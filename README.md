@@ -7,4 +7,7 @@ In November 2017, IAB Europe and a cross-section of the publishing and advertisi
 
 The documents published here that support the Framework are draft specifications for public comment. IAB Tech Lab is charged with the technical governance of these specifications. 
 
+* GDPR Transparency & Consent Framework – Consent Manager Provider JS API v1.0
+* GDPR Transparency & Consent Framework – Cookie and Vendor List Format v1.0a
+
 Please submit your general feedback to feedback@advertisingconsent.eu and any technical feedback to transparencyframework@iabtechlab.com by April 8, 2018.
