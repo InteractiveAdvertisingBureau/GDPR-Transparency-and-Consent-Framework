@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>
+    GDPR Compliance
+  </title>
+
+  <!-- Quantcast Consent Manager Tag : Stubbed -->
+  <script type="text/javascript" , async=true>
+    var __cmp = (function () {
+      return typeof (__cmp) == "function" ? __cmp : function (c) {
+        var b = arguments;
+        if (!b.length) {
+          return __cmp.a;
+        }
+        else if (c == '__cmp')
+          return false;
+        else {
+          if (typeof __cmp.a === 'undefined') {
+            __cmp.a = [];
+          }
+          __cmp.a.push([].slice.apply(b));
+        }
+      }
+    })();
+
+    var elem = document.createElement('script');
+    elem.src = "<%= webpackConfig.output.publicPath %>cmp.js";
+    elem.async = true;
+    elem.type = "text/javascript";
+    elem.setAttribute('display-ui', 'always');
+    var scpt = document.getElementsByTagName('script')[0];
+    scpt.parentNode.insertBefore(elem, scpt);
+  </script>
+  <!-- End Quantcast Consent Manager Tag : Stubbed -->
+
+  <link rel="shortcut icon" href="//www.iab.com/wp-content/themes/iab/assets/img/iab.ico">
+  <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+
+  <style type="text/css"></style>
+  <style>
+    @font-face{
+      font-family: neuzeit-grotesk;
+      src: url(https://use.typekit.net/af/ae4ee6/0000000000000000000178a6/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("woff2"), url(https://use.typekit.net/af/ae4ee6/0000000000000000000178a6/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("woff"), url(https://use.typekit.net/af/ae4ee6/0000000000000000000178a6/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("opentype");
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    @font-face{
+      font-family: neuzeit-grotesk;
+      src: url(https://use.typekit.net/af/234cde/0000000000000000000178a7/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("woff2"), url(https://use.typekit.net/af/234cde/0000000000000000000178a7/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("woff"), url(https://use.typekit.net/af/234cde/0000000000000000000178a7/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("opentype");
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    .publisher-page {
+      position: relative;
+      min-width: 345px;
+      margin: 0;
+      font-family: 'neuzeit-grotesk', Arial, Verdana, sans-serif;
+    }
+
+    .github-link {
+      position: initial;
+    }
+
+    .github-ribbon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: 0;
+      z-index: 10;
+    }
+
+    .header {
+      height: 60px;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      margin: 0;
+    }
+
+    .header-title {
+      color: #fafafa;
+      margin: 0;
+      vertical-align: middle;
+      font-weight: 300;
+      line-height: 60px;
+    }
+
+    .hero {
+      background: linear-gradient(141deg, #00b47d 10%, #6844cd 90%);
+      background-color: #00b47d;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: #fafafa;
+      text-align: center;
+      min-height: 40vh;
+    }
+
+    .hero-title {
+      font-size: 88px;
+      line-height: 100px;
+      font-weight: 700;
+      margin: 60px 10px;
+    }
+
+    .hero-message {
+      font-size: 18px;
+      max-width: 760px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+
+    .page-content {
+      display: flex;
+      flex-flow: row nowrap;
+      margin: 0 auto;
+      min-height: calc(60vh - 120px);
+      min-width: 0;
+      padding: 25px 0;
+      position: relative;
+      width: 100%;
+    }
+
+    .centered-content {
+      display: flex;
+      flex-flow: column;
+      align-content: center;
+      margin: 0 auto;
+      max-width: 800px;
+      min-width: 276px; /* 80% of the page content min-width */
+      width: 80vw;
+    }
+
+    .content-title {
+      font-size: 24px;
+      font-weight: 700;
+      width: 100%
+    }
+
+    .consent-header {
+      color: #000;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .change-consent {
+      color: #6844cd;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 100;
+      line-height: 27px;
+      text-decoration: underline;
+      transition: all .2s ease-in-out;
+    }
+
+    .change-consent::before {
+      content: "\f013";
+      display: inline-block;
+      font-family: "Font Awesome 5 Free";
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 900;
+      margin-right: 10px;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .change-consent:hover {
+      opacity: .6;
+    }
+
+    .consent-lists {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .consent-list-container {
+      flex: 1 1 40%;
+      margin: 0 25px 25px;
+    }
+
+    .consent-list {
+      border-collapse: collapse;
+      font-family: 'neuzeit-grotesk', Arial, Verdana, sans-serif;
+      text-align: left;
+      width: 100%
+    }
+
+    .consent-list-title {
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .consent-row {
+      height: 45px;
+      background-color: #fafafa;
+      border: 1px solid #e8e9ea;
+    }
+
+    .consent-cell {
+      font-size: 14px;
+      padding: 0 15px;
+    }
+
+    .no-consent {
+      opacity: 0.5;
+    }
+
+    .no-consent::before {
+      content: "\f057";
+      display: inline-block;
+      font-family: "Font Awesome 5 Free";
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 900;
+      margin-right: 15px;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .has-consent {
+      color: #00b47d;
+    }
+
+    .has-consent::before {
+      content: "\f058";
+      display: inline-block;
+      font-family: "Font Awesome 5 Free";
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 900;
+      margin-right: 15px;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .learn-more {
+      width: 100%;
+    }
+
+    .content-subtitle {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .learn-more-link {
+      color: #6844cd;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 100;
+      line-height: 27px;
+      text-decoration: underline;
+      transition: all .2s ease-in-out;
+    }
+
+    .learn-more-link:hover {
+      opacity: .6;
+    }
+
+    .github-button {
+      background-color: #000;
+      border: 2px solid #000;
+      border-radius: 3px;
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+      color: #fafafa;
+      padding: 10px;
+      text-decoration: none;
+      transition: all .2s ease-in-out;
+    }
+
+    .github-button::before {
+      content: "\f09b";
+      display: inline-block;
+      font-family: "Font Awesome 5 Brands";
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 100;
+      margin-right: 10px;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .github-button:hover {
+      color: #000;
+      background-color: #fafafa;
+    }
+
+    .footer {
+      background-color: #000;
+      height: 60px;
+      padding: 0px;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body class="publisher-page">
+  <a class="github-link" href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework" target="_blank">
+    <img class="github-ribbon" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png">
+  </a>
+  <header class="header">
+    <h2 class="header-title">GDPR CMP Prototype</h2>
+  </header>
+  <div class="hero">
+    <h1 class="hero-title">GDPR Consent Demo</h1>
+    <p class="hero-message">IAB Europe announced a new technical standard to support the digital advertising ecosystem in meeting the General Data Protection Regulation (GDPR) consumer consent requirements. This site provides a simple working demo of that solution.</p>
+  </div>
+  <main class="page-content">
+    <div class="centered-content">
+      <h2 class="content-title consent-header">
+        Given Consent
+        <a class="change-consent" onclick="setupConsentCallback(); window.__cmp('displayConsentUi');">Change consent</a>
+      </h2>
+      <section class="consent-lists">
+        <div class="consent-list-container">
+          <table class="consent-list">
+            <thead class="consent-list-head">
+              <tr class="consent-row">
+                <th class="consent-cell">
+                  <h5 class="consent-list-title">Vendors</h5>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="vendorList">
+              <tr class="consent-row">
+                <td class="consent-cell">No consent has been given</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="consent-list-container">
+          <table class="consent-list">
+            <thead class="consent-list-head">
+              <tr class="consent-row">
+                <th class="consent-cell">
+                  <h5 class="consent-list-title">Purposes</h5>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="purposeList">
+              <tr class="consent-row">
+                <td class="consent-cell">No consent has been given</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <h2 class="content-title">Learn More</h2>
+      <section class="learn-more">
+        <h3 class="content-subtitle">The EU General Data Protection Regulation (GDPR) Law</h3>
+        <ul>
+          <li><a class="learn-more-link" href="https://www.iabeurope.eu/policy/iab-europes-gdpr-compliance-primer/" target="_blank">IAB Europe GDPR compliance primer</a></li>
+          <li><a class="learn-more-link" href="https://www.iabeurope.eu/policy/gig-working-paper-on-the-definition-of-personal-data/" target="_blank">IAB Europe working paper on the definition of personal data</a></li>
+          <li><a class="learn-more-link" href="http://europa.eu/rapid/press-release_MEMO-15-6385_en.htm" target="_blank">FAQ about the GDPR by the European Commission</a></li>
+        </ul>
+        <h3 class="content-subtitle">The Industry Standardized GDPR Solution</h3>
+        <ul>
+          <li><a class="learn-more-link" href="https://drive.google.com/a/iabeurope.eu/file/d/16xwRwHQcg4HvNanpW55wzSMbKuMx-5w2/view?usp=sharing" target="_blank">IAB Europe Consent Framework - Standardized Cookie and Vendor List Format</a></li>
+          <li><a class="learn-more-link" href="https://drive.google.com/a/iabeurope.eu/file/d/117kx-OWutPpsdY__oxwhQkuA6AhEF9R7/view?usp=sharing" target="_blank">IAB Europe Consent Framework - Consent Manager Provider (CMP) Javascript API</a></li>
+          <li><a class="learn-more-link" href="http://acdn.origin.appnexus.net/cmp/docs/#/" target="_blank">Consent Manager Provider (CMP) Javascript API Demo Provided by AppNexus</a></li>
+        </ul>
+        <h3 class="content-subtitle">Companies Offering CMPs</h3>
+        <ul>
+          <li><a class="learn-more-link" href="https://www.quantcast.com/gdpr/gdpr-consent/" target="_blank">Quantcast</a></li>
+        </ul>
+      </section>
+      <h2 class="content-title">
+        See this code on <a class="github-button" href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework" target="_blank">Github</a>
+      </h2>
+    </div>
+  </main>
+  <footer class="footer"></footer>
+
+  <script>
+    //this is just for showing the consent info on the publisher page in the demo
+    var createConsentTable = function(consentTableInfo) {
+      var listBody = document.getElementById(consentTableInfo.tableId);
+      listBody.innerHTML = '';
+
+      consentTableInfo.requestors.forEach(function(requestor, index) {
+        var cell = document.createElement('td');
+        cell.className = 'consent-cell ' + (consentTableInfo.consents[requestor.id] ? 'has-consent' : 'no-consent');
+        cell.innerText = requestor.name || requestor.purpose;
+
+        var row = document.createElement('tr');
+        row.className = 'consent-row';
+        row.appendChild(cell);
+
+        listBody.appendChild(row);
+      });
+    };
+
+    var setupConsentCallback = function() {
+      window.__cmp('setConsentUiCallback', function () {
+        window.__cmp('getVendorList', 'LATEST', function(vendorList) {
+          var vendors = vendorList.vendors;
+          var purposes = vendorList.purposes;
+
+          if (!vendors || !purposes) {
+            return;
+          }
+
+          window.__cmp('getVendorConsents', null, function (consent) {
+            // build vendor list consents
+            createConsentTable({
+              requestors: vendors,
+              consents: consent.vendorConsents,
+              tableId: 'vendorList'
+            });
+
+            // build purpose list consents
+            createConsentTable({
+              requestors: purposes,
+              consents: consent.purposes,
+              tableId: 'purposeList'
+            });
+          });
+        });
+      });
+    };
+
+    setupConsentCallback();
+  </script>
+</body>
+
+</html>

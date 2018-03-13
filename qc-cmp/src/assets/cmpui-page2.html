@@ -1,0 +1,20 @@
+<div class="qc-cmp-tabs-wrapper">
+
+  <ul class="qc-cmp-tabs" id="qcCmpTabs"></ul>
+
+  <div class="qc-cmp-tab-contents-container">
+    <div class="qc-cmp-tab-contents" id="qcCmpTabContents">
+      <div class="qc-cmp-nav-bar qc-cmp-top">
+          <button class="qc-cmp-button qc-cmp-button-small qc-cmp-secondary-button" onclick="window.__cmpui('enableAllPurposeConsents')">
+            Enable All Purposes
+          </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="qc-cmp-nav-bar qc-cmp-bottom">
+    <a class="qc-cmp-alt-action qc-cmp-cancel" onclick="window.__cmpui('updateConsentUi', 1)"> Cancel </a>
+    <button class="qc-cmp-button qc-cmp-save-and-exit" onclick="window.__cmp('saveConsents', window.__cmpui('getConsentInfo'), function() { window.__cmpui('dismissConsentUi') })"> Save And Exit </button>
+</div>

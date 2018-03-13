@@ -1,0 +1,171 @@
+{
+  "version": 0,
+  "lastUpdated": "2018-01-24T23:51:36Z",
+  "purposes": [
+    {
+      "id": 1,
+      "purpose": "Personalized Advertising",
+      "description": "Delivering tailored advertising based on your preferences or interests across services and devices."
+    },
+    {
+      "id": 2,
+      "purpose": "Advertising Analytics",
+      "description": "Measurement of the advertising on the site(s) or app(s) you are visiting to understand the effectiveness of advertising on those site(s) and apps(s) used to provide you services."
+    },
+    {
+      "id": 3,
+      "purpose": "Analytics",
+      "description": "Measurement of the audience of the site(s) or app(s) you are visiting to understand how you are using those site(s) and app(s)."
+    },
+    {
+      "id": 4,
+      "purpose": "Content Optimization",
+      "description": "Specialization of content based on your preferences or interests."
+    },
+    {
+      "id": 5,
+      "purpose": "Unused Purpose",
+      "description": "Test an unused purpose"
+    }
+  ],
+  "vendors": [
+    {
+      "id": 1,
+      "name": "Adform",
+      "policyUrl": "https://site.adform.com/",
+      "purposeIds": [4]
+    },
+    {
+      "id": 2,
+      "name": "AdRoll",
+      "policyUrl": "https://www.adroll.com/",
+      "purposeIds": [1, 2, 3, 4]
+    },
+    {
+      "id": 3,
+      "name": "AppNexus",
+      "policyUrl": "https://www.appnexus.com/",
+      "purposeIds": [1]
+    },
+    {
+      "id": 4,
+      "name": "Captify",
+      "policyUrl": "http://www.captify.us/",
+      "purposeIds": [1, 4, 3]
+    },
+    {
+      "id": 5,
+      "name": "comScore",
+      "policyUrl": "https://www.comscore.com/",
+      "purposeIds": [2, 3, 4]
+    },
+    {
+      "id": 6,
+      "name": "Conversant",
+      "policyUrl": "https://www.conversantmedia.com/",
+      "purposeIds": [2]
+    },
+    {
+      "id": 7,
+      "name": "DataXu",
+      "policyUrl": "https://www.dataxu.com/",
+      "purposeIds": [1, 4]
+    },
+    {
+      "id": 8,
+      "name": "Demandbase",
+      "policyUrl": "https://www.demandbase.com/",
+      "purposeIds": [1, 2, 3, 4]
+    },
+    {
+      "id": 9,
+      "name": "Factual",
+      "policyUrl": "https://www.factual.com/",
+      "purposeIds": [3]
+    },
+    {
+      "id": 10,
+      "name": "Flashtalking",
+      "policyUrl": "http://www.flashtalking.com/",
+      "purposeIds": [4]
+    },
+    {
+      "id": 11,
+      "name": "Index Exchange",
+      "policyUrl": "http://www.indexexchange.com/",
+      "purposeIds": []
+    },
+    {
+      "id": 12,
+      "name": "Integral Ad Science",
+      "policyUrl": "https://integralads.com/",
+      "purposeIds": [3, 4]
+    },
+    {
+      "id": 13,
+      "name": "MediaMath",
+      "policyUrl": "http://www.mediamath.com/",
+      "purposeIds": [1, 2, 3, 4]
+    },
+    {
+      "id": 14,
+      "name": "Nano Interactive",
+      "policyUrl": "http://nanointeractive.com/",
+      "purposeIds": [1]
+    },
+    {
+      "id": 15,
+      "name": "Outbrain",
+      "policyUrl": "https://www.outbrain.com/",
+      "purposeIds": [4, 3, 2, 1]
+    },
+    {
+      "id": 16,
+      "name": "Quantcast",
+      "policyUrl": "https://www.quantcast.com/",
+      "purposeIds": [1, 2, 3]
+    },
+    {
+      "id": 17,
+      "name": "Rubicon Project",
+      "policyUrl": "https://rubiconproject.com/",
+      "purposeIds": [3]
+    },
+    {
+      "id": 18,
+      "name": "Scoota",
+      "policyUrl": "http://scoota.com/",
+      "purposeIds": [2, 3]
+    },
+    {
+      "id": 19,
+      "name": "Sizmek",
+      "policyUrl": "https://www.sizmek.com/",
+      "purposeIds": [1, 4]
+    },
+    {
+      "id": 20,
+      "name": "SpotX",
+      "policyUrl": "https://www.spotx.tv/",
+      "purposeIds": [4, 4, 4, 4]
+    },
+    {
+      "id": 21,
+      "name": "Taboola",
+      "policyUrl": "https://www.taboola.com/",
+      "purposeIds": [1, 3]
+    },
+    {
+      "id": 22,
+      "name": "TACTIC",
+      "policyUrl": "https://tacticrealtime.com/",
+      "purposeIds": [2, 4]
+    },
+    {
+      "id": 23,
+      "name": "The Trade Desk",
+      "policyUrl": "https://www.thetradedesk.com/",
+      "purposeIds": [2]
+    }
+  ]
+}

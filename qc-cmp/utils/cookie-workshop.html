@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    .binary {
+      font-family: monospace;
+    }
+
+    textarea {
+      font-family: monospace;
+    }
+
+    .disabled {
+      opacity: 0.5 !important;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .long-value {
+      word-break: break-all;
+    }
+
+    .error,
+    #errors {
+      border-color: red;
+      color: red;
+      background-color: pink
+    }
+  </style>
+  <script>
+
+    var globalCookieFormat = {
+      cookieName: 'euconsent',
+      cookieHost: '.consensu.org',
+      cookiePath: '/',
+      cookieMaxAge: 33696000,
+      cookieFields: [
+        { name: 'Version', type: 'int', bits: 6, value: 1 },
+        { name: 'Created', type: 'date', bits: 36 },
+        { name: 'LastUpdated', type: 'date', bits: 36 },
+        { name: 'CmpId', type: 'int', bits: 12 },
+        { name: 'CmpVersion', type: 'int', bits: 6, value: 1 },
+        { name: 'ConsentScreen', type: 'int', bits: 6, value: 0 },
+        { name: 'ConsentLanguage', type: 'letters', bits: 12, size: 2, value: 'en' },
+        { name: 'VendorListVersion', type: 'int', bits: 12 },
+        { name: 'PurposesAllowed', type: 'int', bits: 24 },
+        { name: 'MaxVendorId', type: 'int', bits: 16, value: 10 },
+        { name: 'EncodingType', type: 'opts', bits: 1, values: ["BitField", "Range"] },
+        { name: 'BitField', type: 'bits', bits: 'MaxVendorId', condition: { EncodingType: 0 } },
+        {
+          name: 'RangeSection', type: 'record', condition: { EncodingType: 1 }, fields: [
+            { name: 'DefaultConsent', type: 'opts', bits: 1, values: ["No Consent", "Consent"] },
+            { name: 'NumEntries', type: 'int', bits: 12, value: 1 },
+            {
+              name: 'RangeEntry', type: 'record', repeat: 'NumEntries', fields: [
+                { name: 'SingleOrRange', type: 'opts', bits: 1, values: ["Single", "Range"] },
+                { name: 'SingleVendorId', type: 'int', bits: 16, condition: { SingleOrRange: 0 } },
+                { name: 'StartVendorId', type: 'int', bits: 16, condition: { SingleOrRange: 1 } },
+                { name: 'EndVendorId', type: 'int', bits: 16, condition: { SingleOrRange: 1 } },
+              ]
+            }
+          ]
+        }
+      ]};
+
+    var publisherPurposesFormat = {
+      cookieName: 'publishereuconsent',
+      cookieHost: '.publisher-site.com',
+      cookiePath: '/',
+      cookieMaxAge: 33696000,
+      cookieFields: [
+        { name: 'Version', type: 'int', bits: 6, value: 1 },
+        { name: 'Created', type: 'date', bits: 36 },
+        { name: 'LastUpdated', type: 'date', bits: 36 },
+        { name: 'CmpId', type: 'int', bits: 12 },
+        { name: 'CmpVersion', type: 'int', bits: 6, value: 1 },
+        { name: 'ConsentScreen', type: 'int', bits: 6, value: 0 },
+        { name: 'ConsentLanguage', type: 'letters', bits: 12, size: 2, value: 'en' },
+        { name: 'VendorListVersion', type: 'int', bits: 12 },
+        { name: 'PublisherPurposesVersion', type: 'int', bits: 12 },
+        { name: 'StandardPurposesAllowed', type: 'int', bits: 24 },
+        { name: 'NumberCustomPurposes', type: 'int', bits: 6 },
+        { name: 'CustomPurposesBitField', type: 'int', bits: 'NumberCustomPurposes' },
+      ]};
+
+    var cookieFormat = globalCookieFormat;
+
+    /* return the id of the input field for the given fieldName with a suffix (-val/-dec/-bin),
+       for the given 'repeatCounts' (array/repeat indexes) */
+    function getInputId(fieldName, repeatCounts, suffix) {
+      return fieldName + (repeatCounts.length > 0 ? '-' + repeatCounts.join('-') : '') + (suffix ? suffix : '');
+    }
+
+    /* return the element of the decimal input element for the given fieldName and repeatCounts */
+    function getDecimalInput(fieldName, repeatCounts) {
+      return document.getElementById(getInputId(fieldName, repeatCounts, '-dec'));
+    }
+
+    /* parse a decimal, or throw an error if not a decimal */
+    function parseDecimal(input, element) {
+      if (input.match(/^\d+$/)) {
+        return parseInt(input, 10);
+      }
+      var err = new Error(`not a decimal number`);
+      err.element = element;
+      throw err;
+    }
+
+    /* parse a decimal, or throw an error if not a decimal */
+    function parseBinary(input, element) {
+      if (input.match(/^[01]+$/)) {
+        return parseInt(input, 2);
+      }
+      var err = new Error(`not a binary number`);
+      err.element = element;
+      throw err;
+    }
+
+    /* for either a numeric or named fieldValue, parse and return {value:num, input:element}
+       'input' key returned only if named field value */
+    function getFieldValue(fieldValue, repeatCounts) {
+      if (typeof fieldValue == "number") {
+        return { value: fieldValue };
+      } else if (typeof fieldValue == "string") {
+        if (fieldValue.match(/^\d+$/)) {
+          return { value: parseDecimal(fieldValue) };
+        } else {
+          var el = getDecimalInput(fieldValue, repeatCounts);
+          return { value: parseDecimal(el.value, el), input: el };
+        }
+      } else {
+        return {};
+      }
+    }
+
+    Date.prototype.toISODeciseconds = function () {
+      return (this.toISOString().replace(/\d\dZ$/, 'Z'));
+    }
+
+    /* Add an array of fields (as defined in cookieFormat) as rows of inputs to the fieldTable.
+       'parentRow' is the optional parent row the rows should be added under.
+       Returns the list of rows added. */
+    function addFieldRows(fields, fieldTable, parentRow) {
+      var rows = [];
+      for (var i = 0; i < fields.length; i++) {
+        rows = rows.concat(addFieldRow(fields[i], fieldTable, parentRow));
+      }
+      return rows;
+    }
+
+    /* Add a row of inputs to the fieldTable for the given 'field' object (as defined in cookieFormat)
+       'parentRow' is the optional parent row this row should be considered under.
+       'repeatCount', if !undefined, is the index of a repeated field */
+    function addFieldRow(field, fieldTable, parentRow, repeatCount) {
+      var rows = [];
+
+      /* if a repeated field, loop & re-call addFieldRow with repeatCount parameter set */
+      if (field.repeat && repeatCount === undefined) {
+        var repeatRows = [];
+        var repeatValue = getFieldValue(field.repeat, parentRow.repeatCounts);
+        var repeatNum = repeatValue.value;
+        if (repeatValue.input) {
+          var el = repeatValue.input;
+          /* each repeatRows[repeatCount] is an array of the rows for that repeatCount */
+          el.repeatRows = repeatRows;
+          el.oldValue = repeatNum;
+          /* handle changing of repeat count, 'valueChange' is called in updateValues */
+          el.valueChange = function () {
+            if (el.value.match(/^\d+$/) && el.oldValue !== undefined) {
+              if (el.value > el.oldValue) {
+                /* unhide/create rows */
+                for (var i = el.oldValue; i < el.value; i++) {
+                  if (i < el.repeatRows.length) {
+                    var unhideRows = el.repeatRows[i];
+                    for (var j = 0; j < unhideRows.length; j++) {
+                      unhideRows[j].classList.remove('hidden');
+                    }
+                  } else {
+                    // note: currently only adds rows to the bottom of table
+                    el.repeatRows[i] = addFieldRow(field, fieldTable, parentRow, i);
+                  }
+                }
+              } else if (el.value < el.oldValue) {
+                /* hide rows */
+                for (var i = el.value; i < el.oldValue; i++) {
+                  var hideRows = el.repeatRows[i];
+                  for (var j = 0; j < hideRows.length; j++) {
+                    hideRows[j].classList.add('hidden');
+                  }
+                }
+              }
+              el.oldValue = el.value;
+            }
+          }
+        }
+        for (var i = 0; i < repeatNum; i++) {
+          repeatRows[i] = addFieldRow(field, fieldTable, parentRow, i);
+          rows = rows.concat(repeatRows[i]);
+        }
+        return rows;
+      }
+
+      /* initialize the row */
+      var row = fieldTable.insertRow();
+      row.className = "fieldRow";
+      row.parentRow = parentRow;
+      row.field = field;
+      rows.push(row);
+
+      /* row.repeatCounts is an array of the current repeatCount indexes (array length is array nesting depth) */
+      row.repeatCounts = (row.parentRow ? row.parentRow.repeatCounts : []);
+      if (repeatCount !== undefined) {
+        row.repeatCounts = row.repeatCounts.concat([repeatCount]);
+      }
+
+      var level = row.parentRowLevel = parentRow ? parentRow.parentRowLevel + 1 : 0;
+      var fieldName = getInputId(field.name, row.repeatCounts);
+      row.insertCell().innerHTML = (level > 0 ? "&emsp;".repeat(level - 1) + '└' : '') + fieldName;
+      var valueCell = row.insertCell();
+      var decimalCell = row.insertCell();
+      var binaryCell = row.insertCell();
+      var valueId = getInputId(field.name, row.repeatCounts, '-val');
+      var decimalId = getInputId(field.name, row.repeatCounts, '-dec');
+      var binaryId = getInputId(field.name, row.repeatCounts, '-bin');
+
+      /* add the Value input, if it needs one */
+      if (field.type == 'opts') {
+        var selectInput = `<select class="values" id="${valueId}">`;
+        for (var o = 0; o < field.values.length; o++) {
+          selectInput += `<option value="${o}">${field.values[o]}</option>`;
+        }
+        selectInput += `</select>`;
+        valueCell.innerHTML = selectInput;
+      } else if (['record', 'int', 'bits'].includes(field.type)) {
+        valueCell.innerHTML = '';
+      } else if (field.type == 'date') {
+        valueCell.innerHTML = `<input class="values" id="${valueId}" value="${(new Date()).toISODeciseconds()}" type="text" size=25/>`;
+        var valueEl = document.getElementById(valueId);
+        valueEl.computeDecimal = function () {
+          var val = Math.round(Date.parse(valueEl.value) / 100);
+          if (isNaN(val)) throw new Error('invalid date');
+          return val;
+        };
+        valueEl.computeValue = function () { return (new Date(valueEl.row.inputs.decimal.value * 100)).toISODeciseconds() };
+      } else if (field.type == 'letters') {
+        field.bitsper = Math.floor(field.bits/field.size);
+        field.radix = 2**field.bitsper;
+        valueCell.innerHTML = `<input class="values" id="${valueId}" value="${field.value}" type="text" size=${field.size || 2}/>`;
+        var valueEl = document.getElementById(valueId);
+        valueEl.computeDecimal = function () {
+          var val = valueEl.value;
+          if(val.length != field.size) throw new Error(`length != ${field.size}`);
+          if(!/^[a-z]+$/.test(val)) throw new Error('non-lowercase-letters');
+          return val.split("").reduce((acc,val) => acc*field.radix+val.charCodeAt(0)-97, 0);
+        };
+        valueEl.computeValue = function () {
+          var val = valueEl.row.inputs.decimal.value;
+          var letters = "";
+          for(var i=0; i<field.size; i++) {
+            var letterNum = i==field.size-1 ? val : val%field.radix;
+            if(letterNum > 25) throw new Error("outside letter range");
+            letters = String.fromCharCode(letterNum+97)+letters;
+            val = Math.floor(val/field.radix);
+          }
+          return letters;
+        };
+      } else {
+        valueCell.innerHTML = `<input class="values" id="${valueId}" type="text"/>`;
+      }
+
+      /* add the Decimal input */
+      if (field.type != 'record' && field.type != 'bits') {
+        decimalCell.innerHTML = `<input class="decimal" id="${decimalId}" type="text" value="${field.value || 0}"/>`;
+      }
+
+      /* add the Binary input */
+      if (field.type != 'record') {
+        var size = getBinaryInputSize(field.bits, row.repeatCounts);
+        binaryCell.innerHTML = `<textarea class="binary" id="${binaryId}" rows=${size.rows} cols=${size.cols} maxlength=${size.bits}/>`;
+      }
+
+      /* set 'row.inputs' to point to input elements, and the input elements' 'row' property */
+      var inputs = row.inputs = {
+        value: document.getElementById(valueId),
+        decimal: document.getElementById(decimalId),
+        binary: document.getElementById(binaryId)
+      };
+      if (inputs.value) inputs.value.row = row;
+      if (inputs.decimal) inputs.decimal.row = row;
+      if (inputs.binary) inputs.binary.row = row;
+
+      /* add child field rows */
+      if (field.type == 'record') {
+        rows = rows.concat(addFieldRows(field.fields, fieldTable, row));
+      }
+      return rows;
+    }
+
+    /* return the number of bits, rows, and columns for a binary input field */
+    function getBinaryInputSize(bitValue, repeatCounts) {
+      var bits = getFieldValue(bitValue, repeatCounts).value;
+      var cols = bits < 100 ? bits : 100;
+      var rows = Math.trunc(bits + cols - 1) / cols;
+      return { bits: bits, cols: cols, rows: rows };
+    }
+
+    /* run 'fxn()', and if it throws an error, indicate an error on 'element' */
+    function checkedUpdate(element, fxn) {
+      try {
+        fxn();
+      } catch (e) {
+        var el = e.element || element;
+        el.classList.add('error');
+        var fieldName = (el && el.row) ? `${el.row.field.name}: ` : '';
+        document.getElementById('errors').innerHTML += `${fieldName}${e.message}<br/>`;
+      }
+    }
+
+    /* clear any existing errors */
+    function clearErrors() {
+      document.getElementById('errors').innerHTML = '';
+      var errorElements = document.getElementsByClassName('error');
+      for (var i = 0; i < errorElements.length; i++) {
+        errorElements.item(i).classList.remove('error');
+      }
+    }
+
+    /* on 'change' and 'input' events, and at initialization, this syncs
+       the values of the fields, enabled/disables as needed, and updates
+       the combined cookie value */
+    function updateValues(target) {
+      clearErrors();
+      var fieldRows = document.getElementsByClassName("fieldRow");
+      for (var i = 0; i < fieldRows.length; i++) {
+        var fieldRow = fieldRows.item(i);
+        var valueEl = fieldRow.inputs.value;
+        var decimalEl = fieldRow.inputs.decimal;
+        var binaryEl = fieldRow.inputs.binary;
+
+        var binaryEdit = (target === binaryEl);
+        var decimalEdit = (target == decimalEl);
+
+        /* propagate edited values binary -> decimal  -> value */
+        if (binaryEdit && decimalEl) {
+          checkedUpdate(binaryEl, () => {
+            if (binaryEl.value.length != fieldRow.field.bits)
+              throw new Error(`wrong number of bits: ${binaryEl.value.length}!=${fieldRow.field.bits}`);
+            decimalEl.value = parseBinary(binaryEl.value, binaryEl);
+          });
+        }
+
+        if ((binaryEdit || decimalEdit) && valueEl) {
+          checkedUpdate(decimalEl, () => { valueEl.value = valueEl.computeValue ? valueEl.computeValue() : decimalEl.value });
+        }
+
+        /* propagate values value -> binary -> decimal (not overwriting edits) */
+        if (valueEl && decimalEl && !decimalEdit) {
+          checkedUpdate(valueEl, () => { decimalEl.value = valueEl.computeDecimal ? valueEl.computeDecimal() : valueEl.value });
+        }
+
+        if (binaryEl && !binaryEdit) {
+          checkedUpdate(decimalEl || binaryEl, function () {
+            var size = getBinaryInputSize(fieldRow.field.bits, fieldRow.repeatCounts);
+            var bits = size.bits;
+            var binaryVal;
+            if (decimalEl) {
+              binaryVal = parseDecimal(decimalEl.value, decimalEl).toString(2);
+              if (bits == 0 && binaryVal == "0")
+                binaryVal = "";
+              if (bits >= binaryVal.length)
+                binaryVal = "0".repeat(bits - binaryVal.length) + binaryVal; /* pad on left to 'bits' width */
+              else
+                throw new Error('value too large');
+            } else {
+              /* handles change-in-bitsize caused by other field changes */
+              binaryVal = binaryEl.value;
+              if (bits > binaryVal.length)
+                binaryVal = binaryVal + "0".repeat(bits - binaryVal.length); /* pad on right to 'bits' width */
+              else
+                binaryVal = binaryEl.value.substring(0, bits); /* truncate to first 'bits' digits */
+            }
+            binaryEl.value = binaryVal;
+            binaryEl.rows = size.rows;
+            binaryEl.cols = size.cols;
+            binaryEl.maxLength = bits;
+          });
+        }
+
+        if (decimalEl && decimalEl.valueChange) {
+          decimalEl.valueChange();
+        }
+
+        setEnabledDisabled(fieldRow);
+      }
+
+      showCombinedCookie();
+    }
+
+    function setEnabledDisabled(fieldRow) {
+      /* determine if row enabled */
+      var enabled = true;
+      if (fieldRow.field.condition) {
+        var enabledKey = Object.keys(fieldRow.field.condition)[0];
+        var enabledValue = fieldRow.field.condition[enabledKey];
+        enabled = getDecimalInput(enabledKey, fieldRow.repeatCounts).value == enabledValue;
+      }
+      fieldRow.enabled = enabled && (!fieldRow.parentRow || fieldRow.parentRow.enabled);
+      if (fieldRow.enabled)
+        fieldRow.classList.remove('disabled');
+      else
+        fieldRow.classList.add('disabled')
+      var disabled = !fieldRow.enabled;
+      var inputs = fieldRow.inputs;
+      if (inputs.value) inputs.value.disabled = disabled;
+      if (inputs.decimal) inputs.decimal.disabled = disabled;
+      if (inputs.binary) inputs.binary.disabled = disabled;
+    }
+
+    function showCombinedCookie() {
+      var binaryVal = '';
+      var fieldRows = document.getElementsByClassName("fieldRow");
+      for (var i = 0; i < fieldRows.length; i++) {
+        var fieldRow = fieldRows.item(i);
+        if (fieldRow.inputs.binary && fieldRow.enabled && !fieldRow.classList.contains('hidden')) {
+          binaryVal += fieldRow.inputs.binary.value;
+        }
+      }
+      document.getElementById('binaryVal').innerHTML = binaryVal;
+      var b64Val='NaN';
+      if (binaryVal.match(/^[01]+$/)) {
+        binaryVal = binaryVal + "0".repeat(7 - (binaryVal.length + 7) % 8); /* pad on right to multiple of 8 */
+        bytes = '';
+        for (var i = 0; i < binaryVal.length; i += 8) {
+          bytes += String.fromCharCode(parseInt(binaryVal.substr(i, 8), 2));
+        }
+        b64Val = btoa(bytes).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+      }
+      document.getElementById('setCookie').innerHTML = `${cookieFormat.cookieName}=${b64Val}; Host=${cookieFormat.cookieHost}; `+
+        `Path=${cookieFormat.cookiePath}; Max-Age=${cookieFormat.cookieMaxAge};`
+      document.getElementById('cookieBytes').innerHTML = b64Val.length;
+    }
+
+    function modifySpec() {
+      var formatEl = document.getElementById('cookieFormat');
+      if (formatEl.value == '') {
+        showSpec(cookieFormat);
+      } else {
+        clearErrors();
+        checkedUpdate(formatEl, function() {
+          var newCookieFormat = JSON.parse(formatEl.value);
+          setSpec(newCookieFormat);
+        });
+      }
+    }
+
+    function showSpec(cookieSpec) {
+      var formatEl = document.getElementById('cookieFormat');
+      formatEl.value = JSON.stringify(cookieSpec, null, 2);
+      formatEl.classList.remove('hidden');
+    }
+
+    function setSpec(cookieSpec) {
+      cookieFormat=cookieSpec;
+      showSpec(cookieFormat);
+      var fieldTable = document.getElementById('fieldtable');
+      while (fieldTable.rows.length > 0) {
+        fieldTable.deleteRow(0);
+      }
+      addFieldRows(cookieFormat.cookieFields, fieldTable);
+      updateValues();
+    }
+  </script>
+</head>
+
+<body onload="addFieldRows(cookieFormat.cookieFields, document.getElementById('fieldtable')); updateValues()">
+  <h1>GDPR Consent Cookie workshop</h1>
+  Binary Value: <span id="binaryVal" class="long-value"></span><br/>
+  Set-Cookie: <span id="setCookie" class="long-value"></span><br/>
+  Cookie bytes: <span id="cookieBytes"></span>
+  <br/>
+  <br/>
+  <table id="fieldtable" onchange="updateValues(event.target)" oninput="updateValues(event.target)">
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+      <th>Decimal</th>
+      <th>Binary</th>
+    </tr>
+  </table>
+  <div id="errors" class="error"></div>
+  <button onclick="modifySpec()">Modify Spec</button>
+  <button onclick="setSpec(globalCookieFormat)">Set to global cookie spec</button>
+  <button onclick="setSpec(publisherPurposesFormat)">Set to publisher purposes cookie spec</button>
+  <br/>
+  <textarea id="cookieFormat" class="hidden" rows="50" cols="50"></textarea>
+</body>
+<html>
