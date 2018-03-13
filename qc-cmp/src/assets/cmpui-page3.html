@@ -1,0 +1,38 @@
+<div id="qcCmpPartnerInfo" class="qc-cmp-partner-info">
+  <div class="qc-cmp-sub-title-container">
+    <h1 class="qc-cmp-sub-title">Vendor List</h1>
+    <div class="qc-cmp-buttons">
+      <button class="qc-cmp-button qc-cmp-button-small qc-cmp-secondary-button" onclick="window.__cmpui('toggleAllVendorConsents', false)">
+        Reject All
+      </button>
+      <button class="qc-cmp-button qc-cmp-button-small" onclick="window.__cmpui('toggleAllVendorConsents', true)">
+        Accept All
+      </button>
+    </div>
+  </div>
+  <p class="qc-cmp-messaging">
+    Help us provide you with a better online experience! Awesome Inc. and our partners set cookies and collect information from
+    your browser across the web to provide you with website content, deliver relevant advertising, and understand
+    web audiences.
+  </p>
+  <div class="qc-cmp-vendor-list-container">
+    <table id="qcCmpVendorList" class="qc-cmp-vendor-list">
+      <thead class="qc-cmp-vendor-list-head">
+        <tr class="qc-cmp-vendor-row qc-cmp-striped-row">
+          <th class="qc-cmp-vendor-row-header qc-cmp-company-column">
+            <h5 class="qc-cmp-vendor-list-title">Company</h5>
+          </th>
+          <th class="qc-cmp-vendor-row-header qc-cmp-on-off-column">
+            <h5 class="qc-cmp-vendor-list-title">Off/On</h5>
+          </th>
+          <th class="qc-cmp-vendor-row-header qc-cmp-dropdown-column"></th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+<div class="qc-cmp-nav-bar qc-cmp-bottom">
+    <a class="qc-cmp-alt-action qc-cmp-back" onclick="window.__cmpui('updateConsentUi', 2)"> Back to Purposes </a>
+    <a class="qc-cmp-alt-action qc-cmp-cancel" onclick="window.__cmpui('updateConsentUi', 1)"> Cancel </a>
+    <button class="qc-cmp-button qc-cmp-save-and-exit" onclick="window.__cmp('saveConsents', window.__cmpui('getConsentInfo'), function() { window.__cmpui('dismissConsentUi') })"> Save And Exit </button>
+</div>

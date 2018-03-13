@@ -1,0 +1,30 @@
+<html>
+<head>
+</head>
+<body>
+	<div id="msgDisplay"></div>
+
+	<script>
+		// code at the vendor site
+		var msg = {
+		  __cmpCall: {
+		  	command: "getVendorConsents",
+		  	parameter: [1,2,3,5,6],
+		  	callId: 1
+		  }
+		};
+
+		var msgHandler = function(event) {
+		  document.getElementById("msgDisplay").innerHTML = JSON.stringify(event.data);
+		}
+
+		if (window.addEventListener == undefined) {
+		  window.attachEvent('onmessage', msgHandler);       
+		} else {
+		  window.addEventListener('message', msgHandler, false);
+		}
+
+		parent.postMessage(msg, '*');
+	</script>
+</body>
+</html>
