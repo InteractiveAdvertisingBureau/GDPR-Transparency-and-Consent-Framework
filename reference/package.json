@@ -1,0 +1,108 @@
+{
+  "name": "appnexus-cmp",
+  "version": "0.0.0",
+  "scripts": {
+    "clean": "rm -rf build",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress",
+    "start": "serve build -s -c 1",
+    "prestart": "npm run build",
+    "build": "cross-env NODE_ENV=production webpack --progress",
+    "prebuild": "npm run clean && mkdirp build",
+    "test": "npm run -s lint && jest --coverage",
+    "test:watch": "npm run -s test -- --watch",
+    "lint": "eslint src test",
+    "preversion": "npm test",
+    "version": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/appnexus/cmp.git"
+  },
+  "license": "cc-by-3.0",
+  "author": "AppNexus",
+  "jest": {
+    "setupFiles": [
+      "./test/setup.js"
+    ],
+    "testURL": "http://localhost:8080",
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy",
+      "^react$": "preact-compat",
+      "^react-dom$": "preact-compat"
+    },
+    "collectCoverageFrom": [
+      "src/lib/**/*.{js,jsx}",
+      "src/components/**/*.{js,jsx}"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.0.1",
+    "babel": "^6.5.2",
+    "babel-core": "^6.24.0",
+    "babel-eslint": "^8.2.1",
+    "babel-jest": "^22.2.0",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.24.0",
+    "babel-runtime": "^6.11.6",
+    "chai": "^4.0.2",
+    "copy-webpack-plugin": "^4.3.1",
+    "cross-env": "^5.0.1",
+    "css-loader": "^0.28.0",
+    "eslint": "^4.1.0",
+    "eslint-plugin-jest": "^21.7.0",
+    "eslint-plugin-react": "^7.0.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
+    "html-webpack-plugin": "^2.28.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^22.2.1",
+    "json-loader": "^0.5.4",
+    "less": "^3.0.0-alpha.3",
+    "less-loader": "^4.0.3",
+    "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0",
+    "postcss-loader": "^2.0.3",
+    "preact-jsx-chai": "^2.2.1",
+    "raw-loader": "^1.0.0-beta.0",
+    "regenerator-runtime": "^0.11.1",
+    "replace-bundle-webpack-plugin": "^1.0.0",
+    "script-ext-html-webpack-plugin": "^1.3.4",
+    "sinon": "^4.2.2",
+    "sinon-chai": "^2.9.0",
+    "source-map-loader": "^0.2.1",
+    "style-loader": "^0.20.1",
+    "url-loader": "^0.6.1",
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.4.4"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "codemirror": "^5.34.0",
+    "core-js": "^2.5.3",
+    "js-beautify": "^1.7.5",
+    "lodash": "^4.17.4",
+    "preact": "^8.1.0",
+    "preact-compat": "^3.15.0",
+    "preact-render-to-string": "^3.6.0",
+    "promise-polyfill": "^7.1.0",
+    "proptypes": "^1.0.0",
+    "query-string": "^5.0.1",
+    "react-codemirror2": "^4.0.0",
+    "react-router-dom": "^4.2.2",
+    "serve": "^6.0.0",
+    "whatwg-fetch": "^2.0.3"
+  }
+}

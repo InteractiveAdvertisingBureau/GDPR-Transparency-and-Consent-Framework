@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "purposes": [
+	{
+	  "id": 1,
+	  "name": "Custom Purpose 1"
+	},
+	{
+	  "id": 2,
+	  "name": "Custom Purpose 2"
+	},
+	{
+	  "id": 3,
+	  "name": "Custom Purpose 3"
+	},
+	{
+	  "id": 4,
+	  "name": "Custom Purpose 4"
+	}
+  ]
+}
