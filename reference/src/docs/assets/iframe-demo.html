@@ -1,0 +1,53 @@
+<html>
+<head>
+</head>
+<body>
+<h2 style="margin: 5px;">IFrame Example</h2>
+<div id="buttons">
+	<button id="getVendorConsents">getVendorConsents</button>
+	<button id="getConsentData">getConsentData</button>
+	<button id="getVendorList">getVendorList</button>
+</div>
+<div style="position: absolute; left: 10px; right: 10px; bottom: 10px; top: 70px;">
+	<textarea readonly id="log" style="width: 100%; height: 100%;"></textarea>
+</div>
+
+
+<script>
+	var callId = 0;
+	var logEl = document.getElementById('log');
+	function log(text) {
+		logEl.innerHTML = '[' + new Date().toTimeString() + '] - ' + text + '\n' + logEl.innerHTML;
+	}
+
+	document.querySelectorAll("#buttons button").forEach(button => {
+		button.addEventListener('click', () => {
+			sendMessage(button.id);
+		});
+	});
+
+	function sendMessage(command, parameter) {
+		var message = {
+			__cmp: {
+				callId: `iframe:${++callId}`,
+				command: command,
+				parameter: parameter
+			}
+		};
+		log('Sending Message:\n' + JSON.stringify(message, null, 2));
+		window.top.postMessage(message, '*');
+	}
+
+	function receiveMessage(event) {
+		log('Received Message:\n' + JSON.stringify(event.data, null, 2));
+	}
+
+	window.addEventListener('message', receiveMessage);
+
+	sendMessage('getVendorConsents', [0,1,2]);
+	sendMessage('getConsentData');
+	sendMessage('addEventListener', 'isLoaded');
+	sendMessage('addEventListener', 'onSubmit');
+</script>
+</body>
+</html>

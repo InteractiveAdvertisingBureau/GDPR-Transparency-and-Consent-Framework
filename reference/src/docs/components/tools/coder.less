@@ -1,0 +1,55 @@
+.cookieEncoder, .cookieDecoder {
+	width: 100%;
+	table {
+		width: 100%;
+		border-collapse: collapse;
+
+		thead tr {
+			background: #ccc;
+			th {
+				white-space: nowrap;
+			}
+		}
+		tr {
+			border: 1px solid #ccc;
+		}
+		td, th {
+			padding: 10px;
+			vertical-align: top;
+		}
+	}
+
+	input {
+		width:  300px;
+		padding: 4px;
+
+		&:disabled {
+			background: #eaeaea;
+			border: #ddd;
+		}
+	}
+	.isDisabled {
+		color: #ccc;
+	}
+
+	.sectionTitle {
+		font-size: 1.1em;
+		display: block;
+		margin: 15px 0 5px 0;
+	}
+
+	.encodedValue {
+		word-wrap: break-word;
+		word-break: break-all;
+	}
+	.encodedInput {
+		width: 100%;
+		height: 150px;
+		word-wrap: break-word;
+		word-break: break-all;
+	}
+	.cookieValue {
+		border: 1px solid #ccc;
+		padding: 10px;
+	}
+}

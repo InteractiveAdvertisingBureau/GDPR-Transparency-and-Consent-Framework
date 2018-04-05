@@ -1,0 +1,48 @@
+@import '../../style/variables';
+@import '../../../style/variables';
+
+
+.nav {
+	.mobileMenu {
+		display: none;
+		@media @smartphone {
+			display: flex;
+		}
+	}
+
+	&.menuExpanded {
+		.mobileMenu {
+			border-bottom: 1px solid @color-light-gray;
+			padding-bottom: 10px;
+			margin-bottom: 10px;
+		}
+		.navItems {
+			display: flex;
+		}
+	}
+
+	.menu {
+		overflow: auto;
+	}
+	.navItems {
+		flex-direction: column;
+		@media @smartphone {
+			display: none;
+		}
+
+		.navItem {
+			display: block;
+		}
+
+		.group {
+			margin-bottom: 15px;
+		}
+
+		.groupTitle {
+			display: block;
+			font-size: 1.2em;
+			border-bottom: 1px solid #ccc;
+			margin-bottom: 5px;
+		}
+	}
+}
