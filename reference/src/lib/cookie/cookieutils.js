@@ -218,7 +218,7 @@ function encodeCookieValue(data, definitionMap) {
 		return btoa(bytes)
 			.replace(/\+/g, '-')
 			.replace(/\//g, '_')
-			.replace(/=+$/, '');
+			.replace(/=/g, '.');
 	}
 }
 
@@ -236,16 +236,11 @@ function encodePublisherCookieValue(publisherData) {
  */
 function decodeCookieValue(cookieValue, definitionMap) {
 
-	// Add padding
-	let unsafe = cookieValue;
-	while (unsafe.length % 4 !== 0) {
-		unsafe += '=';
-	}
-
 	// Replace safe characters
-	unsafe = unsafe
+	const unsafe = cookieValue
 		.replace(/-/g, '+')
-		.replace(/_/g, '/');
+		.replace(/_/g, '/')
+		.replace(/\./g, '=');
 
 	const bytes = atob(unsafe);
 
