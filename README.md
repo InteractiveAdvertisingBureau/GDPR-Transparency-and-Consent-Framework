@@ -1,4 +1,5 @@
-![iab tech lab](https://user-images.githubusercontent.com/19175352/38648439-04f878b2-3da6-11e8-992a-38bf120a048b.png)
+![iab tech lab](https://user-images.githubusercontent.com/19175352/38649177-0d37d17c-3daa-11e8-8934-f0fb47919716.png)
+
 
 # GDPR Transparency and Consent Framework
 Hosted in this repository are the technical specifciations for IAB Europe Transparency and Consent Framework that will help the digital advertising industry interpret and comply with EU rules on data protection and privacy - notably the General Data Protection Regulation (GDPR) that comes into effect on May 25, 2018. 
