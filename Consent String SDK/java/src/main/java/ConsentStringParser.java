@@ -76,7 +76,7 @@ public class ConsentStringParser {
 	 * @param consentString
 	 *            (required). The binary user consent data encoded as url and filename safe base64 string
 	 *
-	 * @throws Exception
+	 * @throws ParseException
 	 *             if the consent string cannot be parsed
 	 */
 	public ConsentStringParser(String consentString) throws ParseException {
@@ -89,7 +89,7 @@ public class ConsentStringParser {
 	 *
 	 * @param bytes:
 	 *            the byte string encoding the user consent data
-	 * @throws Exception
+	 * @throws ParseException
 	 *             when the consent string cannot be parsed
 	 */
 	public ConsentStringParser(byte[] bytes) throws ParseException {
