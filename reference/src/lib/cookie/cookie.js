@@ -49,24 +49,26 @@ function decodeBitsToIds(bitString) {
 
 function convertVendorsToRanges(vendors, selectedIds) {
 	let range = [];
-	return vendors.reduce((acc, {id}, index) => {
-		if (selectedIds.has(id)) {
-			range.push(id);
-		}
+	return vendors
+		.sort((vendor1, vendor2) => vendor1.id === vendor2.id ? 0 : vendor1.id < vendor2.id ? -1 : 1)
+		.reduce((acc, {id}, index) => {
+			if (selectedIds.has(id)) {
+				range.push(id);
+			}
 
-		// If the range has ended or at the end of vendors add entry to the list
-		if ((!selectedIds.has(id) || index === vendors.length - 1) && range.length) {
-			const startVendorId = range.shift();
-			const endVendorId = range.pop();
-			range = [];
-			return [...acc, {
-				isRange: typeof endVendorId === 'number',
-				startVendorId,
-				endVendorId
-			}];
-		}
-		return acc;
-	}, []);
+			// If the range has ended or at the end of vendors add entry to the list
+			if ((!selectedIds.has(id) || index === vendors.length - 1) && range.length) {
+				const startVendorId = range.shift();
+				const endVendorId = range.pop();
+				range = [];
+				return [...acc, {
+					isRange: typeof endVendorId === 'number',
+					startVendorId,
+					endVendorId
+				}];
+			}
+			return acc;
+		}, []);
 }
 
 function encodeVendorConsentData(vendorData) {
@@ -100,6 +102,9 @@ function decodeVendorConsentData(cookieValue) {
 	const {
 		cookieVersion,
 		cmpId,
+		cmpVersion,
+		consentScreen,
+		consentLanguage,
 		vendorListVersion,
 		purposeIdBitString,
 		maxVendorId,
@@ -114,6 +119,9 @@ function decodeVendorConsentData(cookieValue) {
 	const cookieData = {
 		cookieVersion,
 		cmpId,
+		cmpVersion,
+		consentScreen,
+		consentLanguage,
 		vendorListVersion,
 		selectedPurposeIds: decodeBitsToIds(purposeIdBitString),
 		maxVendorId,
@@ -203,14 +211,13 @@ function writeCookie(name, value, maxAgeSeconds, path = '/') {
 }
 
 function readPublisherConsentCookie() {
-	// If not configured to store publisher data return an empty object
-	if (!config.storePublisherData) {
-		return {};
-	}
-	const cookie = readCookie(PUBLISHER_CONSENT_COOKIE_NAME);
-	log.debug('Read publisher consent data from local cookie', cookie);
-	if (cookie) {
-		return decodePublisherConsentData(cookie);
+	// If configured try to read publisher cookie
+	if (config.storePublisherData) {
+		const cookie = readCookie(PUBLISHER_CONSENT_COOKIE_NAME);
+		log.debug('Read publisher consent data from local cookie', cookie);
+		if (cookie) {
+			return decodePublisherConsentData(cookie);
+		}
 	}
 }
 
@@ -301,6 +308,8 @@ export {
 	writeCookie,
 	encodeVendorConsentData,
 	decodeVendorConsentData,
+
+	convertVendorsToRanges,
 
 	encodePublisherConsentData,
 	decodePublisherConsentData,

@@ -9,7 +9,7 @@ let root;
 
 const commonSetup =
 	`function receiveMessage(event) {
-	if (event && event.data && event.data.__cmp) {
+	if (event && event.data && event.data.__cmpReturn) {
 		myLogger('Received Message:\\n' + JSON.stringify(event.data, null, 2));
 	}
 }
@@ -22,7 +22,7 @@ const iframeMap =
 			title: 'Get Vendor Consent From IFrame',
 			message:
 				`var message = {
-	__cmp: {
+	__cmpCall: {
 		callId: 'iframe:' + (++this.callId),
 		command: 'getVendorConsents',
 		parameter: [0,1,2]
@@ -33,7 +33,7 @@ const iframeMap =
 			title: 'Show Consent Tool From IFrame',
 			message:
 				`var message = {
-	__cmp: {
+	__cmpCall: {
 		callId: 'iframe:' + (++this.callId),
 		command: 'showConsentTool'
 	}
@@ -43,7 +43,7 @@ const iframeMap =
 			title: 'Get Consent Data From IFrame',
 			message:
 				`var message = {
-	__cmp: {
+	__cmpCall: {
 		callId: 'iframe:' + (++this.callId),
 		command: 'getConsentData'
 	}
@@ -53,7 +53,7 @@ const iframeMap =
 			title: 'Add Event Listeners From IFrame',
 			message:
 				`var message = {
-	__cmp: {
+	__cmpCall: {
 		callId: 'iframe:' + (++this.callId),
 		command: 'addEventListener',
 		parameter: 'onSubmit'
