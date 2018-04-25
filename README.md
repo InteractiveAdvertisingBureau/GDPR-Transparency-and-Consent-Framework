@@ -8,16 +8,24 @@ Hosted in this repository are the technical specifications for IAB Europe Transp
 
 In November 2017, IAB Europe and a cross-section of the publishing and advertising industry, announced a new Transparency & Consent Framework to help publishers, advertisers and technology companies comply with key elements of GDPR. The Framework will give the publishing and advertising industries a common language with which to communicate consumer consent for the delivery of relevant online advertising and content. 
 
-The documents published here that support the Framework are draft specifications for public comment from March 8 to April 8 2018. IAB Tech Lab is charged with the technical governance of these specifications. 
+The documents published here that support the Framework include v1.1 final specifications ready for industry adoption. IAB Tech Lab is charged with the technical governance of these specifications. 
 
-* Draft_for_Public_Comment_Transparency & Consent Framework Formatted CMP JS API v1.0.pdf
-* Draft_for_Public_Comment_Transparency & Consent Framework - cookie and vendor list format specification v1.0a.pdf
+* Consent Management Provider JavaScript API v1.1 Final (referred to as CMP JS API v1.1) 
+* Consent string and vendor list formats v1.1 Final
 
 Public comment period for v1.1 specifications ended April 8, 2018. Feedback for future iterations may be sent to feedback@advertisingconsent.eu and any technical feedback to transparencyframework@iabtechlab.com. 
 
-#### About IAB Tech Lab 
+#### About IAB Tech Lab  
 
-The IAB Technology Laboratory is an independent, international, research and development consortium charged with producing and helping companies implement global industry technical standards. Comprised of digital publishers and ad technology firms, as well as marketers, agencies, and other companies with interests in the interactive marketing arena, the IAB Tech Lab’s goal is to reduce friction associated with the digital advertising and marketing supply chain, while contributing to the safe and secure growth of the industry. Learn more about IAB Tech Lab here: https://www.iabtechlab.com/
+The IAB Technology Laboratory (?Tech Lab?) is a non-profit research and development consortium that produces and provides standards, software, and services to drive growth of an effective and sustainable global digital media ecosystem. Comprised of digital publishers and ad technology firms, as well as marketers, agencies, and other companies with interests in the interactive marketing arena, IAB Tech Lab aims to enable brand and media growth via a transparent, safe, effective supply chain, simpler and more consistent measurement, and better advertising experiences for consumers, with a focus on mobile and ?TV?/digital video channel enablement. The IAB Tech Lab portfolio includes the DigiTrust real-time standardized identity service designed to improve the digital experience for consumers, publishers, advertisers, and third-party platforms. Board members include AppNexus, ExtremeReach, Google, GroupM, Hearst Digital Media, Integral Ad Science, Index Exchange, LinkedIn, MediaMath, Microsoft, Moat, Pandora, PubMatic, Quantcast, Telaria, The Trade Desk, and Yahoo! Japan. Established in 2014, the IAB Tech Lab is headquartered in New York City with an office in San Francisco and representation in Seattle and London.
+
+Learn more about IAB Tech Lab here: [https://www.iabtechlab.com/](https://www.iabtechlab.com/)
+
+#### About IAB Europe 
+
+IAB Europe is the voice of digital business and the leading European-level industry association for the interactive advertising ecosystem. Its mission is to promote the development of this innovative sector by shaping the regulatory environment, investing in research and education, and developing and facilitating the uptake of business standards.
+ 
+Learn more about IAB Europe here: [https://www.iabeurope.eu/](https://www.iabeurope.eu/)
 
 
 #### Contributors and Technical Governance
