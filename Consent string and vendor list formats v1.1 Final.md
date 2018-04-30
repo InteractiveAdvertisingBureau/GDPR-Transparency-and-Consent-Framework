@@ -387,7 +387,7 @@ user?s consent action timing. Javascript: Math.round((new Date()).getTime()/100)
     <td>12 bits
 (108-119)</td>
     <td>Two-letter ISO639-1 language code that CMP asked for consent in</td>
-    <td>Each letter should be encoded as 6 bits, a=0..z=25 . This will result in the base64url-encoded bytes spelling out the language code (in uppercase).</td>
+    <td>Each letter should be encoded as 6 bits, A=0..Z=25 . This will result in the base64url-encoded bytes spelling out the language code (in uppercase).</td>
   </tr>
   <tr>
     <td>VendorListVersion</td>
@@ -553,7 +553,7 @@ Example consent string field values for the case:
   </tr>
   <tr>
     <td>ConsentLanguage</td>
-    <td>"en" (e=4, n=13)</td>
+    <td>"EN" (E=4, N=13)</td>
     <td>Two-letter ISO639-1 language code that CMP asked for consent in</td>
     <td>000100 001101</td>
   </tr>
@@ -609,7 +609,7 @@ Example consent string field values for the case:
     <td>base64url-encoded consent string value</td>
     <td></td>
     <td></td>
-    <td>BOJObISOJObISAABAAENAA4AAAAAoAAA</td>
+    <td>BOEFEAyOEFEAyAHABDENAI4AAAB9vABAAS</td>
   </tr>
 </table>
 
