@@ -524,12 +524,12 @@ Example consent string field values for the case:
   <tr>
     <td>Created </td>
     <td>15100811449 </td>
-    <td>2017-11-07T18:59:04.9Z</td>
+    <td>2017-11-07T19:15:55.4Z</td>
     <td>001110000100000101000100000000110010</td>
   </tr>
   <tr>
     <td>LastUpdated</td>
-    <td>15100811449</td>
+    <td>15100821554</td>
     <td>2017-11-07T18:59:04.9Z</td>
     <td>001110000100000101000100000000110010</td>
   </tr>
