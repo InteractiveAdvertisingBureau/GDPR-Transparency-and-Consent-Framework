@@ -523,15 +523,15 @@ Example consent string field values for the case:
   </tr>
   <tr>
     <td>Created </td>
-    <td>15100811449 </td>
+    <td>15100811449</td>
     <td>2017-11-07T18:59:04.9Z</td>
-    <td>001110000100000101000100000000110010</td>
+    <td>001110000100000101000001100010111001</td>
   </tr>
   <tr>
     <td>LastUpdated</td>
     <td>15100811449</td>
     <td>2017-11-07T18:59:04.9Z</td>
-    <td>001110000100000101000100000000110010</td>
+    <td>001110000100000101000001100010111001</td>
   </tr>
   <tr>
     <td>CmpId</td>
@@ -603,13 +603,13 @@ Example consent string field values for the case:
     <td>SingleVendorId[0]</td>
     <td>9</td>
     <td>VendorId=9 has No Consent (opposite of Default Consent)</td>
-    <td>00000000000001001</td>
+    <td>0000000000001001</td>
   </tr>
   <tr>
     <td>base64url-encoded consent string value</td>
     <td></td>
     <td></td>
-    <td>BOJObISOJObISAABAAENAA4AAAAAoAAA</td>
+    <td>BOEFEAyOEFEAyAHABDENAI4AAAB9vABAASA</td>
   </tr>
 </table>
 
