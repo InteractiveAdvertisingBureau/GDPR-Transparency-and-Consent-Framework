@@ -15,11 +15,12 @@ export default {
 		},
 		details: {
 			title: '',
-			cancel: '',
+			back: '',
 			save: ''
 		},
 		purposes: {
 			active: '',
+			inactive: '',
 			showVendors: '',
 			cookies: {
 				menu: '',
@@ -68,7 +69,12 @@ export default {
 			acceptAll: '',
 			company: '',
 			offOn: '',
-			description: ''
+			description: '',
+			moreChoices: ''
+		},
+		footer: {
+			message: '',
+			consentLink: ''
 		}
 	},
 	de: {
@@ -81,11 +87,12 @@ export default {
 		},
 		details: {
 			title: 'Datenschutzeinstellungen',
-			cancel: 'Abbrechen',
+			back: 'Abbrechen',
 			save: 'Sichern und Beenden'
 		},
 		purposes: {
 			active: 'Aktiv',
+			inactive: 'Inaktiv',
 			showVendors: '',
 			cookies: {
 				menu: 'Wie wir Cookies einsetzen',
@@ -119,7 +126,12 @@ export default {
 			acceptAll: 'Alle akzeptieren',
 			company: 'Unternehmen',
 			offOn: 'Aus/An',
-			description: 'Helfen Sie uns, Ihnen einen besseren Service zu bieten! Unsere Partner verwenden Cookies Ihres Browsers, um quer durch das Web zu verstehen, was Sie interessiert und Ihnen entsprechend relevante Inhalte und Werbung anzubieten.'
+			description: 'Helfen Sie uns, Ihnen einen besseren Service zu bieten! Unsere Partner verwenden Cookies Ihres Browsers, um quer durch das Web zu verstehen, was Sie interessiert und Ihnen entsprechend relevante Inhalte und Werbung anzubieten.',
+			moreChoices: 'Weitere Auswahlmöglichkeiten'
+		},
+		footer: {
+			message: 'Du kannst deine Datenschutz-Einstellungen bearbeiten',
+			consentLink: 'hier'
 		}
 	}
 };
