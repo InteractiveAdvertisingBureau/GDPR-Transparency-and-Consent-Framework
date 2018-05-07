@@ -27,6 +27,11 @@ export default class Details extends Component {
     });
   };
 
+  enableAllPurposes = () => {
+    console.log(here)
+    console.log(props)
+  };
+
   handleBack = () => {
     const { onCancel } = this.props;
     const { selectedPanelIndex } = this.state;
@@ -52,6 +57,7 @@ export default class Details extends Component {
       customPurposeList = {},
       vendorConsentData,
       publisherConsentData,
+      selectAllPurposes,
       selectPurpose,
       selectCustomPurpose,
       selectAllVendors,
@@ -62,18 +68,21 @@ export default class Details extends Component {
     const { purposes = [], vendors = [] } = vendorList;
     const { purposes: customPurposes = [] } = customPurposeList;
 
-
     return (
       <div class={style.details}>
         <div class={style.header}>
-          <div class={style.item}>
+          <div class={style.item, style.left}>
             <img class={style.logo}
               localizeKey='logo'
               src='https://s18955.pcdn.co/wp-content/uploads/2016/12/ShareThisLogo1x.png'
             >
             </img>
+          </div>
+          <div class={style.item, style.center}>
             <LocalLabel class={style.title} localizeKey='title'>Privacy Settings</LocalLabel>
-            <Button class={style.button} onCLick=''>
+          </div>
+          <div class={style.item, style.right}>
+            <Button class={style.button} onClick={selectAllPurposes}>
               <LocalLabel localizeKey='savePurposes'>Enable all purposes</LocalLabel>
             </Button>
           </div>
@@ -98,6 +107,9 @@ export default class Details extends Component {
           </Panel>
         </div>
         <div class={style.footer}>
+          <a class={style.showVendor} onClick={this.handleShowVendors}>
+            <LocalLabel localizeKey='showVendor'>Show full vendor list</LocalLabel>
+          </a>
           <a class={style.cancel} onClick={this.handleBack}><LocalLabel localizeKey='back'>Back</LocalLabel></a>
           <Button class={style.save} onClick={onSave}><LocalLabel localizeKey='save'>Save and Exit</LocalLabel></Button>
         </div>

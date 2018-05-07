@@ -20,30 +20,43 @@
     .item {
       box-sizing: border-box;
       display: flex;
-      flex: 1 0 227px;
+      flex: 1 0 auto;
       height: 60px;
+
       
-      .logo {
-        display: block;
-        align-self: center;
-        padding-left: 13px;
-        max-height: 40px;
-        max-width: 150px;
-      }
-      .title {
-        padding: 0 13px;
-      }
-      .button {
-        background-color: transparent;
-        color: @color-primary;
-        padding-right: 13px;
-        &:hover {
-          background-color: @color-primary;
-          color: #fff;
-        }
+    }
+    .left {
+      flex: 1 0 auto;
+      justify-content: flex-start;
+      padding-left: 13px;
+    }
+    .center {
+      flex: 1 0 auto;
+      justify-content: center;
+      padding: 0 13px;
+    }
+    .right {
+      justify-content: flex-end;
+      padding-right: 13px;
+    }
+    .logo {
+      display: block;
+      align-self: center;
+      max-height: 40px;
+      max-width: 150px;
+    }
+    .button {
+      margin: 10px 0;
+      flex: 0 1 auto;
+      height: 40px;
+      font-size: 12px;
+      background-color: transparent;
+      color: @color-primary;
+      &:hover {
+        background-color: @color-primary;
+        color: #fff;
       }
     }
-    
   }
   .body {
     flex: 1;
@@ -56,6 +69,14 @@
     justify-content: flex-end;
     flex: 0 1 80px;
     border-top: 1px solid @color-border;
+
+    .showVendor {
+      flex: 1 1 auto;
+      margin: 0 0 0 13px;
+      position: relative;
+      text-align: left;
+      line-height: 75px;
+    }
   }
 
   .save {
