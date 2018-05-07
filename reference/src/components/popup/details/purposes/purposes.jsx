@@ -50,6 +50,22 @@ export default class Purposes extends Component {
 		}
 	};
 
+  switchSelectStatus = (selectedPurposeIndex) => {
+    var {
+      purposes,
+      customPurposes,
+      selectedPurposeIds,
+      selectedCustomPurposeIds
+    } = this.props;
+
+    var allPurposes = [...purposes, ...customPurposes];
+    var selectedPurpose = allPurposes[selectedPurposeIndex];
+    var selectedPurposeId = selectedPurpose && selectedPurpose.id;
+
+    return selectedPurposeIndex < purposes.length ?
+      selectedPurposeIds.has(selectedPurposeId) :
+      selectedCustomPurposeIds.has(selectedPurposeId);
+  }
 
 	render(props, state) {
 
@@ -78,8 +94,15 @@ export default class Purposes extends Component {
 						<div class={[style.purposeItem, selectedPurposeIndex === index ? style.selectedPurpose : ''].join(' ')}
 							 onClick={this.handleSelectPurposeDetail(index)}
 						>
-							<LocalLabel localizeKey={`${index >= purposes.length ? 'customPurpose' : 'purpose'}${purpose.id}.menu`}>{purpose.name}</LocalLabel>
+              <LocalLabel localizeKey={`${index >= purposes.length ? 'customPurpose' : 'purpose'}${purpose.id}.menu`}>{purpose.name}</LocalLabel>
+              <div class={style.active}>
+							  <Switch
+                  isSelected={this.switchSelectStatus(index)}
+								  onClick={this.handleSelectPurpose}
+							  />
+						  </div>
 						</div>
+            
 					))}
 				</div>
 				{selectedPurpose &&
@@ -90,7 +113,6 @@ export default class Purposes extends Component {
 								<LocalLabel localizeKey={`${currentPurposeLocalizePrefix}.title`}>{selectedPurpose.name}</LocalLabel>
 							</div>
 							<div class={style.active}>
-								<LocalLabel localizeKey='active'>Active</LocalLabel>
 								<Switch
 									isSelected={purposeIsActive}
 									onClick={this.handleSelectPurpose}

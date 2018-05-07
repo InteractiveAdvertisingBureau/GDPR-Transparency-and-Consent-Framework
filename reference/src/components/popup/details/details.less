@@ -6,14 +6,44 @@
 	flex: 1;
 	height: 100%;
 
+  
 	.header {
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-end;
+    width: 100%;
 		text-transform: uppercase;
 		font-weight: bold;
 		border-bottom: 1px solid @color-border;
-		flex: 0 0 60px;
+    flex-wrap: wrap;
+
+    .item {
+      box-sizing: border-box;
+      display: flex;
+      flex: 1 0 227px;
+      height: 60px;
+      
+      .logo {
+        display: block;
+        align-self: center;
+        padding-left: 13px;
+        max-height: 40px;
+        max-width: 150px;
+      }
+      .title {
+        padding: 0 13px;
+      }
+      .button {
+        background-color: transparent;
+        color: @color-primary;
+        padding-right: 13px;
+        &:hover {
+          background-color: @color-primary;
+          color: #fff;
+        }
+      }
+    }
+    
 	}
 	.body {
 		flex: 1;

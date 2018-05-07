@@ -65,12 +65,18 @@ export default class Details extends Component {
 
 		return (
 			<div class={style.details}>
-				<CloseButton
-					class={style.close}
-					onClick={onClose}
-				/>
 				<div class={style.header}>
-					<LocalLabel localizeKey='title'>User Privacy Preferences</LocalLabel>
+          <div class={style.item}>
+            <img class={style.logo}
+              localizeKey='logo'
+              src='https://s18955.pcdn.co/wp-content/uploads/2016/12/ShareThisLogo1x.png'
+            >
+            </img>
+					  <LocalLabel class={style.title} localizeKey='title'>Privacy Settings</LocalLabel>
+            <Button class={style.button} onCLick=''>
+              <LocalLabel localizeKey='savePurposes'>Enable all purposes</LocalLabel>
+            </Button>
+          </div>
 				</div>
 				<div class={style.body}>
 					<Panel selectedIndex={selectedPanelIndex}>

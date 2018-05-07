@@ -27,12 +27,8 @@ export default class Intro extends Component {
 
 		return (
 			<div class={style.intro}>
-				<CloseButton
-					class={style.close}
-					onClick={onClose}
-				/>
 				<div class={style.title}>
-					<LocalLabel localizeKey='title'>Thanks for visiting</LocalLabel> {DOMAIN}
+					<LocalLabel localizeKey='title'>We value your privacy</LocalLabel>
 				</div>
 				<div class={style.description}>
 					<LocalLabel localizeKey='description'>In order to run a successful website, we and certain third parties are setting cookies and accessing and storing information on your device for various purposes. Various third parties are also collecting data to show you personalized content and ads. Some third parties require your consent to collect data to serve you personalized content and ads.</LocalLabel>
@@ -43,15 +39,16 @@ export default class Intro extends Component {
 						invert={true}
 						onClick={onShowPurposes}
 					>
-						<LocalLabel localizeKey='showPurposes'>Manage your choices</LocalLabel>
+						<LocalLabel localizeKey='showPurposes'>I do not accept</LocalLabel>
 					</Button>
 					<Button
 						class={style.acceptAll}
 						onClick={onAcceptAll}
 					>
-						<LocalLabel localizeKey='acceptAll'>Got it, thanks!</LocalLabel>
+						<LocalLabel localizeKey='acceptAll'>I accept</LocalLabel>
 					</Button>
 				</div>
+        <a class={style.showPurposes} onClick={onShowPurposes}>Show Purposes</a>
 			</div>
 		);
 	}

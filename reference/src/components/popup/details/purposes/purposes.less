@@ -8,19 +8,23 @@
 		font-size: 12px;
 		font-weight: bold;
 		flex: 1;
-		max-width: 200px;
+		max-width: 300px;
 		border-right: 1px solid @color-border;
 		overflow-y: auto;
 		overflow-x: hidden;
 	}
 	.purposeItem {
 		display: flex;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 0 30px;
 		align-items: center;
-		height: 50px;
-		padding-left: 10px;
+    justify-content: space-between;
+    line-height: 75px;
 		background-color: @color-border;
 		border-bottom: 1px solid white;
 		cursor: pointer;
+    transition: all .3s ease;
 
 		&:last-child {
 			border-bottom: 1px solid @color-border;
