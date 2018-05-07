@@ -26,7 +26,11 @@ export default class Intro extends Component {
     } = props;
 
     return (
+
       <div class={style.intro}>
+        <img class={style.logo}
+          src='https://s18955.pcdn.co/wp-content/uploads/2016/12/ShareThisLogo2x.png'
+        />
         <div class={style.title}>
           <LocalLabel localizeKey='title'>We value your privacy</LocalLabel>
         </div>
