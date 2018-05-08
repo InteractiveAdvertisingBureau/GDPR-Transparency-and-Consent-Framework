@@ -31,8 +31,11 @@ export default class Purposes extends Component {
     };
   };
 
-  handleSelectPurpose = ({isSelected}) => {
-    const {selectedPurposeIndex} = this.state;
+  handleSelectPurpose = ({isSelected, dataId}) => {
+    var {selectedPurposeIndex} = this.state;
+    if (dataId !== undefined) {
+      selectedPurposeIndex = dataId;
+    }
     const {
       purposes,
       customPurposes,
@@ -50,7 +53,7 @@ export default class Purposes extends Component {
     }
   };
 
-  switchSelectStatus = (selectedPurposeIndex) => {
+  showSelectStatus = (selectedPurposeIndex) => {
     var {
       purposes,
       customPurposes,
@@ -68,7 +71,6 @@ export default class Purposes extends Component {
   }
 
   render(props, state) {
-
     const {
       onShowVendors,
       purposes,
@@ -91,18 +93,18 @@ export default class Purposes extends Component {
       <div class={style.purposes}>
         <div class={style.purposeList}>
           {allPurposes.map((purpose, index) => (
-            <div class={[style.purposeItem, selectedPurposeIndex === index ? style.selectedPurpose : ''].join(' ')}
+            <li class={[style.purposeItem, selectedPurposeIndex === index ? style.selectedPurpose : ''].join(' ')}
                onClick={this.handleSelectPurposeDetail(index)}
             >
               <LocalLabel localizeKey={`${index >= purposes.length ? 'customPurpose' : 'purpose'}${purpose.id}.menu`}>{purpose.name}</LocalLabel>
               <div class={style.active}>
                 <Switch
-                  isSelected={this.switchSelectStatus(index)}
+                  dataId={index}
+                  isSelected={this.showSelectStatus(index)}
                   onClick={this.handleSelectPurpose}
                 />
               </div>
-            </div>
-            
+            </li>
           ))}
         </div>
         {selectedPurpose &&

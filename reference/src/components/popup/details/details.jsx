@@ -27,11 +27,6 @@ export default class Details extends Component {
     });
   };
 
-  enableAllPurposes = () => {
-    console.log(here)
-    console.log(props)
-  };
-
   handleBack = () => {
     const { onCancel } = this.props;
     const { selectedPanelIndex } = this.state;
