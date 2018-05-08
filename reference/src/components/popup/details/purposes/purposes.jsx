@@ -125,13 +125,15 @@ export default class Purposes extends Component {
             </div>
             <div class={style.body}>
               <LocalLabel localizeKey={`${currentPurposeLocalizePrefix}.description`} />
-              <Vendors
-                hideDescription={true}
-                enableEdit={true}
-                vendors={vendors}
-                selectVendor={selectVendor}
-                selectedVendorIds={selectedVendorIds}
-              />
+              <div class={style.vendor}>
+                <Vendors
+                  hideDescription={true}
+                  enableEdit={true}
+                  vendors={vendors}
+                  selectVendor={selectVendor}
+                  selectedVendorIds={selectedVendorIds}
+                />
+              </div>
             </div>
           </div>
         </div>

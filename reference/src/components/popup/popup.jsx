@@ -43,7 +43,6 @@ export default class Popup extends Component {
     const { store, onShowPurposes } = props;
     const { selectedPanelIndex } = state;
     const { isConsentToolShowing } = store;
-    console.log(store);
 
     return (
       <div
