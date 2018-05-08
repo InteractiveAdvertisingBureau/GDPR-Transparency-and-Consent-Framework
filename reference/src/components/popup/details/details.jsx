@@ -91,7 +91,9 @@ export default class Details extends Component {
               selectedCustomPurposeIds={selectedCustomPurposeIds}
               selectPurpose={selectPurpose}
               selectCustomPurpose={selectCustomPurpose}
-              onShowVendors={this.handleShowVendors}
+              selectVendor={selectVendor}
+              vendors={vendors}
+              selectedVendorIds={selectedVendorIds}
             />
             <Vendors
               selectedVendorIds={selectedVendorIds}

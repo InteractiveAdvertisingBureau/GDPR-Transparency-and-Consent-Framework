@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import style from './purposes.less';
 import Switch from '../../../switch/switch';
 import Label from "../../../label/label";
+import Vendors from './../vendors/vendors';
 
 class LocalLabel extends Label {
   static defaultProps = {
@@ -15,7 +16,6 @@ export default class Purposes extends Component {
   };
 
   static defaultProps = {
-    onShowVendors: () => {},
     purposes: [],
     customPurposes: [],
     selectedPurposeIds: new Set(),
@@ -72,11 +72,13 @@ export default class Purposes extends Component {
 
   render(props, state) {
     const {
-      onShowVendors,
       purposes,
       customPurposes,
       selectedPurposeIds,
-      selectedCustomPurposeIds
+      selectedCustomPurposeIds,
+      vendors,
+      selectVendor,
+      selectedVendorIds
     } = props;
 
     const {selectedPurposeIndex} = state;
@@ -123,7 +125,13 @@ export default class Purposes extends Component {
             </div>
             <div class={style.body}>
               <LocalLabel localizeKey={`${currentPurposeLocalizePrefix}.description`} />
-              <a class={style.vendorLink} onClick={onShowVendors}><LocalLabel localizeKey='showVendors'>Show full vendor list</LocalLabel></a>
+              <Vendors
+                hideDescription={true}
+                enableEdit={true}
+                vendors={vendors}
+                selectVendor={selectVendor}
+                selectedVendorIds={selectedVendorIds}
+              />
             </div>
           </div>
         </div>
