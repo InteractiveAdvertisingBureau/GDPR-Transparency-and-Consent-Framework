@@ -21,3 +21,6 @@ RUN npm run build
 
 # start server
 CMD npm run dev
+
+# expose port
+EXPOSE 8080

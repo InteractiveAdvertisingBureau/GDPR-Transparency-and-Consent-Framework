@@ -17,7 +17,11 @@
 	{
 	  "id": 4,
 	  "name": "Content Personalisation"
-	}
+	},
+  {
+    "id": 5,
+    "name": "Measurement"
+  }
   ],
   "vendors": [
 	{
