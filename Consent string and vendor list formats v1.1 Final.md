@@ -387,7 +387,7 @@ user?s consent action timing. Javascript: Math.round((new Date()).getTime()/100)
     <td>12 bits
 (108-119)</td>
     <td>Two-letter ISO639-1 language code that CMP asked for consent in</td>
-    <td>Each letter should be encoded as 6 bits, a=0..z=25 . This will result in the base64url-encoded bytes spelling out the language code (in uppercase).</td>
+    <td>Each letter should be encoded as 6 bits, A=0..Z=25 . This will result in the base64url-encoded bytes spelling out the language code (in uppercase).</td>
   </tr>
   <tr>
     <td>VendorListVersion</td>
@@ -523,14 +523,14 @@ Example consent string field values for the case:
   </tr>
   <tr>
     <td>Created </td>
-    <td>15100811449 </td>
-    <td>2017-11-07T18:59:04.9Z</td>
+    <td>15100821554 </td>
+    <td>2017-11-07T19:15:55.4Z</td>
     <td>001110000100000101000100000000110010</td>
   </tr>
   <tr>
     <td>LastUpdated</td>
-    <td>15100811449</td>
-    <td>2017-11-07T18:59:04.9Z</td>
+    <td>15100821554</td>
+    <td>2017-11-07T19:15:55.4Z</td>
     <td>001110000100000101000100000000110010</td>
   </tr>
   <tr>
@@ -553,7 +553,7 @@ Example consent string field values for the case:
   </tr>
   <tr>
     <td>ConsentLanguage</td>
-    <td>"en" (e=4, n=13)</td>
+    <td>"EN" (E=4, N=13)</td>
     <td>Two-letter ISO639-1 language code that CMP asked for consent in</td>
     <td>000100 001101</td>
   </tr>
@@ -603,13 +603,13 @@ Example consent string field values for the case:
     <td>SingleVendorId[0]</td>
     <td>9</td>
     <td>VendorId=9 has No Consent (opposite of Default Consent)</td>
-    <td>00000000000001001</td>
+    <td>0000000000001001</td>
   </tr>
   <tr>
     <td>base64url-encoded consent string value</td>
     <td></td>
     <td></td>
-    <td>BOJObISOJObISAABAAENAA4AAAAAoAAA</td>
+    <td>BOEFEAyOEFEAyAHABDENAI4AAAB9vABAASA</td>
   </tr>
 </table>
 
