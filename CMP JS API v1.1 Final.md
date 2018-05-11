@@ -630,11 +630,11 @@ __cmp("ping", null, function(val, success) {
 
 ## Where will the API retrieve the vendor consent information from? <a name="retrieve"></a>
 
-CMP implementations will retrieve vendor consent from the [third party global cookie](https://docs.google.com/document/d/1dg_Tt6HIWyV0GAo8wGss0qya4Uqgxqq0eIKw2jYV-bs/edit?userstoinvite=cpinon@quantcast.com&ts=5a063178#heading=h.8w1ed55yrz3v), or if configured and implemented by the CMP, a first-party service-specific cookie (or, for service-specific vendor consent that needs to be shared between sites, a shared third-party cookie location).
+CMP implementations will retrieve vendor consent from the [third party global cookie](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/Consent%20string%20and%20vendor%20list%20formats%20v1.1%20Final.md), or if configured and implemented by the CMP, a first-party service-specific cookie (or, for service-specific vendor consent that needs to be shared between sites, a shared third-party cookie location).
 
 #### How will the API prioritize the service-specific and the global cookies? <a name="prioritize"></a>
 
-The prioritization between these two cookies is as specified in the [policy FAQ](https://docs.google.com/document/d/1sHynP9J_j4ly_RJL5QyDAD-fBD_BGxb4dUGzznddc_8/edit). 
+The prioritization between these two cookies is as specified in the [policy FAQ](http://advertisingconsent.eu/wp-content/uploads/2018/04/FAQ_Transparency_Consent_Framework_V12_170418.pdf).
 
 The service-specific cookie consents will override the global consent cookie, if it is being used. These are the following resolutions of consent for each vendor:
 
