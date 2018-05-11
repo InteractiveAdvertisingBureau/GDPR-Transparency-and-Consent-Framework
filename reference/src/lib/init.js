@@ -8,6 +8,9 @@ import log from './log';
 import pack from '../../package.json';
 import config from './config';
 
+const CMP_VERSION = 1;
+const CMP_ID = 1;
+const COOKIE_VERSION = 1;
 
 export function init(configUpdates) {
 	config.update(configUpdates);
@@ -18,7 +21,13 @@ export function init(configUpdates) {
 		.then(vendorConsentData => {
 
 			// Initialize the store with all of our consent data
-			const store = new Store({vendorConsentData, publisherConsentData: readPublisherConsentCookie()});
+			const store = new Store({
+				cmpVersion: CMP_VERSION,
+				cmpId: CMP_ID,
+				cookieVersion: COOKIE_VERSION,
+				vendorConsentData,
+				publisherConsentData: readPublisherConsentCookie()
+			});
 
 			// Pull queued command from __cmp stub
 			const {commandQueue = []} = window[CMP_GLOBAL_NAME] || {};
@@ -29,24 +38,6 @@ export function init(configUpdates) {
 			// Expose `processCommand` as the CMP implementation
 			window[CMP_GLOBAL_NAME] = cmp.processCommand;
 
-			// Execute any previously queued command
-			commandQueue.forEach(({callId, command, parameter, callback, event}) => {
-				// If command is queued with an event we will relay its result via postMessage
-				if (event) {
-					cmp.processCommand(command, parameter, result =>
-						event.source.postMessage({
-							[CMP_GLOBAL_NAME]: {
-								callId,
-								command,
-								result
-							}
-						}, event.origin));
-				}
-				else {
-					cmp.processCommand(command, parameter, callback);
-				}
-			});
-
 			// Render the UI
 			const App = require('../components/app').default;
 			render(<App store={store} notify={cmp.notify} />, document.body);
@@ -55,6 +46,10 @@ export function init(configUpdates) {
 			log.debug(`Successfully loaded CMP version: ${pack.version}`);
 			cmp.isLoaded = true;
 			cmp.notify('isLoaded');
+
+			// Execute any previously queued command
+			cmp.commandQueue = commandQueue;
+			cmp.processCommandQueue();
 
 			// Request lists
 			return Promise.all([

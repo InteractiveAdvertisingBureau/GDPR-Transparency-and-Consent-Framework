@@ -5,6 +5,7 @@ import {
 	publisherVersionMap
 } from './definitions';
 
+const SIX_BIT_ASCII_OFFSET = 65;
 
 function repeat(count, string='0') {
 	let padString = '';
@@ -40,6 +41,18 @@ function encodeIntToBits(number, numBits) {
 	return bitString;
 }
 
+/**
+ * Encodes each character of a string in 6 bits starting
+ * with [aA]=0 through [zZ]=25
+ */
+function encode6BitCharacters(string, numBits) {
+	const encoded = typeof string !== 'string' ? '' : string.split('').map(char => {
+		const int = Math.max(0, char.toUpperCase().charCodeAt(0) - SIX_BIT_ASCII_OFFSET);
+		return encodeIntToBits(int > 25 ? 0 : int, 6);
+	}).join('');
+	return padRight(encoded, numBits).substr(0, numBits);
+}
+
 function encodeBoolToBits(value) {
 	return encodeIntToBits(value === true ? 1 : 0, 1);
 }
@@ -61,6 +74,15 @@ function decodeBitsToDate(bitString, start, length) {
 
 function decodeBitsToBool(bitString, start) {
 	return parseInt(bitString.substr(start, 1), 2) === 1;
+}
+function decode6BitCharacters(bitString, start, length) {
+	let decoded = '';
+	let decodeStart = start;
+	while (decodeStart < start + length) {
+		decoded += String.fromCharCode(SIX_BIT_ASCII_OFFSET + decodeBitsToInt(bitString, decodeStart, 6));
+		decodeStart += 6;
+	}
+	return decoded;
 }
 
 
@@ -88,6 +110,8 @@ function encodeField({ input, field }) {
 			return encodeDateToBits(fieldValue, bitCount);
 		case 'bits':
 			return padRight(fieldValue, bitCount - fieldValue.length).substring(0, bitCount);
+		case '6bitchar':
+			return encode6BitCharacters(fieldValue, bitCount);
 		case 'list':
 			return fieldValue.reduce((acc, listValue) => acc + encodeFields({
 				input: listValue,
@@ -132,6 +156,8 @@ function decodeField({ input, output, startPosition, field }) {
 			return { fieldValue: decodeBitsToDate(input, startPosition, bitCount) };
 		case 'bits':
 			return { fieldValue: input.substr(startPosition, bitCount) };
+		case '6bitchar':
+			return { fieldValue: decode6BitCharacters(input, startPosition, bitCount) };
 		case 'list':
 			return new Array(listEntryCount).fill().reduce((acc) => {
 				const { decodedObject, newPosition } = decodeFields({
@@ -236,16 +262,10 @@ function encodePublisherCookieValue(publisherData) {
  */
 function decodeCookieValue(cookieValue, definitionMap) {
 
-	// Add padding
-	let unsafe = cookieValue;
-	while (unsafe.length % 4 !== 0) {
-		unsafe += '=';
-	}
-
 	// Replace safe characters
-	unsafe = unsafe
+	const unsafe = cookieValue
 		.replace(/-/g, '+')
-		.replace(/_/g, '/');
+		.replace(/_/g, '/') + '=='.substring(0, (3 * cookieValue.length) % 4);
 
 	const bytes = atob(unsafe);
 
@@ -291,6 +311,7 @@ export {
 	encodeIntToBits,
 	encodeBoolToBits,
 	encodeDateToBits,
+	encode6BitCharacters,
 	decodeBitsToInt,
 	decodeBitsToDate,
 	decodeBitsToBool,
@@ -299,5 +320,6 @@ export {
 	encodeVendorCookieValue,
 	decodeVendorCookieValue,
 	encodePublisherCookieValue,
-	decodePublisherCookieValue
+	decodePublisherCookieValue,
+	decode6BitCharacters
 };

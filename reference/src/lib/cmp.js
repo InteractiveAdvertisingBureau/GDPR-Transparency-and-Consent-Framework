@@ -1,11 +1,9 @@
 import log from './log';
-import Promise from 'promise-polyfill';
-import pack from '../../package.json';
+import config from './config';
 import {
 	encodeVendorConsentData
 } from './cookie/cookie';
 
-const CMP_VERSION = pack.version;
 export const CMP_GLOBAL_NAME = '__cmp';
 
 export default class Cmp {
@@ -15,7 +13,7 @@ export default class Cmp {
 		this.eventListeners = {};
 		this.store = store;
 		this.processCommand.receiveMessage = this.receiveMessage;
-		this.processCommand.VERSION = CMP_VERSION;
+		this.commandQueue = [];
 	}
 
 	commands = {
@@ -23,9 +21,13 @@ export default class Cmp {
 		 * Get all publisher consent data from the data store.
 		 */
 		getPublisherConsents: (purposeIds, callback = () => {}) => {
-			const consent = this.store.getPublisherConsentsObject();
-			callback(consent);
-			return consent;
+			const consent = {
+				metadata: this.generateConsentString(),
+				gdprApplies: config.gdprApplies,
+				hasGlobalScope: config.storeConsentGlobally,
+				...this.store.getPublisherConsentsObject()
+			};
+			callback(consent, true);
 		},
 
 		/**
@@ -33,52 +35,48 @@ export default class Cmp {
 		 * @param {Array} vendorIds Array of vendor IDs to retrieve.  If empty return all vendors.
 		 */
 		getVendorConsents: (vendorIds, callback = () => {}) => {
-			const consent = this.store.getVendorConsentsObject(vendorIds);
-			callback(consent);
-			return consent;
+			const consent = {
+				metadata: this.generateConsentString(),
+				gdprApplies: config.gdprApplies,
+				hasGlobalScope: config.storeConsentGlobally,
+				...this.store.getVendorConsentsObject(vendorIds)
+			};
+
+			callback(consent, true);
 		},
 
 		/**
 		 * Get the encoded vendor consent data value.
 		 */
 		getConsentData: (_, callback = () => {}) => {
-			const {
-				persistedVendorConsentData,
-				vendorList
-			} = this.store;
-
-			const {
-				vendors = [],
-				purposes = []
-			} = vendorList || {};
-
-			const {
-				selectedVendorIds = new Set(),
-				selectedPurposeIds = new Set()
-			} = persistedVendorConsentData || {};
-
-			// Filter consents by values that exist in the current vendorList
-			const allowedVendorIds = new Set(vendors.map(({id}) => id));
-			const allowedPurposeIds = new Set(purposes.map(({id}) => id));
-
-			// Encode the persisted data
-			const consentData = persistedVendorConsentData && encodeVendorConsentData({
-				...persistedVendorConsentData,
-				selectedVendorIds: new Set(Array.from(selectedVendorIds).filter(id => allowedVendorIds.has(id))),
-				selectedPurposeIds: new Set(Array.from(selectedPurposeIds).filter(id => allowedPurposeIds.has(id))),
-				vendorList
-			});
-			callback(consentData);
-			return consentData;
+			const consentData = {
+				gdprApplies: config.gdprApplies,
+				hasGlobalScope: config.storeConsentGlobally,
+				consentData: this.generateConsentString()
+			};
+			callback(consentData, true);
 		},
 
 		/**
 		 * Get the entire vendor list
 		 */
 		getVendorList: (vendorListVersion, callback = () => {}) => {
-			const list = this.store.vendorList;
-			callback(list);
-			return list;
+			const {vendorList} = this.store;
+			const {vendorListVersion: listVersion} = vendorList || {};
+			if (!vendorListVersion || vendorListVersion === listVersion) {
+				callback(vendorList, true);
+			}
+			else {
+				callback(null, false);
+			}
+		},
+
+		ping: (_, callback = () => {}) => {
+			const result = {
+				gdprAppliesGlobally: config.storeConsentGlobally,
+				cmpLoaded: true
+			};
+			callback(result, true);
 		},
 
 		/**
@@ -129,7 +127,59 @@ export default class Cmp {
 		showConsentTool: (_, callback = () => {}) => {
 			this.store.toggleConsentToolShowing(true);
 			callback(true);
-			return true;
+		}
+	};
+
+	generateConsentString = () => {
+		const {
+			persistedVendorConsentData,
+			vendorList
+		} = this.store;
+
+		const {
+			vendors = [],
+			purposes = []
+		} = vendorList || {};
+
+		const {
+			selectedVendorIds = new Set(),
+			selectedPurposeIds = new Set()
+		} = persistedVendorConsentData || {};
+
+		// Filter consents by values that exist in the current vendorList
+		const allowedVendorIds = new Set(vendors.map(({id}) => id));
+		const allowedPurposeIds = new Set(purposes.map(({id}) => id));
+
+		// Encode the persisted data
+		return persistedVendorConsentData && encodeVendorConsentData({
+			...persistedVendorConsentData,
+			selectedVendorIds: new Set(Array.from(selectedVendorIds).filter(id => allowedVendorIds.has(id))),
+			selectedPurposeIds: new Set(Array.from(selectedPurposeIds).filter(id => allowedPurposeIds.has(id))),
+			vendorList
+		});
+	};
+
+	processCommandQueue = () => {
+		const queue = [...this.commandQueue];
+		if (queue.length) {
+			log.info(`Process ${queue.length} queued commands`);
+			this.commandQueue = [];
+			queue.forEach(({callId, command, parameter, callback, event}) => {
+				// If command is queued with an event we will relay its result via postMessage
+				if (event) {
+					this.processCommand(command, parameter, returnValue =>
+						event.source.postMessage({
+							__cmpReturn: {
+								callId,
+								command,
+								returnValue
+							}
+						}, event.origin));
+				}
+				else {
+					this.processCommand(command, parameter, callback);
+				}
+			});
 		}
 	};
 
@@ -138,11 +188,11 @@ export default class Cmp {
 	 * call `processCommand`
 	 */
 	receiveMessage = ({data, origin, source}) => {
-		const {[CMP_GLOBAL_NAME]: cmp} = data;
+		const {__cmpCall: cmp} = data;
 		if (cmp) {
 			const {callId, command, parameter} = cmp;
-			this.processCommand(command, parameter, result =>
-				source.postMessage({[CMP_GLOBAL_NAME]: {callId, command, result}}, origin));
+			this.processCommand(command, parameter, returnValue =>
+				source.postMessage({__cmpReturn: {callId, command, returnValue}}, origin));
 		}
 	};
 
@@ -155,9 +205,22 @@ export default class Cmp {
 		if (typeof this.commands[command] !== 'function') {
 			log.error(`Invalid CMP command "${command}"`);
 		}
+		// Special case where we have the full CMP implementation loaded but
+		// we still queue these commands until there is data available. This
+		// behavior should be removed in future versions of the CMP spec
+		else if (
+			(!this.store.persistedVendorConsentData && (command === 'getVendorConsents' || command === 'getConsentData')) ||
+			(!this.store.persistedPublisherConsentData && command === 'getPublisherConsents')) {
+			log.info(`Queuing command: ${command} until consent data is available`);
+			this.commandQueue.push({
+				command,
+				parameter,
+				callback
+			});
+		}
 		else {
 			log.info(`Proccess command: ${command}, parameter: ${parameter}`);
-			return Promise.resolve(this.commands[command](parameter, callback));
+			this.commands[command](parameter, callback);
 		}
 	};
 
@@ -172,5 +235,10 @@ export default class Cmp {
 		eventSet.forEach(listener => {
 			listener({event, data});
 		});
+
+		// Process any queued commands that were waiting for consent data
+		if (event === 'onSubmit') {
+			this.processCommandQueue();
+		}
 	};
 }

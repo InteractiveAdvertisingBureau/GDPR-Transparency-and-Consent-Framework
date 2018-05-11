@@ -114,13 +114,12 @@ describe('store', () => {
 		const vendorObject = store.getVendorConsentsObject();
 		const noConsentVendorCount = Object.keys(vendorObject.vendorConsents).filter(key => !vendorObject.vendorConsents[key]).length;
 
-
 		expect(noConsentVendorCount).to.equal(vendorList.vendors.length - 2);
 		expect(vendorObject.vendorConsents['4']).to.be.true;
 		expect(vendorObject.vendorConsents['5']).to.be.true;
 
-		expect(vendorObject.purposes['1']).to.be.true;
-		expect(vendorObject.purposes['4']).to.be.true;
+		expect(vendorObject.purposeConsents['1']).to.be.true;
+		expect(vendorObject.purposeConsents['4']).to.be.true;
 	});
 
 	it('returns consent=false for vendors that are not in the vendorList', () => {
@@ -152,10 +151,10 @@ describe('store', () => {
 
 		const vendorObject = store.getVendorConsentsObject();
 
-		expect(vendorObject.purposes['1']).to.be.true;
-		expect(vendorObject.purposes['4']).to.be.true;
-		expect(vendorObject.purposes['9']).to.be.false;
-		expect(vendorObject.purposes['10']).to.be.false;
+		expect(vendorObject.purposeConsents['1']).to.be.true;
+		expect(vendorObject.purposeConsents['4']).to.be.true;
+		expect(vendorObject.purposeConsents['9']).to.be.false;
+		expect(vendorObject.purposeConsents['10']).to.be.false;
 	});
 
 	it('selects vendor IDs', () => {
@@ -169,6 +168,7 @@ describe('store', () => {
 
 		store.selectVendor(2, false);
 		store.selectVendor(3, true);
+		store.persist();
 
 		const vendorObject = store.getVendorConsentsObject();
 		const selectedVendorIds = Object.keys(vendorObject.vendorConsents).filter(key => vendorObject.vendorConsents[key]);
@@ -186,6 +186,7 @@ describe('store', () => {
 		});
 
 		store.selectAllVendors(true);
+		store.persist();
 
 		const vendorObject = store.getVendorConsentsObject();
 		const selectedVendorIds = Object.keys(vendorObject.vendorConsents).filter(key => vendorObject.vendorConsents[key]);
@@ -205,9 +206,10 @@ describe('store', () => {
 
 		store.selectPurpose(0, false);
 		store.selectPurpose(4, true);
+		store.persist();
 
 		const vendorObject = store.getVendorConsentsObject();
-		const selectedPurposeIds = Object.keys(vendorObject.purposes).filter(key => vendorObject.purposes[key]);
+		const selectedPurposeIds = Object.keys(vendorObject.purposeConsents).filter(key => vendorObject.purposeConsents[key]);
 
 		expect(selectedPurposeIds).to.deep.equal(['1', '2', '4']);
 	});
@@ -223,9 +225,10 @@ describe('store', () => {
 
 
 		store.selectAllPurposes(true);
+		store.persist();
 
 		const vendorObject = store.getVendorConsentsObject();
-		const selectedPurposeIds = Object.keys(vendorObject.purposes).filter(key => vendorObject.purposes[key]);
+		const selectedPurposeIds = Object.keys(vendorObject.purposeConsents).filter(key => vendorObject.purposeConsents[key]);
 
 		expect(selectedPurposeIds.length).to.equal(vendorList.purposes.length);
 	});
@@ -241,6 +244,7 @@ describe('store', () => {
 
 		store.selectCustomPurpose(0, false);
 		store.selectCustomPurpose(3, true);
+		store.persist();
 
 		const publisherObject = store.getPublisherConsentsObject();
 		const selectedCustomPurposeIds = Object.keys(publisherObject.customPurposes).filter(key => publisherObject.customPurposes[key]);
@@ -258,6 +262,7 @@ describe('store', () => {
 		});
 
 		store.selectAllCustomPurposes(true);
+		store.persist();
 
 		const publisherObject = store.getPublisherConsentsObject();
 		const selectedCustomPurposeIds = Object.keys(publisherObject.customPurposes).filter(key => publisherObject.customPurposes[key]);

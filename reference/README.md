@@ -14,7 +14,7 @@ yarn install
 ## Build for Production
 
 ```sh
-npm run build
+yarn build
 ```
 
 This produces a production build of the `cmp` script and the docs application:
@@ -23,11 +23,11 @@ This produces a production build of the `cmp` script and the docs application:
 
 ## Documentation
 
-Instructions to install the CMP as well as API docs and examples are available in the `docs` 
+Instructions to install the CMP as well as API docs and examples are available in the `docs`
 application included with the repo.
 
 ```sh
-npm start
+yarn start
 ```
 
 The documentation can be viewed at:
@@ -36,7 +36,7 @@ The documentation can be viewed at:
 ## Development
 You can start a development server that will monitor changes to all CMP and docs files with:
 ```sh
-npm run dev
+yarn dev
 ```
 
 Development server can be accessed at:
@@ -45,5 +45,5 @@ Development server can be accessed at:
 ## Testing
 
 ```sh
-npm test
+yarn test
 ```

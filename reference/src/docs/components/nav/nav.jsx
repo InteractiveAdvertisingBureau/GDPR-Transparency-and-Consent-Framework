@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import style from './nav.less';
 import Setup from '../docs/setup';
 import CmpApi from '../docs/cmpApi';
+import Ping from '../examples/basic/ping';
 import EventListeners from '../examples/basic/eventListeners';
 import VendorConsents from '../examples/basic/vendorConsents';
 import ConsentData from '../examples/basic/consentData';
@@ -42,6 +43,7 @@ export const navItems = [
 	{
 		title: 'Basic Examples',
 		items: [
+			{ to: '/basic/ping', title: 'Ping', component:  Ping},
 			{ to: '/basic/show', title: 'Show Consent Tool', component:  ShowConsent},
 			{ to: '/basic/events', title: 'Event Listeners', component: EventListeners},
 			{ to: '/basic/vendor', title: 'Get Vendor Consents', component: VendorConsents },
