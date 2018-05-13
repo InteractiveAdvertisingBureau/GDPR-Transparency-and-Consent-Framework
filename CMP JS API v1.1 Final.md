@@ -38,8 +38,8 @@ In February 2017, the IAB Europe assembled parties representing both the supply 
 
 ## About the Transparency & Consent Framework <a name="About-the-Framework"></a>
 
-The scope of the technical working group?s initiative increased to include a technical industry solution to allow website operators to:
-1.  Control the vendors they wish to allow to access their users? browsers (for setting and reading cookies) and process their personal data and disclose these choices to other parties in the online advertising ecosystem
+The scope of the technical working group's initiative increased to include a technical industry solution to allow website operators to:
+1.  Control the vendors they wish to allow to access their users' browsers (for setting and reading cookies) and process their personal data and disclose these choices to other parties in the online advertising ecosystem
 2. Seek user consent under the ePrivacy Directive (for setting cookies or similar technical applications that access information on a device) and/or the GDPR in line with applicable legal requirements and signal the consent status through the online advertising ecosystem
  
 In summary, have one place to go to:
