@@ -93,13 +93,9 @@ export default class Vendors extends Component {
             {vendors.map(({ id, name }, index) => (
               <tr key={id} class={index % 2 === 1 ? style.even : ''}>
                 <td><div class={style.vendorName}>{name}</div></td>
-                {(enableEdit || editingConsents) &&
-                <td>
-                  <Switch
-                    dataId={id}
-                    isSelected={selectedVendorIds.has(id)}
-                    onClick={this.handleSelectVendor}
-                  />
+                {!enableEdit &&
+                <td class={style.disabled}>
+                  Disabled
                 </td>
                 }
               </tr>

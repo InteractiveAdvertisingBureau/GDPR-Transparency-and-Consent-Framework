@@ -63,6 +63,8 @@ export default class Details extends Component {
     const { purposes = [], vendors = [] } = vendorList;
     const { purposes: customPurposes = [] } = customPurposeList;
 
+    const allPurposes = [...purposes, ...customPurposes];
+
     return (
       <div class={style.details}>
         <div class={style.header}>
@@ -82,25 +84,34 @@ export default class Details extends Component {
             </Button>
           </div>
         </div>
+
         <div class={style.body}>
+          <h2 class={style.subtitle}>We value your privacy</h2>
+          <p class={style.message}>In order to run a successful website, we and certain third parties are setting cookies and accessing and storing information on your device for various purposes. Various third parties are also collecting data to show you personalized content and ads. Some third parties require your consent to collect data to serve you personalized content and ads.
+          </p>
           <Panel selectedIndex={selectedPanelIndex}>
-            <Purposes
-              purposes={purposes}
-              customPurposes={customPurposes}
-              selectedPurposeIds={selectedPurposeIds}
-              selectedCustomPurposeIds={selectedCustomPurposeIds}
-              selectPurpose={selectPurpose}
-              selectCustomPurpose={selectCustomPurpose}
-              selectVendor={selectVendor}
-              vendors={vendors}
-              selectedVendorIds={selectedVendorIds}
-            />
-            <Vendors
-              selectedVendorIds={selectedVendorIds}
-              selectAllVendors={selectAllVendors}
-              selectVendor={selectVendor}
-              vendors={vendors}
-            />
+            <table class={style.table}>
+              <tbody>
+                {allPurposes.map((purpose, index) => (
+                  <tr>
+                    <td>
+                      <Purposes
+                        selectedPurposeIndex={index}
+                        purposes={purposes}
+                        customPurposes={customPurposes}
+                        selectedPurposeIds={selectedPurposeIds}
+                        selectedCustomPurposeIds={selectedCustomPurposeIds}
+                        selectPurpose={selectPurpose}
+                        selectCustomPurpose={selectCustomPurpose}
+                        selectVendor={selectVendor}
+                        vendors={vendors}
+                        selectedVendorIds={selectedVendorIds}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </Panel>
         </div>
         <div class={style.footer}>
