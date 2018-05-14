@@ -20,4 +20,4 @@ ADD . /app
 RUN npm run build
 
 # start server
-CMD ["npm", "start"]
+CMD npm start
