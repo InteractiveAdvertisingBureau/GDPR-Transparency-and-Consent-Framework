@@ -12,6 +12,7 @@ class LocalLabel extends Label {
 
 export default class Purposes extends Component {
   state = {
+    showVendors: false,
     selectedPurposeIndex: 0
   };
 
@@ -21,7 +22,6 @@ export default class Purposes extends Component {
     selectedPurposeIds: new Set(),
     selectedCustomPurposeIds: new Set()
   };
-
 
   handleSelectPurposeDetail = index => {
     return () => {
@@ -53,6 +53,12 @@ export default class Purposes extends Component {
     }
   };
 
+  handleShowVendors = () => {
+    this.setState({
+      showVendors: !this.state.showVendors
+    });
+  };
+
   render(props, state) {
     const {
       selectedPurposeIndex,
@@ -73,6 +79,9 @@ export default class Purposes extends Component {
       selectedCustomPurposeIds.has(selectedPurposeId);
     const currentPurposeLocalizePrefix = `${selectedPurposeIndex >= purposes.length ? 'customPurpose' : 'purpose'}${selectedPurposeId}`;
 
+    const {showVendors} = this.state;
+    var itemName = (showVendors === true) ? 'Hide Companies' : 'View Companies';
+
     return (
       <div class={style.purposes}>
         <div class={style.purposeDescription}>
@@ -88,8 +97,15 @@ export default class Purposes extends Component {
                 />
               </div>
             </div>
+
             <div class={style.body}>
               <LocalLabel localizeKey={`${currentPurposeLocalizePrefix}.description`} />
+              <div class={style.showVendors}>
+                <a onClick={this.handleShowVendors}>
+                  <LocalLabel localizeKey='moreChoices'>{itemName}</LocalLabel>
+                </a>
+              </div>
+              {showVendors &&
               <div class={style.vendor}>
                 <Vendors
                   hideDescription={true}
@@ -99,6 +115,7 @@ export default class Purposes extends Component {
                   selectedVendorIds={selectedVendorIds}
                 />
               </div>
+              }
             </div>
           </div>
         </div>
