@@ -51,7 +51,6 @@
     "camelcase": 0,
     "comma-style": 2,
     "comma-dangle": 0,
-    "indent": [2, "tab", {"SwitchCase": 1}],
     "no-mixed-spaces-and-tabs": [2, "smart-tabs"],
     "no-trailing-spaces": [2, { "skipBlankLines": true }],
     "max-nested-callbacks": [2, 3],

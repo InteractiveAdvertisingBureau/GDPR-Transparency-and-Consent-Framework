@@ -26,7 +26,7 @@ const vendorList = {
 	"purposes": [
 		{
 			"id": 1,
-			"name": "Accessing a Device or Browser"
+			"name": "Accessing a Device"
 		},
 		{
 			"id": 2,
