@@ -52,6 +52,26 @@ export default class Vendors extends Component {
     } = props;
     const { editingConsents } = this.state;
 
+    function EnableEdit(props) {
+      const {enableEdit, id} = props;
+      if (!enableEdit) {
+        return (
+          <td class={style.disabled}>
+            Disabled
+          </td>
+        );
+      }
+      return (
+        <td>
+          <Switch
+            dataId={id}
+            isSelected={selectedVendorIds.has(id)}
+            onClick={this.handleSelectVendor}
+          />
+        </td>
+      );
+    };
+
     return (
       <div class={style.vendors}>
         <div class={style.header}>
@@ -93,11 +113,10 @@ export default class Vendors extends Component {
             {vendors.map(({ id, name }, index) => (
               <tr key={id} class={index % 2 === 1 ? style.even : ''}>
                 <td><div class={style.vendorName}>{name}</div></td>
-                {!enableEdit &&
-                <td class={style.disabled}>
-                  Disabled
-                </td>
-                }
+                <EnableEdit
+                  enableEdit={enableEdit}
+                  id={id}
+                />
               </tr>
             ))}
             </tbody>
