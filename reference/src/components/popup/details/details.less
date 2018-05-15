@@ -22,8 +22,6 @@
       display: flex;
       flex: 1 0 auto;
       height: 60px;
-
-      
     }
     .left {
       flex: 1 0 auto;
@@ -34,6 +32,9 @@
       padding-left: 12px;
       flex: 1 0 auto;
       justify-content: center;
+      @media @smartphone {
+        display: none;
+      }
     }
     .right {
       justify-content: flex-end;
