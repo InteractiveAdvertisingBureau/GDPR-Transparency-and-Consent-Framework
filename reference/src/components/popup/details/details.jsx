@@ -93,7 +93,7 @@ export default class Details extends Component {
             <table class={style.table}>
               <tbody>
                 {allPurposes.map((purpose, index) => (
-                  <tr>
+                  <tr class={style.row}>
                     <td>
                       <Purposes
                         selectedPurposeIndex={index}

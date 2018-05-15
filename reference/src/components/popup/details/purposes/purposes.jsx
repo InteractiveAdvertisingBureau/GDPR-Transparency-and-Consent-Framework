@@ -117,8 +117,6 @@ export default class Purposes extends Component {
               </div>
               }
             </div>
-
-            {showDivider && <div class={style.divider}></div>}
           </div>
         </div>
       </div>
