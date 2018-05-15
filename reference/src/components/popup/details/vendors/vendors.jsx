@@ -59,7 +59,7 @@ export default class Vendors extends Component {
             <tr>
               <th><LocalLabel localizeKey='company'>Company</LocalLabel></th>
               {(enableEdit || editingConsents) &&
-              <th><LocalLabel localizeKey='offOn'>Allow</LocalLabel></th>
+              <th><LocalLabel localizeKey='offOn'>Off/On</LocalLabel></th>
               }
             </tr>
             </thead>
