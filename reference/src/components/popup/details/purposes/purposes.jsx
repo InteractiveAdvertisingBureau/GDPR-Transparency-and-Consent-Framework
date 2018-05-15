@@ -78,6 +78,7 @@ export default class Purposes extends Component {
       selectedPurposeIds.has(selectedPurposeId) :
       selectedCustomPurposeIds.has(selectedPurposeId);
     const currentPurposeLocalizePrefix = `${selectedPurposeIndex >= purposes.length ? 'customPurpose' : 'purpose'}${selectedPurposeId}`;
+    const showDivider = selectedPurposeId !== allPurposes.length;
 
     const {showVendors} = this.state;
     var itemName = (showVendors === true) ? 'Hide Companies' : 'View Companies';
@@ -108,7 +109,6 @@ export default class Purposes extends Component {
               {showVendors &&
               <div class={style.vendor}>
                 <Vendors
-                  hideDescription={true}
                   enableEdit={false}
                   vendors={vendors}
                   selectVendor={selectVendor}
@@ -117,6 +117,8 @@ export default class Purposes extends Component {
               </div>
               }
             </div>
+
+            {showDivider && <div class={style.divider}></div>}
           </div>
         </div>
       </div>

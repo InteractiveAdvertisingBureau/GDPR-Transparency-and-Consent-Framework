@@ -113,7 +113,6 @@ export default class Details extends Component {
               </tbody>
             </table>
             <Vendors
-              hideDescription={true}
               enableEdit={true}
               selectedVendorIds={selectedVendorIds}
               selectAllVendors={selectAllVendors}

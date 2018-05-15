@@ -76,7 +76,7 @@
       line-height: 24px;
     }
 
-    .message{
+    .message {
       padding: 20px 0;
       color: #141e23;
       font-size: 14px;
@@ -103,10 +103,13 @@
 
     .showVendor {
       flex: 1 1 auto;
-      margin: 0 0 0 13px;
+      margin-left: 20px;
       position: relative;
       text-align: left;
       line-height: 75px;
+      @media @smartphone {
+        width: 100%;
+      }
     }
   }
 
