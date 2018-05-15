@@ -47,34 +47,12 @@ export default class Vendors extends Component {
     const {
       vendors,
       selectedVendorIds,
-      hideDescription,
       enableEdit
     } = props;
     const { editingConsents } = this.state;
 
     return (
       <div class={style.vendors}>
-        <div class={style.header}>
-          {!hideDescription &&
-            <div class={style.title}>
-              <LocalLabel localizeKey='title'>Our partners</LocalLabel>
-            </div>
-          }
-        </div>
-        {!hideDescription &&
-          <div class={style.description}>
-            <LocalLabel localizeKey='description'>
-              Help us provide you with a better online experience! Our partners set cookies and collect information from your browser across the web to provide you with website content, deliver relevant advertising and understand web audiences.
-            </LocalLabel>
-              {!editingConsents &&
-              <div>
-                <a onClick={this.handleMoreChoices}>
-                  <LocalLabel localizeKey='moreChoices'>Make More Choices</LocalLabel>
-                </a>
-              </div>
-              }
-          </div>
-        }
         <div class={style.vendorHeader}>
           <table class={style.vendorList}>
             <thead>
@@ -93,13 +71,18 @@ export default class Vendors extends Component {
             {vendors.map(({ id, name }, index) => (
               <tr key={id} class={index % 2 === 1 ? style.even : ''}>
                 <td><div class={style.vendorName}>{name}</div></td>
-                {(enableEdit || editingConsents) &&
+                {!enableEdit &&
+                <td class={style.disabled}>
+                  Disabled
+                </td>
+                }
+                {enableEdit &&
                 <td>
                   <Switch
                     dataId={id}
                     isSelected={selectedVendorIds.has(id)}
                     onClick={this.handleSelectVendor}
-                  />
+                />
                 </td>
                 }
               </tr>

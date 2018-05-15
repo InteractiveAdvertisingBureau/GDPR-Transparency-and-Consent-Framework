@@ -59,6 +59,7 @@
       font-weight: bold;
       flex: 1 1 auto;
       @media @smartphone {
+        width: 100%;
         font-size: 20px;
         padding-bottom: 5px;
       }
@@ -68,19 +69,31 @@
       color: @color-primary;
       font-weight: bold;
       display: flex;
+      padding-right: 25px;
       align-items: center;
       @media @smartphone {
         flex: 1 1 auto;
+        padding: 0;
       }
     }
     .body {
-      margin: 5% 0;
+      padding-top: 10px;
+      margin: auto;
       font-size: 14px;
       font-weight: 100;
       line-height: 20px;
     }
   }
+  .showVendors {
+    padding-top: 10px;
+  }
   .vendor {
     margin-top: 10px;
+  }
+  .divider {
+    height: 1px;
+    margin-top: 20px;
+    width: 100%;
+    background: #eaeaea;
   }
 }

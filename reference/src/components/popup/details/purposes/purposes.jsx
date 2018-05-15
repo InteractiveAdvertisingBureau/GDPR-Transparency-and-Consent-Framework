@@ -12,6 +12,7 @@ class LocalLabel extends Label {
 
 export default class Purposes extends Component {
   state = {
+    showVendors: false,
     selectedPurposeIndex: 0
   };
 
@@ -22,7 +23,6 @@ export default class Purposes extends Component {
     selectedCustomPurposeIds: new Set()
   };
 
-
   handleSelectPurposeDetail = index => {
     return () => {
       this.setState({
@@ -32,7 +32,7 @@ export default class Purposes extends Component {
   };
 
   handleSelectPurpose = ({isSelected, dataId}) => {
-    var {selectedPurposeIndex} = this.state;
+    var {selectedPurposeIndex} = this.props;
     if (dataId !== undefined) {
       selectedPurposeIndex = dataId;
     }
@@ -53,25 +53,15 @@ export default class Purposes extends Component {
     }
   };
 
-  showSelectStatus = (selectedPurposeIndex) => {
-    var {
-      purposes,
-      customPurposes,
-      selectedPurposeIds,
-      selectedCustomPurposeIds
-    } = this.props;
-
-    var allPurposes = [...purposes, ...customPurposes];
-    var selectedPurpose = allPurposes[selectedPurposeIndex];
-    var selectedPurposeId = selectedPurpose && selectedPurpose.id;
-
-    return selectedPurposeIndex < purposes.length ?
-      selectedPurposeIds.has(selectedPurposeId) :
-      selectedCustomPurposeIds.has(selectedPurposeId);
-  }
+  handleShowVendors = () => {
+    this.setState({
+      showVendors: !this.state.showVendors
+    });
+  };
 
   render(props, state) {
     const {
+      selectedPurposeIndex,
       purposes,
       customPurposes,
       selectedPurposeIds,
@@ -81,8 +71,6 @@ export default class Purposes extends Component {
       selectedVendorIds
     } = props;
 
-    const {selectedPurposeIndex} = state;
-
     const allPurposes = [...purposes, ...customPurposes];
     const selectedPurpose = allPurposes[selectedPurposeIndex];
     const selectedPurposeId = selectedPurpose && selectedPurpose.id;
@@ -90,26 +78,13 @@ export default class Purposes extends Component {
       selectedPurposeIds.has(selectedPurposeId) :
       selectedCustomPurposeIds.has(selectedPurposeId);
     const currentPurposeLocalizePrefix = `${selectedPurposeIndex >= purposes.length ? 'customPurpose' : 'purpose'}${selectedPurposeId}`;
+    const showDivider = selectedPurposeId !== allPurposes.length;
+
+    const {showVendors} = this.state;
+    var itemName = (showVendors === true) ? 'Hide Companies' : 'View Companies';
 
     return (
       <div class={style.purposes}>
-        <div class={style.purposeList}>
-          {allPurposes.map((purpose, index) => (
-            <li class={[style.purposeItem, selectedPurposeIndex === index ? style.selectedPurpose : ''].join(' ')}
-               onClick={this.handleSelectPurposeDetail(index)}
-            >
-              <LocalLabel localizeKey={`${index >= purposes.length ? 'customPurpose' : 'purpose'}${purpose.id}.menu`}>{purpose.name}</LocalLabel>
-              <div class={style.active}>
-                <Switch
-                  dataId={index}
-                  isSelected={this.showSelectStatus(index)}
-                  onClick={this.handleSelectPurpose}
-                />
-              </div>
-            </li>
-          ))}
-        </div>
-        {selectedPurpose &&
         <div class={style.purposeDescription}>
           <div class={style.purposeDetail}>
             <div class={style.detailHeader}>
@@ -123,21 +98,29 @@ export default class Purposes extends Component {
                 />
               </div>
             </div>
+
             <div class={style.body}>
               <LocalLabel localizeKey={`${currentPurposeLocalizePrefix}.description`} />
+              <div class={style.showVendors}>
+                <a onClick={this.handleShowVendors}>
+                  <LocalLabel localizeKey='moreChoices'>{itemName}</LocalLabel>
+                </a>
+              </div>
+              {showVendors &&
               <div class={style.vendor}>
                 <Vendors
-                  hideDescription={true}
-                  enableEdit={true}
+                  enableEdit={false}
                   vendors={vendors}
                   selectVendor={selectVendor}
                   selectedVendorIds={selectedVendorIds}
                 />
               </div>
+              }
             </div>
+
+            {showDivider && <div class={style.divider}></div>}
           </div>
         </div>
-        }
       </div>
     );
   }
