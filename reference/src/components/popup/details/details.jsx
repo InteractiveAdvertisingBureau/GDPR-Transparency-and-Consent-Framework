@@ -58,12 +58,12 @@ export default class Details extends Component {
       selectAllVendors,
       selectVendor
     } = store;
+
+    const allPurposes = [...purposes, ...customPurposes];
     const { selectedPurposeIds, selectedVendorIds } = vendorConsentData;
     const { selectedCustomPurposeIds } = publisherConsentData;
     const { purposes = [], vendors = [] } = vendorList;
     const { purposes: customPurposes = [] } = customPurposeList;
-
-    const allPurposes = [...purposes, ...customPurposes];
 
     return (
       <div class={style.details}>
