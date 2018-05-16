@@ -18,6 +18,8 @@ const PUBLISHER_CONSENT_COOKIE_MAX_AGE = 33696000;
 const VENDOR_CONSENT_COOKIE_NAME = 'euconsent';
 const VENDOR_CONSENT_COOKIE_MAX_AGE = 33696000;
 
+const SHARETHIS_HOSTNAME = 'c.sharethis.mgr.consensu.org'
+
 
 function encodeVendorIdsToBits(maxVendorId, selectedVendorIds = new Set()) {
 	let vendorString = '';
@@ -208,7 +210,7 @@ function readCookie(name) {
 function readEuconsentCookie(name) {
       return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "http://sharethis.mgr.consensu.org/v1.0/cmp/get_consent");
+            xhr.open("GET", `http://${SHARETHIS_HOSTNAME}/v1.0/cmp/get_consent`);
             xhr.withCredentials = true;
             xhr.responseType = "json";
             xhr.onload = function() {
@@ -232,7 +234,7 @@ function writeCookie(name, value, maxAgeSeconds, path = '/') {
 
 function writeEuconsentCookie(name, value) {
          var xhr  = new XMLHttpRequest();
-         var url = "http://sharethis.mgr.consensu.org/v1.0/cmp/set_consent?cookie="+value
+         var url = `http://${SHARETHIS_HOSTNAME}/v1.0/cmp/set_consent?cookie=${value}`
          xhr.open("GET", url);
          xhr.withCredentials = true
          xhr.send();
