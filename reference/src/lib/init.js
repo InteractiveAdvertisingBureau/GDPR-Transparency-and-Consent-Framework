@@ -19,6 +19,11 @@ export function init(configUpdates) {
 	// Fetch the current vendor consent before initializing
 	return readVendorConsentCookie()
 		.then(vendorConsentData => {
+                        let publisherConsentData = readPublisherConsentCookie();
+                        let showUI  = true;
+                        if(typeof vendorConsentData != 'undefined' || typeof publisherConsentData != 'undefined') {
+                                showUi = false;
+                        }
 
 			// Initialize the store with all of our consent data
 			const store = new Store({
@@ -40,7 +45,9 @@ export function init(configUpdates) {
 
 			// Render the UI
 			const App = require('../components/app').default;
-			render(<App store={store} notify={cmp.notify} />, document.body);
+                        if (showUI) {
+			      render(<App store={store} notify={cmp.notify} />, document.body);
+                        }
 
 			// Notify listeners that the CMP is loaded
 			log.debug(`Successfully loaded CMP version: ${pack.version}`);

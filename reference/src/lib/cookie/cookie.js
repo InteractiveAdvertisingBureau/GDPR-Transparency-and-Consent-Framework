@@ -217,7 +217,7 @@ function readEuconsentCookie(name) {
                   if(parts.length === 2) {
                        resolve(parts.pop().split(';').shift());
                   }else {
-                    resolve(null);
+                    resolve();
                   }
             }
 
