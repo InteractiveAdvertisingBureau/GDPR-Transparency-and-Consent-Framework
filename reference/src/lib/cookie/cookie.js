@@ -205,9 +205,37 @@ function readCookie(name) {
 	}
 }
 
+function readEuconsentCookie(name) {
+      return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://sharethis.mgr.consensu.org/v1.0/cmp/get_consent");
+            xhr.withCredentials = true;
+            xhr.responseType = "json";
+            xhr.onload = function() {
+                  var value = "; " + xhr.response.cookie
+                  var parts = value.split(`; ${name}=`);
+                  if(parts.length === 2) {
+                       resolve(parts.pop().split(';').shift());
+                  }else {
+                    resolve(null);
+                  }
+            }
+
+            xhr.send();
+      });
+
+}
 function writeCookie(name, value, maxAgeSeconds, path = '/') {
 	const maxAge = maxAgeSeconds === null ? '' : `;max-age=${maxAgeSeconds}`;
 	document.cookie = `${name}=${value};path=${path}${maxAge}`;
+}
+
+function writeEuconsentCookie(name, value) {
+         var xhr  = new XMLHttpRequest();
+         var url = "http://sharethis.mgr.consensu.org/v1.0/cmp/set_consent?cookie="+value
+         xhr.open("GET", url);
+         xhr.withCredentials = true
+         xhr.send();
 }
 
 function readPublisherConsentCookie() {
@@ -275,9 +303,14 @@ function writeGlobalVendorConsentCookie(vendorConsentData) {
  * @returns Promise resolved with decoded cookie object
  */
 function readLocalVendorConsentCookie() {
-	const cookie = readCookie(VENDOR_CONSENT_COOKIE_NAME);
-	log.debug('Read consent data from local cookie', cookie);
-	return Promise.resolve(cookie && decodeVendorConsentData(cookie));
+	//const cookie = readCookie(VENDOR_CONSENT_COOKIE_NAME);
+        return new Promise((resolve, reject) => {
+              readEuconsentCookie(VENDOR_CONSENT_COOKIE_NAME)
+                  .then(cookie => {
+                        log.debug('Read consent data from local cookie', cookie);
+                        resolve(cookie && decodeVendorConsentData(cookie));
+                  });
+        });
 }
 
 /**
@@ -288,7 +321,7 @@ function readLocalVendorConsentCookie() {
  */
 function writeLocalVendorConsentCookie(vendorConsentData) {
 	log.debug('Write consent data to local cookie', vendorConsentData);
-	return Promise.resolve(writeCookie(VENDOR_CONSENT_COOKIE_NAME,
+	return Promise.resolve(writeEuconsentCookie(VENDOR_CONSENT_COOKIE_NAME,
 		encodeVendorConsentData(vendorConsentData),
 		VENDOR_CONSENT_COOKIE_MAX_AGE,
 		'/'));
