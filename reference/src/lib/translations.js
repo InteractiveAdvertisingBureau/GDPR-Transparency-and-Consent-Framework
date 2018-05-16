@@ -57,6 +57,9 @@ export default {
 					<li>Precise Geographic Location data - allow processing of a user’s precise geographic location data in support of a purpose for which that certain third party has consent.</li>
 				</ul>`
 			},
+      purpose5: {
+        description: `The collection of information about your use of the content, and combination with previously collected information, used to measure, understand, and report on your usage of the service. This does not include personalisation, the collection of information about your use of this service to subsequently personalise content and/or advertising for you in other contexts, i.e. on other service, such as websites or apps, over time.`
+      },
 			customPurpose1: {
 				menu: '',
 				title: '',
