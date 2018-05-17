@@ -2,7 +2,7 @@
 
 **IAB Europe | IAB Tech Lab**
 
-**Final** **v1.1 | April 2018**
+**Final v1.1 | April 2018**
 
 # Table of Contents
 1. [Introduction](#Introduction)
@@ -36,8 +36,8 @@ In February 2017, the IAB Europe assembled parties representing both the supply 
 
 ## About the Transparency & Consent Framework <a name="About-the-Framework"></a>
 
-The scope of the technical working group?s initiative increased to include a technical industry solution to allow website operators to:
-1.  Control the vendors they wish to allow to access their users? browsers (for setting and reading cookies) and process their personal data and disclose these choices to other parties in the online advertising ecosystem
+The scope of the technical working group's initiative increased to include a technical industry solution to allow website operators to:
+1.  Control the vendors they wish to allow to access their users' browsers (for setting and reading cookies) and process their personal data and disclose these choices to other parties in the online advertising ecosystem
 2. Seek user consent under the ePrivacy Directive (for setting cookies or similar technical applications that access information on a device) and/or the GDPR in line with applicable legal requirements and signal the consent status through the online advertising ecosystem
  
 In summary, have one place to go to:
@@ -66,13 +66,13 @@ Resources including policy FAQ, Global Vendor List Registration, and CMP registr
 
 For purposes of this documentation, the following terms have the following definitions: 
 
-* "**_CMP_**"* *means a company that can read the vendors chosen by a website operator and the consent status of an end user (either service specific (through a first-party cookie) or global (through a third-party cookie).  A CMP is not synonymous with a company that surfaces the user interface to a user (although it can be the same).   
+* "**_CMP_**" means a company that can read the vendors chosen by a website operator and the consent status of an end user (either service specific (through a first-party cookie) or global (through a third-party cookie).  A CMP is not synonymous with a company that surfaces the user interface to a user (although it can be the same).
 
 * "**_Purposes_**" mean the purposes for which a Controller enabled by a website operator is using personal data collected from (or received by a third party) about an end user.
 
 * "**_Daisybit_**" means information compressed into a binary value and passed throughout the online advertising ecosystem through the OpenRTB specification.
 
-* "**_Vendor_**" means a third party that a website operator is using in connection with surfacing content to its end users that either (1) accesses an end user?s device or browser; and/or (2) collects or receives personal data about the website operator?s end users.  As such, a vendor need not be a Controller.
+* "**_Vendor_**" means a third party that a website operator is using in connection with surfacing content to its end users that either (1) accesses an end user's device or browser; and/or (2) collects or receives personal data about the website operator's end users.  As such, a vendor need not be a Controller.
 
 ## License <a name="License"></a>
 
@@ -86,11 +86,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Disclaimer <a name="Disclaimer"></a>
 
-THE STANDARDS, THE SPECIFICATIONS, THE MEASUREMENT GUIDELINES, AND ANY OTHER MATERIALS OR SERVICES PROVIDED TO OR USED BY YOU HEREUNDER (THE "PRODUCTS AND SERVICES") ARE PROVIDED ?AS IS? AND ?AS AVAILABLE,? AND IAB TECHNOLOGY LABORATORY, INC. (?TECH LAB?) MAKES NO WARRANTY WITH RESPECT TO THE SAME AND HEREBY DISCLAIMS ANY AND ALL EXPRESS, IMPLIED, OR STATUTORY WARRANTIES, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AVAILABILITY, ERROR-FREE OR UNINTERRUPTED OPERATION, AND ANY WARRANTIES ARISING FROM A COURSE OF DEALING, COURSE OF PERFORMANCE, OR USAGE OF TRADE.  TO THE EXTENT THAT TECH LAB MAY NOT AS A MATTER OF APPLICABLE LAW DISCLAIM ANY IMPLIED WARRANTY, THE SCOPE AND DURATION OF SUCH WARRANTY WILL BE THE MINIMUM PERMITTED UNDER SUCH LAW.  THE PRODUCTS AND SERVICES DO NOT CONSTITUTE BUSINESS OR LEGAL ADVICE.  TECH LAB DOES NOT WARRANT THAT THE PRODUCTS AND SERVICES PROVIDED TO OR USED BY YOU HEREUNDER SHALL CAUSE YOU AND/OR YOUR PRODUCTS OR SERVICES TO BE IN COMPLIANCE WITH ANY APPLICABLE LAWS, REGULATIONS, OR SELF-REGULATORY FRAMEWORKS, AND YOU ARE SOLELY RESPONSIBLE FOR COMPLIANCE WITH THE SAME.
+THE STANDARDS, THE SPECIFICATIONS, THE MEASUREMENT GUIDELINES, AND ANY OTHER MATERIALS OR SERVICES PROVIDED TO OR USED BY YOU HEREUNDER (THE "PRODUCTS AND SERVICES") ARE PROVIDED "AS IS" AND "AS AVAILABLE," AND IAB TECHNOLOGY LABORATORY, INC. ("TECH LAB") MAKES NO WARRANTY WITH RESPECT TO THE SAME AND HEREBY DISCLAIMS ANY AND ALL EXPRESS, IMPLIED, OR STATUTORY WARRANTIES, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AVAILABILITY, ERROR-FREE OR UNINTERRUPTED OPERATION, AND ANY WARRANTIES ARISING FROM A COURSE OF DEALING, COURSE OF PERFORMANCE, OR USAGE OF TRADE.  TO THE EXTENT THAT TECH LAB MAY NOT AS A MATTER OF APPLICABLE LAW DISCLAIM ANY IMPLIED WARRANTY, THE SCOPE AND DURATION OF SUCH WARRANTY WILL BE THE MINIMUM PERMITTED UNDER SUCH LAW.  THE PRODUCTS AND SERVICES DO NOT CONSTITUTE BUSINESS OR LEGAL ADVICE.  TECH LAB DOES NOT WARRANT THAT THE PRODUCTS AND SERVICES PROVIDED TO OR USED BY YOU HEREUNDER SHALL CAUSE YOU AND/OR YOUR PRODUCTS OR SERVICES TO BE IN COMPLIANCE WITH ANY APPLICABLE LAWS, REGULATIONS, OR SELF-REGULATORY FRAMEWORKS, AND YOU ARE SOLELY RESPONSIBLE FOR COMPLIANCE WITH THE SAME.
 
 ## About IAB Tech Lab  <a name="About-Tech-Lab"></a>
 
-he IAB Technology Laboratory (?Tech Lab?) is a non-profit research and development consortium that produces and provides standards, software, and services to drive growth of an effective and sustainable global digital media ecosystem. Comprised of digital publishers and ad technology firms, as well as marketers, agencies, and other companies with interests in the interactive marketing arena, IAB Tech Lab aims to enable brand and media growth via a transparent, safe, effective supply chain, simpler and more consistent measurement, and better advertising experiences for consumers, with a focus on mobile and ?TV?/digital video channel enablement. The IAB Tech Lab portfolio includes the DigiTrust real-time standardized identity service designed to improve the digital experience for consumers, publishers, advertisers, and third-party platforms. Board members include AppNexus, ExtremeReach, Google, GroupM, Hearst Digital Media, Integral Ad Science, Index Exchange, LinkedIn, MediaMath, Microsoft, Moat, Pandora, PubMatic, Quantcast, Telaria, The Trade Desk, and Yahoo! Japan. Established in 2014, the IAB Tech Lab is headquartered in New York City with an office in San Francisco and representation in Seattle and London.
+he IAB Technology Laboratory ("Tech Lab") is a non-profit research and development consortium that produces and provides standards, software, and services to drive growth of an effective and sustainable global digital media ecosystem. Comprised of digital publishers and ad technology firms, as well as marketers, agencies, and other companies with interests in the interactive marketing arena, IAB Tech Lab aims to enable brand and media growth via a transparent, safe, effective supply chain, simpler and more consistent measurement, and better advertising experiences for consumers, with a focus on mobile and "TV"/digital video channel enablement. The IAB Tech Lab portfolio includes the DigiTrust real-time standardized identity service designed to improve the digital experience for consumers, publishers, advertisers, and third-party platforms. Board members include AppNexus, ExtremeReach, Google, GroupM, Hearst Digital Media, Integral Ad Science, Index Exchange, LinkedIn, MediaMath, Microsoft, Moat, Pandora, PubMatic, Quantcast, Telaria, The Trade Desk, and Yahoo! Japan. Established in 2014, the IAB Tech Lab is headquartered in New York City with an office in San Francisco and representation in Seattle and London.
 
 Learn more about IAB Tech Lab here: [https://www.iabtechlab.com/](https://www.iabtechlab.com/)
 
@@ -112,7 +112,7 @@ Learn more about IAB Europe here: [https://www.iabeurope.eu/](https://www.iabeur
 
 ## In the GDPR Global DaisyBit consent solution, what purpose does the consent string serve? <a name="in-the-GDPR-global-daisybit"></a>
 
-After the interaction between an end user and the Consent Manager Provider (CMP) UI, the consent info is stored (for example, as a third-party cookie) in the user?s browser. The data in the consent string answers the question: "Which vendors and purposes did the user give consent for?"
+After the interaction between an end user and the Consent Manager Provider (CMP) UI, the consent info is stored (for example, as a third-party cookie) in the user's browser. The data in the consent string answers the question: "Which vendors and purposes did the user give consent for?"
 
 ## What information is stored in the consent string? <a name="what-information-is-stored"></a>
 
@@ -130,9 +130,9 @@ The data stored in the consent string is divided into 3 parts:
 
 * Intelligent handling of deleted vendors
 
-* Distinct recording of "Consent Revoked" (as opposed to ?No Consent?)
+* Distinct recording of "Consent Revoked" (as opposed to "No Consent")
 
-* "Not yet consented" state per vendor (it?s either "Consent" or ?No Consent?, or string-not-present).
+* "Not yet consented" state per vendor (it's either "Consent" or "No Consent", or string-not-present).
 
 * Legal audit trail within the consent string. However, the following details are stored for consent logging and audit record: LastUpdated, CmpId, CmpVersion, ConsentScreen, ConsentLanguage, and VendorListVersion.
 
@@ -148,9 +148,9 @@ The data stored in the consent string is divided into 3 parts:
 
 ## What are the URLs for the vendor (and standard purposes) lists? <a name="URLs-vendorlist"></a>
 
-The vendor list will be in JSON and hosted at [https://vendorlist.consensu.org/vendorlist.json](https://vendorlist.consensu.org/vendorlist.json) . Previous and the current version are available at [https://vendorlist.consensu.org/v-](https://vendorlist.consensu.org/vendorlist-versionnum.json)*[versionnum*/](https://vendorlist.consensu.org/vendorlist-versionnum.json)[vendorlist](https://vendorlist.consensu.org/vendorlist-versionnum.json)[.json](https://vendorlist.consensu.org/vendorlist-versionnum.json) , where *versionnum* is a decimal number from 0 to 4095 as indicated in the VendorListVersion field.
+The vendor list will be in JSON and hosted at [https://vendorlist.consensu.org/vendorlist.json](https://vendorlist.consensu.org/vendorlist.json) . Previous and the current version are available at [https://vendorlist.consensu.org/v-](https://vendorlist.consensu.org/vendorlist-versionnum.json)[*versionnum*/](https://vendorlist.consensu.org/vendorlist-versionnum.json)[vendorlist](https://vendorlist.consensu.org/vendorlist-versionnum.json)[.json](https://vendorlist.consensu.org/vendorlist-versionnum.json) , where *versionnum* is a decimal number from 0 to 4095 as indicated in the VendorListVersion field.
 
-Translations of the standard purposes' names and descriptions to non-English languages will be contained in a JSON file including only the 'purposes', 'features', 'vendorListVersion', and 'lastUpdated' keys, and hosted at [https://vendorlist.](https://vendorlist.consensu.org/purposes-language.json)[consensu.org](https://vendorlist.consensu.org/purposes-language.json)[/purposes-](https://vendorlist.consensu.org/purposes-language.json)*[languag*e](https://vendorlist.consensu.org/purposes-language.json)[.json](https://vendorlist.consensu.org/purposes-language.json) with older versions at [https://vendorlist.consensu.org/v-](https://vendorlist.consensu.org/purposes-language-versionnum.json)*[versionnum*/](https://vendorlist.consensu.org/purposes-language-versionnum.json)[purposes-](https://vendorlist.consensu.org/purposes-language-versionnum.json)*[languag*e](https://vendorlist.consensu.org/purposes-language-versionnum.json)[.json](https://vendorlist.consensu.org/purposes-language-versionnum.json) where *language* is the two-letter lowercase ISO 639-1 language code.
+Translations of the standard purposes' names and descriptions to non-English languages will be contained in a JSON file including only the 'purposes', 'features', 'vendorListVersion', and 'lastUpdated' keys, and hosted at [https://vendorlist.](https://vendorlist.consensu.org/purposes-language.json)[consensu.org](https://vendorlist.consensu.org/purposes-language.json)[/purposes-](https://vendorlist.consensu.org/purposes-language.json)[*language*](https://vendorlist.consensu.org/purposes-language.json)[.json](https://vendorlist.consensu.org/purposes-language.json) with older versions at [https://vendorlist.consensu.org/v-](https://vendorlist.consensu.org/purposes-language-versionnum.json)*[versionnum*/](https://vendorlist.consensu.org/purposes-language-versionnum.json)[purposes-](https://vendorlist.consensu.org/purposes-language-versionnum.json)[*language*](https://vendorlist.consensu.org/purposes-language-versionnum.json)[.json](https://vendorlist.consensu.org/purposes-language-versionnum.json) where *language* is the two-letter lowercase ISO 639-1 language code.
 
 ## What is the process of getting on the global vendor list? <a name="process-vendorlist"></a>
 
@@ -181,7 +181,7 @@ The JSON format is:
 
     },
 
-    *? more purposes from id=2 to currently, id=5 (max, id=24)*
+    *... more purposes from id=2 to currently, id=5 (max, id=24)*
 
 *  *],
 
@@ -197,7 +197,7 @@ The JSON format is:
 
     },
 
-    *? more purposes from id=2 up to no higher than id=64. Currently there are 3 planned features*
+    *... more purposes from id=2 up to no higher than id=64. Currently there are 3 planned features*
 
   ],
 
@@ -221,7 +221,7 @@ The JSON format is:
 
     },
 
-    *? more vendors, expecting several hundred vendors in the initial Global Vendor List*
+    *... more vendors, expecting several hundred vendors in the initial Global Vendor List*
 
   ]
 
@@ -307,7 +307,7 @@ Features are informational and should be shown on the UI as a data use by that v
   <tr>
     <td>Host</td>
     <td>.consensu.org</td>
-    <td>The DNS resolution for the name cmp-name.mgr.consensu.org will be delegated by the standardizing authority (IAB) to each CMP. CMP?s will host their code, API?s, and CDN at this domain or subdomains.</td>
+    <td>The DNS resolution for the name cmp-name.mgr.consensu.org will be delegated by the standardizing authority (IAB) to each CMP. CMP's will host their code, API's, and CDN at this domain or subdomains.</td>
   </tr>
   <tr>
     <td>Path</td>
@@ -351,7 +351,7 @@ The following fields are stored in big-endian format. Example values are provide
 (6-41)</td>
     <td>Epoch deciseconds when consent string was first created</td>
     <td>Deciseconds fits into 36 bits with enough precision to record a 
-user?s consent action timing. Javascript: Math.round((new Date()).getTime()/100)</td>
+user's consent action timing. Javascript: Math.round((new Date()).getTime()/100)</td>
   </tr>
   <tr>
     <td>LastUpdated</td>
@@ -403,7 +403,7 @@ user?s consent action timing. Javascript: Math.round((new Date()).getTime()/100)
     <td>For each Purpose, one bit:
 0=No Consent
 1=Consent</td>
-    <td>Purposes are listed in the global Vendor List. Resultant consent value is the ?AND? of the applicable bit(s) from this field and a vendor?s specific consent bit. Purpose #1 maps to the first (most significant) bit, purpose #24 maps to the last (least significant) bit.</td>
+    <td>Purposes are listed in the global Vendor List. Resultant consent value is the "AND" of the applicable bit(s) from this field and a vendor's specific consent bit. Purpose #1 maps to the first (most significant) bit, purpose #24 maps to the last (least significant) bit.</td>
   </tr>
   <tr>
     <td></td>
@@ -590,13 +590,13 @@ Example consent string field values for the case:
   <tr>
     <td>NumEntries</td>
     <td>1</td>
-    <td>One ?range or single? entry</td>
+    <td>One "range or single" entry</td>
     <td>000000000001</td>
   </tr>
   <tr>
     <td>SingleOrRange[0]</td>
     <td>0</td>
-    <td>A single VendorId (which is ?No Consent?)</td>
+    <td>A single VendorId (which is "No Consent")</td>
     <td>0</td>
   </tr>
   <tr>
@@ -616,7 +616,7 @@ Example consent string field values for the case:
 
 ## How is publisher-specific consent stored? <a name="publisher-consent-stored"></a>
 
-Under this proposal, there are two types of publisher-specific consent: service-specific vendor consent, and a publisher?s purposes consent for its own data use (if needed). For example, a publisher that wants to set a frequency-capping first-party cookie should request Publisher Purposes Consent for Purpose #1 "Accessing a Device".
+Under this proposal, there are two types of publisher-specific consent: service-specific vendor consent, and a publisher's purposes consent for its own data use (if needed). For example, a publisher that wants to set a frequency-capping first-party cookie should request Publisher Purposes Consent for Purpose #1 "Accessing a Device".
 
 Service-specific vendor consent can be implemented (optionally) by a CMP using the same Vendor Consent String Format (as detailed above) with the Host, Path, and/or Cookie Name referencing a first-party cookie (or service-shared 3rd-party cookie).  If a CMP allows a subset of vendors to be configured by a publisher, storage of consent in a service-specific cookie is necessary to avoid clearing previously-given consent (on non-included vendors) on the global cookie.
 
@@ -647,15 +647,15 @@ The following table indicates which fields are used by which cookie:
 </table>
 
 
-A publisher?s purposes consent string stores the publisher?s own consent. This is different than the consent string used to collect consumer consent for vendors. The publisher can configure the CMP to request consent for any of the standard list of purposes (which utilizes the StandardPurposesAllowed bitfield and the standard list of purposes from the Vendor List) and/or custom purposes (initialized by the publisher). 
+A publisher's purposes consent string stores the publisher's own consent. This is different than the consent string used to collect consumer consent for vendors. The publisher can configure the CMP to request consent for any of the standard list of purposes (which utilizes the StandardPurposesAllowed bitfield and the standard list of purposes from the Vendor List) and/or custom purposes (initialized by the publisher). 
 
 Differences from the Vendor Consent String Format are:
 
-* "PublisherPurposesVersion" augments ?VendorListVersion? and is incremented each time the publisher modifies the requested purposes.
+* "PublisherPurposesVersion" augments "VendorListVersion" and is incremented each time the publisher modifies the requested purposes.
 
-* "NumCustomPurposes" replaces ?MaxVendorId? and is reduced to 6 bits.
+* "NumCustomPurposes" replaces "MaxVendorId" and is reduced to 6 bits.
 
-* "BitField" encoding is always used and is indexed by CustomPurposeId?s.
+* "BitField" encoding is always used and is indexed by CustomPurposeId's.
 
 * Host, Path, and Cookie Name are configured in the CMP by the publisher, and the consent string data is stored as a first-party cookie by the CMP javascript.
 
@@ -684,7 +684,7 @@ The following fields are stored in big-endian format, the binary bits padded at 
 (6-41)</td>
     <td>Epoch deciseconds when consent string value was first created</td>
     <td>Deciseconds fits into 36 bits with enough precision to record a 
-user?s consent action timing. Javascript: Math.round((new Date()).getTime()/100)</td>
+user's consent action timing. Javascript: Math.round((new Date()).getTime()/100)</td>
   </tr>
   <tr>
     <td>LastUpdated</td>
