@@ -609,7 +609,7 @@ Example consent string field values for the case:
     <td>base64url-encoded consent string value</td>
     <td></td>
     <td></td>
-    <td>BOEFBi5OEFBi5AHABDENAI4AAAB9vABAASA</td>
+    <td>BOEFEAyOEFEAyAHABDENAI4AAAB9vABAASA</td>
   </tr>
 </table>
 
