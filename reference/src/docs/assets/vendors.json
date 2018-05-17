@@ -4,19 +4,19 @@
   "purposes": [
 	{
 	  "id": 1,
-	  "name": "Accessing a Device"
+	  "name": "Information storage and access"
 	},
 	{
 	  "id": 2,
-	  "name": "Advertising Personalisation"
+	  "name": "Personalisation"
 	},
 	{
 	  "id": 3,
-	  "name": "Analytics"
+	  "name": "Ad selection, delivery, reporting"
 	},
 	{
 	  "id": 4,
-	  "name": "Content Personalisation"
+	  "name": "Content selection, delivery, reporting"
 	},
   {
     "id": 5,
