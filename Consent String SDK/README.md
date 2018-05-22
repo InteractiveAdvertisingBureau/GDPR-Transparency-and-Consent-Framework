@@ -20,7 +20,7 @@ The IAB specification for the consent string format is available on the [IAB Git
 
 These implementations are not supported by the IAB.
 
-[Consent String SDK - Go](https://github.com/prebid/go-gdpr)
-
-[Consent String SDK - Rust](https://github.com/cirla/gdpr_consent)
+- [Go](https://github.com/prebid/go-gdpr)
+- [Go](https://github.com/LiveRamp/iabconsent)
+- [Rust](https://github.com/cirla/gdpr_consent)
 
