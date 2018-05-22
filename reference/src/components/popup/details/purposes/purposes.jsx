@@ -59,6 +59,17 @@ export default class Purposes extends Component {
     });
   };
 
+  getVendorsForPurpose = (vendors, selectedPurposeId) => {
+    var purposeVendors = [];
+    for (var i = 0; i < vendors.length; i++) {
+      var vendor = vendors[i];
+      if (vendor.purposeIds.indexOf(selectedPurposeId) !== -1) {
+        purposeVendors.push(vendor);
+      }
+    }
+    return purposeVendors;
+  }
+
   render(props, state) {
     const {
       selectedPurposeIndex,
@@ -82,6 +93,9 @@ export default class Purposes extends Component {
 
     const {showVendors} = this.state;
     var itemName = (showVendors === true) ? 'Hide Companies' : 'View Companies';
+
+    // get the vendor list for this purpose
+    var purposeVendors = this.getVendorsForPurpose(vendors, selectedPurposeId);
 
     return (
       <div class={style.purposes}>
@@ -110,7 +124,7 @@ export default class Purposes extends Component {
               <div class={style.vendor}>
                 <Vendors
                   enableEdit={false}
-                  vendors={vendors}
+                  vendors={purposeVendors}
                   selectVendor={selectVendor}
                   selectedVendorIds={selectedVendorIds}
                 />
