@@ -16,3 +16,11 @@ It should be used by anyone who receives or sends consent information like vendo
 
 The IAB specification for the consent string format is available on the [IAB Github](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/Consent%20string%20and%20vendor%20list%20formats%20v1.1%20Final.md) (section "Vendor Consent Cookie Format").
 
+## Unofficial Third-Party SDKs
+
+These implementations are not supported by the IAB.
+
+[Consent String SDK - Go](https://github.com/prebid/go-gdpr)
+
+[Consent String SDK - Rust](https://github.com/cirla/gdpr_consent)
+
