@@ -117,6 +117,7 @@ export default class Vendors extends Component {
                   />
                 </td>
                 }
+                {enableEdit &&
                 <td class={style.dropDown}>
                   <div
                     class={this.isActive(id) ? style.arrowUp : style.arrowDown}
@@ -125,6 +126,7 @@ export default class Vendors extends Component {
                       <span dangerouslySetInnerHTML={{__html: Icons['arrow']}}/>
                   </div>
                 </td>
+                }
                 <tr class={this.isActive(id) ? null : style.hidden}>
                   <div class={style.policy}>
                     Privacy policy:
