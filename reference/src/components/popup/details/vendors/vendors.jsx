@@ -14,7 +14,9 @@ class LocalLabel extends Label {
 export default class Vendors extends Component {
   constructor(props) {
     super(props);
+    const {selectedVendorIds, vendors} = props;
     this.state = {
+      enableAll: selectedVendorIds.size == vendors.length ? true :  false,
       activeVendorIds: [],
       editingConsents: false
     };
@@ -63,15 +65,28 @@ export default class Vendors extends Component {
     return activeVendorIds.indexOf(id) !== -1;
   }
 
+  enableAll = () => {
+    var {enableAll} = this.state;
+    if (enableAll) {
+      this.handleRejectAll();
+    } else {
+      this.handleAcceptAll();
+    }
+    this.setState({enableAll:!enableAll});
+  };
+
   render(props, state) {
 
     const {
       vendors,
       selectVendor,
+      selectAllVendors,
       selectedVendorIds,
       enableEdit
     } = props;
-    const { editingConsents } = this.state;
+
+    const { editingConsents, enableAll } = this.state;
+    var enableDisplay = enableAll == true ? 'Disable All' : 'Enable All';
 
     function VendorEnable(props) {
       const {enableEdit, id} = props;
@@ -90,9 +105,20 @@ export default class Vendors extends Component {
           <table class={style.vendorList}>
             <thead>
             <tr>
-              <th><LocalLabel localizeKey='company'>Company</LocalLabel></th>
+              <th>
+                <LocalLabel class={style.company} localizeKey='company'>
+                  Company
+                </LocalLabel>
+              </th>
               {(enableEdit || editingConsents) &&
-              <th><LocalLabel localizeKey='offOn'>Off/On</LocalLabel></th>
+              <th>
+                <div
+                  class={style.enableAll}
+                  onClick={this.enableAll}
+                >
+                  <LocalLabel localizeKey='offOn'>{enableDisplay}</LocalLabel>
+                </div>
+              </th>
               }
             </tr>
             </thead>

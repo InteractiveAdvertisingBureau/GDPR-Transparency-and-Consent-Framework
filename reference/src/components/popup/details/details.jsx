@@ -114,6 +114,7 @@ export default class Details extends Component {
             </table>
             <Vendors
               enableEdit={true}
+              enableAllVendors={false}
               selectedVendorIds={selectedVendorIds}
               selectAllVendors={selectAllVendors}
               selectVendor={selectVendor}
