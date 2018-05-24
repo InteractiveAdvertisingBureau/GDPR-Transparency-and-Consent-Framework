@@ -1,7 +1,6 @@
 import log from './log';
 
 const defaultConfig = {
-	customPurposeListLocation: 'http://c.sharethis.mgr.consensu.org/v1.0/cmp/purposes.json',
 	globalVendorListLocation: 'https://vendorlist.consensu.org/vendorlist.json',
 	globalConsentLocation: './portal.html',
 	storeConsentGlobally: true,
@@ -10,6 +9,7 @@ const defaultConfig = {
 	localization: {},
 	forceLocale: null,
 	gdprApplies: true
+
 };
 
 class Config {
