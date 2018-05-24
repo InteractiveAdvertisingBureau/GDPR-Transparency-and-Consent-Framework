@@ -210,7 +210,8 @@ function readCookie(name) {
 function readEuconsentCookie(name) {
       return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", `http://${SHARETHIS_HOSTNAME}/v1.0/cmp/get_consent`);
+            var cmp_url = (("https:" == document.location.protocol) ? "https://" : "http://") + "c.sharethis.mgr.consensu.org/v1.0/cmp/get_consent"
+            xhr.open("GET", cmp_url);
             xhr.withCredentials = true;
             xhr.responseType = "json";
             xhr.onload = function() {
@@ -231,8 +232,8 @@ function writeCookie(name, value, maxAgeSeconds, path = '/') {
 
 function writeEuconsentCookie(name, value) {
          var xhr  = new XMLHttpRequest();
-         var url = `http://${SHARETHIS_HOSTNAME}/v1.0/cmp/set_consent?cookie=${value}`
-         xhr.open("GET", url);
+         var cmp_url = (("https:" == document.location.protocol) ? "https://" : "http://") + "c.sharethis.mgr.consensu.org/v1.0/cmp/set_consent?cookie=" + value
+         xhr.open("GET", cmp_url);
          xhr.withCredentials = true
          xhr.send();
 }
