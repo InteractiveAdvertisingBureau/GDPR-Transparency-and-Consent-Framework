@@ -123,6 +123,8 @@ export default class Purposes extends Component {
               {showVendors &&
               <div class={style.vendor}>
                 <Vendors
+                  purposeId={selectedPurposeId}
+                  selectedPurposeIds={selectedPurposeIds}
                   enableEdit={false}
                   vendors={purposeVendors}
                   selectVendor={selectVendor}

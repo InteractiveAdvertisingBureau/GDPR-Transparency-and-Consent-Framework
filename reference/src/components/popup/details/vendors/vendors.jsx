@@ -79,9 +79,11 @@ export default class Vendors extends Component {
 
     const {
       vendors,
+      purposeId,
       selectVendor,
       selectAllVendors,
       selectedVendorIds,
+      selectedPurposeIds,
       enableEdit
     } = props;
 
@@ -89,11 +91,17 @@ export default class Vendors extends Component {
     var enableDisplay = enableAll == true ? 'Disable All' : 'Enable All';
 
     function VendorEnable(props) {
-      const {enableEdit, id} = props;
+      const {
+        id,
+        enableEdit,
+        selectedPurposeIds,
+        purposeId
+      } = props;
+
       if (enableEdit) {
         return null;
       }
-      if (selectedVendorIds.has(id)) {
+      if (selectedVendorIds.has(id) && selectedPurposeIds.has(purposeId)) {
         return <td class={style.disabled}>Enabled</td>
       }
       return <td class={style.disabled}>Disabled</td>
@@ -132,6 +140,8 @@ export default class Vendors extends Component {
                 <td><div class={style.vendorName}>{name}</div></td>
                 <VendorEnable
                   id={id}
+                  selectedPurposeIds={selectedPurposeIds}
+                  purposeId={purposeId}
                   enableEdit={enableEdit}
                 />
                 {enableEdit &&
