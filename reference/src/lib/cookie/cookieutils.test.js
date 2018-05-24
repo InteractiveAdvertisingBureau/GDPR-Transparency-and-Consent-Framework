@@ -4,13 +4,15 @@ import {
 	encodeIntToBits,
 	encodeBoolToBits,
 	encodeDateToBits,
+	encode6BitCharacters,
 	decodeBitsToInt,
 	decodeBitsToDate,
 	decodeBitsToBool,
 	encodeVendorCookieValue,
 	decodeVendorCookieValue,
 	encodePublisherCookieValue,
-	decodePublisherCookieValue
+	decodePublisherCookieValue,
+	decode6BitCharacters
 } from './cookieutils';
 
 describe('cookieutils', () => {
@@ -51,6 +53,13 @@ describe('cookieutils', () => {
 		});
 	});
 
+	describe('encode6BitCharacters', () => {
+		it('encode a 6bitchar string to a bit string', () => {
+			const bitString = encode6BitCharacters('hello');
+			expect(bitString).to.equal('000111000100001011001011001110');
+		});
+	});
+
 	describe('decodeBitsToInt', () => {
 		it('decodes a bit string to original encoded value', () => {
 			const bitString = encodeIntToBits(123);
@@ -78,6 +87,21 @@ describe('cookieutils', () => {
 			const bitString = encodeBoolToBits(false);
 			const decoded = decodeBitsToBool(bitString, 0, bitString.length);
 			expect(decoded).to.equal(false);
+		});
+	});
+
+	describe('decode6BitCharacters', () => {
+		it('decodes a bit string to original encoded value', () => {
+			const string = 'STUFF';
+			const bitString = encode6BitCharacters(string);
+			const decoded = decode6BitCharacters(bitString, 0, bitString.length);
+			expect(decoded).to.equal(string);
+		});
+		it('decodes a bit string that is longer than length', () => {
+			const string = 'STUFF';
+			const bitString = encode6BitCharacters(string);
+			const decoded = decode6BitCharacters(bitString, 0, 12);
+			expect(decoded).to.equal('ST');
 		});
 	});
 
@@ -127,6 +151,9 @@ describe('cookieutils', () => {
 			created: aDate,
 			lastUpdated: aDate,
 			cmpId: 1,
+			cmpVersion: 1,
+			consentScreen: 1,
+			consentLanguage: 'EN',
 			vendorListVersion: 1,
 			purposeIdBitString: '111000001010101010001101',
 			maxVendorId: 5,
@@ -161,6 +188,9 @@ describe('cookieutils', () => {
 			created: aDate,
 			lastUpdated: aDate,
 			cmpId: 1,
+			cmpVersion: 1,
+			consentScreen: 1,
+			consentLanguage: 'EN',
 			vendorListVersion: 1,
 			purposeIdBitString: '111000001010101010001101',
 			maxVendorId: 5,
@@ -194,6 +224,9 @@ describe('cookieutils', () => {
 			created: aDate,
 			lastUpdated: aDate,
 			cmpId: 1,
+			cmpVersion: 1,
+			consentScreen: 1,
+			consentLanguage: 'EN',
 			vendorListVersion: 1,
 			purposeIdBitString: '000000001010101010001100',
 			maxVendorId: 5,

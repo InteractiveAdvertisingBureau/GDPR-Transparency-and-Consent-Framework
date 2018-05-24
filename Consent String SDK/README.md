@@ -1,6 +1,6 @@
 # Transparency and Consent Framework: Consent String SDK Resources
 
-[Consent String SDK - JavaScript](https://raw.githubusercontent.com/InteractiveAdvertisingBureau/Consent-String-SDK-JS)
+[Consent String SDK - JavaScript](https://github.com/InteractiveAdvertisingBureau/Consent-String-SDK-JS)
 
 [Consent String SDK - Java](https://github.com/InteractiveAdvertisingBureau/Consent-String-SDK-Java)
 

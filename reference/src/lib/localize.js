@@ -1,7 +1,7 @@
 import translations from './translations';
 import config from './config';
 
-function findLocale() {
+export function findLocale() {
 	const locale = config.forceLocale ||
 		(navigator && (
 			navigator.language ||
@@ -15,7 +15,7 @@ function findLocale() {
 
 
 export class Localize {
-	constructor(localizedData) {
+	constructor(localizedData = {...translations, ...config.localization}) {
 		const localizedMap = this.processLocalized(localizedData);
 		const currentLocal = findLocale();
 		const [language] = currentLocal.split('-');
@@ -64,8 +64,3 @@ export class Localize {
 		return flattened;
 	};
 }
-
-export default new Localize({
-	...translations,
-	...config.localization
-});
