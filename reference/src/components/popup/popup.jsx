@@ -42,7 +42,7 @@ export default class Popup extends Component {
   render(props, state) {
     const { store, onShowPurposes } = props;
     const { selectedPanelIndex } = state;
-    const { isConsentToolShowing } = store;
+    const { isConsentToolShowing, publisherName } = store;
 
     return (
       <div
@@ -56,6 +56,7 @@ export default class Popup extends Component {
         <div class={style.content}>
           <Panel selectedIndex={selectedPanelIndex}>
             <Intro
+              publisherName={publisherName}
               onAcceptAll={this.onAcceptAll}
               onShowPurposes={this.handleShowDetails}
               onClose={this.handleClose}

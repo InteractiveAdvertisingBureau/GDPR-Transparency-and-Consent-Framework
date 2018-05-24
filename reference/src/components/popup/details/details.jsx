@@ -52,6 +52,7 @@ export default class Details extends Component {
       customPurposeList = {},
       vendorConsentData,
       publisherConsentData,
+      publisherName,
       selectAllPurposes,
       selectPurpose,
       selectCustomPurpose,
@@ -68,16 +69,11 @@ export default class Details extends Component {
     return (
       <div class={style.details}>
         <div class={style.header}>
+          {publisherName && publisherName.length > 0 &&
           <div class={style.item, style.left}>
-            <img class={style.logo}
-              localizeKey='logo'
-              src='https://s18955.pcdn.co/wp-content/uploads/2016/12/ShareThisLogo1x.png'
-            >
-            </img>
+            <span class={style.name}>{publisherName}</span>
           </div>
-          <div class={style.item, style.center}>
-            <LocalLabel class={style.title} localizeKey='title'>Privacy Settings</LocalLabel>
-          </div>
+          }
           <div class={style.item, style.right}>
             <Button class={style.button} onClick={selectAllPurposes}>
               <LocalLabel localizeKey='savePurposes'>Enable all purposes</LocalLabel>

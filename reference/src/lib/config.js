@@ -8,8 +8,8 @@ const defaultConfig = {
 	logging: false,
 	localization: {},
 	forceLocale: null,
-	gdprApplies: true
-
+	gdprApplies: true,
+  publisherName: ''
 };
 
 class Config {
