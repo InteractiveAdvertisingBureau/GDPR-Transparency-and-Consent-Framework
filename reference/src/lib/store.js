@@ -25,6 +25,7 @@ export default class Store {
 		cmpVersion = 1,
 		cookieVersion = 1,
 		vendorConsentData,
+    publisherName,
 		publisherConsentData,
 		vendorList,
 		customPurposeList
@@ -58,6 +59,7 @@ export default class Store {
 
 		this.isConsentToolShowing = false;
 		this.isFooterShowing = false;
+    this.publisherName = config.publisherName;
 
 		this.updateVendorList(vendorList);
 		this.updateCustomPurposeList(customPurposeList);

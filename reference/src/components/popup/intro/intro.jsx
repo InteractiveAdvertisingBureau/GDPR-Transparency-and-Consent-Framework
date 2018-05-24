@@ -22,15 +22,18 @@ export default class Intro extends Component {
     const {
       onAcceptAll,
       onShowPurposes,
-      onClose
+      onClose,
+      publisherName
     } = props;
 
     return (
 
       <div class={style.intro}>
-        <img class={style.logo}
-          src='https://s18955.pcdn.co/wp-content/uploads/2016/12/ShareThisLogo2x.png'
-        />
+        {(!!publisherName && publisherName.length > 0) &&
+        <div class={style.logo}>
+          <span class={style.name}>{publisherName}</span>
+        </div>
+        }
         <div class={style.title}>
           <LocalLabel localizeKey='title'>We value your privacy</LocalLabel>
         </div>
@@ -52,7 +55,12 @@ export default class Intro extends Component {
             <LocalLabel localizeKey='acceptAll'>I accept</LocalLabel>
           </Button>
         </div>
-        <a class={style.showPurposes} onClick={onShowPurposes}>Show Purposes</a>
+        <div class={style.bottom}>
+          <a class={style.showPurposes} onClick={onShowPurposes}>
+            Show Purposes
+          </a>
+        </div>
+
       </div>
     );
   }
