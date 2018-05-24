@@ -47,7 +47,6 @@ div.vendors {
     margin: 20px 0;
     flex-shrink: 0;
   }
-
   .vendorHeader {
     letter-spacing: 1px;
     display: flex;
@@ -69,12 +68,39 @@ div.vendors {
     padding: 0 20px;
     text-align: right;
   }
+  .enableAll {
+    cursor: pointer;
+    color: #2e7d32;
+    width: 96px;
+    letter-spacing: 0px;
+    transition-duration: 0.4s;
+    &:hover {
+      color: #000;
+    }
+  }
+  .company {
+    padding-left: 5px;
+  }
   .vendorName {
+    align-items: center;
     color: #212934;
+    display: flex;
     font-weight: 700;
     min-height: 30px;
-    display: flex;
-    align-items: center;
+    padding-left: 5px;
+  }
+  .dropDown {
+    padding-right: 20px;
+  }
+  .arrowDown {
+    width: 16px;
+  }
+  .arrowUp {
+    width: 16px;
+    transform: rotate(180deg);
+  }
+  .policy {
+    padding: 0 10px;
   }
   table {
     width: 100%;
@@ -87,6 +113,7 @@ div.vendors {
     }
 
     tr {
+      display: block;
       min-height: 40px;
       th {
         font-weight: bold;
@@ -97,12 +124,19 @@ div.vendors {
         &:first-child {
           width: 100%;
         }
-        &:last-child {
-          padding-right: 25px;
-        }
+      }
+      &:first-child {
+        padding-top: 3px;
       }
     }
 
+    td.dropdown {
+      margin: auto;
+    }
+
+    tr.hidden {
+      display: none;
+    }
     tr.even {
       background-color: @color-table-background;
     }

@@ -3,6 +3,7 @@ import style from './vendors.less';
 import Button from '../../../button/button';
 import Switch from '../../../switch/switch';
 import Label from "../../../label/label";
+import Icons from "../../../../lib/icons";
 
 class LocalLabel extends Label {
   static defaultProps = {
@@ -13,7 +14,10 @@ class LocalLabel extends Label {
 export default class Vendors extends Component {
   constructor(props) {
     super(props);
+    const {selectedVendorIds, vendors} = props;
     this.state = {
+      enableAll: selectedVendorIds.size == vendors.length ? true :  false,
+      activeVendorIds: [],
       editingConsents: false
     };
   }
@@ -42,15 +46,47 @@ export default class Vendors extends Component {
     });
   };
 
+  handleToggle = (vendorId) => {
+    var {activeVendorIds} = this.state;
+    var id = activeVendorIds.indexOf(vendorId);
+    if (id !== -1) {
+      activeVendorIds.splice(id, 1);
+    } else {
+      activeVendorIds.push(vendorId);
+    }
+    this.setState({
+      activeVendorIds: activeVendorIds
+    });
+    console.log(activeVendorIds);
+  };
+
+  isActive = (id) => {
+    var {activeVendorIds} = this.state;
+    return activeVendorIds.indexOf(id) !== -1;
+  }
+
+  enableAll = () => {
+    var {enableAll} = this.state;
+    if (enableAll) {
+      this.handleRejectAll();
+    } else {
+      this.handleAcceptAll();
+    }
+    this.setState({enableAll:!enableAll});
+  };
+
   render(props, state) {
 
     const {
       vendors,
       selectVendor,
+      selectAllVendors,
       selectedVendorIds,
       enableEdit
     } = props;
-    const { editingConsents } = this.state;
+
+    const { editingConsents, enableAll } = this.state;
+    var enableDisplay = enableAll == true ? 'Disable All' : 'Enable All';
 
     function VendorEnable(props) {
       const {enableEdit, id} = props;
@@ -69,9 +105,20 @@ export default class Vendors extends Component {
           <table class={style.vendorList}>
             <thead>
             <tr>
-              <th><LocalLabel localizeKey='company'>Company</LocalLabel></th>
+              <th>
+                <LocalLabel class={style.company} localizeKey='company'>
+                  Company
+                </LocalLabel>
+              </th>
               {(enableEdit || editingConsents) &&
-              <th><LocalLabel localizeKey='offOn'>Off/On</LocalLabel></th>
+              <th>
+                <div
+                  class={style.enableAll}
+                  onClick={this.enableAll}
+                >
+                  <LocalLabel localizeKey='offOn'>{enableDisplay}</LocalLabel>
+                </div>
+              </th>
               }
             </tr>
             </thead>
@@ -80,7 +127,7 @@ export default class Vendors extends Component {
         <div class={style.vendorContent}>
           <table class={style.vendorList}>
             <tbody>
-            {vendors.map(({ id, name }, index) => (
+            {vendors.map(({ id, name, policyUrl }, index) => (
               <tr key={id} class={index % 2 === 1 ? style.even : ''}>
                 <td><div class={style.vendorName}>{name}</div></td>
                 <VendorEnable
@@ -96,6 +143,22 @@ export default class Vendors extends Component {
                   />
                 </td>
                 }
+                {enableEdit &&
+                <td class={style.dropDown}>
+                  <div
+                    class={this.isActive(id) ? style.arrowUp : style.arrowDown}
+                    onClick={this.handleToggle.bind(this, id)}
+                    >
+                      <span dangerouslySetInnerHTML={{__html: Icons['arrow']}}/>
+                  </div>
+                </td>
+                }
+                <tr class={this.isActive(id) ? null : style.hidden}>
+                  <div class={style.policy}>
+                    Privacy policy:
+                    <a href={policyUrl}> {policyUrl}</a>
+                  </div>
+                </tr>
               </tr>
             ))}
             </tbody>
