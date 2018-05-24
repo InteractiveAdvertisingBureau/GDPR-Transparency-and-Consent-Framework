@@ -1,15 +1,15 @@
 import log from './log';
 
 const defaultConfig = {
-	customPurposeListLocation: './purposes.json',
 	globalVendorListLocation: 'https://vendorlist.consensu.org/vendorlist.json',
 	globalConsentLocation: './portal.html',
-	storeConsentGlobally: false,
-	storePublisherData: false,
+	storeConsentGlobally: true,
+	storePublisherData: true,
 	logging: false,
 	localization: {},
 	forceLocale: null,
 	gdprApplies: true
+
 };
 
 class Config {
