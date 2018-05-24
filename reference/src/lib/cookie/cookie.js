@@ -12,7 +12,7 @@ import { sendPortalCommand } from '../portal';
 import pack from '../../../package.json';
 import config from '../config';
 
-const PUBLISHER_CONSENT_COOKIE_NAME = 'pubconsent';
+const PUBLISHER_CONSENT_COOKIE_NAME = 'eupubconsent';
 const PUBLISHER_CONSENT_COOKIE_MAX_AGE = 33696000;
 
 const VENDOR_CONSENT_COOKIE_NAME = 'euconsent';
@@ -214,15 +214,12 @@ function readEuconsentCookie(name) {
             xhr.withCredentials = true;
             xhr.responseType = "json";
             xhr.onload = function() {
-                  var value = "; " + xhr.response.cookie
-                  var parts = value.split(`; ${name}=`);
-                  if(parts.length === 2) {
-                       resolve(parts.pop().split(';').shift());
+                  if(xhr.response.cookie != "") {
+                      resolve(xhr.response.cookie);
                   }else {
-                    resolve();
+                      resolve()
                   }
             }
-
             xhr.send();
       });
 
@@ -266,45 +263,20 @@ function writePublisherConsentCookie(publisherConsentData) {
  *
  * @returns Promise resolved with decoded cookie object
  */
+//function readGlobalVendorConsentCookie() {
+//	log.debug('Request consent data from global cookie');
+//	return sendPortalCommand({
+//		command: 'readVendorConsent',
+//	}).then(result => {
+//		log.debug('Read consent data from global cookie', result);
+//		if (result) {
+//			return decodeVendorConsentData(result);
+//		}
+//	}).catch(err => {
+//		log.error('Failed reading global vendor consent cookie', err);
+//	});
+//}
 function readGlobalVendorConsentCookie() {
-	log.debug('Request consent data from global cookie');
-	return sendPortalCommand({
-		command: 'readVendorConsent',
-	}).then(result => {
-		log.debug('Read consent data from global cookie', result);
-		if (result) {
-			return decodeVendorConsentData(result);
-		}
-	}).catch(err => {
-		log.error('Failed reading global vendor consent cookie', err);
-	});
-}
-
-/**
- * Write vendor consent data to third-party cookie on the
- * global vendor list domain.
- *
- * @returns Promise resolved after cookie is written
- */
-function writeGlobalVendorConsentCookie(vendorConsentData) {
-	log.debug('Write consent data to global cookie', vendorConsentData);
-	return sendPortalCommand({
-		command: 'writeVendorConsent',
-		encodedValue: encodeVendorConsentData(vendorConsentData),
-		vendorConsentData,
-		cmpVersion: pack.version
-	}).catch(err => {
-		log.error('Failed writing global vendor consent cookie', err);
-	});
-}
-
-/**
- * Read vendor consent data from first-party cookie on the
- * local domain.
- *
- * @returns Promise resolved with decoded cookie object
- */
-function readLocalVendorConsentCookie() {
 	//const cookie = readCookie(VENDOR_CONSENT_COOKIE_NAME);
         return new Promise((resolve, reject) => {
               readEuconsentCookie(VENDOR_CONSENT_COOKIE_NAME)
@@ -316,6 +288,44 @@ function readLocalVendorConsentCookie() {
 }
 
 /**
+ * Write vendor consent data to third-party cookie on the
+ * global vendor list domain.
+ *
+ * @returns Promise resolved after cookie is written
+ */
+//function writeGlobalVendorConsentCookie(vendorConsentData) {
+//	log.debug('Write consent data to global cookie', vendorConsentData);
+//	return sendPortalCommand({
+//		command: 'writeVendorConsent',
+//		encodedValue: encodeVendorConsentData(vendorConsentData),
+//		vendorConsentData,
+//		cmpVersion: pack.version
+//	}).catch(err => {
+//		log.error('Failed writing global vendor consent cookie', err);
+//	});
+//}
+
+function writeGlobalVendorConsentCookie(vendorConsentData) {
+	log.debug('Write consent data to local cookie', vendorConsentData);
+	return Promise.resolve(writeEuconsentCookie(VENDOR_CONSENT_COOKIE_NAME,
+		encodeVendorConsentData(vendorConsentData),
+		VENDOR_CONSENT_COOKIE_MAX_AGE,
+		'/'));
+}
+
+/**
+ * Read vendor consent data from first-party cookie on the
+ * local domain.
+ *
+ * @returns Promise resolved with decoded cookie object
+ */
+function readLocalVendorConsentCookie() {
+	const cookie = readCookie(VENDOR_CONSENT_COOKIE_NAME);
+	log.debug('Read consent data from local cookie', cookie);
+	return Promise.resolve(cookie && decodeVendorConsentData(cookie));
+}
+
+/**
  * Write vendor consent data to first-party cookie on the
  * local domain.
  *
@@ -323,7 +333,7 @@ function readLocalVendorConsentCookie() {
  */
 function writeLocalVendorConsentCookie(vendorConsentData) {
 	log.debug('Write consent data to local cookie', vendorConsentData);
-	return Promise.resolve(writeEuconsentCookie(VENDOR_CONSENT_COOKIE_NAME,
+	return Promise.resolve(writeCookie(VENDOR_CONSENT_COOKIE_NAME,
 		encodeVendorConsentData(vendorConsentData),
 		VENDOR_CONSENT_COOKIE_MAX_AGE,
 		'/'));

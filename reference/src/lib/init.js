@@ -22,7 +22,7 @@ export function init(configUpdates) {
                         let publisherConsentData = readPublisherConsentCookie();
                         let showUI  = true;
                         if(typeof vendorConsentData != 'undefined' || typeof publisherConsentData != 'undefined') {
-                                showUi = false;
+                                showUI = false;
                         }
 
 			// Initialize the store with all of our consent data
