@@ -8,8 +8,6 @@
 
 [Consent String SDK - C](https://github.com/InteractiveAdvertisingBureau/Consent-String-SDK-C)
 
-[Consent String SDK - Golang](https://github.com/LiveRamp/iabconsent)
-
 Encode and decode web-safe base64 consent information with the IAB EU's GDPR Transparency and Consent Framework.
 
 Reference implementations for dealing with consent strings in the IAB EU's GDPR Transparency and Consent Framework.  
@@ -22,6 +20,7 @@ The IAB specification for the consent string format is available on the [IAB Git
 
 These implementations are not supported by the IAB.
 
+- [Consent String SDK - Golang](https://github.com/LiveRamp/iabconsent)
 - [Go](https://github.com/prebid/go-gdpr)
 - [Go](https://github.com/LiveRamp/iabconsent)
 - [Rust](https://github.com/cirla/gdpr_consent)
