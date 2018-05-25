@@ -1,0 +1,433 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		92214CD120921F96009049DD /* CMPConsentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 92214CBF20921F96009049DD /* CMPConsentParser.m */; };
+		92214CD220921F96009049DD /* CMPDataStorageUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 92214CC520921F96009049DD /* CMPDataStorageUserDefaults.m */; };
+		92214CD320921F96009049DD /* CMPConsentToolAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 92214CC920921F96009049DD /* CMPConsentToolAPI.m */; };
+		92214CD420921F96009049DD /* CMPConsentToolUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 92214CCA20921F96009049DD /* CMPConsentToolUtil.m */; };
+		92214CD520921F96009049DD /* CMPConsentToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92214CCF20921F96009049DD /* CMPConsentToolViewController.m */; };
+		92214CD620921F96009049DD /* CMPActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92214CD020921F96009049DD /* CMPActivityIndicatorView.m */; };
+		D1B2F0712075FC4700EB06AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B2F0702075FC4700EB06AE /* AppDelegate.m */; };
+		D1B2F0742075FC4700EB06AE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B2F0732075FC4700EB06AE /* ViewController.m */; };
+		D1B2F0772075FC4700EB06AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1B2F0752075FC4700EB06AE /* Main.storyboard */; };
+		D1B2F0792075FC4700EB06AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1B2F0782075FC4700EB06AE /* Assets.xcassets */; };
+		D1B2F07C2075FC4700EB06AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1B2F07A2075FC4700EB06AE /* LaunchScreen.storyboard */; };
+		D1B2F07F2075FC4700EB06AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B2F07E2075FC4700EB06AE /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D1B2F08B207602B500EB06AE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		92214CBF20921F96009049DD /* CMPConsentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPConsentParser.m; sourceTree = "<group>"; };
+		92214CC020921F96009049DD /* CMPConsentConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPConsentConstant.h; sourceTree = "<group>"; };
+		92214CC120921F96009049DD /* CMPConsentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPConsentParser.h; sourceTree = "<group>"; };
+		92214CC320921F96009049DD /* CMPDataStorageUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPDataStorageUserDefaults.h; sourceTree = "<group>"; };
+		92214CC420921F96009049DD /* CMPDataStorageProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPDataStorageProtocol.h; sourceTree = "<group>"; };
+		92214CC520921F96009049DD /* CMPDataStorageUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPDataStorageUserDefaults.m; sourceTree = "<group>"; };
+		92214CC720921F96009049DD /* CMPConsentToolUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPConsentToolUtil.h; sourceTree = "<group>"; };
+		92214CC820921F96009049DD /* CMPTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPTypes.h; sourceTree = "<group>"; };
+		92214CC920921F96009049DD /* CMPConsentToolAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPConsentToolAPI.m; sourceTree = "<group>"; };
+		92214CCA20921F96009049DD /* CMPConsentToolUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPConsentToolUtil.m; sourceTree = "<group>"; };
+		92214CCB20921F96009049DD /* CMPConsentToolAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPConsentToolAPI.h; sourceTree = "<group>"; };
+		92214CCD20921F96009049DD /* CMPConsentToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPConsentToolViewController.h; sourceTree = "<group>"; };
+		92214CCE20921F96009049DD /* CMPActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPActivityIndicatorView.h; sourceTree = "<group>"; };
+		92214CCF20921F96009049DD /* CMPConsentToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPConsentToolViewController.m; sourceTree = "<group>"; };
+		92214CD020921F96009049DD /* CMPActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPActivityIndicatorView.m; sourceTree = "<group>"; };
+		D1B2F06C2075FC4700EB06AE /* CMPConsentToolDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CMPConsentToolDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1B2F06F2075FC4700EB06AE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D1B2F0702075FC4700EB06AE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D1B2F0722075FC4700EB06AE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D1B2F0732075FC4700EB06AE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D1B2F0762075FC4700EB06AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D1B2F0782075FC4700EB06AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D1B2F07B2075FC4700EB06AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D1B2F07D2075FC4700EB06AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1B2F07E2075FC4700EB06AE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D1B2F0692075FC4700EB06AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		92214CBD20921F96009049DD /* CMPConsentTool */ = {
+			isa = PBXGroup;
+			children = (
+				92214CBE20921F96009049DD /* Parser */,
+				92214CC220921F96009049DD /* Storage */,
+				92214CC620921F96009049DD /* API */,
+				92214CCC20921F96009049DD /* Presentation */,
+			);
+			path = CMPConsentTool;
+			sourceTree = SOURCE_ROOT;
+		};
+		92214CBE20921F96009049DD /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				92214CC020921F96009049DD /* CMPConsentConstant.h */,
+				92214CC120921F96009049DD /* CMPConsentParser.h */,
+				92214CBF20921F96009049DD /* CMPConsentParser.m */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		92214CC220921F96009049DD /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				92214CC420921F96009049DD /* CMPDataStorageProtocol.h */,
+				92214CC320921F96009049DD /* CMPDataStorageUserDefaults.h */,
+				92214CC520921F96009049DD /* CMPDataStorageUserDefaults.m */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		92214CC620921F96009049DD /* API */ = {
+			isa = PBXGroup;
+			children = (
+				92214CC820921F96009049DD /* CMPTypes.h */,
+				92214CC720921F96009049DD /* CMPConsentToolUtil.h */,
+				92214CCA20921F96009049DD /* CMPConsentToolUtil.m */,
+				92214CCB20921F96009049DD /* CMPConsentToolAPI.h */,
+				92214CC920921F96009049DD /* CMPConsentToolAPI.m */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		92214CCC20921F96009049DD /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				92214CCD20921F96009049DD /* CMPConsentToolViewController.h */,
+				92214CCF20921F96009049DD /* CMPConsentToolViewController.m */,
+				92214CCE20921F96009049DD /* CMPActivityIndicatorView.h */,
+				92214CD020921F96009049DD /* CMPActivityIndicatorView.m */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		D1B2F0632075FC4700EB06AE = {
+			isa = PBXGroup;
+			children = (
+				D1B2F06E2075FC4700EB06AE /* CMPConsentToolDemoApp */,
+				D1B2F06D2075FC4700EB06AE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D1B2F06D2075FC4700EB06AE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D1B2F06C2075FC4700EB06AE /* CMPConsentToolDemoApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D1B2F06E2075FC4700EB06AE /* CMPConsentToolDemoApp */ = {
+			isa = PBXGroup;
+			children = (
+				92214CBD20921F96009049DD /* CMPConsentTool */,
+				D1B2F06F2075FC4700EB06AE /* AppDelegate.h */,
+				D1B2F0702075FC4700EB06AE /* AppDelegate.m */,
+				D1B2F0722075FC4700EB06AE /* ViewController.h */,
+				D1B2F0732075FC4700EB06AE /* ViewController.m */,
+				D1B2F0752075FC4700EB06AE /* Main.storyboard */,
+				D1B2F0782075FC4700EB06AE /* Assets.xcassets */,
+				D1B2F07A2075FC4700EB06AE /* LaunchScreen.storyboard */,
+				D1B2F07D2075FC4700EB06AE /* Info.plist */,
+				D1B2F07E2075FC4700EB06AE /* main.m */,
+			);
+			path = CMPConsentToolDemoApp;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D1B2F06B2075FC4700EB06AE /* CMPConsentToolDemoApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1B2F0822075FC4700EB06AE /* Build configuration list for PBXNativeTarget "CMPConsentToolDemoApp" */;
+			buildPhases = (
+				D1B2F0682075FC4700EB06AE /* Sources */,
+				D1B2F0692075FC4700EB06AE /* Frameworks */,
+				D1B2F06A2075FC4700EB06AE /* Resources */,
+				D1B2F08B207602B500EB06AE /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CMPConsentToolDemoApp;
+			productName = CMPConsentToolDemoApp;
+			productReference = D1B2F06C2075FC4700EB06AE /* CMPConsentToolDemoApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D1B2F0642075FC4700EB06AE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = Smaato;
+				TargetAttributes = {
+					D1B2F06B2075FC4700EB06AE = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = D1B2F0672075FC4700EB06AE /* Build configuration list for PBXProject "CMPConsentToolDemoApp" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D1B2F0632075FC4700EB06AE;
+			productRefGroup = D1B2F06D2075FC4700EB06AE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D1B2F06B2075FC4700EB06AE /* CMPConsentToolDemoApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D1B2F06A2075FC4700EB06AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1B2F07C2075FC4700EB06AE /* LaunchScreen.storyboard in Resources */,
+				D1B2F0792075FC4700EB06AE /* Assets.xcassets in Resources */,
+				D1B2F0772075FC4700EB06AE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D1B2F0682075FC4700EB06AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92214CD520921F96009049DD /* CMPConsentToolViewController.m in Sources */,
+				92214CD620921F96009049DD /* CMPActivityIndicatorView.m in Sources */,
+				92214CD320921F96009049DD /* CMPConsentToolAPI.m in Sources */,
+				92214CD120921F96009049DD /* CMPConsentParser.m in Sources */,
+				D1B2F0742075FC4700EB06AE /* ViewController.m in Sources */,
+				92214CD420921F96009049DD /* CMPConsentToolUtil.m in Sources */,
+				92214CD220921F96009049DD /* CMPDataStorageUserDefaults.m in Sources */,
+				D1B2F07F2075FC4700EB06AE /* main.m in Sources */,
+				D1B2F0712075FC4700EB06AE /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D1B2F0752075FC4700EB06AE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D1B2F0762075FC4700EB06AE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D1B2F07A2075FC4700EB06AE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D1B2F07B2075FC4700EB06AE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D1B2F0802075FC4700EB06AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D1B2F0812075FC4700EB06AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D1B2F0832075FC4700EB06AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = CMPConsentToolDemoApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.smaato.cmpapi.CMPConsentToolDemoApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D1B2F0842075FC4700EB06AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = CMPConsentToolDemoApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.smaato.cmpapi.CMPConsentToolDemoApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D1B2F0672075FC4700EB06AE /* Build configuration list for PBXProject "CMPConsentToolDemoApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1B2F0802075FC4700EB06AE /* Debug */,
+				D1B2F0812075FC4700EB06AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1B2F0822075FC4700EB06AE /* Build configuration list for PBXNativeTarget "CMPConsentToolDemoApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1B2F0832075FC4700EB06AE /* Debug */,
+				D1B2F0842075FC4700EB06AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D1B2F0642075FC4700EB06AE /* Project object */;
+}
