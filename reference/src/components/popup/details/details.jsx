@@ -82,9 +82,9 @@ export default class Details extends Component {
         </div>
 
         <div class={style.body}>
-          <h2 class={style.subtitle}>We value your privacy</h2>
-          <p class={style.message}>In order to run a successful website, we and certain third parties are setting cookies and accessing and storing information on your device for various purposes. Various third parties are also collecting data to show you personalized content and ads. Some third parties require your consent to collect data to serve you personalized content and ads.
-          </p>
+          <LocalLabel localizeKey='subtitle' class={style.subtitle}>We value your privacy</LocalLabel>
+          <LocalLabel localizeKey='description' class={style.message}>In order to run a successful website, we and certain third parties are setting cookies and accessing and storing information on your device for various purposes. Various third parties are also collecting data to show you personalized content and ads. Some third parties require your consent to collect data to serve you personalized content and ads.
+          </LocalLabel>
           <Panel selectedIndex={selectedPanelIndex}>
             <table class={style.table}>
               <tbody>
@@ -122,7 +122,7 @@ export default class Details extends Component {
           <a class={style.showVendor} onClick={this.handleShowVendors}>
             <LocalLabel localizeKey='showVendor'>Show full vendor list</LocalLabel>
           </a>
-          <a class={style.cancel} onClick={this.handleBack}><LocalLabel localizeKey='back'>Back</LocalLabel></a>
+          <a class={style.cancel} onClick={this.handleBack}><LocalLabel localizeKey='cancel'>Back</LocalLabel></a>
           <Button class={style.save} onClick={onSave}><LocalLabel localizeKey='save'>Save and Exit</LocalLabel></Button>
         </div>
       </div>

@@ -5,7 +5,7 @@
   flex-direction: column;
   flex: 1;
   height: 100%;
-
+  width: 100%;
   
   .header {
     display: flex;
@@ -40,10 +40,11 @@
       }
     }
     .right {
+      white-space: nowrap;
       justify-content: flex-end;
       padding-right: 13px;
       @media @smartphone {
-        width: 50%;
+        text-align: center;
       }
     }
     .name {
@@ -89,6 +90,7 @@
     }
 
     .message {
+      display: block;
       padding: 10px 0;
       color: #141e23;
       font-size: 14px;
@@ -119,25 +121,31 @@
     align-items: center;
     justify-content: flex-end;
     flex: 0 1 80px;
+    font-size: 14px;
     border-top: 1px solid @color-border;
+    width: 100%;
+    flex-wrap: wrap;
+
+    @media @smartphone {
+      display: flex;
+    }
 
     .showVendor {
       flex: 1 1 auto;
       margin-left: 20px;
+      white-space: nowrap;
       position: relative;
       text-align: left;
-      line-height: 75px;
       @media @smartphone {
-        width: 100%;
       }
     }
   }
 
   .save {
     margin-right: 20px;
-    width: 205px;
     @media @smartphone {
       font-size: 10px;
+      white-space: nowrap;
     }
   }
   .cancel {

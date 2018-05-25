@@ -46,7 +46,7 @@ export default class Intro extends Component {
             invert={true}
             onClick={onClose}
           >
-            <LocalLabel localizeKey='showPurposes'>I do not accept</LocalLabel>
+            <LocalLabel localizeKey='rejectAll'>I do not accept</LocalLabel>
           </Button>
           <Button
             class={style.acceptAll}
@@ -57,7 +57,7 @@ export default class Intro extends Component {
         </div>
         <div class={style.bottom}>
           <a class={style.showPurposes} onClick={onShowPurposes}>
-            Show Purposes
+            <LocalLabel localizeKey='showPurposes'>show purposes</LocalLabel>
           </a>
         </div>
 

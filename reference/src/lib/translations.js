@@ -58,7 +58,7 @@ export default {
   },
   de: {
     intro: {
-      title: 'Diese Website verwendet Cookies',
+      title: 'Wir respektieren Ihre Privatsphäre',
       description: 'Wir und unsere Partner verwenden sogenannte Cookies (kleine Textdateien) im Webbrowser um zu verstehen, was unsere Besucher interessiert und entsprechend relevante Inhalte und Werbung anbieten zu können. Zukünftig benötigen wir wahrscheinlich ihr/euer Einverständnis dazu. Ein Beispiel, wie dies aussehen könnte, finden sie/findet ihr unter dieser Erklärung ',
       acceptAll: 'Alle Cookies akzeptieren',
       rejectAll: 'Alle Cookies ablehnen',
@@ -66,8 +66,12 @@ export default {
     },
     details: {
       title: 'Datenschutzeinstellungen',
+      subtitle: 'Wir respektieren Ihre Privatsphäre',
+      description: 'Wir und unsere Partner verwenden sogenannte Cookies (kleine Textdateien) im Webbrowser um zu verstehen, was unsere Besucher interessiert und entsprechend relevante Inhalte und Werbung anbieten zu können. Zukünftig benötigen wir wahrscheinlich ihr/euer Einverständnis dazu. Ein Beispiel, wie dies aussehen könnte, finden sie/findet ihr unter dieser Erklärung ',
       cancel: 'Abbrechen',
-      save: 'Sichern und Beenden'
+      save: 'Speichern & verlassen',
+      showVendor: 'Komplette Partnerliste ansehen',
+      savePurposes: 'Alle Nutzungszwecke erlauben'
     },
     purposes: {
       active: 'Aktiv',
@@ -79,23 +83,28 @@ export default {
       },
       purpose1: {
         menu: 'Zugriff auf ein Gerät',
-        title: 'Zugriff auf ein Gerät',
-        description: 'Die Erlaubnis zum Speichern und Abrufen von Informationen auf dem Gerät eines Website-Besuchers.Das ist notwendig, um Cookies im Web-Browser zu speichern und zur Anzeige relevanter Informationen und Werbung abrufen zu können.'
+        title: 'Speicherung und Zugriff auf Informationen',
+        description: 'Die Speicherung von Informationen oder der Zugriff auf Informationen, die bereits gespeichert wurden, auf Anwendergeräten, wie beispielsweise der Zugriff auf Werbeidentifikatoren und/oder sonstige Geräteidentifikatoren, und/oder die Verwendung von Cookies oder ähnlichen Technologien.'
       },
       purpose2: {
         menu: 'Persönlich angepaßte Werbung',
-        title: 'Persönlich angepaßte Werbung',
-        description: 'Die Erlaubnis, Besucherdaten so zu verarbeiten und/oder zu speichern und abzurufen, dass persönlich angepaßte Werbung angeboten und angezeigt werden kann (dies umfaßt die Auslieferung, Messung und die Erstellung von Berichten darüber). Dies erfolgt auf der Basis bekannter Präferenzen oder Interessen, oder durch das Schließen auf Präferenzen oder Interessen durch die Erfassung von Daten auch über verschiedene Websites, Apps oder Geräte hinweg zu diesem Zweck.'
+        title: 'Personalisierung',
+        description: 'Die Erhebung und Verarbeitung von Informationen über Benutzer einer Site, um nachfolgend Werbung in anderen Zusammenhängen, d. h. auf anderen Sites oder Apps, im Laufe der Zeit nutzerspezifisch anzupassen. Normalerweise wird der Inhalt der Site oder App herangezogen, um Rückschlüsse auf die Interessen der Benutzer zu ermöglichen, an denen sich die zukünftige Auswahl orientiert.'
       },
       purpose3: {
         menu: 'Analysen',
-        title: 'Analysen',
-        description: 'Die Erlaubnis, Besucherdaten zur Anzeige von Inhalten oder Werbung zu verarbeiten, und zur Messung der Auslieferung solcher Inhalte oder Werbung. Umfasst ist die Gewinnung von Erkenntnissen und die Generierung von Berichten um die Nutzung des angebotenen Service zu verstehen, und/oder das Abrufen oder Speichern von Informationen auf Geräten zu diesem Zweck.'
+        title: 'Auswahl, Schaltung und Auswertung von Anzeigen',
+        description: 'Die Erhebung von Informationen und die Verknüpfung mit zuvor erhobenen Informationen, die Auswahl und Schaltung von Werbungen und die Bewertung der Schaltung und der Wirksamkeit dieser Werbungen. Dies umfasst die Nutzung bereits erhobener Informationen über die Interessen der Benutzer, um Werbeanzeigen auszuwählen, Daten darüber zu verarbeiten, welche Werbungen angezeigt wurden, wie oft diese angezeigt wurden, wann und wo sie angezeigt wurden und ob auf die Werbung eine Handlung gefolgt ist, wie zum Beispiel das Klicken auf eine Anzeige oder ein Einkauf.'
       },
       purpose4: {
         menu: 'Persönlich angepasste Inhalte',
-        title: 'Persönlich angepasste Inhalte',
-        description: 'Die Erlaubnis, Besucherdaten zur Anzeige von personalisierten Inhalten zu verarbeiten, und zur Messung der Auslieferung. Umfasst ist die Gewinnung von Erkenntnissen darüber und die Generierung von Berichten dazu. Dies erfolgt auf der Basis bekannter Präferenzen oder Interessen, oder durch das Schließen auf Präferenzen oder Interessen durch die Erfassung von Daten auch über verschiedene Websites, Apps oder Geräte hinweg zu diesem Zweck.'
+        title: 'Auswahl, Schaltung und Auswertung von Inhalten',
+        description: 'Die Erhebung von Informationen und die Verknüpfung mit zuvor erhobenen Informationen, die Auswahl und Schaltung von Inhalten und die Bewertung der Schaltung und der Wirksamkeit dieser Inhalte. Dies umfasst die Nutzung bereits erhobener Informationen über die Interessen der Benutzer, um Inhalte auszuwählen, Daten darüber zu verarbeiten, welche Inhalte angezeigt wurden, wie oft diese angezeigt wurden, wann und wo sie angezeigt wurden und ob auf den Inhalt eine Handlung gefolgt ist, wie zum Beispiel das Klicken auf einen Inhalt.'
+      },
+      purpose5: {
+        menu: 'Bewertung',
+        title: 'Bewertung',
+        description: 'Die Erhebung von Informationen über die Nutzung der Inhalte durch den Benutzer und die Verknüpfung mit zuvor erhobenen Informationen, die herangezogen werden, um die Benutzer-Nutzung der Inhalte zu bewerten, zu verstehen und darüber zu berichten.'
       }
     },
     vendors: {

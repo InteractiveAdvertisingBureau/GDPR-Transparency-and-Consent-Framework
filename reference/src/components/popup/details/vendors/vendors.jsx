@@ -88,7 +88,6 @@ export default class Vendors extends Component {
     } = props;
 
     const { editingConsents, enableAll } = this.state;
-    var enableDisplay = enableAll == true ? 'Disable All' : 'Enable All';
 
     function VendorEnable(props) {
       const {
@@ -102,9 +101,9 @@ export default class Vendors extends Component {
         return null;
       }
       if (selectedVendorIds.has(id) && selectedPurposeIds.has(purposeId)) {
-        return <td class={style.disabled}>Enabled</td>
+        return <td class={style.disabled}>On</td>
       }
-      return <td class={style.disabled}>Disabled</td>
+      return <td class={style.disabled}>Off</td>
     }
 
     return (
@@ -124,7 +123,12 @@ export default class Vendors extends Component {
                   class={style.enableAll}
                   onClick={this.enableAll}
                 >
-                  <LocalLabel localizeKey='offOn'>{enableDisplay}</LocalLabel>
+                  {enableAll &&
+                  <LocalLabel localizeKey='rejectAll'>reject all</LocalLabel>
+                  }
+                  {!enableAll &&
+                  <LocalLabel localizeKey='acceptAll'>accept all</LocalLabel>
+                  }
                 </div>
               </th>
               }
