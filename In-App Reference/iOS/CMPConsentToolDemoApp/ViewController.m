@@ -2,8 +2,6 @@
 //  ViewController.m
 //  CMPConsentToolDemoApp
 //
-//  Copyright © 2018 Smaato. All rights reserved.
-//
 
 #import "ViewController.h"
 //#import "CMPConsentToolAPI.h"

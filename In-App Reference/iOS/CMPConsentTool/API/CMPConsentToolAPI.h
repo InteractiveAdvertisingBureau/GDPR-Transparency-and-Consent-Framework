@@ -2,9 +2,6 @@
 //  CMPConsentToolAPI.h
 //  GDPR
 //
-//  Created by Smaato Inc on 24.04.18.
-//  Copyright © 2018 Smaato Inc. All rights reserved.
-//
 
 #import <Foundation/Foundation.h>
 #import "CMPDataStorageProtocol.h"

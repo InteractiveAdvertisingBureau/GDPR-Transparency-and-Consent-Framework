@@ -2,8 +2,6 @@
 //  main.m
 //  CMPConsentToolDemoApp
 //
-//  Copyright © 2018 Smaato. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
