@@ -8,6 +8,8 @@
 
 [Consent String SDK - C](https://github.com/InteractiveAdvertisingBureau/Consent-String-SDK-C)
 
+[Consent String SDK - Scala](https://github.com/InteractiveAdvertisingBureau/Consent-String-SDK-Scala)
+
 Encode and decode web-safe base64 consent information with the IAB EU's GDPR Transparency and Consent Framework.
 
 Reference implementations for dealing with consent strings in the IAB EU's GDPR Transparency and Consent Framework.  
