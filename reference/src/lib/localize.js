@@ -10,7 +10,6 @@ export function findLocale() {
 			(navigator.languages && navigator.languages[0]) ||
 			'en-us'
 		));
-  console.log(locale);
 	return locale.toLowerCase();
 }
 

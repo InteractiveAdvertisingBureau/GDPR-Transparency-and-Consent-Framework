@@ -57,7 +57,6 @@ export default class Vendors extends Component {
     this.setState({
       activeVendorIds: activeVendorIds
     });
-    console.log(activeVendorIds);
   };
 
   isActive = (id) => {

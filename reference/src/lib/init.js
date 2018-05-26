@@ -34,7 +34,6 @@ export function init(configUpdates) {
         publisherName: config.publisherName,
 				publisherConsentData: readPublisherConsentCookie()
 			});
-      console.log(store);
 
 			// Pull queued command from __cmp stub
 			const {commandQueue = []} = window[CMP_GLOBAL_NAME] || {};
