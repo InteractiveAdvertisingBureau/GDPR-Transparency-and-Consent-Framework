@@ -124,10 +124,10 @@ export default class Vendors extends Component {
                   onClick={this.enableAll}
                 >
                   {enableAll &&
-                  <LocalLabel localizeKey='rejectAll'>reject all</LocalLabel>
+                  <LocalLabel localizeKey='rejectAll'>disable all</LocalLabel>
                   }
                   {!enableAll &&
-                  <LocalLabel localizeKey='acceptAll'>accept all</LocalLabel>
+                  <LocalLabel localizeKey='acceptAll'>enable all</LocalLabel>
                   }
                 </div>
               </th>
