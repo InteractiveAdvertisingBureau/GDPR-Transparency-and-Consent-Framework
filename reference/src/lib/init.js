@@ -31,6 +31,7 @@ export function init(configUpdates) {
 				cmpId: CMP_ID,
 				cookieVersion: COOKIE_VERSION,
 				vendorConsentData,
+        color: config.color,
         publisherName: config.publisherName,
 				publisherConsentData: readPublisherConsentCookie()
 			});
@@ -46,9 +47,9 @@ export function init(configUpdates) {
 
 			// Render the UI
 			const App = require('../components/app').default;
-                        if (showUI) {
-			      render(<App store={store} notify={cmp.notify} />, document.body);
-                        }
+      if (showUI) {
+			  render(<App store={store} notify={cmp.notify} />, document.body);
+      }
 
 			// Notify listeners that the CMP is loaded
 			log.debug(`Successfully loaded CMP version: ${pack.version}`);

@@ -9,7 +9,8 @@ const defaultConfig = {
 	localization: {},
 	forceLocale: null,
 	gdprApplies: true,
-  publisherName: ''
+  publisherName: '',
+  color: '#2e7d32'
 };
 
 class Config {
