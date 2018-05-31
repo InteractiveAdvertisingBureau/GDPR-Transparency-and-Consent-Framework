@@ -7,6 +7,7 @@ import { fetchVendorList, fetchPurposeList } from './vendor';
 import log from './log';
 import pack from '../../package.json';
 import config from './config';
+import {getColorCSS} from './customizeColor';
 
 const CMP_VERSION = 1;
 const CMP_ID = 1;
@@ -19,11 +20,13 @@ export function init(configUpdates) {
 	// Fetch the current vendor consent before initializing
 	return readVendorConsentCookie()
 		.then(vendorConsentData => {
-                        let publisherConsentData = readPublisherConsentCookie();
-                        let showUI  = true;
-                        if(typeof vendorConsentData != 'undefined' || typeof publisherConsentData != 'undefined') {
-                                showUI = false;
-                        }
+      let publisherConsentData = readPublisherConsentCookie();
+      let showUI  = true;
+      if (config.forceShowUI = true) {
+        showUI = true;
+      } else if (typeof vendorConsentData != 'undefined' || typeof publisherConsentData != 'undefined') {
+         showUI = false;
+      }
 
 			// Initialize the store with all of our consent data
 			const store = new Store({
@@ -31,7 +34,6 @@ export function init(configUpdates) {
 				cmpId: CMP_ID,
 				cookieVersion: COOKIE_VERSION,
 				vendorConsentData,
-        color: config.color,
         publisherName: config.publisherName,
 				publisherConsentData: readPublisherConsentCookie()
 			});
@@ -45,6 +47,18 @@ export function init(configUpdates) {
 			// Expose `processCommand` as the CMP implementation
 			window[CMP_GLOBAL_NAME] = cmp.processCommand;
 
+      // customize color if configured
+      if (config.color) {
+        var css = getColorCSS(config.color);
+        var styleNode = document.createElement('style');
+        styleNode.type = "text/css";
+        if (styleNode.styleSheet){
+          styleNode.styleSheet.cssText = css;
+        } else {
+          styleNode.appendChild(document.createTextNode(css));
+        }
+        document.head.append(styleNode);
+      }
 			// Render the UI
 			const App = require('../components/app').default;
       if (showUI) {

@@ -24,7 +24,6 @@ export default class Store {
 		cmpId = 1,
 		cmpVersion = 1,
 		cookieVersion = 1,
-    color,
 		vendorConsentData,
     publisherName,
 		publisherConsentData,
@@ -61,7 +60,6 @@ export default class Store {
 		this.isConsentToolShowing = false;
 		this.isFooterShowing = false;
     this.publisherName = config.publisherName;
-    this.color = config.color;
 
 		this.updateVendorList(vendorList);
 		this.updateCustomPurposeList(customPurposeList);

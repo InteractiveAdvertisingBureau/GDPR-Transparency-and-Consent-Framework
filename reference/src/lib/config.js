@@ -8,6 +8,7 @@ const defaultConfig = {
 	logging: false,
 	localization: {},
 	forceLocale: null,
+  forceShowUI: false,
 	gdprApplies: true,
   publisherName: '',
   color: '#2e7d32'
