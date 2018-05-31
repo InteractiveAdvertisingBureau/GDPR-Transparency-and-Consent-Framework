@@ -22,7 +22,7 @@ export function init(configUpdates) {
 		.then(vendorConsentData => {
       let publisherConsentData = readPublisherConsentCookie();
       let showUI  = true;
-      if (config.forceShowUI = true) {
+      if (config.forceShowUI == true) {
         showUI = true;
       } else if (typeof vendorConsentData != 'undefined' || typeof publisherConsentData != 'undefined') {
          showUI = false;
@@ -48,7 +48,7 @@ export function init(configUpdates) {
 			window[CMP_GLOBAL_NAME] = cmp.processCommand;
 
       // customize color if configured
-      if (config.color && config.color !== "#2e7d32") {
+      if (config.color && config.color != "#2e7d32") {
         var css = getColorCSS(config.color);
         var styleNode = document.createElement('style');
         styleNode.type = "text/css";
