@@ -48,7 +48,7 @@ export function init(configUpdates) {
 			window[CMP_GLOBAL_NAME] = cmp.processCommand;
 
       // customize color if configured
-      if (config.color) {
+      if (config.color && config.color !== "#2e7d32") {
         var css = getColorCSS(config.color);
         var styleNode = document.createElement('style');
         styleNode.type = "text/css";
