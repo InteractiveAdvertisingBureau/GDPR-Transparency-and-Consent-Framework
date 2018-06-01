@@ -32,6 +32,7 @@ export function init(configUpdates) {
 			const store = new Store({
 				cmpVersion: CMP_VERSION,
 				cmpId: CMP_ID,
+        color: config.color,
 				cookieVersion: COOKIE_VERSION,
 				vendorConsentData,
         publisherName: config.publisherName,
@@ -48,8 +49,8 @@ export function init(configUpdates) {
 			window[CMP_GLOBAL_NAME] = cmp.processCommand;
 
       // customize color if configured
-      if (config.color && config.color != "#2e7d32") {
-        var css = getColorCSS(config.color);
+      if (store.color && store.color != "#2e7d32") {
+        var css = getColorCSS(store.color);
         var styleNode = document.createElement('style');
         styleNode.type = "text/css";
         if (styleNode.styleSheet){
