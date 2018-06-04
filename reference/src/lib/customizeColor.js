@@ -45,7 +45,8 @@ const colorCSS = `
   .vendors_disabled {
     color: #2e7d32 !important;
   }
-  .app_gdpr .switch_visualizationContainer,
+  .app_gdpr .switch_isSelected
+  .switch_visualizationContainer,
   .switch_visualizationGlow {
     background-color: #2e7d32 !important;
   }

@@ -111,7 +111,7 @@ export default class Vendors extends Component {
           <table class={style.vendorList}>
             <thead>
             <tr>
-              <th>
+              <th class={style.tableHead}>
                 <LocalLabel class={style.company} localizeKey='company'>
                   Company
                 </LocalLabel>
