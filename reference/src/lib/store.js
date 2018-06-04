@@ -63,6 +63,12 @@ export default class Store {
     this.publisherName = config.publisherName;
     this.color = config.color;
 
+    // for preview use
+    if (config.forceShowUI) {
+      this.isConsentToolShowing = true;
+      this.isFooterShowing = false;
+    }
+
 		this.updateVendorList(vendorList);
 		this.updateCustomPurposeList(customPurposeList);
 	}

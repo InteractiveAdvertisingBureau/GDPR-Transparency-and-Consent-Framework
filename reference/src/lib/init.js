@@ -22,9 +22,7 @@ export function init(configUpdates) {
 		.then(vendorConsentData => {
       let publisherConsentData = readPublisherConsentCookie();
       let showUI  = true;
-      if (config.forceShowUI == true) {
-        showUI = true;
-      } else if (typeof vendorConsentData != 'undefined' || typeof publisherConsentData != 'undefined') {
+      if (typeof vendorConsentData != 'undefined' || typeof publisherConsentData != 'undefined') {
          showUI = false;
       }
 

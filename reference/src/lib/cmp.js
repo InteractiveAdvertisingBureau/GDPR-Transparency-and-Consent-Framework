@@ -3,6 +3,7 @@ import config from './config';
 import {
 	encodeVendorConsentData
 } from './cookie/cookie';
+import {preview} from './preview';
 
 export const CMP_GLOBAL_NAME = '__cmp';
 
@@ -127,7 +128,16 @@ export default class Cmp {
 		showConsentTool: (_, callback = () => {}) => {
 			this.store.toggleConsentToolShowing(true);
 			callback(true);
-		}
+		},
+
+    /**
+     * config in ui, for preview use
+     */
+    previewUI: (configs, callback = () => {}) => {
+      config.update(configs);
+      preview();
+    },
+
 	};
 
 	generateConsentString = () => {

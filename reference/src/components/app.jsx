@@ -16,7 +16,6 @@ export default class App extends Component {
     store.toggleConsentToolShowing(false);
   };
 
-
   updateState = (store) => {
     this.setState({ store });
   };
