@@ -18,6 +18,7 @@ export function preview() {
     cmpID: CMP_ID,
     color: config.color,
     cookieVersion: COOKIE_VERSION,
+    forceShowUI: config.forceShowUI,
     publisherName: config.publisherName,
   });
 

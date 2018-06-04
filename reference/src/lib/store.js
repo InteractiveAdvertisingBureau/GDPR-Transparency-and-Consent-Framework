@@ -25,6 +25,7 @@ export default class Store {
 		cmpVersion = 1,
 		cookieVersion = 1,
     color,
+    forceShowUI,
 		vendorConsentData,
     publisherName,
 		publisherConsentData,
@@ -62,9 +63,10 @@ export default class Store {
 		this.isFooterShowing = false;
     this.publisherName = config.publisherName;
     this.color = config.color;
+    this.forceShowUI = config.forceShowUI;
 
     // for preview use
-    if (config.forceShowUI) {
+    if (forceShowUI) {
       this.isConsentToolShowing = true;
       this.isFooterShowing = false;
     }

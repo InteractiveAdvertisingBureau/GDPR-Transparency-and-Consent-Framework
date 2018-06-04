@@ -29,7 +29,11 @@ export default class Footer extends Component {
 
   render(props) {
     const { store } = props;
-    const { isFooterShowing } = store;
+    var { isFooterShowing, forceShowUI } = store;
+
+    if (forceShowUI) {
+      isFooterShowing = false;
+    }
 
     return (
       <div
