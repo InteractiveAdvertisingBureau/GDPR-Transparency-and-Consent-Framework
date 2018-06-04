@@ -117,7 +117,7 @@ export default class Vendors extends Component {
                 </LocalLabel>
               </th>
               {(enableEdit || editingConsents) &&
-              <th>
+              <th class={style.tableHead}>
                 <div
                   class={style.enableAll}
                   onClick={this.enableAll}
