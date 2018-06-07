@@ -12,11 +12,11 @@ Specifications published here support the Framework, including the following v1.
 * Consent Management Provider JavaScript API v1.1 Final (referred to as CMP JS API v1.1) 
 * Consent string and vendor list formats v1.1 Final
 
-Currently in public comment:
+Upcoming final release of:
 * pubvendors.json v1.0
 * Mobile In-App CMP API v1.0
 
-Pubvendors.json and Mobile In-App Consent APIs are drafts for public comment. Please submit your general feedback to feedback@advertisingconsent.eu and any technical feedback to transparencyframework@iabtechlab.com by June 1, 2018.
+Please submit any general feedback to feedback@advertisingconsent.eu and any technical feedback to transparencyframework@iabtechlab.com. 
 
 #### About IAB Tech Lab  
 
