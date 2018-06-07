@@ -1,31 +1,73 @@
+@import '../../../style/variables';
+
 div.intro {
-	display: flex;
-	flex-direction: column;
-	padding: 0 4%;
-	flex: 1;
+	padding: 14px 27px;
 	max-height: 100%;
 
+	.introWrap {
+		display: flex;
+		flex-direction: row;
+		flex: 1;
+		align-items: center;
+		@media @smartphone {
+			display: block;
+		}
+	}
+
 	.title {
-		font-size: 30px;
-		font-weight: bold;
-		border-bottom: 1px solid #eee;
-		padding: 1% 0;
+		font-size: 22px;
+		font-weight: 400;
+		border-bottom: 1px solid #e8e8e8;
+		padding: 0 0 8px;
+		color: #0065a0;
+		width: 100%;
 	}
 	.description {
-		margin: 1% 0;
+		margin: 1em 0;
 		overflow: auto;
+		flex: 75% 0 0;
+		font-size: 13px;
 	}
 	.options {
-		display: flex;
-		flex-shrink: 0;
-		width: 100%;
 		padding-bottom: 10px;
 	}
 	.rejectAll {
-		flex: 1;
-		margin-right: 10px;
+		font-size: 18px;
+		padding: 2px 0 5px 25px;
+		cursor: pointer;
+		text-decoration: underline;
+		color:#696969;
+		position: relative;
+		&:hover {
+			text-decoration: none;
+		}
+		&:before {
+			content: '';
+			background: url(//images.cdn.spilcloud.com/images/1528358577_gdprsettingsicon.png);
+			background-size: 17px 19px;
+			width: 17px;
+			height: 19px;
+			position: absolute;
+			left: 0;
+			top: 50%;
+			margin-top: -11px;
+		}
+		@media @smartphone {
+			margin: 1em 0;
+			display: block;
+		}
+	}
+	.acceptBtnWrap {
+		flex: 25% 0 0;
+		text-align: center;
 	}
 	.acceptAll {
-		flex: 1;
+		font-size: 26px;
+		box-shadow: 2px 2px 0 #d55c00;
+		padding: 9px 40px;
+		font-weight: 400;
+		@media @smartphone {
+			width: 100%;
+		}
 	}
 }
