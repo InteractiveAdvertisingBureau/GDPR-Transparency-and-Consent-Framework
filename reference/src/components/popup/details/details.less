@@ -59,6 +59,7 @@
       height: 40px;
       font-size: 10px;
       background-color: transparent;
+      position: relative;
       color: @color-primary;
       @media @smartphone {
         font-size: 10px;
@@ -137,16 +138,19 @@
       position: relative;
       text-align: left;
     }
-  }
 
-  .save {
-    margin-right: 20px;
-    @media @smartphone {
-      font-size: 10px;
-      white-space: nowrap;
+    .save {
+      position: relative;
+      margin-right: 20px;
+      @media @smartphone {
+        font-size: 10px;
+        white-space: nowrap;
+      }
     }
-  }
-  .cancel {
-    margin-right: 25px;
+
+    .cancel {
+      position: relative;
+      margin-right: 25px;
+    }
   }
 }
