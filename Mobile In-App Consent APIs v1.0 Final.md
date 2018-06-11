@@ -170,13 +170,13 @@ Decided to be String, to have the uninitialized status. </td>
   </tr>
   <tr>
     <td>IABConsent_ParsedPurposeConsents</td>
-    <td>String (of ?0? and ?1?) where the character in position N indicates the consent status to purpose ID N as defined in the Global Vendor List.</td>
+    <td>String (of "0" and "1") where the character in position N indicates the consent status to purpose ID N as defined in the Global Vendor List.</td>
     <td>String of consent given to enable simple checking. 
 First character from the left being Purpose 1, ...</td>
   </tr>
   <tr>
     <td>IABConsent_ParsedVendorConsents</td>
-    <td>String (of ?0? and ?1?) where the character in position N indicates the consent status to vendor ID N as defined in the Global Vendor List.</td>
+    <td>String (of "0" and "1") where the character in position N indicates the consent status to vendor ID N as defined in the Global Vendor List.</td>
     <td>String of  consent given to enable simple checking. 
 First character from the left being Vendor 1, ...
 </td>
