@@ -66,6 +66,8 @@ export default class Details extends Component {
     const { purposes: customPurposes = [] } = customPurposeList;
     const allPurposes = [...purposes, ...customPurposes];
 
+    var publisherConsentHead = publisherName || 'Publisher Consent';
+
     return (
       <div class={style.details}>
         <div class={style.header}>
@@ -88,6 +90,11 @@ export default class Details extends Component {
           <Panel selectedIndex={selectedPanelIndex}>
             <table class={style.table}>
               <tbody>
+                <tr>
+                  <th class={style.head}>
+                    {publisherConsentHead}
+                  </th>
+                </tr>
                 {allPurposes.map((purpose, index) => (
                   <tr class={style.row}>
                     <td>
@@ -117,6 +124,45 @@ export default class Details extends Component {
               vendors={vendors}
             />
           </Panel>
+
+          <Panel selectedIndex={selectedPanelIndex}>
+            <table class={style.table}>
+              <tbody>
+                <tr>
+                  <th class={style.head}>
+                    Third-party Consent
+                  </th>
+                </tr>
+                {allPurposes.map((purpose, index) => (
+                  <tr class={style.row}>
+                    <td>
+                      <Purposes
+                        selectedPurposeIndex={index}
+                        purposes={purposes}
+                        customPurposes={customPurposes}
+                        selectedPurposeIds={selectedPurposeIds}
+                        selectedCustomPurposeIds={selectedCustomPurposeIds}
+                        selectPurpose={selectPurpose}
+                        selectCustomPurpose={selectCustomPurpose}
+                        selectVendor={selectVendor}
+                        vendors={vendors}
+                        selectedVendorIds={selectedVendorIds}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <Vendors
+              enableEdit={true}
+              enableAllVendors={false}
+              selectedVendorIds={selectedVendorIds}
+              selectAllVendors={selectAllVendors}
+              selectVendor={selectVendor}
+              vendors={vendors}
+            />
+          </Panel>
+
         </div>
         <div class={style.footer}>
           <a class={style.showVendor} onClick={this.handleShowVendors}>
