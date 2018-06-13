@@ -65,7 +65,7 @@ export function init(configUpdates) {
 			// Render the UI
 			const App = require('../components/app').default;
       if (showUI) {
-                          event_logger("cmp_opened");
+                         event_logger("cmp_opened");
 			  render(<App store={store} notify={cmp.notify} />, document.body);
       }
 
