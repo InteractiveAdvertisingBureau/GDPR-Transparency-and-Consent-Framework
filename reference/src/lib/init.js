@@ -38,6 +38,8 @@ export function init(configUpdates) {
 				publisherConsentData: readPublisherConsentCookie()
 			});
 
+      console.log(store);
+
 			// Pull queued command from __cmp stub
 			const {commandQueue = []} = window[CMP_GLOBAL_NAME] || {};
 

@@ -35,6 +35,8 @@ export default class Popup extends Component {
 
   handleClose = () => {
     const { store, onSave } = this.props;
+    store.selectAllVendors(false);
+    store.selectAllPurposes(false);
     onSave();
     store.toggleFooterShowing(true);
   };

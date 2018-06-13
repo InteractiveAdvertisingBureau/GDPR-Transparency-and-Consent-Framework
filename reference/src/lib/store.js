@@ -305,6 +305,7 @@ export default class Store {
 		const {purposes = []} = this.vendorList || {};
 		const operation = isSelected ? 'add' : 'delete';
 		purposes.forEach(({id}) => this.vendorConsentData.selectedPurposeIds[operation](id));
+    purposes.forEach(({id}) => this.publisherConsentData.selectedCustomPurposeIds[operation](id));
 		this.storeUpdate();
 	};
 

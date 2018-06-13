@@ -66,8 +66,6 @@ export default class Details extends Component {
     const { purposes: customPurposes = [] } = customPurposeList;
     const allPurposes = [...purposes, ...customPurposes];
 
-    console.log(customPurposes);
-
     var publisherConsentHead = publisherName || 'Publisher';
 
     return (
@@ -102,7 +100,7 @@ export default class Details extends Component {
                   <tr class={style.row}>
                     <td>
                       <Purposes
-                        selectedPurposeIndex={index + 5}
+                        selectedPurposeIndex={index + purposes.length}
                         purposes={purposes}
                         customPurposes={customPurposes}
                         selectedPurposeIds={selectedPurposeIds}
