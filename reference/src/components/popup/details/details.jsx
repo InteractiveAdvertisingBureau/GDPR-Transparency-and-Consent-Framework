@@ -66,6 +66,8 @@ export default class Details extends Component {
     const { purposes: customPurposes = [] } = customPurposeList;
     const allPurposes = [...purposes, ...customPurposes];
 
+    var publisherConsentHead = publisherName || 'Publisher';
+
     return (
       <div class={style.details}>
         <div class={style.header}>
@@ -85,10 +87,55 @@ export default class Details extends Component {
           <LocalLabel localizeKey='subtitle' class={style.subtitle}>We value your privacy</LocalLabel>
           <LocalLabel localizeKey='description' class={style.message}>In order to run a successful website, we and certain third parties are setting cookies and accessing and storing information on your device for various purposes. Various third parties are also collecting data to show you personalized content and ads. Some third parties require your consent to collect data to serve you personalized content and ads.
           </LocalLabel>
+          {customPurposes && customPurposes.length > 0 &&
           <Panel selectedIndex={selectedPanelIndex}>
             <table class={style.table}>
               <tbody>
-                {allPurposes.map((purpose, index) => (
+                <tr>
+                  <th class={style.head}>
+                    {publisherConsentHead}
+                  </th>
+                </tr>
+                {customPurposes.map((purpose, index) => (
+                  <tr class={style.row}>
+                    <td>
+                      <Purposes
+                        selectedPurposeIndex={index + purposes.length}
+                        purposes={purposes}
+                        customPurposes={customPurposes}
+                        selectedPurposeIds={selectedPurposeIds}
+                        selectedCustomPurposeIds={selectedCustomPurposeIds}
+                        selectPurpose={selectPurpose}
+                        selectCustomPurpose={selectCustomPurpose}
+                        selectVendor={selectVendor}
+                        vendors={vendors}
+                        selectedVendorIds={selectedVendorIds}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <Vendors
+              enableEdit={true}
+              enableAllVendors={false}
+              selectedVendorIds={selectedVendorIds}
+              selectAllVendors={selectAllVendors}
+              selectVendor={selectVendor}
+              vendors={vendors}
+            />
+          </Panel>
+          }
+
+          <Panel selectedIndex={selectedPanelIndex}>
+            <table class={style.table}>
+              <tbody>
+                <tr>
+                  <th class={style.head}>
+                    Third-party Vendors
+                  </th>
+                </tr>
+                {purposes.map((purpose, index) => (
                   <tr class={style.row}>
                     <td>
                       <Purposes
@@ -117,6 +164,7 @@ export default class Details extends Component {
               vendors={vendors}
             />
           </Panel>
+
         </div>
         <div class={style.footer}>
           <a class={style.showVendor} onClick={this.handleShowVendors}>

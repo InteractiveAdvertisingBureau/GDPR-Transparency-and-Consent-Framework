@@ -34,8 +34,11 @@ export function init(configUpdates) {
 				cookieVersion: COOKIE_VERSION,
 				vendorConsentData,
         publisherName: config.publisherName,
+        publisherPurposeIds: config.publisherPurposeIds,
 				publisherConsentData: readPublisherConsentCookie()
 			});
+
+      console.log(store);
 
 			// Pull queued command from __cmp stub
 			const {commandQueue = []} = window[CMP_GLOBAL_NAME] || {};

@@ -88,7 +88,8 @@ export default class Purposes extends Component {
     const purposeIsActive = selectedPurposeIndex < purposes.length ?
       selectedPurposeIds.has(selectedPurposeId) :
       selectedCustomPurposeIds.has(selectedPurposeId);
-    const currentPurposeLocalizePrefix = `${selectedPurposeIndex >= purposes.length ? 'customPurpose' : 'purpose'}${selectedPurposeId}`;
+    // const currentPurposeLocalizePrefix = `${selectedPurposeIndex >= purposes.length ? 'customPurpose' : 'purpose'}${selectedPurposeId}`;
+    const currentPurposeLocalizePrefix = `purpose${selectedPurposeId}`;
     const showDivider = selectedPurposeId !== allPurposes.length;
 
     const {showVendors} = this.state;
