@@ -1,6 +1,7 @@
 import log from './log';
 
 const defaultConfig = {
+  publisherPurposeList: [],
 	globalVendorListLocation: 'https://vendorlist.consensu.org/vendorlist.json',
 	globalConsentLocation: './portal.html',
 	storeConsentGlobally: true,

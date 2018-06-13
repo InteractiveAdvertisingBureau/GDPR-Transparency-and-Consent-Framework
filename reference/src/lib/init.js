@@ -34,6 +34,7 @@ export function init(configUpdates) {
 				cookieVersion: COOKIE_VERSION,
 				vendorConsentData,
         publisherName: config.publisherName,
+        publisherPurposeIds: config.publisherPurposeIds,
 				publisherConsentData: readPublisherConsentCookie()
 			});
 

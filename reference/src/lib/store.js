@@ -28,6 +28,7 @@ export default class Store {
     forceShowUI,
 		vendorConsentData,
     publisherName,
+    publisherPurposeIds,
 		publisherConsentData,
 		vendorList,
 		customPurposeList
@@ -64,6 +65,7 @@ export default class Store {
     this.publisherName = config.publisherName;
     this.color = config.color;
     this.forceShowUI = config.forceShowUI;
+    this.publisherPurposeIds = config.publisherPurposeIds;
 
     // for preview use
     if (forceShowUI) {

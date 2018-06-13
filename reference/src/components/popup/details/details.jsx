@@ -66,7 +66,9 @@ export default class Details extends Component {
     const { purposes: customPurposes = [] } = customPurposeList;
     const allPurposes = [...purposes, ...customPurposes];
 
-    var publisherConsentHead = publisherName || 'Publisher Consent';
+    console.log(customPurposes);
+
+    var publisherConsentHead = publisherName || 'Publisher';
 
     return (
       <div class={style.details}>
@@ -87,6 +89,7 @@ export default class Details extends Component {
           <LocalLabel localizeKey='subtitle' class={style.subtitle}>We value your privacy</LocalLabel>
           <LocalLabel localizeKey='description' class={style.message}>In order to run a successful website, we and certain third parties are setting cookies and accessing and storing information on your device for various purposes. Various third parties are also collecting data to show you personalized content and ads. Some third parties require your consent to collect data to serve you personalized content and ads.
           </LocalLabel>
+          {customPurposes && customPurposes.length > 0 &&
           <Panel selectedIndex={selectedPanelIndex}>
             <table class={style.table}>
               <tbody>
@@ -95,11 +98,11 @@ export default class Details extends Component {
                     {publisherConsentHead}
                   </th>
                 </tr>
-                {allPurposes.map((purpose, index) => (
+                {customPurposes.map((purpose, index) => (
                   <tr class={style.row}>
                     <td>
                       <Purposes
-                        selectedPurposeIndex={index}
+                        selectedPurposeIndex={index + 5}
                         purposes={purposes}
                         customPurposes={customPurposes}
                         selectedPurposeIds={selectedPurposeIds}
@@ -124,16 +127,17 @@ export default class Details extends Component {
               vendors={vendors}
             />
           </Panel>
+          }
 
           <Panel selectedIndex={selectedPanelIndex}>
             <table class={style.table}>
               <tbody>
                 <tr>
                   <th class={style.head}>
-                    Third-party Consent
+                    Third-party Vendors
                   </th>
                 </tr>
-                {allPurposes.map((purpose, index) => (
+                {purposes.map((purpose, index) => (
                   <tr class={style.row}>
                     <td>
                       <Purposes
