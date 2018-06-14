@@ -14,40 +14,38 @@ const CMP_ID = 1;
 const COOKIE_VERSION = 1;
 
 export function init(configUpdates) {
-	config.update(configUpdates);
-	log.debug('Using configuration:', config);
+  config.update(configUpdates);
+  log.debug('Using configuration:', config);
 
-	// Fetch the current vendor consent before initializing
-	return readVendorConsentCookie()
-		.then(vendorConsentData => {
+  // Fetch the current vendor consent before initializing
+  return readVendorConsentCookie()
+    .then(vendorConsentData => {
       let publisherConsentData = readPublisherConsentCookie();
       let showUI  = true;
       if (typeof vendorConsentData != 'undefined' || typeof publisherConsentData != 'undefined') {
          showUI = false;
       }
 
-			// Initialize the store with all of our consent data
-			const store = new Store({
-				cmpVersion: CMP_VERSION,
-				cmpId: CMP_ID,
+      // Initialize the store with all of our consent data
+      const store = new Store({
+        cmpVersion: CMP_VERSION,
+        cmpId: CMP_ID,
         color: config.color,
-				cookieVersion: COOKIE_VERSION,
-				vendorConsentData,
+        cookieVersion: COOKIE_VERSION,
+        vendorConsentData,
         publisherName: config.publisherName,
         publisherPurposeIds: config.publisherPurposeIds,
-				publisherConsentData: readPublisherConsentCookie()
-			});
+        publisherConsentData: readPublisherConsentCookie()
+      });
 
-      console.log(store);
+      // Pull queued command from __cmp stub
+      const {commandQueue = []} = window[CMP_GLOBAL_NAME] || {};
 
-			// Pull queued command from __cmp stub
-			const {commandQueue = []} = window[CMP_GLOBAL_NAME] || {};
+      // Replace the __cmp with our implementation
+      const cmp = new Cmp(store);
 
-			// Replace the __cmp with our implementation
-			const cmp = new Cmp(store);
-
-			// Expose `processCommand` as the CMP implementation
-			window[CMP_GLOBAL_NAME] = cmp.processCommand;
+      // Expose `processCommand` as the CMP implementation
+      window[CMP_GLOBAL_NAME] = cmp.processCommand;
 
       // customize color if configured
       if (store.color && store.color != "#2e7d32") {
@@ -61,35 +59,35 @@ export function init(configUpdates) {
         }
         document.head.append(styleNode);
       }
-			// Render the UI
-			const App = require('../components/app').default;
+      // Render the UI
+      const App = require('../components/app').default;
       if (showUI) {
-			  render(<App store={store} notify={cmp.notify} />, document.body);
+        render(<App store={store} notify={cmp.notify} />, document.body);
       }
 
-			// Notify listeners that the CMP is loaded
-			log.debug(`Successfully loaded CMP version: ${pack.version}`);
-			cmp.isLoaded = true;
-			cmp.notify('isLoaded');
+      // Notify listeners that the CMP is loaded
+      log.debug(`Successfully loaded CMP version: ${pack.version}`);
+      cmp.isLoaded = true;
+      cmp.notify('isLoaded');
 
-			// Execute any previously queued command
-			cmp.commandQueue = commandQueue;
-			cmp.processCommandQueue();
+      // Execute any previously queued command
+      cmp.commandQueue = commandQueue;
+      cmp.processCommandQueue();
 
-			// Request lists
-			return Promise.all([
-				fetchVendorList().then(store.updateVendorList),
-				fetchPurposeList().then(store.updateCustomPurposeList)
-			]).then(() => {
-				cmp.cmpReady = true;
-				cmp.notify('cmpReady');
-			}).catch(err => {
-				log.error('Failed to load lists. CMP not ready', err);
-			});
-		})
-		.catch(err => {
-			log.error('Failed to load CMP', err);
-		});
+      // Request lists
+      return Promise.all([
+        fetchVendorList().then(store.updateVendorList),
+        fetchPurposeList().then(store.updateCustomPurposeList)
+      ]).then(() => {
+        cmp.cmpReady = true;
+        cmp.notify('cmpReady');
+      }).catch(err => {
+        log.error('Failed to load lists. CMP not ready', err);
+      });
+    })
+    .catch(err => {
+      log.error('Failed to load CMP', err);
+    });
 }
 
 
