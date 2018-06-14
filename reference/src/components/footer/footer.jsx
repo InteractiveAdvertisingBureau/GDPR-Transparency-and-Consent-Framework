@@ -45,7 +45,7 @@ export default class Footer extends Component {
           class={style.close}
           onClick={this.handleClose}
         />
-        <LocalLabel localizeKey='message' class={style.message}>A reminder you can control your user privacy preferences</LocalLabel>
+        <LocalLabel localizeKey='message' class={style.message}>Open your user privacy preferences</LocalLabel>
         <a
           class={style.openConsent}
           onClick={this.handleShowConsent}
