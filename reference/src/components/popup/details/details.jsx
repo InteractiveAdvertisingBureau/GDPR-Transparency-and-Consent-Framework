@@ -42,7 +42,6 @@ export default class Details extends Component {
     const {
       onCancel,
       onSave,
-      onClose,
       store
     } = props;
     const { selectedPanelIndex } = state;
