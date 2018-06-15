@@ -21,6 +21,19 @@ export default class Popup extends Component {
     onSave();
   };
 
+  onRejectAll = () => {
+    const { store, onSave } = this.props;
+    store.selectAllVendors(false);
+    store.selectAllPurposes(false);
+    store.selectAllCustomPurposes(false);
+    onSave();
+  };
+
+  handleClose = () => {
+    const {store} = this.props;
+    store.toggleFooterShowing(true);
+  }
+
   onCancel = () => {
     this.setState({
       selectedPanelIndex: SECTION_INTRO
@@ -31,14 +44,6 @@ export default class Popup extends Component {
     this.setState({
       selectedPanelIndex: SECTION_DETAILS
     });
-  };
-
-  handleClose = () => {
-    const { store, onSave } = this.props;
-    store.selectAllVendors(false);
-    store.selectAllPurposes(false);
-    onSave();
-    store.toggleFooterShowing(true);
   };
 
   render(props, state) {
@@ -61,13 +66,13 @@ export default class Popup extends Component {
               publisherName={publisherName}
               onAcceptAll={this.onAcceptAll}
               onShowPurposes={this.handleShowDetails}
-              onClose={this.handleClose}
+              onRejectAll={this.onRejectAll}
             />
             <Details
               onSave={this.props.onSave}
               onCancel={this.onCancel}
               store={this.props.store}
-              onClose={this.handleClose} />
+              onRejectAll={this.onRejectAll} />
           </Panel>
         </div>
       </div>

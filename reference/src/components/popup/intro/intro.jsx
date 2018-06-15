@@ -21,8 +21,8 @@ export default class Intro extends Component {
 
     const {
       onAcceptAll,
+      onRejectAll,
       onShowPurposes,
-      onClose,
       publisherName
     } = props;
 
@@ -44,7 +44,7 @@ export default class Intro extends Component {
           <Button
             class={style.rejectAll}
             invert={true}
-            onClick={onClose}
+            onClick={onRejectAll}
           >
             <LocalLabel localizeKey='rejectAll'>I do not accept</LocalLabel>
           </Button>
