@@ -6,6 +6,7 @@ import Purposes from './purposes/purposes';
 import Vendors from './vendors/vendors';
 import Panel from '../../panel/panel';
 import Label from "../../label/label";
+import event_logger from '../../../lib/event_logger';
 
 const SECTION_PURPOSES = 0;
 const SECTION_VENDORS = 1;
@@ -37,6 +38,12 @@ export default class Details extends Component {
       onCancel();
     }
   };
+
+  handleSave = () => {
+    const { onSave } = this.props;
+    event_logger("exit");
+    onSave();
+  }
 
   render(props, state) {
     const {
@@ -170,7 +177,7 @@ export default class Details extends Component {
             <LocalLabel localizeKey='showVendor'>Show full vendor list</LocalLabel>
           </a>
           <a class={style.cancel} onClick={this.handleBack}><LocalLabel localizeKey='cancel'>Back</LocalLabel></a>
-          <Button class={style.save} onClick={onSave}><LocalLabel localizeKey='save'>Save and Exit</LocalLabel></Button>
+          <Button class={style.save} onClick={this.handleSave}><LocalLabel localizeKey='save'>Save and Exit</LocalLabel></Button>
         </div>
       </div>
     );
