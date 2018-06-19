@@ -93,7 +93,6 @@ export default class Purposes extends Component {
     const showDivider = selectedPurposeId !== allPurposes.length;
 
     const {showVendors} = this.state;
-    var itemName = (showVendors === true) ? 'Hide Companies' : 'View Companies';
 
     // get the vendor list for this purpose
     var purposeVendors = this.getVendorsForPurpose(vendors, selectedPurposeId);
@@ -118,7 +117,12 @@ export default class Purposes extends Component {
               <LocalLabel localizeKey={`${currentPurposeLocalizePrefix}.description`} />
               <div class={style.showVendors}>
                 <a onClick={this.handleShowVendors}>
-                  <LocalLabel localizeKey='moreChoices'>{itemName}</LocalLabel>
+                  {showVendors &&
+                  <LocalLabel localizeKey={`${currentPurposeLocalizePrefix}.hideVendors`}>Hide Companies</LocalLabel>
+                  }
+                  {!showVendors &&
+                  <LocalLabel localizeKey={`${currentPurposeLocalizePrefix}.showVendors`}>Show Companies</LocalLabel>
+                  }
                 </a>
               </div>
               {showVendors &&
