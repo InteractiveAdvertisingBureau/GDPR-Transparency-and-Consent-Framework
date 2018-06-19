@@ -41,7 +41,7 @@ export default class Details extends Component {
 
   handleSave = () => {
     const { onSave } = this.props;
-    event_logger("save and exit");
+    event_logger("exit");
     onSave();
   }
 
