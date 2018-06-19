@@ -3,6 +3,7 @@ import style from './popup.less';
 import Intro from './intro/intro';
 import Details from './details/details';
 import Panel from '../panel/panel';
+import event_logger from '../../lib/event_logger'
 
 
 const SECTION_INTRO = 0;
@@ -14,6 +15,7 @@ export default class Popup extends Component {
   };
 
   onAcceptAll = () => {
+    event_logger("accepted_all");
     const { store, onSave } = this.props;
     store.selectAllVendors(true);
     store.selectAllPurposes(true);
@@ -22,6 +24,7 @@ export default class Popup extends Component {
   };
 
   onRejectAll = () => {
+    event_logger("rejected_all");
     const { store, onSave } = this.props;
     store.selectAllVendors(false);
     store.selectAllPurposes(false);
