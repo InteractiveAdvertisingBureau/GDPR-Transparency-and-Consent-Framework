@@ -18,6 +18,9 @@ export default {
 			save: 'SAVE SETTINGS'
 		},
 		purposes: {
+			showVendors: 'Show full vendor list',
+			active: 'Active',
+			inactive: 'Inactive',
 			purpose1: {
 				description: 'Allow storing or accessing information on a user’s device.'
 			},
@@ -66,6 +69,11 @@ export default {
 			back: 'Sluiten',
 			save: 'INSTELLINGEN OPSLAAN'
 		},
+		purposes: {
+			showVendors: 'Toon volledige verkoperslijst',
+			active: 'Actief',
+			inactive: 'Inactief'
+		},
 		vendors: {
 			title: 'Informatie die we verzamelen',
 			description: 'Wij en onze partners gebruiken je gegevens voor de volgende doeleinden: <ul> <li>Om meer inzicht te krijgen in hoe je onze website gebruikt en om features en diensten te analyseren en te verbeteren.</li> <li>Om ervoor te zorgen dat we jouw geselecteerde websitevoorkeuren kunnen onthouden en afgestemde content kunnen bieden.</li> <li>Om relevante advertenties te tonen en om je inhoud te kunnen laten delen via sociale media.</li> <li>Andere noodzakelijke functionaliteiten voor het aanbieden van onze gamediensten, zoals betalingen.</li> </ul>'
@@ -82,6 +90,11 @@ export default {
 			title: 'VOS PARAMÈTRES DE CONFIDENTIALITÉ',
 			back: 'Fermer',
 			save: 'SAUVEGARDER LES PARAMÈTRES'
+		},
+		purposes: {
+			showVendors: 'Voir la liste complète des fournisseurs',
+			active: 'Actif',
+			inactive: 'Inactif'
 		},
 		vendors: {
 			title: 'Informations collectées vous concernant',
@@ -100,6 +113,11 @@ export default {
 			back: 'Schließen',
 			save: 'EINSTELLUNGEN SPEICHERN'
 		},
+		purposes: {
+			showVendors: 'Vollständige Anbieterliste anzeigen',
+			active: 'Aktiv',
+			inactive: 'Inaktiv'
+		},
 		vendors: {
 			title: 'Informationen, die wir über Sie erfassen',
 			description: 'Wir und unsere Partner nutzen Ihre Daten zu folgenden Zwecken: <ul> <li>Um Erkenntnisse zur Nutzung unserer Website zu erhalten sowie Funktionen und Serviceangebote zu untersuchen und zu verbessern.</li> <li>Um Ihre Website-Einstellungen zu speichern und Ihnen personalisierte Inhalte anbieten zu können.</li> <li>Um Ihnen relevante Werbung anzeigen und Ihnen das Teilen von Inhalten über soziale Medien ermöglichen können.</li> <li>Um Ihnen weitere notwendige Funktionen anbieten und Ihnen so unser Spieleangebot bereitstellen zu können (z. B. Zahlung).</li> </ul>'
@@ -116,6 +134,11 @@ export default {
 			title: 'SU CONFIGURACIÓN DE PRIVACIDAD',
 			back: 'Cerrar',
 			save: 'GUARDAR CONFIGURACIÓN'
+		},
+		purposes: {
+			showVendors: 'Mostrar la lista completa de proveedores',
+			active: 'Activo',
+			inactive: 'Inactivo'
 		},
 		vendors: {
 			title: 'Información que recopilamos sobre usted',
@@ -134,6 +157,11 @@ export default {
 			back: 'Fechar',
 			save: 'SALVAR CONFIGURAÇÕES'
 		},
+		purposes: {
+			showVendors: 'Mostrar lista completa de fornecedores',
+			active: 'Ativo',
+			inactive: 'Inativo'
+		},
 		vendors: {
 			title: 'Informações que coletamos sobre você',
 			description: 'Nós e nossos parceiros usamos seus dados para os seguinte propósitos: <ul> <li>Para nos ajudar a entender melhor como você usa o nosso site e para pesquisar e melhorar recursos e serviços.</li> <li>Para salvarmos as preferências do site selecionadas por você e para oferecermos conteúdos personalizados.</li> <li>Para mostrarmos anúncios relevantes e para permitir que você compartilhe conteúdo via redes sociais.</li> <li>Outras funcionalidades que são necessárias para o fornecimento de serviços de jogo, como pagamentos.</li> </ul>'
@@ -150,6 +178,11 @@ export default {
 			title: 'LE TUE IMPOSTAZIONI SULLA PRIVACY',
 			back: 'Chiudi',
 			save: 'SALVA IMPOSTAZIONI'
+		},
+		purposes: {
+			showVendors: 'Mostra lista completa fornitori',
+			active: 'Attivo',
+			inactive: 'Non attivo'
 		},
 		vendors: {
 			title: 'Informazioni raccolte su di te',
@@ -168,6 +201,11 @@ export default {
 			back: 'Stäng',
 			save: 'SPARA INSTÄLLNINGAR'
 		},
+		purposes: {
+			showVendors: 'Visa fullständig leverantörslista',
+			active: 'Aktiv',
+			inactive: 'Inaktiv'
+		},
 		vendors: {
 			title: 'Verktyget för cookiemedgivande',
 			description: 'Vi och våra partners använder dina uppgifter för följande ändamål: <ul> <li>För att hjälpa oss att förstå hur du använder vår webbplats och för att undersöka och förbättra funktioner och tjänster.</li> <li>För att säkerställa att vi kan komma ihåg de webbplatsinställningarna som du väljer och förse dig med anpassat innehåll.</li> <li>För att visa relevanta annonser och låta dig dela innehåll via sociala medier.</li> <li>Andra funktioner som är nödvändiga för att du ska få ta del av våra speltjänster, till exempel betalningar.</li> </ul>'
@@ -184,6 +222,11 @@ export default {
 			title: 'USTAWIENIA PRYWATNOŚCI',
 			back: 'Zamknij',
 			save: 'ZAPISZ USTAWIENIA'
+		},
+		purposes: {
+			showVendors: 'Wyświetl pełną listę dostawców',
+			active: 'Aktywni',
+			inactive: 'Nieaktywni'
 		},
 		vendors: {
 			title: 'Dane, jakie gromadzimy na Państwa temat',
@@ -202,6 +245,11 @@ export default {
 			back: 'Закрыть',
 			save: 'СОХРАНИТЬ НАСТРОЙКИ'
 		},
+		purposes: {
+			showVendors: 'Показать полный список поставщиков услуг',
+			active: 'Активно',
+			inactive: 'Неактивно'
+		},
 		vendors: {
 			title: 'Какую информацию мы собираем о вас',
 			description: 'Мы вместе с нашими партнерами используем ваши данные для следующих целей: <ul> <li>Чтобы помочь нам понять, как вы используете наш вебсайт, а также для изучения и улучшения наших функций и сервисов.</li> <li>Чтобы быть уверенными в том, что мы можем запоминать выбираемые вами предпочтения на вебсайте и предоставлять вам индивидуальный контент.</li> <li>Чтобы демонстрировать актуальную рекламу и предоставлять вам возможность делиться контентом в социальных сетях.</li> <li>Прочие функции, необходимые для предоставления вам наших игровых услуг, например платежей.</li> </ul>'
@@ -219,6 +267,11 @@ export default {
 			back: 'Tutup',
 			save: 'SIMPAN PENGATURAN'
 		},
+		purposes: {
+			showVendors: 'Tampilkan daftar lengkap vendor',
+			active: 'Aktif',
+			inactive: 'Tidak aktif'
+		},
 		vendors: {
 			title: 'Informasi yang Kami Kumpulkan Tentang Anda',
 			description: 'Kami dan mitra kami menggunakan data Anda untuk tujuan berikut: <ul> <li>Untuk membantu kami memahami cara Anda menggunakan situs web kami dan untuk meneliti dan menyempurnakan fitur-fitur dan layanan.</li> <li>Untuk memastikan bahwa kami dapat mengingat preferensi situs web yang Anda pilih dan menyediakan konten yang disesuaikan untuk Anda.</li> <li>Untuk menampilkan iklan yang relevan dan untuk memungkinkan Anda membagikan konten melalui media sosial.</li> <li>Fungsionalitas lain yang dibutuhkan untuk menyediakan layanan game kami, seperti pembayaran.</li> </ul>'
@@ -235,6 +288,11 @@ export default {
 			title: 'GİZLİLİK AYARLARINIZ',
 			back: 'Kapat',
 			save: 'AYARLARI KAYDET'
+		},
+		purposes: {
+			showVendors: 'Tam tedarikçi listesini göster',
+			active: 'Etkin',
+			inactive: 'Etkin değil'
 		},
 		vendors: {
 			title: 'Çerez Onay Aracı',
