@@ -213,7 +213,7 @@ This object contains the global purposes, and vendors, consented to by the user:
 
   metadata: [base64url-encoded](https://tools.ietf.org/html/rfc4648#section-5) string (header data from the vendor consent format, as described below),
 
-    gdprApplies: *Boolean*,
+  gdprApplies: *Boolean*,
 
   hasGlobalScope: *Boolean,  // true if the vendor consent data is retrieved from the global cookie, false if a publisher-specific (or publisher-group-specific) cookie*
 
@@ -227,7 +227,7 @@ This object contains the global purposes, and vendors, consented to by the user:
 
   vendorConsents: { 
 
-    *vendorId* : *c**onsentBoolean*, 
+    *vendorId* : *consentBoolean*, 
 
     ?
 
@@ -259,13 +259,13 @@ where *vendorId* and *purposeId* are the keys and *consentBoolean *are the value
 This object contains the entire [base64url-encoded](https://tools.ietf.org/html/rfc4648#section-5) string of the vendor consent data:
 
 ```
-	{
+{
 
-                consentData:  [base64url-encoded](https://tools.ietf.org/html/rfc4648#section-5) encoded string,		
+	consentData:  [base64url-encoded](https://tools.ietf.org/html/rfc4648#section-5) encoded string,		
 
-	    gdprApplies:  *Boolean*,
+	gdprApplies:  *Boolean*,
 
-	  hasGlobalScope: *Boolean // true if the vendor consent data is retrieved from the global cookie, false if from a publisher-specific (or publisher-group-specific) cookie*
+	hasGlobalScope: *Boolean // true if the vendor consent data is retrieved from the global cookie, false if from a publisher-specific (or publisher-group-specific) cookie*
 
 }
 ```
@@ -280,7 +280,7 @@ This object contains the publisher-specific (both global and custom) purposes co
 
   metadata: [base64url-encoded](https://tools.ietf.org/html/rfc4648#section-5) encoded string in the publisher consent format,
 
-    gdprApplies:  *Boolean*,
+  gdprApplies:  *Boolean*,
 
   hasGlobalScope: *Boolean,*
 
@@ -311,7 +311,7 @@ This object contains information about the loading status and configuration of t
 ```
 {
 
-    gdprAppliesGlobally:  *Boolean*, // true if publisher has configured CMP to apply GDPR to all (including non-EU) visitors
+  gdprAppliesGlobally:  *Boolean*, // true if publisher has configured CMP to apply GDPR to all (including non-EU) visitors
 
   cmpLoaded: *Boolean *// true if CMP main script is loaded, false if still running stub
 
@@ -516,26 +516,28 @@ CMP tags will install an event handler to call __cmp() for postMessage events, r
 The sent message should have the below form where "*command*" and *parameter* are the same as the first two parameters to the __cmp() function, and a unique callId value:
 
 ```
-{__cmpCall: 
-
-  {command: "*command*", 
-
-   parameter: *parameter, *
-
-   callId: *uniqueId*}}* *
+{
+  __cmpCall: 
+  {
+    command: "*command*", 
+    parameter: *parameter*, 
+    callId: *uniqueId*
+  }
+}
 ```
    
 
 and the returned message (event.data) will have the below form where returnValue and success are the two parameters passed to the callback function, and the same value of callId that was sent:
 
 ```
-{__cmpReturn: 
-
-  {returnValue: *returnValue*, 
-
-   success: *boolean*, 
-
-   callId: *uniqueId*}} 
+{
+  __cmpReturn: 
+  {
+     returnValue: *returnValue*, 
+     success: *boolean*, 
+     callId: *uniqueId*
+   }
+} 
  ```
 
 Below is a wrapper function that emulates the in-frame __cmp() call. It locates the ancestor frame running the CMP, performs the postMessage and listens for the return message and passes its values to the callback:
