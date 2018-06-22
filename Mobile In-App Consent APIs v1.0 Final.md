@@ -342,25 +342,23 @@ Optional:
 
 ### Minimal requirements for a UX
 
-Request initial consent:
+**Request initial consent:**
 
 At app start, before the user can access the app the GDPR consent UI should be shown. The UI should have at least the message as proposed by the IAB GDPR Framework policy, a way to grant consent (where necessary) and instructions where to go to revoke/change consent.
 
-Revoke / change consent
+**Revoke / change consent:**
 
 A UI access (either in app or through settings/app (iOS)) that allows the user to revoke/change the consent using the same UI that the user was asked to provide consent in to begin with
 
-Selecting purposes and access vendorlist
+**Selecting purposes and access vendorlist:**
 
 At least at the same location in the UI as for revoke and change, the purposes (specified by policy) and the vendor list (from GVL) should be surfaced and the user should be able to select consent by purpose or by vendor. (See the IAB provided Web sample UX for an example).
 
-Building an audit track
+**Building an audit track:**
 
-The UX implementation should have all the UI components numbered and tracked in the consent string?s *ConsentString *bits and the used UX language stored in the consent string?s *ConsentLanguage* bits.
+The UX implementation should have all the UI components numbered and tracked in the consent strings *ConsentString *bits and the used UX language stored in the consent strings *ConsentLanguage* bits.
 
 Other parties should adhere to these [Framework implementation guidelines](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/v1.1%20Implementation%20Guidelines.md) where applicable.
-
-
 
 
 ## Future Technical Considerations <a name="future"></a>
