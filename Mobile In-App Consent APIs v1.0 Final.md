@@ -111,7 +111,7 @@ Learn more about IAB Europe here: [https://www.iabeurope.eu/](https://www.iabeur
 
 This API draft specifies the functionality that the Consent Management Provider (CMP) needs to provide publishers and third-party vendors with end user consent information, with particular reference to several SDKs being integrated into the same application of a publisher.
 
-There?s a large potential surface area of publisher-CMP functionality (including UI control and configuration) specific to each CMP that is best provided by the CMP, rather than standardized in APIs. CMPs will provide a variety of additional APIs that will be feature based. This might include eventually functionality for transfering consent across apps or even publishers.
+There's a large potential surface area of publisher-CMP functionality (including UI control and configuration) specific to each CMP that is best provided by the CMP, rather than standardized in APIs. CMPs will provide a variety of additional APIs that will be feature based. This might include eventually functionality for transfering consent across apps or even publishers.
 
 						
 
