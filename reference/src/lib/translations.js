@@ -22,34 +22,29 @@ export default {
 			active: 'Active',
 			inactive: 'Inactive',
 			purpose1: {
-				description: 'Allow storing or accessing information on a user’s device.'
+				title: 'Performance',
+				menu: 'Performance',
+				description: `These cookies are used to analyse how visitors use our website, for instance which pages visitors visit most often, in order to provide a better user experience. This information is already stored or access on your device such as advertising identifiers, device identifiers, cookies, and similar technologies.`
 			},
 			purpose2: {
-				description: `Allow processing of a user’s data to provide and inform personalised advertising (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices  for that purpose.
-				Will include following Features:
-				<ul>
-					<li>Matching Data to Offline Sources - combining data from offline sources that were initially collected in other contexts.</li>
-					<li>Linking Devices - allow processing of a user’s data to connect such user across multiple devices.</li>
-					<li>Precise Geographic Location data - allow processing of a user’s precise geographic location data in support of a purpose for which that certain third party has consent.</li>
-				</ul>`
+				title: 'Personalisation',
+				menu: 'Personalisation',
+				description: `Cookies and similar technologies are used to improve your experience, to do things like: remember your login, general preferences, personalise content, search, recommendations. Without these technologies, things like personalised recommendations, your account preferences may not work correctly.`
 			},
 			purpose3: {
-				description: `Allow processing of a user’s data to deliver content or advertisements and measure the delivery of such content or advertisements, extract insights and generate reports to understand service usage; and/or accessing or storing information on devices for that purpose.  
-				Will include following Features:
-				<ul>
-					<li>Matching Data to Offline Sources - combining data from offline sources that were initially collected in other contexts.</li>
-					<li>Linking Devices - allow processing of a user’s data to connect such user across multiple devices.</li>
-					<li>Precise Geographic Location data - allow processing of a user’s precise geographic location data in support of a purpose for which that certain third party has consent.</li>
-				</ul>`
+				title: 'Advertising',
+				menu: 'Advertising',
+				description: `Ads keep our content FREE for everyone. Please note that by altering the settings below, you'll still receive ads, but these will not be personalised to you. Advertising cookies are used to limit the number of times you see an advertisement, or to customise advertising on our website and make it more relevant to you and to allow us to measure the effectiveness of advertising campaigns. `
 			},
 			purpose4: {
-				description: `Allow processing of a user’s data to provide and inform personalised content (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose.  
-				Will include following Features:
-				<ul>
-					<li>Matching Data to Offline Sources - combining data from offline sources that were initially collected in other contexts.</li>
-					<li>Linking Devices - allow processing of a user’s data to connect such user across multiple devices.</li>
-					<li>Precise Geographic Location data - allow processing of a user’s precise geographic location data in support of a purpose for which that certain third party has consent.</li>
-				</ul>`
+				title: 'Social Media',
+				menu: 'Social Media',
+				description: `Social media cookies allow you to log in to your social networks and share content from our website through social media.`
+			},
+			purpose5: {
+				title: 'Required',
+				menu: 'Required',
+				description: `Some of the technologies we use are necessary for critical functions like security and site integrity, account authentication, security and privacy preferences, internal site usage and maintenance data, and to make the site work correctly for browsing and transactions.`
 			}
 		},
 		vendors: {
@@ -72,7 +67,32 @@ export default {
 		purposes: {
 			showVendors: 'Toon volledige verkoperslijst',
 			active: 'Actief',
-			inactive: 'Inactief'
+			inactive: 'Inactief',
+			purpose1: {
+				title: 'Prestaties',
+				menu: 'Prestaties',
+				description: `Deze cookies worden gebruikt om te analyseren hoe bezoekers onze website gebruiken, bijvoorbeeld welke pagina's ze het vaakst bezoeken, waardoor we een betere gebruikerservaring kunnen bieden. Deze informatie is al opgeslagen op je toestel of is toegankelijk via je toestel. Hij bevat gegevens met betrekking tot advertentie-ID's, toestel-ID's, cookies en soortgelijke technologieën.`
+			},
+			purpose2: {
+				title: 'Personalisatie',
+				menu: 'Personalisatie',
+				description: `Cookies en soortgelijke technologieën worden gebruikt om je ervaring te verbeteren. Ze doen allerlei dingen, zoals het onthouden van je inloggegevens, algemene voorkeuren, gepersonaliseerde inhoud, zoekopdrachten en aanbevelingen. Zonder deze technologieën is het mogelijk dat bepaalde zaken, zoals gepersonaliseerde aanbevelingen en je accountvoorkeuren, niet juist functioneren.`
+			},
+			purpose3: {
+				title: 'Advertenties',
+				menu: 'Advertenties',
+				description: `Dankzij advertenties kan onze inhoud voor iedereen GRATIS blijven. Let op dat je door het wijzigen van onderstaande instellingen nog steeds advertenties ontvangt, maar ze zullen niet voor jou gepersonaliseerd zijn. Advertentiecookies worden gebruikt om het aantal keer dat je een advertentie ziet te beperken of om advertenties op onze website aan te passen. Ze maken deze advertenties voor jou relevanter en wij kunnen er de effectiviteit van advertentiecampagnes mee meten.`
+			},
+			purpose4: {
+				title: 'Social Media',
+				menu: 'Social Media',
+				description: `Met social mediacookies kun je inloggen op je sociale netwerken en via social media inhoud van onze website delen.`
+			},
+			purpose5: {
+				title: 'Vereist',
+				menu: 'Vereist',
+				description: `Sommige technologieën die we gebruiken zijn noodzakelijk voor cruciale functies zoals de beveiliging en integriteit van de website, accountauthenticatie, veiligheids- en privacyvoorkeuren, interne sitegebruiks- en onderhoudsgegevens, en om de site goed te laten functioneren voor zowel browsen als transacties.`
+			}
 		},
 		vendors: {
 			title: 'Informatie die we verzamelen',
@@ -94,7 +114,32 @@ export default {
 		purposes: {
 			showVendors: 'Voir la liste complète des fournisseurs',
 			active: 'Actif',
-			inactive: 'Inactif'
+			inactive: 'Inactif',
+			purpose1: {
+				title: 'Performance',
+				menu: 'Performance',
+				description: `Ces cookies permettent d'analyser l'utilisation de nos sites Internent par les visiteurs. Par exemple, quelles pages ils visitent le plus fréquemment, ce qui nous permet de proposer une meilleure expérience utilisateur.  Ces informations sont déjà enregistrées sur votre appareil ou sont accessibles via ce dernier. Elles comprennent des données relatives aux identifiants publicitaires, aux identifiants de l'appareil, aux cookies et aux technologies similaires.`
+			},
+			purpose2: {
+				title: 'Personnalisation',
+				menu: 'Personnalisation',
+				description: `Les cookies et les technologies similaires sont utilisés pour améliorer votre expérience. Leurs fonctions comprennent notamment la sauvegarde de toutes vos informations de connexion, vos préférences générales, le contenu personnalisé, les recherches et recommandations. Sans ces technologies, des fonctions comme les recommandations personnalisées et les préférences de votre compte peuvent ne pas fonctionner correctement.`
+			},
+			purpose3: {
+				title: 'Publicité',
+				menu: 'Publicité',
+				description: `Les publicités permettent de garder notre contenu GRATUIT pour tout le monde. Veuillez noter qu'en modifiant les paramètres ci-dessous, vous recevrez toujours des publicités, mais celles-ci ne seront plus personnalisées. Les cookies publicitaires sont utilisés pour limiter le nombre de fois que vous voyez une publicité ou pour personnaliser les publicités sur notre site. Ils rendent les publicités plus pertinentes pour vous et nous permettent de mesurer l'efficacité des campagnes publicitaires.`
+			},
+			purpose4: {
+				title: 'Réseaux Sociaux',
+				menu: 'Réseaux Sociaux',
+				description: `Les cookies de réseaux sociaux vous permettent de vous connecter à vos réseaux sociaux et de partager du contenu de notre site Internet via les réseaux sociaux.`
+			},
+			purpose5: {
+				title: 'Requis',
+				menu: 'Requis',
+				description: `Certaines des technologies que nous utilisons sont nécessaires pour des fonctions critiques telles que la sécurité et l'intégrité du site, l'authentification du compte, les préférences de sécurité et de confidentialité, l'utilisation interne du site, les données de maintenance et le bon fonctionnement du site en termes de navigation et de transactions.`
+			}
 		},
 		vendors: {
 			title: 'Informations collectées vous concernant',
@@ -116,7 +161,32 @@ export default {
 		purposes: {
 			showVendors: 'Vollständige Anbieterliste anzeigen',
 			active: 'Aktiv',
-			inactive: 'Inaktiv'
+			inactive: 'Inaktiv',
+			purpose1: {
+				title: 'Leistung',
+				menu: 'Leistung',
+				description: `Diese Cookies werden verwendet, um zu analysieren, wie Besucher unsere Website nutzen, etwa welche Seiten sie am häufigsten besuchen. Das hilft uns, die Benutzererfahrung weiter zu verbessern. Diese Informationen sind bereits auf deinem Gerät gespeichert oder über dein Gerät zugänglich. Dazu gehören Daten im Zusammenhang mit Werbe-IDs, Geräte-IDs, Cookies und vergleichbaren Technologien.`
+			},
+			purpose2: {
+				title: 'Personalisierung',
+				menu: 'Personalisierung',
+				description: `Cookies und vergleichbare Technologien werden verwendet, um deine Erfahrung zu verbessern, indem etwa deine Anmeldedaten, allgemeine Einstellungen, personalisierte Inhalte, Suchverläufe und Empfehlungen gespeichert werden. Ohne diese Technologien können Funktionen wie persönliche Empfehlungen und deine Kontoeinstellungen möglicherweise nicht korrekt funktionieren.`
+			},
+			purpose3: {
+				title: 'Werbung',
+				menu: 'Werbung',
+				description: `Werbung hilft uns, unsere Inhalte GRATIS für alle anzubieten. Beachte bitte: Wenn du die folgenden Einstellungen änderst, wird dir weiterhin Werbung angezeigt, jedoch nicht mehr für dich personalisiert. Werbe-Cookies werden verwendet, um einzuschränken, wie oft du eine bestimmte Werbung siehst, oder um Werbung auf unserer Website anzupassen. Sie machen diese Werbeanzeigen für dich relevanter und ermöglichen es uns, die Effektivität von Werbekampagnen zu messen.`
+			},
+			purpose4: {
+				title: 'Soziale Medien',
+				menu: 'Soziale Medien',
+				description: `Social-Media-Cookies ermöglichen es dir, dich bei deinen sozialen Netzwerken anzumelden und Inhalte unserer Website über Social Media zu teilen.`
+			},
+			purpose5: {
+				title: 'Erforderlich',
+				menu: 'Erforderlich',
+				description: `Einige der von uns eingesetzten Technologien sind erforderlich für kritische Funktionen, wie Sicherheit und Integrität der Website, Authentifizierung von Konten, Sicherheits- und Datenschutzeinstellungen sowie interne Nutzungs- und Wartungsdaten, und für die korrekte Funktionalität der Website beim Browsen und bei Transaktionen.`
+			}
 		},
 		vendors: {
 			title: 'Informationen, die wir über Sie erfassen',
@@ -138,7 +208,32 @@ export default {
 		purposes: {
 			showVendors: 'Mostrar la lista completa de proveedores',
 			active: 'Activo',
-			inactive: 'Inactivo'
+			inactive: 'Inactivo',
+			purpose1: {
+				title: 'Rendimiento',
+				menu: 'Rendimiento',
+				description: `Estas cookies se usan para analizar el modo en que los visitantes utilizan nuestro sitio web (por ejemplo, qué páginas visitan más a menudo), lo que nos ayuda a brindar una mejor experiencia de usuario. Esta información ya se encuentra almacenada en su dispositivo o se accede a través de su dispositivo. Muestra datos relacionados a identificadores de publicidad, identificadores de dispositivos, cookies y tecnologías similares.`
+			},
+			purpose2: {
+				title: 'Personalización',
+				menu: 'Personalización',
+				description: `Las cookies y las tecnologías similares se usan para mejorar su experiencia. Hacen cosas como recordar toda su información de acceso, preferencias generales, contenido personalizado, búsquedas y recomendaciones. Sin estas tecnologías, algunas cosas como las recomendaciones personalizadas o sus preferencias de la cuenta podrían no funcionar correctamente.`
+			},
+			purpose3: {
+				title: 'Publicidad',
+				menu: 'Publicidad',
+				description: `Las publicidades ayudan a que el contenido sea GRATIS para todos. Tenga en cuenta que, al modificar las configuraciones de más abajo, usted seguirá recibiendo publicidad, pero no estarán personalizadas para usted. Las cookies de publicidad se usan para limitar la cantidad de veces que usted verá una publicidad o para personalizar las publicidades en nuestro sitio web. Hacen que las publicidades sean más relevantes para usted y nos permite calcular la eficacia de las campañas publicitarias.`
+			},
+			purpose4: {
+				title: 'Redes sociales',
+				menu: 'Redes sociales',
+				description: `Las cookies de redes sociales le permiten acceder a sus redes sociales y compartir contenido desde nuestros sitios web a través de tales redes sociales.`
+			},
+			purpose5: {
+				title: 'Obligatorio',
+				menu: 'Obligatorio',
+				description: `Algunas de las tecnologías que usamos son necesarias para funciones esenciales como la seguridad y la integridad del sitio, la autenticación de cuenta, las preferencias seguridad y de privacidad, el uso interno del sitio y datos de mantenimiento, y para que el sitio funcione correctamente tanto para la navegación como para las transacciones.`
+			}
 		},
 		vendors: {
 			title: 'Información que recopilamos sobre usted',
@@ -182,7 +277,32 @@ export default {
 		purposes: {
 			showVendors: 'Mostra lista completa fornitori',
 			active: 'Attivo',
-			inactive: 'Non attivo'
+			inactive: 'Non attivo',
+			purpose1: {
+				title: 'Performance',
+				menu: 'Performance',
+				description: `Questi cookie servono per analizzare le modalità di utilizzo del nostro sito da parte degli utenti, come ad esempio quali pagine visitano più spesso. Con questi dati possiamo fornire una migliore esperienza utente. Questa informazione è già archiviata sul dispositivo dell'utente o è accessibile tramite il dispositivo stesso. Contiene dati relativi a identificativi pubblicitari, identificativi del dispositivo, cookie o tecnologie simili.`
+			},
+			purpose2: {
+				title: 'Personalizzazione',
+				menu: 'Personalizzazione',
+				description: `Cookie e tecnologie simili sono utilizzati per migliorare l'esperienza dell'utente. Consentono di memorizzare, ad esempio, dati di accesso, preferenze generali, contenuti personalizzati, ricerche e consigli. Senza queste tecnologie, funzionalità come i consigli personalizzati e le preferenze dell'account potrebbero non funzionare correttamente.`
+			},
+			purpose3: {
+				title: 'Pubblicità',
+				menu: 'Pubblicità',
+				description: `Gli annunci consentono di offrire contenuti GRATIS a tutti. Ricorda che modificando le impostazioni in basso visualizzerai ugualmente gli annunci pubblicitari, con l'unica differenza che non saranno personalizzati. I cookie pubblicitari servono a limitare il numero di volte in cui una pubblicità viene proposta agli utenti o per personalizzare gli annunci sul nostro sito. Consentono inoltre di proporre annunci più mirati e di calcolare l'efficacia delle campagne pubblicitarie.`
+			},
+			purpose4: {
+				title: 'Social media',
+				menu: 'Social media',
+				description: `I cookie dei social network consentono agli utenti di accedere ai propri profili e condividere i contenuti del nostro sito tramite i social network.`
+			},
+			purpose5: {
+				title: 'Tecnici',
+				menu: 'Tecnici',
+				description: `Alcune delle tecnologie da noi adottate sono necessarie per il corretto funzionamento di aspetti come sicurezza e integrità del sito, autenticazione dell'account, sicurezza e preferenze sulla privacy, utilizzo interno del sito e dati di manutenzione, nonché per garantire il corretto funzionamento del sito sia per la navigazione sia per le transazioni.`
+			}
 		},
 		vendors: {
 			title: 'Informazioni raccolte su di te',
@@ -204,7 +324,32 @@ export default {
 		purposes: {
 			showVendors: 'Visa fullständig leverantörslista',
 			active: 'Aktiv',
-			inactive: 'Inaktiv'
+			inactive: 'Inaktiv',
+			purpose1: {
+				title: 'Prestanda',
+				menu: 'Prestanda',
+				description: `Dessa cookies används för att analysera hur besökare använder vår webbplats, till exempel vilka sidor de besöker oftast. Detta hjälper oss att erbjuda en bättre användarupplevelse. Den här informationen är redan lagrad på din enhet eller så är den tillgänglig via din enhet. Den innehåller data som är relaterade till annonseringsidentifierare, enhetsidentifierare, cookies och liknande teknik.`
+			},
+			purpose2: {
+				title: 'Personanpassning',
+				menu: 'Personanpassning',
+				description: `Cookies och liknande teknik används för att förbättra din användarupplevelse. De kan komma ihåg all din inloggningsinformation, allmänna inställningar, personligt innehåll, sökningar och rekommendationer. Utan denna teknik kanske funktioner som personanpassade rekommendationer och dina kontoinställningar inte fungerar som de ska.`
+			},
+			purpose3: {
+				title: 'Annonsering',
+				menu: 'Annonsering',
+				description: `Annonser bidrar till att vårt innehåll är GRATIS för alla. Observera att du genom att ändra inställningarna nedan fortfarande får se annonser, men de kommer inte att anpassas för dig. Annonscookies används för att begränsa antalet gånger du ser en annons, eller för att anpassa annonseringen på vår webbplats. De gör att dessa annonser blir mer relevanta för dig och att vi kan mäta reklamkampanjers effektivitet.`
+			},
+			purpose4: {
+				title: 'Sociala medier',
+				menu: 'Sociala medier',
+				description: `Cookies på sociala medier gör att du kan logga in på dina sociala nätverk och dela innehåll från vår webbplats via sociala medier.`
+			},
+			purpose5: {
+				title: 'Obligatoriskt',
+				menu: 'Obligatoriskt',
+				description: `Några av de tekniker vi använder är nödvändiga för viktiga funktioner som säkerhet och webbplatsintegritet, kontoautentisering, säkerhets- och sekretessinställningar, intern webbplatsanvändning och underhållsdata och för att webbplatsen ska fungera korrekt både när man surfar och genomför transaktioner.`
+			}
 		},
 		vendors: {
 			title: 'Verktyget för cookiemedgivande',
@@ -226,7 +371,32 @@ export default {
 		purposes: {
 			showVendors: 'Wyświetl pełną listę dostawców',
 			active: 'Aktywni',
-			inactive: 'Nieaktywni'
+			inactive: 'Nieaktywni',
+			purpose1: {
+				title: 'Skuteczność',
+				menu: 'Skuteczność',
+				description: `Te pliki cookie służą do analizowania, w jaki sposób użytkownicy korzystają z naszej witryny, np. które strony odwiedzają najczęściej. Pomaga to nam oferować jeszcze lepsze usługi. Te informacje są już przechowywane na Twoim urządzeniu lub można na nim uzyskać do nich dostęp. Obejmują one dane związane z identyfikatorami reklamowymi, identyfikatorami urządzeń, plikami cookie i podobnymi technologiami.`
+			},
+			purpose2: {
+				title: 'Personalizacja',
+				menu: 'Personalizacja',
+				description: `Pliki cookie i podobne technologie są wykorzystywane w celu poprawy jakości usług. Umożliwiają one na przykład zapamiętanie wszystkich danych logowania, ogólnych preferencji, spersonalizowanych treści, wyszukiwań i rekomendacji. Bez tych technologii funkcje takie jak spersonalizowane rekomendacje i preferencje konta mogą nie działać poprawnie.`
+			},
+			purpose3: {
+				title: 'Reklama',
+				menu: 'Reklama',
+				description: `Dzięki reklamom możemy BEZPŁATNIE dostarczać treści wszystkim użytkownikom. Pamiętaj, że jeśli zmienisz poniższe ustawienia, nadal będziesz otrzymywać reklamy, ale nie będą one dla spersonalizowane pod Twoim kątem. Reklamowe pliki cookie są używane w celu ograniczenia liczby wyświetleń reklamy lub dostosowania reklam w naszej witrynie internetowej. Dzięki temu reklamy są bardziej dopasowane do Twoich potrzeb. Pozwalają nam także mierzyć skuteczność kampanii reklamowych.`
+			},
+			purpose4: {
+				title: 'Media społecznościowe',
+				menu: 'Media społecznościowe',
+				description: `Społecznościowe pliki cookie umożliwiają logowanie się do serwisów społecznościowych i udostępnianie treści z naszej witryny za pośrednictwem mediów społecznościowych.`
+			},
+			purpose5: {
+				title: 'Wymagane',
+				menu: 'Wymagane',
+				description: `Niektóre z używanych przez nas technologii są niezbędne w przypadku newralgicznych funkcji, takich jak bezpieczeństwo i integralność witryny, uwierzytelnianie konta, preferencje dotyczące zabezpieczeń i prywatności, dane dotyczące użytkowania witryny wewnętrznej i obsługi. Sprawiają także, że witryna działa poprawnie zarówno podczas przeglądania, jak i dokonywania transakcji.`
+			}
 		},
 		vendors: {
 			title: 'Dane, jakie gromadzimy na Państwa temat',
@@ -248,7 +418,32 @@ export default {
 		purposes: {
 			showVendors: 'Показать полный список поставщиков услуг',
 			active: 'Активно',
-			inactive: 'Неактивно'
+			inactive: 'Неактивно',
+			purpose1: {
+				title: 'Эффективность',
+				menu: 'Эффективность',
+				description: `Эти файлы cookie используются для анализа того, как посетители пользуются нашим сайтом, в том числе того, какие страницы они чаще всего посещают. Это помогает нам сделать работу с сайтом более комфортной. Эта информация уже хранится на вашем устройстве или доступна с вашего устройства. В число такой информации входят данные, относящиеся к рекламным идентификаторам, идентификаторам устройств, файлам cookie и схожим технологиям.`
+			},
+			purpose2: {
+				title: 'Персонализация',
+				menu: 'Персонализация',
+				description: `Для обеспечения более комфортной работы с сайтом мы используем файлы cookie и схожие технологии. С их помощью запоминаются все ваши учетные данные, общие настройки, индивидуализированное содержимое, история поисковых запросов и рекомендации. Без этих технологий такие вещи, как индивидуализированные рекомендации и настройки вашей учетной записи, могут работать неправильно.`
+			},
+			purpose3: {
+				title: 'Реклама',
+				menu: 'Реклама',
+				description: `Реклама помогает сохранять наш контент БЕСПЛАТНЫМ для всех. Обратите внимание, что, изменив указанные ниже настройки, вы все равно будете получать рекламные объявления, но для вас они не будут индивидуализированными. Файлы cookie от рекламодателей используются для ограничения количества просмотров вами рекламы и для персонализации рекламы на нашем сайте. Они также обеспечивают ее актуальность для вас и позволяют нам определять эффективность рекламных кампаний.`
+			},
+			purpose4: {
+				title: 'Социальные сети',
+				menu: 'Социальные сети',
+				description: `Файлы cookie социальных сетей позволяют вам входить в свои учетные записи в социальных сетях и обмениваться контентом с нашего сайта через социальные сети.`
+			},
+			purpose5: {
+				title: 'Требования',
+				menu: 'Требования',
+				description: `Некоторые из используемых нами технологий необходимы для важнейших функций, таких как безопасность и целостность сайта, аутентификация учетной записи, настройки безопасности и конфиденциальности, внутренние данные об использовании и обслуживании сайта, а также для правильного функционирования сайта при просмотре и совершении финансовых операций.`
+			}
 		},
 		vendors: {
 			title: 'Какую информацию мы собираем о вас',
@@ -270,7 +465,32 @@ export default {
 		purposes: {
 			showVendors: 'Tampilkan daftar lengkap vendor',
 			active: 'Aktif',
-			inactive: 'Tidak aktif'
+			inactive: 'Tidak aktif',
+			purpose1: {
+				title: 'Performa',
+				menu: 'Performa',
+				description: `Cookie ini digunakan untuk menganalisis bagaimana pengunjung menggunakan situs web kami. Misalnya, halaman mana yang paling sering mereka kunjungi, guna membantu kami memberikan pengalaman pengguna yang lebih baik. Informasi ini sudah disimpan di perangkat Anda atau dapat diakses melalui perangkat Anda. Informasi berisi data terkait pengidentifikasi iklan, pengidentifikasi perangkat, cookie, dan teknologi serupa.`
+			},
+			purpose2: {
+				title: 'Personalisasi',
+				menu: 'Personalisasi',
+				description: `Cookie dan teknologi serupa digunakan untuk meningkatkan pengalaman Anda. Di antara fungsinya adalah untuk mengingat semua informasi login Anda, preferensi umum, konten yang dipersonalisasi, pencarian, dan rekomendasi. Tanpa teknologi ini, hal-hal seperti rekomendasi yang dipersonalisasi dan preferensi akun Anda mungkin tidak akan bekerja dengan benar.`
+			},
+			purpose3: {
+				title: 'Iklan',
+				menu: 'Iklan',
+				description: `Iklan membantu konten kami dapat diakses secara GRATIS oleh semua orang. Perhatikan bahwa dengan mengubah pengaturan berikut, Anda masih akan menerima iklan, namun tidak akan dipersonalisasi untuk Anda. Cookie iklan digunakan untuk membatasi banyaknya iklan yang Anda lihat atau untuk menyesuaikan iklan di situs web kami. Iklan menjadi lebih relevan bagi Anda dan memungkinkan kami untuk mengukur keefektifan kampanye iklan.`
+			},
+			purpose4: {
+				title: 'Media Sosial',
+				menu: 'Media Sosial',
+				description: `Cookie media sosial memungkinkan Anda untuk login ke jejaring sosial dan membagikan konten dari situs web kami melalui media sosial.`
+			},
+			purpose5: {
+				title: 'Wajib',
+				menu: 'Wajib',
+				description: `Sebagian teknologi yang kami gunakan diperlukan untuk fungsi penting seperti keamanan dan integritas situs, autentikasi akun, preferensi keamanan dan privasi, penggunaan situs internal dan data pemeliharaan, serta agar situs bekerja dengan benar untuk penelusuran dan transaksi.`
+			}
 		},
 		vendors: {
 			title: 'Informasi yang Kami Kumpulkan Tentang Anda',
@@ -292,7 +512,32 @@ export default {
 		purposes: {
 			showVendors: 'Tam tedarikçi listesini göster',
 			active: 'Etkin',
-			inactive: 'Etkin değil'
+			inactive: 'Etkin değil',
+			purpose1: {
+				title: 'Performans',
+				menu: 'Performans',
+				description: `Bu çerezler ziyaretçilerin web sitemizi nasıl kullandığını analiz etmek için kullanılır. Örneğin, en çok ziyaret edilen sayfaları bilmek daha iyi bir kullanıcı deneyimi sunmamıza yardımcı olur. Bu bilgiler zaten cihazınızda depolanmaktadır veya cihazınız aracılığıyla bu bilgilere erişilebilmektedir. Bu bilgiler; reklam tanımlayıcıları, cihaz tanımlayıcıları, çerezler ve benzer teknolojilerle ilgili veriler içerir.`
+			},
+			purpose2: {
+				title: 'Kişiselleştirme',
+				menu: 'Kişiselleştirme',
+				description: `Çerezler ve benzer teknolojiler deneyiminizi iyileştirmek için kullanılır. Oturum açma bilgilerinizi, genel tercihlerinizi, kişiselleştirilmiş içeriklerinizi, aramalarınızı ve önerilerinizi saklamak gibi işlevleri vardır. Bu teknolojiler olmadan kişiselleştirilmiş öneriler ve hesap tercihleriniz gibi işlevler düzgün çalışmayabilir.`
+			},
+			purpose3: {
+				title: 'Reklam',
+				menu: 'Reklam',
+				description: `Reklamlar sayesinde içeriklerimizi herkes için ÜCRETSİZ sunabilmekteyiz. Aşağıdaki ayarları değiştirdiğinizde hâlâ reklam göreceğinizi, ancak bunların kişisel reklamlar olmayacağını lütfen unutmayın. Reklam çerezleri, bir reklamı kaç defa göreceğinizi sınırlandırmak veya web sitemizdeki reklamları özelleştirmek için kullanılır. Reklam çerezleri, reklamların sizinle daha alakalı olmalarını ve reklam kampanyalarının verimliliğini ölçebilmemizi sağlarlar.`
+			},
+			purpose4: {
+				title: 'Sosyal Medya',
+				menu: 'Sosyal Medya',
+				description: `Sosyal medya çerezleri ile sosyal ağlardaki hesaplarınızda oturum açabilir ve sosyal medya aracılığıyla web sitemizden içerik paylaşabilirsiniz.`
+			},
+			purpose5: {
+				title: 'Gerekli',
+				menu: 'Gerekli',
+				description: `Kullandığımız bazı teknolojiler güvenlik ve site bütünlüğü, hesap doğrulama, güvenlik ve gizlilik tercihleri, dahili site kullanımı ve bakım verileri ve de hem gezinme hem de işlemler gibi önemli işlevler için gereklidir.`
+			}
 		},
 		vendors: {
 			title: 'Çerez Onay Aracı',
