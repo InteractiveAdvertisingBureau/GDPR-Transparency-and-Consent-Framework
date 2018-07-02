@@ -11,10 +11,11 @@ In November 2017, IAB Europe and a cross-section of the publishing and advertisi
 Specifications published here support the Framework, including the following v1.1 final specifications ready for industry adoption: 
 * Consent Management Provider JavaScript API v1.1 Final (referred to as CMP JS API v1.1) 
 * Consent string and vendor list formats v1.1 Final
+* Mobile In-App CMP API v1.0
+
 
 Upcoming final release of:
 * pubvendors.json v1.0
-* Mobile In-App CMP API v1.0
 
 Please submit any general feedback to feedback@advertisingconsent.eu and any technical feedback to transparencyframework@iabtechlab.com. 
 
