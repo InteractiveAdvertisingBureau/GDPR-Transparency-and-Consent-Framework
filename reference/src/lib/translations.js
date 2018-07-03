@@ -42,6 +42,11 @@ export default {
 				description: `Social media cookies allow you to log in to your social networks and share content from our website through social media.`
 			},
 			purpose5: {
+				title: 'Measurement',
+				menu: 'Measurement',
+				description: `The collection of information about your use of the content, and combination with previously collected information, used to measure, understand, and report on your usage of the service. This does not include personalisation, the collection of information about your use of this service to subsequently personalise content, and/or advertising for you in other contexts, i.e. on other services, such as websites or apps, over time.`
+			},
+			purpose6: {
 				title: 'Required',
 				menu: 'Required',
 				description: `Some of the technologies we use are necessary for critical functions like security and site integrity, account authentication, security and privacy preferences, internal site usage and maintenance data, and to make the site work correctly for browsing and transactions.`
@@ -89,6 +94,11 @@ export default {
 				description: `Met social mediacookies kun je inloggen op je sociale netwerken en via social media inhoud van onze website delen.`
 			},
 			purpose5: {
+				title: 'Meting',
+				menu: 'Meting',
+				description: `Het verzamelen van informatie over je gebruik van de inhoud en het combineren met eerder verzamelde informatie om je gebruik van de service te meten, te begrijpen en te rapporteren. Dit omvat niet personalisatie, het verzamelen van informatie over je gebruik van deze service om vervolgens inhoud en/of advertenties in andere contexten, d.w.z. op andere services, zoals websites of apps, in de loop van de tijd te personaliseren.`
+			},
+			purpose6: {
 				title: 'Vereist',
 				menu: 'Vereist',
 				description: `Sommige technologieën die we gebruiken zijn noodzakelijk voor cruciale functies zoals de beveiliging en integriteit van de website, accountauthenticatie, veiligheids- en privacyvoorkeuren, interne sitegebruiks- en onderhoudsgegevens, en om de site goed te laten functioneren voor zowel browsen als transacties.`
@@ -136,6 +146,11 @@ export default {
 				description: `Les cookies de réseaux sociaux vous permettent de vous connecter à vos réseaux sociaux et de partager du contenu de notre site Internet via les réseaux sociaux.`
 			},
 			purpose5: {
+				title: 'La Mesure',
+				menu: 'La Mesure',
+				description: `La collecte des informations concernant votre utilisation des contenus et la combinaison avec d'autres informations précédemment collectées utilisées pour mesurer, comprendre et faire un compte rendu de l'usage que vous faites du service. Tout ceci ne concerne pas la personnalisation qui implique la collecte des informations concernant l'utilisation que vous faites de ce service pour personnaliser ensuite les publicités et/ou contenus proposés au sein d'autres contextes, tels que différents sites Internet ou applications, au fil du temps.`
+			},
+			purpose6: {
 				title: 'Requis',
 				menu: 'Requis',
 				description: `Certaines des technologies que nous utilisons sont nécessaires pour des fonctions critiques telles que la sécurité et l'intégrité du site, l'authentification du compte, les préférences de sécurité et de confidentialité, l'utilisation interne du site, les données de maintenance et le bon fonctionnement du site en termes de navigation et de transactions.`
@@ -183,6 +198,11 @@ export default {
 				description: `Social-Media-Cookies ermöglichen es dir, dich bei deinen sozialen Netzwerken anzumelden und Inhalte unserer Website über Social Media zu teilen.`
 			},
 			purpose5: {
+				title: 'Messung',
+				menu: 'Messung',
+				description: `Die Sammlung von Daten über Ihre Nutzung des Inhalts und die Zusammenführung mit zuvor gesammelten Daten, um Ihre Nutzung des Dienstes zu messen, zu verstehen und zu berichten. Dies beinhaltet nicht die Personalisierung, Sammlung von Daten über Ihre Nutzung des Dienstes für die weiterführende Personalisierung von Inhalten und/oder Anzeige von Werbeinhalten für Sie in anderen Zusammenhängen, d. h. auf anderen Diensten wie Websites oder Apps.`
+			},
+			purpose6: {
 				title: 'Erforderlich',
 				menu: 'Erforderlich',
 				description: `Einige der von uns eingesetzten Technologien sind erforderlich für kritische Funktionen, wie Sicherheit und Integrität der Website, Authentifizierung von Konten, Sicherheits- und Datenschutzeinstellungen sowie interne Nutzungs- und Wartungsdaten, und für die korrekte Funktionalität der Website beim Browsen und bei Transaktionen.`
@@ -230,6 +250,11 @@ export default {
 				description: `Las cookies de redes sociales le permiten acceder a sus redes sociales y compartir contenido desde nuestros sitios web a través de tales redes sociales.`
 			},
 			purpose5: {
+				title: 'Medición',
+				menu: 'Medición',
+				description: `La recopilación de información sobre el uso que usted hace del contenido, y la combinación con la información previamente recopilada, utilizada para medir, comprender y generar informes sobre el uso que usted hacer del servicio. Esto no incluye la personalización, la recopilación de la información sobre el uso del servicio para luego personalizar el contenido y/o la publicidad para usted en otros contextos a través del tiempo; esto es, en otros servicios como páginas web o aplicaciones.`
+			},
+			purpose6: {
 				title: 'Obligatorio',
 				menu: 'Obligatorio',
 				description: `Algunas de las tecnologías que usamos son necesarias para funciones esenciales como la seguridad y la integridad del sitio, la autenticación de cuenta, las preferencias seguridad y de privacidad, el uso interno del sitio y datos de mantenimiento, y para que el sitio funcione correctamente tanto para la navegación como para las transacciones.`
@@ -255,7 +280,37 @@ export default {
 		purposes: {
 			showVendors: 'Mostrar lista completa de fornecedores',
 			active: 'Ativo',
-			inactive: 'Inativo'
+			inactive: 'Inativo',
+			purpose1: {
+				title: 'Performance',
+				menu: 'Performance',
+				description: `Estes cookies são utilizados para analisar como visitantes utilizam o nosso site. Por exemplo, quais páginas eles visitam com mais frequência. Isso nos ajuda a oferecer uma melhor experiência de usuário. Esta informação já está armazenada no seu dispositivo ou pode ser acessada através dele. Contém dados relacionados a identificadores de publicidade, identificadores de dispositivos, cookies e tecnologias semelhantes.`
+			},
+			purpose2: {
+				title: 'Personalização',
+				menu: 'Personalização',
+				description: `Cookies e tecnologias semelhantes são utilizados para melhorar sua experiência. Eles fazem coisas como lembrar todas as suas informações de login, preferências gerais, conteúdos personalizados, buscas e recomendações. Sem essas tecnologias, coisas como recomendações personalizadas e suas preferências de conta podem não funcionar corretamente.`
+			},
+			purpose3: {
+				title: 'Propaganda',
+				menu: 'Propaganda',
+				description: `Anúncios ajudam a manter nosso conteúdo GRATUITO para todos. Note que ao alterar as configurações abaixo, você ainda receberá anúncios, mas eles não serão personalizados para você. Cookies de propaganda são utilizados para limitar o número de vezes que você vê um anúncio em nosso site. Eles tornam esses anúncios mais relevantes para você e permitem medir a eficácia de campanhas de publicidade.`
+			},
+			purpose4: {
+				title: 'Redes Sociais',
+				menu: 'Redes Sociais',
+				description: `Cookies de redes sociais permitem que você faça login nas suas contas de redes sociais e compartilhe conteúdos do nosso site via redes sociais.`
+			},
+			purpose5: {
+				title: 'Medição',
+				menu: 'Medição',
+				description: `A coleta de informações sobre o seu uso do conteúdo, e combinação das informações coletadas anteriormente, utilizadas para medir, compreender e analisar o seu uso do serviço. Não inclui personalização, a coleta de informações sobre o seu uso deste serviço para subsequente personalização de conteúdos e/ou propagandas para você em outros contextos, ou seja, outros serviços como sites ou aplicativos, ao longo do tempo.`
+			},
+			purpose6: {
+				title: 'Necessário',
+				menu: 'Necessário',
+				description: `Algumas das tecnologias que nós utilizamos são necessárias para funções críticas, como segurança e integridade do site, autenticação de contas, preferências de privacidade e segurança, uso interno do site e dados de manutenção, e para fazer que o site funcione corretamente para navegação e transações.`
+			}
 		},
 		vendors: {
 			title: 'Informações que coletamos sobre você',
@@ -299,6 +354,11 @@ export default {
 				description: `I cookie dei social network consentono agli utenti di accedere ai propri profili e condividere i contenuti del nostro sito tramite i social network.`
 			},
 			purpose5: {
+				title: 'Misurazioni',
+				menu: 'Misurazioni',
+				description: `Raccolta di informazioni su come l'utente utilizza i contenuti, e combinazione di tali informazioni con altri dati precedentemente raccolti, allo scopo di misurare, comprendere e segnalare come l'utente utilizza il servizio. Ciò non include la personalizzazione, ossia la raccolta di informazioni su come l'utente utilizza il servizio, allo scopo di personalizzare nel tempo contenuti e/o annunci destinati all'utente in altri contesti, ossia nel quadro di altri servizi, come siti web e app.`
+			},
+			purpose6: {
 				title: 'Tecnici',
 				menu: 'Tecnici',
 				description: `Alcune delle tecnologie da noi adottate sono necessarie per il corretto funzionamento di aspetti come sicurezza e integrità del sito, autenticazione dell'account, sicurezza e preferenze sulla privacy, utilizzo interno del sito e dati di manutenzione, nonché per garantire il corretto funzionamento del sito sia per la navigazione sia per le transazioni.`
@@ -346,6 +406,11 @@ export default {
 				description: `Cookies på sociala medier gör att du kan logga in på dina sociala nätverk och dela innehåll från vår webbplats via sociala medier.`
 			},
 			purpose5: {
+				title: 'Mätning',
+				menu: 'Mätning',
+				description: `Insamlandet av information om din användning av innehållet och kombinerandet med tidigare insamlad information, som används för att mäta, förstå och rapportera om din användning av tjänsten. Detta innefattar inte personanpassning, insamling av information om din användning av den här tjänsten för att senare anpassa innehåll och/eller annonsering för dig i andra sammanhang, det vill säga inom andra tjänster, till exempel på webbplatser eller appar, över tid.`
+			},
+			purpose6: {
 				title: 'Obligatoriskt',
 				menu: 'Obligatoriskt',
 				description: `Några av de tekniker vi använder är nödvändiga för viktiga funktioner som säkerhet och webbplatsintegritet, kontoautentisering, säkerhets- och sekretessinställningar, intern webbplatsanvändning och underhållsdata och för att webbplatsen ska fungera korrekt både när man surfar och genomför transaktioner.`
@@ -393,6 +458,11 @@ export default {
 				description: `Społecznościowe pliki cookie umożliwiają logowanie się do serwisów społecznościowych i udostępnianie treści z naszej witryny za pośrednictwem mediów społecznościowych.`
 			},
 			purpose5: {
+				title: 'Mierzenie',
+				menu: 'Mierzenie',
+				description: `Gromadzenie informacji o korzystaniu z treści i połączenie z wcześniej zebranymi informacjami służącymi do mierzenia, analizowania i raportowania na temat korzystania z usługi. Nie obejmuje to personalizacji, zbierania informacji o korzystaniu przez użytkowników z tej usługi w celu późniejszej personalizacji treści i/lub reklamowania w innych kontekstach, np. w innych usługach, takich jak strony internetowe lub aplikacje, w miarę upływu czasu.`
+			},
+			purpose6: {
 				title: 'Wymagane',
 				menu: 'Wymagane',
 				description: `Niektóre z używanych przez nas technologii są niezbędne w przypadku newralgicznych funkcji, takich jak bezpieczeństwo i integralność witryny, uwierzytelnianie konta, preferencje dotyczące zabezpieczeń i prywatności, dane dotyczące użytkowania witryny wewnętrznej i obsługi. Sprawiają także, że witryna działa poprawnie zarówno podczas przeglądania, jak i dokonywania transakcji.`
@@ -440,6 +510,11 @@ export default {
 				description: `Файлы cookie социальных сетей позволяют вам входить в свои учетные записи в социальных сетях и обмениваться контентом с нашего сайта через социальные сети.`
 			},
 			purpose5: {
+				title: 'Определение количества',
+				menu: 'Определение количества',
+				description: `Сбор информации о вашем использовании контента и объединение ее с ранее собранной информацией с целью определения количества, анализа и составления отчетов о вашем использовании услуги. Данный пункт не включает персонализацию — сбор и обработку информации о вашем использовании услуги с целью дальнейшей персонализации показываемой вам рекламы и/или контента в иных контекстах, т.е. при использовании других услуг, таких как сайты или приложения, с течением времени.`
+			},
+			purpose6: {
 				title: 'Требования',
 				menu: 'Требования',
 				description: `Некоторые из используемых нами технологий необходимы для важнейших функций, таких как безопасность и целостность сайта, аутентификация учетной записи, настройки безопасности и конфиденциальности, внутренние данные об использовании и обслуживании сайта, а также для правильного функционирования сайта при просмотре и совершении финансовых операций.`
@@ -487,6 +562,11 @@ export default {
 				description: `Cookie media sosial memungkinkan Anda untuk login ke jejaring sosial dan membagikan konten dari situs web kami melalui media sosial.`
 			},
 			purpose5: {
+				title: 'Pengukuran',
+				menu: 'Pengukuran',
+				description: `Pengumpulan informasi tentang penggunaan konten oleh Anda dan penggabungan dengan informasi yang dikumpulkan sebelumnya, digunakan untuk mengukur, memahami, dan melaporkan penggunaan layanan oleh Anda. Ini tidak mencakup personalisasi, pengumpulan informasi tentang penggunaan layanan ini untuk selanjutnya mempersonalisasi konten, dan/atau iklan untuk Anda dalam konteks lain, mis., pada layanan lain, seperti situs web atau aplikasi seiring waktu.`
+			},
+			purpose6: {
 				title: 'Wajib',
 				menu: 'Wajib',
 				description: `Sebagian teknologi yang kami gunakan diperlukan untuk fungsi penting seperti keamanan dan integritas situs, autentikasi akun, preferensi keamanan dan privasi, penggunaan situs internal dan data pemeliharaan, serta agar situs bekerja dengan benar untuk penelusuran dan transaksi.`
@@ -534,6 +614,11 @@ export default {
 				description: `Sosyal medya çerezleri ile sosyal ağlardaki hesaplarınızda oturum açabilir ve sosyal medya aracılığıyla web sitemizden içerik paylaşabilirsiniz.`
 			},
 			purpose5: {
+				title: 'Ölçüm',
+				menu: 'Ölçüm',
+				description: `Hizmeti kullanımınız hakkında ölçüm yapma, anlama ve raporlama için içeriği kullanımınız hakkındaki bilgilerin toplanması ve bu bilgilerin daha önce toplanan bilgilerle birleştirilmesi. Buna, daha sonra sizin için web siteleri veya uygulamalar gibi başka hizmetlerde, yani başka bağlamlarda içerikleri ve/veya reklamları kişiselleştirmek adına bu hizmeti kullanımınızla ilgili olarak zaman içerisinde bilgilerin toplanması anlamına gelen kişiselleştirme dahil değildir.`
+			},
+			purpose6: {
 				title: 'Gerekli',
 				menu: 'Gerekli',
 				description: `Kullandığımız bazı teknolojiler güvenlik ve site bütünlüğü, hesap doğrulama, güvenlik ve gizlilik tercihleri, dahili site kullanımı ve bakım verileri ve de hem gezinme hem de işlemler gibi önemli işlevler için gereklidir.`
