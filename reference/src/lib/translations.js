@@ -50,6 +50,11 @@ export default {
 				title: 'Required',
 				menu: 'Required',
 				description: `Some of the technologies we use are necessary for critical functions like security and site integrity, account authentication, security and privacy preferences, internal site usage and maintenance data, and to make the site work correctly for browsing and transactions.`
+			},
+			purpose7: {
+				title: '3rd Party Games',
+				menu: '3rd Party Games',
+				description: `By changing this setting, you will or will not be able to play 3rd party games on our website. 3rd party games often include tracking cookies from advertisers or social media features. You may also be required to register in the games in order to play them. Please note that we do not control these games or what happens with the data that is shared.By changing this setting, you will or will not be able to play 3rd party games on our website. 3rd party games often include tracking cookies from advertisers or social media features. You may also be required to register in the games in order to play them. Please note that we do not control these games or what happens with the data that is shared.`
 			}
 		},
 		vendors: {
@@ -102,6 +107,11 @@ export default {
 				title: 'Vereist',
 				menu: 'Vereist',
 				description: `Sommige technologieën die we gebruiken zijn noodzakelijk voor cruciale functies zoals de beveiliging en integriteit van de website, accountauthenticatie, veiligheids- en privacyvoorkeuren, interne sitegebruiks- en onderhoudsgegevens, en om de site goed te laten functioneren voor zowel browsen als transacties.`
+			},
+			purpose7: {
+				title: 'Games van derden',
+				menu: 'Games van derden',
+				description: `Door deze instelling te wijzigen zul je wel of geen games van derden op onze website kunnen spelen. Games van derden bevatten vaak tracking cookies van adverteerders of social media features. Voor sommige games moet je je registreren om ze te kunnen spelen. Let op: wij beheren deze games en het gebruik van de gedeelde gegevens niet.`
 			}
 		},
 		vendors: {
@@ -154,6 +164,11 @@ export default {
 				title: 'Requis',
 				menu: 'Requis',
 				description: `Certaines des technologies que nous utilisons sont nécessaires pour des fonctions critiques telles que la sécurité et l'intégrité du site, l'authentification du compte, les préférences de sécurité et de confidentialité, l'utilisation interne du site, les données de maintenance et le bon fonctionnement du site en termes de navigation et de transactions.`
+			},
+			purpose7: {
+				title: 'Jeux tiers',
+				menu: 'Jeux tiers',
+				description: `En changeant ce paramètre, vous ne pourrez plus jouer aux jeux tiers de notre site Internet. Les jeux tiers comprennent souvent des cookies allant des publicités aux fonctionnalités de réseaux sociaux. Il est possible que l'on vous demande de vous inscrire aux jeux pour pouvoir y jouer. Veuillez noter que nous ne contrôlons pas ces jeux ni l'utilisation des données partagées.`
 			}
 		},
 		vendors: {
@@ -206,6 +221,11 @@ export default {
 				title: 'Erforderlich',
 				menu: 'Erforderlich',
 				description: `Einige der von uns eingesetzten Technologien sind erforderlich für kritische Funktionen, wie Sicherheit und Integrität der Website, Authentifizierung von Konten, Sicherheits- und Datenschutzeinstellungen sowie interne Nutzungs- und Wartungsdaten, und für die korrekte Funktionalität der Website beim Browsen und bei Transaktionen.`
+			},
+			purpose7: {
+				title: 'Spiele von Dritten',
+				menu: 'Spiele von Dritten',
+				description: `Diese Einstellung bestimmt, ob du Spiele von Dritten auf unserer Website spielen kannst oder nicht. Spiele von Dritten enthalten oft Tracking-Cookies von Werbetreibenden oder Social-Media-Funktionen. Es kann auch sein, dass du dich in den Spielen registrieren musst, um sie spielen zu können. Beachte bitte: Wir haben keinen Einfluss auf diese Spiele oder darauf, was mit den übermittelten Daten geschieht.`
 			}
 		},
 		vendors: {
@@ -258,6 +278,11 @@ export default {
 				title: 'Obligatorio',
 				menu: 'Obligatorio',
 				description: `Algunas de las tecnologías que usamos son necesarias para funciones esenciales como la seguridad y la integridad del sitio, la autenticación de cuenta, las preferencias seguridad y de privacidad, el uso interno del sitio y datos de mantenimiento, y para que el sitio funcione correctamente tanto para la navegación como para las transacciones.`
+			},
+			purpose7: {
+				title: 'Juegos de terceros',
+				menu: 'Juegos de terceros',
+				description: `Esta opción de configuración permite o impide jugar a juegos de terceros en nuestro sitio web. Los juegos de terceros suelen incluir cookies de seguimiento de anunciantes o redes sociales. Es posible que también deba registrarse en los juegos para poder jugar. Tenga en cuenta que no ejercemos ningún control sobre dichos juegos ni sobre cómo se tratan los datos compartidos.`
 			}
 		},
 		vendors: {
@@ -310,6 +335,11 @@ export default {
 				title: 'Necessário',
 				menu: 'Necessário',
 				description: `Algumas das tecnologias que nós utilizamos são necessárias para funções críticas, como segurança e integridade do site, autenticação de contas, preferências de privacidade e segurança, uso interno do site e dados de manutenção, e para fazer que o site funcione corretamente para navegação e transações.`
+			},
+			purpose7: {
+				title: 'Jogos de Terceiros',
+				menu: 'Jogos de Terceiros',
+				description: `Ao modificar essa configuração, você poderá ou não acessar jogos de terceiros no nosso site. Jogos de terceiros geralmente possuem cookies de monitoramento de anunciantes e funções de redes sociais. Também pode ser necessário que você faça um cadastro nos jogos para jogá-los. Note que nós não controlamos esses jogos nem o que acontece com os dados compartilhados.`
 			}
 		},
 		vendors: {
@@ -362,6 +392,11 @@ export default {
 				title: 'Tecnici',
 				menu: 'Tecnici',
 				description: `Alcune delle tecnologie da noi adottate sono necessarie per il corretto funzionamento di aspetti come sicurezza e integrità del sito, autenticazione dell'account, sicurezza e preferenze sulla privacy, utilizzo interno del sito e dati di manutenzione, nonché per garantire il corretto funzionamento del sito sia per la navigazione sia per le transazioni.`
+			},
+			purpose7: {
+				title: 'Giochi di terze parti',
+				menu: 'Giochi di terze parti',
+				description: `Modificando questa impostazione, è possibile o meno accedere a giochi di terze parti sul nostro sito. I giochi di terze parti comprendono cookie di tracciamento di inserzionisti o funzionalità di social network. Per accedere a tali giochi, potrà essere richiesta la registrazione. Ricordiamo che non controlliamo questi giochi, né l'uso che viene fatto dei dati condivisi.`
 			}
 		},
 		vendors: {
@@ -414,6 +449,11 @@ export default {
 				title: 'Obligatoriskt',
 				menu: 'Obligatoriskt',
 				description: `Några av de tekniker vi använder är nödvändiga för viktiga funktioner som säkerhet och webbplatsintegritet, kontoautentisering, säkerhets- och sekretessinställningar, intern webbplatsanvändning och underhållsdata och för att webbplatsen ska fungera korrekt både när man surfar och genomför transaktioner.`
+			},
+			purpose7: {
+				title: 'Spel från tredje part',
+				menu: 'Spel från tredje part',
+				description: `Genom att ändra denna inställning väljer du om du vill kunna spela spel från tredje part på vår webbplats eller inte. Tredjepartsspel innehåller ofta cookie-filer från annonsörer eller sociala medier. Du kanske även ombeds att registrera dig i spelen för att kunna spela dem. Observera att vi inte kontrollerar dessa spel eller vad som händer med de data som delas.`
 			}
 		},
 		vendors: {
@@ -466,6 +506,11 @@ export default {
 				title: 'Wymagane',
 				menu: 'Wymagane',
 				description: `Niektóre z używanych przez nas technologii są niezbędne w przypadku newralgicznych funkcji, takich jak bezpieczeństwo i integralność witryny, uwierzytelnianie konta, preferencje dotyczące zabezpieczeń i prywatności, dane dotyczące użytkowania witryny wewnętrznej i obsługi. Sprawiają także, że witryna działa poprawnie zarówno podczas przeglądania, jak i dokonywania transakcji.`
+			},
+			purpose7: {
+				title: 'Gry innych firm',
+				menu: 'Gry innych firm',
+				description: `Zmieniając to ustawienie, będzie można lub nie korzystać na naszej stronie internetowej z gier innych firm. Gry innych firm często zawierają śledzące pliki cookie od reklamodawców lub funkcje mediów społecznościowych. Może być również konieczne zarejestrowanie się w grach, aby z nich korzystać. Należy pamiętać, że nie kontrolujemy tych gier ani udostępnianych danych.`
 			}
 		},
 		vendors: {
@@ -518,6 +563,11 @@ export default {
 				title: 'Требования',
 				menu: 'Требования',
 				description: `Некоторые из используемых нами технологий необходимы для важнейших функций, таких как безопасность и целостность сайта, аутентификация учетной записи, настройки безопасности и конфиденциальности, внутренние данные об использовании и обслуживании сайта, а также для правильного функционирования сайта при просмотре и совершении финансовых операций.`
+			},
+			purpose7: {
+				title: 'Сторонние игры',
+				menu: 'Сторонние игры',
+				description: `Изменение этой настройки влияет на возможность играть в сторонние игры на нашем сайте. В сторонних играх часто имеются отслеживающие файлы cookie от рекламодателей или функции, использующие социальные сети. Чтобы играть в такие игры, от вас также может потребоваться зарегистрироваться в них. Обратите внимание, что мы не контролируем эти игры и использование передаваемой в них информации.`
 			}
 		},
 		vendors: {
@@ -570,6 +620,11 @@ export default {
 				title: 'Wajib',
 				menu: 'Wajib',
 				description: `Sebagian teknologi yang kami gunakan diperlukan untuk fungsi penting seperti keamanan dan integritas situs, autentikasi akun, preferensi keamanan dan privasi, penggunaan situs internal dan data pemeliharaan, serta agar situs bekerja dengan benar untuk penelusuran dan transaksi.`
+			},
+			purpose7: {
+				title: 'Game Pihak Ke-3',
+				menu: 'Game Pihak Ke-3',
+				description: `Dengan mengubah pengaturan ini, Anda akan atau tidak akan dapat memainkan game pihak ke-3 di situs web kami. Game pihak ke-3 sering menyertakan cookie pelacakan dari pengiklan atau fitur media sosial. Anda juga dapat diminta untuk mendaftar di game untuk memainkannya. Perhatikan bahwa kami tidak mengontrol game-game ini atau apa pun yang terjadi pada data yang dibagikan.`
 			}
 		},
 		vendors: {
@@ -622,6 +677,11 @@ export default {
 				title: 'Gerekli',
 				menu: 'Gerekli',
 				description: `Kullandığımız bazı teknolojiler güvenlik ve site bütünlüğü, hesap doğrulama, güvenlik ve gizlilik tercihleri, dahili site kullanımı ve bakım verileri ve de hem gezinme hem de işlemler gibi önemli işlevler için gereklidir.`
+			},
+			purpose7: {
+				title: 'Üçüncü Taraf Oyunları',
+				menu: 'Üçüncü Taraf Oyunları',
+				description: `Bu ayarı değiştirdiğinizde, web sitemizdeki üçüncü taraf oyunlarını oynama özelliğini açmış veya kapatmış olursunuz. Üçüncü taraf oyunları genellikle reklamverenlerin veya sosyal medya özelliklerinin takip çerezlerini içerir. Oynayabilmek için oyunlara kaydolmanız da gerekebilir. Bu oyunları veya paylaşılan verilerle neler yapıldığını denetlemediğimizi lütfen unutmayın.`
 			}
 		},
 		vendors: {
