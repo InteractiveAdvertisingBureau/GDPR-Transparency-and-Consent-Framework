@@ -1,72 +1,92 @@
 @import '../../../../style/variables';
 
 .purposes {
-	display: flex;
-	flex: 1;
+  display: flex;
+  flex: 1;
 
-	.purposeList {
-		font-size: 12px;
-		font-weight: bold;
-		flex: 1;
-		max-width: 200px;
-		border-right: 1px solid @color-border;
-		overflow-y: auto;
-		overflow-x: hidden;
-	}
-	.purposeItem {
-		display: flex;
-		align-items: center;
-		height: 50px;
-		padding-left: 10px;
-		background-color: @color-border;
-		border-bottom: 1px solid white;
-		cursor: pointer;
+  .purposeList {
+    font-size: 12px;
+    font-weight: bold;
+    flex: 1;
+    max-width: 300px;
+    border-right: 1px solid @color-border;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .purposeItem {
+    display: flex;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 0 25px 0 30px;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 75px;
+    background-color: @color-border;
+    border-bottom: 1px solid white;
+    cursor: pointer;
+    transition: all .3s ease;
 
-		&:last-child {
-			border-bottom: 1px solid @color-border;
-		}
+    &:hover {
+      background-color: #85B788;
+    }
 
-		&.selectedPurpose {
-			background-color: white;
-			cursor: auto;
-		}
-	}
-	.purposeDescription {
-		flex: 1;
-		padding: 20px;
-		overflow: auto;
-	}
-	.purposeDetail {
+    &:last-child {
+      border-bottom: 1px solid @color-border;
+    }
 
-		.detailHeader {
-			display: flex;
-			flex-wrap: wrap;
-		}
-		.title {
-			font-size: 24px;
-			font-weight: bold;
-			flex: 1 1 auto;
-			@media @smartphone {
-				font-size: 20px;
-				padding-bottom: 5px;
-			}
-		}
-		.active {
-			color: @color-primary;
-			font-weight: bold;
-			display: flex;
-			align-items: center;
-			@media @smartphone {
-				flex: 1 1 auto;
-			}
-		}
-		.body {
-			margin: 5% 0;
-		}
-	}
-	.vendorLink {
-		display: block;
-		margin-top: 30px;
-		font-size: 12px;
-	}
+    .active {
+      height: 28px;
+    }
+
+    &.selectedPurpose {
+      background-color: white;
+      cursor: auto;
+    }
+  }
+  .purposeDescription {
+    flex: 1;
+    padding: 20px;
+    overflow: auto;
+  }
+  .purposeDetail {
+    .detailHeader {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      flex: 1 1 auto;
+      @media @smartphone {
+        width: 100%;
+        font-size: 20px;
+        padding-bottom: 5px;
+      }
+    }
+    .active {
+      height: 28px;
+      color: @color-primary;
+      font-weight: bold;
+      display: flex;
+      padding-right: 25px;
+      align-items: center;
+      @media @smartphone {
+        flex: 1 1 auto;
+        padding: 0;
+      }
+    }
+    .body {
+      padding-top: 10px;
+      margin: auto;
+      font-size: 14px;
+      font-weight: 100;
+      line-height: 20px;
+    }
+    .showVendors {
+      padding-top: 10px;
+    }
+    .vendor {
+      margin-top: 10px;
+    }
+  }
 }

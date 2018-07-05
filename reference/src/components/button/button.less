@@ -1,28 +1,31 @@
 @import '../../style/variables.less';
 
 button, input[type=button] {
-	&.button {
-		cursor: pointer;
-		outline: none;
-		padding: 1em;
-		background: @color-primary;
-		color: white;
-		border: none;
-		border-radius: 4px;
-		font-size: 1em;
-		font-weight: bold;
-		text-transform: uppercase;
-		&:hover {
-			color: @color-linkColorHover;
-		}
+  &.button {
+    cursor: pointer;
+    letter-spacing: 2px;
+    outline: none;
+    padding: 1em;
+    background: @color-primary;
+    color: white;
+    border: 2px solid @color-primary;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all .2s ease-in-out;
+    text-transform: uppercase;
+    &:hover {
+      background-color: transparent;
+      color: @color-linkColorHover;
+    }
 
-		&.invert {
-			background: white;
-			border: 2px solid @color-primary;
-			color: @color-primary;
-			&:hover {
-				color: lighten(@color-primary, 20%);
-			}
-		}
-	}
+    &.invert {
+      background: white;
+      border: 2px solid @color-primary;
+      color: @color-primary;
+      &:hover {
+        background-color: @color-primary;
+        color: lighten(#fff, 20%);
+      }
+    }
+  }
 }

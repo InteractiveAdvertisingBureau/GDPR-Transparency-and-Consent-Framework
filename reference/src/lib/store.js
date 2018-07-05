@@ -24,7 +24,11 @@ export default class Store {
 		cmpId = 1,
 		cmpVersion = 1,
 		cookieVersion = 1,
+    color,
+    forceShowUI,
 		vendorConsentData,
+    publisherName,
+    publisherPurposeIds,
 		publisherConsentData,
 		vendorList,
 		customPurposeList
@@ -58,6 +62,16 @@ export default class Store {
 
 		this.isConsentToolShowing = false;
 		this.isFooterShowing = false;
+    this.publisherName = config.publisherName;
+    this.color = config.color;
+    this.forceShowUI = config.forceShowUI;
+    this.publisherPurposeIds = config.publisherPurposeIds;
+
+    // for preview use
+    if (forceShowUI) {
+      this.isConsentToolShowing = true;
+      this.isFooterShowing = false;
+    }
 
 		this.updateVendorList(vendorList);
 		this.updateCustomPurposeList(customPurposeList);
@@ -291,6 +305,7 @@ export default class Store {
 		const {purposes = []} = this.vendorList || {};
 		const operation = isSelected ? 'add' : 'delete';
 		purposes.forEach(({id}) => this.vendorConsentData.selectedPurposeIds[operation](id));
+    purposes.forEach(({id}) => this.publisherConsentData.selectedCustomPurposeIds[operation](id));
 		this.storeUpdate();
 	};
 

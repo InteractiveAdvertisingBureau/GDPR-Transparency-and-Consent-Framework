@@ -5,3 +5,5 @@
 /coverage
 /.idea
 /.vscode
+package-lock.json
+*.swp

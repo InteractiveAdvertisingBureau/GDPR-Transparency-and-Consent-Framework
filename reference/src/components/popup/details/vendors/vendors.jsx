@@ -3,105 +3,181 @@ import style from './vendors.less';
 import Button from '../../../button/button';
 import Switch from '../../../switch/switch';
 import Label from "../../../label/label";
+import Icons from "../../../../lib/icons";
 
 class LocalLabel extends Label {
-	static defaultProps = {
-		prefix: 'vendors'
-	};
+  static defaultProps = {
+    prefix: 'vendors'
+  };
 }
 
 export default class Vendors extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			editingConsents: false
-		};
-	}
+  constructor(props) {
+    super(props);
+    const {selectedVendorIds, vendors} = props;
+    this.state = {
+      enableAll: selectedVendorIds.size == vendors.length ? true :  false,
+      activeVendorIds: [],
+      editingConsents: false
+    };
+  }
 
-	static defaultProps = {
-		vendors: [],
-		selectedVendorIds: new Set(),
-		selectVendor: () => {}
-	};
+  static defaultProps = {
+    vendors: [],
+    selectedVendorIds: new Set(),
+    selectVendor: () => {}
+  };
 
-	handleAcceptAll = () => {
-		this.props.selectAllVendors(true);
-	};
+  handleAcceptAll = () => {
+    this.props.selectAllVendors(true);
+  };
 
-	handleRejectAll = () => {
-		this.props.selectAllVendors(false);
-	};
+  handleRejectAll = () => {
+    this.props.selectAllVendors(false);
+  };
 
-	handleSelectVendor = ({ dataId, isSelected }) => {
-		this.props.selectVendor(dataId, isSelected);
-	};
+  handleSelectVendor = ({ dataId, isSelected }) => {
+    this.props.selectVendor(dataId, isSelected);
+  };
 
-	handleMoreChoices = () => {
-		this.setState({
-			editingConsents: true
-		});
-	};
+  handleMoreChoices = () => {
+    this.setState({
+      editingConsents: true
+    });
+  };
 
-	render(props, state) {
+  handleToggle = (vendorId) => {
+    var {activeVendorIds} = this.state;
+    var id = activeVendorIds.indexOf(vendorId);
+    if (id !== -1) {
+      activeVendorIds.splice(id, 1);
+    } else {
+      activeVendorIds.push(vendorId);
+    }
+    this.setState({
+      activeVendorIds: activeVendorIds
+    });
+  };
 
-		const {
-			vendors,
-			selectedVendorIds,
-		} = props;
-		const { editingConsents } = this.state;
+  isActive = (id) => {
+    var {activeVendorIds} = this.state;
+    return activeVendorIds.indexOf(id) !== -1;
+  }
 
-		return (
-			<div class={style.vendors}>
-				<div class={style.header}>
-					<div class={style.title}>
-						<LocalLabel localizeKey='title'>Our partners</LocalLabel>
-					</div>
-				</div>
-				<div class={style.description}>
-					<LocalLabel localizeKey='description'>
-						Help us provide you with a better online experience! Our partners set cookies and collect information from your browser across the web to provide you with website content, deliver relevant advertising and understand web audiences.
-					</LocalLabel>
-						{!editingConsents &&
-						<div>
-							<a onClick={this.handleMoreChoices}>
-								<LocalLabel localizeKey='moreChoices'>Make More Choices</LocalLabel>
-							</a>
-						</div>
-						}
-				</div>
-				<div class={style.vendorHeader}>
-					<table class={style.vendorList}>
-						<thead>
-						<tr>
-							<th><LocalLabel localizeKey='company'>Company</LocalLabel></th>
-							{editingConsents &&
-							<th><LocalLabel localizeKey='offOn'>Allow</LocalLabel></th>
-							}
-						</tr>
-						</thead>
-					</table>
-				</div>
-				<div class={style.vendorContent}>
-					<table class={style.vendorList}>
-						<tbody>
-						{vendors.map(({ id, name }, index) => (
-							<tr key={id} class={index % 2 === 1 ? style.even : ''}>
-								<td><div class={style.vendorName}>{name}</div></td>
-								{editingConsents &&
-								<td>
-									<Switch
-										dataId={id}
-										isSelected={selectedVendorIds.has(id)}
-										onClick={this.handleSelectVendor}
-									/>
-								</td>
-								}
-							</tr>
-						))}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		);
-	}
+  enableAll = () => {
+    var {enableAll} = this.state;
+    if (enableAll) {
+      this.handleRejectAll();
+    } else {
+      this.handleAcceptAll();
+    }
+    this.setState({enableAll:!enableAll});
+  };
+
+  render(props, state) {
+
+    const {
+      vendors,
+      purposeId,
+      selectVendor,
+      selectAllVendors,
+      selectedVendorIds,
+      selectedPurposeIds,
+      enableEdit
+    } = props;
+
+    const { editingConsents, enableAll } = this.state;
+
+    function VendorEnable(props) {
+      const {
+        id,
+        enableEdit,
+        selectedPurposeIds,
+        purposeId
+      } = props;
+
+      if (enableEdit) {
+        return null;
+      }
+      if (selectedVendorIds.has(id) && selectedPurposeIds.has(purposeId)) {
+        return <td class={style.disabled}>On</td>
+      }
+      return <td class={style.disabled}>Off</td>
+    }
+
+    return (
+      <div class={style.vendors}>
+        <div class={style.vendorHeader}>
+          <table class={style.vendorList}>
+            <thead>
+            <tr>
+              <th class={style.tableHead}>
+                <LocalLabel class={style.company} localizeKey='company'>
+                  Company
+                </LocalLabel>
+              </th>
+              {(enableEdit || editingConsents) &&
+              <th class={style.tableHead}>
+                <div
+                  class={style.enableAll}
+                  onClick={this.enableAll}
+                >
+                  {enableAll &&
+                  <LocalLabel localizeKey='rejectAll'>disable all</LocalLabel>
+                  }
+                  {!enableAll &&
+                  <LocalLabel localizeKey='acceptAll'>enable all</LocalLabel>
+                  }
+                </div>
+              </th>
+              }
+            </tr>
+            </thead>
+          </table>
+        </div>
+        <div class={style.vendorContent}>
+          <table class={style.vendorList}>
+            <tbody>
+            {vendors.map(({ id, name, policyUrl }, index) => (
+              <tr key={id} class={index % 2 === 1 ? style.even : ''}>
+                <td><div class={style.vendorName}>{name}</div></td>
+                <VendorEnable
+                  id={id}
+                  selectedPurposeIds={selectedPurposeIds}
+                  purposeId={purposeId}
+                  enableEdit={enableEdit}
+                />
+                {enableEdit &&
+                <td>
+                  <Switch
+                    dataId={id}
+                    isSelected={selectedVendorIds.has(id)}
+                    onClick={this.handleSelectVendor}
+                  />
+                </td>
+                }
+                {enableEdit &&
+                <td class={style.dropDown}>
+                  <div
+                    class={this.isActive(id) ? style.arrowUp : style.arrowDown}
+                    onClick={this.handleToggle.bind(this, id)}
+                    >
+                      <span dangerouslySetInnerHTML={{__html: Icons['arrow']}}/>
+                  </div>
+                </td>
+                }
+                <tr class={this.isActive(id) ? null : style.hidden}>
+                  <div class={style.policy}>
+                    Privacy policy:
+                    <a href={policyUrl}> {policyUrl}</a>
+                  </div>
+                </tr>
+              </tr>
+            ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
 }

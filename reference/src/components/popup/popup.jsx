@@ -3,71 +3,82 @@ import style from './popup.less';
 import Intro from './intro/intro';
 import Details from './details/details';
 import Panel from '../panel/panel';
+import event_logger from '../../lib/event_logger'
 
 
 const SECTION_INTRO = 0;
 const SECTION_DETAILS = 1;
 
 export default class Popup extends Component {
-	state = {
-		selectedPanelIndex: SECTION_INTRO
-	};
+  state = {
+    selectedPanelIndex: SECTION_INTRO
+  };
 
-	onAcceptAll = () => {
-		const { store, onSave } = this.props;
-		store.selectAllVendors(true);
-		store.selectAllPurposes(true);
-		store.selectAllCustomPurposes(true);
-		onSave();
-	};
+  onAcceptAll = () => {
+    event_logger("accepted_all");
+    const { store, onSave } = this.props;
+    store.selectAllVendors(true);
+    store.selectAllPurposes(true);
+    store.selectAllCustomPurposes(true);
+    onSave();
+  };
 
-	onCancel = () => {
-		this.setState({
-			selectedPanelIndex: SECTION_INTRO
-		});
-	};
+  onRejectAll = () => {
+    event_logger("rejected_all");
+    const { store, onSave } = this.props;
+    store.selectAllVendors(false);
+    store.selectAllPurposes(false);
+    store.selectAllCustomPurposes(false);
+    onSave();
+  };
 
-	handleShowDetails = () => {
-		this.setState({
-			selectedPanelIndex: SECTION_DETAILS
-		});
-	};
+  handleClose = () => {
+    const {store} = this.props;
+    store.toggleFooterShowing(true);
+  }
 
-	handleClose = () => {
-		const { store, onSave } = this.props;
-		onSave();
-		store.toggleFooterShowing(true);
-	};
+  onCancel = () => {
+    this.setState({
+      selectedPanelIndex: SECTION_INTRO
+    });
+  };
 
-	render(props, state) {
-		const { store } = props;
-		const { selectedPanelIndex } = state;
-		const { isConsentToolShowing } = store;
+  handleShowDetails = () => {
+    this.setState({
+      selectedPanelIndex: SECTION_DETAILS
+    });
+  };
 
-		return (
-			<div
-				class={style.popup}
-				style={{ display: isConsentToolShowing ? 'flex' : 'none' }}
-			>
-				<div
-					class={style.overlay}
-					onClick={this.handleClose}
-				/>
-				<div class={style.content}>
-					<Panel selectedIndex={selectedPanelIndex}>
-						<Intro
-							onAcceptAll={this.onAcceptAll}
-							onShowPurposes={this.handleShowDetails}
-							onClose={this.handleClose}
-						/>
-						<Details
-							onSave={this.props.onSave}
-							onCancel={this.onCancel}
-							store={this.props.store}
-							onClose={this.handleClose} />
-					</Panel>
-				</div>
-			</div>
-		);
-	}
+  render(props, state) {
+    const { store, onShowPurposes } = props;
+    const { selectedPanelIndex } = state;
+    var { isConsentToolShowing, publisherName } = store;
+
+    return (
+      <div
+        class={style.popup}
+        style={{ display: isConsentToolShowing ? 'flex' : 'none' }}
+      >
+        <div
+          class={style.overlay}
+          onClick={this.handleClose}
+        />
+        <div class={style.content}>
+          <Panel selectedIndex={selectedPanelIndex}>
+            <Intro
+              publisherName={publisherName}
+              onAcceptAll={this.onAcceptAll}
+              onShowPurposes={this.handleShowDetails}
+              onRejectAll={this.onRejectAll}
+            />
+            <Details
+              onSave={this.props.onSave}
+              onCancel={this.onCancel}
+              store={this.props.store}
+              onRejectAll={this.onRejectAll} />
+          </Panel>
+        </div>
+      </div>
+    );
+  }
 }

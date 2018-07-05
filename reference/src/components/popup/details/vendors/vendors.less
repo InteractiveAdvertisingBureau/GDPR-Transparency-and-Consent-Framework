@@ -1,97 +1,149 @@
 @import '../../../../style/variables';
 
 div.vendors {
-	display: flex;
-	flex-direction: column;
-	padding: 2%;
-	overflow: scroll;
-	-webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 
-	.header {
-		display: flex;
-		flex-shrink: 0;
-		@media @smartphone {
-			flex-direction: column;
-			align-items: center;
-		}
-	}
-	.title {
-		flex: 1;
-		font-size: 24px;
-		font-weight: bold;
-		@media @smartphone {
-			text-align: center;
-			padding-bottom: 5px;
-		}
-	}
-	.button {
-		min-width: 140px;
-		padding: 8px;
-		white-space: nowrap;
+  .header {
+    display: flex;
+    flex-shrink: 0;
+    @media @smartphone {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  .title {
+    flex: 1;
+    font-size: 24px;
+    font-weight: bold;
+    @media @smartphone {
+      text-align: center;
+      padding-bottom: 5px;
+    }
+  }
+  .button {
+    min-width: 140px;
+    padding: 8px;
+    white-space: nowrap;
 
-		&:first-child {
-			margin-right: 10px;
-		}
+    &:first-child {
+      margin-right: 10px;
+    }
 
-		@media @smartphone {
-			flex: 1;
-		}
-	}
-	.options {
-		display: flex;
-		@media @smartphone {
-			width: 100%;
-		}
-	}
-	.description {
-		margin: 20px 0;
-		flex-shrink: 0;
-	}
+    @media @smartphone {
+      flex: 1;
+    }
+  }
+  .options {
+    display: flex;
+    @media @smartphone {
+      width: 100%;
+    }
+  }
+  .description {
+    margin: 20px 0;
+    flex-shrink: 0;
+  }
+  .vendorHeader {
+    letter-spacing: 1px;
+    display: flex;
+    flex-shrink: 0;
+  }
+  .vendorContent {
+    display: flex;
+  }
+  .vendorList {
+    color: #575f68;
+    font-size: 14px;
+    border: 1px solid @color-border;
+  }
+  .disabled {
+    color: @color-primary;
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 14px;
+    margin: 10px 0;
+    padding: 0 20px;
+    text-align: right;
+  }
+  .enableAll {
+    white-space: nowrap;
+    cursor: pointer;
+    color: @color-primary;
+    letter-spacing: 0px;
+    padding-right: 5px;
+    transition-duration: 0.4s;
+    &:hover {
+      color: #000;
+    }
+  }
+  .tableHead {
+    border-bottom: 0 !important;
+  }
+  .company {
+    padding-left: 5px;
+  }
+  .vendorName {
+    align-items: center;
+    color: #212934;
+    display: flex;
+    font-weight: 700;
+    min-height: 30px;
+    padding-left: 5px;
+  }
+  .dropDown {
+    padding-right: 20px;
+  }
+  .arrowDown {
+    width: 16px;
+  }
+  .arrowUp {
+    width: 16px;
+    transform: rotate(180deg);
+  }
+  .policy {
+    padding: 0 10px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
 
-	.vendorHeader {
-		display: flex;
-		flex-shrink: 0;
-	}
-	.vendorContent {
-		display: flex;
-	}
-	.vendorList {
-		border: 1px solid @color-border;
-	}
-	.vendorName {
-		min-height: 30px;
-		display: flex;
-		align-items: center;
-	}
-	table {
-		width: 100%;
-		border-collapse: collapse;
+    thead tr {
+      background-color: @color-table-background;
+      border: 1px solid @color-border;
+      text-transform: uppercase;
+    }
 
-		thead tr {
-			background-color: @color-table-background;
-			border: 1px solid @color-border;
-			text-transform: uppercase;
-		}
+    tr {
+      display: block;
+      min-height: 40px;
+      th {
+        font-weight: bold;
+      }
+      td, th {
+        text-align: left;
+        padding: 5px;
+        min-width: 0 !important;
+        &:first-child {
+          width: 100%;
+        }
+      }
+      &:first-child {
+        padding-top: 3px;
+      }
+    }
 
-		tr {
-			min-height: 40px;
-			th {
-				font-weight: bold;
-			}
-			td, th {
-				text-align: left;
-				padding: 5px;
-				&:first-child {
-					width: 100%;
-				}
-				&:last-child {
-					padding-right: 25px;
-				}
-			}
-		}
+    td.dropdown {
+      margin: auto;
+    }
 
-		tr.even {
-			background-color: @color-table-background;
-		}
-	}
+    tr.hidden {
+      display: none;
+    }
+    tr.even {
+      background-color: @color-table-background;
+    }
+  }
 }
