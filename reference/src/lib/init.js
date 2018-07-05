@@ -8,7 +8,6 @@ import log from './log';
 import pack from '../../package.json';
 import config from './config';
 import {getColorCSS} from './customizeColor';
-import event_logger from './event_logger';
 
 const CMP_VERSION = 1;
 const CMP_ID = 1;
@@ -63,7 +62,6 @@ export function init(configUpdates) {
       // Render the UI
       const App = require('../components/app').default;
       if (showUI) {
-        event_logger("cmp_opened");
 	render(<App store={store} notify={cmp.notify} />, document.body);
       }
 
