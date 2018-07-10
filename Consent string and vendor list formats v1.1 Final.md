@@ -164,67 +164,36 @@ The JSON format is:
 
 ```
 {
-
-  "vendorListVersion": 0, *// will be incremented each change*
-
-*  *"lastUpdated": "2018-05-28T00:00:00Z",
-
+  "vendorListVersion": 0, // will be incremented each change*
+  "lastUpdated": "2018-05-28T00:00:00Z",
   "purposes": [
-
     { 
-
       "id": 1,
-
       "name": "Storage and access of information",
-
       "description": "The storage of information, or access to information that is already stored, on user device such as accessing advertising identifiers and/or other device identifiers, and/or using cookies or similar technologies.."
-
     },
-
-    *... more purposes from id=2 to currently, id=5 (max, id=24)*
-
-*  *],
-
-  "features" : [
-
-    {
-
-      "id": 1
-
-      "name": "Matching Data to Offline Sources",
-
-       "description": "combining data from offline sources that were initially collected in other contexts"
-
-    },
-
-    *... more purposes from id=2 up to no higher than id=64. Currently there are 3 planned features*
-
+    // ... more purposes from id=2 to currently, id=5 (max, id=24)
   ],
-
-  "vendors": [
-
+  "features" : [
     {
-
-      "id": 1,
-
-      "name": "Vendor Name",
-
-      "purposeIds": [1], *// list of consentable data purposes*
-
-*      *"legIntPurposeIds": [2, 3], *// list of (non-consentable) data purposes that will be used under legitimate interest*
-
-*     ** *"featureIds": [1, 2], // *list of features*
-
-      "policyUrl": "[https://vendorname.com/gdpr.html](https://vendorname.com/gdpr.html)",
-
-      "deletedDate": "2018-05-28T00:00:00Z", *// if present, vendor should be considered deleted after this date/time*
-
+      "id": 1
+      "name": "Matching Data to Offline Sources",
+      "description": "combining data from offline sources that were initially collected in other contexts"
     },
-
-    *... more vendors, expecting several hundred vendors in the initial Global Vendor List*
-
+    // ... more purposes from id=2 up to no higher than id=64. Currently there are 3 planned features*
+  ],
+  "vendors": [
+    {
+      "id": 1,
+      "name": "Vendor Name",
+      "purposeIds": [1], // list of consentable data purposes
+      "legIntPurposeIds": [2, 3], // list of (non-consentable) data purposes that will be used under legitimate interest
+      "featureIds": [1, 2], // list of features
+      "policyUrl": "[https://vendorname.com/gdpr.html](https://vendorname.com/gdpr.html)",
+      "deletedDate": "2018-05-28T00:00:00Z", // if present, vendor should be considered deleted after this date/time
+    },
+    // ... more vendors, expecting several hundred vendors in the initial Global Vendor List*
   ]
-
 }
 ```
 
