@@ -217,6 +217,24 @@ This object contains the global purposes, and vendors, consented to by the user:
 
   hasGlobalScope: *Boolean,  // true if the vendor consent data is retrieved from the global cookie, false if a publisher-specific (or publisher-group-specific) cookie*
 
+  cookieVersion: *Integer*,
+  
+  created: *Timestamp*, // Epoch deciseconds when consent string was first created
+
+  lastUpdated: *Timestamp*, // Epoch deciseconds when consent string was last updated
+
+  cmpId: *Integer*, // Consent Manager Provider ID that last updated the consent string 
+
+  cmpVersion: *Integer*, // Consent Manager Provider version
+
+  consentScreen: *Integer*, // Screen number in the CMP where consent was given
+
+  consentLanguage: *String*, // Two-letter ISO639-1 language code that CMP asked for consent in
+
+  vendorListVersion: *Integer*, // Version of vendor list used in most recent consent string update.
+
+  maxVendorId: *Integer*, // The maximum VendorId for which consent values are given.
+
   purposeConsents: {
 
     *purposeId*: *consentBoolean*,
