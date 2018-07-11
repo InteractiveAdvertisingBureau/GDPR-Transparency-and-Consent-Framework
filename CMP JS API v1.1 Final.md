@@ -250,9 +250,11 @@ where *vendorId* and *purposeId* are the keys and *consentBoolean *are the value
 
 6. Consent Screen
 
-7. Vendor List Version
+7. Consent Language
 
-8. Publisher Purposes Version (for the *PublisherConsent* metadata only)
+8. Vendor List Version
+
+9. Publisher Purposes Version (for the *PublisherConsent* metadata only)
 
 ### VendorConsentData <a name="vendorconsentdata"></a>
 
