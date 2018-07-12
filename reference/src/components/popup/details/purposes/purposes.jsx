@@ -89,6 +89,7 @@ export default class Purposes extends Component {
 							<div class={style.title}>
 								<LocalLabel localizeKey={`${currentPurposeLocalizePrefix}.title`}>{selectedPurpose.name}</LocalLabel>
 							</div>
+							{!selectedPurpose.required &&
 							<div class={style.active}>
 								<LocalLabel localizeKey={purposeIsActive ? 'active' : 'inactive'}>{purposeIsActive ? 'Active' : 'Inactive'}</LocalLabel>
 								<Switch
@@ -96,6 +97,7 @@ export default class Purposes extends Component {
 									onClick={this.handleSelectPurpose}
 								/>
 							</div>
+							}
 						</div>
 						<div class={style.body}>
 							<LocalLabel localizeKey={`${currentPurposeLocalizePrefix}.description`} />

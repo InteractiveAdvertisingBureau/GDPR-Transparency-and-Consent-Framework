@@ -84,10 +84,10 @@ export default class Vendors extends Component {
 				<div class={style.vendorContent}>
 					<table class={style.vendorList}>
 						<tbody>
-						{vendors.map(({ id, name }, index) => (
+						{vendors.map(({ id, name, required }, index) => (
 							<tr key={id} class={index % 2 === 1 ? style.even : ''}>
 								<td><div class={style.vendorName}>{name}</div></td>
-								{editingConsents &&
+								{editingConsents && !required &&
 								<td>
 									<Switch
 										dataId={id}

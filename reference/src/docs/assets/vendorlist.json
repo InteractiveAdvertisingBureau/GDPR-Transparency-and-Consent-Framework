@@ -5,37 +5,44 @@
 	  {
 		"id": 1,
 		"name": "Information storage and access",
-		"description": "The storage of information, or access to information that is already stored, on your device such as advertising identifiers, device identifiers, cookies, and similar technologies."
+		"description": "The storage of information, or access to information that is already stored, on your device such as advertising identifiers, device identifiers, cookies, and similar technologies.",
+		"required": false
 	  },
 	  {
 		"id": 2,
 		"name": "Personalisation",
-		"description": "The collection and processing of information about your use of this service to subsequently personalise advertising and/or content for you in other contexts, such as on other websites or apps, over time. Typically, the content of the site or app is used to make inferences about your interests, which inform future selection of advertising and/or content."
+		"description": "The collection and processing of information about your use of this service to subsequently personalise advertising and/or content for you in other contexts, such as on other websites or apps, over time. Typically, the content of the site or app is used to make inferences about your interests, which inform future selection of advertising and/or content.",
+		"required": false
 	  },
 	  {
 		"id": 3,
 		"name": "Ad selection, delivery, reporting",
-		"description": "The collection of information, and combination with previously collected information, to select and deliver advertisements for you, and to measure the delivery and effectiveness of such advertisements. This includes using previously collected information about your interests to select ads, processing data about what advertisements were shown, how often they were shown, when and where they were shown, and whether you took any action related to the advertisement, including for example clicking an ad or making a purchase. This does not include personalisation, which is the collection and processing of information about your use of this service to subsequently personalise advertising and/or content for you in other contexts, such as websites or apps, over time."
+		"description": "The collection of information, and combination with previously collected information, to select and deliver advertisements for you, and to measure the delivery and effectiveness of such advertisements. This includes using previously collected information about your interests to select ads, processing data about what advertisements were shown, how often they were shown, when and where they were shown, and whether you took any action related to the advertisement, including for example clicking an ad or making a purchase. This does not include personalisation, which is the collection and processing of information about your use of this service to subsequently personalise advertising and/or content for you in other contexts, such as websites or apps, over time.",
+		"required": false
 	  },
 	  {
 		"id": 4,
 		"name": "Content selection, delivery, reporting",
-		"description": "The collection of information, and combination with previously collected information, to select and deliver content for you, and to measure the delivery and effectiveness of such content. This includes using previously collected information about your interests to select content, processing data about what content was shown, how often or how long it was shown, when and where it was shown, and whether the you took any action related to the content, including for example clicking on content. This does not include personalisation, which is the collection and processing of information about your use of this service to subsequently personalise content and/or advertising for you in other contexts, such as websites or apps, over time."
+		"description": "The collection of information, and combination with previously collected information, to select and deliver content for you, and to measure the delivery and effectiveness of such content. This includes using previously collected information about your interests to select content, processing data about what content was shown, how often or how long it was shown, when and where it was shown, and whether the you took any action related to the content, including for example clicking on content. This does not include personalisation, which is the collection and processing of information about your use of this service to subsequently personalise content and/or advertising for you in other contexts, such as websites or apps, over time.",
+		"required": false
 	  },
 	  {
 		"id": 5,
 		"name": "Measurement",
-		"description": "The collection of information about your use of the content, and combination with previously collected information, used to measure, understand, and report on your usage of the service. This does not include personalisation, the collection of information about your use of this service to subsequently personalise content and/or advertising for you in other contexts, i.e. on other service, such as websites or apps, over time."
+		"description": "The collection of information about your use of the content, and combination with previously collected information, used to measure, understand, and report on your usage of the service. This does not include personalisation, the collection of information about your use of this service to subsequently personalise content and/or advertising for you in other contexts, i.e. on other service, such as websites or apps, over time.",
+		"required": false
 	  },
 	  {
 		"id": 6,
 		"name": "Required",
-		"description": "Some of the technologies we use are necessary for critical functions like security and site integrity, account authentication, security and privacy preferences, internal site usage and maintenance data, and to make the site work correctly for browsing and transactions."
+		"description": "Some of the technologies we use are necessary for critical functions like security and site integrity, account authentication, security and privacy preferences, internal site usage and maintenance data, and to make the site work correctly for browsing and transactions.",
+		"required": true
 	  },
 	  {
 		"id": 7,
 		"name": "3rd Party Games",
-		"description": "By changing this setting, you will or will not be able to play 3rd party games on our website. 3rd party games often include tracking cookies from advertisers or social media features. You may also be required to register in the games in order to play them. Please note that we do not control these games or what happens with the data that is shared."
+		"description": "By changing this setting, you will or will not be able to play 3rd party games on our website. 3rd party games often include tracking cookies from advertisers or social media features. You may also be required to register in the games in order to play them. Please note that we do not control these games or what happens with the data that is shared.",
+		"required": false
 	  }
 	],
 	"features": [
@@ -61,6 +68,7 @@
 		"id": 2101,
 		"name": "SET Events",
 		"policyUrl": "http://www.gamesgames.com/privacy-policy",
+		"required": true,
 		"purposeIds": [
 		  6
 		],
@@ -164,6 +172,7 @@
 		"id": 2005,
 		"name": "Google",
 		"policyUrl": "https://policies.google.com/privacy?hl=en",
+		"required": true,
 		"purposeIds": [
 		  6
 		],
