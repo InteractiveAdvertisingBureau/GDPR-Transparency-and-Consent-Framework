@@ -1,35 +1,37 @@
 @import '../../style/variables';
 
 .popup {
-	display: none;
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	z-index: 99999;
-	justify-content: center;
-	align-items: center;
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
 }
 .overlay {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .content {
-	width: 700px;
-	height: 500px;
-	background: white;
-	display: flex;
-	align-items: center;
-	position: relative;
+    width: 95%;
+    max-width: 80vw;
+    background: white;
+    align-items: center;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.75) 0 -4px 21px -4px;
+    border-radius: 5px 5px 0 0;
+    border-top: 5px solid #d50000;
 
-	@media @smartphone {
-		width: 98%;
-		height: 98%;
-	}
+    @media @smartphone {
+        width: 100%;
+        max-width: 95vw;
+    }
 }
