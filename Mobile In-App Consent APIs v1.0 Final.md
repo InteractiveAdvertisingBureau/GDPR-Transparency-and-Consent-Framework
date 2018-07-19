@@ -30,7 +30,7 @@
 
 # Introduction <a name="Introduction"></a>
 
-In February 2017, the IAB Europe assembled parties representing both the supply and demand sides of the digital advertising ecosystem, to work collectively on guidance and solutions to the requirements of the General Data Protection Regulation (GDPR).  That working group is known as the GDPR Implementation Working Group (GIG).  One of the sub-groups within the GIG was tasked with developing guidance on consent as a legal basis for processing personal data. Out of that effort, an additional working group was formed to develop a technical solution to the challenge of obtaining and disseminating consumer consent to the various parties relying on it as a legal basis of processing personal data.
+In February 2017, the IAB Europe assembled parties representing both the supply and demand sides of the digital advertising ecosystem, to work collectively on guidance and solutions to the requirements of the General Data Protection Regulation (GDPR). That working group is known as the GDPR Implementation Working Group (GIG). One of the sub-groups within the GIG was tasked with developing guidance on consent as a legal basis for processing personal data. Out of that effort, an additional working group was formed to develop a technical solution to the challenge of obtaining and disseminating consumer consent to the various parties relying on it as a legal basis of processing personal data.
 
 This mobile in-app specification is dependent on the following Transparency and Consent Framework;
 - [CMP JS API v1.1](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/CMP%20JS%20API%20v1.1%20Final.md)
@@ -39,8 +39,8 @@ This mobile in-app specification is dependent on the following Transparency and 
 
 ## About the Transparency & Consent Framework <a name="About-the-Framework"></a>
 
-The scope of the technical working group?s initiative increased to include a technical industry solution to allow website operators to:
-1.  Control the vendors they wish to allow to access their users? browsers (for setting and reading cookies) and process their personal data and disclose these choices to other parties in the online advertising ecosystem
+The scope of the technical working group's initiative increased to include a technical industry solution to allow website operators to:
+1. Control the vendors they wish to allow to access their users' browsers (for setting and reading cookies) and process their personal data and disclose these choices to other parties in the online advertising ecosystem
 2. Seek user consent under the ePrivacy Directive (for setting cookies or similar technical applications that access information on a device) and/or the GDPR in line with applicable legal requirements and signal the consent status through the online advertising ecosystem
  
 In summary, have one place to go to:
@@ -71,9 +71,9 @@ For purposes of this documentation, the following terms have the following defin
 
 * " **_CMP_** " or Consent Management Platform means a company that can read the to transmit information about which vendors and which purposes a user has consented to with vendors. The back end storage and retrieval components of a CMP is optional and also is not necessarily to be provided by the same company that surfaces the front end consent collection aspects of the CMP via a user interface to a user (although it can be the same).	
 
-* " **_Purposes_** " mean the purposes for which a controller enabled by an online publisher is using personal data collected from,or received by a third party about an end user.
+* " **_Purposes_** " mean the purposes for which a controller enabled by an online publisher is using personal data collected from, or received by a third party about an end user.
 
-* " **_Vendor_** " means a third party that a publisher is using, directly or indirectly, in connection with surfacing content to its end users that either (1) accesses an end user?s device or browser; and/or (2) collects or receives personal data about the publisher?s end users. As such, a vendor need not be a controller.
+* " **_Vendor_** " means a third party that a publisher is using, directly or indirectly, in connection with surfacing content to its end users that either (1) accesses an end user's device or browser; and/or (2) collects or receives personal data about the publisher's end users. As such, a vendor need not be a controller.
 
 ## Scope of the document and definitions <a name="Scope"></a>
 
@@ -91,7 +91,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Disclaimer <a name="Disclaimer"></a>
 
-THE STANDARDS, THE SPECIFICATIONS, THE MEASUREMENT GUIDELINES, AND ANY OTHER MATERIALS OR SERVICES PROVIDED TO OR USED BY YOU HEREUNDER (THE "PRODUCTS AND SERVICES") ARE PROVIDED "AS IS" AND "AS AVAILABLE," AND IAB TECHNOLOGY LABORATORY, INC. ("TECH LAB") MAKES NO WARRANTY WITH RESPECT TO THE SAME AND HEREBY DISCLAIMS ANY AND ALL EXPRESS, IMPLIED, OR STATUTORY WARRANTIES, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AVAILABILITY, ERROR-FREE OR UNINTERRUPTED OPERATION, AND ANY WARRANTIES ARISING FROM A COURSE OF DEALING, COURSE OF PERFORMANCE, OR USAGE OF TRADE.  TO THE EXTENT THAT TECH LAB MAY NOT AS A MATTER OF APPLICABLE LAW DISCLAIM ANY IMPLIED WARRANTY, THE SCOPE AND DURATION OF SUCH WARRANTY WILL BE THE MINIMUM PERMITTED UNDER SUCH LAW.  THE PRODUCTS AND SERVICES DO NOT CONSTITUTE BUSINESS OR LEGAL ADVICE.  TECH LAB DOES NOT WARRANT THAT THE PRODUCTS AND SERVICES PROVIDED TO OR USED BY YOU HEREUNDER SHALL CAUSE YOU AND/OR YOUR PRODUCTS OR SERVICES TO BE IN COMPLIANCE WITH ANY APPLICABLE LAWS, REGULATIONS, OR SELF-REGULATORY FRAMEWORKS, AND YOU ARE SOLELY RESPONSIBLE FOR COMPLIANCE WITH THE SAME.
+THE STANDARDS, THE SPECIFICATIONS, THE MEASUREMENT GUIDELINES, AND ANY OTHER MATERIALS OR SERVICES PROVIDED TO OR USED BY YOU HEREUNDER (THE "PRODUCTS AND SERVICES") ARE PROVIDED "AS IS" AND "AS AVAILABLE," AND IAB TECHNOLOGY LABORATORY, INC. ("TECH LAB") MAKES NO WARRANTY WITH RESPECT TO THE SAME AND HEREBY DISCLAIMS ANY AND ALL EXPRESS, IMPLIED, OR STATUTORY WARRANTIES, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AVAILABILITY, ERROR-FREE OR UNINTERRUPTED OPERATION, AND ANY WARRANTIES ARISING FROM A COURSE OF DEALING, COURSE OF PERFORMANCE, OR USAGE OF TRADE. TO THE EXTENT THAT TECH LAB MAY NOT AS A MATTER OF APPLICABLE LAW DISCLAIM ANY IMPLIED WARRANTY, THE SCOPE AND DURATION OF SUCH WARRANTY WILL BE THE MINIMUM PERMITTED UNDER SUCH LAW. THE PRODUCTS AND SERVICES DO NOT CONSTITUTE BUSINESS OR LEGAL ADVICE.  TECH LAB DOES NOT WARRANT THAT THE PRODUCTS AND SERVICES PROVIDED TO OR USED BY YOU HEREUNDER SHALL CAUSE YOU AND/OR YOUR PRODUCTS OR SERVICES TO BE IN COMPLIANCE WITH ANY APPLICABLE LAWS, REGULATIONS, OR SELF-REGULATORY FRAMEWORKS, AND YOU ARE SOLELY RESPONSIBLE FOR COMPLIANCE WITH THE SAME.
 
 ## About IAB Tech Lab  <a name="About-Tech-Lab"></a>
 
@@ -161,12 +161,12 @@ Here is the list of the preferences created by the CMP:
 0 - (not subject to GDPR), 
 Nil - undetermined (default before initialization)</td>
     <td>Aligns with IAB OpenRTB GDPR Advisory. 
-Decided to be String, to have the uninitialized status. </td>
+Decided to be String, to have the uninitialized status.</td>
   </tr>
   <tr>
     <td>IABConsent_ConsentString</td>
     <td>Consent string as defined in "Cookie and vendor list format specification"</td>
-    <td>Aligns with IAB OpenRTB GDPR Advisory </td>
+    <td>Aligns with IAB OpenRTB GDPR Advisory</td>
   </tr>
   <tr>
     <td>IABConsent_ParsedPurposeConsents</td>
@@ -298,12 +298,12 @@ The preferred way to make this happen in current AdServers are macros for perfor
     <td>{gdpr}
 </td>
     <td>1 (subject to GDPR), 0 (not subject to GDPR), unset (unknown)</td>
-    <td>Aligns with IAB OpenRTB GDPR Advisory </td>
+    <td>Aligns with IAB OpenRTB GDPR Advisory</td>
   </tr>
   <tr>
     <td>{gdpr_consent}</td>
     <td>Consent string</td>
-    <td>Aligns with IAB OpenRTB GDPR Advisory </td>
+    <td>Aligns with IAB OpenRTB GDPR Advisory</td>
   </tr>
 </table>
 
@@ -348,7 +348,7 @@ At app start, before the user can access the app the GDPR consent UI should be s
 
 **Revoke / change consent:**
 
-A UI access (either in app or through settings/app (iOS)) that allows the user to revoke/change the consent using the same UI that the user was asked to provide consent in to begin with
+A UI access (either in app or through settings/app (iOS)) that allows the user to revoke/change the consent using the same UI that the user was asked to provide consent in to begin with.
 
 **Selecting purposes and access vendorlist:**
 
