@@ -609,6 +609,21 @@ Example consent string field values for the case:
   </tr>
 </table>
 
+### Example for the bit-string
+
+The complete byte-oriented consent string representation with a right-padded last byte looks like this:
+
+<table>
+    <tr><td>00000100</td><td>11100001</td><td>00000101</td></tr>
+    <tr><td>00010000</td><td>00001100</td><td>10001110</td></tr>
+    <tr><td>00010000</td><td>01010001</td><td>00000000</td></tr>
+    <tr><td>11001000</td><td>00000001</td><td>11000000</td></tr>
+    <tr><td>00000100</td><td>00110001</td><td>00001101</td></tr>
+    <tr><td>00000000</td><td>10001110</td><td>00000000</td></tr>
+    <tr><td>00000000</td><td>00000000</td><td>01111101</td></tr>
+    <tr><td>10111100</td><td>00000000</td><td>01000000</td></tr>
+    <tr><td>00000001</td><td>00100000</td><td>00000000</td></tr>
+</table>
 
 ## How is publisher-specific consent stored? <a name="publisher-consent-stored"></a>
 
