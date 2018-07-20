@@ -601,23 +601,26 @@ Example consent string field values for the case:
     <td>The binary bits should be padded at the end with zeroes to the nearest multiple of 8 bits</td>
     <td>00000</td>
   </tr>
-  <tr>
-    <td>base64url-encoded consent string value</td>
-    <td></td>
-    <td></td>
-    <td>BOEFEAyOEFEAyAHABDENAI4AAAB9vABAASA</td>
-  </tr>
 </table>
 
-### Example for the bit-string
+### Concatenated cookie value field bits
 
-The complete byte-oriented consent string representation with a right-padded last byte looks like this:
+The complete byte-oriented consent string representation for the previously shown example is:
 
     00000100 11100001 00000101 00010000 00001100 10001110
     00010000 01010001 00000000 11001000 00000001 11000000
     00000100 00110001 00001101 00000000 10001110 00000000
     00000000 00000000 01111101 10111100 00000000 01000000
     00000001 00100000 00000000
+
+### Building the Base64 representation
+
+This string is built using the base64url-encoded representation of the concatenated Cookie Value Fields bits described earlier.
+*Attention:* Padding '=' characters should be omitted.
+
+The calculated value for this example is:
+
+    BOEFEAyOEFEAyAHABDENAI4AAAB9vABAASA
 
 ## How is publisher-specific consent stored? <a name="publisher-consent-stored"></a>
 
