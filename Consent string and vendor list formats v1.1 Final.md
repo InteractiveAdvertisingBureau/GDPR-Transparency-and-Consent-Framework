@@ -593,7 +593,7 @@ Example consent string field values for the case:
     <td>SingleVendorId[0]</td>
     <td>9</td>
     <td>VendorId=9 has No Consent (opposite of Default Consent)</td>
-    <td>000000000001001</td>
+    <td>0000000000001001</td>
   </tr>
   <tr>
     <td>fillbits</td>
