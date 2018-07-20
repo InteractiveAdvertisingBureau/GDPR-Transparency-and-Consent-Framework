@@ -254,9 +254,13 @@ where *vendorId* and *purposeId* are the keys and *consentBoolean *are the value
 
 8. Publisher Purposes Version (for the *PublisherConsent* metadata only)
 
+CAUTION: This is not a base64 encoding, but a base64url encoding, which is slightly different. Please refers to the link above for clarification.
+         Also, the string of the vendor consent data must be treated as a bytes string, not a character string
 ### VendorConsentData <a name="vendorconsentdata"></a>
 
 This object contains the entire [base64url-encoded](https://tools.ietf.org/html/rfc4648#section-5) string of the vendor consent data:
+CAUTION: This is not a base64 encoding, but a base64url encoding, which is slightly different. Please refers to the link above for clarification.
+         Also, the string of the vendor consent data must be treated as a bytes string, not a character string
 
 ```
 {
