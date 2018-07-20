@@ -613,17 +613,11 @@ Example consent string field values for the case:
 
 The complete byte-oriented consent string representation with a right-padded last byte looks like this:
 
-<table>
-    <tr><td>00000100</td><td>11100001</td><td>00000101</td></tr>
-    <tr><td>00010000</td><td>00001100</td><td>10001110</td></tr>
-    <tr><td>00010000</td><td>01010001</td><td>00000000</td></tr>
-    <tr><td>11001000</td><td>00000001</td><td>11000000</td></tr>
-    <tr><td>00000100</td><td>00110001</td><td>00001101</td></tr>
-    <tr><td>00000000</td><td>10001110</td><td>00000000</td></tr>
-    <tr><td>00000000</td><td>00000000</td><td>01111101</td></tr>
-    <tr><td>10111100</td><td>00000000</td><td>01000000</td></tr>
-    <tr><td>00000001</td><td>00100000</td><td>00000000</td></tr>
-</table>
+     00000100 11100001 00000101 00010000 00001100 10001110
+     00010000 01010001 00000000 11001000 00000001 11000000
+     00000100 00110001 00001101 00000000 10001110 00000000
+     00000000 00000000 01111101 10111100 00000000 01000000
+     00000001 00100000 00000000
 
 ## How is publisher-specific consent stored? <a name="publisher-consent-stored"></a>
 
