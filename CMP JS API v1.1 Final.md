@@ -259,6 +259,7 @@ CAUTION: This is not a base64 encoding, but a base64url encoding, which is sligh
 ### VendorConsentData <a name="vendorconsentdata"></a>
 
 This object contains the entire [base64url-encoded](https://tools.ietf.org/html/rfc4648#section-5) string of the vendor consent data:
+
 CAUTION: This is not a base64 encoding, but a base64url encoding, which is slightly different. Please refers to the link above for clarification.
          Also, the string of the vendor consent data must be treated as a bytes string, not a character string
 
