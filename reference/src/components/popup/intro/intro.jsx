@@ -42,13 +42,6 @@ export default class Intro extends Component {
         </div>
         <div class={style.options}>
           <Button
-            class={style.rejectAll}
-            invert={true}
-            onClick={onRejectAll}
-          >
-            <LocalLabel localizeKey='rejectAll'>I do not accept</LocalLabel>
-          </Button>
-          <Button
             class={style.acceptAll}
             onClick={onAcceptAll}
           >
@@ -57,7 +50,7 @@ export default class Intro extends Component {
         </div>
         <div class={style.bottom}>
           <a class={style.showPurposes} onClick={onShowPurposes}>
-            <LocalLabel localizeKey='showPurposes'>show purposes</LocalLabel>
+            <LocalLabel localizeKey='showPurposes'>Customize my privacy settings</LocalLabel>
           </a>
         </div>
 
