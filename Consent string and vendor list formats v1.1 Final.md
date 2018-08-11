@@ -239,8 +239,8 @@ Features are informational and should be shown on the UI as a data use by that v
   </tr>
   <tr>
     <td>2</td>
-    <td>Personalisation</td>
-    <td>The collection and processing of information about user of a site to subsequently personalize advertising for them in other contexts, i.e. on other sites or apps, over time. Typically, the content of the site or app is used to make inferences about user interests, which inform future selections.</td>
+    <td>Ad and content personalisation</td>
+    <td>The collection and processing of information about user of a site to subsequently personalize advertising or content for them in other contexts, i.e. on other sites or apps, over time. Typically, the content of the site or app is used to make inferences about user interests, which inform future selections of advertising or content.</td>
   </tr>
   <tr>
     <td>3</td>
