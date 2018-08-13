@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import style from './footer.less';
 import Label from '../label/label';
 import CloseButton from '../closebutton/closebutton';
+import event_logger from '../../lib/event_logger';
 
 class LocalLabel extends Label {
   static defaultProps = {
@@ -27,12 +28,20 @@ export default class Footer extends Component {
     toggleConsentToolShowing(true);
   };
 
+  logCloseEvent = () => {
+    event_logger('close');
+  }
+
   render(props) {
     const { store } = props;
     var { isFooterShowing, forceShowUI } = store;
 
     if (forceShowUI) {
       isFooterShowing = false;
+    }
+
+    if (isFooterShowing) {
+      this.logCloseEvent();
     }
 
     return (

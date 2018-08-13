@@ -41,8 +41,15 @@ export default class Details extends Component {
 
   handleSave = () => {
     const { onSave } = this.props;
-    event_logger("exit");
+    event_logger("save_and_exit");
     onSave();
+  }
+
+
+  handleSelectAllPurposes = () => {
+    const {selectAllPurposes} = this.props.store;
+    event_logger("enable_all_purposes");
+    selectAllPurposes(true);
   }
 
   render(props, state) {
@@ -83,7 +90,7 @@ export default class Details extends Component {
           </div>
           }
           <div class={style.item, style.right}>
-            <Button class={style.button} onClick={selectAllPurposes}>
+            <Button class={style.button} onClick={this.handleSelectAllPurposes}>
               <LocalLabel localizeKey='savePurposes'>Enable all purposes</LocalLabel>
             </Button>
           </div>
