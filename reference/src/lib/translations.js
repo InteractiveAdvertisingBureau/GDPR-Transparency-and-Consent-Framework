@@ -67,7 +67,7 @@ export default {
       description: 'Wir und unsere Partner verwenden sogenannte Cookies (kleine Textdateien) im Webbrowser um zu verstehen, was unsere Besucher interessiert und entsprechend relevante Inhalte und Werbung anbieten zu können. Zukünftig benötigen wir wahrscheinlich ihr/euer Einverständnis dazu. Ein Beispiel, wie dies aussehen könnte, finden sie/findet ihr unter dieser Erklärung ',
       acceptAll: 'Alle Cookies akzeptieren',
       rejectAll: 'Alle Cookies ablehnen',
-      showPurposes: 'Verwendungszwecke zeigen'
+      showPurposes: 'Datenschutzeinstellungen anpassen'
     },
     details: {
       title: 'Datenschutzeinstellungen',
@@ -137,7 +137,7 @@ export default {
       description: 'Nos partenaires et nous-mêmes utilisons différentes technologies, telles que les cookies, pour personnaliser les contenus et les publicités, proposer des fonctionnalités sur les réseaux sociaux et analyser le trafic. Merci de cliquer sur le bouton ci-dessous pour donner votre accord. Vous pouvez changer d’avis et modifier vos choix à tout moment.',
       acceptAll: 'J&#039;accepte',
       rejectAll: 'Je refuse',
-      showPurposes: 'Afficher toutes les utilisations prévues'
+      showPurposes: 'personnaliser les paramètres de confidentialité'
     },
     details: {
       title: '',
@@ -207,7 +207,7 @@ export default {
       description: 'Tanto nuestros asociados como nosotros utilizamos cookies en nuestro sitio web para así poder personalizar el contenido, publicidad y funciones internas disponibles en el mismo. Al hacer click en "Guardar y Salir" consientes el uso de esta tecnología en nuestro sitio web. Si cambias de opinión y deseas personalizar tu consentimiento puedes hacerlo siempre que vuelvas a nuestro sitio web.',
       acceptAll: 'Acepto',
       rejectAll: 'No acepto',
-      showPurposes: 'Más información'
+      showPurposes: 'personalizar la configuración de privacidad'
     },
     details: {
       title: '',
@@ -277,7 +277,7 @@ export default {
       description: 'Wij en onze partners gebruiken technologie op onze site, zoals cookies om inhoud en advertenties te personaliseren, social media functies te bieden en ons websiteverkeer te analyseren. Klik hieronder om akkoord te gaan met het gebruik van deze technologie op het internet. U kunt op elk moment van gedachten veranderen en uw instemmingskeuzes wijzigen door terug te keren naar deze site.',
       acceptAll: 'Ik accepteer',
       rejectAll: 'Ik accepteer niet',
-      showPurposes: 'Meer informatie'
+      showPurposes: 'pas privacy-instellingen aan'
     },
     details: {
       title: '',

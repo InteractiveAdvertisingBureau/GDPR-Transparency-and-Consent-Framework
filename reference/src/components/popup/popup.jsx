@@ -44,6 +44,7 @@ export default class Popup extends Component {
   };
 
   handleShowDetails = () => {
+    event_logger("customize_purposes");
     this.setState({
       selectedPanelIndex: SECTION_DETAILS
     });
