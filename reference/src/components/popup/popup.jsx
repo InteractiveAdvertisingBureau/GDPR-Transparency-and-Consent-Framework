@@ -15,7 +15,7 @@ export default class Popup extends Component {
   };
 
   onAcceptAll = () => {
-    event_logger("accepted_all");
+    event_logger("cmp_accepted_all");
     const { store, onSave } = this.props;
     store.selectAllVendors(true);
     store.selectAllPurposes(true);
@@ -24,7 +24,7 @@ export default class Popup extends Component {
   };
 
   onRejectAll = () => {
-    event_logger("rejected_all");
+    event_logger("cmp_rejected_all");
     const { store, onSave } = this.props;
     store.selectAllVendors(false);
     store.selectAllPurposes(false);
@@ -44,7 +44,7 @@ export default class Popup extends Component {
   };
 
   handleShowDetails = () => {
-    event_logger("customize_purposes");
+    event_logger("cmp_customize_purposes");
     this.setState({
       selectedPanelIndex: SECTION_DETAILS
     });

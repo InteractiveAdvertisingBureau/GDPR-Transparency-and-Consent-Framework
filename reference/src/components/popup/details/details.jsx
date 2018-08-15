@@ -41,14 +41,14 @@ export default class Details extends Component {
 
   handleSave = () => {
     const { onSave } = this.props;
-    event_logger("save_and_exit");
+    event_logger("cmp_save_and_exit");
     onSave();
   }
 
 
   handleSelectAllPurposes = () => {
     const {selectAllPurposes} = this.props.store;
-    event_logger("enable_all_purposes");
+    event_logger("cmp_enable_all_purposes");
     selectAllPurposes(true);
   }
 
