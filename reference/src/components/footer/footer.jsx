@@ -29,7 +29,7 @@ export default class Footer extends Component {
   };
 
   logCloseEvent = () => {
-    event_logger('close');
+    event_logger('cmp_close');
   }
 
   render(props) {
