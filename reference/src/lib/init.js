@@ -30,7 +30,7 @@ export function init(configUpdates) {
       }
 
       if (showUI) {
-        event_logger("cmp_opened");
+        event_logger("cmp_show");
       }
 
       // Initialize the store with all of our consent data
