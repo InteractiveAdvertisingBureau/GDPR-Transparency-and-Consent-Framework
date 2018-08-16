@@ -29,10 +29,6 @@ export function init(configUpdates) {
          showUI = false;
       }
 
-      if (showUI) {
-        event_logger("cmp_show");
-      }
-
       // Initialize the store with all of our consent data
       const store = new Store({
         cmpVersion: CMP_VERSION,
@@ -69,7 +65,8 @@ export function init(configUpdates) {
       // Render the UI
       const App = require('../components/app').default;
       if (showUI) {
-	render(<App store={store} notify={cmp.notify} />, document.body);
+        event_logger("cmp_show");
+        render(<App store={store} notify={cmp.notify} />, document.body);
       }
 
       // Notify listeners that the CMP is loaded
