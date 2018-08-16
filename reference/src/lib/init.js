@@ -1,3 +1,6 @@
+
+import event_logger from './event_logger';
+
 import { h, render } from 'preact';
 import Promise from 'promise-polyfill';
 import Store from './store';
@@ -21,9 +24,13 @@ export function init(configUpdates) {
   return readVendorConsentCookie()
     .then(vendorConsentData => {
       let publisherConsentData = readPublisherConsentCookie();
-      let showUI  = true;
+      let showUI = true;
       if (typeof vendorConsentData != 'undefined' || typeof publisherConsentData != 'undefined') {
          showUI = false;
+      }
+
+      if (showUI) {
+        event_logger("cmp_opened");
       }
 
       // Initialize the store with all of our consent data

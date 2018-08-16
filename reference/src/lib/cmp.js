@@ -1,6 +1,4 @@
 
-import event_logger from './event_logger';
-
 import log from './log';
 import config from './config';
 import {
@@ -130,7 +128,6 @@ export default class Cmp {
 		 */
 		showConsentTool: (_, callback = () => {}) => {
 			this.store.toggleConsentToolShowing(true);
-      event_logger("cmp_opened");
 			callback(true);
 		},
 
