@@ -38,7 +38,7 @@ In February 2017, the IAB Europe assembled parties representing both the supply 
 
 ## About the Transparency & Consent Framework <a name="About-the-Framework"></a>
 
-The scope of the technical working group?s initiative increased to include a technical industry solution to allow website operators to:
+The scope of the technical working group's initiative increased to include a technical industry solution to allow website operators to:
 1.  Control the vendors they wish to allow to access their users? browsers (for setting and reading cookies) and process their personal data and disclose these choices to other parties in the online advertising ecosystem
 2. Seek user consent under the ePrivacy Directive (for setting cookies or similar technical applications that access information on a device) and/or the GDPR in line with applicable legal requirements and signal the consent status through the online advertising ecosystem
  
@@ -74,7 +74,7 @@ For purposes of this documentation, the following terms have the following defin
 
 * "**_Daisybit_**" means information compressed into a binary value and passed throughout the online advertising ecosystem through the OpenRTB specification.
 
-* "**_Vendor_**" means a third party that a website operator is using in connection with surfacing content to its end users that either (1) accesses an end user?s device or browser; and/or (2) collects or receives personal data about the website operator?s end users.  As such, a vendor need not be a Controller.
+* "**_Vendor_**" means a third party that a website operator is using in connection with surfacing content to its end users that either (1) accesses an end user's device or browser; and/or (2) collects or receives personal data about the website operator's end users.  As such, a vendor need not be a Controller.
 
 ## License <a name="License"></a>
 
@@ -116,7 +116,7 @@ Learn more about IAB Europe here: [https://www.iabeurope.eu/](https://www.iabeur
 
 ## What is supported by this API? <a name="supported-API"></a>
 
-This API can be used by on-page javascript tags to obtain consent and vendor list information from the Consent Manager Provider. This API draft takes the approach of specifying the minimum-necessary functionality that the CMP needs to provide DSP?s and SSP?s vendor consent info. There?s a large potential surface area of publisher-CMP functionality (including publisher UI control and configuration) that is best provided by CMP-specific, rather than standardized, API?s.
+This API can be used by on-page javascript tags to obtain consent and vendor list information from the Consent Manager Provider. This API draft takes the approach of specifying the minimum-necessary functionality that the CMP needs to provide DSP's and SSP's vendor consent info. There's a large potential surface area of publisher-CMP functionality (including publisher UI control and configuration) that is best provided by CMP-specific, rather than standardized, API's.
 
 ## What API will need to be provided by the CMP? <a name="API-provided"></a>
 
@@ -347,15 +347,15 @@ Typically, code will not need to check if the CMP script is loaded. Code can sim
 
 3. When the CMP script loads, it will:
 
-    6. Set the **__cmp** function to the CMP?s full API implementation.
+    6. Set the **__cmp** function to the CMP's full API implementation.
 
-    7. Replace the stub?s postMessage handler with the full CMP handler.
+    7. Replace the stub's postMessage handler with the full CMP handler.
 
     8. Run any queued calls using the parameters stored by the stub, in the order received.
 
 ## Is there a sample CMP stub? <a name="CMP-stub-sample"></a>
 
-This code should be as close-to-top as possible in the header. The tag also includes the postMessage handler [as described below.](#heading=h.b8yti5hje2qu)  In the snippet provided by a CMP to the publisher, the CMP must replace the value of the gdprAppliesGlobally variable with the value as determined by the publisher in the CMP?s publisher configuration.  Additionally, it is recommended that the CMP provide a minified version of the snippet to publishers.
+This code should be as close-to-top as possible in the header. The tag also includes the postMessage handler [as described below.](#heading=h.b8yti5hje2qu)  In the snippet provided by a CMP to the publisher, the CMP must replace the value of the gdprAppliesGlobally variable with the value as determined by the publisher in the CMP's publisher configuration.  Additionally, it is recommended that the CMP provide a minified version of the snippet to publishers.
 
 If immutable-version URL's are used for cmp.js, [a subresource integrity attribute](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) should be provided by the CMP and used.
 

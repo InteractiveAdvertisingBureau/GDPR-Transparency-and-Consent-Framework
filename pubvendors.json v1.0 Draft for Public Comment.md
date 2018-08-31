@@ -42,7 +42,7 @@ This specification "pubvendors.json" is a draft for public comment. Please submi
 
 ## About the Transparency & Consent Framework <a name="About-the-Framework"></a>
 
-The scope of the technical working group?s initiative increased to include a technical industry solution to allow website operators to:
+The scope of the technical working group's initiative increased to include a technical industry solution to allow website operators to:
 1.  Control the vendors they wish to allow to access their users? browsers (for setting and reading cookies) and process their personal data and disclose these choices to other parties in the online advertising ecosystem
 2. Seek user consent under the ePrivacy Directive (for setting cookies or similar technical applications that access information on a device) and/or the GDPR in line with applicable legal requirements and signal the consent status through the online advertising ecosystem
  
@@ -78,7 +78,7 @@ For purposes of this documentation, the following terms have the following defin
 
 * "**_Daisybit_**" means information compressed into a binary value and passed throughout the online advertising ecosystem through the OpenRTB specification.
 
-* "**_Vendor_**" means a third party that a website operator is using in connection with surfacing content to its end users that either (1) accesses an end user?s device or browser; and/or (2) collects or receives personal data about the website operator?s end users.  As such, a vendor need not be a Controller.
+* "**_Vendor_**" means a third party that a website operator is using in connection with surfacing content to its end users that either (1) accesses an end user's device or browser; and/or (2) collects or receives personal data about the website operator's end users.  As such, a vendor need not be a Controller.
 
 ## License <a name="License"></a>
 
@@ -123,7 +123,7 @@ The high level goals of "pubvendors.json" supports the following:
 
 5. Enable publishers to limit features on a per vendor basis
 
-## Publishers concerns about IAB?s GDPR Transparency & Consent Framework version 1.1 <a name="concerns"></a>
+## Publishers concerns about IAB's GDPR Transparency & Consent Framework version 1.1 <a name="concerns"></a>
 
 As understood by IAB Europe Transparency and Consent Steering Group and IAB Tech Lab GDPR Commit Group, the following are the core publisher concerns:
 
@@ -135,7 +135,7 @@ Transparency and consent may not be seen as valid when many vendors and purposes
 
     * Surfacing thousands of vendors with broad rights to use data w/out tailoring those rights may be too many vendors/permissions
 
-    * Concern that even if a user consents to vendors or doesn?t opt out of a vendor?s processing and broad purposes where the vendor asks a user to, a user may not fully understand what it was told/consented to and publishers may be found to have not done a good enough job limiting the further use of that data for broader arguably more privacy-intrusive uses
+    * Concern that even if a user consents to vendors or doesn?t opt out of a vendor's processing and broad purposes where the vendor asks a user to, a user may not fully understand what it was told/consented to and publishers may be found to have not done a good enough job limiting the further use of that data for broader arguably more privacy-intrusive uses
 
     * Ideally, publishers would be able to pick a small subset of vendors to which they give broader rights ("tier 1") and then limit the rights of the rest of their vendors (?tier 2?) since publishers recognize that delivering ads to their users,either through direct online deals or programmatically, requires more vendors than those in ?tier 1? 
 
@@ -143,19 +143,19 @@ Transparency and consent may not be seen as valid when many vendors and purposes
 
     * Thus, publishers need a way to differentiate between those 2 tiers of vendors in what they surface to a user and in what they signal to vendors on page and downstream and upstream through creatives and need to have an audit trail to show this
 
-* Control of purpose and data use by vendor. Publishers and vendors need a signal to communicate to the vendors, purposes and legal bases that have been disclosed on a publisher?s site. Publishers control the disclosures to their users and therefore which vendors can lawfully process the data of users visiting their properties
+* Control of purpose and data use by vendor. Publishers and vendors need a signal to communicate to the vendors, purposes and legal bases that have been disclosed on a publisher's site. Publishers control the disclosures to their users and therefore which vendors can lawfully process the data of users visiting their properties
 
     * For example vendor 1 has permission for purposes 1, 2 and 3 but vendor 2 only has permission for purpose 3 only
 
     * Example uses publishers may wish to control: 
 
-        * use of a user?s data processed through the delivery, or measurement, of an advertisement or the opportunity to deliver, or measure, of an advertisement to inform future personalisation for such user based on preferences or interests known or inferred from the data collected (inferences about a user can be aggregated across sites)
+        * use of a user's data processed through the delivery, or measurement, of an advertisement or the opportunity to deliver, or measure, of an advertisement to inform future personalisation for such user based on preferences or interests known or inferred from the data collected (inferences about a user can be aggregated across sites)
 
 ### Disagreement over legal basis (LI vs. consent) <a name="disagreement"></a>
 
-A publisher may disagree with a vendor?s legal analysis on which legal basis the vendor can rely upon for a defined purpose
+A publisher may disagree with a vendor's legal analysis on which legal basis the vendor can rely upon for a defined purpose
 
-* Publishers can?t dictate the legal basis on which a vendor (that?s a controller) relies (that?s a legal analysis that has to be made by each controller)
+* Publishers can?t dictate the legal basis on which a vendor (that's a controller) relies (that's a legal analysis that has to be made by each controller)
 
 * But Publishers can, based on the legal bases disclosed by a vendor for each purpose (registered in the global vendor list), either choose not to work with that vendor or allow vendors which use one or other legal basis  ( LI or consent)
 
@@ -197,7 +197,7 @@ The CMP should check use the "pubvendors.json" as the base ruleset for what vend
 
 An SSP/DSP only needs to support version 1.0 of the spec if they are interested in supporting legitimate interest.   The GDPR Consent String contains a more restrictive set of information and downstream parties are compliant if they follow approved vendor/purposes in the protocol.  
 
-If an SSP/DSP does want to support vendors relying on legitimate interest they can use "pubvendors.json" as an out of band solution to augment the Consent String.  The vendor needs to build a system to crawl for the existence of the file building a database mapping between the publisher?s domain and rules/content within the file.  If a publisher whitelists a vendor claiming legitimate interest then Legitimate Interest can take precedence over the information in the Consent String.  The SSP/DSP should regularly sync the ?pubvendors.json?  rules in order to stay up to date with publisher changes.
+If an SSP/DSP does want to support vendors relying on legitimate interest they can use "pubvendors.json" as an out of band solution to augment the Consent String.  The vendor needs to build a system to crawl for the existence of the file building a database mapping between the publisher's domain and rules/content within the file.  If a publisher whitelists a vendor claiming legitimate interest then Legitimate Interest can take precedence over the information in the Consent String.  The SSP/DSP should regularly sync the ?pubvendors.json?  rules in order to stay up to date with publisher changes.
 
 # Pubvendors.json Version 1.0 <a name="v1.0"></a>
 
