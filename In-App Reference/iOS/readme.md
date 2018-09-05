@@ -2,7 +2,7 @@
 # CMP Wrapper Implementation Guide for iOS App Publishers
 
 
-* Configure the consent tool by providing a `cosentToolURL` to `CMPConsentToolViewController`.
+* Configure the consent tool by providing a `consentToolURL` to `CMPConsentToolViewController`.
 	* `consentToolURL`: `NSURL` 
 		* It is used to create and load the request into the `WKWebView` – it is the request for the consent webpage. This property is mandatory.
 		* `cmpPresent`:`BOOL`
