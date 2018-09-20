@@ -8,9 +8,20 @@ import Panel from '../panel/panel';
 const SECTION_INTRO = 0;
 const SECTION_DETAILS = 1;
 
+let lastScrollPositionY = 0;
+
 export default class Popup extends Component {
 	state = {
-		selectedPanelIndex: SECTION_INTRO
+		selectedPanelIndex: SECTION_INTRO,
+		transformTop: 0
+	};
+
+	componentDidMount = () => {
+		window.addEventListener('scroll', this.handleScroll);
+	};
+
+	componentWillUnmount = () => {
+		window.removeEventListener('scroll', this.handleScroll);
 	};
 
 	onAcceptAll = () => {
@@ -24,6 +35,14 @@ export default class Popup extends Component {
 	onCancel = () => {
 		this.setState({
 			selectedPanelIndex: SECTION_INTRO
+		});
+	};
+
+	handleScroll = () => {
+		lastScrollPositionY = window.scrollY;
+
+		this.setState({
+			transformTop: lastScrollPositionY
 		});
 	};
 
@@ -42,8 +61,13 @@ export default class Popup extends Component {
 	render(props, state) {
 		const { store } = props;
 		const { selectedPanelIndex } = state;
+		const { transformTop } = state;
 		const { isConsentToolShowing } = store;
 
+		const transformStyle = { 
+			transform: `translate(0, ${transformTop}px)` 
+		};
+		
 		return (
 			<div
 				class={style.popup}
@@ -53,7 +77,10 @@ export default class Popup extends Component {
 					class={style.overlay}
 					onClick={this.handleClose}
 				/>
-				<div class={style.content}>
+				<div
+					class={style.content}
+					style={transformStyle}
+				>
 					<Panel selectedIndex={selectedPanelIndex}>
 						<Intro
 							onAcceptAll={this.onAcceptAll}

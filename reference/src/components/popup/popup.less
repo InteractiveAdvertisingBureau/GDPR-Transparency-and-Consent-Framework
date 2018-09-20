@@ -2,36 +2,25 @@
 
 .popup {
     display: none;
-    position: fixed;
-    bottom: 0;
+    position: relative;
     left: 0;
     right: 0;
     z-index: 99999;
     justify-content: center;
     align-items: center;
+    transform: translate(0, 0);
 }
 .overlay {
     display: none;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .content {
-    width: 95%;
-    max-width: 80vw;
+    width: 100%;
     background: white;
     align-items: center;
     position: relative;
-    box-shadow: rgba(0, 0, 0, 0.75) 0 -4px 21px -4px;
-    border-radius: 5px 5px 0 0;
-    border-top: 5px solid #d50000;
-
+    transition: transform .2s ease;
     @media @smartphone {
         width: 100%;
-        max-width: 95vw;
     }
 }

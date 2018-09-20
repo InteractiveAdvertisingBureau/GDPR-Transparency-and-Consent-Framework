@@ -1,19 +1,40 @@
 @import '../../../style/variables';
 
 div.intro {
-	padding: 14px 27px;
+	padding: 7px 27px;
 	max-height: 100%;
-
+	
 	.introWrap {
 		display: flex;
 		flex-direction: row;
 		flex: 1;
 		align-items: center;
+		padding: 0 0 0 85px;
+		min-height: 66px;
+		position: relative;
+		&:before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 0;
+			width: 53px;
+			height: 53px;
+			background: url('https://files.cdn.spilcloud.com/iab/1536838597_character-family.png');
+			background-size: 53px 53px;
+			transform: translate(0, -50%);
+		}
+		// Override img for other portals
+		[data-theme="teens"] &:before {
+			background-image: url('https://files.cdn.spilcloud.com/iab/1536838597_character-teens.png');
+		}
 		@media @smartphone {
 			display: block;
+			padding-left: 0;
+			&:before {
+				display: none;
+			}
 		}
 	}
-
 	.title {
 		font-size: 22px;
 		font-weight: 400;
@@ -24,47 +45,30 @@ div.intro {
 	}
 	.description {
 		margin: 1em 0;
-		overflow: auto;
-		flex: 75% 0 0;
-		font-size: 13px;
+		flex: 80% 0 0;
+		font-size: 14px;
 	}
 	.options {
 		padding-bottom: 10px;
 	}
-	.rejectAll {
-		font-size: 18px;
-		padding: 2px 0 5px 25px;
+	.option {
 		cursor: pointer;
 		text-decoration: underline;
-		color:#696969;
+		color:#ef690f;
 		position: relative;
+		padding: 0 5px;
 		&:hover {
 			text-decoration: none;
 		}
-		&:before {
-			content: '';
-			background: url(//images.cdn.spilcloud.com/images/1528358577_gdprsettingsicon.png);
-			background-size: 17px 19px;
-			width: 17px;
-			height: 19px;
-			position: absolute;
-			left: 0;
-			top: 50%;
-			margin-top: -11px;
-		}
-		@media @smartphone {
-			margin: 1em 0;
-			display: block;
-		}
 	}
 	.acceptBtnWrap {
-		flex: 25% 0 0;
+		flex: 20% 0 0;
 		text-align: center;
 	}
 	.acceptAll {
-		font-size: 26px;
+		font-size: 16px;
 		box-shadow: 2px 2px 0 #d55c00;
-		padding: 9px 40px;
+		padding: 10px 37px;
 		font-weight: 400;
 		@media @smartphone {
 			width: 100%;
