@@ -1,31 +1,77 @@
-div.intro {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 0 8%;
-	flex: 1;
-	max-height: 100%;
+@import '../../../style/variables';
 
+div.intro {
+	padding: 7px 27px;
+	max-height: 100%;
+	
+	.introWrap {
+		display: flex;
+		flex-direction: row;
+		flex: 1;
+		align-items: center;
+		padding: 0 0 0 85px;
+		min-height: 66px;
+		position: relative;
+		&:before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 0;
+			width: 53px;
+			height: 53px;
+			background: url('https://files.cdn.spilcloud.com/iab/1536838597_character-family.png');
+			background-size: 53px 53px;
+			transform: translate(0, -50%);
+		}
+		// Override img for other portals
+		[data-theme="teens"] &:before {
+			background-image: url('https://files.cdn.spilcloud.com/iab/1536838597_character-teens.png');
+		}
+		@media @smartphone {
+			display: block;
+			padding-left: 0;
+			&:before {
+				display: none;
+			}
+		}
+	}
 	.title {
-		font-size: 30px;
-		font-weight: bold;
-		text-align: center;
+		font-size: 22px;
+		font-weight: 400;
+		border-bottom: 1px solid #e8e8e8;
+		padding: 0 0 8px;
+		color: #0065a0;
+		width: 100%;
 	}
 	.description {
-		margin: 4% 0;
-		overflow: auto;
+		margin: 1em 0;
+		flex: 80% 0 0;
+		font-size: 14px;
 	}
 	.options {
-		display: flex;
-		flex-shrink: 0;
-		width: 100%;
 		padding-bottom: 10px;
 	}
-	.rejectAll {
-		flex: 1;
-		margin-right: 10px;
+	.option {
+		cursor: pointer;
+		text-decoration: underline;
+		color:#ef690f;
+		position: relative;
+		padding: 0 5px;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+	.acceptBtnWrap {
+		flex: 20% 0 0;
+		text-align: center;
 	}
 	.acceptAll {
-		flex: 1;
+		font-size: 16px;
+		box-shadow: 2px 2px 0 #d55c00;
+		padding: 10px 37px;
+		font-weight: 400;
+		@media @smartphone {
+			width: 100%;
+		}
 	}
 }

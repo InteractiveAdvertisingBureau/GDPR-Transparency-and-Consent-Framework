@@ -86,7 +86,7 @@ const commonConfig = {
 							sourceMap: CSS_MAPS,
 							importLoaders: 1,
 							minimize: true,
-							localIdentName: '[name]_[local]--[hash:base64:5]'
+							localIdentName: '[name]_[local]'
 						}
 					},
 					{
