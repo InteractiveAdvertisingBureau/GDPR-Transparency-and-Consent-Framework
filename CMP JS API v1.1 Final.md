@@ -458,10 +458,10 @@ If immutable-version URL's are used for cmp.js, [a subresource integrity attribu
 
         });
 
-    }
-    catch(ignore) { /* Ignore messages we don't recognize */ }
+      }
 
-  }
+    } catch(ignore) { /* Ignore messages we don't recognize */ }
+
 
   if (typeof (__cmp) !== 'function') {
 
@@ -473,9 +473,12 @@ If immutable-version URL's are used for cmp.js, [a subresource integrity attribu
 
   }
 
-})();
+}})();
 
 </script>
+```
+
+```
 ```
 
 ## How can vendors that use iframes call the CMP API from an iframe? <a name="iframe"></a>
