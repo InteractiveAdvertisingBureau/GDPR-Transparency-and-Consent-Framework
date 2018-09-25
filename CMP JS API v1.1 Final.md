@@ -367,16 +367,18 @@ If immutable-version URL's are used for cmp.js, [a subresource integrity attribu
 (function() {
 
   var gdprAppliesGlobally = false;
+  var win = window;
+  var doc = document;
 
   function addFrame() {
 
-    if (!window.frames['__cmpLocator']) {
+    if (!win.frames['__cmpLocator']) {
 
-      if (document.body) {
+      if (doc.body) {
 
-        var body = document.body,
+        var body = doc.body;
 
-            iframe = document.createElement('iframe');
+        var iframe = doc.createElement('iframe');
 
         iframe.style = 'display:none';
 
@@ -408,17 +410,17 @@ If immutable-version URL's are used for cmp.js, [a subresource integrity attribu
 
     __cmp.a = __cmp.a || [];
 
-    if (!b.length) return __cmp.a;
+    if (!b.length) { 
 
-    else if (b[0] === 'ping') {
+      return __cmp.a;
+
+    } else if (b[0] === 'ping') {
 
       b[2]({"gdprAppliesGlobally": gdprAppliesGlobally,
 
         "cmpLoaded": false}, true);
 
-    }
-
-    else {
+    } else {
 
       __cmp.a.push([].slice.apply(b));
 
@@ -430,45 +432,44 @@ If immutable-version URL's are used for cmp.js, [a subresource integrity attribu
 
     var msgIsString = typeof event.data === "string";
 
-    var json = msgIsString ? JSON.parse(event.data) : event.data;
+    try {
 
-    if (json.__cmpCall) {
+      var json = msgIsString ? JSON.parse(event.data) : event.data;
 
-      var i = json.__cmpCall;
+      if (json.__cmpCall) {
 
-      window.__cmp(i.command, i.parameter, function(retValue, success) {
+        var i = json.__cmpCall;
 
-        var returnMsg = {"__cmpReturn": {
+        win.__cmp(i.command, i.parameter, function(retValue, success) {
 
-          "returnValue": retValue,
+          var returnMsg = {"__cmpReturn": {
 
-          "success": success,
+            "returnValue": retValue,
 
-        	"callId": i.callId
+            "success": success,
 
-        }};
+              "callId": i.callId
 
-        event.source.postMessage(msgIsString ?
+          }};
 
-          JSON.stringify(returnMsg) : returnMsg, '*');
+          event.source.postMessage(msgIsString ?
 
-      });
+            JSON.stringify(returnMsg) : returnMsg, '*');
+
+        });
 
     }
+    catch(ignore) { /* Ignore messages we don't recognize */ }
 
   }
 
   if (typeof (__cmp) !== 'function') {
 
-    window.__cmp = stubCMP;
+    win.__cmp = stubCMP;
 
     __cmp.msgHandler = cmpMsgHandler;
 
-    if (window.addEventListener)
-
-      window.addEventListener('message', cmpMsgHandler, false);
-
-    else window.attachEvent('onmessage', cmpMsgHandler);
+      win.addEventListener('message', cmpMsgHandler, false);
 
   }
 
