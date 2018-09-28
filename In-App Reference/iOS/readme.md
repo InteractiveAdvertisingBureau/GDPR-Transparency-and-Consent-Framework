@@ -47,7 +47,7 @@ int purposeId = <purpose id>;
 BOOL purposeConsent = [consentToolViewController.consentToolAPI isPurposeConsentGivenFor:purposeId];
 ````
 
-* To access vendor consent for given vendorId `isVendorConsentGivenFor:` can be used. Return type is YES if consent is given else returns NO.
+* To access vendor consent for given vendorId `isVendorConsentGivenFor:` can be used. Return type is YES if consent is given, else returns NO.
 ````
 int vendorId = <vendor id>;
 BOOL vendorConsent = [consentToolViewController.consentToolAPI isVendorConsentGivenFor:vendorId];

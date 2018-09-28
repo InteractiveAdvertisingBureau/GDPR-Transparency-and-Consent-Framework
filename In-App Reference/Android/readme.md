@@ -1,7 +1,6 @@
 # Implementation Guide for Android App Publishers
 
-* Drag and drop the classes from the `cmpconsenttool` package to your project. You will have to update the copied classes `package` name to point to yours,
- update the `import` where needed and add the `CMPConsentToolActivity` to your `AndroidManifest.xml`
+* Drag and drop the classes from the `cmpconsenttool` package to your project. You will have to update the copied classes `package` name to point to yours, update the `import` where needed and add the `CMPConsentToolActivity` to your `AndroidManifest.xml`
 * Configure the consent tool by providing a set of properties encapsulated in the `CMPSettings` object. Where:
 
 	* `SubjectToGdpr`: Enum that indicates
@@ -12,7 +11,7 @@
 	* `consentString`: If this property is given, it enforces reinitialization with the given string, configured based on the `consentToolURL`. This property is optional.
 
 ```
-CMPSettings cmpSettings = new CMPSettings(SubjectToGdpr.CMPGDPREnabled, “https://consentWebPage”, null);
+CMPSettings cmpSettings = new CMPSettings(SubjectToGdpr.CMPGDPREnabled, "https://consentWebPage", null);
 ```
 
 * In order to start the `CMPConsentToolActivity`, you can call the following method:	`CMPConsentToolActivity.openCmpConsentToolView(cmpSettings, context, onCloseCallback);`
@@ -29,7 +28,7 @@ CMPSettings cmpSettings = new CMPSettings(SubjectToGdpr.CMPGDPREnabled, “https
         * `CMPGDPRDisabled`- value 0, not subject to GDPR
         * `CMPGDPREnabled` - value 1, subject to GDPR
         * `CMPGDPRUnknown` - value -1, unset
-    * CMPPresent: Boolean which indicates if a CMP implementing the `iAB` specification is present in the application. (stored in SharedPreferences under key `IABConsent_CMPPresent`)
+    * CMPPresent: Boolean which indicates if a CMP implementing the `IAB` specification is present in the application. (stored in SharedPreferences under key `IABConsent_CMPPresent`)
     * consentString: The consent string as a websafe base64-encoded string. (stored in SharedPreferences under key `IABConsent_ConsentString`)
     * purposes: String of purposes created from a subset of the decoded consentString converted to binary. (stored in SharedPreferences under key `IABConsent_ParsedPurposeConsents`)
     * vendors: String of vendors created from a subset of the decoded consentString converted to binary. (stored in SharedPreferences under key `IABConsent_ParsedVendorConsents`)
