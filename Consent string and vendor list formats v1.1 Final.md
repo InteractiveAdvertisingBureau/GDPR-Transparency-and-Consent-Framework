@@ -603,7 +603,7 @@ The calculated value for this example is:
 
 Under this proposal, there are two types of publisher-specific consent: service-specific vendor consent, and a publisher's purposes consent for its own data use (if needed). For example, a publisher that wants to set a frequency-capping first-party cookie should request Publisher Purposes Consent for Purpose #1 "Accessing a Device".
 
-Service-specific vendor consent can be implemented (optionally) by a CMP using the same Vendor Consent String Format (as detailed above) with the Host, Path, and/or Cookie Name referencing a first-party cookie (or service-shared 3rd-party cookie).  If a CMP allows a subset of vendors to be configured by a publisher, storage of consent in a service-specific cookie is necessary to avoid clearing previously-given consent (on non-included vendors) on the global cookie.
+Service-specific vendor consent can be implemented (optionally) by a CMP using the same Vendor Consent String Format (as detailed above) with the Host, Path, and/or Cookie Name referencing a first-party cookie (or service-shared 3rd-party cookie).  
 
 The following table indicates which fields are used by which cookie:
 
