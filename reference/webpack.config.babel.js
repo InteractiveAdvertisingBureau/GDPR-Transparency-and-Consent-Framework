@@ -191,6 +191,9 @@ module.exports = [
 				template: 'index.html',
 				chunks: ['cmp']
 			}),
+			new CopyWebpackPlugin([
+				{ from: '../serve.json', to: '.' }
+			]),
 		]).concat(ENV === 'production' ? uglifyPlugin : []),
 	},
 	// Docs config
@@ -231,7 +234,7 @@ module.exports = [
 				chunks: ['portal']
 			}),
 			new CopyWebpackPlugin([
-				{ from: 'docs/assets', to: '.' },
+				{ from: 'docs/assets', to: '.' }
 			])
 		]).concat(ENV === 'production' ? uglifyPlugin : []),
 	}

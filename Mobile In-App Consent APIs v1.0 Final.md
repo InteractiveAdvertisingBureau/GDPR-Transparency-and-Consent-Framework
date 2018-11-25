@@ -39,7 +39,7 @@ This mobile in-app specification is dependent on the following Transparency and 
 
 ## About the Transparency & Consent Framework <a name="About-the-Framework"></a>
 
-The scope of the technical working group?s initiative increased to include a technical industry solution to allow website operators to:
+The scope of the technical working group's initiative increased to include a technical industry solution to allow website operators to:
 1.  Control the vendors they wish to allow to access their users? browsers (for setting and reading cookies) and process their personal data and disclose these choices to other parties in the online advertising ecosystem
 2. Seek user consent under the ePrivacy Directive (for setting cookies or similar technical applications that access information on a device) and/or the GDPR in line with applicable legal requirements and signal the consent status through the online advertising ecosystem
  
@@ -73,7 +73,7 @@ For purposes of this documentation, the following terms have the following defin
 
 * " **_Purposes_** " mean the purposes for which a controller enabled by an online publisher is using personal data collected from,or received by a third party about an end user.
 
-* " **_Vendor_** " means a third party that a publisher is using, directly or indirectly, in connection with surfacing content to its end users that either (1) accesses an end user?s device or browser; and/or (2) collects or receives personal data about the publisher?s end users. As such, a vendor need not be a controller.
+* " **_Vendor_** " means a third party that a publisher is using, directly or indirectly, in connection with surfacing content to its end users that either (1) accesses an end user's device or browser; and/or (2) collects or receives personal data about the publisher's end users. As such, a vendor need not be a controller.
 
 ## Scope of the document and definitions <a name="Scope"></a>
 
@@ -111,7 +111,7 @@ Learn more about IAB Europe here: [https://www.iabeurope.eu/](https://www.iabeur
 
 This API draft specifies the functionality that the Consent Management Provider (CMP) needs to provide publishers and third-party vendors with end user consent information, with particular reference to several SDKs being integrated into the same application of a publisher.
 
-There?s a large potential surface area of publisher-CMP functionality (including UI control and configuration) specific to each CMP that is best provided by the CMP, rather than standardized in APIs. CMPs will provide a variety of additional APIs that will be feature based. This might include eventually functionality for transfering consent across apps or even publishers.
+There's a large potential surface area of publisher-CMP functionality (including UI control and configuration) specific to each CMP that is best provided by the CMP, rather than standardized in APIs. CMPs will provide a variety of additional APIs that will be feature based. This might include eventually functionality for transfering consent across apps or even publishers.
 
 						
 
@@ -170,13 +170,13 @@ Decided to be String, to have the uninitialized status. </td>
   </tr>
   <tr>
     <td>IABConsent_ParsedPurposeConsents</td>
-    <td>String (of ?0? and ?1?) where the character in position N indicates the consent status to purpose ID N as defined in the Global Vendor List.</td>
+    <td>String (of "0" and "1") where the character in position N indicates the consent status to purpose ID N as defined in the Global Vendor List.</td>
     <td>String of consent given to enable simple checking. 
 First character from the left being Purpose 1, ...</td>
   </tr>
   <tr>
     <td>IABConsent_ParsedVendorConsents</td>
-    <td>String (of ?0? and ?1?) where the character in position N indicates the consent status to vendor ID N as defined in the Global Vendor List.</td>
+    <td>String (of "0" and "1") where the character in position N indicates the consent status to vendor ID N as defined in the Global Vendor List.</td>
     <td>String of  consent given to enable simple checking. 
 First character from the left being Vendor 1, ...
 </td>
@@ -342,25 +342,23 @@ Optional:
 
 ### Minimal requirements for a UX
 
-Request initial consent:
+**Request initial consent:**
 
 At app start, before the user can access the app the GDPR consent UI should be shown. The UI should have at least the message as proposed by the IAB GDPR Framework policy, a way to grant consent (where necessary) and instructions where to go to revoke/change consent.
 
-Revoke / change consent
+**Revoke / change consent:**
 
 A UI access (either in app or through settings/app (iOS)) that allows the user to revoke/change the consent using the same UI that the user was asked to provide consent in to begin with
 
-Selecting purposes and access vendorlist
+**Selecting purposes and access vendorlist:**
 
 At least at the same location in the UI as for revoke and change, the purposes (specified by policy) and the vendor list (from GVL) should be surfaced and the user should be able to select consent by purpose or by vendor. (See the IAB provided Web sample UX for an example).
 
-Building an audit track
+**Building an audit track:**
 
-The UX implementation should have all the UI components numbered and tracked in the consent string?s *ConsentString *bits and the used UX language stored in the consent string?s *ConsentLanguage* bits.
+The UX implementation should have all the UI components numbered and tracked in the consent strings *ConsentString *bits and the used UX language stored in the consent strings *ConsentLanguage* bits.
 
 Other parties should adhere to these [Framework implementation guidelines](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/v1.1%20Implementation%20Guidelines.md) where applicable.
-
-
 
 
 ## Future Technical Considerations <a name="future"></a>

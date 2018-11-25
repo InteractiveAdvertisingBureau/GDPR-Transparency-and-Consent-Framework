@@ -152,6 +152,27 @@ The vendor list will be in JSON and hosted at [https://vendorlist.consensu.org/v
 
 Translations of the standard purposes' names and descriptions to non-English languages will be contained in a JSON file including only the 'purposes', 'features', 'vendorListVersion', and 'lastUpdated' keys, and hosted at [https://vendorlist.](https://vendorlist.consensu.org/purposes-language.json)[consensu.org](https://vendorlist.consensu.org/purposes-language.json)[/purposes-](https://vendorlist.consensu.org/purposes-language.json)[*language*](https://vendorlist.consensu.org/purposes-language.json)[.json](https://vendorlist.consensu.org/purposes-language.json) with older versions at [https://vendorlist.consensu.org/v-](https://vendorlist.consensu.org/purposes-language-versionnum.json)*[versionnum*/](https://vendorlist.consensu.org/purposes-language-versionnum.json)[purposes-](https://vendorlist.consensu.org/purposes-language-versionnum.json)[*language*](https://vendorlist.consensu.org/purposes-language-versionnum.json)[.json](https://vendorlist.consensu.org/purposes-language-versionnum.json) where *language* is the two-letter lowercase ISO 639-1 language code.
 
+## What is the URL for Vendor Info (ad serving and asset domains for vendors in the GVL)?
+The Vendor Info file will be in JSON and hosted at [https://vendorlist.consensu.org/vendorinfo.json](https://vendorlist.consensu.org/vendorinfo.json).
+
+
+In this file, the use of the term "AdServers" is representative of the type of domains associated with a vendor that would be used in delivery of assets or script on page, including (but not limited to) ad serving domains.
+
+## What is the format for Vendor Info JSON File?
+```
+{
+	"vendorListVersion": 36,
+	"lastUpdated": "2018-05-30T16:10:05Z",
+	"vendors": [
+ {
+		"id": 1,
+		"name": "Example Company",
+		"AdServers": ["example.company.com (Description, Ad server and tracker)", 
+  }
+  .... and so on for each vendor included in the Global Vendor List
+}
+```
+
 ## What is the process of getting on the global vendor list? <a name="process-vendorlist"></a>
 
 Access [http://advertisingconsent.eu/](http://advertisingconsent.eu/) to register on the global vendor list. Registration guidelines are available on this website as well.
@@ -164,67 +185,36 @@ The JSON format is:
 
 ```
 {
-
-  "vendorListVersion": 0, *// will be incremented each change*
-
-*  *"lastUpdated": "2018-05-28T00:00:00Z",
-
+  "vendorListVersion": 0, // will be incremented each change*
+  "lastUpdated": "2018-05-28T00:00:00Z",
   "purposes": [
-
     { 
-
       "id": 1,
-
       "name": "Storage and access of information",
-
       "description": "The storage of information, or access to information that is already stored, on user device such as accessing advertising identifiers and/or other device identifiers, and/or using cookies or similar technologies.."
-
     },
-
-    *... more purposes from id=2 to currently, id=5 (max, id=24)*
-
-*  *],
-
-  "features" : [
-
-    {
-
-      "id": 1
-
-      "name": "Matching Data to Offline Sources",
-
-       "description": "combining data from offline sources that were initially collected in other contexts"
-
-    },
-
-    *... more purposes from id=2 up to no higher than id=64. Currently there are 3 planned features*
-
+    // ... more purposes from id=2 to currently, id=5 (max, id=24)
   ],
-
-  "vendors": [
-
+  "features" : [
     {
-
-      "id": 1,
-
-      "name": "Vendor Name",
-
-      "purposeIds": [1], *// list of consentable data purposes*
-
-*      *"legIntPurposeIds": [2, 3], *// list of (non-consentable) data purposes that will be used under legitimate interest*
-
-*     ** *"featureIds": [1, 2], // *list of features*
-
-      "policyUrl": "[https://vendorname.com/gdpr.html](https://vendorname.com/gdpr.html)",
-
-      "deletedDate": "2018-05-28T00:00:00Z", *// if present, vendor should be considered deleted after this date/time*
-
+      "id": 1
+      "name": "Matching Data to Offline Sources",
+      "description": "combining data from offline sources that were initially collected in other contexts"
     },
-
-    *... more vendors, expecting several hundred vendors in the initial Global Vendor List*
-
+    // ... more purposes from id=2 up to no higher than id=64. Currently there are 3 planned features*
+  ],
+  "vendors": [
+    {
+      "id": 1,
+      "name": "Vendor Name",
+      "purposeIds": [1], // list of consentable data purposes
+      "legIntPurposeIds": [2, 3], // list of (non-consentable) data purposes that will be used under legitimate interest
+      "featureIds": [1, 2], // list of features
+      "policyUrl": "[https://vendorname.com/gdpr.html](https://vendorname.com/gdpr.html)",
+      "deletedDate": "2018-05-28T00:00:00Z", // if present, vendor should be considered deleted after this date/time
+    },
+    // ... more vendors, expecting several hundred vendors in the initial Global Vendor List*
   ]
-
 }
 ```
 
