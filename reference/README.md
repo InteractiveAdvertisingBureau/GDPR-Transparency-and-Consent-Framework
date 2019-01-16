@@ -41,7 +41,7 @@ yarn dev
 ```
 
 Development server can be accessed at:
-`http://localhost:8080/`
+`http://localhost:6000/`
 
 ## Testing
 
