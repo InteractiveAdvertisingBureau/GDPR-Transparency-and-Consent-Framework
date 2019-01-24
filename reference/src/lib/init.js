@@ -13,7 +13,7 @@ import config from './config';
 import {getColorCSS} from './customizeColor';
 
 const CMP_VERSION = 1;
-const CMP_ID = 1;
+const CMP_ID = 25;
 const COOKIE_VERSION = 1;
 
 export function init(configUpdates) {
