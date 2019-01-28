@@ -9,7 +9,11 @@ import pack from '../../package.json';
 import config from './config';
 
 const CMP_VERSION = 1;
-const CMP_ID = 1;
+
+// CMP_ID is the ID of your consent management provider according to the IAB. Get an ID here: https://advertisingconsent.eu/cmps/
+const CMP_ID = 0;
+
+// The cookie specification version, as determined by the IAB. Current is 1.
 const COOKIE_VERSION = 1;
 
 export function init(configUpdates) {
@@ -66,5 +70,3 @@ export function init(configUpdates) {
 			log.error('Failed to load CMP', err);
 		});
 }
-
-

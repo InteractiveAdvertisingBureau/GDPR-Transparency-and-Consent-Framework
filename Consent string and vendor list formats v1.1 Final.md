@@ -32,12 +32,12 @@
 
 # Introduction <a name="Introduction"></a>
 
-In February 2017, the IAB Europe assembled parties representing both the supply and demand sides of the digital advertising ecosystem, to work collectively on guidance and solutions to the requirements of the General Data Protection Regulation (GDPR).  That working group is known as the GDPR Implementation Working Group (GIG).  One of the sub-groups within the GIG was tasked with developing guidance on consent as a legal basis for processing personal data. Out of that effort, an additional working group was formed to develop a technical solution to the challenge of obtaining and disseminating consumer consent to the various parties relying on it as a legal basis of processing personal data.
+In February 2017, the IAB Europe assembled parties representing both the supply and demand sides of the digital advertising ecosystem, to work collectively on guidance and solutions to the requirements of the General Data Protection Regulation (GDPR). That working group is known as the GDPR Implementation Working Group (GIG). One of the sub-groups within the GIG was tasked with developing guidance on consent as a legal basis for processing personal data. Out of that effort, an additional working group was formed to develop a technical solution to the challenge of obtaining and disseminating consumer consent to the various parties relying on it as a legal basis of processing personal data.
 
 ## About the Transparency & Consent Framework <a name="About-the-Framework"></a>
 
 The scope of the technical working group's initiative increased to include a technical industry solution to allow website operators to:
-1.  Control the vendors they wish to allow to access their users' browsers (for setting and reading cookies) and process their personal data and disclose these choices to other parties in the online advertising ecosystem
+1. Control the vendors they wish to allow to access their users' browsers (for setting and reading cookies) and process their personal data and disclose these choices to other parties in the online advertising ecosystem
 2. Seek user consent under the ePrivacy Directive (for setting cookies or similar technical applications that access information on a device) and/or the GDPR in line with applicable legal requirements and signal the consent status through the online advertising ecosystem
  
 In summary, have one place to go to:
@@ -66,13 +66,13 @@ Resources including policy FAQ, Global Vendor List Registration, and CMP registr
 
 For purposes of this documentation, the following terms have the following definitions: 
 
-* "**_CMP_**" means a company that can read the vendors chosen by a website operator and the consent status of an end user (either service specific (through a first-party cookie) or global (through a third-party cookie).  A CMP is not synonymous with a company that surfaces the user interface to a user (although it can be the same).
+* "**_CMP_**" means a company that can read the vendors chosen by a website operator and the consent status of an end user (either service specific (through a first-party cookie) or global (through a third-party cookie). A CMP is not synonymous with a company that surfaces the user interface to a user (although it can be the same).
 
 * "**_Purposes_**" mean the purposes for which a Controller enabled by a website operator is using personal data collected from (or received by a third party) about an end user.
 
 * "**_Daisybit_**" means information compressed into a binary value and passed throughout the online advertising ecosystem through the OpenRTB specification.
 
-* "**_Vendor_**" means a third party that a website operator is using in connection with surfacing content to its end users that either (1) accesses an end user's device or browser; and/or (2) collects or receives personal data about the website operator's end users.  As such, a vendor need not be a Controller.
+* "**_Vendor_**" means a third party that a website operator is using in connection with surfacing content to its end users that either (1) accesses an end user's device or browser; and/or (2) collects or receives personal data about the website operator's end users. As such, a vendor need not be a Controller.
 
 ## License <a name="License"></a>
 
@@ -86,11 +86,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Disclaimer <a name="Disclaimer"></a>
 
-THE STANDARDS, THE SPECIFICATIONS, THE MEASUREMENT GUIDELINES, AND ANY OTHER MATERIALS OR SERVICES PROVIDED TO OR USED BY YOU HEREUNDER (THE "PRODUCTS AND SERVICES") ARE PROVIDED "AS IS" AND "AS AVAILABLE," AND IAB TECHNOLOGY LABORATORY, INC. ("TECH LAB") MAKES NO WARRANTY WITH RESPECT TO THE SAME AND HEREBY DISCLAIMS ANY AND ALL EXPRESS, IMPLIED, OR STATUTORY WARRANTIES, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AVAILABILITY, ERROR-FREE OR UNINTERRUPTED OPERATION, AND ANY WARRANTIES ARISING FROM A COURSE OF DEALING, COURSE OF PERFORMANCE, OR USAGE OF TRADE.  TO THE EXTENT THAT TECH LAB MAY NOT AS A MATTER OF APPLICABLE LAW DISCLAIM ANY IMPLIED WARRANTY, THE SCOPE AND DURATION OF SUCH WARRANTY WILL BE THE MINIMUM PERMITTED UNDER SUCH LAW.  THE PRODUCTS AND SERVICES DO NOT CONSTITUTE BUSINESS OR LEGAL ADVICE.  TECH LAB DOES NOT WARRANT THAT THE PRODUCTS AND SERVICES PROVIDED TO OR USED BY YOU HEREUNDER SHALL CAUSE YOU AND/OR YOUR PRODUCTS OR SERVICES TO BE IN COMPLIANCE WITH ANY APPLICABLE LAWS, REGULATIONS, OR SELF-REGULATORY FRAMEWORKS, AND YOU ARE SOLELY RESPONSIBLE FOR COMPLIANCE WITH THE SAME.
+THE STANDARDS, THE SPECIFICATIONS, THE MEASUREMENT GUIDELINES, AND ANY OTHER MATERIALS OR SERVICES PROVIDED TO OR USED BY YOU HEREUNDER (THE "PRODUCTS AND SERVICES") ARE PROVIDED "AS IS" AND "AS AVAILABLE," AND IAB TECHNOLOGY LABORATORY, INC. ("TECH LAB") MAKES NO WARRANTY WITH RESPECT TO THE SAME AND HEREBY DISCLAIMS ANY AND ALL EXPRESS, IMPLIED, OR STATUTORY WARRANTIES, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AVAILABILITY, ERROR-FREE OR UNINTERRUPTED OPERATION, AND ANY WARRANTIES ARISING FROM A COURSE OF DEALING, COURSE OF PERFORMANCE, OR USAGE OF TRADE. TO THE EXTENT THAT TECH LAB MAY NOT AS A MATTER OF APPLICABLE LAW DISCLAIM ANY IMPLIED WARRANTY, THE SCOPE AND DURATION OF SUCH WARRANTY WILL BE THE MINIMUM PERMITTED UNDER SUCH LAW. THE PRODUCTS AND SERVICES DO NOT CONSTITUTE BUSINESS OR LEGAL ADVICE.  TECH LAB DOES NOT WARRANT THAT THE PRODUCTS AND SERVICES PROVIDED TO OR USED BY YOU HEREUNDER SHALL CAUSE YOU AND/OR YOUR PRODUCTS OR SERVICES TO BE IN COMPLIANCE WITH ANY APPLICABLE LAWS, REGULATIONS, OR SELF-REGULATORY FRAMEWORKS, AND YOU ARE SOLELY RESPONSIBLE FOR COMPLIANCE WITH THE SAME.
 
 ## About IAB Tech Lab  <a name="About-Tech-Lab"></a>
 
-he IAB Technology Laboratory ("Tech Lab") is a non-profit research and development consortium that produces and provides standards, software, and services to drive growth of an effective and sustainable global digital media ecosystem. Comprised of digital publishers and ad technology firms, as well as marketers, agencies, and other companies with interests in the interactive marketing arena, IAB Tech Lab aims to enable brand and media growth via a transparent, safe, effective supply chain, simpler and more consistent measurement, and better advertising experiences for consumers, with a focus on mobile and "TV"/digital video channel enablement. The IAB Tech Lab portfolio includes the DigiTrust real-time standardized identity service designed to improve the digital experience for consumers, publishers, advertisers, and third-party platforms. Board members include AppNexus, ExtremeReach, Google, GroupM, Hearst Digital Media, Integral Ad Science, Index Exchange, LinkedIn, MediaMath, Microsoft, Moat, Pandora, PubMatic, Quantcast, Telaria, The Trade Desk, and Yahoo! Japan. Established in 2014, the IAB Tech Lab is headquartered in New York City with an office in San Francisco and representation in Seattle and London.
+The IAB Technology Laboratory ("Tech Lab") is a non-profit research and development consortium that produces and provides standards, software, and services to drive growth of an effective and sustainable global digital media ecosystem. Comprised of digital publishers and ad technology firms, as well as marketers, agencies, and other companies with interests in the interactive marketing arena, IAB Tech Lab aims to enable brand and media growth via a transparent, safe, effective supply chain, simpler and more consistent measurement, and better advertising experiences for consumers, with a focus on mobile and "TV"/digital video channel enablement. The IAB Tech Lab portfolio includes the DigiTrust real-time standardized identity service designed to improve the digital experience for consumers, publishers, advertisers, and third-party platforms. Board members include AppNexus, ExtremeReach, Google, GroupM, Hearst Digital Media, Integral Ad Science, Index Exchange, LinkedIn, MediaMath, Microsoft, Moat, Pandora, PubMatic, Quantcast, Telaria, The Trade Desk, and Yahoo! Japan. Established in 2014, the IAB Tech Lab is headquartered in New York City with an office in San Francisco and representation in Seattle and London.
 
 Learn more about IAB Tech Lab here: [https://www.iabtechlab.com/](https://www.iabtechlab.com/)
 
@@ -296,7 +296,7 @@ Features are informational and should be shown on the UI as a data use by that v
   <tr>
     <td>Host</td>
     <td>.consensu.org</td>
-    <td>The DNS resolution for the name cmp-name.mgr.consensu.org will be delegated by the standardizing authority (IAB) to each CMP. CMP's will host their code, API's, and CDN at this domain or subdomains.</td>
+    <td>The DNS resolution for the name cmp-name.mgr.consensu.org will be delegated by the standardizing authority (IAB) to each CMP. CMPs will host their code, APIs, and CDN at this domain or subdomains.</td>
   </tr>
   <tr>
     <td>Path</td>
@@ -329,69 +329,57 @@ The following fields are stored in big-endian format. Example values are provide
   </tr>
   <tr>
     <td>Version</td>
-    <td>6 bits 
-(0-5)</td>
+    <td>6 bits (0-5)</td>
     <td>"1" for this version</td>
     <td>Incremented when consent string format changes</td>
   </tr>
   <tr>
     <td>Created</td>
-    <td>36 bits
-(6-41)</td>
+    <td>36 bits (6-41)</td>
     <td>Epoch deciseconds when consent string was first created</td>
     <td>Deciseconds fits into 36 bits with enough precision to record a 
 user's consent action timing. Javascript: Math.round((new Date()).getTime()/100)</td>
   </tr>
   <tr>
     <td>LastUpdated</td>
-    <td>36 bits
-(42-77)</td>
+    <td>36 bits (42-77)</td>
     <td>Epoch deciseconds when consent string was last updated</td>
     <td></td>
   </tr>
   <tr>
     <td>CmpId</td>
-    <td>12 bits
-(78-89)
-</td>
+    <td>12 bits (78-89)</td>
     <td>Consent Manager Provider ID that last updated the consent string</td>
     <td>A unique ID will be assigned to each Consent Manager Provider</td>
   </tr>
   <tr>
     <td>CmpVersion</td>
-    <td>12 bits
-(90-101)</td>
+    <td>12 bits (90-101)</td>
     <td>Consent Manager Provider version</td>
     <td>Each change to the CMP should receive a new version number, for logging proof of consent</td>
   </tr>
   <tr>
     <td>ConsentScreen</td>
-    <td>6 bits
-(102-107)</td>
+    <td>6 bits (102-107)</td>
     <td>Screen number in the CMP where consent was given</td>
     <td>The screen number is CMP and CmpVersion specific, and is for logging proof of consent</td>
   </tr>
   <tr>
     <td>ConsentLanguage</td>
-    <td>12 bits
-(108-119)</td>
+    <td>12 bits (108-119)</td>
     <td>Two-letter ISO639-1 language code that CMP asked for consent in</td>
     <td>Each letter should be encoded as 6 bits, A=0..Z=25 . This will result in the base64url-encoded bytes spelling out the language code (in uppercase).</td>
   </tr>
   <tr>
     <td>VendorListVersion</td>
-    <td>12 bits
-(120-131)</td>
+    <td>12 bits (120-131)</td>
     <td>Version of vendor list used in most recent consent string update.</td>
     <td>Vendor list versions will be released periodically. 12 bits allows for 78 years of weekly updates.</td>
   </tr>
   <tr>
     <td>PurposesAllowed</td>
-    <td>24 bits
-(132-155)</td>
-    <td>For each Purpose, one bit:
-0=No Consent
-1=Consent</td>
+    <td>24 bits (132-155)</td>
+    <td>For each Purpose, one bit: 0=No Consent 1=Consent</td>
     <td>Purposes are listed in the global Vendor List. Resultant consent value is the "AND" of the applicable bit(s) from this field and a vendor's specific consent bit. Purpose #1 maps to the first (most significant) bit, purpose #24 maps to the last (least significant) bit.</td>
   </tr>
   <tr>
@@ -402,17 +390,14 @@ user's consent action timing. Javascript: Math.round((new Date()).getTime()/100)
   </tr>
   <tr>
     <td>MaxVendorId</td>
-    <td>16 bits
-(156-171)</td>
+    <td>16 bits (156-171)</td>
     <td>The maximum VendorId for which consent values are given.</td>
     <td>VendorIds are numbered 1 to MaxVendorId. Allows the consent string  to be interpreted without waiting for the vendor list fetch.</td>
   </tr>
   <tr>
     <td>EncodingType</td>
-    <td>1 bit
-(172)</td>
-    <td>0=BitField
-1=Range</td>
+    <td>1 bit (172)</td>
+    <td>0=BitField 1=Range</td>
     <td>The consent encoding used. Either a BitFieldSection or RangeSection follows. Consent string encoding logic should choose the encoding that results in the smaller output.</td>
   </tr>
   <tr>
@@ -423,11 +408,8 @@ user's consent action timing. Javascript: Math.round((new Date()).getTime()/100)
   </tr>
   <tr>
     <td>BitField</td>
-    <td>MaxVendorId bits
-(173-...)</td>
-    <td>For each Vendor, one bit:
-0=No Consent
-1=Consent</td>
+    <td>MaxVendorId bits (173-...)</td>
+    <td>For each Vendor, one bit: 0=No Consent 1=Consent</td>
     <td>The consent value for each VendorId from 1 to MaxVendorId</td>
   </tr>
   <tr>
@@ -439,22 +421,18 @@ user's consent action timing. Javascript: Math.round((new Date()).getTime()/100)
   </tr>
   <tr>
     <td>DefaultConsent</td>
-    <td>1 bit
-(173)</td>
-    <td>0=No Consent
-1=Consent</td>
+    <td>1 bit (173)</td>
+    <td>0=No Consent 1=Consent</td>
     <td>Default consent for VendorIds not covered by a RangeEntry. VendorIds covered by a RangeEntry have a consent value the opposite of DefaultConsent. </td>
   </tr>
   <tr>
     <td>NumEntries</td>
-    <td>12 bits
-(174-185)</td>
+    <td>12 bits (174-185)</td>
     <td>Number of entries to follow</td>
     <td>NumEntries instances of RangeEntry follow.</td>
   </tr>
   <tr>
-    <td>RangeEntry
-(repeated NumEntries times, indicated by [idx])</td>
+    <td>RangeEntry (repeated NumEntries times, indicated by [idx])</td>
     <td></td>
     <td></td>
     <td>A single or range of VendorIds, whose consent value is the opposite of DefaultConsent. All VendorIds must be between 1 and MaxVendorId.</td>
@@ -462,8 +440,7 @@ user's consent action timing. Javascript: Math.round((new Date()).getTime()/100)
   <tr>
     <td>SingleOrRange[idx]</td>
     <td>1 bit</td>
-    <td>0=Single VendorId
-1=VendorId range</td>
+    <td>0=Single VendorId 1=VendorId range</td>
     <td>Whether a single VendorId or a start/end range of VendorIds is given</td>
   </tr>
   <tr>
@@ -481,7 +458,7 @@ user's consent action timing. Javascript: Math.round((new Date()).getTime()/100)
   <tr>
     <td>EndVendorId[idx]</td>
     <td>16 bits</td>
-    <td>The end of an inclusive range of VendorIds </td>
+    <td>The end of an inclusive range of VendorIds</td>
     <td>Exclusive with SingleVendorId. Must be paired with a StartVendorId.</td>
   </tr>
 </table>
@@ -595,13 +572,31 @@ Example consent string field values for the case:
     <td>0000000000001001</td>
   </tr>
   <tr>
-    <td>base64url-encoded consent string value</td>
+    <td>fillbits</td>
     <td></td>
-    <td></td>
-    <td>BOEFEAyOEFEAyAHABDENAI4AAAB9vABAASA</td>
+    <td>The binary bits should be padded at the end with zeroes to the nearest multiple of 8 bits</td>
+    <td>00000</td>
   </tr>
 </table>
 
+### Concatenated cookie value field bits
+
+The complete byte-oriented consent string representation for the previously shown example is:
+
+    00000100 11100001 00000101 00010000 00001100 10001110
+    00010000 01010001 00000000 11001000 00000001 11000000
+    00000100 00110001 00001101 00000000 10001110 00000000
+    00000000 00000000 01111101 10111100 00000000 01000000
+    00000001 00100000 00000000
+
+### Building the Base64 representation
+
+This string is built using the base64url-encoded representation of the concatenated Cookie Value Fields bits described earlier.
+*Attention:* Padding '=' characters should be omitted.
+
+The calculated value for this example is:
+
+    BOEFEAyOEFEAyAHABDENAI4AAAB9vABAASA
 
 ## How is publisher-specific consent stored? <a name="publisher-consent-stored"></a>
 
@@ -619,8 +614,7 @@ The following table indicates which fields are used by which cookie:
   </tr>
   <tr>
     <td>Vendor Consent</td>
-    <td>3rd-party global location
-(.consensu.org). Required cookie name: euconsent</td>
+    <td>3rd-party global location (.consensu.org). Required cookie name: euconsent</td>
     <td>global vendor consent</td>
   </tr>
   <tr>
