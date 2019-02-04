@@ -250,11 +250,11 @@ This object contains the entire [base64url-encoded](https://tools.ietf.org/html/
 ```
 {
 
-	consentData:  [base64url-encoded](https://tools.ietf.org/html/rfc4648#section-5) encoded string,		
+  consentData:  [base64url-encoded](https://tools.ietf.org/html/rfc4648#section-5) encoded string,    
 
-	gdprApplies:  *Boolean*,
+  gdprApplies:  *Boolean*,
 
-	hasGlobalScope: *Boolean // true if the vendor consent data is retrieved from the global cookie, false if from a publisher-specific (or publisher-group-specific) cookie*
+  hasGlobalScope: *Boolean // true if the vendor consent data is retrieved from the global cookie, false if from a publisher-specific (or publisher-group-specific) cookie*
 
 }
 ```
@@ -373,7 +373,7 @@ If immutable-version URL's are used for cmp.js, [a subresource integrity attribu
 
         body.appendChild(iframe);
 
-	 } else {
+   } else {
 
         // In the case where this stub is located in the head,
 
@@ -419,7 +419,15 @@ If immutable-version URL's are used for cmp.js, [a subresource integrity attribu
 
     var msgIsString = typeof event.data === "string";
 
-    var json = msgIsString ? JSON.parse(event.data) : event.data;
+    try {
+
+      var json = msgIsString ? JSON.parse(event.data) : event.data;
+
+    } catch (e) {
+
+      return;
+
+    }
 
     if (json.__cmpCall) {
 
@@ -433,7 +441,7 @@ If immutable-version URL's are used for cmp.js, [a subresource integrity attribu
 
           "success": success,
 
-        	"callId": i.callId
+          "callId": i.callId
 
         }};
 
