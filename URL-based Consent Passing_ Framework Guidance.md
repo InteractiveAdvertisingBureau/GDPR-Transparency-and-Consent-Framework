@@ -4,6 +4,13 @@
 
 **IAB Tech Lab | IAB Europe**
 
+## Specification to be deprecated
+*Note, April 25 2019* 
+
+As of the publication of Transparency and Consent Framework April 25, 2019, this specification is marked as to-be-deprecated. Please review the Transparency and Consent Frameworks for public comment to learn how the new specification support the required use cases.
+
+
+
 ## GDPR Consent Passing for URL-based services 
 
 This document contains implementation guidance reviewed by the IAB Tech Lab GDPR Commit Group for use within the IAB Europe Transparency and Consent Framework.
