@@ -4,6 +4,11 @@
 
 **Draft for Public Comment | May 2018**
 
+## Specification to be deprecated
+*Note, April 25 2019* 
+
+As of the publication of Transparency and Consent Framework April 25, 2019, this specification is marked as to-be-deprecated. Please review the Transparency and Consent Frameworks for public comment to learn how the new specification support the required use cases.
+
 # Table of Contents
 1. [Introduction](#Introduction)
 2. [About the Transparency & Consent Framework](#About-the-Framework)
