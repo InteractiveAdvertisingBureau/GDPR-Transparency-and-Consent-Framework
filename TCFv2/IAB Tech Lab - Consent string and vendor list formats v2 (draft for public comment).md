@@ -55,7 +55,7 @@ This version of the Transparency and Consent String with Global Vendor List Form
 &nbsp;&nbsp;&nbsp;&nbsp;**[How is the checksum used to check the TC String?](#checksum-tcstring)**<br>
 
 ### [Examples: TC String and GVL](#ex-tcs-GVL)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[Example TC String](#example-tcstring)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Example TC String](#example-tcstring)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[Example Global Vendor List JSON Object](#ex-GVL-JSON)**<br>
 
 ### [Appendix A: Proposal for handling legal bases established out-of-band (OOB)](OOB-proposal)<br>
