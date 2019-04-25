@@ -140,12 +140,7 @@ Resources including policy FAQ, Global Vendor List, and CMP List can be found at
 
 IAB Europe Transparency and Consent Framework technical specifications governed by the IAB Tech Lab is licensed under a Creative Commons Attribution 3.0 License.   To view a copy of this license, visit [creativecommons.org/licenses/by/3.0/](http://creativecommons.org/licenses/by/3.0/) or write to Creative Commons, 171 Second Street, Suite 300, San Francisco, CA 94105, USA.
 
-
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/IAB-Tech0.png). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/IAB-Tech0.png "image_tooltip")
+![](https://camo.githubusercontent.com/1ff27c0c79d2341ccab9cc19089e67d1985b8228/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f69643d3163627745476c6238533639536e6449446f486e7663355f3354666d6b474d3752)
 
 
 Disclaimer
@@ -197,7 +192,7 @@ The TC String contains the following information:
 2. **User consent:** the user’s expression of consent given for processing user’s personal data. The information provided signals user’s consent status on two levels:
     * Per standard Purpose
     * Per Vendor
-3. **Legitimate interest: **the status on whether a CMP has established legitimate interest transparency for a vendor or purpose and user objection to legitimate interests. The information provided includes:
+3. **Legitimate interest:** the status on whether a CMP has established legitimate interest transparency for a vendor or purpose and user objection to legitimate interests. The information provided includes:
     * Legitimate interest transparency status per standard Purpose
     * Legitimate interest transparency status per Vendor
     * User objections to legitimate interests per standard Purpose
@@ -1351,7 +1346,7 @@ Example TC String field values for the case:
 Here is an annotated example of the GVL’s JSON format:
 
 
-```JSON
+```
 {
   "gvlSpecificationVersion": 2,
   "vendorListVersion": 133, // incremented with each published file change
@@ -1457,7 +1452,7 @@ Constraints:
 *   Purpose id values included in the three purpose fields must be in the range from 1 to N, where N is the highest purpose id published in this GVL file.
 
 
-```JSON
+```
   	"featureIds": array of positive integers, OPTIONAL. Array may be empty. List of Features the Vendor may utilize when performing some declared Purposes processing.
       "specialFeatureIds": array of positive integers, OPTIONAL. Array may be empty. List of Special Features the Vendor may utilize when performing some declared Purposes processing.
   	"policyUrl": url string, REQUIRED URL to the Vendor's privacy policy document.
