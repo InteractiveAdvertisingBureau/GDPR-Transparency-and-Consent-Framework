@@ -13,60 +13,60 @@ This version of the Transparency and Consent String with Global Vendor List Form
 [Version History](#versionhistory)
 
 ### [Introduction](#introduction)<br>
-&nbsp;&nbsp;**[Audience](#audience)**<br>
-&nbsp;&nbsp;**[Relevant Documents](#relevantdocs)**<br>
-&nbsp;&nbsp;**[About the Transparency & Consent Framework](#aboutTCframework)**<br>
-&nbsp;&nbsp;**[License](#license)**<br>
-&nbsp;&nbsp;**[About IAB Tech Lab](#about-iabtechlab)**<br>
-&nbsp;&nbsp;**[About IAB Europe](#about-iabeurope)**
+&nbsp;&nbsp;&nbsp;&nbsp;**[Audience](#audience)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Relevant Documents](#relevantdocs)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[About the Transparency & Consent Framework](#aboutTCframework)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[License](#license)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[About IAB Tech Lab](#about-iabtechlab)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[About IAB Europe](#about-iabeurope)**<br>
 
 ### [About the Transparency & Consent String (TC String)](#about-tcstring)<br>
-&nbsp;&nbsp;[Definitions](#definitions)<br>
-&nbsp;&nbsp;[What purpose does the TC String serve?](#tcstring-purpose)<br>
-&nbsp;&nbsp;[What information is stored in the TC String?](#info-stored)<br>
-&nbsp;&nbsp;[Who should create the TC String?](#who-create)<br>
-&nbsp;&nbsp;[When should the TC String be created?](#when-create)<br>
-&nbsp;&nbsp;[What are the different scopes for a TC String?](#tcstring-scopes)<br>
-&nbsp;&nbsp;[Working with global TC Strings](#global-tcstrings)<br>
-&nbsp;&nbsp;[What are publisher restrictions?](#pubrestrictions)<br>
-&nbsp;&nbsp;[How should the Transparency & Consent String be stored?](#howtostore)
+&nbsp;&nbsp;&nbsp;&nbsp;**[Definitions](#definitions)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What purpose does the TC String serve?](#tcstring-purpose)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What information is stored in the TC String?](#info-stored)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Who should create the TC String?](#who-create)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[When should the TC String be created?](#when-create)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What are the different scopes for a TC String?](#tcstring-scopes)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Working with global TC Strings](#global-tcstrings)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What are publisher restrictions?](#pubrestrictions)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How should the Transparency & Consent String be stored?](#howtostore)**<br>
 
-[The Global Vendor List](#globalvendorlist)<br>
-&nbsp;&nbsp;[I’m a vendor, how do I get added to the Global Vendor List?](#howtogetadded)<br>
-&nbsp;&nbsp;[What is contained in the Global Vendor List?](#contained-in-globalvendorlist)<br>
-&nbsp;&nbsp;[Where can I access the Global Vendor List?](#listaccess)<br>
-&nbsp;&nbsp;[TCF version 1 of the Global Vendor List (deprecated)](#TCFv1)<br>
-&nbsp;&nbsp;[Translations for Purposes, Special Purposes, Features, and Special Features](#translations)<br>
-&nbsp;&nbsp;[How often is the Global Vendor List updated?](#howoftenupdated)<br>
-&nbsp;&nbsp;[CMPs using the GVL](#CMPs-using-GVL)<br>
-&nbsp;&nbsp;[Vendors using the GVL](#vendors-using-GVL)<br>
-&nbsp;&nbsp;[Caching the Global Vendor List](#cachingGVL)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[CMPs caching the GVL](#CMPscaching)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[Vendors caching the GVL](#vendorscaching)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[Caching previous versions of the GVL](#caching-prev-ver)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[Using a compressed version of the Global Vendor List](#compressedGVL)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[Global Vendor List change control](#GVL-changecontrol)<br>
-&nbsp;&nbsp;[Example Global Vendor List JSON Object](#GVLexampleJSON)
+### [The Global Vendor List](#globalvendorlist)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[I’m a vendor, how do I get added to the Global Vendor List?](#howtogetadded)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What is contained in the Global Vendor List?](#contained-in-globalvendorlist)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Where can I access the Global Vendor List?](#listaccess)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[TCF version 1 of the Global Vendor List (deprecated)](#TCFv1)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Translations for Purposes, Special Purposes, Features, and Special Features](#translations)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How often is the Global Vendor List updated?](#howoftenupdated)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[CMPs using the GVL](#CMPs-using-GVL)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Vendors using the GVL](#vendors-using-GVL)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Caching the Global Vendor List](#cachingGVL)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[CMPs caching the GVL](#CMPscaching)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Vendors caching the GVL](#vendorscaching)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Caching previous versions of the GVL](#caching-prev-ver)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Using a compressed version of the Global Vendor List](#compressedGVL)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Global Vendor List change control](#GVL-changecontrol)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Example Global Vendor List JSON Object](#GVLexampleJSON)**<br>
 
-[Creating a TC String](#creatingTCstring)<br>
-&nbsp;&nbsp;[What are the Purposes and Features being supported?](#supported-pandf)<br>
-&nbsp;&nbsp;[How should the TC String be created?](#howshouldcreate)<br>
-&nbsp;&nbsp;[TC String Format](#tcstringformat)<br>
-&nbsp;&nbsp;[How is the checksum used to check the TC String?](#checksum-tcstring)
+### [Creating a TC String](#creatingTCstring)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What are the Purposes and Features being supported?](#supported-pandf)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How should the TC String be created?](#howshouldcreate)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[TC String Format](#tcstringformat)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How is the checksum used to check the TC String?](#checksum-tcstring)**<br>
 
-[Examples: TC String and GVL](#ex-tcs-GVL)<br>
-&nbsp;&nbsp;[Example TC String](#example-tcstring)<br>
-&nbsp;&nbsp;[Example Global Vendor List JSON Object](#ex-GVL-JSON)
+### [Examples: TC String and GVL](#ex-tcs-GVL)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Example TC String](#example-tcstring)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Example Global Vendor List JSON Object](#ex-GVL-JSON)**<br>
 
-[Appendix A: Proposal for handling legal bases established out-of-band (OOB)](OOB-proposal)<br>
-&nbsp;&nbsp;[Proposed additions to the TC String format](#proposed-additions)<br>
-&nbsp;&nbsp;[Special considerations](#special-considerations)
+### [Appendix A: Proposal for handling legal bases established out-of-band (OOB)](OOB-proposal)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Proposed additions to the TC String format](#proposed-additions)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Special considerations](#special-considerations)**<br>
 
-[Appendix B: Proposal for handling specific jurisdiction consent](#appendixb)<br>
-&nbsp;&nbsp;[Proposed solution](#b-proposed-solution)<br>
-&nbsp;&nbsp;[Usage for CMPs](#b-usage-CMPs)<br>
-&nbsp;&nbsp;[Usage for Vendors](#b-usage-vendors)<br>
-&nbsp;&nbsp;[Important notes](#b-notes)<br>
+### [Appendix B: Proposal for handling specific jurisdiction consent](#appendixb)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Proposed solution](#b-proposed-solution)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Usage for CMPs](#b-usage-CMPs)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Usage for Vendors](#b-usage-vendors)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Important notes](#b-notes)**<br>
 
 
 
