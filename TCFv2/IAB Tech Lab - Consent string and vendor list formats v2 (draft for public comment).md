@@ -1,4 +1,4 @@
-## IAB Europe Transparency & Consent Framework 
+## IAB Europe Transparency & Consent Framework
 # Transparency and Consent String with Global Vendor List Format
 
 **Draft for Public Comment April 25 2019  **
@@ -159,7 +159,7 @@ IAB Europe is the leading European-level industry association for the digital ad
 
 
 
-Learn more about IAB Europe here: [iabeurope.eu](https://www.iabeurope.eu/)  
+Learn more about IAB Europe here: [iabeurope.eu](https://www.iabeurope.eu/)
 
 
 
@@ -1345,158 +1345,186 @@ Example TC String field values for the case:
 
 Here is an annotated example of the GVL’s JSON format:
 
+```json
 
-```
 {
   "gvlSpecificationVersion": 2,
-  "vendorListVersion": 133, // incremented with each published file change
-  "tcfPolicyVersion": 2, // The TCF MO will increment this value whenever a GVL change (such as adding a new Purpose or Feature or a change in Purpose wording) legally invalidates existing TC Strings and requires CMPs to re-establish transparency and consent from users.
-If the policy version number in the latest GVL is different from the value in your TC String, then you need to re-establish transparency and consent for that user. A version 1 format TC String is considered to have a version value of 1.
 
+  // incremented with each published file change
+  "vendorListVersion": 1,
+
+  // The TCF MO will increment this value whenever a GVL change (such as adding
+  // a new Purpose or Feature or a change in Purpose wording) legally invalidates
+  // existing TC Strings and requires CMPs to re-establish transparency and consent
+  // from users.  If the policy version number in the latest GVL is different from
+  // the value in your TC String, then you need to re-establish transparency and
+  // consent for that user. A version 1 format TC String is considered to have a
+  // version value of 1.
+  "tcfPolicyVersion": 2,
   "lastUpdated": "2018-05-28T00:00:00Z",
+
+  /*
+   * Information published for each Purpose
+   *
+   * "id": numeric, REQUIRED
+   * "name": string, REQUIRED
+   * "description": string, REQUIRED
+   * "descriptionLegal": string, REQUIRED
+   * "consentable": boolean, OPTIONAL, default=true  false means CMPs should never afford users the means to provide an opt-in consent choice
+   * "rightToObject": boolean, OPTIONAL, default=true  false means CMPs should never afford users the means to exercise a right to object
+   */
   "purposes": {
-	/*
-  	Information published for each Purpose
+    "1": {
+      "id": 1,
+      "name": "Storage and access of information",
+      "description": "...",
+      "descriptionLegal": "..."
+    },
+    "10": {
+      "id": 10,
+      "name": "Develop and improve product",
+      "description": "...",
+      "descriptionLegal": "...",
+      "consentable": false,
+      "rightToObject": false
+    }
 
+  // ... more purposes from id=2 to id=9 (up to no higher than id=24)
 
-  	"id": numeric, REQUIRED
-  	"name": string, REQUIRED
-      "description": string, REQUIRED
-      "descriptionLegal": string, REQUIRED
-  	"consentable": boolean, OPTIONAL, default=true  false means CMPs should never afford users the means to provide an opt-in consent choice
-  	"rightToObject": boolean, OPTIONAL, default=true  false means CMPs should never afford users the means to exercise a right to object
-	*/
-
-
-      "1": {
-    "id": 1,
-  		"name": "Storage and access of information",
-  		"description": "..."
-  		"descriptionLegal": "..."
-	},
-	// ... more purposes from id=2 to id=9 (up to no higher than id=24)
-	{
-      "10": {
-    "id": 10,
-  		"name": "Develop and improve product",
-  		"description": "...",
-  		"descriptionLegal": "...",
-  		"consentable": false,
-  		"rightToObject": false
-	},
-	{
-},
-"specialPurposes" : {
-	"1": {
-      		"id": 1,
-  		"name": "Security, Fraud Prevention, Debugging",
-  		"description": "...",
-  		"descriptionLegal": "...",
-  		"consentable": false,
-  		"rightToObject": false
-	},
-	"2": {
-      		"id": 2,
-  		"name": "Technical ad and content delivery",
-  		"description": "...",
-  		"descriptionLegal": "...",
-  		"consentable": false,
-  		"rightToObject": false
-	}
+  },
+  "specialPurposes" : {
+    "1": {
+      "id": 1,
+      "name": "Security, Fraud Prevention, Debugging",
+      "description": "...",
+      "descriptionLegal": "...",
+      "consentable": false,
+      "rightToObject": false
+  },
+    "2": {
+      "id": 2,
+      "name": "Technical ad and content delivery",
+      "description": "...",
+      "descriptionLegal": "...",
+      "consentable": false,
+      "rightToObject": false
+  }
   },
   "features" : {
-	"1": {
-  		"id": 1
-  		"name": "Matching Data to Offline Sources",
-  		"description": "Combining data from offline sources that were initially collected in other contexts",
-  		"descriptionLegal": "..."
-	}
-	// ... more features from id=2 up to no higher than id=64.
+    "1": {
+      "id": 1,
+      "name": "Matching Data to Offline Sources",
+      "description": "Combining data from offline sources that were initially collected in other contexts",
+      "descriptionLegal": "..."
+    }
+
+  // ... more features from id=2 up to no higher than id=64.
+
   },
+
   // Special features differ from simple features in that CMPs MUST provide
   // users with a means to signal an opt-in choice as to whether vendors
   // may employ the feature when performing any purpose processing.
   // See Policies for specifics.
   "specialFeatures" : {
-	"1": {
-  		"id": 1
-  		"name": "Precise Geolocation",
-  		"description": "...",
-  		"descriptionLegal": "..."
-	},
-	"2": {
-  		"id": 2
-  		"name": "Active Fingerprinting",
-  		"description": "...",
-  		"descriptionLegal": "..."
-	}
-	// ... more special features from id=3 up to no higher than id=8.
+    "1": {
+      "id": 1,
+      "name": "Precise Geolocation",
+      "description": "...",
+      "descriptionLegal": "..."
+    },
+    "2": {
+      "id": 2,
+      "name": "Active Fingerprinting",
+      "description": "...",
+      "descriptionLegal": "..."
+    }
   },
   "vendors": {
-	/*
-  	Information published for each vendor
 
-  	"id": numeric, REQUIRED
-  	"name": string, REQUIRED
-      "purposeIds": array of positive integers, either purposeIds or legIntPurposeIDs REQUIRED. Array may be empty. List of purpose ids declared as performed on the legal basis of consent
-  	"legIntPurposeIds": array of positive integers, either purposeIds or legIntPurposeIDs REQUIRED. Array may be empty. List of purpose ids declared as performed on the legal basis of a legitimate interest
-  	"flexiblePurposeIds": array of positive integers, OPTIONAL. Array may be empty. List of purpose ids where the vendor is flexible regarding the legal basis; they will perform the processing based on consent or a legitimate interest. The 'default' is determined by which of the other two mutually-exclusive purpose fields is used to declare the purpose for the vendor
-
-```
-
-
-Constraints:
-*   Either purposeIds OR legIntPurposeIds can be missing/empty, but not both.
-*   A purpose id must not be present in both purposeIds and legIntPurposeIds
-*   A purpose id listed in flexiblePurposeIds must have been declared in one of purposeIds or legIntPurposeIds.
-*   Purpose id values included in the three purpose fields must be in the range from 1 to N, where N is the highest purpose id published in this GVL file.
-
-
-```
-  	"featureIds": array of positive integers, OPTIONAL. Array may be empty. List of Features the Vendor may utilize when performing some declared Purposes processing.
-      "specialFeatureIds": array of positive integers, OPTIONAL. Array may be empty. List of Special Features the Vendor may utilize when performing some declared Purposes processing.
-  	"policyUrl": url string, REQUIRED URL to the Vendor's privacy policy document.
-      "deletedDate": date string ("2019-05-28T00:00:00Z") OPTIONAL, If present, vendor should be considered deleted after this date/time and MUST NOT be established to users.
-      "overflow": object specifying the vendor's http GET request length  limit OPTIONAL. Has the following members & values
-
-      "overflow": {
-          "httpGetLimit": 32   /* 32 or 128 are supported options */
-      }
-If a vendor entry does not include this attribute then the vendor has no overflow options and none can be inferred.
-    */
-
+  /*
+   * Information published for each Vendor
+   *
+   * "id": numeric, REQUIRED
+   *
+   * "name": string, REQUIRED
+   *
+   * "purposeIds": array of positive integers, either purposeIds or
+   * legIntPurposeIDs REQUIRED. Array may be empty. List of purpose ids
+   * declared as performed on the legal basis of consent
+   *
+   * "legIntPurposeIds": array of positive integers, either purposeIds or
+   * legIntPurposeIDs REQUIRED. Array may be empty. List of purpose ids
+   * declared as performed on the legal basis of a legitimate interest
+   *
+   * "flexiblePurposeIds": array of positive integers, OPTIONAL. Array may be
+   * empty. List of purpose ids where the vendor is flexible regarding the
+   * legal basis; they will perform the processing based on consent or a legitimate
+   * interest. The 'default' is determined by which of the other two
+   * mutually-exclusive purpose fields is used to declare the purpose for the vendor
+   *    Constraints:
+   *    -   Either purposeIds OR legIntPurposeIds can be missing/empty, but not
+   *        both.
+   *    -   A purpose id must not be present in both purposeIds and
+   *        legIntPurposeIds
+   *    -   A purpose id listed in flexiblePurposeIds must have been declared
+   *        in one of purposeIds or legIntPurposeIds.
+   *    -   Purpose id values included in the three purpose fields must be in
+   *        the range from 1 to N, where N is the highest purpose id published
+   *        in this GVL file.
+   *
+   * "featureIds": array of positive integers, OPTIONAL. Array may be empty.
+   * List of Features the Vendor may utilize when performing some declared
+   * Purposes processing.
+   *
+   * "specialFeatureIds": array of positive integers, OPTIONAL. Array may be
+   * empty. List of Special Features the Vendor may utilize when performing
+   * some declared Purposes processing.
+   *
+   * "policyUrl": url string, REQUIRED URL to the Vendor's privacy policy
+   * document.
+   *
+   * "deletedDate": date string ("2019-05-28T00:00:00Z") OPTIONAL, If present,
+   * vendor should be considered deleted after this date/time and MUST NOT be
+   * established to users.
+   *
+   * "overflow": object specifying the vendor's http GET request length  limit
+   * OPTIONAL. If a vendor entry does not include this attribute then the
+   * vendor has no overflow options and none can be inferred. Has the following
+   * members & values
+   *
+   *     "overflow": {
+   *       // 32 or 128 are supported options
+   *       "httpGetLimit": 32
+   *     }
+   */
     "1":{
-	"id": 1,
-  	"name": "Vendor Name",
-  	"purposeIds": [1],
-  	"legIntPurposeIds": [2, 3],
+      "id": 1,
+      "name": "Vendor Name",
+      "purposeIds": [1],
+      "legIntPurposeIds": [2, 3],
       "flexiblePurposeIds": [1, 2],
       "featureIds": [1, 2],
-  	"specialFeatureIds": [1, 2],
-  	"policyUrl": "https://vendorname.com/gdpr.html",
-  	"deletedDate": "2019-02-28T00:00:00Z",
+      "specialFeatureIds": [1, 2],
+      "policyUrl": "https://vendorname.com/gdpr.html",
+      "deletedDate": "2019-02-28T00:00:00Z",
       "overflow": {
-          "httpGetLimit": 32   /* 32 or 128 are supported options */
+        "httpGetLimit": 32
       }
-    },
+    }
     // ... more vendors
-  }
-
+  },
  "stacks": {
-  "1": {
-   	"id": 1,
-   	"purposes" : [1,2,3 ...],
-   	"specialPurposes" : [1,2,3 ...],
-   	"name" : "...",
-   	"description" : "...",
-  }
+    "1": {
+      "id": 1,
+      "purposes" : [1,2,3],
+      "specialPurposes" : [1,2,3],
+      "name" : "...",
+      "description" : "..."
+    }
  }
 }
 ```
-
-
-
-
 
 ## Appendix A: Proposal for handling legal bases established out-of-band (OOB) <a name="OOB-proposal"></a>
 
