@@ -1361,6 +1361,7 @@ Here is an annotated example of the GVL’s JSON format:
   // consent for that user. A version 1 format TC String is considered to have a
   // version value of 1.
   "tcfPolicyVersion": 2,
+
   "lastUpdated": "2018-05-28T00:00:00Z",
 
   /*
@@ -1392,6 +1393,7 @@ Here is an annotated example of the GVL’s JSON format:
   // ... more purposes from id=2 to id=9 (up to no higher than id=24)
 
   },
+
   "specialPurposes" : {
     "1": {
       "id": 1,
@@ -1400,7 +1402,7 @@ Here is an annotated example of the GVL’s JSON format:
       "descriptionLegal": "...",
       "consentable": false,
       "rightToObject": false
-  },
+    },
     "2": {
       "id": 2,
       "name": "Technical ad and content delivery",
@@ -1408,8 +1410,9 @@ Here is an annotated example of the GVL’s JSON format:
       "descriptionLegal": "...",
       "consentable": false,
       "rightToObject": false
-  }
+    }
   },
+
   "features" : {
     "1": {
       "id": 1,
@@ -1440,6 +1443,7 @@ Here is an annotated example of the GVL’s JSON format:
       "descriptionLegal": "..."
     }
   },
+
   "vendors": {
 
   /*
@@ -1514,6 +1518,7 @@ Here is an annotated example of the GVL’s JSON format:
     }
     // ... more vendors
   },
+
  "stacks": {
     "1": {
       "id": 1,
