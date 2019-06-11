@@ -1345,7 +1345,7 @@ Example TC String field values for the case:
 
 Here is an annotated example of the GVL’s JSON format:
 
-```json
+```jsonc
 
 {
   "gvlSpecificationVersion": 2,
