@@ -23,17 +23,23 @@
 ### [CMP API v2.0](#cmpapiv2)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[What does the CMP API support?](#cmpsupport)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[How does the CMP provide the API?](#cmpprovide)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What required commands does the CMP API support?](#requiredcommands)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[getVendorConsents](#getvendorconsents)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ping](#ping)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What optional commands does the CMP API support?](optionalcommands)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[getInAppConsentData](#getinappconsent)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[getVendorList](#getvendorlist)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What are the return data objects passed to the callbacks?](#returndata)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[VendorConsents](#vendorconsents)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[PingReturn](#pingreturn)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Ping Status Codes](#pingcodes)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[InAppConsentData](#inappconsent)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[API Documentation](#api-documentation)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**[What required commands does the CMP API support?](#requiredcommands)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[getVendorConsents](#getvendorconsents)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ping](#ping)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**[What optional commands does the CMP API support?](#optionalcommands)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[getInAppConsentData](#getinappconsent)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[getVendorList](#getvendorlist)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**[What do the callback functions look like?](#whatdothecallbackfunctionslooklike)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[VendorConsentsCallback](#vendorconsentscallback)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[PingCallback](#pingcallback)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[InAppConsentDataCallback](#inappconsentdatacallback)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[GlobalVendorListCallback](#globalvendorlistcallback)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**[What are the return data objects passed to the callbacks?](#returndata)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[VendorConsents](#vendorconsents)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[PingReturn](#pingreturn)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Ping Status Codes](#pingcodes)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[InAppConsentData](#inappconsent)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[In-App Details](#inapp)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[How is the CMP used in-app?](#cmpinapp)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[What is the CMP in-app internal structure for the defined API?](#inappstructure)<br>
@@ -133,97 +139,208 @@ This document specifies required functionality that the CMP must provide in acco
 
 Every consent manager MUST provide the following API function:
 
-`__tcfapi(_Command, Parameter, Version, Callback_)`
+`__tcfapi( Command, Version, Callback[, Parameter] )`
 
 The function `__tcfapi()` **must be a function** and cannot be any other JavaScript data type, even if only temporarily on initialization, as calls to the API will fail if `__tcfapi()` is not a function.
 
 In addition to providing `__tcfapi()`, consent managers must handle postMessage events targeted to the `__tcfapi` interface sent from nested iframes. See the section on iframes for information on working with IAB SafeFrames.
 
-
+## API Documentation
 ### What required commands does the CMP API support? <a name="requiredcommands"></a>
 
-This API must support the following **required** functionality: `getVendorConsents` and `ping`.
+This API must support the following **required** functionality: [`getVendorConsents`](#getvendorconsents) and [`ping`](#ping).
 
+---
+### getVendorConsents <a name="getvendorconsents"></a>
 
-#### getVendorConsents <a name="getvendorconsents"></a>
+**Command {`string`} [required]** - "getVendorConsents"
 
-**Command (string):** getVendorConsents
+**Version {`number`} [required]** - API Version, should be 2 for this version
 
-**Parameter (unit16array or null):** vendorIds
-
-**Callback function signature:** Callback(_VendorConsents object, success:boolean_)
-
-The `vendorIds` array contains the Vendor IDs (as identified in the Global Vendor List) for which transparency and consent is being requested.
-
-If `vendorIds` is null or empty, the operation will return data for all Vendors in the Global Vendor List, unless `gdprApplies` equals false.
-
-The callback function will be called with a `VendorConsents` object as the parameter. If `vendorIds` is provided and not empty, then `VendorConsents.vendorConsents` will only include IDs from `vendorIds`.
-
-The callback is called:
-
+**Callback {[`VendorConsentsCallback`](#vendorconsentscallback)} [required]** - will be called:
 1. immediately and without any asynchronous logic (e.g. promises) if the TC String is already present for the CMP or
 
 2. only after the TC String has been created by the CMP (e.g. due to user interaction that made it possible for the CMP to create a new TC String).
 
-The consent and legitimate interest Signal will be returned false (“No Consent” and “No Legitimate Interest Transparency Established or User Objected”) for any invalid vendorId.
+**Parameter {`number[]`} [optional]** - contains the Vendor IDs (as identified in the [Global Vendor List](IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2%20(draft%20for%20public%20comment).md)) for which transparency and consent is being requested. If the value is null, undefined or the array is empty, the operation will return data for all Vendors in the Global Vendor List, unless gdprApplies equals false.
 
-The boolean `success` parameter passed to the callback indicates whether the call to `getVendorConsents` was successful.
+**NOTE** -- The consent and legitimate interest Signal will be returned false (“No Consent” and “No Legitimate Interest Transparency Established or User Objected”) for any invalid vendorId.
 
+```javascript
+const handleVendorConsents = (vendorConsents, success) => {
+  if(success) {
 
-#### ping <a name="ping"></a>
+  	console.dir(vendorConsents);
+  } else {
 
-**Command (string):** ping
+    // Uh oh... something went wrong...
+  }
+}
+__tcfapi("getVendorConsents", 2, handleVendorConsents, [2]);
+```
 
-**Parameter:** ignored
+---
+### ping <a name="ping"></a>
 
-**Callback function signature:** Callback(_PingReturn object, success:boolean_)
+**Command {`string`} [required]** - "ping"
+
+**Version {`number`} [required]** - API Version, should be 2 for this version
+
+**Callback {[`PingCallback`](#pingcallback)} [required]**( [`PingReturn`](#pingreturn) object, success:boolean)
 
 The ping command invokes the callback immediately and without any asynchronous logic (e.g. promises) with information about whether the main CMP script has loaded yet and whether `gdprApplies` has been set to indicate that GDPR applies for all users or just for users in Europe. (This requires this command's implementation and its configuration to be in the stub).
 
-The boolean `success` parameter passed to the callback indicates whether the call to ping was successful.
+```javascript
+const handlePing = (PingReturn, success) => {
+  if(success) {
+
+  	console.dir(PingReturn);
+  } else {
+
+    // Uh oh... something went wrong...
+  }
+}
+__tcfapi("ping", 2, handlePing);
+```
 
 
 ### What optional commands does the CMP API support? <a name="optionalcommands"></a>
 
-This API may support the following **optional** functionality: `getInAppConsentData` and `getVendorList`.
+This API may support the following **optional** functionality: [`getInAppConsentData`](#getinappconsentdata) and [`getVendorList`](#getvendorlist).
 
+---
+### getInAppConsentData <a name="getinappconsent"></a>
 
-#### getInAppConsentData <a name="getinappconsent"></a>
+**Command {`string`} [required]** - "getInAppConsentData"
 
-**Command (string):** getInAppConsentData
+**Version {`number`} [required]** - API Version, should be 2 for this version
 
-**Parameter:** ignored
+**Callback {[`InAppConsentDataCallback`](#inappconsentdatacallback)} [required]**
 
-**Callback function signature:** Callback(InAppConsentData_ object, success:boolean_)
+When an in-app CMP leverages a mobile web view to gather consent, the cookies set by anything in the web view will only persist as long as that web view is open. Therefore, the native layer must manage the storage of the transparency and consent information as a JavaScript/Cookie-based solution will not work in this context.  This interface provides the native app running a web-view CMP an ability to retrieve the TCString by part in a unencoded binary string format so that it may both store and make decisions based on the information.
 
-When a mobile web-based CMP runs there is no ability to set a cookie. So to get around this restriction, the mobile instance grabs the “parsed” values and the consent string and stores them in an app storage on the native layer. This enables a web-view to have a parsed raw binary string of vendor and purpose consents as well as LI status for both purposes and vendors.
+```javascript
+const handleInAppConsentData = (inAppConsentData, success) => {
+  if(success) {
 
-The boolean `success` parameter passed to the callback indicates whether the call to getInAppConsentData was successful.
+  console.dir(inAppConsentData);
+  } else {
 
+    // Uh oh... something went wrong...
+  }
+};
+__tcfapi("getInAppConsentData", 2, handleInAppConsentData);
+```
 
-#### getVendorList <a name="getvendorlist"></a>
+---
+### getVendorList <a name="getvendorlist"></a>
 
-**Command (string):** getVendorList
+**Command {`string`} [required]** - "getVendorList"
 
-**Parameter (string, null or uint16):** vendorListVersion
+**Version {`number`} [required]** - API Version, should be 2 for this version
 
-**Callback function signature:** Callback(_GlobalVendorList object, success:boolean_)
+**Callback {[`GlobalVendorListCallback`](#globalvendorlistcallback)} [required]** - called with the `GlobalVendorList` parameter being the global vendor list object of the requested version.
 
-The callback function will be called with the `GlobalVendorList` parameter being the global vendor list object of the requested version.
+**Parameter {`number`} [optional]** - `vendorListVersion` (see: [Global Vendor List](IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2%20(draft%20for%20public%20comment).md))
 
-If the `vendorListVersion` is null, the Global Vendor List for the `VendorListVersion` in the current TC String is returned. If no TC String value is currently set, the latest version of the Global Vendor List is returned.
+- `number` - a [Global Vendor List Object](IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2%20(draft%20for%20public%20comment).md) will be returned matching that number provided that vendor list version exists.
+- `null` or `undefined` - a [Global Vendor List Object](IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2%20(draft%20for%20public%20comment).md) will be returned with the same version in the current TC String.
+- `"LATEST"` - a [Global Vendor List Object](IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2%20(draft%20for%20public%20comment).md) will be returned with the latest version available.
+- `*` - anything else and `null` will be returned for the first argument and `false` for the `success` argument.
+```javascript
+const handleGVL = (gvl, success) => {
+  if(success) {
 
-If the `vendorListVersion` value is “LATEST”, the latest version available is returned.
+    // do something
+  } else {
 
-If the `vendorListVersion` is invalid (e.g. 1), the callback function will be called with 'null' as the first argument and false as the `success` argument.
+  	// do something else
+  }
+};
+__tcfapi("getVendorList", 2, handleGVL, "LATEST");
+```
 
-The boolean `success` parameter passed to the callback indicates whether the call to `getVendorList` was successful.
+### What do the callback functions look like? <a name="returndata"></a>
+---
+### VendorConsentsCallback
+This callback will be called with a [`VendorConsents`](#vendorconsents) object as the parameter. If `vendorIds` is provided as the `Parameter` for [`getVendorConsents`](#getvendorconsents) and not empty, then [`VendorConsents.vendorConsents`](#vendorconsents) will only include IDs from `vendorIds`.
+
+**vendorConsents {[`VendorConsents`](#vendorconsents)}**
+
+**success {`boolean`}** - whether or not the call succeeded
+
+```javascript
+const handleVendorConsents = (vendorConsents, success) => {
+  if(success) {
+
+    // do something
+  } else {
+
+  	// do something else
+  }
+};
+```
+---
+### PingCallback
+
+**pingReturn {[`PingReturn`](#pingreturn)}**
+
+**success {`boolean`}** - whether or not the call succeeded
+
+```javascript
+const handlePing = (pingReturn, success) => {
+  if(success) {
+
+    // do something
+  } else {
+
+  	// do something else
+  }
+};
+```
+---
+### InAppConsentDataCallback
+
+**inAppConsentData {[`InAppConsentData`](#inappconsentdata-)}**
+
+**success {`boolean`}** - whether or not the call succeeded
+
+```javascript
+const handleInAppConsentData = (inAppConsentData, success) => {
+  if(success) {
+
+    // do something
+  } else {
+
+  	// do something else
+  }
+};
+```
+---
+### GlobalVendorListCallback
+
+**globalVendorList {[`GlobalVendorList`](IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2%20(draft%20for%20public%20comment).md#example-global-vendor-list-json-object--1)}**
+
+**success {`boolean`}** - whether or not the call succeeded
+
+```javascript
+const handleGVL = (gvl, success) => {
+  if(success) {
+
+    // do something
+  } else {
+
+  	// do something else
+  }
+};
+```
 
 
 ### What are the return data objects passed to the callbacks? <a name="returndata"></a>
 
+---
 
-#### VendorConsents <a name="vendorconsents"></a>
+### VendorConsents <a name="vendorconsents"></a>
 
 This object contains the Vendors and Purposes for which the user gave consent, as well as the Vvendors and Purposes for which legitimate interest transparency is established. In case when `gdprApplies` equals false, the CMP can omit the properties `purposeConsents`, `purposeLI`, `vendorConsents`, `vendorLI`, `featureAllowed` and restrictions.
 
@@ -235,35 +352,55 @@ In the case when `gdprApplies` equals true, these properties must be present and
 2. contain all purpose IDs but only vendor IDs that correspond to those given by the `vendorIds` parameter or,
 3. these properties must be empty arrays if an invalid Vendor ID is submitted.
 
-    ```
-    {  
-      consentData: base64url-encoded string, // full TC string
+    ```javascript
+    {
+
+      // full TCString
+      consentData: base64url-encoded string,
+
       gdprApplies: Boolean,
-      hasGlobalScope: Boolean, // true if using a global TC string, false if using a service-specific or publisher-specific TC string
+
+      // true if using a global TC string, false if using a service-specific or publisher-specific TC string
+      hasGlobalScope: Boolean,
+
       useNonStandardStacks: Boolean,
+
       purposeConsents: {
+
         *purposeId*: *consentBoolean*,
         …
       },
+
       purposeLI: {
+
         *purposeId*: *liBoolean*,
         …
       },
+
       vendorConsents: {
+
         *vendorId* : *consentBoolean*,
         …
       },
+
       vendorLI: {
+
         *vendorId* : *liBoolean*,
         …
       },
+
       featureAllowed: {
+
         *featureID* : *featureBoolean*,
         …
       },
+
       restrictions: {
+
         *vendorId* : {
-         *purposeId* : *overrideType*, // 0=Not established (disallowed); 1=Established for consent if vendor declared flexible legal basis; 2=Established for LI if vendor declared flexible legal basis.
+
+          // 0=Not established (disallowed); 1=Established for consent if vendor declared flexible legal basis; 2=Established for LI if vendor declared flexible legal basis.
+         *purposeId* : *overrideType*,
          ...
         },
        ...
@@ -276,28 +413,36 @@ Where `vendorId` and `purposeId` are the keys; `consentBoolean` are the values f
 
 
 
-#### PingReturn <a name="pingreturn"></a>
+### PingReturn <a name="pingreturn"></a>
 
 This object contains information about the loading status and configuration of the CMP.
 
 
-```
+```javascript
     {
-      gdprAppliesGlobally: Boolean, // true if publisher has configured CMP to apply GDPR to all (including non-EEA) visitors
+      // true if publisher has configured CMP to apply GDPR to all (including non-EEA) visitors
+      gdprAppliesGlobally: boolean,
 
-      cmpLoaded: Boolean // true if CMP main script is loaded, false if still running stub
+      // true if CMP main script is loaded, false if still running stub
+      cmpLoaded: boolean
 
-      cmpStatus: String // see Ping Status Codes in following table
+      // see Ping Status Codes in following table
+      cmpStatus: string
 
-      displayStatus: String // see Ping Status Codes in following table
+      // see Ping Status Codes in following table
+      displayStatus: string
 
-      apiVersion: string, // version of the CMP API that is supported, e.g. "2.0"
+      // version of the CMP API that is supported, e.g. "2.0"
+      apiVersion: string,
 
-      cmpVersion: String, // CMPs own/internal version that is currently running
+      // CMPs own/internal version that is currently running
+      cmpVersion: string,
 
-      gvlVersion: int, // Version of the GVL currently loaded by the CMP.
+      // Version of the GVL currently loaded by the CMP.
+      gvlVersion: number,
 
-      policyVersion: int // Number of the supported TCF version
+      // Number of the supported TCF version
+      policyVersion: number
     }
 ```
 
@@ -332,18 +477,39 @@ This object contains the parsed binary string representations (“1010101”) of
 As well as passing the `gdprApplies` flag and the whole TC String back.
 
 
-```
-    {  
-      consentData: "", // Full base64url-encoded TC String
-      gdprApplies: Boolean, // true if the user is determined (by geo-IP lookup) to be in the EEA, or the publisher has configured the CMP (via a CMP-specific method not specified by this spec) that they are a EU publisher and thus the CMP UI should be shown for everyone.
-      vendorConsents: "",  // parsed vendor consents
-      vendorLIStatus: "",  // parsed vendor LI Status
-      purposeConsents: "", // parsed purpose consents
-      purposeLIStatus: "", // parsed purpose LI Status
-      publisherRestrictions: "", // parsed publisher restrictions
-      checksum: "", // TCString checksum value
-      usesNonStandardStacks: Boolean // true if consent was provided using non-standard stacks
-      }
+```javascript
+    {
+
+      // Full base64url-encoded TC String
+      consentData: "",
+
+
+      // true if the user is determined (by geo-IP lookup) to be in the EEA, or the publisher has configured the CMP (via a CMP-specific method not specified by this spec) that they are a EU publisher and thus the CMP UI should be shown for everyone.
+      gdprApplies: Boolean,
+
+
+      // parsed vendor consents
+      vendorConsents: "",
+
+      // parsed vendor LI Status
+      vendorLIStatus: "",
+
+      // parsed purpose consents
+      purposeConsents: "",
+
+      // parsed purpose LI Status
+      purposeLIStatus: "",
+
+      // parsed publisher restrictions
+      publisherRestrictions: "",
+
+      // TCString checksum value
+      checksum: "",
+
+      // true if consent was provided using non-standard stacks
+      usesNonStandardStacks: Boolean
+
+  }
 ```
 
 
@@ -402,7 +568,7 @@ On Android, the consent values should be stored in the default shared preference
 
 Example:
 
-```
+```swift
 Context mContext = getApplicationContext();
 SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 ```
@@ -416,7 +582,7 @@ The consent value can be retrieved from the application Shared preferences by ke
 
 Example:
 
-```
+```swift
 Context mContext = getApplicationContext();
 SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 String consentString = mPreferences.getString("IABConsent_tcString", "");
@@ -436,17 +602,17 @@ A callback can be registered to update settings when a preference is changed usi
 
 Example:
 
-```
+```swift
 Context mContext = getApplicationContext();
 SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 SharedPreferences.OnSharedPreferenceChangeListener mListener;
 mListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
-                        if (key.equals([Specific Consent Key])) {
-                                   // Update Consent settings
-                                   }
-                        }
-            };
+  public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
+    if (key.equals([Specific Consent Key])) {
+      // Update Consent settings
+    }
+  }
+};
 
 
 mPreferences.registerOnSharedPreferenceChangeListener(mListener);
@@ -556,76 +722,122 @@ This code should be as close-to-top as possible in the header. The tag also incl
 If immutable-version URLs are used for cmp.js, [a subresource integrity attribute](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) should be provided by the CMP and used.
 
 
-```
+```javascript
 <script type="text/javascript" src="https://my-cmp.mgr.consensu.org/cmp.js" async="true"></script>
 
 <script type="text/javascript">
-(function() {
-  var gdprAppliesGlobally = false;
 
-  function addFrame() {
-    if (!window.frames['__tcfapiLocator']) {
-      if (document.body) {
-        var  iframe = document.createElement('iframe');
+  (function() {
 
-        iframe.style.cssText = 'display:none';
-        iframe.name = '__tcfapiLocator';
-        document.body.appendChild(iframe);
-	 } else {
-        // In the case where this stub is located in the head,
-        // this allows us to inject the iframe more quickly than
-        // relying on DOMContentLoaded or other events.
-        setTimeout(addFrame, 5);
+    const gdprAppliesGlobally = false;
+
+    function addFrame() {
+
+      if (!window.frames['__tcfapiLocator']) {
+
+        if (document.body) {
+
+          const iframe = document.createElement('iframe');
+
+          iframe.style.cssText = 'display:none';
+          iframe.name = '__tcfapiLocator';
+          document.body.appendChild(iframe);
+
+        } else {
+
+          // In the case where this stub is located in the head,
+          // this allows us to inject the iframe more quickly than
+          // relying on DOMContentLoaded or other events.
+          setTimeout(addFrame, 5);
+
+        }
+
       }
+
     }
-  }
-  addFrame();
+    addFrame();
 
-  function stubCMP() {
-    var b = arguments;
-    __tcfapi.a = __tcfapi.a || [];
+    function stubCMP() {
 
-    if (!b.length){ return __tcfapi.a; }
-    else if (b[0] === 'ping' && b.length>1) {
-     var r = {"gdprAppliesGlobally": gdprAppliesGlobally,
-        "cmpLoaded": false, "apiVersion":"2.0"}
-      b[2](r, true);
-     return r;
+      const b = arguments;
+
+      __tcfapi.a = __tcfapi.a || [];
+
+      if (!b.length) {
+
+        return __tcfapi.a;
+
+      } else if (b[0] === 'ping' && b.length>1) {
+
+        const r = {'gdprAppliesGlobally': gdprAppliesGlobally,
+                   "cmpLoaded": false, 'apiVersion': '2.0'};
+
+        b[2](r, true);
+        return r;
+
+      } else {
+
+        __tcfapi.a.push([].slice.apply(b));
+        return true;
+
+      }
+
     }
-    else {
-      __tcfapi.a.push([].slice.apply(b));
- return true;
+
+    function cmpMsgHandler(event) {
+
+      const msgIsString = typeof event.data === 'string';
+
+      try {
+
+        var json = msgIsString ? JSON.parse(event.data) : event.data;
+
+      } catch (e) {
+
+        var json = Object();
+
+        /* optional error handling */}
+      if (json.__tcfapiCall) {
+
+        const i = json.__tcfapiCall;
+
+        window.__tcfapi(i.command, i.parameter, i.version, function(retValue, success) {
+
+          const returnMsg = {'__tcfapiReturn': {
+            'returnValue': retValue,
+            'success': success,
+              'callId': i.callId,
+          }};
+
+          event.source.postMessage(msgIsString ?
+            JSON.stringify(returnMsg) : returnMsg, '*');
+
+        });
+
+      }
+
     }
-  }
 
-  function cmpMsgHandler(event) {
-    var msgIsString = typeof event.data === "string";
-try{
-    var json = msgIsString ? JSON.parse(event.data) : event.data;
-}catch(e){var json = Object(); /* optional error handling */ }
-    if (json.__tcfapiCall) {
-      var i = json.__tcfapiCall;
-      window.__tcfapi(i.command, i.parameter, i.version, function(retValue, success) {
-        var returnMsg = {"__tcfapiReturn": {
-          "returnValue": retValue,
-          "success": success,
-        	"callId": i.callId
-        }};
-        event.source.postMessage(msgIsString ?
-          JSON.stringify(returnMsg) : returnMsg, '*');
-      });
+    if (typeof (__tcfapi) !== 'function') {
+
+      window.__tcfapi = stubCMP;
+      __tcfapi.msgHandler = cmpMsgHandler;
+
+      window.addEventListener('message', cmpMsgHandler, false);
+
     }
-  }
 
-  if (typeof (__tcfapi) !== 'function') {
-    window.__tcfapi = stubCMP;
-    __tcfapi.msgHandler = cmpMsgHandler;
+  })();
 
-    window.addEventListener('message', cmpMsgHandler, false);
+</script>
+```
+minfied:
 
-  }
-})();
+```javascript
+<script type="text/javascript" src="https://my-cmp.mgr.consensu.org/cmp.js" async="true"></script>
 
+<script type="text/javascript">
+!function(){const t=!1;function a(t){const a="string"==typeof t.data;try{var e=a?JSON.parse(t.data):t.data}catch(t){e=Object()}if(e.__tcfapiCall){const n=e.__tcfapiCall;window.__tcfapi(n.command,n.parameter,n.version,function(e,c){const i={__tcfapiReturn:{returnValue:e,success:c,callId:n.callId}};t.source.postMessage(a?JSON.stringify(i):i,"*")})}}!function t(){if(!window.frames.__tcfapiLocator)if(document.body){const t=document.createElement("iframe");t.style.cssText="display:none",t.name="__tcfapiLocator",document.body.appendChild(t)}else setTimeout(t,5)}(),"function"!=typeof __tcfapi&&(window.__tcfapi=function(){const a=arguments;if(__tcfapi.a=__tcfapi.a||[],a.length){if("ping"===a[0]&&a.length>1){const e={gdprAppliesGlobally:t,cmpLoaded:!1,apiVersion:"2.0"};return a[2](e,!0),e}return __tcfapi.a.push([].slice.apply(a)),!0}return __tcfapi.a},__tcfapi.msgHandler=a,window.addEventListener("message",a,!1))}();
 </script>
 ```
 
@@ -656,22 +868,28 @@ CMP tags will install an event handler to call `__tcfapi()` for `postMessage` ev
 The sent message should have the below form where "*command*" and *parameter* are the same as the first two parameters to the `__tcfapi()` function, and a unique `callId` value:
 
 
-```
-{__tcfapiCall:
-  {command: "command",
-   parameter: parameter,
-   version: version,
-   callId: uniqueId}}
+```javascript
+{
+  __tcfapiCall:{
+    command: "command",
+    parameter: parameter,
+    version: version,
+    callId: uniqueId
+  }
+}
 ```
 
 and the returned message (`event.data`) will have the below form where `returnValue` and `success` are the two parameters passed to the callback function, and the same value of `callId` that was sent:
 
 
-```
-{__tcfapiReturn:
-  {returnValue: returnValue,
-   success: boolean,
-   callId: uniqueId}}
+```javascript
+{
+  __tcfapiReturn:{
+    returnValue: returnValue,
+    success: boolean,
+    callId: uniqueId
+  }
+}
 ```
 
 
@@ -680,54 +898,87 @@ and the returned message (`event.data`) will have the below form where `returnVa
 Below is a wrapper function that emulates the in-frame `__tcfapi()` call. It locates the ancestor frame running the CMP, performs the `postMessage` and listens for the return message and passes its values to the callback:
 
 
-```
-    // find the CMP frame
-    var f = window;
-    var cmpFrame;
-    while(!cmpFrame) {
-      try {
-        if(f.frames["__tcfapiLocator"]) cmpFrame = f;
-      } catch(e) {}
-      if(f === window.top) break;
-      f = f.parent;
+```javascript
+// find the CMP frame
+let win = window;
+let cmpFrame;
+
+while (!cmpFrame && win !== win.top) {
+
+
+  if (win.frames['__tcfapiLocator']) {
+
+    cmpFrame = win;
+
+  }
+
+  win = win.parent;
+
+}
+
+const cmpCallbacks = {};
+
+/**
+ * Set up a __tcfapi function to do the postMessage and stash the callback.
+ * This function behaves (from the caller's perspective) identically to the
+ * in-frame __tcfapi call
+ */
+win.__tcfapi = (cmd, arg, version, callback) => {
+
+  if (!cmpFrame) {
+
+    callback({msg: 'CMP not found'}, false);
+    return;
+
+  }
+  const callId = Math.random() + '';
+  const msg = {
+  __tcfapiCall: {
+      command: cmd,
+      parameter: arg,
+      version: version,
+      callId: callId,
+    }
+  };
+
+  cmpCallbacks[callId] = callback;
+  cmpFrame.postMessage(msg, '*');
+
+};
+
+/*
+ * when we get the return message, call the stashed callback
+ */
+win.addEventListener('message', (event) => {
+
+  // wrap in a try catch because of the JSON.parse
+  try {
+
+    const json = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+    const response = json.__tcfapiReturn;
+
+    if (response) {
+
+      cmpCallbacks[response.callId](i.returnValue, response.success);
+      delete cmpCallbacks[response.callId];
+
     }
 
-    var cmpCallbacks = {}
+  } catch (parseError) {
 
-    /* Set up a __tcfapi function to do the postMessage and
-       stash the callback.
-       This function behaves (from the caller's perspective)
-       identically to the in-frame __tcfapi call */
-    window.__tcfapi = function(cmd, arg, version, callback) {
-      if(!cmpFrame) {
-        callback({msg:"CMP not found"}, false);
-        return;
-      }
-      var callId = Math.random() + "";
-      var msg = {__tcfapiCall: {
-        command: cmd,
-        parameter: arg,
-        version: version,
-        callId: callId
-      }};
-      cmpCallbacks[callId] = callback;
-      cmpFrame.postMessage(msg, '*');
-    }
+    // if there are any odd postMessages we'll ignore them
+  }
 
-    /* when we get the return message, call the stashed callback */
-    window.addEventListener("message", function(event) {
-      var json = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
-      if(json.__tcfapiReturn) {
-        var i = json.__tcfapiReturn;
-        cmpCallbacks[i.callId](i.returnValue, i.success);
-        delete cmpCallbacks[i.callId];
-      }
-    }, false);
+}, false);
 
-    /* example call of the above __tcfapi wrapper function */
-    __tcfapi("ping", null, version, function(val, success) {
-      console.log("val=",val," success=",success)
-    });
+/*
+ * example call of the above __tcfapi wrapper function
+ */
+__tcfapi('ping', 2, (val, success) => {
+
+  console.log('val=', val, ' success=', success);
+
+});
 ```
 
 
@@ -752,4 +1003,4 @@ The service-specific TC String will override the global TC String, if it is bein
 4. Renamed `__cmp` to `__tcfapi`
 5. Renamed all `__cmp` to `__tcfapi` (e.g. `__cmpLocator` is now `__tcfapiLocator`)
 6. Removed `getConsentData` and `getPublisherConsents` commands
-7. Added in-app API details throughout where applicable
+7. Added in-app API details throughout where applicable# New Document
