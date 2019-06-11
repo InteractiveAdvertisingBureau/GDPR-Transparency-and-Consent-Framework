@@ -1353,18 +1353,20 @@ Here is an annotated example of the GVL’s JSON format:
   // incremented with each published file change
   "vendorListVersion": 1,
 
-  // The TCF MO will increment this value whenever a GVL change (such as adding
-  // a new Purpose or Feature or a change in Purpose wording) legally invalidates
-  // existing TC Strings and requires CMPs to re-establish transparency and consent
-  // from users.  If the policy version number in the latest GVL is different from
-  // the value in your TC String, then you need to re-establish transparency and
-  // consent for that user. A version 1 format TC String is considered to have a
-  // version value of 1.
+  /**
+   * The TCF MO will increment this value whenever a GVL change (such as adding
+   * a new Purpose or Feature or a change in Purpose wording) legally invalidates
+   * existing TC Strings and requires CMPs to re-establish transparency and consent
+   * from users.  If the policy version number in the latest GVL is different from
+   * the value in your TC String, then you need to re-establish transparency and
+   * consent for that user. A version 1 format TC String is considered to have a
+   * version value of 1.
+   */
   "tcfPolicyVersion": 2,
 
   "lastUpdated": "2018-05-28T00:00:00Z",
 
-  /*
+  /**
    * Information published for each Purpose
    *
    * "id": numeric, REQUIRED
@@ -1425,10 +1427,12 @@ Here is an annotated example of the GVL’s JSON format:
 
   },
 
-  // Special features differ from simple features in that CMPs MUST provide
-  // users with a means to signal an opt-in choice as to whether vendors
-  // may employ the feature when performing any purpose processing.
-  // See Policies for specifics.
+  /**
+   * Special features differ from simple features in that CMPs MUST provide
+   * users with a means to signal an opt-in choice as to whether vendors
+   * may employ the feature when performing any purpose processing.
+   * See Policies for specifics.
+   */
   "specialFeatures" : {
     "1": {
       "id": 1,
@@ -1446,7 +1450,7 @@ Here is an annotated example of the GVL’s JSON format:
 
   "vendors": {
 
-  /*
+  /**
    * Information published for each Vendor
    *
    * "id": numeric, REQUIRED
