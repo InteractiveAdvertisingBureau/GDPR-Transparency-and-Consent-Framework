@@ -1489,6 +1489,10 @@ Here is an annotated example of the GVL’s JSON format:
    * empty. List of Special Features the Vendor may utilize when performing
    * some declared Purposes processing.
    *
+   * "specialPurposeIds": array of positive integers, OPTIONAL. Array may be
+   * empty. List of Special Purposes declared as performed on the legal basis
+   * of a legitimate interest
+   *
    * "policyUrl": url string, REQUIRED URL to the Vendor's privacy policy
    * document.
    *
@@ -1514,6 +1518,7 @@ Here is an annotated example of the GVL’s JSON format:
       "flexiblePurposeIds": [1, 2],
       "featureIds": [1, 2],
       "specialFeatureIds": [1, 2],
+      "specialPurposeIds": [2],
       "policyUrl": "https://vendorname.com/gdpr.html",
       "deletedDate": "2019-02-28T00:00:00Z",
       "overflow": {
