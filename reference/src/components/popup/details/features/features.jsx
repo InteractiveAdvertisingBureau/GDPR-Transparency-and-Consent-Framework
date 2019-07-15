@@ -11,12 +11,13 @@ class LocalLabel extends Label {
 
 export default class Features extends Component {
   static defaultProps = {
-    feature: []
+    feature: [],
+    prefix: 'features'
   };
 
 
   render(props, state) {
-    const { feature } = props;
+    const { feature, prefix } = props;
 
     return (
       <div class={style.features}>
