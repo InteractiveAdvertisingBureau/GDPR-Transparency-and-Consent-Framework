@@ -8,6 +8,7 @@ import event_logger from '../../lib/event_logger'
 
 const SECTION_INTRO = 0;
 const SECTION_DETAILS = 1;
+const SECTION_VENDORS = 2;
 
 export default class Popup extends Component {
   state = {
@@ -50,6 +51,12 @@ export default class Popup extends Component {
     });
   };
 
+  handleShowVendors = () => {
+    this.setState({
+      selectedPanelIndex: SECTION_VENDORS
+    });
+  };
+
   render(props, state) {
     const { store, onShowPurposes } = props;
     const { selectedPanelIndex } = state;
@@ -70,9 +77,17 @@ export default class Popup extends Component {
               publisherName={publisherName}
               onAcceptAll={this.onAcceptAll}
               onShowPurposes={this.handleShowDetails}
+              onShowVendors={this.handleShowVendors}
               onRejectAll={this.onRejectAll}
             />
             <Details
+              index={0}
+              onSave={this.props.onSave}
+              onCancel={this.onCancel}
+              store={this.props.store}
+              onRejectAll={this.onRejectAll} />
+            <Details
+              index={1}
               onSave={this.props.onSave}
               onCancel={this.onCancel}
               store={this.props.store}

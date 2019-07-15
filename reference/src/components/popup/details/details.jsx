@@ -3,6 +3,7 @@ import style from './details.less';
 import Button from '../../button/button';
 import CloseButton from '../../closebutton/closebutton';
 import Purposes from './purposes/purposes';
+import Features from './features/features';
 import Vendors from './vendors/vendors';
 import Panel from '../../panel/panel';
 import Label from "../../label/label";
@@ -18,9 +19,12 @@ class LocalLabel extends Label {
 }
 
 export default class Details extends Component {
-  state = {
-    selectedPanelIndex: SECTION_PURPOSES
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedPanelIndex: this.props.index || SECTION_PURPOSES
+    };
+  }
 
   handleShowVendors = () => {
     this.setState({
@@ -75,7 +79,7 @@ export default class Details extends Component {
 
     const { selectedPurposeIds, selectedVendorIds } = vendorConsentData;
     const { selectedCustomPurposeIds } = publisherConsentData;
-    const { purposes = [], vendors = [] } = vendorList;
+    const { purposes = [], vendors = [], features = [] } = vendorList;
     const { purposes: customPurposes = [] } = customPurposeList;
     const allPurposes = [...purposes, ...customPurposes];
 
@@ -130,52 +134,88 @@ export default class Details extends Component {
               </tbody>
             </table>
             <Vendors
-              enableEdit={true}
               enableAllVendors={false}
-              selectedVendorIds={selectedVendorIds}
+              enableEdit={true}
+              features={features}
+              purposes={purposes}
               selectAllVendors={selectAllVendors}
               selectVendor={selectVendor}
+              selectedVendorIds={selectedVendorIds}
               vendors={vendors}
             />
-          </Panel>
-          }
 
-          <Panel selectedIndex={selectedPanelIndex}>
             <table class={style.table}>
               <tbody>
                 <tr>
                   <th class={style.head}>
-                    Third-party Vendors
+                    Features
                   </th>
                 </tr>
-                {purposes.map((purpose, index) => (
-                  <tr class={style.row}>
-                    <td>
-                      <Purposes
-                        selectedPurposeIndex={index}
-                        purposes={purposes}
-                        customPurposes={customPurposes}
-                        selectedPurposeIds={selectedPurposeIds}
-                        selectedCustomPurposeIds={selectedCustomPurposeIds}
-                        selectPurpose={selectPurpose}
-                        selectCustomPurpose={selectCustomPurpose}
-                        selectVendor={selectVendor}
-                        vendors={vendors}
-                        selectedVendorIds={selectedVendorIds}
-                      />
-                    </td>
-                  </tr>
-                ))}
+                {features.map((feature) => {
+                  return (
+                    <Features feature={feature} />
+                  )
+                })}
               </tbody>
             </table>
+          </Panel>
+          }
+
+          <Panel selectedIndex={selectedPanelIndex}>
+            <div>
+              <table class={style.table}>
+                <tbody>
+                  <tr>
+                    <th class={style.head}>
+                      Third-party Vendors
+                    </th>
+                  </tr>
+                  {purposes.map((purpose, index) => (
+                    <tr class={style.row}>
+                      <td>
+                        <Purposes
+                          selectedPurposeIndex={index}
+                          purposes={purposes}
+                          customPurposes={customPurposes}
+                          selectedPurposeIds={selectedPurposeIds}
+                          selectedCustomPurposeIds={selectedCustomPurposeIds}
+                          selectPurpose={selectPurpose}
+                          selectCustomPurpose={selectCustomPurpose}
+                          selectVendor={selectVendor}
+                          vendors={vendors}
+                          selectedVendorIds={selectedVendorIds}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <table class={style.table}>
+                <tbody>
+                  <tr>
+                    <th class={style.head}>
+                      Features
+                    </th>
+                  </tr>
+                  {features.map((feature) => {
+                    return (
+                      <Features feature={feature} />
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
             <Vendors
-              enableEdit={true}
               enableAllVendors={false}
-              selectedVendorIds={selectedVendorIds}
+              enableEdit={true}
+              features={features}
+              purposes={purposes}
               selectAllVendors={selectAllVendors}
               selectVendor={selectVendor}
+              selectedVendorIds={selectedVendorIds}
               vendors={vendors}
             />
+
           </Panel>
 
         </div>

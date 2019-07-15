@@ -23,6 +23,7 @@ export default class Intro extends Component {
       onAcceptAll,
       onRejectAll,
       onShowPurposes,
+      onShowVendors,
       publisherName
     } = props;
 
@@ -38,9 +39,20 @@ export default class Intro extends Component {
           <LocalLabel localizeKey='title'>We value your privacy</LocalLabel>
         </div>
         <div class={style.description}>
-          <LocalLabel localizeKey='description'>In order to run a successful website, we and certain third parties are setting cookies and accessing and storing information on your device for various purposes. Various third parties are also collecting data to show you personalized content and ads. Some third parties require your consent to collect data to serve you personalized content and ads.</LocalLabel>
+          <LocalLabel localizeKey='description'>
+            In order to run a successful website, we and certain third party partners are setting cookies and accessing/storing information on your device for purposes such as personalizing content/ads and measuring/analyzing traffic. Some parties may rely on offline data matching, device linking, and geographic location data to offer those services.
+          <br />
+            Click below to consent to the use of this technology across the web. You can change your mind and change your consent choices at anytime by returning to this site.
+          </LocalLabel>
         </div>
         <div class={style.options}>
+          <Button
+            invert={true}
+            class={style.rejectAll}
+            onClick={onRejectAll}
+          >
+            <LocalLabel localizeKey='rejectAll'>I do not accept</LocalLabel>
+          </Button>
           <Button
             class={style.acceptAll}
             onClick={onAcceptAll}
@@ -50,7 +62,11 @@ export default class Intro extends Component {
         </div>
         <div class={style.bottom}>
           <a class={style.showPurposes} onClick={onShowPurposes}>
-            <LocalLabel localizeKey='showPurposes'>Customize my privacy settings</LocalLabel>
+            <LocalLabel localizeKey='showPurposes'>Show Purposes</LocalLabel>
+          </a>
+          <div class={style.divider} />
+          <a class={style.showVendor} onClick={onShowVendors}>
+            <LocalLabel localizeKey='showVenders'>See full vendor list</LocalLabel>
           </a>
         </div>
 

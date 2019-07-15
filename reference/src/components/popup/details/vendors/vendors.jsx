@@ -77,13 +77,15 @@ export default class Vendors extends Component {
   render(props, state) {
 
     const {
-      vendors,
+      enableEdit,
+      features,
       purposeId,
-      selectVendor,
+      purposes,
       selectAllVendors,
-      selectedVendorIds,
+      selectVendor,
       selectedPurposeIds,
-      enableEdit
+      selectedVendorIds,
+      vendors,
     } = props;
 
     const { editingConsents, enableAll } = this.state;
@@ -138,7 +140,14 @@ export default class Vendors extends Component {
         <div class={style.vendorContent}>
           <table class={style.vendorList}>
             <tbody>
-            {vendors.map(({ id, name, policyUrl }, index) => (
+              {vendors.map(({
+                featureIds,
+                id,
+                legIntPurposeIds,
+                name,
+                policyUrl,
+                purposeIds,
+              }, index) => (
               <tr key={id} class={index % 2 === 1 ? style.even : ''}>
                 <td><div class={style.vendorName}>{name}</div></td>
                 <VendorEnable
@@ -168,10 +177,51 @@ export default class Vendors extends Component {
                 }
                 <tr class={this.isActive(id) ? null : style.hidden}>
                   <div class={style.policy}>
-                    Privacy policy:
-                    <a href={policyUrl}> {policyUrl}</a>
+                    <span class={style.subtitle}>Privacy policy:</span>
+                    <a href={policyUrl}>{policyUrl}</a>
                   </div>
                 </tr>
+                {purposes && purposes.length > 0 &&
+                  <tr class={this.isActive(id) ? null : style.hidden}>
+                    <div class={style.purposes}>
+                      <span class={style.subtitle}>Purposes:</span>
+                      {purposeIds.map((purposeId) => {
+                        var purpose = purposes[purposeId-1].name;
+                        return (
+                          <span class={style.text}>{purpose}</span>
+                        )
+                      })}
+                    </div>
+                  </tr>
+                }
+                <div class={style.divider} />
+                {purposes && purposes.length > 0 &&
+                  <tr class={this.isActive(id) ? null : style.hidden}>
+                    <div class={style.purposes}>
+                      <span class={style.subtitle}>Legitimate Interest Purposes:</span>
+                      {legIntPurposeIds.map((legIntPurposeId) => {
+                        var purpose = purposes[legIntPurposeId-1].name;
+                        return (
+                          <span class={style.text}>{purpose}</span>
+                        )
+                      })}
+                    </div>
+                  </tr>
+                }
+                <div class={style.divider} />
+                { features && features.length > 0 &&
+                  <tr class={this.isActive(id) ? null : style.hidden}>
+                    <div class={style.purposes}>
+                      <span class={style.subtitle}>Features:</span>
+                      {featureIds.map((featureId) => {
+                        var feature = features[featureId-1].name;
+                        return (
+                          <span class={style.text}>{feature}</span>
+                        )
+                      })}
+                    </div>
+                  </tr>
+                }
               </tr>
             ))}
             </tbody>
