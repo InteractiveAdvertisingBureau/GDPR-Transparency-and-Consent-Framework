@@ -145,7 +145,7 @@ export default class Cmp {
     /**
      * user custominzed show ui command
      */
-    showConsentUI: (configs, callback = () => {}) => {
+    showConsentUi: (configs, callback = () => {}) => {
       if (!configs) var configs = {'forceShowUI': true}
       config.update(configs);
       preview();
