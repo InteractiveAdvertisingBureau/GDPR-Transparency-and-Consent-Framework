@@ -40,7 +40,7 @@ export default class Intro extends Component {
         </div>
         <div class={style.description}>
           <LocalLabel localizeKey='description'>
-            In order to run a successful website, we and certain third party partners are setting cookies and accessing/storing information on your device for purposes such as personalizing content/ads and measuring/analyzing traffic. Some parties may rely on offline data matching, device linking, and geographic location data to offer those services. Click below to consent to the use of this technology across the web. You can change your mind and change your consent choices at anytime by returning to this site.
+            In order to run a successful website, we and certain third party partners are setting cookies and accessing/storing information about your interest on your device (mobile) for purposes such as personalizing content/ads and measuring/analyzing traffic. Some parties may rely on offline data matching, device linking, and geographic location data to offer those services. Click below to consent to the use of this technology across the web. You can change your mind and change your consent choices at anytime by returning to this site.
           </LocalLabel>
         </div>
         <div class={style.options}>
