@@ -3,7 +3,7 @@ import log from './log';
 const defaultConfig = {
   publisherPurposeList: [],
 	globalVendorListLocation: 'https://vendorlist.consensu.org/vendorlist.json',
-	globalConsentLocation: 'https://c.sharethis.mgr.consensu.org/v1.0/cmp/portal.html',
+	globalConsentLocation: 'https://c.sharethis.mgr.consensu.org/portal.html',
 	storeConsentGlobally: true,
 	storePublisherData: true,
 	logging: false,
