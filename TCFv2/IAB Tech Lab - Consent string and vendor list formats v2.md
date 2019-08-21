@@ -80,7 +80,7 @@ To participate in the use of the TCF, vendors must make a public attestation of 
 
 ### Audience
 
-Engineers for a registered CMP can use this document to design or update a solution for generating a TC String. In particular, first parties (content publishers, advertisers, and other suppliers of online services) and third-party (vendors for data-driven services) organizations should be familiar with the purpose and scope of a TC String as well as what information it provides, and support its implementation.
+Engineers for a registered CMP can use this document to design or update a solution for generating a TC String. In particular, first parties (content publishers, advertisers, and other suppliers of online services) and third-party (vendors for data-driven services) organisations should be familiar with the purpose and scope of a TC String as well as what information it provides, and support its implementation.
 
 
 ### Relevant Documents
@@ -424,7 +424,7 @@ The global TC string is stored in a shared space and is formatted as described i
       <td>
         The DNS resolution for the name
         <code>[<em>cmp-name</em>].mgr.consensu.org</code> will be delegated
-        by the Managing Organization (IAB Europe) to each CMP. CMPs will
+        by the Managing Organisation (IAB Europe) to each CMP. CMPs will
         host their code, APIs, and CDN under this domain or subdomains.
       </td>
     </tr>
@@ -1743,7 +1743,7 @@ A browser will add this header automatically and, therefore, nothing needs to be
 
 When a change occurs in the TCF [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf), the update invalidates the previous declarations of vendors listed on the previous version of the GVL. These policy changes happen infrequently, but when they do, a CMP is required to discard the user’s current TC String and resurface the user interface to provide new disclosures, capture new consent, and encode a new TC String without migrating any old values over from the old one.
 
-To determine if TCF [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) have changed, CMPs shall compare the _**TcfPolicyVersion**_ encoded in a TC String with the _**TcfPolicyVersion**_ property in the latest Global Vendor List published by the Managing Organization – if the values are different then the TCF Policy has changed and a CMP will be required to provide new disclosures, capture new consent, and encode a new TC String.
+To determine if TCF [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) have changed, CMPs shall compare the _**TcfPolicyVersion**_ encoded in a TC String with the _**TcfPolicyVersion**_ property in the latest Global Vendor List published by the Managing Organisation – if the values are different then the TCF Policy has changed and a CMP will be required to provide new disclosures, capture new consent, and encode a new TC String.
 
 
 ### Example Global Vendor List JSON Object
