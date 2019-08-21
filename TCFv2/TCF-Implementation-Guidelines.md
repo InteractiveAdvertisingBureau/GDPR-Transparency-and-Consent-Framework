@@ -58,16 +58,16 @@ It allows publishers and website operators to communicate to vendors, in a stand
 
 The TCF was first introduced in April 2018. This document refers to version 2 of the TCF, announced in August 2019, which introduces significant changes and is not backward-compatible with the earlier version.
 
-The communication between publishers and vendors must pass through a Consent Management Platform (CMP). A CMP can be operated by anyone, as long as the entity that operates it has completed registration on the CMP list  and is approved by IAB Europe . A list of all approved CMPs is available here.
+The communication between publishers and vendors must pass through a Consent Management Platform (CMP). A CMP can be operated by anyone, as long as the entity that operates it has completed registration on the CMP list  and is approved by IAB Europe . A list of all approved CMPs is available [here](https://advertisingconsent.eu/vendor-list/).
 
 CMPs centralise and manage transparency for and consent and objections of the end users, acting as an intermediary between the Publisher, end user and vendors,using information distributed via the Global Vendor List (GVL), which contains the updated list of vendors adhering to the framework. Please refer to the Policy for complete definition of a CMP. Only CMPs can write and read the Transparency and Consent string, where consent is stored. Their role is to make this information available to vendors within the technical specifications that the framework states.
 
 When configuring their CMP, publishers can make a number of decisions:
 - Consent can be shared with all other publishers adhering to the framework or kept local to the specific publisher;
 - A number of restrictions can be applied, including allowing only a selected list of vendors to process data through their properties.
-A current list of vendors adhering to the framework can be found here.
+A current list of vendors adhering to the framework can be found [here](https://advertisingconsent.eu/vendor-list/).
 
-Any party considering adoption of the TCF must read and follow the TCF Policies, outlined in the IAB Europe Transparency & Consent Framework Policies. Correct implementation of the framework is impossible without following the requirements in the TCF Policy.
+Any party considering adoption of the TCF must read and follow the TCF Policies, outlined in the [IAB Europe Transparency & Consent Framework Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf). Correct implementation of the framework is impossible without following the requirements in the TCF Policy.
 
 ## Who should read this document?
 Publishers, Vendors (DMP, AdServer, Advertisers, …) and registered CMPs who want to work within the TCF can use this document as guidance to implement the technology to support their efforts. This document addresses common (technical) questions and makes it easier for companies to understand the coherences of the TCF policy and technical specifications.
@@ -84,9 +84,9 @@ You can also submit general feedback on IAB Tech Lab draft specifications to fee
 Yes, the technical specifications for the TC String and CMP API were developed to support policies outlined in the Transparency and Consent Framework (TCF) Policies for version 2. Implementing the technology requires adherence to these policies.
 
 If you have not yet read tech specs or policy, you can access these documents here: 
-- IAB Europe Transparency and Consent Framework Policies  
-- Transparency and Consent String, Version 2
-- Consent Management Platform API, Version 2
+- [IAB Europe Transparency and Consent Framework Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf)
+- [Transparency and Consent String, Version 2](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md)
+- [Consent Management Platform API, Version 2(https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md)
 
 All definitions in the implementation guidelines should reflect definitions provided in the Policy. 
 
