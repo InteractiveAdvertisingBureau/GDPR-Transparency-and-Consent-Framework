@@ -339,7 +339,7 @@ CMPs can implement a consent redirector and host it at `https://[cmpname].mgr.co
 
  If a publisher is operating a CMP within a jurisdiction that does not require consent to store and/or access information on a device and, therefore, does not ask for consent on behalf of a vendor, the CMP will write the corresponding bit in the _**PurposesConsent**_ field to `0`. Even though it is valid within that jurisdiction to use Legitimate Interest for Purpose 1, a vendor would interpret that `0` as a “no consent” signal and have no way of knowing that consent was not required in the jurisdiction in which the publisher operates.  This lack of transparency would, ultimately, cause losses in ad revenue for that publisher.
 
-To accommodate cases where Purpose 1 is governed differently for consent depending on the jurisdiction, a TC String is transparent about the publisher’s operating governance and whether or not Purpose 1 was disclosed to a user. The vendor can then use these details to make a determination about whether they have sufficient legal basis for personal data processing in that given context. To support this, there are two fields in a TC String: _**PublisherCC**_, which represents the publisher’s country code and a flag for whether any disclosure has been offered on Purpose 1 named _**PurposeOneTreatment**_. Details for each field are listed among [the fields used in the TC String](#tc-string-format).
+To accommodate cases where Purpose 1 is governed differently for consent depending on the jurisdiction, a TC String is transparent about the publisher’s operating governance and whether or not Purpose 1 was disclosed to a user. The vendor can then use these details to make a determination about whether they have sufficient legal bases for personal data processing in that given context. To support this, there are two fields in a TC String: _**PublisherCC**_, which represents the publisher’s country code and a flag for whether any disclosure has been offered on Purpose 1 named _**PurposeOneTreatment**_. Details for each field are listed among [the fields used in the TC String](#tc-string-format).
 
 ## Creating a TC String
 
@@ -1135,7 +1135,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
 
 #### Signaling OOB in the TC String
 
-On occasion, legal bases for processing a user's personal data are achieved outside of the TCF. This would be considered an out-of-band (OOB) legal basis. To signal whether using an OOB legal basis is allowed requires:
+On occasion, legal bases for processing a user's personal data are achieved outside of the TCF. This would be considered an out-of-band (OOB) legal basis. To signal whether using an OOB legal bases is allowed requires:
 
 *   An indication that some CMP has, at some time, disclosed the vendor in a global context to the user in the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment
 *   The use of a global-context TC String
@@ -1432,7 +1432,7 @@ Signals which vendors the publisher permits to use OOB legal bases.
       <td colspan="2">
         <strong
           >Encodes range groups of Vendor IDs who the publisher is allowing
-          to use an OOB legal basis</strong
+          to use OOB legal bases</strong
         >
       </td>
     </tr>
@@ -1445,9 +1445,9 @@ Signals which vendors the publisher permits to use OOB legal bases.
       <td colspan="2">RangeEntry (repeated NumEntries times)</td>
       <td colspan="2">
         A single or range of Vendor ID(s) of Vendor(s) who are allowed to
-        use an OOB legal basis on the given publisher’s digital property. If
+        use OOB legal bases on the given publisher’s digital property. If
         a Vendor ID is not within the bounds of the ranges then they are not
-        allowed to use an OOB legal basis on the given publisher's digital
+        allowed to use OOB legal bases on the given publisher's digital
         property..
       </td>
     </tr>
@@ -1697,10 +1697,9 @@ CMPs must, of course, use specific versions of the GVL to determine if a CMP sho
 
 ### Vendors using the GVL
 
-Vendors must use the version of the GVL encoded in the TC String received to determine if they have the legal basis they need to process the user's personal data for a given purpose.
+Vendors must use the version of the GVL encoded in the TC String received to determine if they have the legal bases they need to process the user's personal data.
 
 **Strict restrictions on caching the GVL apply and are detailed in the following section.**
-
 
 ### Caching the Global Vendor List
 
