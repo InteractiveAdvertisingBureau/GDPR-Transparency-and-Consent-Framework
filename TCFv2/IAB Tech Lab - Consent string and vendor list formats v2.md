@@ -1699,9 +1699,9 @@ CMPs must, of course, use specific versions of the GVL to determine if a CMP sho
 
 Vendors must use the version of the GVL encoded in the TC String received to determine if they have the legal bases they need to process the user's personal data.
 
-**Strict restrictions on caching the GVL apply and are detailed in the following section.**
-
 ### Caching the Global Vendor List
+
+**Strict restrictions on caching the GVL apply and are detailed in the following section.**
 
 Given the scale of the TCF and the high volume of requests for the Global Vendor List, current and previous versions are configured with cache-control headers. All requests for the Global Vendor List must honour these headers and must not cache the resource with different settings. In this respect, “cache busting” techniques, like appending a query string parameter and a randomly generated value as part of the URL request to download the Global Vendor List in order to bypass the cache must not be used.
 
