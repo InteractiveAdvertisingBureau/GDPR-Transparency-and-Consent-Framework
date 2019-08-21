@@ -1,78 +1,119 @@
 ![iab tech lab](https://user-images.githubusercontent.com/19175352/38649177-0d37d17c-3daa-11e8-8934-f0fb47919716.png)
-# Consent Management Platform API
+# Transparency and Consent String with Global Vendor List Format
 **IAB Europe Transparency & Consent Framework**
 
 **Final v.2.0 | August 2019**
 
-- [Version History](#version-history)
-- [Introduction](#introduction)
-  - [About the Transparency & Consent Framework](#about-the-transparency--consent-framework)
-  - [License](#license)
-  - [Disclaimer](#disclaimer)
-  - [About IAB Tech Lab](#about-iab-tech-lab)
-  - [About IAB Europe](#about-iab-europe)
-- [CMP API v2.0](#cmp-api-v20)
-  - [What does the CMP API support?](#what-does-the-cmp-api-support)
-  - [What is the Global Vendor List?](#what-is-the-global-vendor-list)
-  - [How does the CMP provide the API?](#how-does-the-cmp-provide-the-api)
-  - [What required API commands must a CMP support?](#what-required-api-commands-must-a-cmp-support)
-    - [`getTCData`](#gettcdata)
-    - [`ping`](#ping)
-    - [`addEventListener`](#addeventlistener)
-    - [`removeEventListener`](#removeeventlistener)
-  - [What optional API commands might a CMP support?](#what-optional-api-commands-might-a-cmp-support)
-    - [`getInAppTCData`](#getinapptcdata)
-    - [`getVendorList`](#getvendorlist)
-  - [What objects are returned form the API?](#what-objects-are-returned-form-the-api)
-    - [`TCData`](#tcdata)
-    - [`PingReturn`](#pingreturn)
-      - [Ping Status Codes](#ping-status-codes)
-    - [`InAppTCData`](#inapptcdata)
-  - [In-App Details](#in-app-details)
-    - [How is a CMP used in-app?](#how-is-a-cmp-used-in-app)
-    - [What is the CMP in-app internal structure for the defined API?](#what-is-the-cmp-in-app-internal-structure-for-the-defined-api)
-    - [How do third-party SDKs (vendors) access the consent information in-app?](#how-do-third-party-sdks-vendors-access-the-consent-information-in-app)
-    - [How does ad mediation work in-app?](#how-does-ad-mediation-work-in-app)
-      - [Mediation SDK](#mediation-sdk)
-      - [Vendor](#vendor)
-- [Using the CMP API](#using-the-cmp-api)
-  - [How do ad tags work?](#how-do-ad-tags-work)
-  - [How does the "version" parameter work?](#how-does-the-version-parameter-work)
-  - [What does the gdprApplies value mean?](#what-does-the-gdprapplies-value-mean)
-  - [Details for vendors](#details-for-vendors)
-    - [How can scripts on a page determine if there is a CMP present?](#how-can-scripts-on-a-page-determine-if-there-is-a-cmp-present)
-    - [How can scripts determine if the CMP script is loaded yet?](#how-can-scripts-determine-if-the-cmp-script-is-loaded-yet)
-    - [How does the CMP “stub” API work?](#how-does-the-cmp-stub-api-work)
-    - [Requirements for the CMP “stub” API script](#requirements-for-the-cmp-stub-api-script)
-    - [Is there a sample CMP “stub” API script?](#is-there-a-sample-cmp-stub-api-script)
-  - [How can vendors that use iframes call the CMP API from an iframe?](#how-can-vendors-that-use-iframes-call-the-cmp-api-from-an-iframe)
-    - [Via safeFrames](#via-safeframes)
-    - [Without safeFrames, using postMessage](#without-safeframes-using-postmessage)
-    - [Is there a sample iframe script call to the CMP API?](#is-there-a-sample-iframe-script-call-to-the-cmp-api)
-  - [From where will the API retrieve the TC string?](#from-where-will-the-api-retrieve-the-tc-string)
-    - [How will the API prioritize the service-specific and the global configurations?](#how-will-the-api-prioritize-the-service-specific-and-the-global-configurations)
-  - [Major Changes from 1.1](#major-changes-from-11)
+Table of Contents
 
-## Version History
+* [Version History:](#version-history)
+* [Introduction](#introduction)
+  + [Audience](#audience)
+  + [Relevant Documents](#relevant-documents)
+  + [About the Transparency & Consent Framework](#about-the-transparency--consent-framework)
+  + [License](#license)
+  + [About IAB Tech Lab](#about-iab-tech-lab)
+  + [About IAB Europe](#about-iab-europe)
+* [About the Transparency & Consent String (TC String)](#about-the-transparency--consent-string-tc-string)
+  + [Definitions](#definitions)
+  + [What purpose does a TC String serve?](#what-purpose-does-a-tc-string-serve)
+  + [What information is stored in a TC String?](#what-information-is-stored-in-a-tc-string)
+  + [Who should create a TC string?](#who-should-create-a-tc-string)
+  + [When should a TC string be created?](#when-should-a-tc-string-be-created)
+  + [What are the different scopes for a TC String?](#what-are-the-different-scopes-for-a-tc-string)
+  + [What are publisher restrictions?](#what-are-publisher-restrictions)
+* [Working with global TC Strings](#working-with-global-tc-strings)
+  + [How does the CMP handle a globally-scoped TC string?](#how-does-the-cmp-handle-a-globally-scoped-tc-string)
+  + [How does a URL-based service process the TC string when it can't execute JavaScript?](#how-does-a-url-based-service-process-the-tc-string-when-it-cant-execute-javascript)
+    - [Full TC String passing](#full-tc-string-passing)
+    - [CMP Redirect for TC String](#cmp-redirect-for-tc-string)
+  + [What if consent is governed differently in a country?](#what-if-consent-is-governed-differently-in-a-country)
+* [Creating a TC String](#creating-a-tc-string)
+  + [How should a Transparency & Consent String be stored?](#how-should-a-transparency--consent-string-be-stored)
+  + [What are the Purposes and Features being supported?](#what-are-the-purposes-and-features-being-supported)
+  + [How should a global TC string be formatted for storage?](#how-should-a-global-tc-string-be-formatted-for-storage)
+  + [TC String Format](#tc-string-format)
+    - [The Core String](#the-core-string)
+    - [Signaling OOB in the TC String](#signaling-oob-in-the-tc-string)
+    - [Disclosed Vendors (OOB)](#disclosed-vendors-oob)
+    - [Allowed Vendors (OOB)](#allowed-vendors-oob)
+    - [Publisher Purposes Transparency and Consent](#publisher-purposes-transparency-and-consent)
+* [The Global Vendor List](#the-global-vendor-list)
+  + [I’m a vendor, how do I get added to the Global Vendor List?](#im-a-vendor-how-do-i-get-added-to-the-global-vendor-list)
+  + [What is contained in the Global Vendor List?](#what-is-contained-in-the-global-vendor-list)
+  + [Where can I access the Global Vendor List?](#where-can-i-access-the-global-vendor-list)
+  + [TCF version 1 of the Global Vendor List (deprecated)](#tcf-version-1-of-the-global-vendor-list-deprecated)
+  + [Translations for Purposes, Special Purposes, Features, and Special Features](#translations-for-purposes-special-purposes-features-and-special-features)
+  + [How often is the Global Vendor List updated?](#how-often-is-the-global-vendor-list-updated)
+  + [CMPs using the GVL](#cmps-using-the-gvl)
+  + [Vendors using the GVL](#vendors-using-the-gvl)
+  + [Caching the Global Vendor List](#caching-the-global-vendor-list)
+    - [CMPs caching the GVL](#cmps-caching-the-gvl)
+    - [Vendors caching the GVL](#vendors-caching-the-gvl)
+    - [Caching previous versions of the GVL](#caching-previous-versions-of-the-gvl)
+    - [Using a compressed version of the Global Vendor List](#using-a-compressed-version-of-the-global-vendor-list)
+    - [Global Vendor List and TCF Policy Updates](#global-vendor-list-and-tcf-policy-updates)
+  + [Example Global Vendor List JSON Object](#example-global-vendor-list-json-object)
 
-| Date | Version | Comments |
-| :-- | :-- | :-- |
-| April 2019 | 2.0 | Released for public comment |
-| April 2018 | 1.1 | First version released to the public |
+
+## Version History:
+
+
+<table>
+  <tr>
+   <td>Date
+   </td>
+   <td>Version
+   </td>
+   <td>Comments
+   </td>
+  </tr>
+  <tr>
+   <td>April 2019
+   </td>
+   <td>2.0
+   </td>
+   <td>Released for public comment
+   </td>
+  </tr>
+  <tr>
+   <td>April 2018
+   </td>
+   <td>1.1
+   </td>
+   <td>First version released to the public
+   </td>
+  </tr>
+</table>
+
+
 
 ## Introduction
 
-This document is one of the IAB Europe Transparency and Consent Framework (TCF) Specifications. It defines the API for Consent Management Providers (CMPs). The CMP API v2 is the interface a CMP provides for callers (web and in-app) to access information regarding the transparency and consent disclosed and obtained from the end user by the CMP. Both required functionality that the CMP must provide and optional features are described.
+This document is one of the IAB Europe Transparency and Consent Framework Specifications. It defines the technical implementation of the structure and encoding for a Transparency and Consent String (TC String), and the format for a Global Vendor List (GVL) maintained by IAB Europe. The TC String is a technical component of the IAB Europe Transparency & Consent Framework (TCF).
 
-The General Data Protection Regulation (GDPR) requires a high level of accountability for how personal data is processed for users consuming content online or in-app. Specifically, GDPR requires a legal basis for such processing. Two of the legal bases described in the GDPR are the most relevant to organizations that operate in the digital advertising ecosystem. Such organizations need to either obtain consent from the user to process their personal data, or establish legitimate interests for processing data such that the interests and fundamental rights of the user are not overriding.
+The General Data Protection Regulation (GDPR) requires a high level of accountability for how personal data is processed. While important to all parties in the digital advertising ecosystem, implementation of the GDPR came with heavy technical challenges.
 
-Under the GDPR, controllers are required to create and maintain records of compliance. While compliance is important, implementation came with heavy technical challenges. Clear standards for a common technical solution would be needed.
+The GDPR requires, amongst others, a legal basis for such processing. The two most relevant legal bases are the consent of the user to the processing of their personal data, and the legitimate interests of the controller or a third party to the processing of a user’s personal data, provided that the interests and fundamental rights of the user are not overriding. Both legal bases require the provision of disclosures to ensure transparency, and the opportunity for user choice either through the user’s consent to the processing of their personal data before the processing starts if the legal basis is consent, or through the user’s objection to the processing of their personal data after the processing starts if the legal basis is a legitimate interest. Under the GDPR, controllers are required to create and maintain records of compliance, including, but not limited to user consent records. This warrants clear standards for a common technical solution for all affected parties and policies to govern how that solution is used.
 
-IAB Europe established the TCF to support compliance with the GDPR in the context of digital advertising. This framework is built on four components: a Global Vendor List (GVL), a Transparency and Consent String (TC String) to store data, an API for CMPs to create and process the TC String, and the Policies that govern how the TCF is used.
+IAB Europe established the TCF to support compliance with the GDPR in the context of digital advertising. This framework is built on four components: a Global Vendor List (GVL), a Transparency and Consent String (TC String), an API for Consent Management Providers (CMPs) to create and process the TC String, and the Policies that govern how the TCF is used.
 
-Prescribed use of the TCF establishes an audit trail to help maintain compliance with the GDPR, but the real benefit to the digital advertising ecosystem is a safer Internet for consumers, and more reliable data for brands and publishers. As adoption of the TCF increases, compliance becomes more scalable and data becomes more meaningful.
+Prescribed use of the TCF may support compliance with the GDPR, but the real benefit to the digital advertising ecosystem is a safer Internet for consumers, and more reliable data for brands and publishers. As adoption of the TCF increases, compliance becomes more scalable and data becomes more meaningful.
 
-To participate in the use of the TCF, become familiar with the Policies for using it. To have transparency and consent established and signaled  for your online services, apply to be added to the GVL. To play a role in creating a TC String for signaling status on transparency and user consent, sign up with IAB Europe to become a CMP. CMPs must follow technical standards provided in this document for creating TC Strings in compliance with [TCF Policy](https://www.iabeurope.eu/category/policy/tcf-updates/). They must also follow technical standards  for using the CMP API specified in this document to receive and process information provided in the TC String.
+To participate in the use of the TCF, vendors must make a public attestation of compliance with the [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) for using it. To have transparency and consent established and signaled status for your online services stored in a global database, apply to be added to the GVL. To play a role in creating a TC String for signaling status on transparency and user consent, sign up with IAB Europe to become a CMP. CMPs must follow technical standards provided in this document for creating TC Strings in compliance with TCF [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf). They must also follow technical standards guidance for using the CMP API specified in this document to receive and process information provided in a TC String.
+
+
+### Audience
+
+Engineers for a registered CMP can use this document to design or update a solution for generating a TC String. In particular, first parties (content publishers, advertisers, and other suppliers of online services) and third-party (vendors for data-driven services) organizations should be familiar with the purpose and scope of a TC String as well as what information it provides, and support its implementation.
+
+
+### Relevant Documents
+
+IAB Europe Transparency & Consent Framework Policies
+
+Consent Manager Provider JS API
+
 
 ### About the Transparency & Consent Framework
 
@@ -80,1227 +121,1704 @@ IAB Europe Transparency & Consent Framework (TCF) has a simple objective to help
 
 Resources including policy FAQ, Global Vendor List, and CMP List can be found at [iabeurope.eu/tcf](http://iabeurope.eu/tcf).
 
+
 ### License
 
 IAB Europe Transparency and Consent Framework technical specifications governed by the IAB Tech Lab is licensed under a Creative Commons Attribution 3.0 License.   To view a copy of this license, visit[ creativecommons.org/licenses/by/3.0/](http://creativecommons.org/licenses/by/3.0/) or write to Creative Commons, 171 Second Street, Suite 300, San Francisco, CA 94105, USA.
 
 ![](https://drive.google.com/uc?id=1cbwEGlb8S69SndIDoHnvc5_3TfmkGM7R)
 
-### Disclaimer
+
+Disclaimer
 
 THE STANDARDS, THE SPECIFICATIONS, THE MEASUREMENT GUIDELINES, AND ANY OTHER MATERIALS OR SERVICES PROVIDED TO OR USED BY YOU HEREUNDER (THE “PRODUCTS AND SERVICES”) ARE PROVIDED “AS IS” AND “AS AVAILABLE,” AND IAB TECHNOLOGY LABORATORY, INC. (“TECH LAB”) MAKES NO WARRANTY WITH RESPECT TO THE SAME AND HEREBY DISCLAIMS ANY AND ALL EXPRESS, IMPLIED, OR STATUTORY WARRANTIES, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AVAILABILITY, ERROR-FREE OR UNINTERRUPTED OPERATION, AND ANY WARRANTIES ARISING FROM A COURSE OF DEALING, COURSE OF PERFORMANCE, OR USAGE OF TRADE.  TO THE EXTENT THAT TECH LAB MAY NOT AS A MATTER OF APPLICABLE LAW DISCLAIM ANY IMPLIED WARRANTY, THE SCOPE AND DURATION OF SUCH WARRANTY WILL BE THE MINIMUM PERMITTED UNDER SUCH LAW.  THE PRODUCTS AND SERVICES DO NOT CONSTITUTE BUSINESS OR LEGAL ADVICE.  TECH LAB DOES NOT WARRANT THAT THE PRODUCTS AND SERVICES PROVIDED TO OR USED BY YOU HEREUNDER SHALL CAUSE YOU AND/OR YOUR PRODUCTS OR SERVICES TO BE IN COMPLIANCE WITH ANY APPLICABLE LAWS, REGULATIONS, OR SELF-REGULATORY FRAMEWORKS, AND YOU ARE SOLELY RESPONSIBLE FOR COMPLIANCE WITH THE SAME.
 
+
 ### About IAB Tech Lab
 
-The IAB Technology Laboratory (Tech Lab) is a non-profit consortium that engages a member community globally to develop foundational technology and standards that enable growth and trust in the digital media ecosystem.. Comprised of digital publishers, ad technology firms, agencies, marketers, and other member companies, IAB Tech Lab focuses on improving the digital advertising supply chain, measurement, and consumer experiences, while promoting responsible use of data. Its work includes the OpenRTB real-time bidding protocol, ads.txt anti-fraud specification, Open Measurement SDK for viewability and verification, VAST video specification, and DigiTrust identity service. Board members include ExtremeReach, Facebook, Google, GroupM, Hearst Digital Media, Index Exchange, Integral Ad Science, LinkedIn, LiveRamp, MediaMath, Microsoft, Oracle Data Cloud, Pandora, PubMatic, Quantcast, Rakuten Marketing, Telaria, The Trade Desk, Verizon Media Group, Xandr, and Yahoo! Japan. Established in 2014, the IAB Tech Lab is headquartered in New York City with staff in San Francisco, Seattle, and London. Learn more at [iabtechlab.com](https://www.iabtechlab.com).
+The IAB Technology Laboratory (Tech Lab) is a non-profit consortium that engages a member community globally to develop foundational technology and standards that enable growth and trust in the digital media ecosystem.. Comprised of digital publishers, ad technology firms, agencies, marketers, and other member companies, IAB Tech Lab focuses on improving the digital advertising supply chain, measurement, and consumer experiences, while promoting responsible use of data. Its work includes the OpenRTB real-time bidding protocol, ads.txt anti-fraud specification, Open Measurement SDK for viewability and verification, VAST video specification, and DigiTrust identity service. Board members include ExtremeReach, Facebook, Google, GroupM, Hearst Digital Media, Index Exchange, Integral Ad Science, LinkedIn, LiveRamp, MediaMath, Microsoft, Oracle Data Cloud, Pandora, PubMatic, Quantcast, Rakuten Marketing, Telaria, The Trade Desk, Verizon Media Group, Xandr, and Yahoo! Japan. Established in 2014, the IAB Tech Lab is headquartered in New York City with staff in San Francisco, Seattle, and London. Learn more at [https://www.iabtechlab.com](https://www.iabtechlab.com/).
+
 
 ### About IAB Europe
 
 IAB Europe is the European-level association for the digital marketing and advertising ecosystem. Through its membership of National IABs and media, technology and marketing companies, its mission is to lead political representation and promote industry collaboration to deliver frameworks, standards and industry programmes that enable business to thrive in the European market.
 
-Learn more about IAB Europe here: [iabeurope.eu/](https://www.iabeurope.eu/)
+Learn more about IAB Europe here: [https://www.iabeurope.eu/](https://www.iabeurope.eu/)
 
-## CMP API v2.0
 
-### What does the CMP API support?
+## About the Transparency & Consent String (TC String)
 
-Consent Management Providers (CMPs) provide a user interface to establish transparency to users, and obtain consent or register objections from end users, and capture their preferences in Signals. These Signals are packaged in a standardized, easily-communicated payload called a TC String. The CMP API provides a standardized means for parties, such as the hosting publisher or an advertising vendor, to access these preferences managed by the CMP.
+In the TCF, a TC String is used to encapsulate relevant details about how transparency and consent was established and encoded as it applies for each of the Purposes, Special Purposes, Features, and Special Features defined by the [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) and for participating Vendors. This document specifies how that string must be formatted, who should use it, and how it must be used.
 
-Using the API, scripts may obtain the TC String payload as well as the information it contains, which is ready to use without having to understand how to "unpack" the payload format. This makes it easy to make immediate data processing decisions based on the returned information.
 
-CMPs may provide proprietary interfaces for specialised features or capabilities. The design and operation of a proprietary interface is documented in the IAB Europe Transparency and Consent Framework Policies.
+### Definitions
 
-This document specifies required functionality that the CMP must provide in accordance with the TCF. Any CMP functionality, including a publisher CMP or any UI and configuration, are provided by a designated CMP and using this CMP API. Other standardized APIs fall outside the TCF and may not be aligned to TCF policies.
+Regarding specific definitions as they relate to TCF [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) and the technology described in this document, please refer to IAB Europe Transparency and Consent Framework Policies located at the following link:
 
-### What is the Global Vendor List?
+[http://www.iabeurope.eu/tcfdocuments/documents/legal/currenttcfpolicyFINAL.pdf](http://www.iabeurope.eu/tcfdocuments/documents/legal/currenttcfpolicyFINAL.pdf)
 
-The Global Vendor List (GVL) is a technical document that CMPs download from a domain managed by IAB Europe. It lists all registered and approved Vendors, as well as standard Purposes, Features Special Purposes, Special Features and Stacks. The information stored in the GVL is used for determining what legal disclosures must be made to the user. IAB Europe manages and publishes the GVL.
 
-The Global Vendor List contains the following information:
+### What purpose does a TC String serve?
 
-*   A Global Vendor List version.
-*   A list of standard Purposes, including any Special Purposes.
-*   A list of standard Features. Vendors can indicate that they use Features. Since they span purposes, users cannot exercise choice  about any of them, but Features Vendors use should be disclosed  in the CMP’s UI.
-*   A list of Special Features, which are Features for which users are given an opt-in choice.
-*   A list of Stack definitions.
-*   A list of Vendors with assigned Vendor IDs (denoted as **VendorIds** in the string), the standard Purposes for which they are requesting consent, the standard Purposes they will be using on the legitimate interest legal basis, the Features they may use across declared Purposes, and the URL of their GDPR/privacy policy page. _VendorIds_ are incrementally-assigned and not reused; deleted Vendors are just marked as deleted.
-*   Vendor GET limits to inform overflow option. This provides the information needed to support Vendor’s ability to use the http GET request.
+A TC String’s primary purpose is to encapsulate and encode all the information disclosed to a user and the expression of their preferences for data processing under the GDPR. Using a Consent Management Platform (CMP), the information is captured into an encoded and compact  HTTP-transferable string. This string enables communication of transparency and consent information to entities, or “vendors”, that process user data. Vendors decode a TC String to determine whether they have the necessary legal bases to  process a user's personal data for their purposes. Theconcise string data format enables a  CMP to persist and retrieve a user’s preferences any time they're needed as well as transfer that information to any vendors who need it.
 
-You can learn more about the Global Vendor list on the IAB EU website: [https://iabeurope.eu/tcf](https://iabeurope.eu/tcf)
 
-### How does the CMP provide the API?
+### What information is stored in a TC String?
 
-Every consent manager MUST provide the following API function:
+A TC String contains the following information:
 
-**`__tcfapi(command, version, callback, parameter)`**
 
-The function `__tcfapi` **must always be a function** and cannot be any other type, even if only temporarily on initialization – the API must be able to handle calls at all times.
 
-Secondarily, CMPs must provide a proxy for postMessage events targeted to the `__tcfapi` interface sent from within nested iframes. See [the section on iframes](#how-can-vendors-that-use-iframes-call-the-cmp-api-from-an-iframe) for information on working with IAB SafeFrames.
+1. **General metadata:** standard markers that indicate details about a TC String such as its encoding version, when it was last updated, and when it was initially created as well as details about the conditions of the transparency and consent values it contains such as the Global Vendor List version used, the CMP used, etc.
+2. **User consent:** a user’s expression of consent given for processing their data. A user’s consent is expressed on two levels: per Purpose and per Vendor.
+3. **Legitimate interest:** the record of a CMP having established legitimate interest transparency for a vendor and/or purpose and whether the user exercised their “Right to Object” to it.  This includes signals for Purposes in general and Purposes declared specifically for a given Vendor.
+4. **Publisher restrictions:** the restrictions of a vendors' data processing by a publisher within the context of the users trafficking their digital property.
+5. **Publisher transparency and consent:** a segment of a TC String that publishers may use to establish transparency with and receive consent from users for their own legal bases to process data or to share with vendors if they so choose.
+6. **Out-of-band (OOB) legal bases:** two segments expresing that a Vendor is using  legal bases outside of the TCF  to process data.  The first segment is a list of Vendors disclosed to the user and the second is a list of Vendors that the publisher allows to use out-of-band legal bases.
+7. **Specific jurisdiction disclosures:** the country in which the publisher’s business entity is established or the legislative country of reference and a record of whether Purpose 1, “[to] store and/or access information on a device,” was dislcosed to the user since some legal jurisdictions handle this data processing purpose differently.
 
-### What required API commands must a CMP support?
 
-All CMPs must support four required API commands: [`'getTCData'`](#gettcdata), [`'ping'`](#ping), [`'addEventListener'`](#addeventlistener) and [`'removeEventListener'`](#removeeventlistener).
+### Who should create a TC string?
 
-______
+A Transparency & Consent String may only be created by an IAB Europe TCF registered CMP using its assigned CMP ID number in accordance with the [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf). Vendors or any other third-party service providers must neither create nor alter TC Strings. These and other requirements are articulated in the [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) to which all parties including CMPs, Publishers, and Vendors, are bound.
 
-#### `getTCData`
 
-| argument name | type | optional | value |
-|--:|:-:|:-:|:--|
-| command | string | | `'getTCData'` |
-| callback | function | | `function(tcData: TCData, success: boolean)` |
-| parameter | int array | ✔️  | `vendorIds` |
+### When should a TC string be created?
 
-**Example:**
+A TC String that contains positive consent signals must not be created before clear affirmative action is taken by a user that unambiguously signifies that user’s consent. However, a TC String may be created with only legitimate interest establishment signals providing that legitimate interest transparency has been established in accordance with the [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf).
 
-```javascript
-__tcfapi('getTCData', 2, (tcData, success) => {
 
-  if(success) {
+### What are the different scopes for a TC String?
 
-    // do something with tcData
+There are two main contexts in which a TC String can be created:
 
-  } else {
 
-    // do something else
 
-  }
+*   **Service-specific** - A  TC String in this context is only used by the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain [Publisher restrictions](#what-are-publisher-restrictions), a [Publisher TC](#publisher-purposes-transparency-and-consent) segment and an [AllowedVendors](#allowed-vendors-oob) segment.
+*   **Global** - A TC String in this context is saved globally and is shared by CMPs running onsites across the web; When stored globally, they must <span style="text-decoration:underline;">NOT</span> contain [Publisher restrictions](#what-are-publisher-restrictions) or a [Publisher TC](#publisher-purposes-transparency-and-consent) segment but they may contain a [DisclosedVendors](#disclosed-vendors-oob) segment.
 
-}, [1,2,3]);
+CMPs must be set up to operate in either a service-specific or global configuration. If the Publisher-operated CMP declares that the processing disclosed is, for example, data processing on this site and on other sites or apps where third-party companies also operate, then the scope is global and that TC String is used and stored in a global context.
+
+If the disclosures do not describe a global scope, or explicitly state service-specific processing, then the TC String is used and stored explicitly as a service-specific string. Also, if the CMP discloses transparency and consent in a global context but the user’s browser does not permit third-party cookies, then the CMP’s only recourse is to retain the user’s preference is to use a local storage mechanism (eg. first-party cookie or [window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)). Since the transparency and consent obtained from the user is restricted to that site or service, the TC String must then have the service-specific bit ([IsServiceSpecific](#tcstring-format)) set.
+
+
+### What are publisher restrictions?
+
+Version 2.0 of the Framework introduced the ability for publishers to signal restrictions on how vendors may process data:
+
+ * **Purposes.** Restrict the purposes for which personal data is processed by a vendor.
+ * **Legal basis.** Specify the legal basis upon which a publisher requires a vendor to operate where a vendor has signaled flexibility on legal basis in the GVL.
+
+Publisher restrictions are custom requirements specified by a publisher and must only be saved to a service-specific TC String.
+
+## Working with global TC Strings
+
+Each party involved in handling a TC String plays a role. The following topics address how parties should handle a TC String in different situations.
+
+
+### How does the CMP handle a globally-scoped TC string?
+
+When configured to use globally-scoped TC Strings CMPs must not overwrite any of the consent or legitimate interest signals found in an existing TC String. Therefore CMPs must do the following:
+
+*   Decode the TC String from the global scope to load and preserve all existing signals
+*   Set the signals for the vendors specified in the CMP user interface. If a subset of vendors is shown in the CMP user interface, the CMP must only set signals for those vendors.
+*   If a CMP is unable to resolve an ambgious negative vendor signal – unable to differentiate between a “no” and a “never disclosed” – a CMP shall disambiguate the signal with the corresponding value in the [Vendors Disclosed](#heading=h.ifuzicjs0ou3) segment since that segment signals which vendors were disclosed to the user.
+*   Once the user has made their selections the CMP shall save the resulting TC String back to the global context, overwriting the old one.
+
+
+### How does a URL-based service process the TC string when it can't execute JavaScript?
+
+When a creative is rendered, it may contain a number of pixels under `<img>` tags. For example, `<img src="http://vendor-a.com/key1=val1&key2=val2">` which fires an HTTP GET request from the browser to Vendor A’s domain.
+
+Since the pixel is in an `<img>` tag without the ability to execute JavaScript, the CMP API cannot be used to obtain the TC String. For Vendor A to receive the TC String, the service that renders the pixel must insert the string into the pixel's URL. And if Vendor A wants to make the string available for Vendor B later down the chain, Vendor A must be able to include the TC String in the URL that redirects to Vendor B.
+
+All parties in the ad supply chain who transact using URLs can add a macro in their URLs where the TC String is inserted. Any caller with access to the applicable TC String must insert it within a URL containing the macro `${gdpr_consent_xxxxx}` where `xxxxx` is the numeric Vendor ID of the vendor receiving the TC string.
+
+For example, for Vendor A with ID 123 to receive a TC String, an image URLmust include a key-value pair with the url parameter and macro `gdpr_consent=${gdpr_consent_123}`.
+
+The resulting URL is:
+
+`http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=${gdpr_consent_123}`
+
+If the TC String is: `BOPnWgIOPnWgIAAABAENAI4AAAAA0ABA`
+
+Then the caller replaces the macro in the URL with the actual TC String so that the originally placed pixel containing the macro is modified as follows when making the call to the specified server.
+
+`http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=BOPnWgIOPnWgIAAABAENAI4AAAAA0ABA`
+
+TC Strings must always be propagated as is, and not modified. Additional URLs in the supply chain are addressed the same way with remaining vendors.
+
+The available URL parameters and macros to relay information down the supply chain are listed in the following section.
+
+#### Full TC String passing
+
+Services that are called using a URL from the user's browser, like cookie staplers, user id associators, and tracking pixels (the 'callee') are passed as macros within the URL and formatted as:
+
+```
+&url_parameter=${macro_name}
 ```
 
-The `vendorIds` array contains the integer-value Vendor IDs for Vendors in which transparency and consent is being requested.
+The supported URL parameters and the corresponding macros are defined below:
 
-If the `vendorIds` argument is not defined the callback will be called with a [`TCData`](#tcdata) that includes Transparency and Consent values for all Vendors in the [Global Vendor List](#what-is-the-global-vendor-list).  If GDPR does not apply to this user in this context (`gdprApplies=false`) then this user will have no Transparency and Consent values and a TCData object with no Transparency and Consent values for any Vendors will be passed to the callback function. For more on `gdprApplies` see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean).
 
-The callback shall be called immediately and without any asynchronous logic with whatever is available in the current state of the CMP.  To determine the current state the callback will need to evaluate the [`eventStatus`](#addeventlistener) property value.  It is recommended that calling scripts register a listener function via [`addEventListener`](#addeventlistener) instead of `getTCData`, which also exposes a [`TCData`](#tcdata) object, to ensure necessary TC string and decoded TC values under the right circumstances and context for their legal basis as specified in [TCF Policy](https://www.iabeurope.eu/category/policy/tcf-updates/). The consent and legitimate interest values will be `false` in the [`TCData`](#tcdata) object for any unregistered Vendor ID passed in the vendorIds array.  Which, in accordance with [TCF Policy](https://www.iabeurope.eu/category/policy/tcf-updates/), means “No Consent” for _consent_ and “No Legitimate Interest Transparency Established” for _legitimate interest_.
+<table>
+  <tr>
+   <td><strong>URL parameter</strong>
+   </td>
+   <td><strong>Corresponding Macro</strong>
+   </td>
+   <td><strong>Representation in URL</strong>
+   </td>
+  </tr>
+  <tr>
+   <td><code>gdpr</code>
+   </td>
+   <td><code>gdpr</code>
+   </td>
+   <td><code>&gdpr=${gdpr}</code>
+   </td>
+  </tr>
+  <tr>
+   <td><code>gdpr_consent</code>
+   </td>
+   <td><code>gdpr_consent_xxxxx</code>
+<p>
+(<code>xxxxx</code> is numeric vendor ID - the ID of the vendor on the GVL who is expecting this URL call)
+   </td>
+   <td><code>&gdpr_consent=${gdpr_consent_xxxxx}</code>
+<p>
+E.g. <code>&gdpr_consent=${gdpr_consent_123}</code> for vendor ID 123.
+   </td>
+  </tr>
+  <tr>
+   <td><code>gdpr_pd</code>
+   </td>
+   <td><code>gdpr_pd</code>
+   </td>
+   <td><code>&gdpr_pd=${gdpr_pd}</code>
+   </td>
+  </tr>
+</table>
 
-A value of `false` will be passed as the argument to the `success` callback parameter if an invalid `verdorIds` argument is passed with this command. An invalid `vendorIds` argument would constitute anything other than an array of positive integers.
 
-The `callback` shall be invoked only once per api call with this command.
+The service making the call must replace the macros with appropriate values described in the table below. For macro `${gdpr_consent_xxxxx}`, the service making the call must also check that the macro name contains a validvendor ID before replacing the macro. The creator of the URL should ensure these parameters are added only once, and are passed to services which are expecting them and can handle them properly.
 
-______
 
-#### `ping`
+<table>
+  <tr>
+   <td><strong>Macro</strong>
+   </td>
+   <td><strong>possible values</strong>
+   </td>
+   <td><strong>purpose</strong>
+   </td>
+  </tr>
+  <tr>
+   <td><code>${gdpr}</code>
+   </td>
+   <td><code>0</code> / <code>1</code>
+   </td>
+   <td><code>0</code>=GDPR does not apply <code>1</code>=GDPR applies If not present, callee should do geoIP lookup, and GDPR applies for EU IP addresses
+   </td>
+  </tr>
+  <tr>
+   <td><code>${gdpr_consent_xxxxx}</code>
+   </td>
+   <td>URL-safe base64-encoded Transparency & Consent string. Only meaningful if <code>gdpr=1</code>
+   </td>
+   <td>Encodes the TC string, as obtained from the CMP JS API or OpenRTB.
+   </td>
+  </tr>
+  <tr>
+   <td><code>${gdpr_pd}</code>
+   </td>
+   <td><code>0</code> / <code>1</code> (optional, default: <code>1</code>)
+   </td>
+   <td>for generic URL parameters, <code>gdpr_pd=0</code> indicates none of them contain personal data (from the perspective of the callee). For "defined" URL parameters, their definition should define whether they include personal data.
+   </td>
+  </tr>
+</table>
 
-| argument name | type  | value |
-|--:|:-:|:--|
-| command | string | `'ping'` |
-| callback | function | `function(PingReturn:object)` |
+**Note:** other personal data, like IP addresses or callee cookies, may be passed as part of the request, and the `gdpr` and `gdpr_consent_xxxxx` is used by the callee to determine whether an identifier cookie or other personal data can be set and/or used.
 
-**Example:**
+#### CMP Redirect for TC String
 
-```javascript
-__tcfapi('ping', 2, (pingReturn) => {
+CMP's can implement a consent redirector and host it at `https://cmpname.mgr.consensu.org/consent?redirect=url`. This redirector can read the (web-wide global) consent cookie which the browser sends with a 302 HTTP redirect url using the parameters described in the previous section.
 
-  // do something with pingReturn
+### What if consent is governed differently in a country?
 
-});
+[Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) require consent for Purpose 1 to store and/or access information on a device  “where such consent is necessary” leaving the responsibility to publishers and vendors to determine if consent in those jurisdictions is required or not.
+
+If a publisher is operating a CMP within a jurisdiction that does not require consent to store and/or access information on a device and, therefore, does not ask for consent on behalf of a vendor, the CMP will write the corresponding bit in the _**PurposesConsent**_ field to `0`. Even though it is vaild within that jurisdiction to use Legitimate Interest for Purpose 1, a vendor would interpret that `0` as a “no consent” signal and have no way of knowing that consent was not required in the jurisdiction in which the publisher operates.  This lack of transparency would, ultimately, cause losses in ad revenue for that publisher.
+
+To accomodate cases “where Purpose 1 is governed differently for consent depending on the legal jurisdiction, a TC String is transparent about the publisher’s operating governance and whether or not Purpose 1 was disclosed to a user. The vendor can then use these details to make a determinationabout whether they have sufficient legal basis for data processing in that given context. To support this, there are two feilds in a TC String: _**PublisherCC**_, which represents the publisher’s country code and a flag for whether any disclosure has been offered on Purpose 1 named _**PurposeOneTreatment**_. Details for each field are listed among [the fields used in the TC String](#tc-string-format).
+
+## Creating a TC String
+
+The following details provide information on creating, storing, and managing a TC String.
+
+### How should a Transparency & Consent String be stored?
+
+In version 1 of the TCF Specifications the consent string was specified to be stored as either a 1st party cookie for service-specific consent or a 3rd party cookie for global consent. In version 2 of the TCF Specifications, the storage mechanism used for service-specific TC Strings is up to a CMP, including any non-cookie storage mechanism. However, global TC Strings must still be stored as cookies under the consensu.org.domain.
+
+It is important to note that with the creation of the version 2 TCF Specifications globally-scoped and service-specific scoped TC Strings have different encoding and decoding requirements.  Some segments are not allowed in a global scope and some are not allowed in a service-specific scope. This document attempts to call out those differeing requirements explicity where applicable.
+
+The following table summarises where data is stored:
+
+<table>
+  <tr>
+   <td><strong>Scope</strong>
+   </td>
+   <td><strong>Storage</strong>
+   </td>
+   <td><strong>Purpose</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>Global
+   </td>
+   <td>3rd-party .consensu.org cookie. CMPs may also “backup” a TC String encoded for the global scope via a different storage mechanism if 3rd-party cookies are being blocked or erased by a browser.
+   </td>
+   <td>Web-wide vendor transparency & consent
+   </td>
+  </tr>
+  <tr>
+   <td>Service-specific
+   </td>
+   <td>Storage mechanism chosen by CMP. Must not be stored as the version 1.1 local ‘euconsent’ cookie.
+   </td>
+   <td>Service-specific vendor transparency & consent (if configured, overrides global vendor transparency & consent)
+   </td>
+  </tr>
+</table>
+
+**Note:** TCF version 2 introduces [“Publisher Restrictions”](#what-are-publisher-restrictions), which, if exhausted by a publisher, could result in TC strings that are larger than the size limit for cookies.  While this posibility is remote, it should be guarded against – a CMP should work with a publisher to help them accomplish their goals. [Publisher Restrictions](#what-are-publisher-restrictions) are only allowed in TC Strings, therefore within a service-specific context so CMPs may need to take this into consideration when deciding on the storage mechanism for those TC Strings.
+
+### What are the Purposes and Features being supported?
+
+The IAB Europe Transparency & Consent Framework [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) defines Purposes, Special Purposes, Features, Special Features, and Stacks (groupings of Purposes and/or Special Features). You can reference the details of these purposes and features in the document found at the following URL:
+
+[http://www.iabeurope.eu/tcfdocuments/documents/legal/currenttcfpolicyFINAL.pdf](http://www.iabeurope.eu/tcfdocuments/documents/legal/currenttcfpolicyFINAL.pdf)
+
+
+### How should a global TC string be formatted for storage?
+
+The global TC string is stored in a shared space and is formatted as described in the following table:
+
+
+<table>
+  <tr>
+   <td><strong>Cookie Directive</strong>
+   </td>
+   <td><strong>Value(s)</strong>
+   </td>
+   <td><strong>Notes</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>Name
+   </td>
+   <td><code>euconsent-v2</code>
+   </td>
+   <td>To avoid conflicts with TC String cookie storage, beginning with version 2.0 of the TCF  the global and service-specific cookie name  shall include the TC string version as a hyphenated postfix, for example ‘euconsent-v2’.
+   </td>
+  </tr>
+  <tr>
+   <td>Host
+   </td>
+   <td><code>.consensu.org</code>
+   </td>
+   <td>The DNS resolution for the name <code>[<em>cmp-name</em>].mgr.consensu.org</code> will be delegated by the Managing Organization (IAB Europe) to each CMP. CMPs will host their code, APIs, and CDN under this domain or subdomains.
+   </td>
+  </tr>
+  <tr>
+   <td>Path
+   </td>
+   <td><code>/</code>
+   </td>
+   <td>
+   </td>
+  </tr>
+  <tr>
+   <td>Max-Age
+   </td>
+   <td><code>33696000</code>
+   </td>
+   <td>This represents thirteen 30-day months.
+   </td>
+  </tr>
+  <tr>
+   <td>Value
+   </td>
+   <td>Encoded TC String
+   </td>
+   <td>
+   </td>
+  </tr>
+</table>
+
+
+
+### TC String Format
+
+There are 4 distinct TC String segments that are joined together on a “dot” character.  They are:
+
+*   The core vendor transparency and consent details
+*   Disclosed vendors for validating OOB signaling
+*   Allowed vendors for restricting OOB signaling to select vendors, and
+*   Publisher purposes transparency and consent for their own data uses.
+
+The [Core String](#the-core-string) is always required and comes first and includes all the details required for communicating basic vendor transparency and consent. The remaining optional and arbitrarily ordered segments represent support for [out-of-band (OOB)](#signaling-oob-in-the-tc-string) signaling and [publisher purposes transparency and consent (publisher TC)](##publisher-purposes-transparency-and-consent).  A TC String with all four segments is possible in certain conditions.
+
+For example, a globally-scoped TC String with all four segments present would be surfaced through CMP API – not stored – and look like:
+
+[ [Core String](#the-core-string) ].[ [Disclosed Vendors (OOB)](#disclosed-vendors-oob) ].[ [Allowed Vendors (OOB)](#allowed-vendors-oob) ].[ [Publisher TC](#publisher-purposes-transparency-and-consent) ]
+```
+BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA.DqFENCAmeAENCDA.OevsguAfDq
+```
+A service-specific TC String must contain a Core TC String and may optionally contain a [Publisher TC](#publisher-purposes-transparency-and-consent) segment, but must not contain the OOB-related segments because those segments are not allowed in service-specific contexts:
+
+[ [Core String](#the-core-string) ].[ [Publisher TC](#publisher-purposes-transparency-and-consent) ]
+```
+BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
+```
+#### The Core String
+
+The following fields are stored in big-endian format. Example values are provided in the appendix. Bit numberings are left-to-right.
+
+
+<table>
+  <tr>
+   <td><strong>TC String field name</strong>
+   </td>
+   <td><strong>Bits</strong>
+   </td>
+   <td><strong>Value(s)</strong>
+   </td>
+   <td><strong>Notes</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>Version
+   </td>
+   <td>6 bits
+   </td>
+   <td>Version number of the encoding format
+   </td>
+   <td>the value is 2 for this format.
+   </td>
+  </tr>
+  <tr>
+   <td>Created
+   </td>
+   <td>36 bits
+   </td>
+   <td>Epoch deciseconds when this TC String was first created (should not be changed unless a new TCString is created from scratch)
+   </td>
+   <td rowspan="2" >A decisecond is 1/10th of a second. To create a decisecond timestamp in JavaScript: <code>Math.round((new Date()).getTime()/100)</code>
+   </td>
+  </tr>
+  <tr>
+   <td>LastUpdated
+   </td>
+   <td>36 bits
+   </td>
+   <td>Epoch deciseconds when TC String was last updated (Must be updated any time a value is changed)
+   </td>
+  </tr>
+  <tr>
+   <td>CmpId
+   </td>
+   <td>12 bits
+   </td>
+   <td>Consent Management Platform ID that last updated the TC String
+   </td>
+   <td>A unique ID will be assigned to each Consent ManagementPlatform.
+   </td>
+  </tr>
+  <tr>
+   <td>CmpVersion
+   </td>
+   <td>12 bits
+   </td>
+   <td>Consent Management Platform version of the CMP that last updated this TC String
+   </td>
+   <td>Each change to a CMP should increment their internally assigned version number as a record of which version the user gave consent and transparency was established.
+   </td>
+  </tr>
+  <tr>
+   <td>ConsentScreen
+   </td>
+   <td>6 bits
+   </td>
+   <td>CMP Screen number  at which consent was given for a user with the CMP that last updated this TC String
+   </td>
+   <td>The number is a CMP internal designation and is CmpVersion specific. The number is used for identifying on which screen a user gave consent as a record.
+   </td>
+  </tr>
+  <tr>
+   <td>ConsentLanguage
+   </td>
+   <td>12 bits
+   </td>
+   <td>Two-letter ISO639-1 language code in which the CMP UI was presented
+   </td>
+   <td>Each letter is encoded as 6 bits, a=0..z=25.
+   </td>
+  </tr>
+  <tr>
+   <td>VendorListVersion
+   </td>
+   <td>12 bits
+   </td>
+   <td>Version of the GVL used to create this string.
+   </td>
+   <td>Version of the GVL used to create this TC String.
+   </td>
+  </tr>
+  <tr>
+   <td>TcfPolicyVersion
+   </td>
+   <td>6 bits
+   </td>
+   <td>Version of policy used within GVL
+   </td>
+   <td>From the corresponding field in the GVL that was used for obtaining consent. A new policy version invalidates existing strings and requires CMPs to re-establish transparency and consent from users.
+   </td>
+  </tr>
+  <tr>
+   <td>IsServiceSpecific
+   </td>
+   <td>1 bit
+   </td>
+   <td><code>0</code>=False<br /><code>1</code>=True
+   </td>
+   <td>Whether the signals encoded in this TC String were from service-specific storage (True) versus ‘global’ consensu.org shared storage (False).
+   </td>
+  </tr>
+  <tr>
+   <td>UseNonStandardStacks
+   </td>
+   <td>1 bit
+   </td>
+   <td>1=CMP used non-IAB standard stacks during consent gathering
+<p>
+<code>0</code>=IAB standard stacks were used
+   </td>
+   <td>Setting this to 1 means that a publisher-run CMP – that is still IAB Europe registered – is using customized Stack descriptions and <span style="text-decoration:underline;">not</span> the standard stack descriptions defined in the [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) (Appendix A section E). A CMP that services multiple publishers sets this value to <code>0</code>.
+   </td>
+  </tr>
+  <tr>
+   <td>SpecialFeatureOptIns
+   </td>
+   <td>12 bits
+   </td>
+   <td>One bit for each Special Feature:
+<p>
+1=Opted in
+<p>
+<code>0</code>=Not opted in
+   </td>
+   <td>The TCF [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) designates certain Features as “special” which means a CMP must afford the user a means to opt in to their use. These “Special Features” are published and numerically identified in the Global Vendor List separately from normal Features.
+   </td>
+  </tr>
+  <tr>
+   <td>PurposesConsent
+<p>
+(renamed from PurposesAllowed)
+   </td>
+   <td>24 bits
+   </td>
+   <td>One bit for each Purpose:
+<p>
+<code>0</code>=No Consent
+<p>
+1=Consent
+   </td>
+   <td>The user’s consent value for each Purpose established on the legal basis of consent.
+<p>
+The Purposes are numerically identified and published in the Global Vendor List. From left to right, Purpose 1 maps to the <code>0</code> bit, purpose 24 maps to the bit at index 23. Special Purposes are a different ID space and not included in  this field.
+   </td>
+  </tr>
+  <tr>
+   <td>PurposesLITransparency
+   </td>
+   <td>24 bits
+   </td>
+   <td>One bit for each Purpose:
+<p>
+<code>0</code>=legitimate interest was NOT established or it was established but user excercised their “Right to Object” to the Purpose
+<p>
+1= legitimate interest established
+   </td>
+   <td>The Purpose’s transparency requirements are met for each Purposeon the legal basis of legitimate interest and the user has not exercised their “Right to Object” to that Purpose.
+<p>
+By default or if the user has exercised their “Right to Object” to a Purpose, the corresponding bit for that Purpose is set to <code>0</code>. From left to right, Purpose 1 maps to the 0th bit, purpose 24 maps to the bit at index 23. Special Purposes are a different ID space and not included in this field.
+   </td>
+  </tr>
+  <tr>
+   <td colspan="3" ><strong>Specific Jurisdiction Disclosures</strong>
+   </td>
+   <td>
+   </td>
+  </tr>
+  <tr>
+   <td>PurposeOneTreatment
+   </td>
+   <td>1 bit
+   </td>
+   <td>0=Purpose 1 was disclosed commonly as consent as expected by the [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf).
+<p>
+1=Purpose 1 was NOT disclosed at all.
+   </td>
+   <td>CMPs can use the PublisherCC field to indicate the legal jurisdiction the publisher is under to help vendors determine whether the vendor needs consent for Purpose 1.
+<p>
+In a globally-scoped TC string, this field must always have a value of 0. When a CMP encounters a globally-scoped TC String with PurposeOneTreatment=1 then it is considered invalid and the CMP must discard it and re-establish transparency and consent.
+   </td>
+  </tr>
+  <tr>
+   <td>PublisherCC
+   </td>
+   <td>12 bits
+   </td>
+   <td><a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2 code</a>
+   </td>
+   <td>The country code of the country that determines legislation of reference. Commonly, this corresponds to the country in which the publisher’s business entity is established.
+<p>
+Each letter is encoded as 6 bits, a=0..z=25.
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2" ><strong>Vendor Consent Section</strong>
+   </td>
+   <td>
+   </td>
+   <td>
+   </td>
+  </tr>
+  <tr>
+   <td>MaxVendorId
+   </td>
+   <td>16 bits
+   </td>
+   <td>The maximum Vendor ID that is represented in the following bit field or range encoding.
+   </td>
+   <td>Because this section can be a variable length, this indicates the last ID of the section so that a decoder will know when it has reached the end.
+   </td>
+  </tr>
+  <tr>
+   <td>IsRangeEncoding
+   </td>
+   <td>1 bit
+   </td>
+   <td>0=BitField
+<p>
+1=Range
+   </td>
+   <td>The encoding scheme used to encode the IDs in the section – Either a BitFieldSection or RangeSection follows. Encoding logic should choose the encoding scheme that results in the smaller output size for a given set.
+   </td>
+  </tr>
+  <tr>
+   <td><strong>Bit Field Section</strong>
+   </td>
+   <td>
+   </td>
+   <td>
+   </td>
+   <td><strong>Encodes one consent bit per Vendor ID</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>BitField
+   </td>
+   <td>MaxVendorId bits
+   </td>
+   <td>One bit for each Vendor:
+<p>
+0=No Consent
+<p>
+1=Consent
+   </td>
+   <td>The consent value for each Vendor ID from 1 to MaxVendorId where index 0 is Vendor ID 1.
+<p>
+Set the bit corresponding to a given vendor to 1 if the user has consented to this vendor processing their data
+   </td>
+  </tr>
+  <tr>
+   <td><strong>Range Section</strong>
+   </td>
+   <td>
+   </td>
+   <td>
+   </td>
+   <td><strong>Encodes range groups of Vendor IDs who have received consent from a user</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>NumEntries
+   </td>
+   <td>12 bits
+   </td>
+   <td>Number of RangeEntry sections to follow
+   </td>
+   <td>
+   </td>
+  </tr>
+  <tr>
+   <td colspan="3" >RangeEntry (repeated NumEntries times)
+   </td>
+   <td>A single or range of Vendor ID(s) who have received consent. If a vendor ID is not within the bounds of the ranges then the vendor is assumed to have “No Consent”.
+   </td>
+  </tr>
+  <tr>
+   <td>IsARange
+   </td>
+   <td>1 bit
+   </td>
+   <td>0=Single Vendor ID 1=Vendor ID range
+   </td>
+   <td>If more than one vendor ID is included in this RangeEntry then this describes a range of vendor IDs and this value is 1.  If only one vendor ID is included then the value is 0.
+   </td>
+  </tr>
+  <tr>
+   <td>StartOrOnlyVendorId
+   </td>
+   <td>16 bits
+   </td>
+   <td>The first ID of an inclusive contiguous ascending-order series of vendor IDs even if the series is only a cardinality of 1.
+   </td>
+   <td>This is the first or only vendor ID with consent in this Range Entry.
+   </td>
+  </tr>
+  <tr>
+   <td>EndVendorId
+   </td>
+   <td>16 bits
+   </td>
+   <td>The last ID of the inclusive contiguous ascending-order series of Vendor IDs started with StartOrOnlyVendorId but only if that series has a cardinality greater than 1, otherwise this field is omitted.
+   </td>
+   <td>The end of the series of Vendor IDs – this is omitted if IsARange=0.
+   </td>
+  </tr>
+  <tr>
+   <td colspan="4" ><strong>Repeated RangeEntry sections to NumEntries...</strong>
+   </td>
+  </tr>
+  <tr>
+   <td colspan="3" ><strong>Vendor Legitimate Interest Section</strong>
+   </td>
+   <td>
+   </td>
+  </tr>
+  <tr>
+   <td>MaxVendorId
+   </td>
+   <td>16 bits
+   </td>
+   <td>The maximum Vendor ID that is represented in the following bit field or range encoding.
+   </td>
+   <td>Because this section can be a variable length, this indicates the last ID of the section so that a decoder will know when it has reached the end.
+   </td>
+  </tr>
+  <tr>
+   <td>IsRangeEncoding
+   </td>
+   <td>1 bit
+   </td>
+   <td>0=BitField
+<p>
+1=Range
+   </td>
+   <td>The encoding scheme used to encode the IDs in the section – Either a BitFieldSection or RangeSection follows. Encoding logic should encode with the encoding scheme that results in the smaller output size for a given set.
+   </td>
+  </tr>
+  <tr>
+   <td><strong>BitFieldSection</strong>
+   </td>
+   <td>
+   </td>
+   <td>
+   </td>
+   <td><strong>Encodes one legitimate interest bit per VendorId</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>BitField
+   </td>
+   <td>MaxVendorId bits
+   </td>
+   <td>One bit for each Vendor:
+<p>
+0=Legitimate Interest not established or the user exercised their “Right to Object”
+<p>
+1=Legitimate Interest established
+   </td>
+   <td>The legitimate interest value for each Vendor ID from 1 to MaxVendorId where index 0 is vendor ID 1.
+<p>
+Set the bit corresponding to a given vendor to 1 if the CMP has established transparency for a vendor's legitimate interest disclosures.
+<p>
+ \
+If a user exercises their “Right To Object” to a vendor’s processing based on a legitimate interest, then that vendor’s bit must be set to 0.
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2" ><strong>RangeSection</strong>
+   </td>
+   <td colspan="2" ><strong>Encodes range groups of Vendor IDs who have established their legitimate interest disclosures with a user</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>NumEntries
+   </td>
+   <td>12 bits
+   </td>
+   <td>Number of RangeEntry sections to follow
+   </td>
+   <td>
+   </td>
+  </tr>
+  <tr>
+   <td colspan="3" >RangeEntry (repeated NumEntries times)
+   </td>
+   <td>A single or range of Vendor ID(s) who have established transparency for their legitimate interest disclosures with the user.  If a vendor ID is not within the bounds of the ranges then they have not established that transparency.
+   </td>
+  </tr>
+  <tr>
+   <td>IsARange
+   </td>
+   <td>1 bit
+   </td>
+   <td>0=Single Vendor ID
+<p>
+1=Vendor ID range
+   </td>
+   <td>If more than one vendor ID is included in this RangeEntry then this describes a range of vendor IDs and this value is 1.  If only one vendor ID is included then the value is 0.
+   </td>
+  </tr>
+  <tr>
+   <td>StartOrOnlyVendorId
+   </td>
+   <td>16 bits
+   </td>
+   <td>The first ID of an inclusive contiguous ascending-order series of Vendor IDs even if the series is only a cardinality of 1.
+   </td>
+   <td>This is the first or only Vendor ID with legitimate interest disclosures established in this Range Entry.
+   </td>
+  </tr>
+  <tr>
+   <td>EndVendorId
+   </td>
+   <td>16 bits
+   </td>
+   <td>The last ID of the inclusive contiguous ascending-order series of vendor IDs started with StartOrOnlyVendorId but only if that series has a cardinality greater than 1, otherwise this field is omitted.
+   </td>
+   <td>The end of the series of Vendor IDs – this is omitted if IsARange=0.
+   </td>
+  </tr>
+  <tr>
+   <td colspan="4" ><strong>Repeated RangeEntry sections to NumEntries...</strong>
+   </td>
+  </tr>
+  <tr>
+   <td><strong>Publisher Restrictions Section</strong>
+   </td>
+   <td>
+   </td>
+   <td colspan="2" ><strong>The content of this section is optional EXCEPT for NumPubRestrictions. Encodes any number of single or range restriction entries</strong>
+   </td>
+  </tr>
+  <tr>
+   <td><strong>NumPubRestrictions</strong>
+   </td>
+   <td><strong>12 bits</strong>
+   </td>
+   <td><strong>Number of publisher restrictions to follow. A value of 0 indicates no publisher restrictions content follows.</strong>
+   </td>
+   <td><strong>Value is required even if it is 0. </strong>
+<p>
+<strong>Number of restriction records to follow.</strong>
+   </td>
+  </tr>
+  <tr>
+   <td colspan="3" >PubRestrictionEntry (Repeated NumPubRestrictions times)
+   </td>
+   <td>Each Publisher Restriction Entry is made up of three parts: Purpose ID, Restriction Type and, List of Vendor IDs under that Purpose restriction.
+   </td>
+  </tr>
+  <tr>
+   <td>PurposeId
+   </td>
+   <td>6 bits
+   </td>
+   <td>Purpose ID
+   </td>
+   <td>The Vendor’s declared Purpose ID that the publisher has indicated that they are overriding.
+   </td>
+  </tr>
+  <tr>
+   <td>RestrictionType
+   </td>
+   <td>2 bits
+   </td>
+   <td>Enum
+<p>
+ \
+0=Purpose Flatly Not Allowed by Publisher (regardless of Vendor declarations)
+<p>
+1=Require Consent (if Vendor has declared the Purpose IDs legal basis as Legitimate Interest and flexible)
+<p>
+2=Require Legitimate Interest (if Vendor has declared the Purpose IDs legal basis as Consent and flexible)
+<p>
+3=UNDEFINED (not used)
+   </td>
+   <td>Vendors must always respect a 0 (Not Allowed) regardless of whether or not they have not decalred that Purpose to be “flexible”.  Values 1 and 2 are in accordance with a vendors declared flexibility.  Eg. if a vendor has Purpose 2 declared as Legitimate Interest but also declares that Purpose as flexible and this field is set to 1, they must then check for the “consent” signal in the Vendor Consents section to make a determination on whether they have the legal basis for processing user data under that Purpose.
+<p>
+If a vendor has not declared a Purpose flexible and this value is 1 or 2 they may ignore the signal.
+<p>
+<strong>Note:</strong> Purpose 1 is always required to be registered as a consent purpose and can not be flexible per [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf).
+   </td>
+  </tr>
+  <tr>
+   <td>NumEntries
+   </td>
+   <td>12 bits
+   </td>
+   <td>Number of RangeEntry sections to follow.
+   </td>
+   <td>
+   </td>
+  </tr>
+  <tr>
+   <td colspan="3" >RangeEntry (repeated NumEntries times)
+   </td>
+   <td>A single or range of Vendor ID(s) who the publisher has designated as restricted under the Purpose ID in this PubRestrictionsEntry.
+   </td>
+  </tr>
+  <tr>
+   <td>
+IsARange
+   </td>
+   <td>1 bit
+   </td>
+   <td>0=Single Vendor ID
+<p>
+1=Vendor ID range
+   </td>
+   <td>If more than one Vendor ID is included in this RangeEntry then this describes a range of vendor IDs and this value is 1.  If only one vendor ID is included then the value is 0.
+   </td>
+  </tr>
+  <tr>
+   <td>
+StartOrOnlyVendorId
+   </td>
+   <td>16 bits
+   </td>
+   <td>The first ID of an inclusive contiguous ascending-order series of vendor IDs even if the series is only a cardinality of 1.
+   </td>
+   <td>This is the first or only vendor ID with this restriction in this Range Entry
+   </td>
+  </tr>
+  <tr>
+   <td>EndVendorId
+   </td>
+   <td>16 bits
+   </td>
+   <td>The last ID of the inclusive contiguous ascending-order series of vendor IDs started with StartOrOnlyVendorId but only if that series has a cardinality greater than 1, otherwise this field is omitted.
+   </td>
+   <td>The end of the series of Vendor IDs – this is omitted if IsARange=0.
+   </td>
+  </tr>
+  <tr>
+   <td colspan="4" ><strong>Repeated RangeEntry sections to NumEntries...</strong>
+   </td>
+  </tr>
+  <tr>
+   <td colspan="4" ><strong>Repeated PubRestrictionsEntry sections to NumPubRestrictions...</strong>
+   </td>
+  </tr>
+</table>
+
+
+
+#### Signaling OOB in the TC String
+
+On occasion, legal bases for processing user data are achieved outside of the TCF. This would be considered an out-of-band (OOB) legal basis. To signal whether using an OOB legal basis is allowed requires: \
+
+
+
+
+*   An indication that some CMP has, at some time, disclosed the vendor in a global context to the user inthe [DisclosedVendors](#disclosed-vendors-oob) segment
+*   The use of a global-context TC String
+*   The publisher to allow vendors, in general, to use OOB legal bases
+*   Optionally, a list of specific vendors allowed to use OOB legal bases in the [AllowedVendors](#allowed-vendors-oob) segment
+
+The _[DisclosedVendors](#disclosed-vendors-oob) _segment of a TC String provides a list of vendors that have been disclosed to a user; it is created and stored in a global context for all CMPs to share across the web. The existence of this segment as a member of a TC String, when signaling, implies that the publisher supportsOOB legal bases. Conversely, If a publisher does not support OOB legal bases the segment shall be omitted when signaling.  Regardless of publisher support, a CMP shall still update the segment with any new Vendor IDs disclosed and save the updated TC String back to the global context when the CMP user interface completes its interaction with the user.
+
+If a publisher supports OOB legal bases, but only for select vendors, a CMP shall create an [AllowedVendors](#allowed-vendors-oob) segment that reflects the vendors the publisher allows to operate under OOB legal bases.  When a TC String is requested from the CMP API it shall include both the [AllowedVendors](#allowed-vendors-oob) and [DisclosedVendors](#disclosed-vendors-oob) segments.  However, when a TC String is stored, an [AllowedVendors](#allowed-vendors-oob) segment must never be saved to the global context as this is a publisher-specific setting and does not apply web-wide. If a CMP encouters a TC String with an [AllowedVendors](#allowed-vendors-oob) segment in the global context it must disregard it, not include it in responses from the CMP API, and of course omit it when re-saving.
+
+The following three examples demonstrate how to handle an OOB signal in the TC String.
+
+
+    **Example 1: A Publisher Does <span style="text-decoration:underline;">Not</span> Support OOB Legal Bases**
+
+
+    The CMP reads a TC String from global context storage and it contains a [DisclosedVendors](#disclosed-vendors-oob) segment:
+
+
+```
+        [ Core ][ [DisclosedVendors](#disclosed-vendors-oob) ]
+        BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA
 ```
 
-The ping command invokes the callback immediately without any asynchronous logic and returns a [`PingReturn`](#pingreturn) object for determining whether or not the main CMP script has loaded yet and whether GDPR applies; therefore, the only command required to be on the page in a stub before the rest of the commands are implemented. See the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more.
-
-The `callback` shall be invoked only once per api call with this command.
-
-______
-
-#### `addEventListener`
-
-| argument name | type  | value |
-|--:|:-:|:--|
-| command | string | `'addEventListener'` |
-| callback | function | `function(tcData: TCData, success: boolean)` |
-
-**Example:**
-
-```javascript
-const callback = (tcData, success) => {
-
-  if(success && tcData.eventStatus === 'tcloaded') {
-
-    // do something with tcData.tcString
-
-    // remove the ourself to not get called more than once
-    __tcfapi('removeEventListener', 2, (success) => {
-
-      if(success) {
-
-        // oh good...
-
-      }
-
-    }, callback);
 
 
-  } else {
+    Because the publisher does not support OOB legal bases, the dot-delimited [DisclosedVendors](#disclosed-vendors-oob) segment at the end of the TC String is removed when requested form the CMP API:
 
-    // do something else
 
-  }
-
-}
-
-__tcfapi('addEventListener', 2, callback);
+```
+    [ Core ]
+        BObdrPUOevsguAfDqFENCNAAAAAmeAAA
 ```
 
-Registers a callback function with a CMP. The callback will be invoked with the [`TCData`](#tcdata) object as an argument whenever the TC String is changed and a new one is available. The [`eventStatus`](#addeventlistener) property of the [`TCData`](#tcdata) object shall be one of the following:
 
-| eventStatus | Description |
-| :--- | :--- |
-| `'tcloaded'` | This shall be the value for the `eventStatus` property of the [`TCData`](#tcdata) object when a CMP is loaded and is prepared to surface a TC String to any calling scripts on the page. A CMP is only prepared to surface a TC String for this `eventStatus` if an existing, <span style="text-decoration:underline;">valid</span> TC String is available to the CMP and it is not intending to surface the UI. If, however, the CMP will surface the UI because of an invalid TC String (e.g. it is too old, incorrect or does not reflect all the information the CMP needs to gather from the user) then an event with this `eventStatus` must not be triggered. |
-| `'cmpuishown'` | This shall be the value for the `eventStatus` property of the [`TCData`](#tcdata) object any time the UI is surfaced or re-surfaced, a TC String is available and has rendered "Transparency" in accordance with the [TCF Policy](https://www.iabeurope.eu/category/policy/tcf-updates/). The CMP shall create a TC string with all the surfaced vendors’ legitimate interest signals set to true and all the consent signals set to false.  If previous TC signals are present a CMP may also merge those into the now-available TC String in accordance with the policy. |
-| `'useractioncomplete'` | This shall be the value for the `eventStatus` property of the [`TCData`](#tcdata) object whenever a user has confirmed or re-confirmed their choices in accordance with [TCF Policy](https://www.iabeurope.eu/category/policy/tcf-updates/) and a CMP is prepared to respond to any calling scripts with the corresponding TC String. |
 
-The CMP will, in most cases, invoke the callback when  either the `'tcloaded'` OR `'cmpuishown'` + `'useractioncomplete'` `eventStatus`(s) occur, but never for all three `eventStatuses` within the same page view. However, if an existing and valid TC string is available and the CMP does not intend to to surface a UI automatically (`'tcloaded'`) but the user manually surfaces the UI and changes their selected choices (`'cmpuishown'` + `'useractioncomplete'`) all three `eventStatuses` would appear within the same page view.
 
-The callback shall be invokedwith `false` as the argument for the `success` parameter if the callback could not be registered as a listener for any reason.
 
-**Note:** Unlike the other API commands, the `addEventListener` callback may be called as many times as the TC String is changed — callback functions should be defensive and remove themselves as listeners if this behavior is not desired via `removeEventListener`.
 
-______
+    **Example 2: A Publisher Supports OOB Legal Bases**
 
-#### `removeEventListener`
 
-| argument name | type  | value |
-|--:|:-:|:--|
-| command | string | `'removeEventListener'` |
-| callback | function | `function(success: boolean)` |
-| parameter | function | previously registered callback (via `addEventListener`) |
+    The CMP reads a TC String from global context storage and it contains a [DisclosedVendors](#disclosed-vendors-oob) segment (same as Example 1):
 
-**Example:** see [`'addEventListener'`](#addeventlistener)
 
-The callback shall be called with `false` as the argument for the `success` parameter if  the listener could not be removed (e.g. the parameter (`callback`) is not registered or is invalid)).
-
-______
-
-### What optional API commands might a CMP support?
-
-A CMP may choose to support two optional API commands: [`'getInAppTCData'`](#getinapptcdata) and [`'getVendorList'`](#getvendorlist).
-
-______
-
-#### `getInAppTCData`
-
-| argument name | type  | value |
-|--:|:-:|:--|
-| command | string | `'getInAppTCData'` |
-| callback | function | `function(inAppTCData: InAppTCData, success: boolean)` |
-
-**Example:**
-
-```javascript
-__tcfapi('getInTCData', 2, (inAppTCData, success) => {
-
-  if(success) {
-
-    // do something with inAppTCData
-
-  } else {
-
-    // do something else
-
-  }
-
-});
+```
+        [ Core ][ [DisclosedVendors](#disclosed-vendors-oob) ]
+        BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA
 ```
 
-A mobile in-app CMP that uses a web-based UI in a mobile web view may choose to implement API calls with this command for the purpose of retrieving the TC String and pre-parsed TC signals from that web-based UI for the purpose of storing them in the [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android). (see [What is the CMP in-app internal structure for the defined API?](#what-is-the-cmp-in-app-internal-structure-for-the-defined-api))
 
-The callback shall be invoked only once per api call with this command.
 
-______
+    Since the publisher supports OOB legal bases for any vendor that uses it, the TC String, when surfaced through the CMP API, is unchanged from storage – it includes the [DisclosedVendors](#disclosed-vendors-oob) segment:
 
-#### `getVendorList`
 
-| argument name | type | optional | value |
-|--:|:---:|:-:|:--|
-| command | string | | `'getVendorList'` |
-| callback | function | | `function(gvl: GlobalVendorList, success: boolean)` |
-| parameter | int or string | ✔️  | `vendorListVersion` |
-
-**Example:**
-
-```javascript
-__tcfapi('getVendorList', 2, (gvl, success) => {
-
-  if(success) {
-
-    // do something with gvl
-
-  } else {
-
-    // do something else
-
-  }
-
-}, 'LATEST');
+```
+        [ Core ][ [DisclosedVendors](#disclosed-vendors-oob) ]
+        BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA
 ```
 
-Calling with this command and a valid `vendorListVersion` parameter shall return a `GlobalVendorList` object to the `callback` function.  The caller may specify a [Global Vendor List](#what-is-the-global-vendor-list) version number with the `vendorListVersion` parameter.  If no version is specified, the [Global Vendor List](#what-is-the-global-vendor-list) version returned shall be the same as that which is encoded in the current TC String – If no TC String exists the latest version of the [Global Vendor List](#what-is-the-global-vendor-list) shall be returned.  The calling function may also pass `'LATEST'` as the argument to the `vendorListVersion` parameter to explicitly receive the latest [Global Vendor List](#what-is-the-global-vendor-list) version as the `GlobalVendorList` object.
 
-If an invalid `vendorListVersion` argument is passed with the `getVendorList` command the callback function shall receive a `null` argument for the `GlobalVendorList` parameter and the `success` parameter shall receive a `false` argument.  Valid `vendorListVersion`s are integers (or integer strings) greater than `1`.  The `success` parameter shall receive a `false` argument for any unsuccessful call with the `getVendorList` command. (eg. invalid `vendorListVersion` argument, network error, etc…)
 
-The callback shall be invoked only once per api call with this command.
+    **Example 3: A Publisher Supports OOB Legal Bases for Only Select Vendors**
 
-______
 
-### What objects are returned form the API?
+    The CMP reads a TC String from global context storage and it contains a [DisclosedVendors](#disclosed-vendors-oob) segment (same as Example 1 & Example 2):
 
-______
 
-#### `TCData`
-
-This object contains both the encoded and unencoded values of the TC String as well as information about the CMP `eventStatus` and whether or not GDPR applies to this user in this context (see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more).  If GDPR does not apply to this user in this context then only `gdprApplies`, `tcfPolicyVersion`, `cmpId` and `cmpVersion` shall exist in the object. If it is unknown just yet whether GDPR Applies to this user in this context or if this is CMP Stub code then the `callback` shall not be invoked until that `gdprApplies` is known.
-
-``` javascript
-TCData = {
-  tcString: 'base64url-encoded TC string with segments',
-  tcfPolicyVersion: 2,
-  cmpId:1000,
-  cmpVersion: 1000,
-
-  /**
-   * true - GDPR Applies
-   * false - GDPR Does not apply
-   * undefined - unknown whether GDPR Applies
-   * see the section: "What does the gdprApplies value mean?"
-   */
-  gdprApplies: Boolean,
-
-  /*
-   * see addEventListener command
-   */
-  eventStatus: 'string',
-
-  /*
-   * true - if using a service-specific or publisher-specific TC String
-   * false - if using a global TC String.
-   */
-  isServiceSpecific: Boolean,
-
-  /**
-   * true - CMP is using publisher-customized stack descriptions
-   * false - CMP is NOT using publisher-customized stack descriptions
-   */
-  useNonStandardStacks: Boolean,
-
-  /**
-   * Country code of the country that determines the legislation of
-   * reference.  Normally corresponds to the country code of the country
-   * in which the publisher's business entity is established.
-   */
-  publisherCC: 'Two-letter ISO 3166-1 alpha-2 code',
-
-  /**
-   * Only exists on service-specific TC
-   *
-   * true - Purpose 1 not disclosed at all. CMPs use PublisherCC to
-   * indicate the publisher's country of establishment to help vVendors
-   * determine whether the vendor requires Purpose 1 consent.
-   *
-   * false - There is no special Purpose 1 treatmentstatus. Purpose 1 was
-   * disclosed normally (consent) as expected by TCF Policy
-   */
-  purposeOneTreatment: Boolean,
-
-  /**
-   * Only exists on global-scope TC
-   */
-  outOfBand: {
-    allowedVendors: {
-
-      /**
-       * true - Vendor is allowed to use and Out-of-Band Legal Basis
-       * false - Vendor is NOT allowed to use an Out-of-Band Legal Basis
-       */
-      '[vendor id]': Boolean
-    },
-    discloseVendors: {
-
-      /**
-       * true - Vendor has been disclosed to the user
-       * false - Vendor has been disclosed to the user
-       */
-      '[vendor id]': Boolean
-    }
-  },
-  purpose: {
-    consents: {
-
-      /**
-       * true - Consent
-       * false - No Consent.
-       */
-      '[purpose id]': Boolean
-    },
-   legitimateInterests: {
-
-      /**
-       * true - Legitimate Interest Established
-       * false - No Legitimate Interest Established
-       */
-      '[purpose id]': Boolean
-    }
-  },
-  vendor: {
-
-    consents: {
-
-      /**
-       * true - Consent
-       * false - No Consent
-       */
-      '[vendor id]': Boolean
-
-    },
-    legitimateInterests: {
-
-      /**
-       * true - Legitimate Interest Established
-       * false - No Legitimate Interest Established
-       */
-      '[vendor id]': Boolean
-
-    }
-  },
-  speicalFeatureOptins: {
-
-      /**
-       * true - Special Feature Opted Into
-       * false - Special Feature NOT Opted Into
-       */
-      '[special feature id]': Boolean
-  },
-  publisher: {
-    consents: {
-
-      /**
-       * true - Consent
-       * false - No Consent
-       */
-      '[purpose id]': Boolean
-    },
-    legitimateInterests: {
-
-      /**
-       * true - Legitimate Interest Established
-       * false - No Legitimate Interest Established
-       */
-      '[purpose id]': Boolean
-    },
-    customPurpose: {
-      consents: {
-
-        /**
-         * true - Consent
-         * false - No Consent
-         */
-        '[purpose id]': Boolean
-      },
-      legitimateInterests: {
-
-        /**
-         * true - Legitimate Interest Established
-         * false - No Legitimate Interest Established
-         */
-        '[purpose id]': Boolean
-      },
-    },
-    restrictions: {
-
-      '[purpose id]': {
-
-        /**
-         * 0 - Not Allowed
-         * 1 - Require Consent
-         * 2 - Require Legitimate Interest
-         */
-        '[vendor id]': 1
-      }
-    }
-  }
-}
+```
+        [ Core ][ [DisclosedVendors](#disclosed-vendors-oob) ]
+        BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA
 ```
 
-______
 
-#### `PingReturn`
 
-This object contains information about the loading status and configuration of the CMP.
+    To indicate the select vendors a publisher approves to use OOB legal bases, the CMP includes the [AllowedVendors](#allowed-vendors-oob) segment with the TC String from the CMP API:
 
-``` javascript
-PingReturn = {
 
-  /**
-   * true - GDPR Applies
-   * false - GDPR Does not apply
-   * undefined - unknown whether GDPR Applies
-   * see the section: "What does the gdprApplies value mean?"
-   */
-  gdprApplies: Boolean,
-
-  /**
-   * true - CMP main script is loaded
-   * false - still running stub
-   */
-  cmpLoaded: Boolean,
-
-  /**
-   * see Ping Status Codes in following table
-   */
-  cmpStatus: String,
-
-  /**
-   * see Ping Status Codes in following table
-   */
-  displayStatus: String,
-
-  /**
-   * version of the CMP API that is supported, e.g. "2.0"
-   */
-  apiVersion: String,
-
-  /**
-   * CMPs own/internal version that is currently running
-   * undefined if still the stub
-   */
-  cmpVersion: Number,
-
-  /**
-   * IAB Assidned CMP ID
-   * undefined if still the stub
-   */
-  cmpId: Number,
-
-  /**
-   * Version of the GVL currently loaded by the CMP
-   * undefined if still the stub
-   */
-  gvlVersion: Number,
-
-  /**
-   * Number of the supported TCF version
-   * undefined if still the stub
-   */
-  tcfPolicyVersion: Number,
-};
 ```
-**Note:** `cmpLoaded` must be set to `true` if the main script is loaded and the stub interface is replaced, regardless of whether or not the user will see the UI or intereact with it.
-
-#### Ping Status Codes
-
-| Status Code | Applicable for | Description |
-| :-------- | :------------- | :------------- |
-| `'stub'` | cmpStatus | CMP not yet loaded – stub still in place |
-| `'loading'` | cmpStatus | CMP is loading |
-| `'loaded'` | cmpStatus | CMP is finished loading |
-| `'error'` | cmpStatus | CMP is in an error state. A CMP shall not respond to any other API requests if this cmpStatus is present. A CMP may set this status if, for any reason, it is unable to perform the operations in compliance with the TCF. |
-| `'visible'` | displayStatus | User interface is currently displayed |
-| `'hidden'` | displayStatus | User interface is not yet or no longer displayed |
-| `'disabled'` | displayStatus | User interface will not show (e.g. GDPR does not apply or TC data is current and does not need renewal) |
-
-______
-
-#### `InAppTCData`
-
-```javascript
-InAppTCData = {
-  tcString: 'base64url-encoded TC string with segments',
-  tcfPolicyVersion: 2,
-  cmpId:1000,
-  cmpVersion: 1000,
-
-  /**
-   * 1 - GDPR Applies
-   * 0 - GDPR Does not apply
-   * undefined - unknown whether GDPR applies
-   * see the section: "What does the gdprApplies value mean?"
-   */
-  gdprApplies: 1,
-
-  /*
-   * see addEventListener command
-   */
-  eventStatus: 'string',
-
-  /*
-   * 1 - if using a service-specific or publisher-specific TC String
-   * 0 - if using a global TC String.
-   */
-  isServiceSpecific: 1,
-
-  /**
-   * 1 - CMP is using publisher-customized stack descriptions
-   * 0 - CMP is NOT using publisher-customized stack descriptions
-   */
-  useNonStandardStacks: 1,
-
-  /**
-   * Country code of the country that determines the legislation of
-   * reference.  Normally corresponds to the country code of the country
-   * in which the publisher's business entity is established.
-   */
-  publisherCC: 'Two-letter ISO 3166-1 alpha-2 code',
-
-  /**
-   * 1 - Purpose 1 not disclosed at all. CMPs use PublisherCC to indicate
-   * the publisher's country of establishment to help vVendors determine
-   * whether the vendor requires Purpose 1 consent.
-   *
-   * 0 - There is no special Purpose 1 treatmentstatus. Purpose 1 was
-   * disclosed normally (consent) as expected by TCF Policy.
-   */
-  purposeOneTreatment: 1,
-
-  purpose: {
-
-    /**
-     * 1 - Consent
-     * 0 - No Consent
-     */
-    consents: '01010 -- Purpose bitfield',
-
-    /**
-     * 1 - Legitimate Interest Established
-     * 0 - No Legitimate Interest Established
-     */
-    legitimateInterests: '01010 -- Purpose bitfield'
-  },
-  vendor: {
-
-    /**
-     * 1 - Consent
-     * 0 - No Consent
-     */
-    consents: '01010 -- Vendor bitfield',
-
-    /**
-     * 1 - Legitimate Interest Established
-     * 0 - No Legitimate Interest Established
-     */
-    legitimateInterests: '01010 -- Vendor bitfield'
-  },
-
-  /**
-   * 1 - Special Feature Opted Into
-   * 0 - Special Feature NOT Opted Into
-   */
-  speicalFeatureOptins: '01010 -- Special Feature bitfield',
-
-  publisher: {
-
-    /**
-     * 1 - Consent
-     * 0 - No Consent
-     */
-    consents: '01010 -- Purpose bitfield',
-
-    /**
-     * 1 - Legitimate Interest Established
-     * 0 - No Legitimate Interest Established
-     */
-    legitimateInterests: '01010 -- Purpose bitfield',
-
-    customPurpose: {
-
-      /**
-       * 1 - Consent
-       * 0 - No Consent
-       */
-      consents: '01010 -- Purpose bitfield',
-
-      /**
-       * 1 - Legitimate Interest Established
-       * 0 - No Legitimate Interest Established
-       */
-      legitimateInterests: '01010 -- Purpose bitfield'
-    },
-    restrictions: {
-
-      /**
-       * 0 - Not Allowed
-       * 1 - Require Consent
-       * 2 - Require Legitimate Interest
-       *
-       * each position represents vendor id and number represents restriction
-       * type 0-2
-       */
-      '[purpose id]': '01201221'
-    }
-  }
-}
-```
-______
-
-### In-App Details
-
-#### How is a CMP used in-app?
-
-The steps for integrating a CMP SDK into an app is the following:
-
-1. An app publisher should embed a CMP SDK – The setup and configuration as well as the protocol for  how to initialize the CMP SDK  are all proprietary to each CMP SDK.
-2. Since more than one CMP SDK may be included in publishers' linked SDKs, the publisher must initialize only one of them. The initialized CMP shall set `IABTCF_CmpSdkId` with its ID as soon as it is initialized in the app to signal to vendors that a CMP is present.
-3. The CMP SDK will determine if GDPR applies (see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean)) to this user in this context. But, a publisher may choose to initialize a CMP dialogue UI manually.
-4. The CMP shall set the [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android) variables and vendors will then be able to read from them directly.
-5. Vendors should listen to `IABTCF_* `key updates to retrieve new TC data from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android).
-
-#### What is the CMP in-app internal structure for the defined API?
-
-[`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android) shall be used to store pre-parsed TC data as well as the TC string by a CMP SDK. It allows:
-
-*   Vendors to easily access TC data
-*   TC data to persist across app sessions
-*   TC data to be portable between CMPs to provide flexibility for a publisher to exchange one CMP SDK for another
-*   Vendors within an app to avoid code duplication by not being required to include a TC string decoder while still enabling all typical use cases
-
-**Note:** If a publisher chooses to remove a CMP SDK from their app they are responsible for clearing all `IABTCF_*` vestigial values for users so that vendors do not continue to use the TC data therein.
-
-[`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android) values
-
-| Key | Value(s) |
-| :-- | :-- |
-| `IABTCF_CmpSdkID` | `Number`:  The unsigned integer ID of CMP SDK |
-| `IABTCF_CmpSdkVersion`  | `Number`: The unsigned integer version number of CMP SDK |
-| `IABTCF_PolicyVersion`  | `Number`: The unsigned integer representing the version of the TCF that these consents adhere to. |
-| `IABTCF_gdprApplies`  | `Number`: <p>`1` GDPR applies in current context</p><p>`0` - GDPR does _**not**_ apply in current context</p><p>**Unset** - undetermined (default before initialization)</p><p>see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more</p> |
-| `IABTCF_PublisherCC`  | `String`: [Two-letter ISO 3166-1 alpha-2 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) – Default: `AA` (unknown) |
-| `IABTCF_PurposeOneTreatment`  | `Number`: <p>`0` - no special treatment of purpose one</p><p>`1` - purpose one not disclosed</p><p>**Unset default** - `0`</p><p>Vendors can use this value to determine whether consent for purpose one is required.</p> |
-| `IABTCF_UseNonStandardStacks`  | `Number`: <p>`1` CMP used a non-standard stack</p><p>`0` - CMP did not use a non-standard stack</p> |
-| `IABTCF_TCString` | `String`: Full encoded TC string |
-| `IABTCF_VendorConsents` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the consent status for Vendor ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is consent `true` for vendor ID `1` |
-| `IABTCF_VendorLegitimateInterests` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the legitimate interest status for Vendor ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is legitimate interest established `true` for vendor ID `1` |
-| `IABTCF_PurposeConsents` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the consent status for purpose ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is consent `true` for purpose ID `1` |
-| `IABTCF_PurposeLegitimateInterests` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the legitimate interest status for purpose ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is legitimate interest established `true` for purpose ID `1` |
-| `IABTCF_SpecialFeaturesOptIns` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the opt-in status for special feature ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is opt-in `true` for special feature ID `1` |
-| `IABTCF_PublisherRestrictions{ID}` | `String ['0','1', or '2']`: The value at position **n** – where **n**'s indexing begins at `0`  – indicates the publisher restriction type (0-2) for vendor **n+1**; (see Publisher Restrictions Types). eg. `'2'` at index `0` is restrictionType `2` for vendor ID `1`.  `{ID}` refers to the purpose ID. |
-| `IABTCF_PublisherConsent` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the purpose consent status for purpose ID **n+1** for the publisher as they correspond to the [Global Vendor List](#what-is-the-global-vendor-list) Purposes; `false` and `true` respectively. eg. `'1'` at index `0` is consent `true` for purpose ID `1` |
-| `IABTCF_PublisherLegitimateInterests` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the purpose legitimate interest status for purpose ID **n+1** for the publisher as they correspond to the [Global Vendor List](#what-is-the-global-vendor-list) Purposes; `false` and `true` respectively. eg. `'1'` at index `0` is legitimate interest established `true` for purpose ID `1` |
-| `IABTCF_PublisherCustomPurposConsents` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the purpose consent status for the publisher's custom purpose ID **n+1** for the publisher; `false` and `true` respectively. eg. `'1'` at index `0` is consent `true` for custom purpose ID `1` |
-| `IABTCF_PublisherCustomPurposesLegitimateInterests` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the purpose legitimate interest status for the publisher's custom purpose ID **n+1** for the publisher; `false` and `true` respectively. eg. `'1'` at index `0` is legitimate interest established `true` for custom purpose ID `1` |
-
-#### How do third-party SDKs (vendors) access the consent information in-app?
-
-On both Android OS and iOS, the vendor can get notified when the values of the shared keys change. See [NSUserDefaultsDidChangeNotification](https://developer.apple.com/documentation/foundation/nsuserdefaultsdidchangenotification?language=objc) and [SharedPreferences.OnSharedPreferenceChangeListener](https://developer.android.com/reference/android/content/SharedPreferences.OnSharedPreferenceChangeListener.html).
-
-On Android OS, the TC data and TC string shall be stored in the default Shared Preferences for the application context. This can be accessed using the `getDefaultSharedPreferences` method from the `android.preference.PreferenceManager` class using the application context.
-
-**Example**:
-
-```java
-Context mContext = getApplicationContext();
-SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-```
-The TC data values can be retrieved from the application Shared Preferences by key name using the `get` methods on the `android.content.SharedPreferences` class. For the purposes of accessing TC data, only two methods should be necessary: `getString(String key, String defValue)` for `String` values and `getInt(String key, int defValue)` for `integer`s and `integer` representations of `Boolean` values.
-
-**Example**:
-
-```java
-Context mContext = getApplicationContext();
-SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-String consentString = mPreferences.getString("IABTCF_tcString", "");
-Boolean gdprApplies = mPreferences.getString("IABTCF_gdprApplies", "");
-```
-A callback can be registered to update settings when a preference is changed using the `registerOnSharedPreferenceChangeListener` method for the `android.content.SharedPreferences` class.
-
-**Note**: The preference manager does not currently store a strong reference to the listener. If you do not store a strong reference, the listener will be susceptible to garbage collection. External guidance such as this [documentation on setting listeners](https://developer.android.com/guide/topics/ui/settings#Listening) may provide more information on listening for preference changes.
-
-**Example**:
-
-```java
-Context mContext = getApplicationContext();
-SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-SharedPreferences.OnSharedPreferenceChangeListener mListener;
-mListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
-                        if (key.equals([Specific Consent Key])) {
-                                   // Update Consent settings
-                                   }
-                        }
-            };
-
-
-mPreferences.registerOnSharedPreferenceChangeListener(mListener);
-```
-#### How does ad mediation work in-app?
-
-Mediation SDK allows app developers to monetize from multiple vendors.
-
-##### Mediation SDK
-
-*   Mediation SDK retrieves `IABTCF_gdprApplies` and `IABTCF_tcString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android).
-*   If `IABTCF_gdprApplies == 0`, Mediation SDK can run mediation across all ad network SDKs
-*   If `IABTCF_gdprApplies == 1`, Mediation SDK will run mediation only among the ad network SDKs that are GDPR ready.
-
-'GDPR ready' means that the vendor retrieves `IABTCF_gdprApplies` and `IABTCF_tcString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android), and passes on these GDPR values downstream.
-
-##### Vendor
-
-*   Vendor retrieves `IABTCF_gdprApplies` and `IABTCF_tcString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android), and passes on these GDPR values downstream and passes on these GDPR values downstream.
-
-______
-
-## Using the CMP API
-
-The following details provide information about how ad tags work, using the version parameter in the `__tcfapi()` function, and how vendors can interact with the API.
-
-### How do ad tags work?
-
-Tag-based demand, especially ad tags, are basically creative files, that are not an advertisement themselves, but are loaded to access additional sources to provide ad creative.
-
-For performance reasons, the preferred way to make this happen in current ad servers are macros. The following two macros the recommendation for ad server implementation:
-
-| Macro | Values |
-| :-- | :-- |
-| `${gdpr}`| <p>**1** - GDPR Applies</p><p>**0** - GDPR does not apply</p><p>**unset** - unknown</p> |
-| `${gdpr_consent}`| Encoded TC String |
-
-**Note**: Values Align with IAB OpenRTB GDPR Advisory
-
-**Note**: For more information on GDPR Applies see the secion ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean)
-
-### How does the "version" parameter work?
-
-The `Version` parameter of the API is used to enable scripts to specify what version of the API they are prepared to handle. The CMP shall respond in kind with the appropriately versioned information, if available.
-
-If the argument is `0` (Zero), `null` or `undefined`, the CMP shall return the information for the latest (highest) version available. For example, when a user has a v2 TC string and a v3 TC string, the CMP should return the v3 TC string and TC data.
-
-If the argument is invalid (ie. not a positive integer greater than `1` or higher than the highest supported version for this CMP) the CMP shall invoke the callback with an argument of `false` for the success parameter and a `null` argument for any expected TC data parameter.
-
-If the argument is `1`, the CMP shall invoke the callback with an argument of `false` for the success parameter and a `null` argument for any expected TC data parameter, as this TCF version is no longer supported by this API. Vendors should instead use the version `1` API to get version `1` data (see [v1.1 documentation](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/CMP%20JS%20API%20v1.1%20Final.md#consent-management-provider-javascript-api-v11-transparency--consent-framework)).
-
-If the argument is an integer higher than `1`, the CMP shall invoke the callbback with defined data according to the specified version if it exists in that version.  For obvious reasons, if new properties of the version-specific outlined TC data objects are added in v3, a v2 TC data object shall not contain these new properties because they may either not exist or may have different meaning from version to version.
-
-### What does the gdprApplies value mean?
-
-`gdprApplies` is a `boolean` value that may be `undefined`.  A CMP shall determine whether or not GDPR applies in its current context and set the `gdprApplies` value.  A publisher may determine that GDPR applies to all traffic on their site and signal their CMP to always return `true` for `gdprApplies`, a CMP may invoke a geo-tagging service call to make a determination on a specific user or may have some other proprietary solution for determining whether or not GDPR applies in accordance with [TCF Policy](https://www.iabeurope.eu/category/policy/tcf-updates/).  In any case, vendors shall respect the value of `gdprApplies` put forth by the CMP.  If `gdprApplies` value is `undefined` but exists in the schema outlined in the response object in this document, then calling scripts shall assume that the CMP is still pending a determination on whether or not GDPR applies in this context.
-
-### Details for vendors
-
-#### How can scripts on a page determine if there is a CMP present?
-
-Scripts can check for the presence of a function named `__tcfapi` – if it exists then a CMP can be assumed to be present for scripts.  In iframes, the presence of a CMP can be determined by the existence of a specially-named iframe named `"__tcfapiLocator"` in the parent (or above) frame. The CMP shall create an iframe as a signal to scripts nested in other iframes that a CMP exists in a higher frame and name it `"__tcfapiLocator"` on the current `DOM` to indicate its own presence; since iframe properties can be accessed from other iframes. Publishers must load the CMP in a parent (or ancestor) of all iframes that may need to establish a GDPR legal basis.
-
-If a CMP is not present, or if the CMP fails to respond, vendors should assume "no consent" and “no legitimate interest transparency established” in contexts where GDPR applies (see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more).
-
-#### How can scripts determine if the CMP script is loaded yet?
-
-Typically, scripts will not need to check if the CMP script is loaded. Scripts can simply call the `__tcfapi` function as it will queue the calls for execution when the full CMP script is loaded.  If the full CMP has been loaded, its `__tcfapi` implementation will handle the call normally. If necessary, the [`'ping'`](#ping) command will return a [`PingReturn`](#pingreturn) object that contains the `boolean` property `cmpLoaded` to indicate whether the cmp is loaded.
-
-#### How does the CMP "stub" API work?
-
-1. A CMP-provided synchronous "stub" script must be added by the publisher to their page before any other scripts that rely on `__tcfapi` (this usually means between the `<head></head>` tags of the HTML document).
-2. This "stub" will:
-    1. Define a queuing function named `__tcfapi` at the `Window` scope.
-    2. All arguments for a given call to the stubbed `__tcfapi` method will be enqueued as a set.
-    3. Define the postMessage handler function for cross-origin iframe requests.
-    4. Add the newly-created `postMessage` handler function as an event listener on the `Window` object listening for the `‘message’` event.
-    5. Create an iframe named `'__tcfapiLocator'` in the current DOM.
-3. When the main CMP implementation script loads and executes, it will:
-    1. Create an internal reference to the queued argument sets of the "stub".
-    2. Redefine the `__tcfapi` function to the CMP’s full API implementation.
-    3. Iterate and dequeue the queued argument sets in a first-in-first-out (FIFO) order and `apply` each set of arguments to the fully-implemented `__tcfapi` function.
-
-#### Requirements for the CMP "stub" API script
-
-A CMP must provide stub script to its clients that at least supports the following features/logic:
-
-1. `__tcfapi` function that supports the ping command, with the minimum properties of `cmpLoaded` and `apiVersion`. **Note**: `gdprApplies` may also be set in the [`PingReturn`](#pingreturn) object if the "stub" is set by the publisher to apply GDPR to all traffic.  However, `gdprApplies` may not be available unitl the CMP is finished loading and the value will, therefore, be `undefined`. See the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more.
-2. Collect all calls to `__tcfapi` that cannot (yet) be handled by the “stub” in a queue
-3. Check if `window.frames['__tcfapiLocator']` exists, indicating that a CMP is already present, otherwise create an empty iframe named `'__tcfapiLocator`' in the current DOM.
-4. Create an event listener for `postMessage` events on the `Window` object. When the event handler function receives a postMessage (`‘message’`) event it shall proxy the `__tcfapi` function requests to send the response back through the `postMessage` event channel
-5. The stub code must be loaded and executed synchronously before any other scripts that depend on the `__tcfapi` function to be there – this usually means between the `<head></head>` tags of the HTML document – in order to ensure that it can be executed before all calls from third parties.
-
-#### Is there a sample CMP “stub” API script?
-
-This code should be executed on the page before any other scripts that require the `__tcfapi` function – this usually means between the `<head></head>` tags of the HTML document. The sample script also includes the `postMessage` handler.
-
-```javascript
-<script type="text/javascript">
-
-(function() {
-
-  if (typeof (window.__tcfapi) !== 'function') {
-
-    const queue = [];
-    const win = window;
-    const doc = win.document;
-    let gdprApplies;
-
-    function addFrame() {
-
-      /**
-       * check for other CMPs
-       */
-      const otherCMP = !!(win.frames['__tcfapiLocator']);
-
-      if (!otherCMP) {
-
-        /**
-         * There can be only one
-         */
-
-        if (doc.body) {
-
-          /**
-           * check for body tag – otherwise we'll be
-           * be having a hard time appending a child
-           * to it if it doesn't exist
-           */
-
-          const iframe = doc.createElement('iframe');
-
-          iframe.style.cssText = 'display:none';
-          iframe.name = '__tcfapiLocator';
-          doc.body.appendChild(iframe);
-
-        } else {
-
-          /**
-           * Wait for the body tag to exist.
-           *
-           * Since this API "stub" is located in the <head>,
-           * setTimeout allows us to inject the iframe more
-           * quickly than relying on DOMContentLoaded or
-           * other events.
-           */
-
-          setTimeout(addFrame, 5);
-
-        }
-
-      }
-
-      /**
-       * if there was not another CMP then we have
-       * succeeded
-       */
-
-      return !otherCMP;
-
-    }
-
-    function __tcfapi(...args) {
-
-      if (!args.length) {
-
-        /**
-         * shortcut to get the queue when the full CMP
-         * implementation loads; it can call __tcfapi()
-         * with no arguments to get the queued arguments
-         */
-
-        return queue;
-
-      } else if (args[0] === 'setGdprApplies') {
-
-        /**
-         * shortcut to set gdprApplies if the publisher
-         * knows that they apply GDPR rules to all
-         * traffic (see the section on "What does the
-         * gdprApplies value mean" for more
-         */
-
-        if (args.length > 3 && parseInt(args[1], 10) === 2 && typeof args[3] === 'boolean') {
-
-          gdprApplies = args[3];
-
-          if (typeof args[2] === 'function') {
-
-            args[2](retr, true);
-
-          }
-
-        }
-
-      } else if (args[0] === 'ping') {
-
-        /**
-         * Only supported method; give PingReturn
-         * object as response
-         */
-
-        const retr = {
-          gdprApplies: gdprApplies,
-          cmpLoaded: false,
-          apiVersion: '2.0',
-        };
-
-        if (typeof args[2] === 'function') {
-
-          args[2](retr, true);
-
-        }
-
-      } else {
-
-        /**
-         * some other method, just queue it for the
-         * full CMP implementation to deal with
-         */
-
-        queue.push(args);
-
-      }
-
-    }
-
-    function postMessageEventHandler(event) {
-
-      const msgIsString = typeof event.data === 'string';
-      let json = {};
-
-      try {
-
-        /**
-         * Try to parse the data from the event.  This is important
-         * to have in a try/catch because often messages may come
-         * through that are not JSON
-         */
-
-        json = msgIsString ? JSON.parse(event.data) : event.data;
-
-      } catch (ignore) {}
-
-      const payload = json.__tcfapiCall;
-
-      if (payload) {
-
-        /**
-         * the message we care about will have a payload
-         */
-
-        win.__tcfapi(payload.command, payload.parameter, payload.version, function(retValue, success) {
-
-          let returnMsg = {
-            __tcfapiReturn: {
-              returnValue: retValue,
-              success: success,
-              callId: payload.callId,
-            },
-          };
-
-          if (msgIsString) {
-
-            /**
-             * If we were given a string, we'll respond in kind
-             */
-
-            returnMsg = JSON.stringify(returnMsg);
-
-          }
-
-          event.source.postMessage(returnMsg, '*');
-
-        });
-
-      }
-
-    }
-
-    if(!win.__tcfapi && addFrame()) {
-
-      win.__tcfapi = __tcfapi;
-      win.addEventListener('message', postMessageEventHandler, false);
-
-    }
-
-  }
-
-}
-
-</script>
+        [ Core ][ [DisclosedVendors](#disclosed-vendors-oob) ][ [AllowedVendors](#allowed-vendors-oob) ]
+        BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA.DqFENCAmeAENCDA
 ```
 
-### How can vendors that use iframes call the CMP API from an iframe?
 
-There are two ways to request TC Data from a parent or ancestor’s frame: [Via safeFrames](#via-safeframes) and [without safeFrames, using postMessage](#without-safeframes-using-postmessage).
 
-#### Via safeFrames
+#### Disclosed Vendors (OOB)
 
-When safeFrames are used to proxy API requests no changes are required for the CMP or the vendor. SafeFrame implementations should either allow post messages or implement a proxy `tcfapi()` interface for a caller script within a sandbox that would otherwise be blocked. This proxy interface internally uses the safeFrame messaging protocol to interface with the full CMP implementation of the API on the publisher's top frame and proxies responses back to the sandboxed caller.  If allowing postMessage, vendors will not be required to accomodate any special protocols; they will simply use the [postMessage method without safeFrame](#without-safeframes-using-postmessage).
+The _[DisclosedVendors](#disclosed-vendors-oob) _is a TC String segment that signals which vendors have been disclosed to a given user by a CMP. This segment is required when saving a global-context TC String.  When a CMP updates a globally-scoped TC String, the CMP <span style="text-decoration:underline;">MUST</span> retain the existing values and only add new disclosed Vendor IDs that had not been added by other CMPs in prior interactions with this user.
 
-If not allowing or blocking postMessage and, therefore, implementing the proxy method, vendors will see a local-to-the-sandboxed-iframe-scope `__tcfapi()` proxy method that must behave the same as the asynchronous CMP `__tcfapi()` full-implementation method on the publisher’s top frame.
 
-#### Without safeFrames, using postMessage
+<table>
+  <tr>
+   <td><strong>Disclosed Vendors Section</strong>
+   </td>
+   <td><strong>Bits</strong>
+   </td>
+   <td><strong>Values</strong>
+   </td>
+   <td><strong>Description</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>SegmentType
+   </td>
+   <td>3 bits
+   </td>
+   <td>Enum
+<p>
+0=Default - reserved for core string (does not need to be present in the core string)
+<p>
+<strong>1=OOB vendors disclosed</strong>
+<p>
+2=OOB vendors allowed
+<p>
+3=PublisherTC
+   </td>
+   <td>Disclosed Vendors segment is 1 which is ‘001’ in binary.
+   </td>
+  </tr>
+  <tr>
+   <td>MaxVendorId
+   </td>
+   <td>16 bits
+   </td>
+   <td>The maximum Vendor ID included in this encoding.
+   </td>
+   <td>Because this section can be a variable length, this indicates the last ID of the section so that a decoder will know when it has reached the end.
+   </td>
+  </tr>
+  <tr>
+   <td>IsRangeEncoding
+   </td>
+   <td>1 bit
+   </td>
+   <td>0=BitField
+<p>
+ \
+1=Range
+   </td>
+   <td>The encoding scheme used to encode the IDs in the section – Either a BitFieldSection or RangeSection follows. Encoding logic should choose the encoding scheme that results in the smaller output size for a given set.
+   </td>
+  </tr>
+  <tr>
+   <td><strong>BitFieldSection</strong>
+   </td>
+   <td>
+   </td>
+   <td>
+   </td>
+   <td><strong>Encodes one disclosed vendor bit per Vendor ID</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>BitField
+   </td>
+   <td>MaxVendorId bits
+   </td>
+   <td>One bit for each vendor
+<p>
+ \
+0=Not Disclosed
+<p>
+1=Disclosed
+   </td>
+   <td>The value for each Vendor ID from 1 to MaxVendorId.
+<p>
+Set the bit corresponding to a given vendor to 1 if the CMP has disclosed the vendor in the UI.
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2" ><strong>RangeSection</strong>
+   </td>
+   <td colspan="2" ><strong>Encodes range groups of vendor IDs who have been disclosed to a user</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>NumEntries
+   </td>
+   <td>12 bits
+   </td>
+   <td>Number of ReangeEntry sections to follow
+   </td>
+   <td>
+   </td>
+  </tr>
+  <tr>
+   <td colspan="3" >RangeEntry (repeated NumEntries times)
+   </td>
+   <td>A single or range of Vendor ID(s) of Vendor(s) who were disclosed in a CMP UI to the user. If a Vendor ID is not within the bounds of the ranges then they were not disclosed to the user.
+   </td>
+  </tr>
+  <tr>
+   <td>IsARangeRange
+   </td>
+   <td>1 bit
+   </td>
+   <td>0=Single Vendor ID
+<p>
+1=Vendor ID range
+   </td>
+   <td>If more than one Vendor ID is included in this RangeEntry then this describes a range of Vendor IDs and this value is 1.  If only one Vendor ID is included then the value is 0.
+   </td>
+  </tr>
+  <tr>
+   <td>StartOrOnlyVendorId
+   </td>
+   <td>16 bits
+   </td>
+   <td>The first ID of an inclusive contiguous ascending-order series of Vendor IDs even if the series is only a cardinality of 1.
+   </td>
+   <td>This is the first or only Vendor ID that has been disclosed in this RangeEntry.
+   </td>
+  </tr>
+  <tr>
+   <td>EndVendorId
+   </td>
+   <td>16 bits
+   </td>
+   <td>The last ID of the inclusive contiguous ascending-order series of Vendor IDs started with StartOrOnlyVendorId but only if that series has a cardinality greater than 1, otherwise this field is omitted.
+   </td>
+   <td>The end of the series of Vendor IDs – this is omitted if IsARange=0.
+   </td>
+  </tr>
+</table>
 
-The [`window.postMessage()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) method may be used from a child iframe to make requests from a parent or any ancestor frame's CMP API. To locate an ancestor frame capable of responding to `postMessage()` CMP API calls search for an ancestor frame that has a child frame named `'__tcfapiLocator'` (see [sample code](#is-there-a-sample-iframe-script-call-to-the-cmp-api)).
 
-CMPs shall create an event listener to handle `postMessage` requests via the [CMP “stub” API script](#how-does-the-cmp-stub-api-work) so that `postMessage` events can be queued and processed by the full-implementation of the CMP API as soon as it is initialized.
 
-**Sent Message**
+#### Allowed Vendors (OOB)
 
-The sent message shall follow the form outlined below. The command, parameter and version object properties correspond to their namesake parameters defined as method argument parameters for `__tcfapi()` method. The “sent message” also requires a unique callId property to help match the request with a response
+Signals which vendors the publisher permits to use OOB legal bases.
+
+
+<table>
+  <tr>
+   <td><strong>OOBVendors \
+Section </strong>
+   </td>
+   <td><strong>Bits</strong>
+   </td>
+   <td><strong>Values</strong>
+   </td>
+   <td><strong>Description</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>SegmentType
+   </td>
+   <td>3 bits
+   </td>
+   <td>Enum
+<p>
+0=default - reserved for core string (does not need to be present in the core string)
+<p>
+1=OOB disclosed vendors
+<p>
+<strong>2=OOB allowed vendors</strong>
+<p>
+3=PublisherTC
+   </td>
+   <td>OOB Allowed Vendors segment  is 2 which is  ‘010’ in binary.
+   </td>
+  </tr>
+  <tr>
+   <td>MaxVendorId
+   </td>
+   <td>16 bits
+   </td>
+   <td>The maximum Vendor ID that is included.
+   </td>
+   <td>Because this section can be a variable length, this indicates the last ID of the section so that a decoder will know when it has reached the end.
+   </td>
+  </tr>
+  <tr>
+   <td>IsRangeEncoding
+   </td>
+   <td>1 bit
+   </td>
+   <td>0=BitField
+<p>
+ \
+1=Range
+   </td>
+   <td>The encoding scheme used to encode the IDs in the section – Either a BitFieldSection or RangeSection follows. Encoding logic should choose the encoding scheme that results in the smaller output size for a given set.
+   </td>
+  </tr>
+  <tr>
+   <td><strong>BitFieldSection</strong>
+   </td>
+   <td>
+   </td>
+   <td>
+   </td>
+   <td><strong>Encodes one allowed vendor bit per vendor ID</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>BitField
+   </td>
+   <td>MaxVendorId bits
+   </td>
+   <td>One bit for each Vendor
+<p>
+ \
+0=Not Allowed
+<p>
+1=Allowed
+   </td>
+   <td>The value for each Vendor ID from 1 to MaxVendorId.
+<p>
+Set the bit corresponding to a given vendor to 1 if the Publisher permits the vendor to use OOB legal bases.
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2" ><strong>RangeSection</strong>
+   </td>
+   <td colspan="2" ><strong>Encodes range groups of Vendor IDs who the publisher is allowing to use an OOB legal basis</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>NumEntries
+   </td>
+   <td>12 bits
+   </td>
+   <td>Number of RangeEntry sections to follow
+   </td>
+   <td>
+   </td>
+  </tr>
+  <tr>
+   <td colspan="3" >RangeEntry (repeated NumEntries times)
+   </td>
+   <td>A single or range of Vendor ID(s) of Vendor(s) who are allowed to use an OOB legal basis on the given publisher’s digital property. If a Vendor ID is not within the bounds of the ranges then they are not allowed to use an OOB legal basis on the given publisher’s digital property..
+   </td>
+  </tr>
+  <tr>
+   <td>IsARange[idx]
+   </td>
+   <td>1 bit
+   </td>
+   <td>0=Single vendor ID
+<p>
+1=Vendor ID range
+   </td>
+   <td>If more than one vendor ID is included in this RangeEntry then this describes a range of vendor IDs and this value is 1.  If only one vendor ID is included then the value is 0.
+   </td>
+  </tr>
+  <tr>
+   <td>StartOrOnlyVendorId
+   </td>
+   <td>16 bits
+   </td>
+   <td>The first ID of an inclusive contiguous ascending-order series of Vendor IDs even if the series is only a cardinality of 1.
+   </td>
+   <td>This is the first or only Vendor ID that has is allowed in this RangeEntry.
+   </td>
+  </tr>
+  <tr>
+   <td>EndVendorId
+   </td>
+   <td>16 bits
+   </td>
+   <td>The last ID of the inclusive contiguous ascending-order series of Vendor IDs started with StartOrOnlyVendorId but only if that series has a cardinality greater than 1, otherwise this field is omitted.
+   </td>
+   <td>The end of the series of Vendor IDs – this is omitted if IsARange=0.
+   </td>
+  </tr>
+</table>
+
+
+
+#### Publisher Purposes Transparency and Consent
+
+Publishers may need to establish transparency and consent for a set of purposes for their own data use. For example, a publisher that wants to set a frequency-capping first-party cookie should request user consent for Purpose 1 "Store and/or access information on a device" in jurisdictions where it is required.
+
+The [Publisher TC](#publisher-purposes-transparency-and-consent) segment in the TC string represents publisher purposes transparency & consent signals which is different than the other TC String segments; they are used to collect consumer purposes transparency & consent for vendors. This segment supports the standard list of purposes defined by the TCF as well as custom purposes defined by the publisher if they so choose.
+
+
+<table>
+  <tr>
+   <td><strong>Publisher Transparency & Consent</strong>
+   </td>
+   <td>
+   </td>
+   <td colspan="2" ><strong>The content of this section is optional, and should only be present if the HasPublisherTC flag in the main section is 1.</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>SegmentType
+   </td>
+   <td>3 bits
+   </td>
+   <td>Enum
+<p>
+0 = default - reserved for core string (does not need to be present in the core string)
+<p>
+1 = OOB disclosed vendor
+<p>
+2 = OOB allowed vendors
+<p>
+<strong>3 = PublisherTC</strong>
+   </td>
+   <td>PublisherTC segment is 3 which is  ‘011’ in binary.
+   </td>
+  </tr>
+  <tr>
+   <td>PubPurposesConsent
+   </td>
+   <td>24 bits
+   </td>
+   <td>One bit for each Purpose:
+<p>
+0=No Consent
+<p>
+1=Consent
+   </td>
+   <td>The user’s consent value for each Purpose established on the legal basis of consent, for the publisher
+<p>
+The Purposes are numerically identified and published in the Global Vendor List. From left to right, Purpose 1 maps to the 0th bit, purpose 24 maps to the bit at index 23.
+   </td>
+  </tr>
+  <tr>
+   <td>PubPurposesLITransparency
+   </td>
+   <td>24 bits
+   </td>
+   <td>One bit for each Purpose:
+<p>
+0=legitimate interest NOT established
+<p>
+1=legitimate interest established
+   </td>
+   <td>The Purpose’s transparency requirements are met for each Purpose established on the legal basis of legitimate interest and the user has not exercised their “Right to Object” to that Purpose.
+<p>
+By default or if the user has exercised their “Right to Object to a Purpose, the corresponding bit for that purpose is set to 0. From left to right, Purpose 1 maps to the 0th bit, purpose 24 maps to the bit at index 23.
+   </td>
+  </tr>
+  <tr>
+   <td>NumCustomPurposes
+   </td>
+   <td>6 bits
+   </td>
+   <td>The number of custom purposes.
+   </td>
+   <td>Custom purpose IDs are numbered 1 to NumberCustomPurposes. Custom purposes will be definedby the publisher and displayed to a user in a CMP user interface.
+<p>
+If the publisher does not use any custom purposes, this field is set to 0 and the following two fields will be omitted.
+   </td>
+  </tr>
+  <tr>
+   <td>CustomPurposesConsent
+   </td>
+   <td>NumCustomPurposes
+   </td>
+   <td>One bit for each custom purpose
+<p>
+0=No Consent
+<p>
+1=Consent
+   </td>
+   <td>The consent value for each CustomPurposeId from 1 to NumberCustomPurposes
+   </td>
+  </tr>
+  <tr>
+   <td>CustomPurposesLITransparency
+   </td>
+   <td>NumCustomPurposes
+   </td>
+   <td>One bit for each custom purpose Legitimate Interest establishment
+<p>
+0=Legitimate Interest not established or established or the user exercised their “Right to Object”
+<p>
+
+<p>
+1=Legitimate Interest established
+   </td>
+   <td>The legitimate Interest disclosure establishment value for each CustomPurposeId from 1 to NumberCustomPurposes
+   </td>
+  </tr>
+</table>
+
+
+
+## The Global Vendor List
+
+The Global Vendor List (GVL) is a technical document that CMPs download from a domain managed and published by IAB Europe. It lists all registered and approved Vendors, as well as standard Purposes, Special Purposes, Features, Special Features and Stacks. The information stored in the GVL is used for determining what legal disclosures must be made to the user.
+
+
+### I’m a vendor, how do I get added to the Global Vendor List?
+
+The registration process is described here: [https://iabeurope.eu/tcf](https://iabeurope.eu/tcf)
+
+
+### What is contained in the Global Vendor List?
+
+
+
+*   A Global Vendor List Specification Version
+*   A Global Vendor List version
+*   A TCF Policy Version
+*   A Last Updated Date
+*   A list of standard Purposes
+*   A list of Special Purposes
+*   A list of standard Features
+*   A list of Special Features.
+*   A list of Stacks
+*   A list of Vendors and their:
+    *   Numeric ID which is incrementally assigned and never re-used – deleted Vendors are just marked as deleted.
+    *   Name.
+    *   List of Purposes for which they are requesting consent.
+    *   List of Purposes for which they require to be transparently disclosed as their legitimate interest.
+    *   List of Purposes they have the flexibility to either use a consent or a legitimate interest legal basis.
+    *   List of Special Purposes to transparently disclose as their legitimate interest that a user has no right to object.
+    *   List of Features they use across Purposes.
+    *   GDPR/privacy policy page URL.
+    *   HTTP “overflow” options which includes a GET request maximum size in kilobytes to help diagnose problems with TC String passing as well as limit oversized strings.
+
+
+### Where can I access the Global Vendor List?
+
+The GVL is in JSON format and the current version at any given time can be retrieved using the following URL structure:
+
+[https://vendorlist.consensu.org/v2/vendor-list.json](https://vendorlist.consensu.org/v2/vendorlist.json)
+
+Previous versions of the Global Vendor List are available here:
+
+[https://vendorlist.consensu.org/v2/archives/vendor-list-v{vendor-list-version}.json](https://vendorlist.consensu.org/v2/archives/vendorlist-v{vendor-list-version}.json)
+
+Where ‘vendor-list-version’ corresponds to the ‘vendorListVersion’ property in the GVL, for example, the following URL would retrieve the GVL update published with version 138
+
+[https://vendorlist.consensu.org/v2/archives/vendor-list-v138.json](https://vendorlist.consensu.org/v2/vendor-list.json)
+
+Previous versions of the GVL may only be used in cases when the current version cannot be downloaded (such as when operating in-app while offline), or for change control management.
+
+
+### TCF version 1 of the Global Vendor List (deprecated)
+
+For reference, the URL for version 1 of the TCF was:
+
+[https://vendorlist.consensu.org/vendorlist.json](https://vendorlist.consensu.org/vendorlist.json)
+
+Version 1 of the Global Vendor List and all version 1 archives will continue to be maintained until support officially ends in 2020. At that time, these files will be deprecated and only version 2 and newer of the Global Vendor List will be available.
+
+
+### Translations for Purposes, Special Purposes, Features, and Special Features
+
+Translations of the names and descriptions for Purposes, Special Purposes, Features, and Special Features to non-English languages are contained in a file where attributes containing English content (except vendor declaration information) are translated, and can be found here:
+
+https://vendorlist.consensu.org/v2/purposes-{language}.json
+
+Where ‘language’ is a two letter lowercase ISO 639-1 language code. Supported languages are listed at the following URL:
+
+[https://register.consensu.org/Translation](https://register.consensu.org/Translation)
+
+
+### How often is the Global Vendor List updated?
+
+As of the publication of this document, changes to the Global Vendor List are published weekly at 5:00 PM Central European Time on Thursdays. IAB Europe reserves the right to change this time and will notify CMP members of any changes.
+
+
+### CMPs using the GVL
+
+Any time the CMP user interface is surfaced  to a user to provide transparency and request consent, the **current **version of the GVL must be used to populate the user interface – this includes first-time interactions and renewal interactions.  When a user summons the CMP user interface manually to review their settings, the version of the GVL encoded in the TC String is used instead.
+
+Within a mobile in-app context where the current version of the GVL cannot be loaded because of a lack of Internet connectivity, the most recently cached version of the GVL may be used – The latest version of the GVL must be retrieved as soon as connectivity is restored.
+
+CMPs must, of course, use specific versions of the GVL to determine if a CMP should be resurfaced to a user whom has a TC String encoded with a GVL version that is not the latest or if they are resurfacing the user interface upon the user’s request to review their settings.
+
+
+### Vendors using the GVL
+
+Vendors must use the version of the GVL encoded in the TC String received to determine if they have the legal basis they need to process the user’s data for a given purpose.
+
+**Strict restrictions on caching the GVL apply and are detailed in the following section.**
+
+
+### Caching the Global Vendor List
+
+Given the scale of the TCF and the high volume of requests for the Global Vendor List, current and previous versions are configured with cache-control headers. All requests for the Global Vendor List must honour these headers and must not cache the resource with different settings. In this respect, “cache busting” techniques, like appending a query string parameter and a randomly generated value as part of the URL request to download the Global Vendor List in order to bypass the cache must not be used.
+
+**Note: **There may be a delay of up to the maximum cache interval in retrieving the latest version of the Global Vendor List.
+
+
+#### CMPs caching the GVL
+
+CMPs shall set [cache-control headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) on HTTP responses sent to client-side requests for GVL files to prevent users from repeatedly downloading the file. When cache-control headers are set browsers will automatically cache the GVL file and return the file from cache to the client-side script running when it makes the request circumventing the need to fetch the file over HTTP again and again.
+
+
+#### Vendors caching the GVL
+
+Because vendor requests for a GVL file will not be in a browser context, GVL files must be cached server-side.
+
+Vendor application logic must only request one version of the GVL per vendor during the cache period specified in the cache-control header. For example, if the caching period is one week, only one request for the current GVL file must be received for a given vendor per week.
+
+**Note: **The volume of usage will be monitored carefully by the managing organisation (MO) and any vendor not adhering to this request limit will be blocked from accessing the GVL.
+
+
+#### Caching previous versions of the GVL
+
+Previous versions of the GVL must be cached for at least the period specified by the cache-control headers and may be cached indefinitely as they are static resources.
+
+
+#### Using a compressed version of the Global Vendor List
+
+In order to control the bandwidth used by requests for the GVL file, vendors and CMPs must request a compressed version of the GVL. This can be done by sending _Accept-Encoding_ headers on the GET request for the file.  Example:
+
+
+```
+Accept-Encoding: gzip, deflate, br
+```
+
+
+A browser will add this header automatically and, therefore, nothing needs to be done for an in-browser request.  Server-side requests are another matter because server software may not decompress the response automatically. Make sure your server requests send the options your service is capable of decoding in your _Accept-Encoding_ header.
+
+
+#### Global Vendor List and TCF Policy Updates
+
+When a change occurs in the TCF [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf), the update invalidates the previous declarations of vendors listed on the previous version of the GVL. These policy changes happen infrequently, but when they do, a CMP is required to discard the user’s current TC String and resurface the user interface to provide new disclosures, capture new consent, and encode a new TC String without migrating any old values over from the old one.
+
+To determine if TCF [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) have changed, CMPs shall compare the _TcfPolicyVersion_ encoded in a TC String with the _TcfPolicyVersion _property in the latest Global Vendor List published by the Managing Organziation – if the values are different then the TCF Policy has changed and a CMP will be required to provide new disclosures, capture new consent, and encode a new TC String.
+
+
+### Example Global Vendor List JSON Object
+
+Here is an annotated example of the GVL’s JSON format:
+
 
 ```javascript
 {
-  __tcfapiCall: {
-    command: "command",
-    parameter: parameter,
-    version: version
-  }
-}
+  "gvlSpecificationVersion": 2,
+  "vendorListVersion": 133, // incremented with each published file change
+  "tcfPolicyVersion": 2, // The TCF MO will increment this value whenever a GVL change (such as adding a new Purpose or Feature or a change in Purpose wording) legally invalidates existing TC Strings and requires CMPs to re-establish transparency and consent from users. TCF Policy changes should be relatively infrequent and only occur when necessary to support changes in global mandate. If the policy version number in the latest GVL is different from the value in your TC String, then you need to re-establish transparency and consent for that user. A version 1 format TC String is considered to have a version value of 1.
+
+  "lastUpdated": "2018-05-28T00:00:00Z",
+  "purposes": {
+	/*
+  	Information published for each Purpose
+
+
+  	"id": number, REQUIRED
+  	"name": string, REQUIRED
+      "description": string, REQUIRED
+      "descriptionLegal": string, REQUIRED
+  	"consentable": boolean, OPTIONAL, default=true  false means CMPs should never afford users the means to provide an opt-in consent choice
+  	"rightToObject": boolean, OPTIONAL, default=true  false means CMPs should never afford users the means to exercise a right to object
+	*/
+
+
+      "1": {
+    "id": 1,
+  		"name": "Storage and access of information",
+  		"description": "..."
+  		"descriptionLegal": "..."
+	},
+	// ... more purposes from id=2 to id=9 (up to no higher than id=24)
+	{
+      "10": {
+    "id": 10,
+  		"name": "Develop and improve product",
+  		"description": "...",
+  		"descriptionLegal": "...",
+  		"consentable": false,
+  		"rightToObject": false
+	},
+	{
+},
+"specialPurposes" : {
+	"1": {
+      		"id": 1,
+  		"name": "Security, Fraud Prevention, Debugging",
+  		"description": "...",
+  		"descriptionLegal": "...",
+  		"consentable": false,
+  		"rightToObject": false
+	},
+	"2": {
+      		"id": 2,
+  		"name": "Technical ad and content delivery",
+  		"description": "...",
+  		"descriptionLegal": "...",
+  		"consentable": false,
+  		"rightToObject": false
+	}
+  },
+  "features" : {
+	"1": {
+  		"id": 1
+  		"name": "Matching Data to Offline Sources",
+  		"description": "Combining data from offline sources that were initially collected in other contexts",
+  		"descriptionLegal": "..."
+	}
+	// ... more features from id=2 up to no higher than id=64.
+  },
+  // Special features differ from simple features in that CMPs MUST provide
+  // users with a means to signal an opt-in choice as to whether vendors
+  // may employ the feature when performing any purpose processing.
+  // See Policies for specifics.
+  "specialFeatures" : {
+	"1": {
+  		"id": 1
+  		"name": "Precise Geolocation",
+  		"description": "...",
+  		"descriptionLegal": "..."
+	},
+	"2": {
+  		"id": 2
+  		"name": "Active Fingerprinting",
+  		"description": "...",
+  		"descriptionLegal": "..."
+	}
+	// ... more special features from id=3 up to no higher than id=8.
+  },
+  "vendors": {
+	/*
+  	Information published for each vendor
+
+  	"id": numeric, REQUIRED
+  	"name": string, REQUIRED
+      "purposeIds": array of positive integers, either purposeIds or legIntPurposeIDs REQUIRED. Array may be empty. List of purpose ids declared as performed on the legal basis of consent
+"specialPurposeIds": array of positive integers, OPTIONAL. Array may be empty. List of Special Purposes declared as performed on the legal basis of a legitimate interest
+  	"legIntPurposeIds": array of positive integers, either purposeIds or legIntPurposeIDs REQUIRED. Array may be empty. List of purpose ids declared as performed on the legal basis of a legitimate interest
+  	"flexiblePurposeIds": array of positive integers, OPTIONAL. Array may be empty. List of purpose ids where the vendor is flexible regarding the legal basis; they will perform the processing based on consent or a legitimate interest. The 'default' is determined by which of the other two mutually-exclusive purpose fields is used to declare the purpose for the vendor
+
+Constraints:
+
 ```
 
-The `event.data` object payload shall follow the form outlined below. The `returnValue` object property shall be the correspondng TC data object for the `command` used upon sending the “sent message”. The `success` object property shall reflect the `__tcfapi()` `success` callback argument and the `callId` will correspond to the “sent message” unique id passed in the `callId` property.
 
-```javascript
-{
-  __tcfapiReturn: {
-   returnValue: returnValue,
-   success: boolean,
-   callId: uniqueId
-  }
-}
+
+*   `Either purposeIds OR legIntPurposeIds can be missing/empty, but not both.`
+*   `A purpose id must not be present in both purposeIds and legIntPurposeIds`
+*   `A purpose id listed in flexiblePurposeIds must have been declared in one of purposeIds or legIntPurposeIds.`
+*   `Purpose id values included in the three purpose fields must be in the range from 1 to N, where N is the highest purpose id published in this GVL file.`
+
+
 ```
+  	"featureIds": array of positive integers, OPTIONAL. Array may be empty. List of Features the Vendor may utilize when performing some declared Purposes processing.
+      "specialFeatureIds": array of positive integers, OPTIONAL. Array may be empty. List of Special Features the Vendor may utilize when performing some declared Purposes processing.
+"SpecialPurposes": array of positive integers, OPTIONAL. Array may be empty. List of Special Purposes declared as performed on the legal basis of a legitimate interest
+  	"policyUrl": url string, REQUIRED URL to the Vendor's privacy policy document.
+      "deletedDate": date string ("2019-05-28T00:00:00Z") OPTIONAL, If present, vendor is considered deleted after this date/time and MUST NOT be established to users.
+      "overflow": object specifying the vendor's http GET request length  limit OPTIONAL. Has the following members & values
 
-#### Is there a sample iframe script call to the CMP API?
-
-Below is an exmample script that emulates the in-frame `__tcfapi()` call. It locates the ancestor frame running the CMP, performs the `postMessage` and listens for the return message and passes its values to the callback:
-
-```javascript
-(function() {
-
-  //start here at our window
-  let frame = window;
-
-  // if we locate the CMP iframe we will reference it with this
-  let cmpFrame;
-
-  // map of calls
-  const cmpCallbacks = {};
-
-  while(frame) {
-
-    try {
-
-      /**
-       * throws a reference error if no frames exist
-       */
-
-      if (frame.frames['___tcfapiLocator']) {
-
-        cmpFrame = frame;
-        break;
-
+      "overflow": {
+          "httpGetLimit": 32   /* 32 or 128 are supported options */
       }
-
-    } catch(ignore) {}
-
-    if(frame === window.top) {
-
-      break;
-
-    }
-
-    frame = frame.parent;
-
-  }
-
- /**
-  * Set up a __tcfapi proxy method to do the postMessage and map the callback.
-  * From the caller's perspective, this function behaves identically to the
-  * CMP API's __tcfapi call
-  */
-
-  window.__tcfapi = function(cmd, version, callback, arg) {
-
-    if (!cmpFrame) {
-
-      callback({msg: 'CMP not found'}, false);
-
-    } else {
-
-      const callId = Math.random() + '';
-      const msg = {
-        __tcfapiCall: {
-          command: cmd,
-          parameter: arg,
-          version: version,
-          callId: callId,
-        },
-      };
-
-      /**
-       * map the callback for lookup on response
-       */
-
-      cmpCallbacks[callId] = callback;
-      cmpFrame.postMessage(msg, '*');
-
-    }
-
-  };
-
-  function postMessageHandler(event) {
-
-  /**
-    * when we get the return message, call the mapped callback
+If a vendor entry does not include this attribute then the vendor has no overflow options and none can be inferred.
     */
 
-    let json = {};
-
-    try {
-
-      /**
-        * if this isn't valid JSON then this will throw an error
-        */
-
-      json = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
-
-    } catch (ignore) {}
-
-    const payload = json.__tcfapiReturn;
-
-    if (payload) {
-
-      /**
-        * messages we care about will have a payload
-        */
-
-      if (typeof cmpCallbacks[payload.callId] === 'function') {
-
-        /**
-         * call the mapped callback and then remove the reference
-         */
-
-        cmpCallbacks[payload.callId](payload.returnValue, payload.success);
-        cmpCallbacks[payload.callId] = null;
-
+    "1":{
+	"id": 1,
+  	"name": "Vendor Name",
+  	"purposeIds": [1],
+	"specialPurposes": [1],
+  	"legIntPurposeIds": [2, 3],
+      "flexiblePurposeIds": [1, 2],
+      "featureIds": [1, 2],
+  	"specialFeatureIds": [1, 2],
+  	"policyUrl": "https://vendorname.com/gdpr.html",
+  	"deletedDate": "2019-02-28T00:00:00Z",
+      "overflow": {
+          "httpGetLimit": 32   /* 32 or 128 are supported options */
       }
-
-    }
-
+    },
+    // ... more vendors
   }
 
-  window.addEventListener('message', postMessageHandler, false);
-
-}());
-
-__tcfapi('ping', (pingReturn, success) => {
-
-  // should get response from window.top's CMP
-
-});
-```
-### From where will the API retrieve the TC string?
-
-See the ‘How should the transparency & consent string be stored?’ section in the ‘Transparency & Consent String and Global Vendor List Format’ spec which describes where CMPs must store the transparency & consent string.
-
-#### How will the API prioritize the service-specific and the global configurations?
-
-The service-specific TC String will override the global TC String, if it is being used. The prioritization between these two scenarios is as specified in the policy FAQ.
-
-### Major Changes from 1.1
-
-1. Added `getInAppTCData`
-2. Added properties to `PingReturn`
-3. Added `addEventListener`
-4. Added `TCData`
-5. Removed `VendorConsents`
-6. Removed `VendorConsentData`
-7. Changed `getVendorConsents` to `getTCData`
-8. Renamed `__cmp` to `__tcfapi`
-9. Renamed all `__cmp*` to `__tcfapi*` (e.g. `__cmpLocator` is now `__tcfapiLocator`)
-10. Removed `getConsentData` and `getPublisherConsents` commands (data moved to `getTCData`)
-11. Added in-app API details throughout where applicable
+ "stacks": {
+  "1": {
+   	"id": 1,
+   	"purposes" : [1,2,3 ...],
+   	"specialPurposes" : [1,2,3 ...],
+   	"name" : "...",
+   	"description" : "...",
+  }
+ }
+}
