@@ -141,7 +141,7 @@ Regarding specific definitions as they relate to TCF [Policies](https://www.iabe
 
  ### What purpose does a TC String serve?
 
-A TC String’s primary purpose is to encapsulate and encode all the information disclosed to a user and the expression of their preferences for data processing under the GDPR. Using a Consent Management Platform (CMP), the information is captured into an encoded and compact  HTTP-transferable string. This string enables communication of transparency and consent information to entities, or “vendors”, that process user data. Vendors decode a TC String to determine whether they have the necessary legal bases to  process a user's personal data for their purposes. The concise string data format enables a  CMP to persist and retrieve a user’s preferences any time they're needed as well as transfer that information to any vendors who need it.
+A TC String’s primary purpose is to encapsulate and encode all the information disclosed to a user and the expression of their preferences for their personal data processing under the GDPR. Using a Consent Management Platform (CMP), the information is captured into an encoded and compact  HTTP-transferable string. This string enables communication of transparency and consent information to entities, or “vendors”, that process a user's personal data. Vendors decode a TC String to determine whether they have the necessary legal bases to  process a user's personal data for their purposes. The concise string data format enables a  CMP to persist and retrieve a user’s preferences any time they're needed as well as transfer that information to any vendors who need it.
 
 
 ### What information is stored in a TC String?
@@ -151,12 +151,12 @@ A TC String contains the following information:
 
 
 1. **General metadata:** standard markers that indicate details about a TC String such as its encoding version, when it was last updated, and when it was initially created as well as details about the conditions of the transparency and consent values it contains such as the [Global Vendor List](#the-global-vendor-list) version used, the CMP used, etc.
-2. **User consent:** a user’s expression of consent given for processing their data. A user’s consent is expressed on two levels: per Purpose and per Vendor.
+2. **User consent:** a user’s expression of consent given for processing their personal data. A user’s consent is expressed on two levels: per Purpose and per Vendor.
 3. **Legitimate interest:** the record of a CMP having established legitimate interest transparency for a vendor and/or purpose and whether the user exercised their “Right to Object” to it.  This includes signals for Purposes in general and Purposes declared specifically for a given Vendor.
 4. **Publisher restrictions:** the restrictions of a vendor's data processing by a publisher within the context of the users trafficking their digital property.
-5. **Publisher transparency and consent:** a segment of a TC String that publishers may use to establish transparency with and receive consent from users for their own legal bases to process data or to share with vendors if they so choose.
-6. **Out-of-band (OOB) legal bases:** two segments expressing that a Vendor is using  legal bases outside of the TCF to process data. The first segment is a list of Vendors disclosed to the user and the second is a list of Vendors that the publisher allows to use out-of-band legal bases.
-7. **Specific jurisdiction disclosures:** the country in which the publisher’s business entity is established or the legislative country of reference and a record of whether Purpose 1, “[to] store and/or access information on a device,” was disclosed to the user since some legal jurisdictions handle this data processing purpose differently.
+5. **Publisher transparency and consent:** a segment of a TC String that publishers may use to establish transparency with and receive consent from users for their own legal bases to process personal data or to share with vendors if they so choose.
+6. **Out-of-band (OOB) legal bases:** two segments expressing that a Vendor is using  legal bases outside of the TCF to process personal data. The first segment is a list of Vendors disclosed to the user and the second is a list of Vendors that the publisher allows to use out-of-band legal bases.
+7. **Specific jurisdiction disclosures:** the country in which the publisher’s business entity is established or the legislative country of reference and a record of whether Purpose 1, “[to] store and/or access information on a device,” was disclosed to the user since some jurisdictions handle this Purpose differently.
 
 
 ### Who should create a TC string?
@@ -176,14 +176,14 @@ There are two main contexts in which a TC String can be created:
 *   **Global** - A TC String in this context is saved globally and is shared by CMPs running on sites across the web; When stored globally, they must <span style="text-decoration:underline;">NOT</span> contain [Publisher restrictions](#what-are-publisher-restrictions) or a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment but they may contain a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment.
 *   **Service-specific** - A  TC String in this context is only used by the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain [Publisher restrictions](#what-are-publisher-restrictions), a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment and an _**[AllowedVendors](#allowed-vendors-oob)**_ segment.
 
-CMPs must be set up to operate in either a service-specific or global configuration. If the Publisher-operated CMP declares that the processing disclosed is, for example, data processing on this site and on other sites or apps where third-party companies also operate, then the scope is global and that TC String is used and stored in a global context.
+CMPs must be set up to operate in either a service-specific or global configuration. If a Publisher-operated CMP declares that the personal data processing purpose is, for example, on this site and on other sites or apps where third-party companies also operate, then the scope is global and that TC String is used and stored in a global context.
 
 If the disclosures do not describe a global scope, or explicitly state service-specific processing, then the TC String is used and stored explicitly as a service-specific string. Also, if the CMP discloses transparency and consent in a global context but the user’s browser does not permit third-party cookies, then the CMP’s only recourse is to retain the user’s preference using a local storage mechanism (eg. first-party cookie or [window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)). Since the transparency and consent obtained from the user is restricted to that site or service, the TC String must then have the service-specific bit [IsServiceSpecific](#tc-string-format) set.
 
 
 ### What are publisher restrictions?
 
-Version 2.0 of the Framework introduced the ability for publishers to signal restrictions on how vendors may process data:
+Version 2.0 of the Framework introduced the ability for publishers to signal restrictions on how vendors may process personal data:
 
 *  **Purposes.** Restrict the purposes for which personal data is processed by a vendor.
 *  **Legal basis.** Specify the legal basis upon which a publisher requires a vendor to operate where a vendor has signaled flexibility on legal basis in the [GVL](#the-global-vendor-list).
@@ -339,7 +339,7 @@ CMPs can implement a consent redirector and host it at `https://[cmpname].mgr.co
 
  If a publisher is operating a CMP within a jurisdiction that does not require consent to store and/or access information on a device and, therefore, does not ask for consent on behalf of a vendor, the CMP will write the corresponding bit in the _**PurposesConsent**_ field to `0`. Even though it is valid within that jurisdiction to use Legitimate Interest for Purpose 1, a vendor would interpret that `0` as a “no consent” signal and have no way of knowing that consent was not required in the jurisdiction in which the publisher operates.  This lack of transparency would, ultimately, cause losses in ad revenue for that publisher.
 
-To accommodate cases where Purpose 1 is governed differently for consent depending on the legal jurisdiction, a TC String is transparent about the publisher’s operating governance and whether or not Purpose 1 was disclosed to a user. The vendor can then use these details to make a determination about whether they have sufficient legal basis for data processing in that given context. To support this, there are two fields in a TC String: _**PublisherCC**_, which represents the publisher’s country code and a flag for whether any disclosure has been offered on Purpose 1 named _**PurposeOneTreatment**_. Details for each field are listed among [the fields used in the TC String](#tc-string-format).
+To accommodate cases where Purpose 1 is governed differently for consent depending on the jurisdiction, a TC String is transparent about the publisher’s operating governance and whether or not Purpose 1 was disclosed to a user. The vendor can then use these details to make a determination about whether they have sufficient legal basis for personal data processing in that given context. To support this, there are two fields in a TC String: _**PublisherCC**_, which represents the publisher’s country code and a flag for whether any disclosure has been offered on Purpose 1 named _**PurposeOneTreatment**_. Details for each field are listed among [the fields used in the TC String](#tc-string-format).
 
 ## Creating a TC String
 
@@ -775,7 +775,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
         MaxVendorId where index <code>0</code> is Vendor ID
         <code>1</code>.<br /><br />Set the bit corresponding to a given
         vendor to <code>1</code> if the user has consented to this vendor
-        processing their data
+        processing their personal data
       </td>
     </tr>
     <tr style="background-color:#999;">
@@ -1046,7 +1046,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
         Purpose as flexible and this field is set to <code>1</code>, they
         must then check for the “consent” signal in the VendorConsents
         section to make a determination on whether they have the legal basis
-        for processing user data under that Purpose.
+        for processing user personal data under that Purpose.
         <p>
           If a vendor has not declared a Purpose flexible and this value is
           <code>1</code> or <code>2</code> they may ignore the signal.
@@ -1135,7 +1135,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
 
 #### Signaling OOB in the TC String
 
-On occasion, legal bases for processing user data are achieved outside of the TCF. This would be considered an out-of-band (OOB) legal basis. To signal whether using an OOB legal basis is allowed requires:
+On occasion, legal bases for processing a user's personal data are achieved outside of the TCF. This would be considered an out-of-band (OOB) legal basis. To signal whether using an OOB legal basis is allowed requires:
 
 *   An indication that some CMP has, at some time, disclosed the vendor in a global context to the user in the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment
 *   The use of a global-context TC String
@@ -1447,7 +1447,7 @@ Signals which vendors the publisher permits to use OOB legal bases.
         A single or range of Vendor ID(s) of Vendor(s) who are allowed to
         use an OOB legal basis on the given publisher’s digital property. If
         a Vendor ID is not within the bounds of the ranges then they are not
-        allowed to use an OOB legal basis on the given publisher’s digital
+        allowed to use an OOB legal basis on the given publisher's digital
         property..
       </td>
     </tr>
@@ -1495,7 +1495,7 @@ Signals which vendors the publisher permits to use OOB legal bases.
 
 #### Publisher Purposes Transparency and Consent
 
-Publishers may need to establish transparency and consent for a set of purposes for their own data use. For example, a publisher that wants to set a frequency-capping first-party cookie should request user consent for Purpose 1 "Store and/or access information on a device" in jurisdictions where it is required.
+Publishers may need to establish transparency and consent for a set of personal data processing purposes for their own use. For example, a publisher that wants to set a frequency-capping first-party cookie should request user consent for Purpose 1 "Store and/or access information on a device" in jurisdictions where it is required.
 
 The _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment in the TC string represents publisher purposes transparency & consent signals which is different than the other TC String segments; they are used to collect consumer purposes transparency & consent for vendors. This segment supports the standard list of purposes defined by the TCF as well as Custom Purposes defined by the publisher if they so choose.
 
@@ -1540,7 +1540,7 @@ The _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment i
         </p>
       </td>
       <td>
-        The user’s consent value for each Purpose established on the legal
+        The user's consent value for each Purpose established on the legal
         basis of consent, for the publisher
         <p>
           The Purposes are numerically identified and published in the
@@ -1697,7 +1697,7 @@ CMPs must, of course, use specific versions of the GVL to determine if a CMP sho
 
 ### Vendors using the GVL
 
-Vendors must use the version of the GVL encoded in the TC String received to determine if they have the legal basis they need to process the user’s data for a given purpose.
+Vendors must use the version of the GVL encoded in the TC String received to determine if they have the legal basis they need to process the user's personal data for a given purpose.
 
 **Strict restrictions on caching the GVL apply and are detailed in the following section.**
 
