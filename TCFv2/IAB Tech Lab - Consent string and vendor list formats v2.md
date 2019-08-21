@@ -264,7 +264,6 @@ The supported URL parameters and the corresponding macros are defined below:
           this URL call)
         </p>
       </td>
-
       <td>
         <code>&gdpr_consent=${gdpr_consent_xxxxx}</code>
         <p>
