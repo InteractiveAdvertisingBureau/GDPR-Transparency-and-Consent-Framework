@@ -86,7 +86,7 @@ Yes, the technical specifications for the TC String and CMP API were developed t
 If you have not yet read tech specs or policy, you can access these documents here: 
 - [IAB Europe Transparency and Consent Framework Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf)
 - [Transparency and Consent String, Version 2](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md)
-- [Consent Management Platform API, Version 2(https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md)
+- [Consent Management Platform API, Version 2](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md)
 
 All definitions in the implementation guidelines should reflect definitions provided in the Policy. 
 
