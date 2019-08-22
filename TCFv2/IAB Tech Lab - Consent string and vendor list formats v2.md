@@ -1146,12 +1146,13 @@ The _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment of a TC String prov
 
 If a publisher supports OOB legal bases, but only for select vendors, a CMP shall create an _**[AllowedVendors](#allowed-vendors-oob)**_ segment that reflects the vendors the publisher allows to operate under OOB legal bases.  When a TC String is requested from the CMP API it shall include both the _**[AllowedVendors](#allowed-vendors-oob)**_ and _**[DisclosedVendors](#disclosed-vendors-oob)**_ segments.  However, when a TC String is stored, an _**[AllowedVendors](#allowed-vendors-oob)**_ segment must never be saved to the global context as this is a publisher-specific setting and does not apply web-wide. If a CMP encounters a TC String with an _**[AllowedVendors](#allowed-vendors-oob)**_ segment in the global context it must disregard it, not include it in responses from the CMP API, and of course omit it when re-saving.
 
+**Note:** If a Vendor has been _disclosed_ within the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment that means that they have interacted with the Framework and therefore can not use OOB legal bases.
+
 The following three examples demonstrate how to handle an OOB signal in the TC String.
 
 **Example 1: A Publisher Does <span style="text-decoration:underline;">Not</span> Support OOB Legal Bases**
 
 The CMP reads a TC String from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment:
-
 
 [ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
 ```
@@ -1645,6 +1646,7 @@ The registration process is described here: [https://iabeurope.eu/tcf](https://i
     *   List of Purposes they have the flexibility to either use a consent or a legitimate interest legal basis.
     *   List of Special Purposes to transparently disclose as their legitimate interest that a user has no right to object.
     *   List of Features they use across Purposes.
+    *   List of Special Features they use accross Purposes.
     *   GDPR/privacy policy page URL.
     *   HTTP “overflow” options which includes a <code>GET</code> request maximum size in kilobytes to help diagnose problems with TC String passing as well as limit oversized strings.
 
@@ -1878,7 +1880,7 @@ Here is an annotated example of the GVL’s JSON format:
    * of Features the Vendor may utilize when performing some declared Purposes
    * processing.
    *
-   * "specialfeatures": array of positive integers, OPTIONAL. Array may be
+   * "specialFeatures": array of positive integers, OPTIONAL. Array may be
    * empty. List of Special Features the Vendor may utilize when performing
    * some declared Purposes processing.
    *
@@ -1911,7 +1913,7 @@ Here is an annotated example of the GVL’s JSON format:
     "legIntPurposes": [2, 3],
     "flexiblePurposes": [1, 2],
     "features": [1, 2],
-    "specialfeatures": [1, 2],
+    "specialFeatures": [1, 2],
     "policyUrl": "https://vendorname.com/gdpr.html",
     "deletedDate": "2019-02-28T00:00:00Z",
     "overflow": {
@@ -1924,10 +1926,10 @@ Here is an annotated example of the GVL’s JSON format:
   "stacks": {
     "1": {
       "id": 1,
-      "purposes" : [1,2,3 ...],
-      "specialPurposes" : [1,2,3 ...],
-      "name" : "...",
-      "description" : "...",
+      "purposes" : [],
+      "specialFeatures" : [1,2],
+      "name" : "Precise geolocation data, and identification through device scanning",
+      "description" : "Precise geolocation and information about device characteristics can be used."
     }
   }
 }
