@@ -1007,7 +1007,7 @@ This code should be executed on the page before any other scripts that require t
 
           if (typeof args[2] === 'function') {
 
-            args[2](retr, true);
+            args[2]("set", true);
 
           }
 
