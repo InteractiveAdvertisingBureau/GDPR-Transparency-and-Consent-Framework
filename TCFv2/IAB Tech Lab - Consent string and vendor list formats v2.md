@@ -22,7 +22,6 @@
    + [When should a TC string be created?](#when-should-a-tc-string-be-created)
    + [What are the different scopes for a TC String?](#what-are-the-different-scopes-for-a-tc-string)
    + [What are publisher restrictions?](#what-are-publisher-restrictions)
- * [Working with global TC Strings](#working-with-global-tc-strings)
    + [How does the CMP handle a globally-scoped TC string?](#how-does-the-cmp-handle-a-globally-scoped-tc-string)
    + [How does a URL-based service process the TC string when it can't execute JavaScript?](#how-does-a-url-based-service-process-the-tc-string-when-it-cant-execute-javascript)
      - [Full TC String passing](#full-tc-string-passing)
@@ -189,10 +188,6 @@ Version 2.0 of the Framework introduced the ability for publishers to signal res
 *  **Legal basis.** Specify the legal basis upon which a publisher requires a vendor to operate where a vendor has signaled flexibility on legal basis in the [GVL](#the-global-vendor-list).
 
 Publisher restrictions are custom requirements specified by a publisher and must only be saved to a service-specific TC String.
-
- ## Working with global TC Strings
-
-Each party involved in handling a TC String plays a role. The following topics address how parties should handle a TC String in different situations.
 
 
 ### How does the CMP handle a globally-scoped TC string?
