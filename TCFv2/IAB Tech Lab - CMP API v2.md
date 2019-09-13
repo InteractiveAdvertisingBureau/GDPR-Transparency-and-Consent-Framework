@@ -290,7 +290,7 @@ ______
 **Example:**
 
 ```javascript
-__tcfapi('getInTCData', 2, (inAppTCData, success) => {
+__tcfapi('getInAppTCData', 2, (inAppTCData, success) => {
 
   if(success) {
 
