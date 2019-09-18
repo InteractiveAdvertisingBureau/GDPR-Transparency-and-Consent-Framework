@@ -204,9 +204,7 @@ Publisher restrictions are custom requirements specified by a publisher and must
 
 When a creative is rendered, it may contain a number of pixels under `<img>` tags. For example, `<img src="http://vendor-a.com/key1=val1&key2=val2">` which fires an HTTP GET request from the browser to Vendor A’s domain.
 
-Since the pixel is in an `<img>` tag without the ability to execute JavaScript, the CMP API cannot be used to obtain the TC String. For Vendor A to receive the TC String, the service that renders the pixel must insert the string into the pixel's URL. And if Vendor A wants to make the string available for Vendor B later down the chain, Vendor A must be able to include the TC String in the URL that redirects to Vendor B.
-
-All parties in the ad supply chain who transact using URLs can add a macro in their URLs where the TC String is inserted. Any caller with access to the applicable TC String must insert it within a URL containing the macro `${gdpr_consent_xxxxx}` where `xxxxx` is the numeric Vendor ID of the vendor receiving the TC string.
+Since the pixel is in an `<img>` tag without the ability to execute JavaScript, the CMP API cannot be used to obtain the TC String.  All parties in the ad supply chain who transact using URLs must add a macro in their URLs where the TC String is inserted. Any caller with access to the applicable TC String must insert it within a URL containing the macro `${gdpr_consent_xxxxx}` where `xxxxx` is the numeric Vendor ID of the vendor receiving the TC string.
 
 For example, for Vendor A with ID 123 to receive a TC String, an image URL must include a key-value pair with the URL parameter and macro `gdpr_consent=${gdpr_consent_123}`.
 
