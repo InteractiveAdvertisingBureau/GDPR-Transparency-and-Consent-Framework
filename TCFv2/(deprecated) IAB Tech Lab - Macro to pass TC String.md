@@ -1,9 +1,10 @@
-# **Macro** as a web-wide standard for URL-based services to pass/receive the Transparency and Consent String 
+# (Deprecated)
+# Macro as a web-wide standard for URL-based services to pass/receive the Transparency and Consent String 
 
 
 ## Document status 
 
-Published on April 25 2019 as part of the IAB Europe Transparency and Consent Framework v2 public comment period. This document is intended to replace the former guidance for URL-based consent string passing.
+Published on April 25 2019 as part of the IAB Europe Transparency and Consent Framework v2 public comment period. This document was intended to replace the former guidance for URL-based consent string passing; however, finalized updates to v2 incorporated a better solution for URL-based processing when JavaScript isn't supported. Details for this solution can be found [here](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#how-does-a-url-based-service-process-the-tc-string-when-it-cant-execute-javascript).
 
 
 ## Background 
