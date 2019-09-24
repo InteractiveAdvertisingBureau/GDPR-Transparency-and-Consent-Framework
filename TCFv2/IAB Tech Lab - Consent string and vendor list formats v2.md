@@ -1648,7 +1648,7 @@ The registration process is described here: [https://iabeurope.eu/tcf](https://i
 
 The GVL is in JSON format and the current version at any given time can be retrieved using the following URL structure:
 
-[https://vendorlist.consensu.org/v2/vendor-list.json](https://vendorlist.consensu.org/v2/vendorlist.json)
+[https://vendorlist.consensu.org/v2/vendor-list.json](https://vendorlist.consensu.org/v2/vendor-list.json)
 
 Previous versions of the Global Vendor List are available here:
 
@@ -1656,7 +1656,7 @@ Previous versions of the Global Vendor List are available here:
 
 Where ‘vendor-list-version’ corresponds to the ‘vendorListVersion’ property in the GVL, for example, the following URL would retrieve the GVL update published with version 138
 
-[https://vendorlist.consensu.org/v2/archives/vendor-list-v138.json](https://vendorlist.consensu.org/v2/vendor-list.json)
+https://vendorlist.consensu.org/v2/archives/vendor-list-v138.json
 
 Previous versions of the GVL may only be used in cases when the current version cannot be downloaded (such as when operating in-app while offline), or for change control management.
 
