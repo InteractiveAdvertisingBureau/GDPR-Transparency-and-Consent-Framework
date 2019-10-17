@@ -828,15 +828,15 @@ Mediation SDK allows app developers to monetize from multiple vendors.
 
 ##### Mediation SDK
 
-*   Mediation SDK retrieves `IABTCF_gdprApplies` and `IABTCF_tcString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android).
+*   Mediation SDK retrieves `IABTCF_gdprApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android).
 *   If `IABTCF_gdprApplies == 0`, Mediation SDK can run mediation across all ad network SDKs
 *   If `IABTCF_gdprApplies == 1`, Mediation SDK will run mediation only among the ad network SDKs that are GDPR ready.
 
-'GDPR ready' means that the vendor retrieves `IABTCF_gdprApplies` and `IABTCF_tcString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android), and passes on these GDPR values downstream.
+'GDPR ready' means that the vendor retrieves `IABTCF_gdprApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android), and passes on these GDPR values downstream.
 
 ##### Vendor
 
-*   Vendor retrieves `IABTCF_gdprApplies` and `IABTCF_tcString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android), and passes on these GDPR values downstream and passes on these GDPR values downstream.
+*   Vendor retrieves `IABTCF_gdprApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android), and passes on these GDPR values downstream and passes on these GDPR values downstream.
 
 ______
 
