@@ -23,7 +23,7 @@
   - [What optional API commands might a CMP support?](#what-optional-api-commands-might-a-cmp-support)
     - [`getInAppTCData`](#getinapptcdata)
     - [`getVendorList`](#getvendorlist)
-  - [What objects are returned form the API?](#what-objects-are-returned-form-the-api)
+  - [What objects are returned from the API?](#what-objects-are-returned-from-the-api)
     - [`TCData`](#tcdata)
     - [`PingReturn`](#pingreturn)
       - [Ping Status Codes](#ping-status-codes)
@@ -254,7 +254,7 @@ Registers a callback function with a CMP. The callback will be invoked with the 
 
 The CMP will, in most cases, invoke the callback when  either the `'tcloaded'` OR `'cmpuishown'` + `'useractioncomplete'` `eventStatus`(s) occur, but never for all three `eventStatuses` within the same page view. However, if an existing and valid TC string is available and the CMP does not intend to to surface a UI automatically (`'tcloaded'`) but the user manually surfaces the UI and changes their selected choices (`'cmpuishown'` + `'useractioncomplete'`) all three `eventStatuses` would appear within the same page view.
 
-The callback shall be invokedwith `false` as the argument for the `success` parameter if the callback could not be registered as a listener for any reason.
+The callback shall be invoked with `false` as the argument for the `success` parameter if the callback could not be registered as a listener for any reason.
 
 **Note:** Unlike the other API commands, the `addEventListener` callback may be called as many times as the TC String is changed — callback functions should be defensive and remove themselves as listeners if this behavior is not desired via `removeEventListener`.
 
@@ -270,7 +270,7 @@ ______
 
 **Example:** see [`'addEventListener'`](#addeventlistener)
 
-The callback shall be called with `false` as the argument for the `success` parameter if  the listener could not be removed (e.g. the parameter (`callback`) is not registered or is invalid)).
+The callback shall be called with `false` as the argument for the `success` parameter if  the listener could not be removed (e.g. the parameter `callback` is not registered or is invalid).
 
 ______
 
@@ -345,7 +345,7 @@ The callback shall be invoked only once per api call with this command.
 
 ______
 
-### What objects are returned form the API?
+### What objects are returned from the API?
 
 ______
 
@@ -399,7 +399,7 @@ TCData = {
    * indicate the publisher's country of establishment to help vVendors
    * determine whether the vendor requires Purpose 1 consent.
    *
-   * false - There is no special Purpose 1 treatmentstatus. Purpose 1 was
+   * false - There is no special Purpose 1 treatment status. Purpose 1 was
    * disclosed normally (consent) as expected by TCF Policy
    */
   purposeOneTreatment: Boolean,
@@ -568,7 +568,7 @@ PingReturn = {
   cmpVersion: Number,
 
   /**
-   * IAB Assidned CMP ID
+   * IAB Assigned CMP ID
    * undefined if still the stub
    */
   cmpId: Number,
@@ -586,7 +586,7 @@ PingReturn = {
   tcfPolicyVersion: Number,
 };
 ```
-**Note:** `cmpLoaded` must be set to `true` if the main script is loaded and the stub interface is replaced, regardless of whether or not the user will see the UI or intereact with it.
+**Note:** `cmpLoaded` must be set to `true` if the main script is loaded and the stub interface is replaced, regardless of whether or not the user will see the UI or interact with it.
 
 #### Ping Status Codes
 
@@ -648,7 +648,7 @@ InAppTCData = {
    * the publisher's country of establishment to help vVendors determine
    * whether the vendor requires Purpose 1 consent.
    *
-   * 0 - There is no special Purpose 1 treatmentstatus. Purpose 1 was
+   * 0 - There is no special Purpose 1 treatment status. Purpose 1 was
    * disclosed normally (consent) as expected by TCF Policy.
    */
   purposeOneTreatment: 1,
@@ -737,7 +737,7 @@ ______
 
 #### How is a CMP used in-app?
 
-The steps for integrating a CMP SDK into an app is the following:
+The steps for integrating a CMP SDK into an app are the following:
 
 1. An app publisher should embed a CMP SDK – The setup and configuration as well as the protocol for  how to initialize the CMP SDK  are all proprietary to each CMP SDK.
 2. Since more than one CMP SDK may be included in publishers' linked SDKs, the publisher must initialize only one of them. The initialized CMP shall set `IABTCF_CmpSdkId` with its ID as soon as it is initialized in the app to signal to vendors that a CMP is present.
@@ -766,7 +766,7 @@ The steps for integrating a CMP SDK into an app is the following:
 | `IABTCF_gdprApplies`  | `Number`: <p>`1` GDPR applies in current context</p><p>`0` - GDPR does _**not**_ apply in current context</p><p>**Unset** - undetermined (default before initialization)</p><p>see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more</p> |
 | `IABTCF_PublisherCC`  | `String`: [Two-letter ISO 3166-1 alpha-2 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) – Default: `AA` (unknown) |
 | `IABTCF_PurposeOneTreatment`  | `Number`: <p>`0` - no special treatment of purpose one</p><p>`1` - purpose one not disclosed</p><p>**Unset default** - `0`</p><p>Vendors can use this value to determine whether consent for purpose one is required.</p> |
-| `IABTCF_UseNonStandardStacks`  | `Number`: <p>`1` CMP used a non-standard stack</p><p>`0` - CMP did not use a non-standard stack</p> |
+| `IABTCF_UseNonStandardStacks`  | `Number`: <p>`1` - CMP used a non-standard stack</p><p>`0` - CMP did not use a non-standard stack</p> |
 | `IABTCF_TCString` | `String`: Full encoded TC string |
 | `IABTCF_VendorConsents` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the consent status for Vendor ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is consent `true` for vendor ID `1` |
 | `IABTCF_VendorLegitimateInterests` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the legitimate interest status for Vendor ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is legitimate interest established `true` for vendor ID `1` |
@@ -829,7 +829,7 @@ Mediation SDK allows app developers to monetize from multiple vendors.
 ##### Mediation SDK
 
 *   Mediation SDK retrieves `IABTCF_gdprApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android).
-*   If `IABTCF_gdprApplies == 0`, Mediation SDK can run mediation across all ad network SDKs
+*   If `IABTCF_gdprApplies == 0`, Mediation SDK can run mediation across all ad network SDKs.
 *   If `IABTCF_gdprApplies == 1`, Mediation SDK will run mediation only among the ad network SDKs that are GDPR ready.
 
 'GDPR ready' means that the vendor retrieves `IABTCF_gdprApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android), and passes on these GDPR values downstream.
@@ -848,16 +848,16 @@ The following details provide information about how ad tags work, using the vers
 
 Tag-based demand, especially ad tags, are basically creative files, that are not an advertisement themselves, but are loaded to access additional sources to provide ad creative.
 
-For performance reasons, the preferred way to make this happen in current ad servers are macros. The following two macros the recommendation for ad server implementation:
+For performance reasons, the preferred way to make this happen in current ad servers are macros. The following two macros are recommended for ad server implementation:
 
 | Macro | Values |
 | :-- | :-- |
 | `${gdpr}`| <p>**1** - GDPR Applies</p><p>**0** - GDPR does not apply</p><p>**unset** - unknown</p> |
 | `${gdpr_consent}`| Encoded TC String |
 
-**Note**: Values Align with IAB OpenRTB GDPR Advisory
+**Note**: Values align with IAB OpenRTB GDPR Advisory
 
-**Note**: For more information on GDPR Applies see the secion ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean)
+**Note**: For more information on GDPR Applies see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean)
 
 ### How does the "version" parameter work?
 
@@ -865,11 +865,11 @@ The `Version` parameter of the API is used to enable scripts to specify what ver
 
 If the argument is `0` (Zero), `null` or `undefined`, the CMP shall return the information for the latest (highest) version available. For example, when a user has a v2 TC string and a v3 TC string, the CMP should return the v3 TC string and TC data.
 
-If the argument is invalid (ie. not a positive integer greater than `1` or higher than the highest supported version for this CMP) the CMP shall invoke the callback with an argument of `false` for the success parameter and a `null` argument for any expected TC data parameter.
+If the argument is invalid (i.e. not a positive integer greater than `1` or higher than the highest supported version for this CMP) the CMP shall invoke the callback with an argument of `false` for the success parameter and a `null` argument for any expected TC data parameter.
 
 If the argument is `1`, the CMP shall invoke the callback with an argument of `false` for the success parameter and a `null` argument for any expected TC data parameter, as this TCF version is no longer supported by this API. Vendors should instead use the version `1` API to get version `1` data (see [v1.1 documentation](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/CMP%20JS%20API%20v1.1%20Final.md#consent-management-provider-javascript-api-v11-transparency--consent-framework)).
 
-If the argument is an integer higher than `1`, the CMP shall invoke the callbback with defined data according to the specified version if it exists in that version.  For obvious reasons, if new properties of the version-specific outlined TC data objects are added in v3, a v2 TC data object shall not contain these new properties because they may either not exist or may have different meaning from version to version.
+If the argument is an integer higher than `1`, the CMP shall invoke the callback with defined data according to the specified version if it exists in that version.  For obvious reasons, if new properties of the version-specific outlined TC data objects are added in v3, a v2 TC data object shall not contain these new properties because they may either not exist or may have different meaning from version to version.
 
 ### What does the gdprApplies value mean?
 
@@ -905,7 +905,7 @@ Typically, scripts will not need to check if the CMP script is loaded. Scripts c
 
 A CMP must provide stub script to its clients that at least supports the following features/logic:
 
-1. `__tcfapi` function that supports the ping command, with the minimum properties of `cmpLoaded` and `apiVersion`. **Note**: `gdprApplies` may also be set in the [`PingReturn`](#pingreturn) object if the "stub" is set by the publisher to apply GDPR to all traffic.  However, `gdprApplies` may not be available unitl the CMP is finished loading and the value will, therefore, be `undefined`. See the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more.
+1. `__tcfapi` function that supports the ping command, with the minimum properties of `cmpLoaded` and `apiVersion`. **Note**: `gdprApplies` may also be set in the [`PingReturn`](#pingreturn) object if the "stub" is set by the publisher to apply GDPR to all traffic.  However, `gdprApplies` may not be available until the CMP is finished loading and the value will, therefore, be `undefined`. See the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more.
 2. Collect all calls to `__tcfapi` that cannot (yet) be handled by the “stub” in a queue
 3. Check if `window.frames['__tcfapiLocator']` exists, indicating that a CMP is already present, otherwise create an empty iframe named `'__tcfapiLocator`' in the current DOM.
 4. Create an event listener for `postMessage` events on the `Window` object. When the event handler function receives a postMessage (`‘message’`) event it shall proxy the `__tcfapi` function requests to send the response back through the `postMessage` event channel
@@ -1118,19 +1118,19 @@ There are two ways to request TC Data from a parent or ancestor’s frame: [Via 
 
 #### Via safeFrames
 
-When safeFrames are used to proxy API requests no changes are required for the CMP or the vendor. SafeFrame implementations should either allow post messages or implement a proxy `tcfapi()` interface for a caller script within a sandbox that would otherwise be blocked. This proxy interface internally uses the safeFrame messaging protocol to interface with the full CMP implementation of the API on the publisher's top frame and proxies responses back to the sandboxed caller.  If allowing postMessage, vendors will not be required to accomodate any special protocols; they will simply use the [postMessage method without safeFrame](#without-safeframes-using-postmessage).
+When safeFrames are used to proxy API requests no changes are required for the CMP or the vendor. SafeFrame implementations should either allow post messages or implement a proxy `tcfapi()` interface for a caller script within a sandbox that would otherwise be blocked. This proxy interface internally uses the safeFrame messaging protocol to interface with the full CMP implementation of the API on the publisher's top frame and proxies responses back to the sandboxed caller.  If allowing postMessage, vendors will not be required to accommodate any special protocols; they will simply use the [postMessage method without safeFrame](#without-safeframes-using-postmessage).
 
 If not allowing or blocking postMessage and, therefore, implementing the proxy method, vendors will see a local-to-the-sandboxed-iframe-scope `__tcfapi()` proxy method that must behave the same as the asynchronous CMP `__tcfapi()` full-implementation method on the publisher’s top frame.
 
 #### Without safeFrames, using postMessage
 
-The [`window.postMessage()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) method may be used from a child iframe to make requests from a parent or any ancestor frame's CMP API. To locate an ancestor frame capable of responding to `postMessage()` CMP API calls search for an ancestor frame that has a child frame named `'__tcfapiLocator'` (see [sample code](#is-there-a-sample-iframe-script-call-to-the-cmp-api)).
+The [`window.postMessage()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) method may be used from a child iframe to make requests from a parent or any ancestor frame's CMP API. To locate an ancestor frame capable of responding to `postMessage()` CMP API calls, search for an ancestor frame that has a child frame named `'__tcfapiLocator'` (see [sample code](#is-there-a-sample-iframe-script-call-to-the-cmp-api)).
 
 CMPs shall create an event listener to handle `postMessage` requests via the [CMP “stub” API script](#how-does-the-cmp-stub-api-work) so that `postMessage` events can be queued and processed by the full-implementation of the CMP API as soon as it is initialized.
 
 **Sent Message**
 
-The sent message shall follow the form outlined below. The command, parameter and version object properties correspond to their namesake parameters defined as method argument parameters for `__tcfapi()` method. The “sent message” also requires a unique callId property to help match the request with a response
+The sent message shall follow the form outlined below. The command, parameter and version object properties correspond to their namesake parameters defined as method argument parameters for `__tcfapi()` method. The “sent message” also requires a unique callId property to help match the request with a response.
 
 ```javascript
 {
@@ -1142,7 +1142,7 @@ The sent message shall follow the form outlined below. The command, parameter an
 }
 ```
 
-The `event.data` object payload shall follow the form outlined below. The `returnValue` object property shall be the correspondng TC data object for the `command` used upon sending the “sent message”. The `success` object property shall reflect the `__tcfapi()` `success` callback argument and the `callId` will correspond to the “sent message” unique id passed in the `callId` property.
+The `event.data` object payload shall follow the form outlined below. The `returnValue` object property shall be the corresponding TC data object for the `command` used upon sending the “sent message”. The `success` object property shall reflect the `__tcfapi()` `success` callback argument and the `callId` will correspond to the “sent message” unique id passed in the `callId` property.
 
 ```javascript
 {
@@ -1156,7 +1156,7 @@ The `event.data` object payload shall follow the form outlined below. The `retur
 
 #### Is there a sample iframe script call to the CMP API?
 
-Below is an exmample script that emulates the in-frame `__tcfapi()` call. It locates the ancestor frame running the CMP, performs the `postMessage` and listens for the return message and passes its values to the callback:
+Below is an example script that emulates the in-frame `__tcfapi()` call. It locates the ancestor frame running the CMP, performs the `postMessage` and listens for the return message and passes its values to the callback:
 
 ```javascript
 (function() {
