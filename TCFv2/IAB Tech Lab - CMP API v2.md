@@ -149,7 +149,7 @@ ______
 | argument name | type | optional | value |
 |--:|:-:|:-:|:--|
 | command | string | | `'getTCData'` |
-| version | number | | `2` |
+| [version](#how-does-the-version-parameter-work) | number | | `2` |
 | callback | function | | `function(tcData: TCData, success: boolean)` |
 | parameter | int array | ✔️  | `vendorIds` |
 
@@ -188,7 +188,7 @@ ______
 | argument name | type  | value |
 |--:|:-:|:--|
 | command | string | `'ping'` |
-| version | number | `2` |
+| [version](#how-does-the-version-parameter-work) | number | `2` |
 | callback | function | `function(PingReturn:object)` |
 
 **Example:**
@@ -212,7 +212,7 @@ ______
 | argument name | type  | value |
 |--:|:-:|:--|
 | command | string | `'addEventListener'` |
-| version | number | `2` |
+| [version](#how-does-the-version-parameter-work) | number | `2` |
 | callback | function | `function(tcData: TCData, success: boolean)` |
 
 **Example:**
@@ -268,7 +268,7 @@ ______
 | argument name | type  | value |
 |--:|:-:|:--|
 | command | string | `'removeEventListener'` |
-| version | number | `2` |
+| [version](#how-does-the-version-parameter-work) | number | `2` |
 | callback | function | `function(success: boolean)` |
 | parameter | function | previously registered callback (via `addEventListener`) |
 
@@ -289,7 +289,7 @@ ______
 | argument name | type  | value |
 |--:|:-:|:--|
 | command | string | `'getInAppTCData'` |
-| version | number | `2` |
+| [version](#how-does-the-version-parameter-work) | number | `2` |
 | callback | function | `function(inAppTCData: InAppTCData, success: boolean)` |
 
 **Example:**
@@ -321,7 +321,7 @@ ______
 | argument name | type | optional | value |
 |--:|:---:|:-:|:--|
 | command | string | | `'getVendorList'` |
-| version | number | | `2` |
+| [version](#how-does-the-version-parameter-work) | number | | `2` |
 | callback | function | | `function(gvl: GlobalVendorList, success: boolean)` |
 | parameter | int or string | ✔️  | `vendorListVersion` |
 
