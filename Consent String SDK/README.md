@@ -25,3 +25,4 @@ These implementations are not supported by the IAB.
 - [Go](https://github.com/prebid/go-gdpr) (prebid/go-gdpr)
 - [Go](https://github.com/LiveRamp/iabconsent) (LiveRamp/iabconsent)
 - [Rust](https://github.com/cirla/gdpr_consent) (cirla/gdpr_consent)
+- [Python](https://github.com/aabalaban/IAB-Consent-Framework/blob/master/IAB-Consent-Framework-v1.1.ipynb) (aabalaban/IAB-Consent-Framework)
