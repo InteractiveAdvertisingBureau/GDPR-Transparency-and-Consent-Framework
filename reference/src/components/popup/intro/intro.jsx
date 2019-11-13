@@ -60,7 +60,7 @@ export default class Intro extends Component {
         </div>
         <div class={style.bottom}>
           <a class={style.showPurposes} onClick={onShowPurposes}>
-            <LocalLabel localizeKey='showPurposes'>Show Purposes</LocalLabel>
+            <LocalLabel localizeKey='showPurposes'>Manage my preferences</LocalLabel>
           </a>
           <div class={style.divider} />
           <a class={style.showVendor} onClick={onShowVendors}>
