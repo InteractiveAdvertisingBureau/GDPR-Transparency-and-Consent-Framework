@@ -152,7 +152,7 @@ const commonConfig = {
 	devtool: ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
 
 	devServer: {
-		port: process.env.PORT || 6000,
+		port: process.env.PORT || 5000,
 		host: 'localhost',
 		publicPath: '/',
 		contentBase: './src',
