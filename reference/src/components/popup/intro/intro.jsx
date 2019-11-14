@@ -3,6 +3,7 @@ import style from './intro.less';
 import Button from '../../button/button';
 import Label from '../../label/label';
 import CloseButton from '../../closebutton/closebutton';
+import ImageLink from '../../imageLink/imageLink';
 
 class LocalLabel extends Label {
   static defaultProps = {
@@ -31,9 +32,9 @@ export default class Intro extends Component {
 
       <div class={style.intro}>
         {(!!publisherName && publisherName.length > 0) &&
-        <div class={style.logo}>
-          <span class={style.name}>{publisherName}</span>
-        </div>
+          <div class={style.logo}>
+            <span class={style.name}>{publisherName}</span>
+          </div>
         }
         <div class={style.title}>
           <LocalLabel localizeKey='title'>We value your privacy</LocalLabel>
@@ -66,6 +67,12 @@ export default class Intro extends Component {
           <a class={style.showVendor} onClick={onShowVendors}>
             <LocalLabel localizeKey='showVenders'>See full vendor list</LocalLabel>
           </a>
+        </div>
+        <div class={style.footer}>
+          <ImageLink
+            className={style.footerLogo}
+            href='https://sharethis.com/privacy/'
+            src='https://s18955.pcdn.co/wp-content/uploads/2019/06/ShareThisLogo2x-1.png' />
         </div>
 
       </div>
