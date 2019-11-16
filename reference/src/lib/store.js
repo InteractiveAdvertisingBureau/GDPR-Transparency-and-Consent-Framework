@@ -374,8 +374,7 @@ export default class Store {
 
 		// If publisher consent has never been persisted set the default selected status
 		if (!created) {
-			const {purposes = [],} = customPurposeList || {};
-			this.publisherConsentData.selectedCustomPurposeIds = new Set(purposes.map(p => p.id));
+			this.publisherConsentData.selectedCustomPurposeIds = new Set();
 		}
 
 		const {version = 1} = customPurposeList || {};
