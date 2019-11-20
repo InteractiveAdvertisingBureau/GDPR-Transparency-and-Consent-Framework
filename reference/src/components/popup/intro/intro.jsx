@@ -72,7 +72,8 @@ export default class Intro extends Component {
           <ImageLink
             className={style.footerLogo}
             href='https://sharethis.com/privacy/'
-            src='https://s18955.pcdn.co/wp-content/uploads/2019/06/ShareThisLogo2x-1.png' />
+            src='https://s18955.pcdn.co/wp-content/uploads/2019/06/ShareThisLogo2x-1.png'
+            target='_blank' />
         </div>
 
       </div>
