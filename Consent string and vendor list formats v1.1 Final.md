@@ -315,11 +315,9 @@ Features are informational and should be shown on the UI as a data use by that v
   </tr>
 </table>
 
-## Global Cookie Storage Update (October 2019)
+## Global Cookie Storage Update (December 2019)
 - All requests that read from or write to the global cookie in the consensu.org domain must be secured by HTTPS
-- All cookies created must have the following attributes set:
-  - SameSite=None
-  - Secure 
+- Additionally, browser cookie policies may require the support of certain attributes (e.g. sameSite, Secure)
 
 ## Vendor Consent String Format <a name="vendor-consent-string-format"></a>
 
