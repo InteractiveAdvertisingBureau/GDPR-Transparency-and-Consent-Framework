@@ -2,7 +2,7 @@
  # Transparency and Consent String with Global Vendor List Format
  **IAB Europe Transparency & Consent Framework**
 
- **Final v.2.0 | August 2019, Updated November 2019**
+ **Final v.2.0 | August 2019, Updated December 2019**
 
  Table of Contents
 
@@ -59,7 +59,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
-| November 2019 | 2.0 | Update with global cookie support for browser changes |
+| December 2019 | 2.0 | Update with global cookie support for browser changes |
 | August 2019 | 2.0 | Version 2.0 released to the public |
 | April 2019 | 2.0 | Released for public comment |
 | April 2018 | 1.1 | First version released to the public |
@@ -441,11 +441,10 @@ The global TC string is stored in a shared space and is formatted as described i
 </table>
 
 
-#### Global Cookie Storage Update (November 2019)
+#### Global Cookie Storage Update (December 2019)
 - All requests that read from or write to the global cookie in the consensu.org domain must be secured by HTTPS
-- All cookies created must have the following attributes set:
-  - SameSite=None
-  - Secure 
+- Additionally, browser cookie policies may require the support of certain attributes (e.g. sameSite, Secure)
+
 
 
 ### TC String Format
