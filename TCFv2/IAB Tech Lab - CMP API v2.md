@@ -377,6 +377,11 @@ TCData = {
   /*
    * see addEventListener command
    */
+  cmpStatus: String,
+
+  /**
+   * see Ping Status Codes in following table
+   */
   eventStatus: 'string',
 
   /*
