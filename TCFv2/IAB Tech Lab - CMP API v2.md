@@ -2,7 +2,7 @@
 # Consent Management Platform API
 **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.0 | August 2019, Updated Nov 2019 with CMP List**
+**Final v.2.0 | August 2019**
 
 - [Version History](#version-history)
 - [Introduction](#introduction)
@@ -58,7 +58,6 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
-| November 2019 | 2.0 | Updated with reference to CMP List |
 | April 2019 | 2.0 | Released for public comment |
 | April 2018 | 1.1 | First version released to the public |
 
