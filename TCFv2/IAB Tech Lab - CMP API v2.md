@@ -51,6 +51,7 @@
     - [Is there a sample iframe script call to the CMP API?](#is-there-a-sample-iframe-script-call-to-the-cmp-api)
   - [From where will the API retrieve the TC string?](#from-where-will-the-api-retrieve-the-tc-string)
     - [How will the API prioritize the service-specific and the global configurations?](#how-will-the-api-prioritize-the-service-specific-and-the-global-configurations)
+  - [CMP List](#Global-CMP-List-Specification)
   - [Major Changes from 1.1](#major-changes-from-11)
 
 ## Version History
@@ -61,6 +62,7 @@
 | August 2019 | 2.0 | Final version released for adoption |
 | April 2019 | 2.0 | Released for public comment |
 | April 2018 | 1.1 | First version released to the public |
+
 
 ## Introduction
 
@@ -1304,7 +1306,91 @@ See the ‘How should the transparency & consent string be stored?’ section in
 
 The service-specific TC String will override the global TC String, if it is being used. The prioritization between these two scenarios is as specified in the policy FAQ.
 
-### Major Changes from 1.1
+
+## Global CMP List Specification
+The Global CMP List (GCL) is a JSON format document that lists all CMPs registered with the Transparency and Consent Framework (TCF). This file is used by vendors to determine which CMPs are compliant and active within the framework, in order to ascertain whether a given CMP ID found in a consent string or TC String is valid.
+
+IMPORTANT NOTE: all CMPs that have registered with the TCF are listed in this file. CMPs that are no longer active for whatever reason, have the `deletedDate` property set. Consent strings or TC Strings for CMPs with a `deletedDate` set must be considered invalid after that date/time and must be discarded immediately and not passed downstream.
+
+##### What is contained in the Global CMP List?
+* A Last Updated Date.
+* A list of CMPs detailing:
+  * A Numeric ID which is incrementally assigned and never re-used - inactive CMPs are marked as deleted.
+  * Their Name.
+  * Whether or not the CMP is a commercial service.
+  * If applicable, the date/time after which CMP is considered inactive.
+
+##### Where can I access the Global CMP List?
+The GCL is in JSON format and the current version at any given time can be retrieved using the following URL:
+
+https://cmplist.consensu.org/cmp-list.json
+
+##### How often is the Global CMP List updated?
+As of the publication of this document, changes to the Global CMP List are published weekly at 5:00 PM Central European Time on Thursdays. IAB Europe reserves the right to change this time and will notify members of any changes.
+
+##### Caching the Global CMP List
+Strict restrictions on caching the GCL apply.
+
+All requests for the Global CMP List must honour the cache-control headers and must not cache the resource with different settings. 
+
+Note: There may be a delay of up to the maximum cache interval in retrieving the latest version of the Global CMP List.
+
+##### Server-side caching of the GCL
+As requests for a GCL file will not be in a browser context, GCL files must be cached explicitly server-side according to the cache-control headers.
+
+Application logic must only request one version of the GCL during the cache period specified in the cache-control header. For example, if the caching period is one week, only one request for the current GCL file must be received per week.
+
+Note: The volume of usage will be monitored carefully by the managing organisation (MO) and any organisations not adhering to this request limit will be blocked from accessing the GCL.
+
+##### Using a compressed version of the Global CMP List
+A compressed version of the GCL must be requested. This can be done by sending Accept-Encoding headers on the GET request for the file:
+
+- Example: Accept-Encoding: gzip, deflate, br
+
+##### Example Global CMP List JSON Object
+Here is an example of the GCL’s JSON format:
+
+
+```
+{
+  "lastUpdated": "2019-10-31T00:00:00Z",
+  "cmps": {
+
+    /**
+     * Information published for each CMP
+     *
+     * "id": numeric, REQUIRED
+     * "name": string, REQUIRED
+     * "isCommercial": boolean, REQUIRED
+     * "deletedDate": date string ("2019-05-28T00:00:00Z") OPTIONAL
+     *  If present, CMP is considered deleted after this date/time and 
+     *  consent string or TC String must be discarded immediately.
+     */
+
+    "2":{
+      "id": 2,
+      "name": "Chandago",
+      "isCommercial": true
+    },
+
+    // ... more CMPs
+
+    "136":{
+      "id": 136,
+      "name": "M6 Web",
+      "isCommercial": false,
+      "deletedDate": "2019-08-06T00:00:00Z"
+    }
+
+    // ... more CMPs
+
+  }
+}
+```
+
+
+
+## Major Changes from 1.1
 
 1. Added `getInAppTCData`
 2. Added properties to `PingReturn`
