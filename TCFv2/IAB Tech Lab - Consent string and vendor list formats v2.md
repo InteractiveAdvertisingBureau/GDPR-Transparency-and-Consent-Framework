@@ -441,6 +441,11 @@ The global TC string is stored in a shared space and is formatted as described i
 </table>
 
 
+#### Global Cookie Storage Update (December 2019)
+- All requests that read from or write to the global cookie in the consensu.org domain must be secured by HTTPS
+- Additionally, browser cookie policies may require the support of certain attributes (e.g. sameSite, Secure)
+
+
 
 ### TC String Format
 
