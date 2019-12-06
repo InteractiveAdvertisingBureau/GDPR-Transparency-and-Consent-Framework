@@ -2,7 +2,7 @@
  # Transparency and Consent String with Global Vendor List Format
  **IAB Europe Transparency & Consent Framework**
 
- **Final v.2.0 | August 2019**
+ **Final v.2.0 | August 2019, Updated December 2019**
 
  Table of Contents
 
@@ -59,6 +59,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| December 2019 | 2.0 | Updated with global cookie support notes, Updated macros to be upper case |
 | August 2019 | 2.0 | Version 2.0 released to the public |
 | April 2019 | 2.0 | Released for public comment |
 | April 2018 | 1.1 | First version released to the public |
