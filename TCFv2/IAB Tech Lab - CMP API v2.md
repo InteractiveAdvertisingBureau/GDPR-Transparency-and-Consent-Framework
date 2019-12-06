@@ -2,7 +2,7 @@
 # Consent Management Platform API
 **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.0 | August 2019**
+**Final v.2.0 | August 2019, Updated December 2019**
 
 - [Version History](#version-history)
 - [Introduction](#introduction)
@@ -57,6 +57,8 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| December 2019 | 2.0 | Updated with reference to CMP List, Updated macros to be upper case, Added cmpStatus to be surfaced in both the API calls and the TCData object, and fixed case in a reference to IABTCF_CmpSdkID |
+| August 2019 | 2.0 | Final version released for adoption |
 | April 2019 | 2.0 | Released for public comment |
 | April 2018 | 1.1 | First version released to the public |
 
