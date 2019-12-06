@@ -204,13 +204,13 @@ Publisher restrictions are custom requirements specified by a publisher and must
 
 When a creative is rendered, it may contain a number of pixels under `<img>` tags. For example, `<img src="http://vendor-a.com/key1=val1&key2=val2">` which fires an HTTP GET request from the browser to Vendor A’s domain.
 
-Since the pixel is in an `<img>` tag without the ability to execute JavaScript, the CMP API cannot be used to obtain the TC String.  All parties in the ad supply chain who transact using URLs must add a macro in their URLs where the TC String is inserted. Any caller with access to the applicable TC String must insert it within a URL containing the macro `${gdpr_consent_xxxxx}` where `xxxxx` is the numeric Vendor ID of the vendor receiving the TC string.
+Since the pixel is in an `<img>` tag without the ability to execute JavaScript, the CMP API cannot be used to obtain the TC String.  All parties in the ad supply chain who transact using URLs must add a macro in their URLs where the TC String is inserted. Any caller with access to the applicable TC String must insert it within a URL containing the macro `${GDPR_CONSENT_XXXXX}` where `XXXXX` is the numeric Vendor ID of the vendor receiving the TC string.
 
-For example, for Vendor A with ID 123 to receive a TC String, an image URL must include a key-value pair with the URL parameter and macro `gdpr_consent=${gdpr_consent_123}`.
+For example, for Vendor A with ID 123 to receive a TC String, an image URL must include a key-value pair with the URL parameter and macro `gdpr_consent=${GDPR_CONSENT_123}`.
 
 The resulting URL is:
 
-`http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=${gdpr_consent_123}`
+`http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=${GDPR_CONSENT_123}`
 
 If the TC String is: `BOPnWgIOPnWgIAAABAENAI4AAAAA0ABA`
 
@@ -244,37 +244,37 @@ The supported URL parameters and the corresponding macros are defined below:
   <tbody>
     <tr>
       <td><code>gdpr</code></td>
-      <td><code>gdpr</code></td>
-      <td><code>&gdpr=${gdpr}</code></td>
+      <td><code>GDPR</code></td>
+      <td><code>&gdpr=${GDPR}</code></td>
     </tr>
     <tr>
       <td><code>gdpr_consent</code></td>
       <td>
-        <code>gdpr_consent_xxxxx</code>
+        <code>GDPR_CONSENT_XXXXX</code>
         <p>
-          (<code>xxxxx</code> is numeric Vendor ID - the ID of the vendor on
+          (<code>XXXXX</code> is numeric Vendor ID - the ID of the vendor on
           the <a href="#the-global-vendor-list">GVL</a> who is expecting
           this URL call)
         </p>
       </td>
       <td>
-        <code>&gdpr_consent=${gdpr_consent_xxxxx}</code>
+        <code>&gdpr_consent=${GDPR_CONSENT_XXXXX}</code>
         <p>
-          E.g. <code>&gdpr_consent=${gdpr_consent_123}</code> for Vendor ID
+          E.g. <code>&gdpr_consent=${GDPR_CONSENT_123}</code> for Vendor ID
           123.
         </p>
       </td>
     </tr>
     <tr>
       <td><code>gdpr_pd</code></td>
-      <td><code>gdpr_pd</code></td>
-      <td><code>&gdpr_pd=${gdpr_pd}</code></td>
+      <td><code>GDPR_PD</code></td>
+      <td><code>&gdpr_pd=${GDPR_PD}</code></td>
     </tr>
   </tbody>
 </table>
 
 
-The service making the call must replace the macros with appropriate values described in the table below. For macro `${gdpr_consent_xxxxx}`, the service making the call must also check that the macro name contains a valid Vendor ID before replacing the macro. The creator of the URL should ensure these parameters are added only once, and are passed to services which are expecting them and can handle them properly.
+The service making the call must replace the macros with appropriate values described in the table below. For macro `${GDPR_CONSENT_XXXXX}`, the service making the call must also check that the macro name contains a valid Vendor ID before replacing the macro. The creator of the URL should ensure these parameters are added only once, and are passed to services which are expecting them and can handle them properly.
 
 
 <table>
@@ -287,7 +287,7 @@ The service making the call must replace the macros with appropriate values desc
   </thead>
   <tbody>
     <tr>
-      <td><code>${gdpr}</code></td>
+      <td><code>${GDPR}</code></td>
       <td><code>0</code> / <code>1</code></td>
       <td>
         <code>0</code> GDPR does not apply <code>1</code> GDPR applies If
@@ -296,7 +296,7 @@ The service making the call must replace the macros with appropriate values desc
       </td>
     </tr>
     <tr>
-      <td><code>${gdpr_consent_xxxxx}</code></td>
+      <td><code>${GDPR_CONSENT_XXXXX}</code></td>
       <td>
         URL-safe base64-encoded Transparency & Consent string. Only
         meaningful if <code>gdpr=1</code>
@@ -306,7 +306,7 @@ The service making the call must replace the macros with appropriate values desc
       </td>
     </tr>
     <tr>
-      <td><code>${gdpr_pd}</code></td>
+      <td><code>${GDPR_PD}</code></td>
       <td>
         <code>0</code> / <code>1</code> (optional, default: <code>1</code>)
       </td>
