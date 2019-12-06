@@ -2,7 +2,7 @@
 # Consent Management Platform API
 **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.0 | August 2019**
+**Final v.2.0 | August 2019, Updated December 2019**
 
 - [Version History](#version-history)
 - [Introduction](#introduction)
@@ -57,6 +57,8 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| December 2019 | 2.0 | Updated with reference to CMP List, Updated macros to be upper case, Added cmpStatus to be surfaced in both the API calls and the TCData object, and fixed case in a reference to IABTCF_CmpSdkID |
+| August 2019 | 2.0 | Final version released for adoption |
 | April 2019 | 2.0 | Released for public comment |
 | April 2018 | 1.1 | First version released to the public |
 
@@ -376,6 +378,11 @@ TCData = {
 
   /*
    * see addEventListener command
+   */
+  cmpStatus: String,
+
+  /**
+   * see Ping Status Codes in following table
    */
   eventStatus: 'string',
 
@@ -746,7 +753,7 @@ ______
 The steps for integrating a CMP SDK into an app are the following:
 
 1. An app publisher should embed a CMP SDK – The setup and configuration as well as the protocol for  how to initialize the CMP SDK  are all proprietary to each CMP SDK.
-2. Since more than one CMP SDK may be included in publishers' linked SDKs, the publisher must initialize only one of them. The initialized CMP shall set `IABTCF_CmpSdkId` with its ID as soon as it is initialized in the app to signal to vendors that a CMP is present.
+2. Since more than one CMP SDK may be included in publishers' linked SDKs, the publisher must initialize only one of them. The initialized CMP shall set `IABTCF_CmpSdkID` with its ID as soon as it is initialized in the app to signal to vendors that a CMP is present.
 3. The CMP SDK will determine if GDPR applies (see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean)) to this user in this context. But, a publisher may choose to initialize a CMP dialogue UI manually.
 4. The CMP shall set the [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android) variables and vendors will then be able to read from them directly.
 5. Vendors should listen to `IABTCF_* `key updates to retrieve new TC data from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android).
