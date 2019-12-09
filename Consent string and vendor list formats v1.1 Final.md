@@ -104,6 +104,8 @@ Learn more about IAB Europe here: [https://www.iabeurope.eu/](https://www.iabeur
 
 ## Version History <a name="Version-History"></a>
 
+2019/12/06 - Version 1.1 Updated with global cookie support notes
+
 2018/04/24 - Version 1.1 final publication
 
 2018/03/08 - Version 1.1 published for 30-day public comment
