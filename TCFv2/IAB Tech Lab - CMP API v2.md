@@ -426,7 +426,7 @@ TCData = {
     allowedVendors: {
 
       /**
-       * true - Vendor is allowed to use and Out-of-Band Legal Basis
+       * true - Vendor is allowed to use an Out-of-Band Legal Basis
        * false - Vendor is NOT allowed to use an Out-of-Band Legal Basis
        */
       '[vendor id]': Boolean
