@@ -181,7 +181,7 @@ If the `vendorIds` argument is not defined the callback will be called with a [`
 
 The callback shall be called immediately and without any asynchronous logic with whatever is available in the current state of the CMP.  To determine the current state the callback will need to evaluate the [`eventStatus`](#addeventlistener) property value.  It is recommended that calling scripts register a listener function via [`addEventListener`](#addeventlistener) instead of `getTCData`, which also exposes a [`TCData`](#tcdata) object, to ensure necessary TC string and decoded TC values under the right circumstances and context for their legal basis as specified in [TCF Policy](https://www.iabeurope.eu/category/policy/tcf-updates/). The consent and legitimate interest values will be `false` in the [`TCData`](#tcdata) object for any unregistered Vendor ID passed in the vendorIds array.  Which, in accordance with [TCF Policy](https://www.iabeurope.eu/category/policy/tcf-updates/), means “No Consent” for _consent_ and “No Legitimate Interest Transparency Established” for _legitimate interest_.
 
-A value of `false` will be passed as the argument to the `success` callback parameter if an invalid `verdorIds` argument is passed with this command. An invalid `vendorIds` argument would constitute anything other than an array of positive integers.
+A value of `false` will be passed as the argument to the `success` callback parameter if an invalid `vendorIds` argument is passed with this command. An invalid `vendorIds` argument would constitute anything other than an array of positive integers.
 
 The `callback` shall be invoked only once per api call with this command.
 
