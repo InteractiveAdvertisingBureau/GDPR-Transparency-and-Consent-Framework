@@ -475,7 +475,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
 
  #### The Core String
 
- The following fields are stored in big-endian format. Example values are provided in the appendix. Bit numberings are left-to-right.
+ The following fields are stored in big-endian format. Bit numberings are left-to-right.
 
 <table>
   <thead>
