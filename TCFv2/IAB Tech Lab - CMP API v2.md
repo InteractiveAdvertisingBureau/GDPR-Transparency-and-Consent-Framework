@@ -479,7 +479,7 @@ TCData = {
 
     }
   },
-  specialFeatureOptins: {
+  specialFeatureOptIns: {
 
       /**
        * true - Special Feature Opted Into
@@ -701,7 +701,7 @@ InAppTCData = {
    * 1 - Special Feature Opted Into
    * 0 - Special Feature NOT Opted Into
    */
-  specialFeatureOptins: '01010 -- Special Feature bitfield',
+  specialFeatureOptIns: '01010 -- Special Feature bitfield',
 
   publisher: {
 
