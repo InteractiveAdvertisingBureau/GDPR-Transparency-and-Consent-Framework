@@ -1,16 +1,11 @@
 ![iab tech lab](https://user-images.githubusercontent.com/19175352/38649177-0d37d17c-3daa-11e8-8934-f0fb47919716.png)
+
 # Consent Management Platform API
+
 **IAB Europe Transparency & Consent Framework**
 
 **Final v.2.0 | August 2019, Updated December 2019**
 
-- [Version History](#version-history)
-- [Introduction](#introduction)
-  - [About the Transparency & Consent Framework](#about-the-transparency--consent-framework)
-  - [License](#license)
-  - [Disclaimer](#disclaimer)
-  - [About IAB Tech Lab](#about-iab-tech-lab)
-  - [About IAB Europe](#about-iab-europe)
 - [CMP API v2.0](#cmp-api-v20)
   - [What does the CMP API support?](#what-does-the-cmp-api-support)
   - [What is the Global Vendor List?](#what-is-the-global-vendor-list)
@@ -28,13 +23,6 @@
     - [`PingReturn`](#pingreturn)
       - [Ping Status Codes](#ping-status-codes)
     - [`InAppTCData`](#inapptcdata)
-  - [In-App Details](#in-app-details)
-    - [How is a CMP used in-app?](#how-is-a-cmp-used-in-app)
-    - [What is the CMP in-app internal structure for the defined API?](#what-is-the-cmp-in-app-internal-structure-for-the-defined-api)
-    - [How do third-party SDKs (vendors) access the consent information in-app?](#how-do-third-party-sdks-vendors-access-the-consent-information-in-app)
-    - [How does ad mediation work in-app?](#how-does-ad-mediation-work-in-app)
-      - [Mediation SDK](#mediation-sdk)
-      - [Vendor](#vendor)
 - [Using the CMP API](#using-the-cmp-api)
   - [How do ad tags work?](#how-do-ad-tags-work)
   - [How does the "version" parameter work?](#how-does-the-version-parameter-work)
@@ -51,58 +39,9 @@
     - [Is there a sample iframe script call to the CMP API?](#is-there-a-sample-iframe-script-call-to-the-cmp-api)
   - [From where will the API retrieve the TC string?](#from-where-will-the-api-retrieve-the-tc-string)
     - [How will the API prioritize the service-specific and the global configurations?](#how-will-the-api-prioritize-the-service-specific-and-the-global-configurations)
-  - [CMP List](#Global-CMP-List-Specification)
   - [Major Changes from 1.1](#major-changes-from-11)
-
-## Version History
-
-| Date | Version | Comments |
-| :-- | :-- | :-- |
-| December 2019 | 2.0 | Updated with reference to CMP List, Updated macros to be upper case, Added cmpStatus to be surfaced in both the API calls and the TCData object, and fixed case in a reference to IABTCF_CmpSdkID |
-| August 2019 | 2.0 | Final version released for adoption |
-| April 2019 | 2.0 | Released for public comment |
-| April 2018 | 1.1 | First version released to the public |
-
-
-## Introduction
-
-This document is one of the IAB Europe Transparency and Consent Framework (TCF) Specifications. It defines the API for Consent Management Providers (CMPs). The CMP API v2 is the interface a CMP provides for callers (web and in-app) to access information regarding the transparency and consent disclosed and obtained from the end user by the CMP. Both required functionality that the CMP must provide and optional features are described.
-
-The General Data Protection Regulation (GDPR) requires a high level of accountability for how personal data is processed for users consuming content online or in-app. Specifically, GDPR requires a legal basis for such processing. Two of the legal bases described in the GDPR are the most relevant to organizations that operate in the digital advertising ecosystem. Such organizations need to either obtain consent from the user to process their personal data, or establish legitimate interests for processing data such that the interests and fundamental rights of the user are not overriding.
-
-Under the GDPR, controllers are required to create and maintain records of compliance. While compliance is important, implementation came with heavy technical challenges. Clear standards for a common technical solution would be needed.
-
-IAB Europe established the TCF to support compliance with the GDPR in the context of digital advertising. This framework is built on four components: a Global Vendor List (GVL), a Transparency and Consent String (TC String) to store data, an API for CMPs to create and process the TC String, and the Policies that govern how the TCF is used.
-
-Prescribed use of the TCF establishes an audit trail to help maintain compliance with the GDPR, but the real benefit to the digital advertising ecosystem is a safer Internet for consumers, and more reliable data for brands and publishers. As adoption of the TCF increases, compliance becomes more scalable and data becomes more meaningful.
-
-To participate in the use of the TCF, become familiar with the Policies for using it. To have transparency and consent established and signaled  for your online services, apply to be added to the GVL. To play a role in creating a TC String for signaling status on transparency and user consent, sign up with IAB Europe to become a CMP. CMPs must follow technical standards provided in this document for creating TC Strings in compliance with [TCF Policy](https://www.iabeurope.eu/category/policy/tcf-updates/). They must also follow technical standards  for using the CMP API specified in this document to receive and process information provided in the TC String.
-
-### About the Transparency & Consent Framework
-
-IAB Europe Transparency & Consent Framework (TCF) has a simple objective to help all parties in the digital advertising chain ensure that they comply with the EU’s General Data Protection Regulation and ePrivacy Directive when processing personal data or accessing and/or storing information on a user’s device, such as cookies, advertising identifiers, device identifiers and other tracking technologies. IAB Tech Lab stewards the development of these technical specifications.
-
-Resources including policy FAQ, Global Vendor List, and CMP List can be found at [iabeurope.eu/tcf](http://iabeurope.eu/tcf).
-
-### License
-
-IAB Europe Transparency and Consent Framework technical specifications governed by the IAB Tech Lab is licensed under a Creative Commons Attribution 3.0 License.   To view a copy of this license, visit[ creativecommons.org/licenses/by/3.0/](http://creativecommons.org/licenses/by/3.0/) or write to Creative Commons, 171 Second Street, Suite 300, San Francisco, CA 94105, USA.
-
-![](https://drive.google.com/uc?id=1cbwEGlb8S69SndIDoHnvc5_3TfmkGM7R)
-
-### Disclaimer
-
-THE STANDARDS, THE SPECIFICATIONS, THE MEASUREMENT GUIDELINES, AND ANY OTHER MATERIALS OR SERVICES PROVIDED TO OR USED BY YOU HEREUNDER (THE “PRODUCTS AND SERVICES”) ARE PROVIDED “AS IS” AND “AS AVAILABLE,” AND IAB TECHNOLOGY LABORATORY, INC. (“TECH LAB”) MAKES NO WARRANTY WITH RESPECT TO THE SAME AND HEREBY DISCLAIMS ANY AND ALL EXPRESS, IMPLIED, OR STATUTORY WARRANTIES, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AVAILABILITY, ERROR-FREE OR UNINTERRUPTED OPERATION, AND ANY WARRANTIES ARISING FROM A COURSE OF DEALING, COURSE OF PERFORMANCE, OR USAGE OF TRADE.  TO THE EXTENT THAT TECH LAB MAY NOT AS A MATTER OF APPLICABLE LAW DISCLAIM ANY IMPLIED WARRANTY, THE SCOPE AND DURATION OF SUCH WARRANTY WILL BE THE MINIMUM PERMITTED UNDER SUCH LAW.  THE PRODUCTS AND SERVICES DO NOT CONSTITUTE BUSINESS OR LEGAL ADVICE.  TECH LAB DOES NOT WARRANT THAT THE PRODUCTS AND SERVICES PROVIDED TO OR USED BY YOU HEREUNDER SHALL CAUSE YOU AND/OR YOUR PRODUCTS OR SERVICES TO BE IN COMPLIANCE WITH ANY APPLICABLE LAWS, REGULATIONS, OR SELF-REGULATORY FRAMEWORKS, AND YOU ARE SOLELY RESPONSIBLE FOR COMPLIANCE WITH THE SAME.
-
-### About IAB Tech Lab
-
-The IAB Technology Laboratory (Tech Lab) is a non-profit consortium that engages a member community globally to develop foundational technology and standards that enable growth and trust in the digital media ecosystem.. Comprised of digital publishers, ad technology firms, agencies, marketers, and other member companies, IAB Tech Lab focuses on improving the digital advertising supply chain, measurement, and consumer experiences, while promoting responsible use of data. Its work includes the OpenRTB real-time bidding protocol, ads.txt anti-fraud specification, Open Measurement SDK for viewability and verification, VAST video specification, and DigiTrust identity service. Board members include ExtremeReach, Facebook, Google, GroupM, Hearst Digital Media, Index Exchange, Integral Ad Science, LinkedIn, LiveRamp, MediaMath, Microsoft, Oracle Data Cloud, Pandora, PubMatic, Quantcast, Rakuten Marketing, Telaria, The Trade Desk, Verizon Media Group, Xandr, and Yahoo! Japan. Established in 2014, the IAB Tech Lab is headquartered in New York City with staff in San Francisco, Seattle, and London. Learn more at [iabtechlab.com](https://www.iabtechlab.com).
-
-### About IAB Europe
-
-IAB Europe is the European-level association for the digital marketing and advertising ecosystem. Through its membership of National IABs and media, technology and marketing companies, its mission is to lead political representation and promote industry collaboration to deliver frameworks, standards and industry programmes that enable business to thrive in the European market.
-
-Learn more about IAB Europe here: [iabeurope.eu/](https://www.iabeurope.eu/)
+ * [License](#license)
+ * [Disclaimer](#disclaimer)
 
 ## CMP API v2.0
 
@@ -347,7 +286,7 @@ __tcfapi('getVendorList', 2, (gvl, success) => {
 }, 'LATEST');
 ```
 
-Calling with this command and a valid `vendorListVersion` parameter shall return a `GlobalVendorList` object to the `callback` function.  The caller may specify a [Global Vendor List](#what-is-the-global-vendor-list) version number with the `vendorListVersion` parameter.  If no version is specified, the [Global Vendor List](#what-is-the-global-vendor-list) version returned shall be the same as that which is encoded in the current TC String – If no TC String exists the latest version of the [Global Vendor List](#what-is-the-global-vendor-list) shall be returned.  The calling function may also pass `'LATEST'` as the argument to the `vendorListVersion` parameter to explicitly receive the latest [Global Vendor List](#what-is-the-global-vendor-list) version as the `GlobalVendorList` object.
+Calling with this command and a valid `vendorListVersion` parameter shall return a `GlobalVendorList` object to the `callback` function.  The caller may specify a [Global Vendor List](./Global_Vendor_List_spec_v2.0#what-is-the-global-vendor-list) version number with the `vendorListVersion` parameter.  If no version is specified, the [Global Vendor List](./Global_Vendor_List_spec_v2.0#what-is-the-global-vendor-list) version returned shall be the same as that which is encoded in the current TC String – If no TC String exists the latest version of the [Global Vendor List](./Global_Vendor_List_spec_v2.0#what-is-the-global-vendor-list) shall be returned.  The calling function may also pass `'LATEST'` as the argument to the `vendorListVersion` parameter to explicitly receive the latest [Global Vendor List](./Global_Vendor_List_spec_v2.0#what-is-the-global-vendor-list) version as the `GlobalVendorList` object.
 
 If an invalid `vendorListVersion` argument is passed with the `getVendorList` command the callback function shall receive a `null` argument for the `GlobalVendorList` parameter and the `success` parameter shall receive a `false` argument.  Valid `vendorListVersion`s are integers (or integer strings) greater than `1`.  The `success` parameter shall receive a `false` argument for any unsuccessful call with the `getVendorList` command. (eg. invalid `vendorListVersion` argument, network error, etc…)
 
@@ -361,7 +300,7 @@ ______
 
 #### `TCData`
 
-This object contains both the encoded and unencoded values of the TC String as well as information about the CMP `eventStatus` and whether or not GDPR applies to this user in this context (see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more).  If GDPR does not apply to this user in this context then only `gdprApplies`, `tcfPolicyVersion`, `cmpId` and `cmpVersion` shall exist in the object. If it is unknown just yet whether GDPR Applies to this user in this context or if this is CMP Stub code then the `callback` shall not be invoked until that `gdprApplies` is known.
+This object contains both the encoded and unencoded values of the TC String as well as information about the CMP `eventStatus` and whether or not GDPR applies to this user in this context (see the section ["What does the gdprApplies value mean?"](./Global_Vendor_List_spec_v2.0#what-does-the-gdprapplies-value-mean) for more).  If GDPR does not apply to this user in this context then only `gdprApplies`, `tcfPolicyVersion`, `cmpId` and `cmpVersion` shall exist in the object. If it is unknown just yet whether GDPR Applies to this user in this context or if this is CMP Stub code then the `callback` shall not be invoked until that `gdprApplies` is known.
 
 ``` javascript
 TCData = {
@@ -748,112 +687,6 @@ InAppTCData = {
 ```
 ______
 
-### In-App Details
-
-#### How is a CMP used in-app?
-
-The steps for integrating a CMP SDK into an app are the following:
-
-1. An app publisher should embed a CMP SDK – The setup and configuration as well as the protocol for  how to initialize the CMP SDK  are all proprietary to each CMP SDK.
-2. Since more than one CMP SDK may be included in publishers' linked SDKs, the publisher must initialize only one of them. The initialized CMP shall set `IABTCF_CmpSdkID` with its ID as soon as it is initialized in the app to signal to vendors that a CMP is present.
-3. The CMP SDK will determine if GDPR applies (see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean)) to this user in this context. But, a publisher may choose to initialize a CMP dialogue UI manually.
-4. The CMP shall set the [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android) variables and vendors will then be able to read from them directly.
-5. Vendors should listen to `IABTCF_* `key updates to retrieve new TC data from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android).
-
-#### What is the CMP in-app internal structure for the defined API?
-
-[`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android) shall be used to store pre-parsed TC data as well as the TC string by a CMP SDK. It allows:
-
-*   Vendors to easily access TC data
-*   TC data to persist across app sessions
-*   TC data to be portable between CMPs to provide flexibility for a publisher to exchange one CMP SDK for another
-*   Vendors within an app to avoid code duplication by not being required to include a TC string decoder while still enabling all typical use cases
-
-**Note:** If a publisher chooses to remove a CMP SDK from their app they are responsible for clearing all `IABTCF_*` vestigial values for users so that vendors do not continue to use the TC data therein.
-
-[`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android) values
-
-| Key | Value(s) |
-| :-- | :-- |
-| `IABTCF_CmpSdkID` | `Number`:  The unsigned integer ID of CMP SDK |
-| `IABTCF_CmpSdkVersion`  | `Number`: The unsigned integer version number of CMP SDK |
-| `IABTCF_PolicyVersion`  | `Number`: The unsigned integer representing the version of the TCF that these consents adhere to. |
-| `IABTCF_gdprApplies`  | `Number`: <p>`1` GDPR applies in current context</p><p>`0` - GDPR does _**not**_ apply in current context</p><p>**Unset** - undetermined (default before initialization)</p><p>see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more</p> |
-| `IABTCF_PublisherCC`  | `String`: [Two-letter ISO 3166-1 alpha-2 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) – Default: `AA` (unknown) |
-| `IABTCF_PurposeOneTreatment`  | `Number`: <p>`0` - no special treatment of purpose one</p><p>`1` - purpose one not disclosed</p><p>**Unset default** - `0`</p><p>Vendors can use this value to determine whether consent for purpose one is required.</p> |
-| `IABTCF_UseNonStandardStacks`  | `Number`: <p>`1` - CMP used a non-standard stack</p><p>`0` - CMP did not use a non-standard stack</p> |
-| `IABTCF_TCString` | `String`: Full encoded TC string |
-| `IABTCF_VendorConsents` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the consent status for Vendor ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is consent `true` for vendor ID `1` |
-| `IABTCF_VendorLegitimateInterests` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the legitimate interest status for Vendor ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is legitimate interest established `true` for vendor ID `1` |
-| `IABTCF_PurposeConsents` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the consent status for purpose ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is consent `true` for purpose ID `1` |
-| `IABTCF_PurposeLegitimateInterests` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the legitimate interest status for purpose ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is legitimate interest established `true` for purpose ID `1` |
-| `IABTCF_SpecialFeaturesOptIns` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the opt-in status for special feature ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is opt-in `true` for special feature ID `1` |
-| `IABTCF_PublisherRestrictions{ID}` | `String ['0','1', or '2']`: The value at position **n** – where **n**'s indexing begins at `0`  – indicates the publisher restriction type (0-2) for vendor **n+1**; (see Publisher Restrictions Types). eg. `'2'` at index `0` is restrictionType `2` for vendor ID `1`.  `{ID}` refers to the purpose ID. |
-| `IABTCF_PublisherConsent` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the purpose consent status for purpose ID **n+1** for the publisher as they correspond to the [Global Vendor List](#what-is-the-global-vendor-list) Purposes; `false` and `true` respectively. eg. `'1'` at index `0` is consent `true` for purpose ID `1` |
-| `IABTCF_PublisherLegitimateInterests` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the purpose legitimate interest status for purpose ID **n+1** for the publisher as they correspond to the [Global Vendor List](#what-is-the-global-vendor-list) Purposes; `false` and `true` respectively. eg. `'1'` at index `0` is legitimate interest established `true` for purpose ID `1` |
-| `IABTCF_PublisherCustomPurposesConsents` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the purpose consent status for the publisher's custom purpose ID **n+1** for the publisher; `false` and `true` respectively. eg. `'1'` at index `0` is consent `true` for custom purpose ID `1` |
-| `IABTCF_PublisherCustomPurposesLegitimateInterests` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the purpose legitimate interest status for the publisher's custom purpose ID **n+1** for the publisher; `false` and `true` respectively. eg. `'1'` at index `0` is legitimate interest established `true` for custom purpose ID `1` |
-
-#### How do third-party SDKs (vendors) access the consent information in-app?
-
-On both Android OS and iOS, the vendor can get notified when the values of the shared keys change. See [NSUserDefaultsDidChangeNotification](https://developer.apple.com/documentation/foundation/nsuserdefaultsdidchangenotification?language=objc) and [SharedPreferences.OnSharedPreferenceChangeListener](https://developer.android.com/reference/android/content/SharedPreferences.OnSharedPreferenceChangeListener.html).
-
-On Android OS, the TC data and TC string shall be stored in the default Shared Preferences for the application context. This can be accessed using the `getDefaultSharedPreferences` method from the `android.preference.PreferenceManager` class using the application context.
-
-**Example**:
-
-```java
-Context mContext = getApplicationContext();
-SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-```
-The TC data values can be retrieved from the application Shared Preferences by key name using the `get` methods on the `android.content.SharedPreferences` class. For the purposes of accessing TC data, only two methods should be necessary: `getString(String key, String defValue)` for `String` values and `getInt(String key, int defValue)` for `integer`s and `integer` representations of `Boolean` values.
-
-**Example**:
-
-```java
-Context mContext = getApplicationContext();
-SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-String consentString = mPreferences.getString("IABTCF_TCString", "");
-Boolean gdprApplies = mPreferences.getString("IABTCF_gdprApplies", "");
-```
-A callback can be registered to update settings when a preference is changed using the `registerOnSharedPreferenceChangeListener` method for the `android.content.SharedPreferences` class.
-
-**Note**: The preference manager does not currently store a strong reference to the listener. If you do not store a strong reference, the listener will be susceptible to garbage collection. External guidance such as this [documentation on setting listeners](https://developer.android.com/guide/topics/ui/settings#Listening) may provide more information on listening for preference changes.
-
-**Example**:
-
-```java
-Context mContext = getApplicationContext();
-SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-SharedPreferences.OnSharedPreferenceChangeListener mListener;
-mListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
-                        if (key.equals([Specific Consent Key])) {
-                                   // Update Consent settings
-                                   }
-                        }
-            };
-
-
-mPreferences.registerOnSharedPreferenceChangeListener(mListener);
-```
-#### How does ad mediation work in-app?
-
-Mediation SDK allows app developers to monetize from multiple vendors.
-
-##### Mediation SDK
-
-*   Mediation SDK retrieves `IABTCF_gdprApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android).
-*   If `IABTCF_gdprApplies == 0`, Mediation SDK can run mediation across all ad network SDKs.
-*   If `IABTCF_gdprApplies == 1`, Mediation SDK will run mediation only among the ad network SDKs that are GDPR ready.
-
-'GDPR ready' means that the vendor retrieves `IABTCF_gdprApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android), and passes on these GDPR values downstream.
-
-##### Vendor
-
-*   Vendor retrieves `IABTCF_gdprApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android), and passes on these GDPR values downstream and passes on these GDPR values downstream.
-
-______
 
 ## Using the CMP API
 
@@ -1306,90 +1139,6 @@ See the ‘How should the transparency & consent string be stored?’ section in
 
 The service-specific TC String will override the global TC String, if it is being used. The prioritization between these two scenarios is as specified in the policy FAQ.
 
-
-## Global CMP List Specification
-The Global CMP List (GCL) is a JSON format document that lists all CMPs registered with the Transparency and Consent Framework (TCF). This file is used by vendors to determine which CMPs are compliant and active within the framework, in order to ascertain whether a given CMP ID found in a consent string or TC String is valid.
-
-IMPORTANT NOTE: all CMPs that have registered with the TCF are listed in this file. CMPs that are no longer active for whatever reason, have the `deletedDate` property set. Consent strings or TC Strings for CMPs with a `deletedDate` set must be considered invalid after that date/time and must be discarded immediately and not passed downstream.
-
-##### What is contained in the Global CMP List?
-* A Last Updated Date.
-* A list of CMPs detailing:
-  * A Numeric ID which is incrementally assigned and never re-used - inactive CMPs are marked as deleted.
-  * Their Name.
-  * Whether or not the CMP is a commercial service.
-  * If applicable, the date/time after which CMP is considered inactive.
-
-##### Where can I access the Global CMP List?
-The GCL is in JSON format and the current version at any given time can be retrieved using the following URL:
-
-https://cmplist.consensu.org/cmp-list.json
-
-##### How often is the Global CMP List updated?
-As of the publication of this document, changes to the Global CMP List are published weekly at 5:00 PM Central European Time on Thursdays. IAB Europe reserves the right to change this time and will notify members of any changes.
-
-##### Caching the Global CMP List
-Strict restrictions on caching the GCL apply.
-
-All requests for the Global CMP List must honour the cache-control headers and must not cache the resource with different settings. 
-
-Note: There may be a delay of up to the maximum cache interval in retrieving the latest version of the Global CMP List.
-
-##### Server-side caching of the GCL
-As requests for a GCL file will not be in a browser context, GCL files must be cached explicitly server-side according to the cache-control headers.
-
-Application logic must only request one version of the GCL during the cache period specified in the cache-control header. For example, if the caching period is one week, only one request for the current GCL file must be received per week.
-
-Note: The volume of usage will be monitored carefully by the managing organisation (MO) and any organisations not adhering to this request limit will be blocked from accessing the GCL.
-
-##### Using a compressed version of the Global CMP List
-A compressed version of the GCL must be requested. This can be done by sending Accept-Encoding headers on the GET request for the file:
-
-- Example: Accept-Encoding: gzip, deflate, br
-
-##### Example Global CMP List JSON Object
-Here is an example of the GCL’s JSON format:
-
-
-```
-{
-  "lastUpdated": "2019-10-31T00:00:00Z",
-  "cmps": {
-
-    /**
-     * Information published for each CMP
-     *
-     * "id": numeric, REQUIRED
-     * "name": string, REQUIRED
-     * "isCommercial": boolean, REQUIRED
-     * "deletedDate": date string ("2019-05-28T00:00:00Z") OPTIONAL
-     *  If present, CMP is considered deleted after this date/time and 
-     *  consent string or TC String must be discarded immediately.
-     */
-
-    "2":{
-      "id": 2,
-      "name": "Chandago",
-      "isCommercial": true
-    },
-
-    // ... more CMPs
-
-    "136":{
-      "id": 136,
-      "name": "M6 Web",
-      "isCommercial": false,
-      "deletedDate": "2019-08-06T00:00:00Z"
-    }
-
-    // ... more CMPs
-
-  }
-}
-```
-
-
-
 ## Major Changes from 1.1
 
 1. Added `getInAppTCData`
@@ -1403,3 +1152,13 @@ Here is an example of the GCL’s JSON format:
 9. Renamed all `__cmp*` to `__tcfapi*` (e.g. `__cmpLocator` is now `__tcfapiLocator`)
 10. Removed `getConsentData` and `getPublisherConsents` commands (data moved to `getTCData`)
 11. Added in-app API details throughout where applicable
+
+### License
+
+IAB Europe Transparency and Consent Framework technical specifications governed by the IAB Tech Lab is licensed under a Creative Commons Attribution 3.0 License.   To view a copy of this license, visit[ creativecommons.org/licenses/by/3.0/](http://creativecommons.org/licenses/by/3.0/) or write to Creative Commons, 171 Second Street, Suite 300, San Francisco, CA 94105, USA.
+
+![](https://drive.google.com/uc?id=1cbwEGlb8S69SndIDoHnvc5_3TfmkGM7R)
+
+### Disclaimer
+
+THE STANDARDS, THE SPECIFICATIONS, THE MEASUREMENT GUIDELINES, AND ANY OTHER MATERIALS OR SERVICES PROVIDED TO OR USED BY YOU HEREUNDER (THE “PRODUCTS AND SERVICES”) ARE PROVIDED “AS IS” AND “AS AVAILABLE,” AND IAB TECHNOLOGY LABORATORY, INC. (“TECH LAB”) MAKES NO WARRANTY WITH RESPECT TO THE SAME AND HEREBY DISCLAIMS ANY AND ALL EXPRESS, IMPLIED, OR STATUTORY WARRANTIES, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AVAILABILITY, ERROR-FREE OR UNINTERRUPTED OPERATION, AND ANY WARRANTIES ARISING FROM A COURSE OF DEALING, COURSE OF PERFORMANCE, OR USAGE OF TRADE.  TO THE EXTENT THAT TECH LAB MAY NOT AS A MATTER OF APPLICABLE LAW DISCLAIM ANY IMPLIED WARRANTY, THE SCOPE AND DURATION OF SUCH WARRANTY WILL BE THE MINIMUM PERMITTED UNDER SUCH LAW.  THE PRODUCTS AND SERVICES DO NOT CONSTITUTE BUSINESS OR LEGAL ADVICE.  TECH LAB DOES NOT WARRANT THAT THE PRODUCTS AND SERVICES PROVIDED TO OR USED BY YOU HEREUNDER SHALL CAUSE YOU AND/OR YOUR PRODUCTS OR SERVICES TO BE IN COMPLIANCE WITH ANY APPLICABLE LAWS, REGULATIONS, OR SELF-REGULATORY FRAMEWORKS, AND YOU ARE SOLELY RESPONSIBLE FOR COMPLIANCE WITH THE SAME.

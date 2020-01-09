@@ -1,14 +1,11 @@
-# IAB Europe Transparency and Consent Framework Implementation Guidelines 
+# IAB Europe Transparency and Consent Framework Implementation Guidelines
 
 **August 2019**
 
 This document provides technical implementation guidelines related to the [IAB Europe Transparency and Consent Framework (TCF) v2 technical specs](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework). The IAB Tech Lab GDPR Technical Working Group has collaborated on the following implementation guidelines, and will continue to produce resources supporting industry adoption of the Framework. The intended audience of this document includes product and engineering teams who are building technology based on this framework, and who are looking for guidance on implementation strategies such as questions to ask your platform partners or avoiding common pitfalls.
 
-Policy FAQ, webinars, and other resources are available at 
-[https://www.iabeurope.eu/tcf](https://www.iabeurope.eu/tcf) 
-
-
-
+Policy FAQ, webinars, and other resources are available at
+[https://www.iabeurope.eu/tcf](https://www.iabeurope.eu/tcf)
 
 ### [Introduction to the TCF](#Intro)<br>
 ### [Common Questions](#commonquestions)<br>
@@ -52,7 +49,7 @@ Policy FAQ, webinars, and other resources are available at
 
 
 # Introduction to the TCF <a name="intro"></a>
-The Transparency and Consent Framework (TCF) was created to help all parties who display and manage digital advertising and develop targeted content comply with the European Union’s General Data Protection Regulation (GDPR) and ePrivacy Directive (ePD) when processing personal data and/or accessing and/or storing information on a user’s device. 
+The Transparency and Consent Framework (TCF) was created to help all parties who display and manage digital advertising and develop targeted content comply with the European Union’s General Data Protection Regulation (GDPR) and ePrivacy Directive (ePD) when processing personal data and/or accessing and/or storing information on a user’s device.
 
 It allows publishers and website operators to communicate to vendors, in a standardized way, what preferences users have expressed when it comes to their personal data. A vendor is a company that participates in the delivery of digital advertising within a publisher’s website, app, or other digital content, that either accesses an end user’s device or browser or processes personal data about end users visiting the publishers content.
 
@@ -73,25 +70,28 @@ Any party considering adoption of the TCF must read and follow the TCF Policies,
 Publishers, Vendors (DMP, AdServer, Advertisers, …) and registered CMPs who want to work within the TCF can use this document as guidance to implement the technology to support their efforts. This document addresses common (technical) questions and makes it easier for companies to understand the coherences of the TCF policy and technical specifications.
 
 ## How can I submit my questions?
-You can learn more about IAB Tech Lab support of the TCF and involvement with IAB Europe at the following URL: 
+You can learn more about IAB Tech Lab support of the TCF and involvement with IAB Europe at the following URL:
 
 https://iabtechlab.com/standards/gdpr-transparency-and-consent-framework/
 
-You can also submit general feedback on IAB Tech Lab draft specifications to feedback@advertisingconsent.eu and any technical feedback to transparencyframework@iabtechlab.com. 
+You can also submit general feedback on IAB Tech Lab draft specifications to feedback@advertisingconsent.eu and any technical feedback to transparencyframework@iabtechlab.com.
 
 # Common Questions <a name="commonquestions"></a>
 ## Do I need to read the Policy? <a name="needpolicy"></a>
 Yes, the technical specifications for the TC String and CMP API were developed to support policies outlined in the Transparency and Consent Framework (TCF) Policies for version 2. Implementing the technology requires adherence to these policies.
 
-If you have not yet read tech specs or policy, you can access these documents here: 
+If you have not yet read tech specs or policy, you can access these documents here:
 - [IAB Europe Transparency and Consent Framework Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf)
-- [Transparency and Consent String, Version 2](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md)
-- [Consent Management Platform API, Version 2](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md)
+ - [CMP API Specification](./CMP_API_spec_v2.0.md)
+ - [CMP List Specification](./CMP_List_spec_v2.0.md)
+ - [Global Vendor List Specification](./Global_Vendor_List_spec_v2.0.md)
+ - [In-App Specification](./In-App_spec_v2.0.md)
+ - [TC string Specification](./TC_String_spec_v2.0.md)
 
-All definitions in the implementation guidelines should reflect definitions provided in the Policy. 
+All definitions in the implementation guidelines should reflect definitions provided in the Policy.
 
 ## What changed in v2?<a name="changes"></a>
-Version 2 of the policy and technical specification marks significant updates to better support GDPR legislation and enhance the user experience, while remaining flexible to account for unique scenarios within the framework. 
+Version 2 of the policy and technical specification marks significant updates to better support GDPR legislation and enhance the user experience, while remaining flexible to account for unique scenarios within the framework.
 
 Changes across the Framework are listed below and grouped according to supporting documentation for: the TC String, the Global Vendor List,  and the CMP API. 
 
@@ -103,10 +103,10 @@ Changes across the Framework are listed below and grouped according to supportin
 - “Right to object” to legitimate interests support added
 - Out-of-Band (OOB) legal basis support
 	- Created Allowed Vendors TC String segment
-	- Created Disclosed Vendors TC String segment 
+	- Created Disclosed Vendors TC String segment
 - Enhanced TC String Encoding
-	- TC String segmentation (core, publisher, oob segments) 
-	- Revised Macro support 
+	- TC String segmentation (core, publisher, oob segments)
+	- Revised Macro support
 - Text revisions based on requests for clarification/consistency
 
 ### Within the Global Vendor List (GVL) Format<a name="changegvl"></a>
@@ -122,7 +122,7 @@ Changes across the Framework are listed below and grouped according to supportin
 - Updates to support special jurisdiction, handling Out-of-Band (OOB) , and publisher restrictions
 
 ## What is legitimate interest, and what’s new for vendor registration?<a name="whatisli"></a>
-Under the GDPR, a legal basis is required for processing a user’s data. While consent is the most common legal basis for processing a user’s data, legitimate interest is another legal basis that a vendor may use. For more information legitimate interest and when it can be used as a legal basis, please visit gdpr-info.eu where the regulation is posted. Chapter 2, article 6, describes legal bases under the GDPR. 
+Under the GDPR, a legal basis is required for processing a user’s data. While consent is the most common legal basis for processing a user’s data, legitimate interest is another legal basis that a vendor may use. For more information legitimate interest and when it can be used as a legal basis, please visit gdpr-info.eu where the regulation is posted. Chapter 2, article 6, describes legal bases under the GDPR.
 
 ## Is v2 backwards compatible? <a name="compatibility"></a>
 No. The changes in v2 are substantial enough that a completely new implementation is required. With the list of features, purposes, stacks, new structure for the TC String, and a number of other changes, none of the updates map to anything in previous versions. After an initial transition phase in v2 adoption, older versions will be deprecated.
@@ -131,7 +131,7 @@ No. The changes in v2 are substantial enough that a completely new implementatio
 The TC String includes four (4) segments of information: the core string, publisher restrictions, publisher-approved vendors, and out-of-band (OOB) signaling. The technical specs describing the TC String provide details on specific information provided in each segment. These details may change from the start of the transaction to the end of the transaction. Vendors must evaluate the four segments of a string as it relates to a given transaction, determine the intent of the information provided, and proceed accordingly.
 
 ## How should I handle multiple signals with different information?<a name="mergesignals"></a>
-Sometimes two or more TC Strings might contain different preferences for different vendors. For example, one String includes consent signals for vendors 1, 2, and 3. Later, the user is asked for consent on vendors 3, 4, and 5, but rejects all three. In this example, the most recent signal received for vendor 3 is that of no consent and should be recorded as such despite previous signals. However, we cannot anticipate and provide guidance for all scenarios. Vendors should update the TC String, where applicable, with details that reflect the intent of the user and meets the requirements of the TCF. 
+Sometimes two or more TC Strings might contain different preferences for different vendors. For example, one String includes consent signals for vendors 1, 2, and 3. Later, the user is asked for consent on vendors 3, 4, and 5, but rejects all three. In this example, the most recent signal received for vendor 3 is that of no consent and should be recorded as such despite previous signals. However, we cannot anticipate and provide guidance for all scenarios. Vendors should update the TC String, where applicable, with details that reflect the intent of the user and meets the requirements of the TCF.
 
 ## What is OOB? <a name="oob"></a>
 OOB is an abbreviation for Out-of-Band legal basis and represents a signal that transparency & consent was achieved for a vendor outside of the TCF, which is an in-band establishment. Publishers can choose whether to support OOB or not, and if they do, they may provide a list of approved vendors allowed to claim OOB. Look for details outlined in documentation for the TC String.
@@ -140,20 +140,20 @@ OOB is an abbreviation for Out-of-Band legal basis and represents a signal that 
 ## What is a Consent Management Platform (CMP) and why do I, as a Publisher, need one?<a name="whatiscmp"></a>
 A Consent Management Platform (CMP) is operated by a controller and is used to manage transparency and consent (TC) preferences signaled by the end user. The CMP installs a user dialogue on the publisher’s digital properties to capture and manage TC information from a user. This installed user dialogue software also surfaces TC information to vendor technologies operating as part of the publisher’s digital property and supply chain. The CMP acts as an intermediary between the publisher, end user, and vendors.
 
-Please refer to TCF Policy for a complete definition of a CMP. A registered CMP is required if the publisher or website operator wishes to work under the Policies of the TCF.  
+Please refer to TCF Policy for a complete definition of a CMP. A registered CMP is required if the publisher or website operator wishes to work under the Policies of the TCF.
 
 The publisher may implement a CMP in one of two ways:
 
 1.	**Build:** Develop an in-house CMP that meets the technical requirements specified by IAB Europe and register as an official CMP using this form.
-2.	**Outsource:** Rely on  the service of a CMP registered with IAB Europe and listed here as an official CMP. 
+2.	**Outsource:** Rely on  the service of a CMP registered with IAB Europe and listed here as an official CMP.
 
 ## What publisher controls are available? What happened to Pubvendors?<a name="pubvendors"></a>
-The goal of pubvendors.json was to enable publisher control over their vendor relationships and data purposes but was ultimately found to be an incomplete and error-prone solution. 
+The goal of pubvendors.json was to enable publisher control over their vendor relationships and data purposes but was ultimately found to be an incomplete and error-prone solution.
 
 In v2 of the TC String, a segment of information enables publishers to define restrictions. Another segment defines their vendor relationships in a list of allowed vendors. These publisher controls replace the pubvendors.json solutions and is to be deprecated after a transition phase for v2 implementation.
 
 ## The Global Vendor List<a name="gvl"></a>
-Publishers should ask their partners (advertising vendors, DMPs, analytics vendors, etc.) to register on the Global Vendor List (GVL), if not already registered. The Global Vendor List is maintained with current registered vendors here. 
+Publishers should ask their partners (advertising vendors, DMPs, analytics vendors, etc.) to register on the Global Vendor List (GVL), if not already registered. The Global Vendor List is maintained with current registered vendors here.
 
 ## Withdrawal of consent<a name="withdraw"></a>
 Vendors must support the withdrawal of consent. Since consent is transmitted from publisher or CMPs to partners and vendors on each request, the publisher or CMP should provide a mechanism for users to withdraw consent. This mechanism may be as simple as collecting consent at each user session, or providing an option that enables the user to withdraw consent later. The UI for withdrawing consent should be the same as the UI by which consent was given.
@@ -165,8 +165,8 @@ For vendors or media buyers registered in the Global Vendor List, these guidelin
 2.	Vendors should check consent for users from the EEA (EU + Norway + Island + Liechtenstein).
 3.	Vendors should be able to identify traffic that falls under the GDPR.
 
-The OpenRTB GDPR Advisory should be used to communicate user consent. Vendors can use the two extension fields, GDPR and CONSENT, in OpenRTB to determine action. 
-		
+The OpenRTB GDPR Advisory should be used to communicate user consent. Vendors can use the two extension fields, GDPR and CONSENT, in OpenRTB to determine action.
+
 ## How do I find the TC String?<a name="findtcstring"></a>
 If an impression is received server side (through openRTB for example), you should read the information from the TC data payload. For openRTB, technical specifications were updated to provide information on where and how the information is passed. For other non-standard server side delivery, clarify with the partner on how the TC data payload is passed.
 
@@ -179,8 +179,8 @@ For any server side call, if using openRTB, the consent payload should be sent a
 According to policies of the Transparency and Consent Framework, a vendor may choose not to transmit data to another vendor for any reason, but a vendor must not transmit data to another vendor without a justified basis for relying on that vendor’s legal basis for processing the personal data.  If a vendor has or obtains personal data and has no legal basis for the access to and processing of that data, the vendor should quickly cease collection and storage of the data and refrain from passing the data on to other parties, even if those parties have a legal basis.
 
 ## Agency guidelines<a name="agencyguide"></a>
-In addition to the vendor guidelines, agencies may want to consider the following details: 
-- If you're handling any personal data, register as a vendor in the Global Vendor List. 
+In addition to the vendor guidelines, agencies may want to consider the following details:
+- If you're handling any personal data, register as a vendor in the Global Vendor List.
 - Become familiar with the capabilities of your DSP partner(s) so that you only work with personal data when you have a legal basis to do so. Some of the following questions may help you get started:
 	- Are your DSPs working with the TCF?
 	- Are your DSPs reading the TC String passed through OpenRTB?
@@ -188,31 +188,31 @@ In addition to the vendor guidelines, agencies may want to consider the followin
 
 ## DSP guidelines<a name="dspguide"></a>
 In addition to vendor guidelines, DSPs should consider the following points:
-- If you're handling any personal data, register as a vendor in the Global Vendor List. 
-- Support ingesting transparency and consent signals on openRTB bid requests. 
+- If you're handling any personal data, register as a vendor in the Global Vendor List.
+- Support ingesting transparency and consent signals on openRTB bid requests.
 - Decide how to handle bidding based on these signals, ensuring that processing of user data only occurs when there is a legal basis.
 
 ## DMP guidelines<a name="dmpguide"></a>
-DMP in this document refers to enterprise software that can be used by publishers, marketers, agencies and third-party vendors to centralize marketing information associated with pseudonymous IDs. To take advantage of the Framework, DMPs should be registered to the Global Vendor List. For simplicity sake, we will assume the same guidelines apply for both buy-side focused and sell-side focused DMPs. While oriented towards different buyers, buy-side and sell-side DMPs centralize this data, enable forecasting and reporting, and often enable syndication to take-action systems (e.g., Publishers, DSPs, DCO vendors, and Site Optimization/Personalization vendors). 
+DMP in this document refers to enterprise software that can be used by publishers, marketers, agencies and third-party vendors to centralize marketing information associated with pseudonymous IDs. To take advantage of the Framework, DMPs should be registered to the Global Vendor List. For simplicity sake, we will assume the same guidelines apply for both buy-side focused and sell-side focused DMPs. While oriented towards different buyers, buy-side and sell-side DMPs centralize this data, enable forecasting and reporting, and often enable syndication to take-action systems (e.g., Publishers, DSPs, DCO vendors, and Site Optimization/Personalization vendors).
 
 ## How does the TC String apply to non-OpenRTB situations?<a name="nonrtb"></a>
-- Many requests for ad serving will include the TC String. 
+- Many requests for ad serving will include the TC String.
 - Some requests will be sent to vendors without a TC String, such as: publishers not implementing a CMP, server-initiated server-to-server data transfers such as syndication or CRM onboarding, and consumer opt-outs from centralized privacy pages such as AboutAds.info.
-- When a visitor visits a publisher page with a CMP implemented, the first JavaScript that loads should be the CMP.js library. First time visitors are presented with a UI that offers choices to the user, which are then stored in a TC String. Return visitors need not see the UI again, and any associated TC String may be updated if the user changes any preferences.  
-- Tag management containers should integrate CMP code. In addition to enriching ad calls, a CMP should also support calling a third-party tag management container that will handle robust tag logic already implemented on behalf of the publisher. 
-- Syndication for buy-side DMPs centralizes marketing information associated with pseudonymous IDs, which enables marketers to improve their media planning, syndication and cross-vendor reporting. 
+- When a visitor visits a publisher page with a CMP implemented, the first JavaScript that loads should be the CMP.js library. First time visitors are presented with a UI that offers choices to the user, which are then stored in a TC String. Return visitors need not see the UI again, and any associated TC String may be updated if the user changes any preferences.
+- Tag management containers should integrate CMP code. In addition to enriching ad calls, a CMP should also support calling a third-party tag management container that will handle robust tag logic already implemented on behalf of the publisher.
+- Syndication for buy-side DMPs centralizes marketing information associated with pseudonymous IDs, which enables marketers to improve their media planning, syndication and cross-vendor reporting.
 	- Syndication of audience segments is often initiated by a marketer ruleset to send information from the DMP to take-action systems (DSP, DCO, Site Optimization, etc.).
-	- For GDPR purposes, the DMP maintains a server-side consent store that maintains the most recent consent state associated with its pseudonymous IDs. This server-side store is also useful for maintaining the audit log of signals received. 
+	- For GDPR purposes, the DMP maintains a server-side consent store that maintains the most recent consent state associated with its pseudonymous IDs. This server-side store is also useful for maintaining the audit log of signals received.
 	- Because the TC String maintains the current consent state for all vendors, the DMP can send only pseudonymous IDs with consent state=1 to recipient vendors.
 
 # Consent Management Platform (CMP) guidelines<a name="cmp"></a>
 This section outlines implementation guidelines for CMPs to be compliant with the TCF technical specification when collecting, storing and sharing user consent.
 
-Register to be on the CMP list: https://register.consensu.org/ 
+Register to be on the CMP list: https://register.consensu.org/
 This step is required to be a TCF recognised CMP trusted by vendors receiving the consents that you collect. Upon registration a CMP is assigned an ID, which is passed with each request, and granted access to the “consensu.org” domain for accessing and modifying the global consent cookie.
 
 ## 1. Collecting consent from users<a name="collectconsent"></a>
-The TCF defines a set of common purposes and features that vendors can act on. Vendors are responsible for providing up-to-date information on the purposes they support and the legal basis under which they wish to operate these purposes. This information is captured in the  Global Vendor List (GVL). 
+The TCF defines a set of common purposes and features that vendors can act on. Vendors are responsible for providing up-to-date information on the purposes they support and the legal basis under which they wish to operate these purposes. This information is captured in the  Global Vendor List (GVL).
 
 For a given publisher, a CMP must (at least) collect the user consent for all purposes and vendors declared by the publisher. With the publisher agreement, a CMP can also collect consent for all purposes and vendors in the GVL.
 
@@ -251,22 +251,22 @@ Please refer to the policies for the minimal information / functionality that ne
 # How do vendors outside the RTB bidstream query a CMP?<a name="outsidertb"></a>
 At a high level, all vendors need to query the CMP on the page to get access to consent information in the TC String, parse the consent data in the String, and gate usage of user data based on user consent. This lookup needs to be executed as close as possible to using the user data so that the latest value of consent is used.
 
-1. **GVL registration:** Before you can work with a CMP, you need to be registered as a vendor. You can sign up to be added to the GVL on IAB Europe's registration site. 
-2. **Query CMP:** Once added, you can query the CMP for consent information. Details about how to query the CMP are provided in the documentation for CMP API v2. Initiate consent query before applying workflow to reduce latency. 
+1. **GVL registration:** Before you can work with a CMP, you need to be registered as a vendor. You can sign up to be added to the GVL on IAB Europe's registration site.
+2. **Query CMP:** Once added, you can query the CMP for consent information. Details about how to query the CMP are provided in the documentation for CMP API v2. Initiate consent query before applying workflow to reduce latency.
 3. **Determine data usage:** Parse the TC String for details on whether GDPR applies and the user's consent status for allowing the use of user's data. This consent can differ by purpose and by vendor.
 
 
 ## What if I don’t receive the TC string?
-Unfortunately, if transparency or consent information is unavailable, you may not be able to process the user's data. 
+Unfortunately, if transparency or consent information is unavailable, you may not be able to process the user's data.
 
 ## Does the policy make a difference between functional and marketing cookies? Do I need consent for functional cookies?
 You may or may not depending on whether the scenario is covered by special features or special purposes. Review the policy documentation to learn more.
 
 # Other Frequently Asked Questions<a name="otherfaq"></a>
 ## Are cookies required for working with the CMP API?<a name="cookiesrequired"></a>
-Yes, v2 depends on the consent data being stored in cookies. 
+Yes, v2 depends on the consent data being stored in cookies.
 
-Discussion on future iterations have led to proposals about storage mechanisms like a central registry that stores user IDs and their associated information. At that time the implementation could be updated to retrieve data from a defined source without having to change the interface. Until such mechanism exist, cookies are required for working with the CMP API. 
+Discussion on future iterations have led to proposals about storage mechanisms like a central registry that stores user IDs and their associated information. At that time the implementation could be updated to retrieve data from a defined source without having to change the interface. Until such mechanism exist, cookies are required for working with the CMP API.
 
 ## What is the long-term plan for consent storage?<a name="futurestorage"></a>
 A third-party cookie isn’t a long-term solution to auditable, permanent, user-keyed consent storage, and doesn’t work with browsers that block 3rd-party cookies or mobile apps. CMP’s should work towards standardizing a more future-looking server-side consent retrieval mechanism so that cookies might be used as more of a “consent caching” in the future.
