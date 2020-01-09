@@ -1,7 +1,7 @@
 ![iab tech lab](https://user-images.githubusercontent.com/19175352/38649177-0d37d17c-3daa-11e8-8934-f0fb47919716.png)
 
 # IAB Europe Transparency and Consent Framework
-Hosted in this repository are the [technical specifications](./specifications) for the IAB Europe Transparency and Consent Framework (TCF) that will help the digital advertising industry interpret, and comply with EU rules on data protection and privacy - notably the General Data Protection Regulation (GDPR).
+Hosted in this repository are the technical specifications for the IAB Europe Transparency and Consent Framework (TCF) that will help the digital advertising industry interpret, and comply with EU rules on data protection and privacy - notably the General Data Protection Regulation (GDPR).
 
 ### About the Transparency & Consent Framework <a name="aboutTCframework"></a>
 
@@ -12,12 +12,12 @@ Resources including policy FAQ, Global Vendor List, and CMP List can be found at
 ### v2.0
 The Transparency & Consent Framework (TCF) v2.0 initial public draft was released on **FILL IN THE BLANK** and the final specification was released on **FILL IN THE BLANK**.  It superceeds the v1.1 specification.
 
-[Transparency & Consent Framework v2.0](./specification/v2/README.md)
+[Transparency & Consent Framework v2.0](./v2/README.md)
 
 ### v1.0
 The Transparency & Consent Framework (TCF) v1.0 initial public draft was released on **FILL IN THE BLANK** and the final specification was released on **FILL IN THE BLANK**.  It is the first specification released before 2018 May 25; the date that the GDPR regulation went into effect.
 
-[Transparency & Consent Framework v1.0](./specification/v1/README.md)
+[Transparency & Consent Framework v1.0](./v1/README.md)
 
 ### About IAB Tech Lab <a name="about-iabtechlab"></a>
 
