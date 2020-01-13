@@ -46,8 +46,7 @@
     - [Requirements for the CMP “stub” API script](#requirements-for-the-cmp-stub-api-script)
     - [Is there a sample CMP “stub” API script?](#is-there-a-sample-cmp-stub-api-script)
   - [How can vendors that use iframes call the CMP API from an iframe?](#how-can-vendors-that-use-iframes-call-the-cmp-api-from-an-iframe)
-    - [Via safeFrames](#via-safeframes)
-    - [Without safeFrames, using postMessage](#without-safeframes-using-postmessage)
+    - [Using postmessage](#using-postmessage)
     - [Is there a sample iframe script call to the CMP API?](#is-there-a-sample-iframe-script-call-to-the-cmp-api)
   - [From where will the API retrieve the TC string?](#from-where-will-the-api-retrieve-the-tc-string)
     - [How will the API prioritize the service-specific and the global configurations?](#how-will-the-api-prioritize-the-service-specific-and-the-global-configurations)
@@ -140,7 +139,7 @@ Every consent manager MUST provide the following API function:
 
 The function `__tcfapi` **must always be a function** and cannot be any other type, even if only temporarily on initialization – the API must be able to handle calls at all times.
 
-Secondarily, CMPs must provide a proxy for postMessage events targeted to the `__tcfapi` interface sent from within nested iframes. See [the section on iframes](#how-can-vendors-that-use-iframes-call-the-cmp-api-from-an-iframe) for information on working with IAB SafeFrames.
+Secondarily, CMPs must provide a proxy for postMessage events targeted to the `__tcfapi` interface sent from within nested iframes. See [the section on iframes](#how-can-vendors-that-use-iframes-call-the-cmp-api-from-an-iframe) for information.
 
 ### What required API commands must a CMP support?
 
@@ -237,7 +236,7 @@ const callback = (tcData, success) => {
 
       }
 
-    }, callback);
+    }, tcData.listenerId);
 
 
   } else {
@@ -251,7 +250,7 @@ const callback = (tcData, success) => {
 __tcfapi('addEventListener', 2, callback);
 ```
 
-Registers a callback function with a CMP. The callback will be invoked with the [`TCData`](#tcdata) object as an argument whenever the TC String is changed and a new one is available. The [`eventStatus`](#addeventlistener) property of the [`TCData`](#tcdata) object shall be one of the following:
+Registers a callback function with a CMP (or a postmessage to respond to for cross-domain case). The callback will be invoked with the [`TCData`](#tcdata) object as an argument whenever the TC String is changed and a new one is available. The [`TCData`](#tcdata) object will contain CMP-assigned `listenerId` for the registered listener. The [`eventStatus`](#addeventlistener) property of the [`TCData`](#tcdata) object shall be one of the following:
 
 | eventStatus | Description |
 | :--- | :--- |
@@ -263,8 +262,7 @@ The CMP will, in most cases, invoke the callback when  either the `'tcloaded'` O
 
 The callback shall be invoked with `false` as the argument for the `success` parameter if the callback could not be registered as a listener for any reason.
 
-**Note:** Unlike the other API commands, the `addEventListener` callback may be called as many times as the TC String is changed — callback functions should be defensive and remove themselves as listeners if this behavior is not desired via `removeEventListener`.
-
+**Note:** The `addEventListener` callback, upon registration, should be immediately called with the current TC String, then subsequently called on any TC String changes until it is removed as listeners via `removeEventListener`.
 ______
 
 #### `removeEventListener`
@@ -274,11 +272,11 @@ ______
 | command | string | `'removeEventListener'` |
 | [version](#how-does-the-version-parameter-work) | number | `2` |
 | callback | function | `function(success: boolean)` |
-| parameter | function | previously registered callback (via `addEventListener`) |
+| parameter | number | `listenerId`, the unique ID assigned by the CMP to the registered callback (via `addEventListener`) |
 
 **Example:** see [`'addEventListener'`](#addeventlistener)
 
-The callback shall be called with `false` as the argument for the `success` parameter if  the listener could not be removed (e.g. the parameter `callback` is not registered or is invalid).
+The callback shall be called with `false` as the argument for the `success` parameter if the listener could not be removed (e.g. the CMP cannot find a registered listener corresponding to `listenerId`).
 
 ______
 
@@ -387,6 +385,14 @@ TCData = {
    * see Ping Status Codes in following table
    */
   eventStatus: 'string',
+
+  /**
+   * If this TCData is sent to the callback of addEventListener: number,
+   * the unique ID assigned by the CMP to the listener function registered
+   * via addEventListener.
+   * Others: undefined.
+   */
+  listenerId: Number | undefined,
 
   /*
    * true - if using a service-specific or publisher-specific TC String
@@ -1129,15 +1135,9 @@ This code should be executed on the page before any other scripts that require t
 
 ### How can vendors that use iframes call the CMP API from an iframe?
 
-There are two ways to request TC Data from a parent or ancestor’s frame: [Via safeFrames](#via-safeframes) and [without safeFrames, using postMessage](#without-safeframes-using-postmessage).
+The only way to request TC Data from a parent or ancestor’s frame is [using postmessage](#using-postmessage).
 
-#### Via safeFrames
-
-When safeFrames are used to proxy API requests no changes are required for the CMP or the vendor. SafeFrame implementations should either allow post messages or implement a proxy `tcfapi()` interface for a caller script within a sandbox that would otherwise be blocked. This proxy interface internally uses the safeFrame messaging protocol to interface with the full CMP implementation of the API on the publisher's top frame and proxies responses back to the sandboxed caller.  If allowing postMessage, vendors will not be required to accommodate any special protocols; they will simply use the [postMessage method without safeFrame](#without-safeframes-using-postmessage).
-
-If not allowing or blocking postMessage and, therefore, implementing the proxy method, vendors will see a local-to-the-sandboxed-iframe-scope `__tcfapi()` proxy method that must behave the same as the asynchronous CMP `__tcfapi()` full-implementation method on the publisher’s top frame.
-
-#### Without safeFrames, using postMessage
+#### Using postmessage
 
 The [`window.postMessage()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) method may be used from a child iframe to make requests from a parent or any ancestor frame's CMP API. To locate an ancestor frame capable of responding to `postMessage()` CMP API calls, search for an ancestor frame that has a child frame named `'__tcfapiLocator'` (see [sample code](#is-there-a-sample-iframe-script-call-to-the-cmp-api)).
 
@@ -1403,3 +1403,4 @@ Here is an example of the GCL’s JSON format:
 9. Renamed all `__cmp*` to `__tcfapi*` (e.g. `__cmpLocator` is now `__tcfapiLocator`)
 10. Removed `getConsentData` and `getPublisherConsents` commands (data moved to `getTCData`)
 11. Added in-app API details throughout where applicable
+12. Removed SafeFrame proxy communication
