@@ -9,17 +9,42 @@ const COOKIE_MAX_AGE = 33696000;
 const COOKIE_NAME = 'euconsent';
 
 function readCookie(name) {
-	const value = '; ' + document.cookie;
-	const parts = value.split('; ' + name + '=');
-	if (parts.length === 2) {
-		return Promise.resolve(parts.pop().split(';').shift());
-	}
-	return Promise.resolve();
+  const cookie = '; ' + document.cookie;
+  const parts = cookie.split('; ' + name + '=');
+  var value = null;
+  if (parts.length === 2) {
+    value = parts.pop().split(';').shift();
+  }
+
+  // Begin SameSite Migration: re-write cookies with SameSite=true if it's supported
+  if (value) {
+    writeCookie(name, value);
+  }
+  // End SameSite Migration
+
+  if (value) {
+    return Promise.resolve(value);
+  }
+  return Promise.resolve();
+}
+
+// samesite support check
+var supports_samesite = false;
+document.cookie = "st_samesite=1;SameSite=None;Secure";
+if (readCookie("st_samesite")) {
+  supports_samesite = true;
+  document.cookie = "st_samesite=1;max-age=0;SameSite=None;Secure";
 }
 
 function writeCookie({ name, value, path = '/'}) {
-	document.cookie = `${name}=${value}${COOKIE_DOMAIN};path=${path};max-age=${COOKIE_MAX_AGE}`;
-	return Promise.resolve();
+  if (supports_samesite) {
+    document.cookie = `${name}=${value}${COOKIE_DOMAIN};path=${path};max-age=${COOKIE_MAX_AGE};SameSite=None;Secure`;
+  }
+  else {
+    document.cookie = `${name}=${value}${COOKIE_DOMAIN};path=${path};max-age=${COOKIE_MAX_AGE}`;
+  }
+
+  return Promise.resolve();
 }
 
 const commands = {
@@ -31,27 +56,28 @@ const commands = {
     });
   },
 
-	readVendorConsent: () => {
-		return readCookie(COOKIE_NAME);
-	},
+  readVendorConsent: () => {
+    return readCookie(COOKIE_NAME);
+  },
 
-	writeVendorConsent: ({encodedValue}) => {
-		return writeCookie({name: COOKIE_NAME, value: encodedValue});
-	}
+  writeVendorConsent: ({encodedValue}) => {
+    return writeCookie({name: COOKIE_NAME, value: encodedValue});
+  }
 };
 
 window.addEventListener('message', (event) => {
-	const data = event.data.vendorConsent;
-	if (data && typeof commands[data.command] === 'function') {
-		const { command } = data;
-		commands[command](data).then(result => {
-			event.source.postMessage({
-				vendorConsent: {
-					...data,
-					result
-				}
-			}, event.origin);
-		});
-	}
+  const data = event.data.vendorConsent;
+  if (data && typeof commands[data.command] === 'function') {
+    const { command } = data;
+    commands[command](data).then(result => {
+      event.source.postMessage({
+        vendorConsent: {
+          ...data,
+          result,
+          samesite
+        }
+      }, event.origin);
+    });
+  }
 });
 window.parent.postMessage({ vendorConsent: { command: 'isLoaded' } }, '*');
