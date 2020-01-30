@@ -262,7 +262,7 @@ The CMP will, in most cases, invoke the callback when  either the `'tcloaded'` O
 
 The callback shall be invoked with `false` as the argument for the `success` parameter if the callback could not be registered as a listener for any reason.
 
-**Note:** The `addEventListener` callback, upon registration, should be immediately called with the current TC String, then subsequently called on any TC String changes until it is removed as listeners via `removeEventListener`.
+**Note:** The `addEventListener` callback shall be immediately called upon registration with the current TC data, then subsequently called again on any TC String changes unless it is removed via `removeEventListener`.
 ______
 
 #### `removeEventListener`
@@ -374,7 +374,7 @@ TCData = {
    * undefined - unknown whether GDPR Applies
    * see the section: "What does the gdprApplies value mean?"
    */
-  gdprApplies: Boolean,
+  gdprApplies: Boolean | undefined,
 
   /*
    * see addEventListener command
@@ -559,7 +559,7 @@ PingReturn = {
    * undefined - unknown whether GDPR Applies
    * see the section: "What does the gdprApplies value mean?"
    */
-  gdprApplies: Boolean,
+  gdprApplies: Boolean | undefined,
 
   /**
    * true - CMP main script is loaded
@@ -586,25 +586,25 @@ PingReturn = {
    * CMPs own/internal version that is currently running
    * undefined if still the stub
    */
-  cmpVersion: Number,
+  cmpVersion: Number | undefined,
 
   /**
    * IAB Assigned CMP ID
    * undefined if still the stub
    */
-  cmpId: Number,
+  cmpId: Number | undefined,
 
   /**
    * Version of the GVL currently loaded by the CMP
    * undefined if still the stub
    */
-  gvlVersion: Number,
+  gvlVersion: Number | undefined,
 
   /**
    * Number of the supported TCF version
    * undefined if still the stub
    */
-  tcfPolicyVersion: Number,
+  tcfPolicyVersion: Number | undefined,
 };
 ```
 **Note:** `cmpLoaded` must be set to `true` if the main script is loaded and the stub interface is replaced, regardless of whether or not the user will see the UI or interact with it.
