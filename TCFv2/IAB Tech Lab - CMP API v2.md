@@ -262,7 +262,7 @@ The CMP will, in most cases, invoke the callback when  either the `'tcloaded'` O
 
 The callback shall be invoked with `false` as the argument for the `success` parameter if the callback could not be registered as a listener for any reason.
 
-**Note:** The `addEventListener` callback shall be immediately called upon registration with the current TC data, then subsequently called again on any TC String changes unless it is removed via `removeEventListener`.
+> **Note**: The `addEventListener` callback shall be immediately called upon registration with the current TC data, even if the CMP status is `loading` and the CMP has incomplete TC Data, so that the calling script may have access to its registered `listenerId`. Furthermore, on every TC String change the callback shall be called unless it is removed via `removeEventListener`.
 ______
 
 #### `removeEventListener`
