@@ -814,7 +814,7 @@ The TC data values can be retrieved from the application Shared Preferences by k
 Context mContext = getApplicationContext();
 SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 String consentString = mPreferences.getString("IABTCF_TCString", "");
-Boolean gdprApplies = mPreferences.getString("IABTCF_gdprApplies", "");
+int gdprApplies = mPreferences.getInt("IABTCF_gdprApplies", "");
 ```
 A callback can be registered to update settings when a preference is changed using the `registerOnSharedPreferenceChangeListener` method for the `android.content.SharedPreferences` class.
 
