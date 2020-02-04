@@ -76,7 +76,7 @@ IAB Europe established the TCF to support compliance with the GDPR in the contex
 
 Prescribed use of the TCF may support compliance with the GDPR, but the real benefit to the digital advertising ecosystem is a safer Internet for consumers, and more reliable data for brands and publishers. As adoption of the TCF increases, compliance becomes more scalable and data becomes more meaningful.
 
-To participate in the use of the TCF, vendors must make a public attestation of compliance with the [Policies](https://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) for using it. To have transparency and consent established and signaled status for your online services stored in a global database, apply to be added to the [GVL](#the-global-vendor-list). To play a role in creating a TC String for signaling status on transparency and user consent, sign up with IAB Europe to become a CMP. CMPs must follow technical standards provided in this document for creating TC Strings in compliance with TCF [Policies](https://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf). They must also follow technical standards guidance for using the CMP API specified in this document to receive and process information provided in a TC String.
+To participate in the use of the TCF, vendors must make a public attestation of compliance with the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) for using it. To have transparency and consent established and signaled status for your online services stored in a global database, apply to be added to the [GVL](#the-global-vendor-list). To play a role in creating a TC String for signaling status on transparency and user consent, sign up with IAB Europe to become a CMP. CMPs must follow technical standards provided in this document for creating TC Strings in compliance with TCF [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/). They must also follow technical standards guidance for using the CMP API specified in this document to receive and process information provided in a TC String.
 
 ### Audience
 
@@ -85,7 +85,7 @@ Engineers for a registered CMP can use this document to design or update a solut
 
 ### Relevant Documents
 
-[IAB Europe Transparency & Consent Framework Policies](https://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf)
+[IAB Europe Transparency & Consent Framework Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/)
 
 [Consent Manager Provider JS API](IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md)
 
@@ -127,15 +127,15 @@ Learn more about IAB Europe here: [https://www.iabeurope.eu/](https://www.iabeur
 
 ## About the Transparency & Consent String (TC String)
 
-In the TCF, a TC String is used to encapsulate relevant details about how transparency and consent was established and encoded as it applies for each of the Purposes, Special Purposes, Features, and Special Features defined by the [Policies](https://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) and for participating Vendors. This document specifies how that string must be formatted, who should use it, and how it must be used.
+In the TCF, a TC String is used to encapsulate relevant details about how transparency and consent was established and encoded as it applies for each of the Purposes, Special Purposes, Features, and Special Features defined by the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) and for participating Vendors. This document specifies how that string must be formatted, who should use it, and how it must be used.
 
 
 
 ### Definitions
 
-Regarding specific definitions as they relate to TCF [Policies](https://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) and the technology described in this document, please refer to IAB Europe Transparency and Consent Framework Policies located at the following link:
+Regarding specific definitions as they relate to TCF [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) and the technology described in this document, please refer to IAB Europe Transparency and Consent Framework Policies located at the following link:
 
-[https://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf](https://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf)
+[https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/)
 
 
 
@@ -161,12 +161,12 @@ A TC String contains the following information:
 
 ### Who should create a TC string?
 
-A Transparency & Consent String may only be created by an IAB Europe TCF registered CMP using its assigned CMP ID number in accordance with the [Policies](https://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf). Vendors or any other third-party service providers must neither create nor alter TC Strings. These and other requirements are articulated in the [Policies](https://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) to which all parties including CMPs, Publishers, and Vendors, are bound.
+A Transparency & Consent String may only be created by an IAB Europe TCF registered CMP using its assigned CMP ID number in accordance with the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/). Vendors or any other third-party service providers must neither create nor alter TC Strings. These and other requirements are articulated in the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) to which all parties including CMPs, Publishers, and Vendors, are bound.
 
 
 ### When should a TC string be created?
 
-A TC String that contains positive consent signals must not be created before clear affirmative action is taken by a user that unambiguously signifies that user’s consent. However, a TC String may be created with only legitimate interest establishment signals providing that legitimate interest transparency has been established in accordance with the [Policies](https://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf).
+A TC String that contains positive consent signals must not be created before clear affirmative action is taken by a user that unambiguously signifies that user’s consent. However, a TC String may be created with only legitimate interest establishment signals providing that legitimate interest transparency has been established in accordance with the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/).
 
 
 ### What are the different scopes for a TC String?
@@ -329,7 +329,7 @@ CMPs can implement a consent redirector and host it at `https://[cmpname].mgr.co
 
 ### What if consent is governed differently in a country?
 
-[Policies](https://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) require consent for Purpose 1 to store and/or access information on a device  “where such consent is necessary” leaving the responsibility to publishers and vendors to determine if consent in those jurisdictions is required or not.
+[Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) require consent for Purpose 1 to store and/or access information on a device  “where such consent is necessary” leaving the responsibility to publishers and vendors to determine if consent in those jurisdictions is required or not.
 
  If a publisher is operating a CMP within a jurisdiction that does not require consent to store and/or access information on a device and, therefore, does not ask for consent on behalf of a vendor, the CMP will write the corresponding bit in the _**PurposesConsent**_ field to `0`. Even though it is valid within that jurisdiction to use Legitimate Interest for Purpose 1, a vendor would interpret that `0` as a “no consent” signal and have no way of knowing that consent was not required in the jurisdiction in which the publisher operates.  This lack of transparency would, ultimately, cause losses in ad revenue for that publisher.
 
@@ -383,9 +383,9 @@ The following table summarises where data is stored:
 
 ### What are the Purposes and Features being supported?
 
-The IAB Europe Transparency & Consent Framework [Policies](https://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) defines Purposes, Special Purposes, Features, Special Features, and Stacks (groupings of Purposes and/or Special Features). You can reference the details of these purposes and features in the document found at the following URL:
+The IAB Europe Transparency & Consent Framework [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) defines Purposes, Special Purposes, Features, Special Features, and Stacks (groupings of Purposes and/or Special Features). You can reference the details of these purposes and features in the document found at the following URL:
 
-[https://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf](https://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf)
+[https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/)
 
 
 ### How should a global TC string be formatted for storage?
@@ -608,7 +608,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
         Europe registered – is using customized Stack descriptions and not
         the standard stack descriptions defined in the
         <a
-          href="http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf"
+          href="https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/"
           >Policies</a
         >
         (Appendix A section E). A CMP that services multiple publishers sets
@@ -625,7 +625,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
       <td>
         The TCF
         <a
-          href="http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf"
+          href="https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/"
           >Policies</a
         >
         designates certain Features as “special” which means a CMP must
@@ -693,7 +693,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
         >
         Purpose 1 was disclosed commonly as consent as expected by the
         <a
-          href="http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf"
+          href="https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/"
           >Policies</a
         >.
       </td>
@@ -1054,7 +1054,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
           <strong>Note:</strong> Purpose 1 is always required to be
           registered as a consent purpose and can not be flexible per
           <a
-            href="http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf"
+            href="https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/"
             >Policies</a
           >.
         </p>
@@ -1742,9 +1742,9 @@ A browser will add this header automatically and, therefore, nothing needs to be
 
 #### Global Vendor List and TCF Policy Updates
 
-When a change occurs in the TCF [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf), the update invalidates the previous declarations of vendors listed on the previous version of the GVL. These policy changes happen infrequently, but when they do, a CMP is required to discard the user’s current TC String and resurface the user interface to provide new disclosures, capture new consent, and encode a new TC String without migrating any old values over from the old one.
+When a change occurs in the TCF [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/), the update invalidates the previous declarations of vendors listed on the previous version of the GVL. These policy changes happen infrequently, but when they do, a CMP is required to discard the user’s current TC String and resurface the user interface to provide new disclosures, capture new consent, and encode a new TC String without migrating any old values over from the old one.
 
-To determine if TCF [Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf) have changed, CMPs shall compare the _**TcfPolicyVersion**_ encoded in a TC String with the _**TcfPolicyVersion**_ property in the latest Global Vendor List published by the Managing Organisation – if the values are different then the TCF Policy has changed and a CMP will be required to provide new disclosures, capture new consent, and encode a new TC String.
+To determine if TCF [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) have changed, CMPs shall compare the _**TcfPolicyVersion**_ encoded in a TC String with the _**TcfPolicyVersion**_ property in the latest Global Vendor List published by the Managing Organisation – if the values are different then the TCF Policy has changed and a CMP will be required to provide new disclosures, capture new consent, and encode a new TC String.
 
 
 ### Example Global Vendor List JSON Object
