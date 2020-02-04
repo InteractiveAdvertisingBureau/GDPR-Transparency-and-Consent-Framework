@@ -379,12 +379,12 @@ TCData = {
   gdprApplies: Boolean,
 
   /*
-   * see addEventListener command
+   * see Ping Status Codes in following table
    */
   cmpStatus: String,
 
   /**
-   * see Ping Status Codes in following table
+   * see addEventListener command 
    */
   eventStatus: 'string',
 
