@@ -10,13 +10,11 @@ Specifications published here support the Framework, including the following v1.
 * Consent string and vendor list formats v1.1 Final
 * Mobile In-App CMP API v1.0
 
-#### IAB Europe Transparency and Consent Framework v2 Drafts for Public Comment
-Version 2 of the TCF Specifications are provided for public comment beginning April 25th, 2019. Comments are due End of Day May 25, 2019.
-The draft IAB Tech Lab technical specifications include;
-* Consent Management Platform API v 2.0 (draft for public comment)
-* Transparency and Consent String with Global Vendor List Format v 2.0 (draft for public comment)
-
-For version 2 specifications, please submit any technical feedback to transparencyframework@iabtechlab.com. Any general feedback to feedback@advertisingconsent.eu, and any
+#### IAB Europe Transparency and Consent Framework v2
+Version 2 of the TCF Specifications were released 21 August 2019 with industry adoption commencing first half of 2020.
+The v2 specifications include;
+* Consent Management Platform API v 2.0
+* Transparency and Consent String with Global Vendor List Format v 2.0
 
 ### About the Transparency & Consent Framework <a name="aboutTCframework"></a>
 
