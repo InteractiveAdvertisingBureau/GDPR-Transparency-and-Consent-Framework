@@ -1645,7 +1645,7 @@ The registration process is described here: [https://iabeurope.eu/tcf](https://i
     *   List of Purposes they have the flexibility to either use a consent or a legitimate interest legal basis.
     *   List of Special Purposes to transparently disclose as their legitimate interest that a user has no right to object.
     *   List of Features they use across Purposes.
-    *   List of Special Features they use accross Purposes.
+    *   List of Special Features they use across Purposes.
     *   GDPR/privacy policy page URL.
     *   HTTP “overflow” options which includes a <code>GET</code> request maximum size in kilobytes to help diagnose problems with TC String passing as well as limit oversized strings.
 
