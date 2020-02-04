@@ -381,12 +381,12 @@ TCData = {
   /*
    * see addEventListener command
    */
-  cmpStatus: String,
+  eventStatus: String,
 
   /**
    * see Ping Status Codes in following table
    */
-  eventStatus: 'string',
+  cmpStatus: 'string',
 
   /*
    * true - if using a service-specific or publisher-specific TC String
