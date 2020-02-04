@@ -67,7 +67,7 @@ When configuring their CMP, publishers can make a number of decisions:
 - A number of restrictions can be applied, including allowing only a selected list of vendors to process data through their properties.
 A current list of vendors adhering to the framework can be found [here](https://advertisingconsent.eu/vendor-list/).
 
-Any party considering adoption of the TCF must read and follow the TCF Policies, outlined in the [IAB Europe Transparency & Consent Framework Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf). Correct implementation of the framework is impossible without following the requirements in the TCF Policy.
+Any party considering adoption of the TCF must read and follow the TCF Policies, outlined in the [IAB Europe Transparency & Consent Framework Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/). Correct implementation of the framework is impossible without following the requirements in the TCF Policy.
 
 ## Who should read this document?
 Publishers, Vendors (DMP, AdServer, Advertisers, …) and registered CMPs who want to work within the TCF can use this document as guidance to implement the technology to support their efforts. This document addresses common (technical) questions and makes it easier for companies to understand the coherences of the TCF policy and technical specifications.
@@ -84,7 +84,7 @@ You can also submit general feedback on IAB Tech Lab draft specifications to fee
 Yes, the technical specifications for the TC String and CMP API were developed to support policies outlined in the Transparency and Consent Framework (TCF) Policies for version 2. Implementing the technology requires adherence to these policies.
 
 If you have not yet read tech specs or policy, you can access these documents here: 
-- [IAB Europe Transparency and Consent Framework Policies](http://www.iabeurope.eu/tcfdocuments/documents/legal/tcfpolicyFINALv2.pdf)
+- [IAB Europe Transparency and Consent Framework Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/)
 - [Transparency and Consent String, Version 2](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md)
 - [Consent Management Platform API, Version 2](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md)
 
@@ -274,7 +274,7 @@ A third-party cookie isn’t a long-term solution to auditable, permanent, user-
 ## Can I also use the API for CCPA or other laws?<a name="ccpa"></a>
 At this time, the IAB Europe Transparency and Consent Framework is designed for compliance with GDPR. The CMP API was designed to only support a special use case of the GDPR, which involves the use of user data in the context of digital advertising. Consult your local IAB or the IAB Tech Lab to learn more about other ongoing projects for privacy tool development.
 ## Related resources<a name="resources"></a>
-A “cookie workshop” page is available at http://gdpr-demo.labs.quantcast.com/user-examples/cookie-workshop.html. This little activity was built to support v1 and has not yet been updated with details for v2.
+A v2 consent string encoder/decoder can be found here: https://iabtcf.com/#/ as well as links to further implementation libraries.
 
 ### Will these FAQ be updated? <a name="updates"></a>
 Yes, these guidelines will be updated as questions arise. A wiki with more dynamic content has been proposed, but timelines have not yet been determined.
