@@ -1122,7 +1122,7 @@ This code should be executed on the page before any other scripts that require t
 
   }
 
-}
+})();
 
 </script>
 ```
@@ -1292,7 +1292,7 @@ Below is an example script that emulates the in-frame `__tcfapi()` call. It loca
 
 }());
 
-__tcfapi('ping', (pingReturn, success) => {
+__tcfapi('ping', 2, (pingReturn, success) => {
 
   // should get response from window.top's CMP
 
