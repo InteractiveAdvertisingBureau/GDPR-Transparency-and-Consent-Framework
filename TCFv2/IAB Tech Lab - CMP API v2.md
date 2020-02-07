@@ -928,7 +928,7 @@ A CMP must provide stub script to its clients that at least supports the followi
 
 #### Is there a sample CMP “stub” API script?
 
-Stub API script can be found here: https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/stub 
+You can find an iab-supported open-source implementation of the stub API here: https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/master/modules/stub/ 
 
 This code should be executed on the page before any other scripts that require the `__tcfapi` function – this usually means between the `<head></head>` tags of the HTML document. The sample script also includes the `postMessage` handler.
 
