@@ -66,21 +66,21 @@
 
 ## Introduction
 
-This document is one of the IAB Europe Transparency and Consent Framework Specifications. It defines the technical implementation of the structure and encoding for a Transparency and Consent String (TC String), and the format for a [Global Vendor List (GVL)](#the-global-vendor-list) maintained by IAB Europe. The TC String is a technical component of the IAB Europe Transparency & Consent Framework (TCF).
+This document is one of the IAB Europe Transparency and Consent Framework Specifications. It defines the technical implementation of the structure and encoding for a Transparency and Consent String (TC string), and the format for a [Global Vendor List (GVL)](#the-global-vendor-list) maintained by IAB Europe. The TC string is a technical component of the IAB Europe Transparency & Consent Framework (TCF).
 
 The General Data Protection Regulation (GDPR) requires a high level of accountability for how personal data is processed. While important to all parties in the digital advertising ecosystem, implementation of the GDPR came with heavy technical challenges.
 
 The GDPR requires, amongst others, a legal basis for such processing. The two most relevant legal bases are the consent of the user to the processing of their personal data, and the legitimate interests of the controller or a third party to the processing of a user’s personal data, provided that the interests and fundamental rights of the user are not overriding. Both legal bases require the provision of disclosures to ensure transparency, and the opportunity for user choice either through the user’s consent to the processing of their personal data before the processing starts if the legal basis is consent, or through the user’s objection to the processing of their personal data after the processing starts if the legal basis is a legitimate interest. Under the GDPR, controllers are required to create and maintain records of compliance, including, but not limited to user consent records. This warrants clear standards for a common technical solution for all affected parties and policies to govern how that solution is used.
 
-IAB Europe established the TCF to support compliance with the GDPR in the context of digital advertising. This framework is built on four components: a [Global Vendor List (GVL)](#the-global-vendor-list), a Transparency and Consent String (TC String), an API for Consent Management Providers (CMPs) to create and process the TC String, and the Policies that govern how the TCF is used.
+IAB Europe established the TCF to support compliance with the GDPR in the context of digital advertising. This framework is built on four components: a [Global Vendor List (GVL)](#the-global-vendor-list), a Transparency and Consent String (TC string), an API for Consent Management Providers (CMPs) to create and process the TC string, and the Policies that govern how the TCF is used.
 
 Prescribed use of the TCF may support compliance with the GDPR, but the real benefit to the digital advertising ecosystem is a safer Internet for consumers, and more reliable data for brands and publishers. As adoption of the TCF increases, compliance becomes more scalable and data becomes more meaningful.
 
-To participate in the use of the TCF, vendors must make a public attestation of compliance with the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) for using it. To have transparency and consent established and signaled status for your online services stored in a global database, apply to be added to the [GVL](#the-global-vendor-list). To play a role in creating a TC String for signaling status on transparency and user consent, sign up with IAB Europe to become a CMP. CMPs must follow technical standards provided in this document for creating TC Strings in compliance with TCF [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/). They must also follow technical standards guidance for using the CMP API specified in this document to receive and process information provided in a TC String.
+To participate in the use of the TCF, vendors must make a public attestation of compliance with the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) for using it. To have transparency and consent established and signaled status for your online services stored in a global database, apply to be added to the [GVL](#the-global-vendor-list). To play a role in creating a TC string for signaling status on transparency and user consent, sign up with IAB Europe to become a CMP. CMPs must follow technical standards provided in this document for creating TC strings in compliance with TCF [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/). They must also follow technical standards guidance for using the CMP API specified in this document to receive and process information provided in a TC string.
 
 ### Audience
 
-Engineers for a registered CMP can use this document to design or update a solution for generating a TC String. In particular, first parties (content publishers, advertisers, and other suppliers of online services) and third-party (vendors for data-driven services) organisations should be familiar with the purpose and scope of a TC String as well as what information it provides, and support its implementation.
+Engineers for a registered CMP can use this document to design or update a solution for generating a TC string. In particular, first parties (content publishers, advertisers, and other suppliers of online services) and third-party (vendors for data-driven services) organisations should be familiar with the purpose and scope of a TC string as well as what information it provides, and support its implementation.
 
 
 ### Relevant Documents
@@ -127,7 +127,7 @@ Learn more about IAB Europe here: [https://www.iabeurope.eu/](https://www.iabeur
 
 ## About the Transparency & Consent String (TC String)
 
-In the TCF, a TC String is used to encapsulate relevant details about how transparency and consent was established and encoded as it applies for each of the Purposes, Special Purposes, Features, and Special Features defined by the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) and for participating Vendors. This document specifies how that string must be formatted, who should use it, and how it must be used.
+In the TCF, a TC string is used to encapsulate relevant details about how transparency and consent was established and encoded as it applies for each of the Purposes, Special Purposes, Features, and Special Features defined by the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) and for participating Vendors. This document specifies how that string must be formatted, who should use it, and how it must be used.
 
 
 
@@ -141,44 +141,44 @@ Regarding specific definitions as they relate to TCF [Policies](https://iabeurop
 
  ### What purpose does a TC String serve?
 
-A TC String’s primary purpose is to encapsulate and encode all the information disclosed to a user and the expression of their preferences for their personal data processing under the GDPR. Using a Consent Management Platform (CMP), the information is captured into an encoded and compact  HTTP-transferable string. This string enables communication of transparency and consent information to entities, or “vendors”, that process a user's personal data. Vendors decode a TC String to determine whether they have the necessary legal bases to  process a user's personal data for their purposes. The concise string data format enables a  CMP to persist and retrieve a user’s preferences any time they're needed as well as transfer that information to any vendors who need it.
+A TC string’s primary purpose is to encapsulate and encode all the information disclosed to a user and the expression of their preferences for their personal data processing under the GDPR. Using a Consent Management Platform (CMP), the information is captured into an encoded and compact  HTTP-transferable string. This string enables communication of transparency and consent information to entities, or “vendors”, that process a user's personal data. Vendors decode a TC string to determine whether they have the necessary legal bases to  process a user's personal data for their purposes. The concise string data format enables a  CMP to persist and retrieve a user’s preferences any time they're needed as well as transfer that information to any vendors who need it.
 
 
 ### What information is stored in a TC String?
 
-A TC String contains the following information:
+A TC string contains the following information:
 
 
 
-1. **General metadata:** standard markers that indicate details about a TC String such as its encoding version, when it was last updated, and when it was initially created as well as details about the conditions of the transparency and consent values it contains such as the [Global Vendor List](#the-global-vendor-list) version used, the CMP used, etc.
+1. **General metadata:** standard markers that indicate details about a TC string such as its encoding version, when it was last updated, and when it was initially created as well as details about the conditions of the transparency and consent values it contains such as the [Global Vendor List](#the-global-vendor-list) version used, the CMP used, etc.
 2. **User consent:** a user’s expression of consent given for processing their personal data. A user’s consent is expressed on two levels: per Purpose and per Vendor.
 3. **Legitimate interest:** the record of a CMP having established legitimate interest transparency for a vendor and/or purpose and whether the user exercised their “Right to Object” to it.  This includes signals for Purposes in general and Purposes declared specifically for a given Vendor.
 4. **Publisher restrictions:** the restrictions of a vendor's data processing by a publisher within the context of the users trafficking their digital property.
-5. **Publisher transparency and consent:** a segment of a TC String that publishers may use to establish transparency with and receive consent from users for their own legal bases to process personal data or to share with vendors if they so choose.
+5. **Publisher transparency and consent:** a segment of a TC string that publishers may use to establish transparency with and receive consent from users for their own legal bases to process personal data or to share with vendors if they so choose.
 6. **Out-of-band (OOB) legal bases:** two segments expressing that a Vendor is using  legal bases outside of the TCF to process personal data. The first segment is a list of Vendors disclosed to the user and the second is a list of Vendors that the publisher allows to use out-of-band legal bases.
 7. **Specific jurisdiction disclosures:** the country in which the publisher’s business entity is established or the legislative country of reference and a record of whether Purpose 1, “[to] store and/or access information on a device,” was disclosed to the user since some jurisdictions handle this Purpose differently.
 
 
 ### Who should create a TC string?
 
-A Transparency & Consent String may only be created by an IAB Europe TCF registered CMP using its assigned CMP ID number in accordance with the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/). Vendors or any other third-party service providers must neither create nor alter TC Strings. These and other requirements are articulated in the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) to which all parties including CMPs, Publishers, and Vendors, are bound.
+A Transparency & Consent String may only be created by an IAB Europe TCF registered CMP using its assigned CMP ID number in accordance with the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/). Vendors or any other third-party service providers must neither create nor alter TC strings. These and other requirements are articulated in the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) to which all parties including CMPs, Publishers, and Vendors, are bound.
 
 
 ### When should a TC string be created?
 
-A TC String that contains positive consent signals must not be created before clear affirmative action is taken by a user that unambiguously signifies that user’s consent. However, a TC String may be created with only legitimate interest establishment signals providing that legitimate interest transparency has been established in accordance with the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/).
+A TC string that contains positive consent signals must not be created before clear affirmative action is taken by a user that unambiguously signifies that user’s consent. However, a TC string may be created with only legitimate interest establishment signals providing that legitimate interest transparency has been established in accordance with the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/).
 
 
 ### What are the different scopes for a TC String?
 
-There are two main contexts in which a TC String can be created:
+There are two main contexts in which a TC string can be created:
 
-*   **Global** - A TC String in this context is saved globally and is shared by CMPs running on sites across the web; When stored globally, they must <span style="text-decoration:underline;">NOT</span> contain [Publisher restrictions](#what-are-publisher-restrictions) or a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment but they may contain a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment.
-*   **Service-specific** - A  TC String in this context is only used by the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain [Publisher restrictions](#what-are-publisher-restrictions), a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment and an _**[AllowedVendors](#allowed-vendors-oob)**_ segment.
+*   **Global** - A TC string in this context is saved globally and is shared by CMPs running on sites across the web; When stored globally, they must <span style="text-decoration:underline;">NOT</span> contain [Publisher restrictions](#what-are-publisher-restrictions) or a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment but they may contain a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment.
+*   **Service-specific** - A  TC string in this context is only used by the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain [Publisher restrictions](#what-are-publisher-restrictions), a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment and an _**[AllowedVendors](#allowed-vendors-oob)**_ segment.
 
-CMPs must be set up to operate in either a service-specific or global configuration. If a Publisher-operated CMP declares that the personal data processing purpose is, for example, on this site and on other sites or apps where third-party companies also operate, then the scope is global and that TC String is used and stored in a global context.
+CMPs must be set up to operate in either a service-specific or global configuration. If a Publisher-operated CMP declares that the personal data processing purpose is, for example, on this site and on other sites or apps where third-party companies also operate, then the scope is global and that TC string is used and stored in a global context.
 
-If the disclosures do not describe a global scope, or explicitly state service-specific processing, then the TC String is used and stored explicitly as a service-specific string. Also, if the CMP discloses transparency and consent in a global context but the user’s browser does not permit third-party cookies, then the CMP’s only recourse is to retain the user’s preference using a local storage mechanism (eg. first-party cookie or [window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)). Since the transparency and consent obtained from the user is restricted to that site or service, the TC String must then have the service-specific bit [IsServiceSpecific](#tc-string-format) set.
+If the disclosures do not describe a global scope, or explicitly state service-specific processing, then the TC string is used and stored explicitly as a service-specific string. Also, if the CMP discloses transparency and consent in a global context but the user’s browser does not permit third-party cookies, then the CMP’s only recourse is to retain the user’s preference using a local storage mechanism (eg. first-party cookie or [window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)). Since the transparency and consent obtained from the user is restricted to that site or service, the TC string must then have the service-specific bit [IsServiceSpecific](#tc-string-format) set.
 
 
 ### What are publisher restrictions?
@@ -188,38 +188,38 @@ Version 2.0 of the Framework introduced the ability for publishers to signal res
 *  **Purposes.** Restrict the purposes for which personal data is processed by a vendor.
 *  **Legal basis.** Specify the legal basis upon which a publisher requires a vendor to operate where a vendor has signaled flexibility on legal basis in the [GVL](#the-global-vendor-list).
 
-Publisher restrictions are custom requirements specified by a publisher and must only be saved to a service-specific TC String.
+Publisher restrictions are custom requirements specified by a publisher and must only be saved to a service-specific TC string.
 
 
 ### How does the CMP handle a globally-scoped TC string?
 
- When configured to use globally-scoped TC Strings CMPs must not overwrite any of the consent or legitimate interest signals found in an existing TC String. Therefore CMPs must do the following:
+ When configured to use globally-scoped TC strings CMPs must not overwrite any of the consent or legitimate interest signals found in an existing TC string. Therefore CMPs must do the following:
 
-*   Decode the TC String from the global scope to load and preserve all existing signals
+*   Decode the TC string from the global scope to load and preserve all existing signals
 *   Set the signals for the vendors specified in the CMP user interface. If a subset of vendors is shown in the CMP user interface, the CMP must only set signals for those vendors.
 *   If a CMP is unable to resolve an ambigious negative vendor signal – unable to differentiate between a “no” and a “never disclosed” – a CMP shall disambiguate the signal with the corresponding value in the _**[DisclosedVendors ](#disclosed-vendors-oob)**_ segment since that segment signals which vendors were disclosed to the user.
-*   Once the user has made their selections the CMP shall save the resulting TC String back to the global context, overwriting the old one.
+*   Once the user has made their selections the CMP shall save the resulting TC string back to the global context, overwriting the old one.
 
 
 ### How does a URL-based service process the TC string when it can't execute JavaScript?
 
 When a creative is rendered, it may contain a number of pixels under `<img>` tags. For example, `<img src="http://vendor-a.com/key1=val1&key2=val2">` which fires an HTTP GET request from the browser to Vendor A’s domain.
 
-Since the pixel is in an `<img>` tag without the ability to execute JavaScript, the CMP API cannot be used to obtain the TC String.  All parties in the ad supply chain who transact using URLs must add a macro in their URLs where the TC String is inserted. Any caller with access to the applicable TC String must insert it within a URL containing the macro `${GDPR_CONSENT_XXXXX}` where `XXXXX` is the numeric Vendor ID of the vendor receiving the TC string.
+Since the pixel is in an `<img>` tag without the ability to execute JavaScript, the CMP API cannot be used to obtain the TC string.  All parties in the ad supply chain who transact using URLs must add a macro in their URLs where the TC string is inserted. Any caller with access to the applicable TC string must insert it within a URL containing the macro `${GDPR_CONSENT_XXXXX}` where `XXXXX` is the numeric Vendor ID of the vendor receiving the TC string.
 
-For example, for Vendor A with ID 123 to receive a TC String, an image URL must include a key-value pair with the URL parameter and macro `gdpr_consent=${GDPR_CONSENT_123}`.
+For example, for Vendor A with ID 123 to receive a TC string, an image URL must include a key-value pair with the URL parameter and macro `gdpr_consent=${GDPR_CONSENT_123}`.
 
 The resulting URL is:
 
 `http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=${GDPR_CONSENT_123}`
 
-If the TC String is: `BOPnWgIOPnWgIAAABAENAI4AAAAA0ABA`
+If the TC string is: `BOPnWgIOPnWgIAAABAENAI4AAAAA0ABA`
 
- Then the caller replaces the macro in the URL with the actual TC String so that the originally placed pixel containing the macro is modified as follows when making the call to the specified server.
+ Then the caller replaces the macro in the URL with the actual TC string so that the originally placed pixel containing the macro is modified as follows when making the call to the specified server.
 
 `http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=BOPnWgIOPnWgIAAABAENAI4AAAAA0ABA`
 
-TC Strings must always be propagated as is, and not modified. Additional URLs in the supply chain are addressed the same way with remaining vendors.
+TC strings must always be propagated as is, and not modified. Additional URLs in the supply chain are addressed the same way with remaining vendors.
 
 The available URL parameters and macros to relay information down the supply chain are listed in the following section.
 
@@ -333,17 +333,17 @@ CMPs can implement a consent redirector and host it at `https://[cmpname].mgr.co
 
  If a publisher is operating a CMP within a jurisdiction that does not require consent to store and/or access information on a device and, therefore, does not ask for consent on behalf of a vendor, the CMP will write the corresponding bit in the _**PurposesConsent**_ field to `0`. Even though it is valid within that jurisdiction to use Legitimate Interest for Purpose 1, a vendor would interpret that `0` as a “no consent” signal and have no way of knowing that consent was not required in the jurisdiction in which the publisher operates.  This lack of transparency would, ultimately, cause losses in ad revenue for that publisher.
 
-To accommodate cases where Purpose 1 is governed differently for consent depending on the jurisdiction, a TC String is transparent about the publisher’s operating governance and whether or not Purpose 1 was disclosed to a user. The vendor can then use these details to make a determination about whether they have sufficient legal bases for personal data processing in that given context. To support this, there are two fields in a TC String: _**PublisherCC**_, which represents the publisher’s country code and a flag for whether any disclosure has been offered on Purpose 1 named _**PurposeOneTreatment**_. Details for each field are listed among [the fields used in the TC String](#tc-string-format).
+To accommodate cases where Purpose 1 is governed differently for consent depending on the jurisdiction, a TC string is transparent about the publisher’s operating governance and whether or not Purpose 1 was disclosed to a user. The vendor can then use these details to make a determination about whether they have sufficient legal bases for personal data processing in that given context. To support this, there are two fields in a TC string: _**PublisherCC**_, which represents the publisher’s country code and a flag for whether any disclosure has been offered on Purpose 1 named _**PurposeOneTreatment**_. Details for each field are listed among [the fields used in the TC String](#tc-string-format).
 
 ## Creating a TC String
 
-The following details provide information on creating, storing, and managing a TC String.
+The following details provide information on creating, storing, and managing a TC string.
 
 ### How should a Transparency & Consent String be stored?
 
-In version 1 of the TCF Specifications the consent string was specified to be stored as either a 1st party cookie for service-specific consent or a 3rd party cookie for global consent. In version 2 of the TCF Specifications, the storage mechanism used for service-specific TC Strings is up to a CMP, including any non-cookie storage mechanism. However, global TC Strings must still be stored as cookies under the `consensu.org` domain.
+In version 1 of the TCF Specifications the consent string was specified to be stored as either a 1st party cookie for service-specific consent or a 3rd party cookie for global consent. In version 2 of the TCF Specifications, the storage mechanism used for service-specific TC strings is up to a CMP, including any non-cookie storage mechanism. However, global TC strings must still be stored as cookies under the `consensu.org` domain.
 
-It is important to note that with the creation of the version 2 TCF Specifications globally-scoped and service-specific scoped TC Strings have different encoding and decoding requirements.  Some segments are not allowed in a global scope and some are not allowed in a service-specific scope. This document attempts to call out those differing requirements explicitly where applicable.
+It is important to note that with the creation of the version 2 TCF Specifications globally-scoped and service-specific scoped TC strings have different encoding and decoding requirements.  Some segments are not allowed in a global scope and some are not allowed in a service-specific scope. This document attempts to call out those differing requirements explicitly where applicable.
 
 The following table summarises where data is stored:
 
@@ -359,7 +359,7 @@ The following table summarises where data is stored:
     <tr>
       <td>Global</td>
       <td>
-        3rd-party .consensu.org cookie. CMPs may also “backup” a TC String
+        3rd-party .consensu.org cookie. CMPs may also “backup” a TC string
         encoded for the global scope via a different storage mechanism if
         3rd-party cookies are being blocked or erased by a browser.
       </td>
@@ -379,7 +379,7 @@ The following table summarises where data is stored:
   </tbody>
 </table>
 
-**Note:** TCF version 2 introduces [“Publisher Restrictions”](#what-are-publisher-restrictions), which, if exhausted by a publisher, could result in TC strings that are larger than the size limit for cookies.  While this possibility is remote, it should be guarded against – a CMP should work with a publisher to help them accomplish their goals. [Publisher Restrictions](#what-are-publisher-restrictions) are only allowed in TC Strings, therefore within a service-specific context so CMPs may need to take this into consideration when deciding on the storage mechanism for those TC Strings.
+**Note:** TCF version 2 introduces [“Publisher Restrictions”](#what-are-publisher-restrictions), which, if exhausted by a publisher, could result in TC strings that are larger than the size limit for cookies.  While this possibility is remote, it should be guarded against – a CMP should work with a publisher to help them accomplish their goals. [Publisher Restrictions](#what-are-publisher-restrictions) are only allowed in TC strings, therefore within a service-specific context so CMPs may need to take this into consideration when deciding on the storage mechanism for those TC strings.
 
 ### What are the Purposes and Features being supported?
 
@@ -406,7 +406,7 @@ The global TC string is stored in a shared space and is formatted as described i
       <td>Name</td>
       <td><code>euconsent-v2</code></td>
       <td>
-        To avoid conflicts with TC String cookie storage, beginning with
+        To avoid conflicts with TC string cookie storage, beginning with
         version 2.0 of the TCF the global and service-specific cookie name
         shall include the TC string version as a hyphenated postfix, for
         example <code>euconsent-v2</code>.
@@ -434,7 +434,7 @@ The global TC string is stored in a shared space and is formatted as described i
     </tr>
     <tr>
       <td>Value</td>
-      <td>Encoded TC String</td>
+      <td>Encoded TC string</td>
       <td></td>
     </tr>
   </tbody>
@@ -449,23 +449,32 @@ The global TC string is stored in a shared space and is formatted as described i
 
 ### TC String Format
 
-There are 4 distinct TC String segments that are joined together on a “dot” character.  They are:
+There are 4 distinct TC string segments that are joined together on a “dot” character.  They are the:
 
-*   The core vendor transparency and consent details
-*   Disclosed vendors for validating OOB signaling
-*   Allowed vendors for restricting OOB signaling to select vendors, and
-*   Publisher purposes transparency and consent for their own data uses.
+* **Core** vendor transparency and consent details
+  * Always included and always first
+* **Disclosed vendors** for validating OOB signaling
+  * Only included on globally-scoped TC strings
+  * Only included in CmpApi TCData calls if the publisher supports OOB signaling
+* **Allowed vendors** for restricting OOB signaling to select vendors
+  * Only included on globally-scoped TC strings
+  * Only included in CmpApi TCData calls if the publisher supports OOB signaling
+  * Only included in CmpApi TCData calls if the publisher would like to restrict which vendors may use OOB signaling
+  * Never included in a stored TC string; it's only appended on CmpApi TCData calls
+* **Publisher** purposes transparency and consent (Publisher TC) for their own data uses
+  * Included in both service-specific and globally-scoped TC strings surfaced through CmpApi
+  * May not be saved to the global scope, but may be saved to service-specific scope (this is up to the CMP)
 
-The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent. The remaining optional and arbitrarily ordered segments represent support for [out-of-band (OOB)](#signaling-oob-in-the-tc-string) signaling and [publisher purposes transparency and consent (publisher TC)](##publisher-purposes-transparency-and-consent).  A TC String with all four segments is possible in certain conditions.
+The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent. The remaining optional and arbitrarily ordered segments represent support for [out-of-band (OOB)](#signaling-oob-in-the-tc-string) signaling and [publisher purposes transparency and consent (publisher TC)](##publisher-purposes-transparency-and-consent).  A TC string with all four segments is possible in certain conditions.
 
-For example, a globally-scoped TC String with all four segments present would be surfaced through CMP API – not stored – and look like:
+For example, a globally-scoped TC string with all four segments present would be surfaced through CMP API – not stored – and look like:
 
 [ _**[Core String](#the-core-string)**_ ].[ _**[Disclosed Vendors](#disclosed-vendors-oob)**_ ].[ _**[AllowedVendors](#allowed-vendors-oob)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
 ```
 BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA.DqFENCAmeAENCDA.OevsguAfDq
 ```
-A service-specific TC String must contain a Core TC String and may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment, but must not contain the OOB-related segments because those segments are not allowed in service-specific contexts:
+A service-specific TC string must contain a Core TC string and may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment, but must not contain the OOB-related segments because those segments are not allowed in service-specific contexts:
 
 [ _**[Core String](#the-core-string)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
@@ -497,7 +506,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
       <td>Created</td>
       <td>36 bits</td>
       <td>
-        Epoch deciseconds when this TC String was first created (should not
+        Epoch deciseconds when this TC string was first created (should not
         be changed unless a new TCString is created from scratch)
       </td>
       <td rowspan="2">
@@ -509,7 +518,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
       <td>LastUpdated</td>
       <td>36 bits</td>
       <td>
-        Epoch deciseconds when TC String was last updated (Must be updated
+        Epoch deciseconds when TC string was last updated (Must be updated
         any time a value is changed)
       </td>
     </tr>
@@ -517,7 +526,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
       <td>CmpId</td>
       <td>12 bits</td>
       <td>
-        Consent Management Platform ID that last updated the TC String
+        Consent Management Platform ID that last updated the TC string
       </td>
       <td>
         A unique ID will be assigned to each Consent Management Platform.
@@ -528,7 +537,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
       <td>12 bits</td>
       <td>
         Consent Management Platform version of the CMP that last updated
-        this TC String
+        this TC string
       </td>
       <td>
         Each change to a CMP should increment their internally assigned
@@ -541,7 +550,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
       <td>6 bits</td>
       <td>
         CMP Screen number at which consent was given for a user with the CMP
-        that last updated this TC String
+        that last updated this TC string
       </td>
       <td>
         The number is a CMP internal designation and is CmpVersion specific.
@@ -568,7 +577,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
       </td>
       <td>
         Version of the <a href="#the-global-vendor-list">GVL</a> used to
-        create this TC String.
+        create this TC string.
       </td>
     </tr>
     <tr>
@@ -591,7 +600,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
       <td>1 bit</td>
       <td><code>1</code> true<br /><code>0</code> false</td>
       <td>
-        Whether the signals encoded in this TC String were from
+        Whether the signals encoded in this TC string were from
         service-specific storage (<code>true</code>) versus ‘global’
         consensu.org shared storage (<code>false</code>).
       </td>
@@ -703,7 +712,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
         whether the vendor needs consent for Purpose 1.
         <p>
           In a globally-scoped TC string, this field must always have a
-          value of 0. When a CMP encounters a globally-scoped TC String with
+          value of 0. When a CMP encounters a globally-scoped TC string with
           PurposeOneTreatment=1 then it is considered invalid and the CMP
           must discard it and re-establish transparency and consent.
         </p>
@@ -1137,27 +1146,27 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
 On occasion, legal bases for processing a user's personal data are achieved outside of the TCF. This would be considered an out-of-band (OOB) legal basis. To signal whether using an OOB legal bases is allowed requires:
 
 *   An indication that some CMP has, at some time, disclosed the vendor in a global context to the user in the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment
-*   The use of a global-context TC String
+*   The use of a global-context TC string
 *   The publisher to allow vendors, in general, to use OOB legal bases
 *   Optionally, a list of specific vendors allowed to use OOB legal bases in the _**[AllowedVendors](#allowed-vendors-oob)**_ segment
 
-The _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment of a TC String provides a list of vendors that have been disclosed to a user; it is created and stored in a global context for all CMPs to share across the web. The existence of this segment as a member of a TC String, when signaling, implies that the publisher supports OOB legal bases. Conversely, If a publisher does not support OOB legal bases the segment shall be omitted when signaling.  Regardless of publisher support, a CMP shall still update the segment with any new Vendor IDs disclosed and save the updated TC String back to the global context when the CMP user interface completes its interaction with the user.
+The _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment of a TC string provides a list of vendors that have been disclosed to a user; it is created and stored in a global context for all CMPs to share across the web. The existence of this segment as a member of a TC string, when signaling, implies that the publisher supports OOB legal bases. Conversely, If a publisher does not support OOB legal bases the segment shall be omitted when signaling.  Regardless of publisher support, a CMP shall still update the segment with any new Vendor IDs disclosed and save the updated TC string back to the global context when the CMP user interface completes its interaction with the user.
 
-If a publisher supports OOB legal bases, but only for select vendors, a CMP shall create an _**[AllowedVendors](#allowed-vendors-oob)**_ segment that reflects the vendors the publisher allows to operate under OOB legal bases.  When a TC String is requested from the CMP API it shall include both the _**[AllowedVendors](#allowed-vendors-oob)**_ and _**[DisclosedVendors](#disclosed-vendors-oob)**_ segments.  However, when a TC String is stored, an _**[AllowedVendors](#allowed-vendors-oob)**_ segment must never be saved to the global context as this is a publisher-specific setting and does not apply web-wide. If a CMP encounters a TC String with an _**[AllowedVendors](#allowed-vendors-oob)**_ segment in the global context it must disregard it, not include it in responses from the CMP API, and of course omit it when re-saving.
+If a publisher supports OOB legal bases, but only for select vendors, a CMP shall create an _**[AllowedVendors](#allowed-vendors-oob)**_ segment that reflects the vendors the publisher allows to operate under OOB legal bases.  When a TC string is requested from the CMP API it shall include both the _**[AllowedVendors](#allowed-vendors-oob)**_ and _**[DisclosedVendors](#disclosed-vendors-oob)**_ segments.  However, when a TC string is stored, an _**[AllowedVendors](#allowed-vendors-oob)**_ segment must never be saved to the global context as this is a publisher-specific setting and does not apply web-wide. If a CMP encounters a TC string with an _**[AllowedVendors](#allowed-vendors-oob)**_ segment in the global context it must disregard it, not include it in responses from the CMP API, and of course omit it when re-saving.
 
 **Note:** If a Vendor has been _disclosed_ within the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment that means that they have interacted with the Framework and therefore can not use OOB legal bases.
 
-The following three examples demonstrate how to handle an OOB signal in the TC String.
+The following three examples demonstrate how to handle an OOB signal in a TC string.
 
 **Example 1: A Publisher Does <span style="text-decoration:underline;">Not</span> Support OOB Legal Bases**
 
-The CMP reads a TC String from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment:
+The CMP reads a TC string from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment:
 
 [ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
 ```
 BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA
 ```
-Because the publisher does not support OOB legal bases, the dot-delimited _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment at the end of the TC String is removed when requested form the CMP API:
+Because the publisher does not support OOB legal bases, the dot-delimited _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment at the end of the TC string is removed when requested form the CMP API:
 
 [ _**[Core](#the-core-string)**_ ]
 ```
@@ -1166,13 +1175,13 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA
 
 **Example 2: A Publisher Supports OOB Legal Bases**
 
-The CMP reads a TC String from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment (same as Example 1):
+The CMP reads a TC string from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment (same as Example 1):
 
 [ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
 ```
 BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA
 ```
-Since the publisher supports OOB legal bases for any vendor that uses it, the TC String, when surfaced through the CMP API, is unchanged from storage – it includes the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment:
+Since the publisher supports OOB legal bases for any vendor that uses it, the TC string, when surfaced through the CMP API, is unchanged from storage – it includes the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment:
 
 [ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
 ```
@@ -1181,7 +1190,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA
 
 **Example 3: A Publisher Supports OOB Legal Bases for Only Select Vendors**
 
-The CMP reads a TC String from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment (same as Example 1 & Example 2):
+The CMP reads a TC string from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment (same as Example 1 & Example 2):
 
 
 [ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
@@ -1189,7 +1198,7 @@ The CMP reads a TC String from global context storage and it contains a _**[Disc
 BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA
 ```
 
-To indicate the select vendors a publisher approves to use OOB legal bases, the CMP includes the _**[AllowedVendors](#allowed-vendors-oob)**_ segment with the TC String from the CMP API:
+To indicate the select vendors a publisher approves to use OOB legal bases, the CMP includes the _**[AllowedVendors](#allowed-vendors-oob)**_ segment with the TC string from the CMP API:
 
 [ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ].[ _**[AllowedVendors](#allowed-vendors-oob)**_ ]
 
@@ -1199,7 +1208,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA.DqFENCAmeAENCDA
 
 #### Disclosed Vendors (OOB)
 
-The _**DisclosedVendors**_ is a TC String segment that signals which vendors have been disclosed to a given user by a CMP. This segment is required when saving a global-context TC String.  When a CMP updates a globally-scoped TC String, the CMP <span style="text-decoration:underline;">MUST</span> retain the existing values and only add new disclosed Vendor IDs that had not been added by other CMPs in prior interactions with this user.
+The _**DisclosedVendors**_ is a TC string segment that signals which vendors have been disclosed to a given user by a CMP. This segment is required when saving a global-context TC string.  When a CMP updates a globally-scoped TC string, the CMP <span style="text-decoration:underline;">MUST</span> retain the existing values and only add new disclosed Vendor IDs that had not been added by other CMPs in prior interactions with this user.
 
 
 <table>
@@ -1497,7 +1506,7 @@ Signals which vendors the publisher permits to use OOB legal bases.
 
 Publishers may need to establish transparency and consent for a set of personal data processing purposes for their own use. For example, a publisher that wants to set a frequency-capping first-party cookie should request user consent for Purpose 1 "Store and/or access information on a device" in jurisdictions where it is required.
 
-The _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment in the TC string represents publisher purposes transparency & consent signals which is different than the other TC String segments; they are used to collect consumer purposes transparency & consent for vendors. This segment supports the standard list of purposes defined by the TCF as well as Custom Purposes defined by the publisher if they so choose.
+The _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment in the TC string represents publisher purposes transparency & consent signals which is different than the other TC string segments; they are used to collect consumer purposes transparency & consent for vendors. This segment supports the standard list of purposes defined by the TCF as well as Custom Purposes defined by the publisher if they so choose.
 
 
 <table>
@@ -1647,7 +1656,7 @@ The registration process is described here: [https://iabeurope.eu/tcf](https://i
     *   List of Features they use across Purposes.
     *   List of Special Features they use across Purposes.
     *   GDPR/privacy policy page URL.
-    *   HTTP “overflow” options which includes a <code>GET</code> request maximum size in kilobytes to help diagnose problems with TC String passing as well as limit oversized strings.
+    *   HTTP “overflow” options which includes a <code>GET</code> request maximum size in kilobytes to help diagnose problems with TC string passing as well as limit oversized strings.
 
 
 ### Where can I access the Global Vendor List?
@@ -1690,15 +1699,15 @@ As of the publication of this document, changes to the Global Vendor List are pu
 
 ### CMPs using the GVL
 
-Any time the CMP user interface is surfaced  to a user to provide transparency and request consent, the **current** version of the GVL must be used to populate the user interface – this includes first-time interactions and renewal interactions.  When a user summons the CMP user interface manually to review their settings, the version of the GVL encoded in the TC String is used instead.
+Any time the CMP user interface is surfaced  to a user to provide transparency and request consent, the **current** version of the GVL must be used to populate the user interface – this includes first-time interactions and renewal interactions.  When a user summons the CMP user interface manually to review their settings, the version of the GVL encoded in a TC string is used instead.
 
 Within a mobile in-app context where the current version of the GVL cannot be loaded because of a lack of Internet connectivity, the most recently cached version of the GVL may be used – The latest version of the GVL must be retrieved as soon as connectivity is restored.
 
-CMPs must, of course, use specific versions of the GVL to determine if a CMP should be resurfaced to a user whom has a TC String encoded with a GVL version that is not the latest or if they are resurfacing the user interface upon the user’s request to review their settings.
+CMPs must, of course, use specific versions of the GVL to determine if a CMP should be resurfaced to a user whom has a TC string encoded with a GVL version that is not the latest or if they are resurfacing the user interface upon the user’s request to review their settings.
 
 ### Vendors using the GVL
 
-Vendors must use the version of the GVL encoded in the TC String received to determine if they have the legal bases they need to process the user's personal data.
+Vendors must use the version of the GVL encoded in a TC string received to determine if they have the legal bases they need to process the user's personal data.
 
 ### Caching the Global Vendor List
 
@@ -1742,9 +1751,9 @@ A browser will add this header automatically and, therefore, nothing needs to be
 
 #### Global Vendor List and TCF Policy Updates
 
-When a change occurs in the TCF [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/), the update invalidates the previous declarations of vendors listed on the previous version of the GVL. These policy changes happen infrequently, but when they do, a CMP is required to discard the user’s current TC String and resurface the user interface to provide new disclosures, capture new consent, and encode a new TC String without migrating any old values over from the old one.
+When a change occurs in the TCF [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/), the update invalidates the previous declarations of vendors listed on the previous version of the GVL. These policy changes happen infrequently, but when they do, a CMP is required to discard the user’s current TC string and resurface the user interface to provide new disclosures, capture new consent, and encode a new TC string without migrating any old values over from the old one.
 
-To determine if TCF [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) have changed, CMPs shall compare the _**TcfPolicyVersion**_ encoded in a TC String with the _**TcfPolicyVersion**_ property in the latest Global Vendor List published by the Managing Organisation – if the values are different then the TCF Policy has changed and a CMP will be required to provide new disclosures, capture new consent, and encode a new TC String.
+To determine if TCF [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) have changed, CMPs shall compare the _**TcfPolicyVersion**_ encoded in a TC string with the _**TcfPolicyVersion**_ property in the latest Global Vendor List published by the Managing Organisation – if the values are different then the TCF Policy has changed and a CMP will be required to provide new disclosures, capture new consent, and encode a new TC string.
 
 
 ### Example Global Vendor List JSON Object
@@ -1755,7 +1764,7 @@ Here is an annotated example of the GVL’s JSON format:
 {
   "gvlSpecificationVersion": 2,
   "vendorListVersion": 133, // incremented with each published file change
-  "tcfPolicyVersion": 2, // The TCF MO will increment this value whenever a GVL change (such as adding a new Purpose or Feature or a change in Purpose wording) legally invalidates existing TC Strings and requires CMPs to re-establish transparency and consent from users. TCF Policy changes should be relatively infrequent and only occur when necessary to support changes in global mandate. If the policy version number in the latest GVL is different from the value in your TC String, then you need to re-establish transparency and consent for that user. A version 1 format TC String is considered to have a version value of 1.
+  "tcfPolicyVersion": 2, // The TCF MO will increment this value whenever a GVL change (such as adding a new Purpose or Feature or a change in Purpose wording) legally invalidates existing TC strings and requires CMPs to re-establish transparency and consent from users. TCF Policy changes should be relatively infrequent and only occur when necessary to support changes in global mandate. If the policy version number in the latest GVL is different from the value in your TC string, then you need to re-establish transparency and consent for that user. A version 1 format TC string is considered to have a version value of 1.
   "lastUpdated": "2018-05-28T00:00:00Z",
   "purposes": {
 
