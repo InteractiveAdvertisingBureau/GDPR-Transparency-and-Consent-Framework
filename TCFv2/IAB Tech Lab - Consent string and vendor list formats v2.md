@@ -23,7 +23,7 @@
    + [What are the different scopes for a TC String?](#what-are-the-different-scopes-for-a-tc-string)
    + [What are publisher restrictions?](#what-are-publisher-restrictions)
    + [How does the CMP handle a globally-scoped TC string?](#how-does-the-cmp-handle-a-globally-scoped-tc-string)
-   + [How does a URL-based service process the TC string when it can't execute JavaScript?](#how-does-a-url-based-service-process-the-tc-string-when-it-cant-execute-javascript)
+   + [How does a URL-based service process a TC string when it can't execute JavaScript?](#how-does-a-url-based-service-process-a-tc-string-when-it-cant-execute-javascript)
      - [Full TC String passing](#full-tc-string-passing)
      - [CMP Redirect for TC String](#cmp-redirect-for-tc-string)
    + [What if consent is governed differently in a country?](#what-if-consent-is-governed-differently-in-a-country)
@@ -33,7 +33,7 @@
    + [How should a global TC string be formatted for storage?](#how-should-a-global-tc-string-be-formatted-for-storage)
    + [TC String Format](#tc-string-format)
      - [The Core String](#the-core-string)
-     - [Signaling OOB in the TC String](#signaling-oob-in-the-tc-string)
+     - [Signaling OOB in a TC String](#signaling-oob-in-a-tc-string)
      - [Disclosed Vendors (OOB)](#disclosed-vendors-oob)
      - [Allowed Vendors (OOB)](#allowed-vendors-oob)
      - [Publisher Purposes Transparency and Consent](#publisher-purposes-transparency-and-consent)
@@ -201,11 +201,11 @@ Publisher restrictions are custom requirements specified by a publisher and must
 *   Once the user has made their selections the CMP shall save the resulting TC string back to the global context, overwriting the old one.
 
 
-### How does a URL-based service process the TC string when it can't execute JavaScript?
+### How does a URL-based service process a TC string when it can't execute JavaScript?
 
 When a creative is rendered, it may contain a number of pixels under `<img>` tags. For example, `<img src="http://vendor-a.com/key1=val1&key2=val2">` which fires an HTTP GET request from the browser to Vendor A’s domain.
 
-Since the pixel is in an `<img>` tag without the ability to execute JavaScript, the CMP API cannot be used to obtain the TC string.  All parties in the ad supply chain who transact using URLs must add a macro in their URLs where the TC string is inserted. Any caller with access to the applicable TC string must insert it within a URL containing the macro `${GDPR_CONSENT_XXXXX}` where `XXXXX` is the numeric Vendor ID of the vendor receiving the TC string.
+Since the pixel is in an `<img>` tag without the ability to execute JavaScript, the CMP API cannot be used to obtain a TC string.  All parties in the ad supply chain who transact using URLs must add a macro in their URLs where a TC string is inserted. Any caller with access to the applicable TC string must insert it within a URL containing the macro `${GDPR_CONSENT_XXXXX}` where `XXXXX` is the numeric Vendor ID of the vendor receiving a TC string.
 
 For example, for Vendor A with ID 123 to receive a TC string, an image URL must include a key-value pair with the URL parameter and macro `gdpr_consent=${GDPR_CONSENT_123}`.
 
@@ -213,7 +213,7 @@ The resulting URL is:
 
 `http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=${GDPR_CONSENT_123}`
 
-If the TC string is: `BOPnWgIOPnWgIAAABAENAI4AAAAA0ABA`
+If a TC string is: `BOPnWgIOPnWgIAAABAENAI4AAAAA0ABA`
 
  Then the caller replaces the macro in the URL with the actual TC string so that the originally placed pixel containing the macro is modified as follows when making the call to the specified server.
 
@@ -303,7 +303,7 @@ The service making the call must replace the macros with appropriate values desc
         meaningful if <code>gdpr=1</code>
       </td>
       <td>
-        Encodes the TC string, as obtained from the CMP JS API or OpenRTB.
+        Encodes a TC string, as obtained from the CMP JS API or OpenRTB.
       </td>
     </tr>
     <tr>
@@ -333,7 +333,7 @@ CMPs can implement a consent redirector and host it at `https://[cmpname].mgr.co
 
  If a publisher is operating a CMP within a jurisdiction that does not require consent to store and/or access information on a device and, therefore, does not ask for consent on behalf of a vendor, the CMP will write the corresponding bit in the _**PurposesConsent**_ field to `0`. Even though it is valid within that jurisdiction to use Legitimate Interest for Purpose 1, a vendor would interpret that `0` as a “no consent” signal and have no way of knowing that consent was not required in the jurisdiction in which the publisher operates.  This lack of transparency would, ultimately, cause losses in ad revenue for that publisher.
 
-To accommodate cases where Purpose 1 is governed differently for consent depending on the jurisdiction, a TC string is transparent about the publisher’s operating governance and whether or not Purpose 1 was disclosed to a user. The vendor can then use these details to make a determination about whether they have sufficient legal bases for personal data processing in that given context. To support this, there are two fields in a TC string: _**PublisherCC**_, which represents the publisher’s country code and a flag for whether any disclosure has been offered on Purpose 1 named _**PurposeOneTreatment**_. Details for each field are listed among [the fields used in the TC String](#tc-string-format).
+To accommodate cases where Purpose 1 is governed differently for consent depending on the jurisdiction, a TC string is transparent about the publisher’s operating governance and whether or not Purpose 1 was disclosed to a user. The vendor can then use these details to make a determination about whether they have sufficient legal bases for personal data processing in that given context. To support this, there are two fields in a TC string: _**PublisherCC**_, which represents the publisher’s country code and a flag for whether any disclosure has been offered on Purpose 1 named _**PurposeOneTreatment**_. Details for each field are listed among [the fields used in a TC String](#tc-string-format).
 
 ## Creating a TC String
 
@@ -1141,7 +1141,7 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
 
 
 
-#### Signaling OOB in the TC String
+#### Signaling OOB in a TC String
 
 On occasion, legal bases for processing a user's personal data are achieved outside of the TCF. This would be considered an out-of-band (OOB) legal basis. To signal whether using an OOB legal bases is allowed requires:
 
@@ -1156,7 +1156,57 @@ If a publisher supports OOB legal bases, but only for select vendors, a CMP shal
 
 **Note:** If a Vendor has been _disclosed_ within the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment that means that they have interacted with the Framework and therefore can not use OOB legal bases.
 
-The following three examples demonstrate how to handle an OOB signal in a TC string.
+#### When to Include Allowed and Disclosed Vendor Segments
+
+There are three primary conditions to consider when determining whether or not to include one or both of the OOB Signal Segments – They are whether or not the TC string is a globally-scoped string (**P**), whether the publisher supports OOB Signaling (**R**), and whether or not the TC string is intended to be saved in a cookie or other storage mechanism as opposed to being passed in a TCData object through the CMP API to Vendors for downstream interpretation.  Representing those conditions symbolically:
+
+  * **P**: TC string is globally-scoped
+  * **Q**: TC string is for saving in a cookie, local storage or some other mechanism (not to be surfaced through the CMP API for Vendors)
+  * **R**: The Publisher Supports OOB Signaling
+  * **S**: Should Include Disclosed Vendors Segment
+  * **T**: Should Include Allowed Vendors Segment
+
+**Whether to include the _[DisclosedVendors](#disclosed-vendors-oob)_ Segment is expressed as**
+
+**P ∧ Q ∨ R → S**
+
+In plain english, if the TC string is globally-scoped (**P**) and the TC string is intended to be saved (**Q**) or the publisher supports OOB Signaling (**R**) then the _**[DisclosedVendors](#disclosed-vendors-oob)**_ Segment should be included (**S**).
+
+**Truth Table for Disclosed Vendors**
+
+| P | Q | R | S |
+|---|---|---|---|
+| T | T | T | T |
+| T | T | F | T |
+| T | F | T | T |
+| T | F | F | F |
+| F | T | T | F |
+| F | T | F | F |
+| F | F | T | F |
+| F | F | F | F |
+
+**Whether to include the _[AllowedVendors](#allowed-vendors-oob)_ Segment is expressed as**
+
+**P ∧ R ∧ ¬Q → T**
+
+In plain english, if the TC string is globally-scoped (**P**) and the publisher supports OOB Signaling (**R**) and it is _**not**_ intended for saving (**¬Q**) then the _**[AllowedVendors](#allowed-vendors-oob)**_ Segment should be included (**T**).
+
+**Truth Table for Allowed Vendors**
+
+| P | R | ¬Q | T |
+|---|---|---|---|
+| T | T | T | T |
+| T | T | F | F |
+| T | F | T | F |
+| T | F | F | F |
+| F | T | T | F |
+| F | T | F | F |
+| F | F | T | F |
+| F | F | F | F |
+
+##### Examples
+
+The following examples demonstrate how to handle an OOB signal in a TC string.
 
 **Example 1: A Publisher Does <span style="text-decoration:underline;">Not</span> Support OOB Legal Bases**
 
@@ -1506,7 +1556,7 @@ Signals which vendors the publisher permits to use OOB legal bases.
 
 Publishers may need to establish transparency and consent for a set of personal data processing purposes for their own use. For example, a publisher that wants to set a frequency-capping first-party cookie should request user consent for Purpose 1 "Store and/or access information on a device" in jurisdictions where it is required.
 
-The _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment in the TC string represents publisher purposes transparency & consent signals which is different than the other TC string segments; they are used to collect consumer purposes transparency & consent for vendors. This segment supports the standard list of purposes defined by the TCF as well as Custom Purposes defined by the publisher if they so choose.
+The _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment in a TC string represents publisher purposes transparency & consent signals which is different than the other TC string segments; they are used to collect consumer purposes transparency & consent for vendors. This segment supports the standard list of purposes defined by the TCF as well as Custom Purposes defined by the publisher if they so choose.
 
 
 <table>
