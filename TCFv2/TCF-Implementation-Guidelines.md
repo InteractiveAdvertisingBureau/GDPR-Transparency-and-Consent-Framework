@@ -58,14 +58,14 @@ It allows publishers and website operators to communicate to vendors, in a stand
 
 The TCF was first introduced in April 2018. This document refers to version 2 of the TCF, announced in August 2019, which introduces significant changes and is not backward-compatible with the earlier version.
 
-The communication between publishers and vendors must pass through a Consent Management Platform (CMP). A CMP can be operated by anyone, as long as the entity that operates it has completed registration on the CMP list  and is approved by IAB Europe . A list of all approved CMPs is available [here](https://advertisingconsent.eu/vendor-list/).
+The communication between publishers and vendors must pass through a Consent Management Platform (CMP). A CMP can be operated by anyone, as long as the entity that operates it has completed registration on the CMP list  and is approved by IAB Europe . A list of all approved CMPs is available [here](https://iabeurope.eu/cmp-list/).
 
-CMPs centralise and manage transparency for and consent and objections of the end users, acting as an intermediary between the Publisher, end user and vendors,using information distributed via the Global Vendor List (GVL), which contains the updated list of vendors adhering to the framework. Please refer to the Policy for complete definition of a CMP. Only CMPs can write and read the Transparency and Consent string, where consent is stored. Their role is to make this information available to vendors within the technical specifications that the framework states.
+CMPs centralise and manage transparency for and consent and objections of the end users, acting as an intermediary between the Publisher, end user and vendors, using information distributed via the Global Vendor List (GVL), which contains the updated list of vendors adhering to the framework. Please refer to the Policy for complete definition of a CMP. Only CMPs can write and read the Transparency and Consent string, where consent is stored. Their role is to make this information available to vendors within the technical specifications that the framework states.
 
 When configuring their CMP, publishers can make a number of decisions:
 - Consent can be shared with all other publishers adhering to the framework or kept local to the specific publisher;
 - A number of restrictions can be applied, including allowing only a selected list of vendors to process data through their properties.
-A current list of vendors adhering to the framework can be found [here](https://advertisingconsent.eu/vendor-list/).
+A current list of vendors adhering to the framework can be found [here](https://vendorlist.consensu.org/v2/vendor-list.json).
 
 Any party considering adoption of the TCF must read and follow the TCF Policies, outlined in the [IAB Europe Transparency & Consent Framework Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/). Correct implementation of the framework is impossible without following the requirements in the TCF Policy.
 
