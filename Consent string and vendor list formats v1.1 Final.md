@@ -177,7 +177,7 @@ In this file, the use of the term "AdServers" is representative of the type of d
 
 ## What is the process of getting on the global vendor list? <a name="process-vendorlist"></a>
 
-Access [http://advertisingconsent.eu/](http://advertisingconsent.eu/) to register on the global vendor list. Registration guidelines are available on this website as well.
+Access [iabeurope.eu/join-the-tcf/](https://iabeurope.eu/join-the-tcf/) to register on the global vendor list. Registration guidelines are available on this website as well.
 
 ## What is the format of the global vendor (and standard purposes) list? <a name="format-vendorlist"></a>
 
@@ -222,7 +222,7 @@ The JSON format is:
 
 ## What are the purposes and features being supported? <a name="purposes-features"></a>
 
-The entries below are valid for the v1.1 release. Purposes and features are subject to change, so are included in the Global Vendor List. For most up-to-date policy defined purposes, please refer to [http://advertisingconsent.eu/#resources](http://advertisingconsent.eu/#resources). 
+The entries below are valid for the v1.1 release. Purposes and features are subject to change, so are included in the Global Vendor List. For most up-to-date policy defined purposes, please refer to [iabeurope.eu/tcf/](https://iabeurope.eu/transparency-consent-framework/). 
 
 Purposes are individually-consentable data uses. Due to space constraints in the consent string, they are not consentable on a per-vendor basis, but which vendors utilize which purpose should be shown in the UI for each vendor. Consent for a purpose applies only to vendors that have declared (via the Global Vendor List) that they use that purpose.
 
