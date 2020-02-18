@@ -64,7 +64,7 @@ The various pieces of the Framework are the following:
 
 ## About the Transparency & Consent Standard <a name="About-the-standard"></a>
 
-Resources including policy FAQ, Global Vendor List Registration, and CMP registration can be found at [advertisingconsent.eu](http://advertisingconsent.eu/).
+Resources including policy FAQ, Global Vendor List Registration, and CMP registration can be found at [iabeurope.eu/tcf](https://iabeurope.eu/transparency-consent-framework/).
 
 For purposes of this documentation, the following terms have the following definitions: 
 
