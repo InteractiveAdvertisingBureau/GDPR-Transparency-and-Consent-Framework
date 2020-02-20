@@ -463,14 +463,14 @@ For example, a globally-scoped TC String with all four segments present would be
 [ _**[Core String](#the-core-string)**_ ].[ _**[Disclosed Vendors](#disclosed-vendors-oob)**_ ].[ _**[AllowedVendors](#allowed-vendors-oob)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
 ```
-BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA.DqFENCAmeAENCDA.OevsguAfDq
+CObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA.DqFENCAmeAENCDA.OevsguAfDq
 ```
 A service-specific TC String must contain a Core TC String and may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment, but must not contain the OOB-related segments because those segments are not allowed in service-specific contexts:
 
 [ _**[Core String](#the-core-string)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
 ```
-BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
+CObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
 ```
 
  #### The Core String
