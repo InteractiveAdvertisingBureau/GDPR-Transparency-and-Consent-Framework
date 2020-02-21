@@ -1943,9 +1943,9 @@ Here is an annotated example of the GVL’s JSON format:
 
 
 ## Global CMP List Specification
-The Global CMP List (GCL) is a JSON format document that lists all CMPs registered with the Transparency and Consent Framework (TCF). This file is used by vendors to determine which CMPs are compliant and active within the framework, in order to ascertain whether a given CMP ID found in a consent string or TC String is valid.
+The Global CMP List (GCL) is a JSON format document that lists all CMPs registered with the Transparency and Consent Framework (TCF). There are separate files for v1.1 and v2 of the framework. These files are used by vendors to determine which CMPs are compliant and active within the framework, in order to ascertain whether a given CMP ID found in a consent string or TC String is valid.
 
-IMPORTANT NOTE: all CMPs that have registered with the TCF are listed in this file. CMPs that are no longer active for whatever reason, have the `deletedDate` property set. Consent strings or TC Strings for CMPs with a `deletedDate` set must be considered invalid after that date/time and must be discarded immediately and not passed downstream.
+IMPORTANT NOTE: all CMPs that have registered with the TCF are listed in these files. CMPs that are no longer active for whatever reason, have the `deletedDate` property set. Consent strings or TC Strings for CMPs with a `deletedDate` set must be considered invalid after that date/time and must be discarded immediately and not passed downstream.
 
 ### What is contained in the Global CMP List?
 * A Last Updated Date.
@@ -1958,7 +1958,8 @@ IMPORTANT NOTE: all CMPs that have registered with the TCF are listed in this fi
 ### Where can I access the Global CMP List?
 The GCL is in JSON format and the current version at any given time can be retrieved using the following URL:
 
-https://cmplist.consensu.org/cmp-list.json
+v2: https://cmplist.consensu.org/v2/cmp-list.json
+v1: https://cmplist.consensu.org/cmp-list.json
 
 ### How often is the Global CMP List updated?
 As of the publication of this document, changes to the Global CMP List are published weekly at 5:00 PM Central European Time on Thursdays. IAB Europe reserves the right to change this time and will notify members of any changes.
