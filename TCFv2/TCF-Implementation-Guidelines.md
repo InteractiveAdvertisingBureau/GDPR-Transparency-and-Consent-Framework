@@ -173,7 +173,13 @@ If an impression is received server side (through openRTB for example), you shou
 When the impression is received client side (redirect, prebid, etc.), leverage the CMP to request and read the TC data. This information can be collected whether you are in the top parent page (using the __tcfapi method) or from an iframe (using postMessage method as defined by the CMP API technical specifications).
 
 ## How do I send the TC string?<a name="sendtcstring"></a>
-For any server side call, if using openRTB, the consent payload should be sent accordingly to the openRTB specs. For any client side call, once the consent payload has been obtained leveraging the CMP, you should pass it in the ad call using the URL-passing macro solution detailed in documentation for the TC String.
+For any server side call, if using openRTB, the consent payload should be sent according to the openRTB specs.
+
+For any client side call, once the consent payload has been obtained leveraging the CMP, you can validate that it reflects user-intentful consent by checking the status of certain fields. For example:
+- the field `cmpStatus` is `loaded`, and
+- the field `eventStatus` is `tcloaded` or `useractioncomplete`
+
+The status of these two fields as indicated above show that the CMP has been loaded and the user has engaged. After validating the TC data payload is suitable for your case, you should pass it in the ad call using the URL-passing macro solution detailed in documentation for the TC String.
 
 ## What do I do with the TC String?<a name="handletcstring"></a>
 According to policies of the Transparency and Consent Framework, a vendor may choose not to transmit data to another vendor for any reason, but a vendor must not transmit data to another vendor without a justified basis for relying on that vendor’s legal basis for processing the personal data.  If a vendor has or obtains personal data and has no legal basis for the access to and processing of that data, the vendor should quickly cease collection and storage of the data and refrain from passing the data on to other parties, even if those parties have a legal basis.
