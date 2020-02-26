@@ -56,6 +56,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| February 2020 | 2.0 | Removed CMP List; added included in the Consent String and Vendor List Specification |
 | February 2020 | 2.0 | Updated stub example to reference open-source library, change addEventListener/removeEventListener interface, clarify addEventListener callback invocation time, and remove SafeFrame proxy communications |
 | December 2019 | 2.0 | Updated with reference to CMP List, Updated macros to be upper case, Added cmpStatus to be surfaced in both the API calls and the TCData object, and fixed case in a reference to IABTCF_CmpSdkID |
 | August 2019 | 2.0 | Final version released for adoption |
