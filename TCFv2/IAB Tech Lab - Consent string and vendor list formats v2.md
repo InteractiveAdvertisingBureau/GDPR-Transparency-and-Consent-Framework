@@ -1158,7 +1158,7 @@ If a publisher supports OOB legal bases, but only for select vendors, a CMP shal
 
 #### When to Include Allowed and Disclosed Vendor Segments
 
-There are three primary conditions to consider when determining whether or not to include one or both of the OOB Signal Segments – They are whether or not the TC string is a globally-scoped string, whether the publisher supports OOB Signaling, and whether or not the TC string is intended to be saved in a cookie or other storage mechanism as opposed to being passed in a TCData object through the CMP API to Vendors for downstream interpretation. This is the only situation in which the information in the TC string may differ based on whether the string is meant to be saved in a cookie or other storage mechanism or passed in a TCData object.
+There are three primary conditions to consider when determining whether or not to include one or both of the OOB Signal Segments – They are whether or not the TC string is a globally-scoped string, whether the publisher supports OOB Signaling, and whether or not the TC string is intended to be saved in a cookie or other storage mechanism as opposed to being passed in a TCData object through the CMP API to Vendors for downstream interpretation. This is a situation in which the information in the TC string may differ based on whether the string is meant to be saved in a cookie or other storage mechanism or passed in a TCData object.
 
 
 ##### Examples
