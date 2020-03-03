@@ -1000,7 +1000,7 @@ Below is an example script that emulates the in-frame `__tcfapi()` call. It loca
        * throws a reference error if no frames exist
        */
 
-      if (frame.frames['___tcfapiLocator']) {
+      if (frame.frames['__tcfapiLocator']) {
 
         cmpFrame = frame;
         break;
