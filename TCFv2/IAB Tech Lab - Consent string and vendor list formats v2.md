@@ -1030,12 +1030,12 @@ BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
           Enum
         </p>
         <p>
-          <code>1</code> Require Consent (if Vendor has declared the Purpose
-          IDs legal basis as Legitimate Interest and flexible)
-        </p>
-        <p>
           <code>0</code> Purpose Flatly Not Allowed by Publisher (regardless
           of Vendor declarations)
+        </p>
+        <p>
+          <code>1</code> Require Consent (if Vendor has declared the Purpose
+          IDs legal basis as Legitimate Interest and flexible)
         </p>
         <p>
           <code>2</code> Require Legitimate Interest (if Vendor has declared
