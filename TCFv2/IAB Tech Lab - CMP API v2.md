@@ -952,7 +952,7 @@ CMPs shall create an event listener to handle `postMessage` requests via the [CM
 
 **Sent Message**
 
-The sent message shall follow the form outlined below. The command, parameter and version object properties correspond to their namesake parameters defined as method argument parameters for `__tcfapi()` method. The “sent message” also requires a unique callId property to help match the request with a response.
+The sent message shall follow the form outlined below. The command, parameter and version object properties correspond to their namesake parameters defined as method argument parameters for `__tcfapi()` method. The “sent message” also requires a unique callId property to help match the request with a response. The `callId` property shall be either a string or a number, but the calling script shall not use the two types interchangeably.
 
 ```javascript
 {
