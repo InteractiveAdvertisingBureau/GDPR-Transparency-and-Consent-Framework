@@ -118,7 +118,7 @@ This document specifies required functionality that the CMP must provide in acco
 
 ### What is the Global Vendor List?
 
-The Global Vendor List (GVL) is a technical document that CMPs download from a domain managed by IAB Europe. It lists all registered and approved Vendors, as well as standard Purposes, Features Special Purposes, Special Features and Stacks. The information stored in the GVL is used for determining what legal disclosures must be made to the user. IAB Europe manages and publishes the GVL.
+The Global Vendor List (GVL) is a technical document that CMPs download from a domain managed by IAB Europe. It lists all registered and approved Vendors, as well as standard Purposes, Features, Special Purposes, Special Features and Stacks. The information stored in the GVL is used for determining what legal disclosures must be made to the user. IAB Europe manages and publishes the GVL.
 
 The Global Vendor List contains the following information:
 
