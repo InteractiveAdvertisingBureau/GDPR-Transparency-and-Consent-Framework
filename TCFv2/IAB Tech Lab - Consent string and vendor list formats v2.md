@@ -470,14 +470,14 @@ For example, a globally-scoped TC String with all four segments present would be
 [ _**[Core String](#the-core-string)**_ ].[ _**[Disclosed Vendors](#disclosed-vendors-oob)**_ ].[ _**[AllowedVendors](#allowed-vendors-oob)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
 ```
-to insert with updated v2 example
+COw4XqLOw4XqLAAAAAENAXCAAAAAAAAAAAAAAAAAAAAA.IFukWSQgAIQwgI0QEByFAAAAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.QFukWSQgAIQwgI0QEByFAAAAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.YAAAAAAAAAAAAAAAAAA
 ```
 A service-specific TC String must contain a Core TC String and may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment, but must not contain the OOB-related segments because those segments are not allowed in service-specific contexts:
 
 [ _**[Core String](#the-core-string)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
 ```
-to insert with updated v2 example
+CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEgAA.argAC0gAAAAAAAAAAAA
 ```
 
  #### The Core String
@@ -1201,7 +1201,7 @@ To indicate the select vendors a publisher approves to use OOB legal bases, the 
 [ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ].[ _**[AllowedVendors](#allowed-vendors-oob)**_ ]
 
 ```
-to insert with updated v2 example
+CGL23UdMFJzvuA9ACCENAXCEAC0AAGrAAA5YA5ht7-_d_7_vd-f-nrf4_4A4hM4JCKoK4YhmAqABgAEgAA.IFut_a83_Ma_t-_SvB3v4-IAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.QFulWfTw4obx_Z2zUj6XkNIAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA
 ```
 
 #### Disclosed Vendors (OOB)
@@ -1967,7 +1967,7 @@ As of the publication of this document, changes to the Global CMP List are publi
 ### Caching the Global CMP List
 Strict restrictions on caching the GCL apply.
 
-All requests for the Global CMP List must honour the cache-control headers and must not cache the resource with different settings. 
+All requests for the Global CMP List must honour the cache-control headers and must not cache the resource with different settings.
 
 Note: There may be a delay of up to the maximum cache interval in retrieving the latest version of the Global CMP List.
 
@@ -1999,7 +1999,7 @@ Here is an example of the GCL’s JSON format:
      * "name": string, REQUIRED
      * "isCommercial": boolean, REQUIRED
      * "deletedDate": date string ("2019-05-28T00:00:00Z") OPTIONAL
-     *  If present, CMP is considered deleted after this date/time and 
+     *  If present, CMP is considered deleted after this date/time and
      *  consent string or TC String must be discarded immediately.
      */
 
