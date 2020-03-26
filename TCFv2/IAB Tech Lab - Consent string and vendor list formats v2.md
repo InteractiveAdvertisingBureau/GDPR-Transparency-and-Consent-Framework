@@ -220,7 +220,7 @@ The resulting URL is:
 
 `http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=${GDPR_CONSENT_123}`
 
-If the TC String is: `BOPnWgIOPnWgIAAABAENAI4AAAAA0ABA`
+If the TC String is: `COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw`
 
  Then the caller replaces the macro in the URL with the actual TC String so that the originally placed pixel containing the macro is modified as follows when making the call to the specified server.
 
@@ -470,14 +470,14 @@ For example, a globally-scoped TC String with all four segments present would be
 [ _**[Core String](#the-core-string)**_ ].[ _**[Disclosed Vendors](#disclosed-vendors-oob)**_ ].[ _**[AllowedVendors](#allowed-vendors-oob)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
 ```
-BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA.DqFENCAmeAENCDA.OevsguAfDq
+to insert with updated v2 example
 ```
 A service-specific TC String must contain a Core TC String and may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment, but must not contain the OOB-related segments because those segments are not allowed in service-specific contexts:
 
 [ _**[Core String](#the-core-string)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
 ```
-BObdrPUOevsguAfDqFENCNAAAAAmeAAA.OevsguAfDq
+to insert with updated v2 example
 ```
 
  #### The Core String
@@ -1162,13 +1162,13 @@ The CMP reads a TC String from global context storage and it contains a _**[Disc
 
 [ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
 ```
-BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA
+COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw
 ```
 Because the publisher does not support OOB legal bases, the dot-delimited _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment at the end of the TC String is removed when requested form the CMP API:
 
 [ _**[Core](#the-core-string)**_ ]
 ```
-BObdrPUOevsguAfDqFENCNAAAAAmeAAA
+COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA
 ```
 
 **Example 2: A Publisher Supports OOB Legal Bases**
@@ -1177,13 +1177,13 @@ The CMP reads a TC String from global context storage and it contains a _**[Disc
 
 [ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
 ```
-BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA
+COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw
 ```
 Since the publisher supports OOB legal bases for any vendor that uses it, the TC String, when surfaced through the CMP API, is unchanged from storage – it includes the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment:
 
 [ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
 ```
-BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA
+COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw
 ```
 
 **Example 3: A Publisher Supports OOB Legal Bases for Only Select Vendors**
@@ -1193,7 +1193,7 @@ The CMP reads a TC String from global context storage and it contains a _**[Disc
 
 [ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
 ```
-BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA
+COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw.PVAfDObdrA
 ```
 
 To indicate the select vendors a publisher approves to use OOB legal bases, the CMP includes the _**[AllowedVendors](#allowed-vendors-oob)**_ segment with the TC String from the CMP API:
@@ -1201,7 +1201,7 @@ To indicate the select vendors a publisher approves to use OOB legal bases, the 
 [ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ].[ _**[AllowedVendors](#allowed-vendors-oob)**_ ]
 
 ```
-BObdrPUOevsguAfDqFENCNAAAAAmeAAA.PVAfDObdrA.DqFENCAmeAENCDA
+to insert with updated v2 example
 ```
 
 #### Disclosed Vendors (OOB)
