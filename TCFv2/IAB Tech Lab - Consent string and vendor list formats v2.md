@@ -1717,6 +1717,8 @@ Given the scale of the TCF and the high volume of requests for the Global Vendor
 
 #### CMPs caching the GVL
 
+CMP code running in browsers should not fetch the GVL directly. The most current version of the GVL must be hosted and provided by each CMP, fetched by the server-side application no more often than the cache-control headers indicate.
+
 CMPs shall set [cache-control headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) on HTTP responses sent to client-side requests for GVL files to prevent users from repeatedly downloading the file. When cache-control headers are set browsers will automatically cache the GVL file and return the file from cache to the client-side script running when it makes the request circumventing the need to fetch the file over HTTP again and again.
 
 
