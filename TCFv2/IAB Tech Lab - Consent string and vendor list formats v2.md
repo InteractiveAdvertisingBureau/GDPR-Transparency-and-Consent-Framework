@@ -1697,43 +1697,43 @@ As of the publication of this document, changes to the Global Vendor List are pu
 
 ### CMPs using the GVL
 
-Any time the CMP user interface is surfaced  to a user to provide transparency and request consent, the **current** version of the GVL must be used to populate the user interface – this includes first-time interactions and renewal interactions.  When a user summons the CMP user interface manually to review their settings, the version of the GVL encoded in the TC String is used instead.
+Any time the CMP user interface is surfaced to a user to provide transparency and request consent, the **latest** version of the GVL must be used to populate the user interface. This includes first-time interactions, renewal interactions, as well as when a user launches the user interface to manually review and update their settings.
 
-Within a mobile in-app context where the current version of the GVL cannot be loaded because of a lack of Internet connectivity, the most recently cached version of the GVL may be used – The latest version of the GVL must be retrieved as soon as connectivity is restored.
+Note that subject to the caching requirements stated below, it is understood that there may be a delay of up to the maximum cache interval in retrieving the latest version of the Global Vendor List, which means that in some cases the version of the GVL used may be the penultimate version of the GVL rather than the latest.
 
-CMPs must, of course, use specific versions of the GVL to determine if a CMP should be resurfaced to a user whom has a TC String encoded with a GVL version that is not the latest or if they are resurfacing the user interface upon the user’s request to review their settings.
+Within a mobile in-app context where the latest version of the GVL cannot be loaded because of a lack of Internet connectivity, the most recently cached version of the GVL may be used – the latest version of the GVL must be retrieved as soon as connectivity is restored.
+
+CMPs must use specific versions of the GVL to determine if a CMP should be resurfaced to a user who has a TC String encoded with a GVL version that is not the latest. Note however that it is not a requirement to resurface the CMP if the GVL has changed - when to resurface the CMP user interface is at the discretion of the CMP and publisher.
+
+**Strict restrictions on accessing and caching the GVL apply and are detailed below.**
 
 ### Vendors using the GVL
 
-Vendors must use the version of the GVL encoded in the TC String received to determine if they have the legal bases they need to process the user's personal data.
+Vendors must use the version of the GVL encoded in the TC String received to determine if they have the legal bases they need to process the user's personal data, as well as to determine if a vendor they are about to pass personal data to, also has the necessary legal bases to process personal data.
 
-### Caching the Global Vendor List
+**Strict restrictions on accessing and caching the GVL apply and are detailed below.**
 
-**Strict restrictions on caching the GVL apply and are detailed in the following section.**
+### Accessing and caching the Global Vendor List
 
-Given the scale of the TCF and the high volume of requests for the Global Vendor List, current and previous versions are configured with cache-control headers. All requests for the Global Vendor List must honour these headers and must not cache the resource with different settings. In this respect, “cache busting” techniques, like appending a query string parameter and a randomly generated value as part of the URL request to download the Global Vendor List in order to bypass the cache must not be used.
+In TCF v1 it was possible for client-side CMP applications to load the GVL directly via CORS. Given the scale of the TCF and the high volume of requests for the Global Vendor List, this is no longer possible from TCF v2.0 onward. All requests for the GVL must now be server-side.
 
-**Note:** There may be a delay of up to the maximum cache interval in retrieving the latest version of the Global Vendor List.
-
-#### CMPs caching the GVL
-
-CMP code running in browsers should not fetch the GVL directly. The most current version of the GVL must be hosted and provided by each CMP, fetched by the server-side application no more often than the cache-control headers indicate.
-
-CMPs shall set [cache-control headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) on HTTP responses sent to client-side requests for GVL files to prevent users from repeatedly downloading the file. When cache-control headers are set browsers will automatically cache the GVL file and return the file from cache to the client-side script running when it makes the request circumventing the need to fetch the file over HTTP again and again.
-
-
-#### Vendors caching the GVL
-
-Because vendor requests for a GVL file will not be in a browser context, GVL files must be cached server-side.
-
-Vendor application logic must only request one version of the GVL per vendor during the cache period specified in the cache-control header. For example, if the caching period is one week, only one request for the current GVL file must be received for a given vendor per week.
-
-**Note:** The volume of usage will be monitored carefully by the managing organisation (MO) and any vendor not adhering to this request limit will be blocked from accessing the GVL.
-
-
-#### Caching previous versions of the GVL
+In addition to this all current and previous GVL resources, as well as purpose translations, are configured with [cache-control headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control). All requests for these resources must honour the headers and must not cache a resource with different settings, or request a resource more than once within the specified cache period.
 
 Previous versions of the GVL must be cached for at least the period specified by the cache-control headers and may be cached indefinitely as they are static resources.
+
+### CMPs accessing and caching the GVL
+
+Client-side CMP applications must not load the GVL directly from vendorlist.consensu.org - instead the GVL must be loaded and hosted by a CMP’s server-side application and then passed to the client-side CMP application.
+
+CMP server-side applications must only make one request for the GVL during the cache period specified in the cache-control header. For example, if the caching period is one week, only one request for the latest GVL file must be received for a given CMP per week. Note: The volume of usage will be monitored carefully by the managing organisation (MO) and any CMP not adhering to this request limit will be blocked from accessing the GVL.
+
+CMPs should set cache-control headers on HTTP responses sent to client-side requests for their self-hosted GVL resources to prevent client-side applications from repeatedly downloading the file. When cache-control headers are set browsers will automatically cache the GVL file and return the file from the cache to the client-side application running when it makes the request, circumventing the need to fetch the file over HTTP again and again.
+
+### Vendors accessing and caching the GVL
+
+Vendor requests for GVL resources must be loaded and cached by the server-side application.
+
+Vendor application logic must only make one request for the GVL during the cache period specified in the cache-control header. For example, if the caching period is one week, only one request for the latest GVL file must be received for a given vendor per week. Note: The volume of usage will be monitored carefully by the managing organisation (MO) and any vendor not adhering to this request limit will be blocked from accessing the GVL.
 
 #### Using a compressed version of the Global Vendor List
 
