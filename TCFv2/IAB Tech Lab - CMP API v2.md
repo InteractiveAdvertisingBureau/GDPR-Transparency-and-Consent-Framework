@@ -193,7 +193,7 @@ ______
 |--:|:-:|:--|
 | command | string | `'ping'` |
 | [version](#how-does-the-version-parameter-work) | number | `2` |
-| callback | function | `function(PingReturn:object)` |
+| callback | function | `function(pingReturn: PingReturn)` |
 
 **Example:**
 
