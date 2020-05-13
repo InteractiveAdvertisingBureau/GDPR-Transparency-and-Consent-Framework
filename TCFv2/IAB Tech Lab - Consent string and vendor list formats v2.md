@@ -1053,10 +1053,20 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         must then check for the “consent” signal in the VendorConsents
         section to make a determination on whether they have the legal basis
         for processing user personal data under that Purpose.
-        <p>
-          If a vendor has not declared a Purpose flexible and this value is
-          <code>1</code> or <code>2</code> they may ignore the signal.
-        </p>
+        **When a vendor's registration is _not_ flexible:**
+        If a vendor has not declared a Purpose flexible, this value is
+        <code>1</code> and vendor is registered under Legitimate Interest for
+        that Purpose then the vendor should not process for that Purpose.
+        If a vendor has not declared a Purpose flexible, this value is 
+        <code>2</code> and vendor is registered under Consent for for that
+        Purpose then the vendor should not process for that Purpose.
+        If a vendor has not declared a Purpose flexible, this value is
+        <code>1</code> and vendor is registered under Consent for
+        that Purpose then the vendor can ignore the signal.
+        If a vendor has not declared a Purpose flexible, this value is 
+        <code>2</code> and vendor is registered under Legitimate Interest 
+        for for that Purpose then the vendor can ignore the signal.
+        **
         <p>
           <strong>Note:</strong> Purpose 1 is always required to be
           registered as a consent purpose and can not be flexible per
