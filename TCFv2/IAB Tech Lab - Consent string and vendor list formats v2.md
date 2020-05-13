@@ -1057,15 +1057,15 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         <p>If a vendor has not declared a Purpose flexible, this value is
         <code>1</code> and vendor is registered under Legitimate Interest for
         that Purpose then the vendor should not process for that Purpose.</p>
-        <p>If a vendor has not declared a Purpose flexible, this value is 
-        <code>2</code> and vendor is registered under Consent for for that
-        Purpose then the vendor should not process for that Purpose.</p>
         <p>If a vendor has not declared a Purpose flexible, this value is
         <code>1</code> and vendor is registered under Consent for
         that Purpose then the vendor can ignore the signal.</p>
         <p>If a vendor has not declared a Purpose flexible, this value is 
+        <code>2</code> and vendor is registered under Consent for that
+        Purpose then the vendor should not process for that Purpose.</p>
+        <p>If a vendor has not declared a Purpose flexible, this value is 
         <code>2</code> and vendor is registered under Legitimate Interest 
-        for for that Purpose then the vendor can ignore the signal.</p>
+        for that Purpose then the vendor can ignore the signal.</p>
         <p>
           <strong>Note:</strong> Purpose 1 is always required to be
           registered as a consent purpose and can not be flexible per
