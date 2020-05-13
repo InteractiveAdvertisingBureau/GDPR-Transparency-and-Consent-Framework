@@ -1053,19 +1053,17 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         must then check for the “consent” signal in the VendorConsents
         section to make a determination on whether they have the legal basis
         for processing user personal data under that Purpose.</p>
-        <p><strong>When a vendor's registration is <u>not</u> flexible:</strong></p>
-        <p>If a vendor has not declared a Purpose flexible, this value is
-        <code>1</code> and vendor is registered under Legitimate Interest for
-        that Purpose then the vendor should not process for that Purpose.</p>
-        <p>If a vendor has not declared a Purpose flexible, this value is
-        <code>1</code> and vendor is registered under Consent for
-        that Purpose then the vendor can ignore the signal.</p>
-        <p>If a vendor has not declared a Purpose flexible, this value is 
-        <code>2</code> and vendor is registered under Consent for that
-        Purpose then the vendor should not process for that Purpose.</p>
-        <p>If a vendor has not declared a Purpose flexible, this value is 
-        <code>2</code> and vendor is registered under Legitimate Interest 
-        for that Purpose then the vendor can ignore the signal.</p>
+        <p>When a vendor's Purpose registration <strong><u>is not flexible</u></strong> 
+        they should interpret this value in the following ways:</strong></p>
+        <p>If this value is <code>1</code> and vendor is registered under 
+        Legitimate Interest for that Purpose then the vendor <u>should not 
+        process</u> for that Purpose.</p>
+        <p>If this value is <code>1</code> and vendor is registered under Consent
+        for that Purpose then the vendor <u>can ignore</u> the signal.</p>
+        <p>If this value is <code>2</code> and vendor is registered under Consent 
+        for that Purpose then the vendor <u>should not process</u> for that Purpose.</p>
+        <p>If this value is <code>2</code> and vendor is registered under 
+        Legitimate Interest for that Purpose then the vendor <u>can ignore</u> the signal.</p>
         <p>
           <strong>Note:</strong> Purpose 1 is always required to be
           registered as a consent purpose and can not be flexible per
