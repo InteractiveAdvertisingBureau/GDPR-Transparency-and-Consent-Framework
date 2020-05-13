@@ -1044,7 +1044,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         <p><code>3</code> UNDEFINED (not used)</p>
       </td>
       <td>
-        Vendors must always respect a <code>0</code> (Not Allowed)
+        <p>Vendors must always respect a <code>0</code> (Not Allowed)
         regardless of whether or not they have not declared that Purpose to
         be “flexible”. Values <code>1</code> and <code>2</code> are in
         accordance with a vendors declared flexibility. Eg. if a vendor has
@@ -1052,8 +1052,8 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         Purpose as flexible and this field is set to <code>1</code>, they
         must then check for the “consent” signal in the VendorConsents
         section to make a determination on whether they have the legal basis
-        for processing user personal data under that Purpose.
-        **When a vendor's registration is _not_ flexible:**
+        for processing user personal data under that Purpose.</p>
+        <p><strong>When a vendor's registration is _not_ flexible:</strong>
         If a vendor has not declared a Purpose flexible, this value is
         <code>1</code> and vendor is registered under Legitimate Interest for
         that Purpose then the vendor should not process for that Purpose.
@@ -1065,8 +1065,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         that Purpose then the vendor can ignore the signal.
         If a vendor has not declared a Purpose flexible, this value is 
         <code>2</code> and vendor is registered under Legitimate Interest 
-        for for that Purpose then the vendor can ignore the signal.
-        **
+        for for that Purpose then the vendor can ignore the signal.</p>
         <p>
           <strong>Note:</strong> Purpose 1 is always required to be
           registered as a consent purpose and can not be flexible per
