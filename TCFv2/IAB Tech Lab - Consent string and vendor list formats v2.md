@@ -298,7 +298,7 @@ The service making the call must replace the macros with appropriate values desc
       <td><code>${GDPR}</code></td>
       <td><code>0</code> / <code>1</code></td>
       <td>
-        <code>0</code> GDPR does not apply <code>1</code> GDPR applies If
+        <code>0</code> GDPR does not apply; <code>1</code> GDPR applies. If
         not present, callee should do geoIP lookup, and GDPR applies for EU
         IP addresses
       </td>
