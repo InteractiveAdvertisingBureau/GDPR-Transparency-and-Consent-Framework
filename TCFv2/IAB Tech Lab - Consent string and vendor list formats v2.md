@@ -906,8 +906,8 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         ID <code>1</code>.
         <p>
           Set the bit corresponding to a given vendor to <code>1</code> if
-          the CMP has established transparency for a vendor's legitimate
-          interest disclosures.
+          the CMP has established transparency for that vendor's legitimate
+          interest disclosures for one or more Purposes (not Special Purposes).
         </p>
         <p>
           If a user exercises their “Right To Object” to a vendor’s
