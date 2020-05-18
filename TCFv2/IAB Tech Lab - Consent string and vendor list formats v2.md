@@ -66,6 +66,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+|May 2020| 2.0 | Updated to clarify questions on `RestrictionType` cases |
 | December 2019 | 2.0 | Updated with global cookie support notes, Updated macros to be upper case |
 | August 2019 | 2.0 | Version 2.0 released to the public |
 | April 2019 | 2.0 | Released for public comment |
@@ -1044,7 +1045,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         <p><code>3</code> UNDEFINED (not used)</p>
       </td>
       <td>
-        Vendors must always respect a <code>0</code> (Not Allowed)
+        <p>Vendors must always respect a <code>0</code> (Not Allowed)
         regardless of whether or not they have not declared that Purpose to
         be “flexible”. Values <code>1</code> and <code>2</code> are in
         accordance with a vendors declared flexibility. Eg. if a vendor has
@@ -1052,11 +1053,20 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         Purpose as flexible and this field is set to <code>1</code>, they
         must then check for the “consent” signal in the VendorConsents
         section to make a determination on whether they have the legal basis
-        for processing user personal data under that Purpose.
-        <p>
-          If a vendor has not declared a Purpose flexible and this value is
-          <code>1</code> or <code>2</code> they may ignore the signal.
-        </p>
+        for processing user personal data under that Purpose.</p>
+        <p>When a vendor's Purpose registration <strong><em>is not flexible</em></strong> 
+        they should interpret this value in the following ways:</strong></p>
+        <p>If this value is <code>1</code> and vendor is registered under 
+        Legitimate Interest for that Purpose then the vendor <em>should not 
+        process</em> for that Purpose.</p>
+        <p>If this value is <code>1</code> and vendor is registered under Consent
+        for that Purpose then the vendor <em>can ignore</em> the signal.</p>
+        <p>If this value is <code>2</code> and vendor is registered under Consent 
+        for that Purpose then the vendor <em>should not process</em> for that Purpose.</p>
+        <p>If this value is <code>2</code> and vendor is registered under 
+        Legitimate Interest for that Purpose then the vendor <em>can ignore</em> the signal.</p>
+        <p>If this value is <code>1</code> or <code>2</code> and the vendor is not
+        registered for the Purpose then the vendor <em>should not porcess</em> for that Purpose.</p>
         <p>
           <strong>Note:</strong> Purpose 1 is always required to be
           registered as a consent purpose and can not be flexible per
