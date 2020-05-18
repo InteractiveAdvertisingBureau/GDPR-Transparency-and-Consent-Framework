@@ -66,6 +66,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+|May 2020| 2.0 | Updated to clarify questions on `RestrictionType` cases |
 | December 2019 | 2.0 | Updated with global cookie support notes, Updated macros to be upper case |
 | August 2019 | 2.0 | Version 2.0 released to the public |
 | April 2019 | 2.0 | Released for public comment |
