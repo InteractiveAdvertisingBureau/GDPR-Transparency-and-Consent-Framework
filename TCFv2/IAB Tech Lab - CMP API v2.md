@@ -418,7 +418,7 @@ TCData = {
    * Only exists on service-specific TC
    *
    * true - Purpose 1 not disclosed at all. CMPs use PublisherCC to
-   * indicate the publisher's country of establishment to help vVendors
+   * indicate the publisher's country of establishment to help Vendors
    * determine whether the vendor requires Purpose 1 consent.
    *
    * false - There is no special Purpose 1 treatment status. Purpose 1 was
@@ -434,7 +434,7 @@ TCData = {
 
       /**
        * true - Vendor is allowed to use an Out-of-Band Legal Basis
-       * false - Vendor is NOT allowed to use an Out-of-Band Legal Basis
+       * false | undefined - Vendor is NOT allowed to use an Out-of-Band Legal Basis
        */
       '[vendor id]': Boolean
     },
@@ -442,7 +442,7 @@ TCData = {
 
       /**
        * true - Vendor has been disclosed to the user
-       * false - Vendor has been disclosed to the user
+       * false | undefined - Vendor has been disclosed to the user
        */
       '[vendor id]': Boolean
     }
@@ -452,7 +452,7 @@ TCData = {
 
       /**
        * true - Consent
-       * false - No Consent.
+       * false | undefined - No Consent.
        */
       '[purpose id]': Boolean
     },
@@ -460,7 +460,7 @@ TCData = {
 
       /**
        * true - Legitimate Interest Established
-       * false - No Legitimate Interest Established
+       * false | undefined - No Legitimate Interest Established
        */
       '[purpose id]': Boolean
     }
@@ -471,7 +471,7 @@ TCData = {
 
       /**
        * true - Consent
-       * false - No Consent
+       * false | undefined - No Consent
        */
       '[vendor id]': Boolean
 
@@ -480,7 +480,7 @@ TCData = {
 
       /**
        * true - Legitimate Interest Established
-       * false - No Legitimate Interest Established
+       * false | undefined - No Legitimate Interest Established
        */
       '[vendor id]': Boolean
 
@@ -490,7 +490,7 @@ TCData = {
 
       /**
        * true - Special Feature Opted Into
-       * false - Special Feature NOT Opted Into
+       * false | undefined - Special Feature NOT Opted Into
        */
       '[special feature id]': Boolean
   },
@@ -499,7 +499,7 @@ TCData = {
 
       /**
        * true - Consent
-       * false - No Consent
+       * false | undefined - No Consent
        */
       '[purpose id]': Boolean
     },
@@ -507,7 +507,7 @@ TCData = {
 
       /**
        * true - Legitimate Interest Established
-       * false - No Legitimate Interest Established
+       * false | undefined - No Legitimate Interest Established
        */
       '[purpose id]': Boolean
     },
@@ -516,7 +516,7 @@ TCData = {
 
         /**
          * true - Consent
-         * false - No Consent
+         * false | undefined - No Consent
          */
         '[purpose id]': Boolean
       },
@@ -524,7 +524,7 @@ TCData = {
 
         /**
          * true - Legitimate Interest Established
-         * false - No Legitimate Interest Established
+         * false | undefined - No Legitimate Interest Established
          */
         '[purpose id]': Boolean
       },
@@ -679,13 +679,13 @@ InAppTCData = {
 
     /**
      * 1 - Consent
-     * 0 - No Consent
+     * 0 | undefined - No Consent
      */
     consents: '01010 -- Purpose bitfield',
 
     /**
      * 1 - Legitimate Interest Established
-     * 0 - No Legitimate Interest Established
+     * 0 | undefined - No Legitimate Interest Established
      */
     legitimateInterests: '01010 -- Purpose bitfield'
   },
@@ -693,20 +693,20 @@ InAppTCData = {
 
     /**
      * 1 - Consent
-     * 0 - No Consent
+     * 0 | undefined - No Consent
      */
     consents: '01010 -- Vendor bitfield',
 
     /**
      * 1 - Legitimate Interest Established
-     * 0 - No Legitimate Interest Established
+     * 0 | undefined - No Legitimate Interest Established
      */
     legitimateInterests: '01010 -- Vendor bitfield'
   },
 
   /**
    * 1 - Special Feature Opted Into
-   * 0 - Special Feature NOT Opted Into
+   * 0 | undefined - Special Feature NOT Opted Into
    */
   specialFeatureOptins: '01010 -- Special Feature bitfield',
 
@@ -714,13 +714,13 @@ InAppTCData = {
 
     /**
      * 1 - Consent
-     * 0 - No Consent
+     * 0 | undefined - No Consent
      */
     consents: '01010 -- Purpose bitfield',
 
     /**
      * 1 - Legitimate Interest Established
-     * 0 - No Legitimate Interest Established
+     * 0 | undefined - No Legitimate Interest Established
      */
     legitimateInterests: '01010 -- Purpose bitfield',
 
@@ -728,13 +728,13 @@ InAppTCData = {
 
       /**
        * 1 - Consent
-       * 0 - No Consent
+       * 0 | undefined - No Consent
        */
       consents: '01010 -- Purpose bitfield',
 
       /**
        * 1 - Legitimate Interest Established
-       * 0 - No Legitimate Interest Established
+       * 0 | undefined - No Legitimate Interest Established
        */
       legitimateInterests: '01010 -- Purpose bitfield'
     },
@@ -744,6 +744,7 @@ InAppTCData = {
        * 0 - Not Allowed
        * 1 - Require Consent
        * 2 - Require Legitimate Interest
+       * _ - No Restriction (maintains indexing)
        *
        * each position represents vendor id and number represents restriction
        * type 0-2
