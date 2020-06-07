@@ -46,17 +46,16 @@
    + [How often is the Global Vendor List updated?](#how-often-is-the-global-vendor-list-updated)
    + [CMPs using the GVL](#cmps-using-the-gvl)
    + [Vendors using the GVL](#vendors-using-the-gvl)
-   + [Caching the Global Vendor List](#caching-the-global-vendor-list)
-     - [CMPs caching the GVL](#cmps-caching-the-gvl)
-     - [Vendors caching the GVL](#vendors-caching-the-gvl)
-     - [Caching previous versions of the GVL](#caching-previous-versions-of-the-gvl)
+   + [Accessing And Caching the Global Vendor List](#accessing-and-caching-the-global-vendor-list)
+     - [CMPs accessing and caching the GVL](#cmps-accessing-and-caching-the-gvl)
+     - [Vendors accessing and caching the GVL](#vendors-accessing-and-caching-the-gvl)
      - [Using a compressed version of the Global Vendor List](#using-a-compressed-version-of-the-global-vendor-list)
      - [Global Vendor List and TCF Policy Updates](#global-vendor-list-and-tcf-policy-updates)
    + [Example Global Vendor List JSON Object](#example-global-vendor-list-json-object)
  * [Global CMP List](#Global-CMP-List-Specification)
    + [What is contained in the Global CMP List?](#what-is-contained-in-the-Global-CMP-list)
    + [Where can I access the Global CMP List?](#where-can-i-access-the-Global-CMP-list)
-   + [How often is the Global CMP List updated?](#how-often-is-the-the-Global-CMP-list-updated)
+   + [How often is the Global CMP List updated?](#how-often-is-the-Global-CMP-list-updated)
    + [Caching the Global CMP List](#caching-the-Global-CMP-list)
    + [Server-side caching of the GCL](#server-side-caching-of-the-GCL)
    + [Using a compressed version of the Global CMP List](#using-a-compressed-version-of-the-Global-CMP-list)
@@ -463,7 +462,7 @@ There are 4 distinct TC String segments that are joined together on a “dot” 
 *   Allowed vendors for restricting OOB signaling to select vendors, and
 *   Publisher purposes transparency and consent for their own data uses.
 
-The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent. The remaining optional and arbitrarily ordered segments represent support for [out-of-band (OOB)](#signaling-oob-in-the-tc-string) signaling and [publisher purposes transparency and consent (publisher TC)](##publisher-purposes-transparency-and-consent).  A TC String with all four segments is possible in certain conditions.
+The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent. The remaining optional and arbitrarily ordered segments represent support for [out-of-band (OOB)](#signaling-oob-in-the-tc-string) signaling and [publisher purposes transparency and consent (publisher TC)](#publisher-purposes-transparency-and-consent).  A TC String with all four segments is possible in certain conditions.
 
 For example, a globally-scoped TC String with all four segments present would be surfaced through CMP API – not stored – and look like:
 
