@@ -385,6 +385,7 @@ The following table summarises where data is stored:
     </tr>
   </tbody>
 </table>
+
 **Managing conflicting string versions:**
 If a CMP encounters a situation where both a v1.1 string and a v2.0 string are erroneously present simultaneously, the CMP should remove the v1.1 string to ensure that there is only one source of truth for consumers of the string.
 
