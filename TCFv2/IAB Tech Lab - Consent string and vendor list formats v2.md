@@ -386,7 +386,7 @@ The following table summarises where data is stored:
   </tbody>
 </table>
 
-**Managing conflicting string versions:**
+#### Managing conflicting string versions
 If a CMP encounters a situation where both a v1.1 string and a v2.0 string are erroneously present simultaneously, the CMP should remove the v1.1 string to ensure that there is only one source of truth for consumers of the string.
 
 **Note:** TCF version 2 introduces [“Publisher Restrictions”](#what-are-publisher-restrictions), which, if exhausted by a publisher, could result in TC strings that are larger than the size limit for cookies.  While this possibility is remote, it should be guarded against – a CMP should work with a publisher to help them accomplish their goals. [Publisher Restrictions](#what-are-publisher-restrictions) are only allowed in TC Strings, therefore within a service-specific context so CMPs may need to take this into consideration when deciding on the storage mechanism for those TC Strings.
