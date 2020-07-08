@@ -876,7 +876,7 @@ For performance reasons, the preferred way to make this happen in current ad ser
 | Macro | Values |
 | :-- | :-- |
 | `${GDPR}`| <p>**1** - GDPR Applies</p><p>**0** - GDPR does not apply</p><p>**unset** - unknown</p> |
-| `${GDPR_CONSENT}`| Encoded TC String |
+| `${GDPR_CONSENT_XXXX}`| Encoded TC String where XXXX is the numeric Vendor ID of the vendor receiving the TC string. |
 
 **Note**: Values align with IAB OpenRTB GDPR Advisory
 
