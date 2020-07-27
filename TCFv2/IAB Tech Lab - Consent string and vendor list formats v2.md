@@ -1022,7 +1022,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       <td>Purpose ID</td>
       <td>
         The Vendor’s declared Purpose ID that the publisher has indicated
-        that they are overriding.
+        that they are overriding. Use Purpose ID 63 in order to signal "all purposes".
       </td>
     </tr>
     <tr>
