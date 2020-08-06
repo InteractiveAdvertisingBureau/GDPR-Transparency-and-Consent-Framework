@@ -3,7 +3,7 @@ A new feature introduced for Transparency and Consent Framework (TCF) v2.1
 
 ## Summary
 
-This specification provides vendors with a method to disclose the amount of time any vendor-specific information may be stored on a device. The required disclosure is an added section in the Global Vendor List (GVL) and is used by CMPs to display the information to consumers. This form of transparency took on urgency after a ruling by the Court of Justice of the European Union in Case C-673/17 _Planet49_. 
+This specification provides vendors with a method to disclose the length of time any vendor-specific information may be stored on a device. The required disclosure is an added section in the Global Vendor List (GVL) and is used by CMPs to display the information to consumers. Additionally, vendors disclose additional storage and access via a JSON file which CMPs display to consumers. This form of transparency took on urgency after a ruling by the Court of Justice of the European Union in Case C-673/17 _Planet49_. 
 
 ### Planet49 Ruling
 
@@ -16,9 +16,9 @@ In its Planet49 judgment (available [here](http://curia.europa.eu/juris/document
 
 ## Global Vendor List Fields<sup id="a2">[2](#f2)</sup>
 
-### cookieMaxAgeSeconds
+### <code>cookieMaxAgeSeconds</code>
 
-The number, any integer in seconds, of the longest potential duration for cookie storage on a device. Cookies are the only method of storage that permit a predictable duration to be set. When multiple cookies are stored, each with different storage duration, information stored on the cookie with the longest duration is represented.
+The number of seconds representing the longest potential duration for cookie storage on a device. Cookies are the only method of storage that permit a predictable duration to be set. When multiple cookies are stored, each with different storage duration, information stored on the cookie with the longest duration is represented. If a Vendor uses multiple cookies with differing durations, <code>cookieMaxAgeSeconds</code> represents the longest duration.
 
 <table>
   <tr>
@@ -47,9 +47,9 @@ The number, any integer in seconds, of the longest potential duration for cookie
   </tr>
 </table>
 
-### usesNonCookieAccess
+### <code>usesNonCookieAccess</code>
 
-This true or false field indicates whether the vendor uses other, non-cookie methods of storage or accessing information already stored on a user’s device (see footnote 1). Non-cookie access could include, but is not limited to: localStorage, indexDB, and mobile ad IDs.
+This true or false field indicates whether the vendor uses other, non-cookie methods of storage or accessing information already stored on a user’s device (see footnote 1). Examples of non-cookie storage and access may be localStorage, indexDB, mobile ad IDs, etc.
 
 <table>
   <tr>
@@ -80,7 +80,7 @@ This true or false field indicates whether the vendor uses other, non-cookie met
 
 ### deviceStorageDisclosureUrl
 
-Link to a recommended, vendor-supplied, secure URL for disclosing additional storage information (see “deviceStorage.json” heading below for additional details). 
+Link to a recommended, vendor-hosted, secure URL for disclosing additional storage information (see “deviceStorage.json” heading below for additional details). 
 
 <table>
   <tr>
@@ -104,14 +104,14 @@ Link to a recommended, vendor-supplied, secure URL for disclosing additional sto
    </td>
    <td>-
    </td>
-   <td>Value is URL to Vendor’s optional, but recommended deviceStorage.json file
+   <td>Location of vendor-hosted deviceStorage.json file
    </td>
   </tr>
 </table>
 
 #### Example of GVL entry with `cookieMaxAgeSeconds, usesNonCookieAccess `and `deviceStorageDisclosureUrl`:
 
-```
+```javascript
 ...
 "1": {
   "id": 1,
@@ -132,7 +132,7 @@ Link to a recommended, vendor-supplied, secure URL for disclosing additional sto
 
 ## deviceStorage.json
 
-The deviceStorage.json is provided using a vendor-supplied URL and serves the purpose of disclosing additional storage information. The recommended location for storing the JSON file is https://vendor123.com/.well-known/deviceStorage.json. Storage at this location is not required since reference to the file is provided in the GVL. However, because CMP consent interfaces will need to be able to load the JSON file in the browser, [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) must be enabled at the serving location specified. Storage types are classified as cookies or local storage and correspond to TCF purposes.
+The deviceStorage.json is hosted at the vendor-supplied URL (<code>deviceStorageDisclosureUrl</code>) to disclose additional storage information. It is recommended that deviceStorage.json be hosted in a Vendor's .well-known directory; although not required because the URL is provided by <code>deviceStorageDisclosureUrl</code>. Because CMPs will need to be able to load the JSON file in the browser, [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) must be enabled at the serving location specified by <code>deviceStorageDisclosureUrl</code>.
 
 ### Disclosures Object
 
@@ -214,7 +214,7 @@ To indicate that the use of storage is <span style="text-decoration:underline;">
 Below is an example JSON for a fictional company named AdTech123.  AdTech123 owns the domain `adtech123.com` and has a "third-party" re-targeting cookie that is set on the domain of `retarget.adtech123.com`.  They also maintain a `localStorage` object that contains a `user` object with key “id” that can be accessed via JavaScript at `window.localStorage.id`. AdTech123 will host this `deviceStorage.json` at https://vendor123.com/path/to/deviceStorage.json
 
 
-```
+```javascript
 {
   "disclosures": [
     {
