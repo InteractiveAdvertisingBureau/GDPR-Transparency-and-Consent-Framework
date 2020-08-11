@@ -132,7 +132,7 @@ Link to a recommended, vendor-hosted, secure URL for disclosing additional stora
 
 ## deviceStorage.json
 
-The deviceStorage.json is hosted at the vendor-supplied URL (<code>deviceStorageDisclosureUrl</code>) to disclose additional storage information. It is recommended that deviceStorage.json be hosted in a Vendor's .well-known directory; although not required because the URL is provided by <code>deviceStorageDisclosureUrl</code>. Because CMPs will need to be able to load the JSON file in the browser, [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) must be enabled at the serving location specified by <code>deviceStorageDisclosureUrl</code>.
+The deviceStorage.json is hosted at the vendor-supplied URL (<code>deviceStorageDisclosureUrl</code>) to disclose additional storage and access information. It is recommended that deviceStorage.json be hosted in a Vendor's .well-known directory; although not required because the URL is provided by <code>deviceStorageDisclosureUrl</code>. Because CMPs will need to be able to load the JSON file in the browser, [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) must be enabled at the serving location specified by <code>deviceStorageDisclosureUrl</code>.
 
 ### Disclosures Object
 
@@ -211,7 +211,7 @@ To indicate that the use of storage is <span style="text-decoration:underline;">
 
 #### Example
 
-Below is an example JSON for a fictional company named AdTech123.  AdTech123 owns the domain `adtech123.com` and has a "third-party" re-targeting cookie that is set on the domain of `retarget.adtech123.com`.  They also maintain a `localStorage` object that contains a `user` object with key “id” that can be accessed via JavaScript at `window.localStorage.id`. AdTech123 will host this `deviceStorage.json` at https://vendor123.com/path/to/deviceStorage.json
+Below is an example JSON for a fictional company named AdTech123.  AdTech123 owns the domain `adtech123.com` and has a "third-party" re-targeting cookie that is set on the domain of `retarget.adtech123.com`.  They also maintain a `localStorage` object that contains a `user` object with key “id” that can be accessed via JavaScript at `window.localStorage.id`. AdTech123 hosts this `deviceStorage.json` at https://vendor123.com/path/to/deviceStorage.json
 
 
 ```javascript
