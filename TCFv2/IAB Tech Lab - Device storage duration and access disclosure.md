@@ -78,7 +78,7 @@ This true or false field indicates whether the vendor uses other, non-cookie met
   </tr>
 </table>
 
-### deviceStorageDisclosureUrl
+### <code>deviceStorageDisclosureUrl</code>
 
 Link to a recommended, vendor-hosted, secure URL for disclosing additional storage information (see “deviceStorage.json” heading below for additional details). 
 
