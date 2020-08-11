@@ -18,7 +18,7 @@ In its Planet49 judgment (available [here](http://curia.europa.eu/juris/document
 
 ### <code>cookieMaxAgeSeconds</code>
 
-The number of seconds representing the longest potential duration for cookie storage on a device. Cookies are the only method of storage that permit a predictable duration to be set. When multiple cookies are stored, each with different storage duration, information stored on the cookie with the longest duration is represented. If a Vendor uses multiple cookies with differing durations, <code>cookieMaxAgeSeconds</code> represents the longest duration.
+The number of seconds representing the longest potential duration for cookie storage on a device. If a Vendor uses multiple cookies with differing durations, <code>cookieMaxAgeSeconds</code> represents the cookie with the longest duration. Note: cookies are the only method of storage or device access that permit a predictable duration to be set. 
 
 <table>
   <tr>
