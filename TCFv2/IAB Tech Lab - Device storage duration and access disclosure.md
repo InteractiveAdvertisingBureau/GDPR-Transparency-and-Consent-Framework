@@ -73,7 +73,7 @@ This true or false field indicates whether the vendor uses other, non-cookie met
    </td>
    <td>-
    </td>
-   <td>Indicates the vendor’s use of non-cookie storage and access to information already stored on a user’s device. True indicates non-cookie access is used. False indicates only cookie access is used. 
+   <td>Indicates the vendor’s use of non-cookie storage and access to information already stored on a user’s device. True indicates non-cookie access is used. False indicates only cookie storage and access are used. 
    </td>
   </tr>
 </table>
