@@ -1883,14 +1883,12 @@ Here is an annotated example of the GVL’s JSON format:
    *
    * "name": string, REQUIRED
    *
-   * "purposes": array of positive integers, either purposes or
+   * "purposes": conditionally OPTIONAL. array of positive integers. List of 
+   * Purpose ids declared as performed on the legal basis of consent. 
    *
-   * "legIntPurposes" REQUIRED. Array may be empty. List of purpose ids
-   * declared as performed on the legal basis of consent
-   *
-   * "specialPurposes": array of positive integers, OPTIONAL. Array may be
-   * empty. List of Special Purposes declared as performed on the legal basis
-   * of a legitimate interest
+   * "legIntPurposes" conditionally OPTIONAL. array of positive integers. List
+   * of Purpose ids declared as performed on the legal basis of legitimate
+   * interest
    *
    * "flexiblePurposes": array of positive integers, OPTIONAL. Array may be
    * empty. List of purpose ids where the vendor is flexible regarding the
@@ -1912,6 +1910,10 @@ Here is an annotated example of the GVL’s JSON format:
    *   range from 1 to N, where N is the highest purpose id published in this
    *   GVL file.
    *
+   * "specialPurposes": array of positive integers, OPTIONAL. Array may be
+   * empty. List of Special Purposes declared as performed on the legal basis
+   * of a legitimate interest
+   *
    * "features": array of positive integers, OPTIONAL. Array may be empty. List
    * of Features the Vendor may utilize when performing some declared Purposes
    * processing.
@@ -1919,10 +1921,6 @@ Here is an annotated example of the GVL’s JSON format:
    * "specialFeatures": array of positive integers, OPTIONAL. Array may be
    * empty. List of Special Features the Vendor may utilize when performing
    * some declared Purposes processing.
-   *
-   * "SpecialPurposes": array of positive integers, OPTIONAL. Array may be
-   * empty. List of Special Purposes declared as performed on the legal basis
-   * of a legitimate interest
    *
    * "policyUrl": url string, REQUIRED URL to the Vendor's privacy policy
    * document.
