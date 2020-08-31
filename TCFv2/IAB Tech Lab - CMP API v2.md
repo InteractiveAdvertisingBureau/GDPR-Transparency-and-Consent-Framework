@@ -615,7 +615,7 @@ PingReturn = {
 | Status Code | Applicable for | Description |
 | :-------- | :------------- | :------------- |
 | `'stub'` | cmpStatus | CMP not yet loaded – stub still in place |
-| `'loading'` | cmpStatus | CMP is loading |
+| `'loading'` | cmpStatus | DEPRECATED (this status is not distinct and will be removed in a future version) |
 | `'loaded'` | cmpStatus | CMP is finished loading |
 | `'error'` | cmpStatus | CMP is in an error state. A CMP shall not respond to any other API requests if this cmpStatus is present. A CMP may set this status if, for any reason, it is unable to perform the operations in compliance with the TCF. |
 | `'visible'` | displayStatus | User interface is currently displayed |
