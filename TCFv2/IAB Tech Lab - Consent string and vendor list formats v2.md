@@ -1883,15 +1883,15 @@ Here is an annotated example of the GVL’s JSON format:
    *
    * "name": string, REQUIRED
    *
-   * "purposes": conditionally OPTIONAL (see "Constraints"). array of positive 
+   * "purposes": conditionally OPTIONAL (see "Constraints") array of positive 
    * integers. List of Purpose ids declared as performed on the legal basis of
    * consent
    *
-   * "legIntPurposes" conditionally OPTIONAL (see "Constraints"). array of
+   * "legIntPurposes" conditionally OPTIONAL (see "Constraints") array of
    * positive integers. List of Purpose ids declared as performed on the legal
    * basis of legitimate interest
    *
-   * "flexiblePurposes": array of positive integers, OPTIONAL. Array may be
+   * "flexiblePurposes": OPTIONAL array of positive integers. Array may be
    * empty. List of purpose ids where the vendor is flexible regarding the
    * legal basis; they will perform the processing based on consent or a
    * legitimate interest. The 'default' is determined by which of the other two
