@@ -1883,16 +1883,15 @@ Here is an annotated example of the GVL’s JSON format:
    *
    * "name": string, REQUIRED
    *
-   * "purposes": array of positive integers, either purposes or
+   * "purposes": conditionally OPTIONAL (see "Constraints") array of positive 
+   * integers. List of Purpose ids declared as performed on the legal basis of
+   * consent
    *
-   * "legIntPurposes" REQUIRED. Array may be empty. List of purpose ids
-   * declared as performed on the legal basis of consent
+   * "legIntPurposes" conditionally OPTIONAL (see "Constraints") array of
+   * positive integers. List of Purpose ids declared as performed on the legal
+   * basis of legitimate interest
    *
-   * "specialPurposes": array of positive integers, OPTIONAL. Array may be
-   * empty. List of Special Purposes declared as performed on the legal basis
-   * of a legitimate interest
-   *
-   * "flexiblePurposes": array of positive integers, OPTIONAL. Array may be
+   * "flexiblePurposes": OPTIONAL array of positive integers. Array may be
    * empty. List of purpose ids where the vendor is flexible regarding the
    * legal basis; they will perform the processing based on consent or a
    * legitimate interest. The 'default' is determined by which of the other two
@@ -1900,8 +1899,7 @@ Here is an annotated example of the GVL’s JSON format:
    * vendor
    *
    * Constraints:
-   *   Either purposes OR legIntPurposes can be missing/empty, but not
-   *   both.
+   *   Either purposes OR legIntPurposes can be missing/empty, but not both.
    *
    *   A Purpose id must not be present in both purposes and legIntPurposes
    *
@@ -1912,6 +1910,10 @@ Here is an annotated example of the GVL’s JSON format:
    *   range from 1 to N, where N is the highest purpose id published in this
    *   GVL file.
    *
+   * "specialPurposes": array of positive integers, OPTIONAL. Array may be
+   * empty. List of Special Purposes declared as performed on the legal basis
+   * of a legitimate interest
+   *
    * "features": array of positive integers, OPTIONAL. Array may be empty. List
    * of Features the Vendor may utilize when performing some declared Purposes
    * processing.
@@ -1919,10 +1921,6 @@ Here is an annotated example of the GVL’s JSON format:
    * "specialFeatures": array of positive integers, OPTIONAL. Array may be
    * empty. List of Special Features the Vendor may utilize when performing
    * some declared Purposes processing.
-   *
-   * "SpecialPurposes": array of positive integers, OPTIONAL. Array may be
-   * empty. List of Special Purposes declared as performed on the legal basis
-   * of a legitimate interest
    *
    * "policyUrl": url string, REQUIRED URL to the Vendor's privacy policy
    * document.
