@@ -218,14 +218,14 @@ Below is an example JSON for a fictional company named AdTech123.  AdTech123 own
 {
   "disclosures": [
     {
-      "name": "retarget-adtech123",
+      "identifier": "retarget-adtech123",
       "type": "cookie",
       "maxAgeSeconds": 2592000000,
       "domain": "retarget.adtech123.com", 
       "purposes": [3,4,5,6]
     },
     {
-      "name": "id",
+      "identifier": "id",
       "type": "web",
       "maxAgeSeconds": null,
       "purposes": [3,4,5,6,7,8,9,10]
