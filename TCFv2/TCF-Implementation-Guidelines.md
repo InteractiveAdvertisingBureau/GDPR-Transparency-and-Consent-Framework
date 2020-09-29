@@ -40,7 +40,8 @@ Policy FAQ, webinars, and other resources are available at
 &nbsp;&nbsp;&nbsp;&nbsp;**[2. Sharing consent with vendors](#shareconsent)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[3. Storing Consent](#storeconsent)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[4. Withdrawal of consent and other non-TCF policy](#withdrawconsent)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[5. CMP interface requirements](#cmpreq)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[5. Encoding publisher restrictions](#pubrestrenc)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[6. CMP interface requirements](#cmpreq)**<br>
 ### [How do vendors outside the RTB bidstream query a CMP?](#outsidertb)
 ### [Other Frequently Asked Questions](#otherfaq)
 &nbsp;&nbsp;&nbsp;&nbsp;**[Are cookies required for working with the CMP API?](#cookiesrequired)**<br>
@@ -93,7 +94,7 @@ All definitions in the implementation guidelines should reflect definitions prov
 ## What changed in v2?<a name="changes"></a>
 Version 2 of the policy and technical specification marks significant updates to better support GDPR legislation and enhance the user experience, while remaining flexible to account for unique scenarios within the framework. 
 
-Changes across the Framework are listed below and grouped according to supporting documentation for: the TC String, the Global Vendor List,  and the CMP API. 
+Changes across the Framework are listed below and grouped according to supporting documentation for: the TC String, the Global Vendor List,  and the CMP API.
 
 ### Within the Transparency and Consent String (TC String)<a name="changetcstring"></a>
 - Special jurisdiction handling using publisher country code
@@ -182,7 +183,7 @@ For any client side call, once the consent payload has been obtained leveraging 
 The status of these two fields as indicated above show that the CMP has been loaded and the user has engaged. After validating the TC data payload is suitable for your case, you should pass it in the ad call using the URL-passing macro solution detailed in documentation for the TC String.
 
 ## What do I do with the TC String?<a name="handletcstring"></a>
-According to policies of the Transparency and Consent Framework, a vendor may choose not to transmit data to another vendor for any reason, but a vendor must not transmit data to another vendor without a justified basis for relying on that vendor’s legal basis for processing the personal data.  If a vendor has or obtains personal data and has no legal basis for the access to and processing of that data, the vendor should quickly cease collection and storage of the data and refrain from passing the data on to other parties, even if those parties have a legal basis.
+According to policies of the Transparency and Consent Framework, a vendor may choose not to transmit data to another vendor for any reason, but a vendor must not transmit data to another vendor without a justified basis for relying on that vendor’s legal basis for processing the personal data.If a vendor has or obtains personal data and has no legal basis for the access to andprocessing of that data, the vendor should quickly cease collection and storage of the data andrefrain from passing the data on to other parties, even if those parties have a legal basis.
 
 ## Agency guidelines<a name="agencyguide"></a>
 In addition to the vendor guidelines, agencies may want to consider the following details: 
@@ -244,14 +245,25 @@ Method | Pros | Cons
 ------------ | ------------- | -------------
 Cookies | Easy to use and cheap. Fast and provide a good user experience. | Short-lived. Cannot be used as proof of consent. Third-party cookies might be blocked by browsers so web-wide consent can be hard to implement
 Server-side storage | Long-lived. Can be used as proof of consent | Can be slow (use cookies/local storage as client-side cache). Requires a long-term ID (cookie ID or email or similar user ID)
-Mobile: internal data storage / shared preferences | Easy to use and cheap. Fast and provide a good user experience | Cannot be used as proof of consent. Cannot be shared across apps so device-wide consent can be hard to achieve
-
+Mobile: internal data storage / shared preferences | Easy to use and cheap. Fast and provide a good user experience | Cannot be used as proof of consent. Cannot be shared across apps so device-wide consent can be hard to achie
 You’ll usually want to go with a combination of server-side storage – for being able to store consent for a long time and share it across websites/apps – and a client-side storage like cookies or shared preferences – for a local fast-to-access cache.
 
 ## 4. Withdrawal of consent and other non-TCF policy <a name="withdrawconsent"></a>
 Signals sent through the IAB Europe framework should only indicate what the user status is at the time of the signal creation and nothing else. While the CMP should also enable users to withdraw consent, the minimum requirement is to record the user's preference at the time the signal is created. Certain GDPR policy, such as portability and the right to be forgotten, is not covered in the IAB Europe TCF. CMPs and vendors should address other GDPR rights outside the TCF separately and on their own.
 
-## 5. CMP interface requirements<a name="cmpreq"></a>
+## 5. Encoding publisher restrictions <a name="pubrestrenc"></a>
+CMPs are advised to store/provide publisher restrictions only in cases they are necessary to reflect the publishers choice to restrict a vendors processing of personal data. In terms of reflecting a publisher’s choice:
+
+* In case a vendor has not been disclosed to the user via the CMP UI, there is no need to store restrictions for that vendor in the TC String. Given the vendor was not disclosed both vendor consent and vendor legitimate interest signals in the TC String must be set to 0 which suffices to signal that the vendor may not process personal data.
+* Purpose restrictions (i.e. disallowing a vendor to process) need to be stored in case the vendor was disclosed by the CMP (reflecting the restriction in the UI) and registered for that purpose in the GVL
+* Legal Basis restrictions are only needed in situations where there vendor was disclosed by the CMP (reflecting the restriction in the UI)  and declared flexibilty in the GVL for the respective purpose, meaning:
+
+    1. The vendor registered a purpose as legitimated interest (default legal basis), but also registered this purpose as flexible (i.e. also accepts consent as a legal basis). In this case a "require consent" restriction is needed to signal that the vendor may only apply the consent signal/can rely on it to process personal data.
+    2. The vendor registered a purpose as consent (default legal basis), but also registered this purpose as flexible (i.e. also accepts legitimate interest as a legal basis).  In this case a "require legitimate interest" restriction is needed to signal that the vendor may only apply the legitimate interest signal/can rely on it to process personal data.
+    
+Note that the above does not preclude the use of efficient encoding/decoding schemes in certain scenarios, for example in cases where a publisher wants to restrict a purpose for all vendors to consent it might be more efficient to encode a small number of range restriction segments using an specific encoding scheme.
+
+## 6. CMP interface requirements<a name="cmpreq"></a>
 Please refer to the policies for the minimal information / functionality that needs to be shown on the first screen of the UI and the information that must be present on second/additional layers of the UI.
 
 # How do vendors outside the RTB bidstream query a CMP?<a name="outsidertb"></a>
