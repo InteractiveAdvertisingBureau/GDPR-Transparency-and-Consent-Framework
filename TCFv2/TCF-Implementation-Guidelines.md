@@ -253,7 +253,7 @@ You’ll usually want to go with a combination of server-side storage – for be
 Signals sent through the IAB Europe framework should only indicate what the user status is at the time of the signal creation and nothing else. While the CMP should also enable users to withdraw consent, the minimum requirement is to record the user's preference at the time the signal is created. Certain GDPR policy, such as portability and the right to be forgotten, is not covered in the IAB Europe TCF. CMPs and vendors should address other GDPR rights outside the TCF separately and on their own.
 
 ## 5. Encoding publisher restrictions <a name="pubrestrenc"></a>
-CMPs are advised to store/provide publisher restrictions only in cases they are necessary to reflect the publishers choice to restrict a vendors processing of personal data. In terms of reflecting a publisher’s choice:
+In order to reduce the size of the TC string, CMPs are advised to store/provide publisher restrictions only when necessary to reflect the publisher's choice to restrict a vendor's processing of personal data. In terms of reflecting a publisher’s choice:
 
 * In case a vendor has not been disclosed to the user via the CMP UI, there is no need to store restrictions for that vendor in the TC String. Given the vendor was not disclosed both vendor consent and vendor legitimate interest signals in the TC String must be set to 0 which suffices to signal that the vendor may not process personal data.
 * Purpose restrictions (i.e. disallowing a vendor to process) need to be stored in case the vendor was disclosed by the CMP (reflecting the restriction in the UI) and registered for that purpose in the GVL
