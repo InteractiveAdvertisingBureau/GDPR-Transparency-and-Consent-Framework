@@ -255,8 +255,8 @@ Signals sent through the IAB Europe framework should only indicate what the user
 ## 5. Encoding publisher restrictions <a name="pubrestrenc"></a>
 In order to reduce the size of the TC string, CMPs are advised to store/provide publisher restrictions only when necessary to reflect the publisher's choice to restrict a vendor's processing of personal data. In terms of reflecting a publisher’s choice:
 
-* In case a vendor has not been disclosed to the user via the CMP UI, there is no need to store restrictions for that vendor in the TC String. Given the vendor was not disclosed both vendor consent and vendor legitimate interest signals in the TC String must be set to 0 which suffices to signal that the vendor may not process personal data.
-* Purpose restrictions (i.e. disallowing a vendor to process) need to be stored in case the vendor was disclosed by the CMP (reflecting the restriction in the UI) and registered for that purpose in the GVL
+* In case a vendor has not been disclosed to the user via the CMP UI, there is no need to store restrictions for that vendor in the TC String. Given the vendor was not disclosed both vendor consent and vendor legitimate interest signals in the TC String can be left undefined which suffices to signal that the vendor may not process personal data.
+* Purpose restrictions that disallow a vendor to process personal data for a specific purpose only need to be stored in case the vendor was disclosed by the CMP (reflecting the restriction in the UI) and registered for that purpose in the GVL
 * Legal Basis restrictions are only needed in situations where there vendor was disclosed by the CMP (reflecting the restriction in the UI) and declared flexibilty in the GVL for the respective purpose, meaning:
 
     1. The vendor registered a purpose as legitimate interest (default legal basis), but also registered this purpose as flexible (i.e. also accepts consent as a legal basis). In this case a "require consent" restriction is needed to signal that the vendor may only apply the consent signal/can rely on it to process personal data.
