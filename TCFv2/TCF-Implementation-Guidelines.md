@@ -262,7 +262,7 @@ In order to reduce the size of the TC string, CMPs are advised to store/provide 
     1. The vendor registered a purpose as legitimate interest (default legal basis), but also registered this purpose as flexible (i.e. also accepts consent as a legal basis). In this case a "require consent" restriction is needed to signal that the vendor may only apply the consent signal/can rely on it to process personal data.
     2. The vendor registered a purpose as consent (default legal basis), but also registered this purpose as flexible (i.e. also accepts legitimate interest as a legal basis).  In this case a "require legitimate interest" restriction is needed to signal that the vendor may only apply the legitimate interest signal/can rely on it to process personal data.
     
-Note that the above does not preclude the use of efficient encoding/decoding schemes in certain scenarios, for example in cases where a publisher wants to restrict a purpose for all vendors to consent it might be more efficient to encode a small number of range restriction segments using an specific encoding scheme.
+Note that the above does not preclude the use of efficient encoding/decoding schemes in certain scenarios, for example in cases where a publisher wants to restrict a purpose for all vendors to consent it might be more efficient to encode a small number of range restriction segments using a specific encoding scheme.
 
 ## 6. CMP interface requirements<a name="cmpreq"></a>
 Please refer to the policies for the minimal information / functionality that needs to be shown on the first screen of the UI and the information that must be present on second/additional layers of the UI.
