@@ -257,7 +257,7 @@ In order to reduce the size of the TC string, CMPs are advised to store/provide 
 
 * In case a vendor has not been disclosed to the user via the CMP UI, there is no need to store restrictions for that vendor in the TC String. Given the vendor was not disclosed both vendor consent and vendor legitimate interest signals in the TC String must be set to 0 which suffices to signal that the vendor may not process personal data.
 * Purpose restrictions (i.e. disallowing a vendor to process) need to be stored in case the vendor was disclosed by the CMP (reflecting the restriction in the UI) and registered for that purpose in the GVL
-* Legal Basis restrictions are only needed in situations where there vendor was disclosed by the CMP (reflecting the restriction in the UI)  and declared flexibilty in the GVL for the respective purpose, meaning:
+* Legal Basis restrictions are only needed in situations where there vendor was disclosed by the CMP (reflecting the restriction in the UI) and declared flexibilty in the GVL for the respective purpose, meaning:
 
     1. The vendor registered a purpose as legitimated interest (default legal basis), but also registered this purpose as flexible (i.e. also accepts consent as a legal basis). In this case a "require consent" restriction is needed to signal that the vendor may only apply the consent signal/can rely on it to process personal data.
     2. The vendor registered a purpose as consent (default legal basis), but also registered this purpose as flexible (i.e. also accepts legitimate interest as a legal basis).  In this case a "require legitimate interest" restriction is needed to signal that the vendor may only apply the legitimate interest signal/can rely on it to process personal data.
