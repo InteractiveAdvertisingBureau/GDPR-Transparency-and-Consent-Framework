@@ -202,8 +202,7 @@ Publisher restrictions are custom requirements specified by a publisher and must
 
 For the avoidance of doubt:
 
-* In case a vendor has declared flexibility for a purpose and there is no legal basis restriction signal it must always apply the default legal basis under which the purpose was registered aside from being registered as flexible. That means if a vendor declared a purpose as legitimate interest and also declared that purpose as flexible it may not apply a "consent" signal without a legal basis restriction signal to require consent.   
-* Restriction signals with respect to applicable legal basis for purposes for which a vendor has not declared flexibility may be ignored by vendors
+In case a vendor has declared flexibility for a purpose and there is no legal basis restriction signal it must always apply the default legal basis under which the purpose was registered aside from being registered as flexible. That means if a vendor declared a purpose as legitimate interest and also declared that purpose as flexible it may not apply a "consent" signal without a legal basis restriction signal to require consent.   
 
 
 ### How does the CMP handle a globally-scoped TC string?
