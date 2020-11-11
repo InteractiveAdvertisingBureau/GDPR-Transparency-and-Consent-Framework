@@ -215,27 +215,29 @@ In case a vendor has declared flexibility for a purpose and there is no legal ba
 *   Once the user has made their selections the CMP shall save the resulting TC String back to the global context, overwriting the old one.
 
 
-### How does a URL-based service process the TC string when it can't execute JavaScript?
+### How does a vendor retrieve the TC string when it is not participating in a bid request and cannot execute JavaScript?
 
-When a creative is rendered, it may contain a number of pixels under `<img>` tags. For example, `<img src="http://vendor-a.com/key1=val1&key2=val2">` which fires an HTTP GET request from the browser to Vendor A’s domain.
+There are cases when vendors are unable to obtain a TC string via a bid request or using the [CMP API (JavaScript)](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md). A vendor may not be integrated with OpenRTB or may participate in an ad related transaction via a method which cannot execute JavaScript to call the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md). The cases are:
 
-Since the pixel is in an `<img>` tag without the ability to execute JavaScript, the CMP API cannot be used to obtain the TC String.  All parties in the ad supply chain who transact using URLs must add a macro in their URLs where the TC String is inserted. Any caller with access to the applicable TC String must insert it within a URL containing the macro `${GDPR_CONSENT_XXXXX}` where `XXXXX` is the numeric Vendor ID of the vendor receiving the TC string.
+*   Non-JavaScript creative tags 
+*   URL-based cookie syncing (typically an `<img>` tag)
+*   Other URL-based pixels
 
-For example, for Vendor A with ID 123 to receive a TC String, an image URL must include a key-value pair with the URL parameter and macro `gdpr_consent=${GDPR_CONSENT_123}`.
+For example, `<img src="http://vendor-a.com/key1=val1&key2=val2">` fires an HTTP GET request from the browser to Vendor A’s domain. Since this implementation is an `<img>` tag without the ability to execute JavaScript, the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md) cannot be used by the vendor to obtain the TC String.
 
-The resulting URL is:
+When parties in the ad supply chain cannot retrieve a TC String from an OpenRTB bid request or execute JavaScript to read a TC string from the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md) they must add a macro to their non-Javascript creative tags, URL-based cookie syncing pixels and other URL-based pixels. Vendors with access to the TC String via OpenRTB or the CMP API will insert the TC String within the implementation containing the macro `${GDPR_CONSENT_XXXXX}` (where `XXXXX` is the numeric Vendor ID of the vendor unable to retrieve the TC string via means other than the macro). Now the parties in the ad supply chain who cannot retrieve a TC string from OpenRTB or the CMP API can read the value of the expanded macro when their implementation fires an HTTP GET Request.
+
+For example, for Vendor A with ID 456 to receive a TC String via the vendor's non-Javascript creative tag, URL-based cookie syncing pixel or other URL-based pixel, Vendor A includes a key-value pair with the parameter and macro `gdpr_consent=${GDPR_CONSENT_456}`. The resulting URL implementation before the macro is expanded by the party who calls it is:
 
 `http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=${GDPR_CONSENT_123}`
 
-If the TC String is: `COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw`
-
- Then the caller replaces the macro in the URL with the actual TC String so that the originally placed pixel containing the macro is modified as follows when making the call to the specified server.
+If the TC String for a given transaction is `COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw` the caller of the URL example above replaces (expands) the macro in the URL `gdpr_consent=${GDPR_CONSENT_123}` with the actual TC String value so that the originally placed macro is expand and the URL appears as follows when making the HTTP get request to Vendor A's server.
 
 `http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw`
 
-TC Strings must always be propagated as is, and not modified. Additional URLs in the supply chain are addressed the same way with remaining vendors.
+TC Strings must always be propagated via macros as is, and not modified. In this example there may be additional URL-based implementations in the supply chain. Each is addressed the same way.
 
-The available URL parameters and macros to relay information down the supply chain are listed in the following section.
+The available parameters and macros to relay information through the non-OpenRTB/non-JavaScript excuting supply chain are listed in the following section.
 
 #### Full TC String passing
 
