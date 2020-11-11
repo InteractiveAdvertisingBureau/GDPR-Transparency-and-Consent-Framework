@@ -361,14 +361,19 @@ The following table sets expectations about which parties are expected to add an
    <td>DSP before returning creative URL to page</td>
   </tr>
   <tr>
-   <td>3rd party creative <strong>via publisher ad server</strong></td>
+   <td>3rd party creative URL <strong>via publisher ad server</strong></td>
    <td>Creative vendor at the time of tag export</td>
    <td>Publisher ad server before returning URL to the page</td>
   </tr>
   <tr>
-   <td>3rd party creative <strong>via header bidding</strong></td>
+   <td>3rd party creative URL <strong>via header bidding</strong></td>
    <td>Creative vendor at the time of tag export</td>
    <td>DSP before returning URL to the SSP</td>
+  </tr>
+  <tr>
+   <td>3rd party creative URL <strong>via mediation</strong></td>
+   <td>Creative vendor at the time of tag export</td>
+   <td>Mediating network before returning URL to the SSP</td>
   </tr>
   <tr>
    <td>Hosted creative URL <strong>via DSP</strong></td>
@@ -376,22 +381,22 @@ The following table sets expectations about which parties are expected to add an
    <td>DSP before returning creative URL to page</td>
   </tr>
   <tr>
-   <td>Hosted creative <strong>via publisher ad server</strong></td>
+   <td>Hosted creative URL <strong>via publisher ad server</strong></td>
    <td>Publisher ad server before returning URL to the page</td>
    <td>Publisher ad server before returning URL to the page</td>
   </tr>
   <tr>
-   <td>Hosted creative <strong>via header bidding</strong></td>
+   <td>Hosted creative URL <strong>via header bidding</strong></td>
    <td>DSP before returning URL to the SSP</td>
    <td>DSP before returning URL to the SSP</td>
   </tr>
   <tr>
-   <td>Cookie Sync Pixel <strong>via Creative</strong></td>
+   <td>Cookie Sync URL <strong>via creative</strong></td>
    <td>?</td>
    <td>?</td>
   </tr>
   <tr>
-   <td>Cookie Sync Pixel <strong>via Other Means</strong></td>
+   <td>Cookie Sync URL <strong>via other means</strong></td>
    <td>?</td>
    <td>?</td>
   </tr>
