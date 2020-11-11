@@ -24,7 +24,7 @@
    + [What are publisher restrictions?](#what-are-publisher-restrictions)
    + [How does the CMP handle a globally-scoped TC string?](#how-does-the-cmp-handle-a-globally-scoped-tc-string)
    + [How does a vendor retrieve the TC string when it is not participating in a bid request and cannot execute JavaScript?](#how-does-a-vendor-retrieve-the-tc-string-when-it-is-not-participating-in-a-bid-request-and-cannot-execute-javascript)
-     - [Full TC String passing](#full-tc-string-passing)
+     - [Macro Format, Parameters and Values](#macro-format-parameters-and-values)
      - [CMP Redirect for TC String](#cmp-redirect-for-tc-string)
    + [What if consent is governed differently in a country?](#what-if-consent-is-governed-differently-in-a-country)
  * [Creating a TC String](#creating-a-tc-string)
@@ -235,17 +235,18 @@ If the TC String for a transaction is `COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUA
 
 `http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw`
 
-_Note: TC Strings must always be propagated via macros as is, and not modified. In this example there may be additional URL-based implementations in the supply chain. Each is addressed the same way._
+**Note:** TC Strings must always be propagated via macros as is, and not modified. In this example there may be additional URL-based implementations in the supply chain. Each is addressed the same way.
 
 The available parameters and macros to relay information through the non-OpenRTB/non-JavaScript excuting supply chain are listed in the following section.
 
-#### Macro Format
+#### Macro Format, Parameters and Values
 
 The basic format of the URL parameters and macros is:
 
 ```
-&url_parameter=${macro_name}
+&url_parameter=${MACRO_NAME}
 ```
+**Note:** MACRO_NAME is UPPERCASE. The `${}` and UPPERCASE format can be expected by callers even if their platform's macro format convention is otherwise. The macro format is important to make certain a macro can be recognized and replaced given that vendors using macros are doing so because their implementation has no other way to retreive the TC String value for a given transaction.
 
 The supported URL parameters and the corresponding macros are defined below:
 
@@ -260,13 +261,13 @@ The supported URL parameters and the corresponding macros are defined below:
   <tbody>
     <tr>
       <td><code>gdpr</code></td>
-      <td><code>GDPR</code></td>
+      <td><code>${GDPR}</code></td>
       <td><code>&gdpr=${GDPR}</code></td>
     </tr>
     <tr>
       <td><code>gdpr_consent</code></td>
       <td>
-        <code>GDPR_CONSENT_XXXXX</code>
+        <code>${GDPR_CONSENT_XXXXX}</code>
         <p>
           (<code>XXXXX</code> is numeric Vendor ID of the vendor on
           the <a href="#the-global-vendor-list">GVL</a> who is expecting
@@ -283,7 +284,7 @@ The supported URL parameters and the corresponding macros are defined below:
     </tr>
     <tr>
       <td><code>gdpr_pd</code></td>
-      <td><code>GDPR_PD</code></td>
+      <td><code>${GDPR_PD}</code></td>
       <td><code>&gdpr_pd=${GDPR_PD}</code></td>
     </tr>
   </tbody>
@@ -334,7 +335,7 @@ The vendor service making the call to a URL with the macro must replace the macr
   </tbody>
 </table>
 
-**Note:** other personal data, like IP addresses or callee cookies, may be passed as part of the request, and the `gdpr` and `gdpr_consent_xxxxx` is used by the callee to determine whether an identifier cookie or other personal data can be set and/or used.
+**Note:** other personal data, like IP addresses or callee cookies, may be passed as part of the request, and the `${GDPR}` and `$GDPR_CONSENT_XXXXX` is used by the callee to determine whether an identifier cookie or other personal data can be set and/or used.
 
 #### CMP Redirect for TC String
 
