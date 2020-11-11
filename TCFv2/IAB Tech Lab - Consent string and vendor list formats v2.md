@@ -344,7 +344,7 @@ The vendor creating the URL should ensure these parameters are added only once, 
 
 Parties in the ad supply chain who cannot retrieve a TC String from an OpenRTB bid request or execute JavaScript to read a TC string from the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md) must not rely on other vendors to append URLs with any TCF macros. It is the responsibility of the party who cannot otherwise retreive the TC String value to add the correct macro to their URL-based implementation. Parties who cannot otherwise retreive the TC String value in a given implementation should not rely on ad ops or programmatic mechanisms to appropriately place a TCF macro in a URL-based implementation.
 
-The following table sets expectations about which party is expected to expand a TCF macro in a given use case.
+The following table sets expectations about which parties are expected to add and expand a TCF macro in a given use case.
 
 <table>
  <thead>
@@ -356,12 +356,42 @@ The following table sets expectations about which party is expected to expand a 
  </thead>
  <tbody>
   <tr>
-   <td></td>
+   <td>3rd party creative URL via DSP</td>
+   <td>Creative vendor at time of tag export</td>
+   <td>DSP before returning creative URL to page</td>
+  </tr>
+  <tr>
+   <td>3rd party creative via publisher ad server</td>
+   <td>Creative vendor at the time of tag export</td>
+   <td>Publisher ad server before returning URL to the page</td>
+  </tr>
+  <tr>
+   <td>3rd party creative via header bidding</td>
+   <td>Creative vendor at the time of tag export</td>
+   <td>DSP before returning URL to the SSP</td>
+  </tr>
+  <tr>
+   <td>Hosted creative URL via DSP</td>
+   <td>DSP before returning creative URL to page</td>
+   <td>DSP before returning creative URL to page</td>
+  </tr>
+  <tr>
+   <td>Hosted creative via publisher ad server</td>
+   <td>Publisher ad server before returning URL to the page</td>
+   <td>Publisher ad server before returning URL to the page</td>
+  </tr>
+  <tr>
+   <td>Hosted creative via header bidding</td>
+   <td>DSP before returning URL to the SSP</td>
+   <td>DSP before returning URL to the SSP</td>
+  </tr>
+  <tr>
+   <td>Cookie Sync Pixel via Creative</td>
    <td></td>
    <td></td>
   </tr>
   <tr>
-   <td></td>
+   <td>Cookie Sync Pixel via Other Means</td>
    <td></td>
    <td></td>
   </tr>
