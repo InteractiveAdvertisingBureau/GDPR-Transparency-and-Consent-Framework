@@ -23,7 +23,7 @@
    + [What are the different scopes for a TC String?](#what-are-the-different-scopes-for-a-tc-string)
    + [What are publisher restrictions?](#what-are-publisher-restrictions)
    + [How does the CMP handle a globally-scoped TC string?](#how-does-the-cmp-handle-a-globally-scoped-tc-string)
-   + [How does a URL-based service process the TC string when it can't execute JavaScript?](#how-does-a-url-based-service-process-the-tc-string-when-it-cant-execute-javascript)
+   + [How does a vendor retrieve the TC string when it is not participating in a bid request and cannot execute JavaScript?](#how-does-a-vendor-retrieve-the-tc-string-when-it-is-not-participating-in-a-bid-request-and-cannot-execute-javascript)
      - [Full TC String passing](#full-tc-string-passing)
      - [CMP Redirect for TC String](#cmp-redirect-for-tc-string)
    + [What if consent is governed differently in a country?](#what-if-consent-is-governed-differently-in-a-country)
@@ -219,36 +219,35 @@ In case a vendor has declared flexibility for a purpose and there is no legal ba
 
 There are cases when vendors are unable to obtain a TC string via a bid request or using the [CMP API (JavaScript)](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md). A vendor may not be integrated with OpenRTB or may participate in an ad related transaction via a method which cannot execute JavaScript to call the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md). The cases are:
 
-*   Non-JavaScript creative tags 
+*   URL-based creative tags 
 *   URL-based cookie syncing (typically an `<img>` tag)
 *   Other URL-based pixels
 
-For example, `<img src="http://vendor-a.com/key1=val1&key2=val2">` fires an HTTP GET request from the browser to Vendor A’s domain. Since this implementation is an `<img>` tag without the ability to execute JavaScript, the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md) cannot be used by the vendor to obtain the TC String.
+For example, `<img src="http://vendor-a.com/key1=val1&key2=val2">` fires an HTTP GET request from the browser to Vendor A’s domain. Since this implementation is an `<img>` tag without the ability to execute JavaScript, the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md) cannot be used by the vendor to obtain the TC String. It is clearly not receiving a bid request.
 
-When parties in the ad supply chain cannot retrieve a TC String from an OpenRTB bid request or execute JavaScript to read a TC string from the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md) they must add a macro to their non-Javascript creative tags, URL-based cookie syncing pixels and other URL-based pixels. Vendors with access to the TC String via OpenRTB or the CMP API will insert the TC String within the implementation containing the macro `${GDPR_CONSENT_XXXXX}` (where `XXXXX` is the numeric Vendor ID of the vendor unable to retrieve the TC string via means other than the macro). Now the parties in the ad supply chain who cannot retrieve a TC string from OpenRTB or the CMP API can read the value of the expanded macro when their implementation fires an HTTP GET Request.
+When parties in the ad supply chain cannot retrieve a TC String from an OpenRTB bid request or execute JavaScript to read a TC string from the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md) they must add a macro to their URL-based creative tags, URL-based cookie syncing pixels and other URL-based pixels. The macro format is `${GDPR_CONSENT_XXXXX}` where `XXXXX` is the numeric Vendor ID of the vendor unable to retrieve the TC string via means other than the macro. The vendor _with_ access to the TC String via OpenRTB or the CMP API who calls the implementation with the macro will expand the macro with the value of the TC String. Now the parties in the ad supply chain who cannot retrieve a TC string from OpenRTB or the CMP API can read the value of the expanded macro when their implementation makes an HTTP GET Request.
 
-For example, for Vendor A with ID 456 to receive a TC String via the vendor's non-Javascript creative tag, URL-based cookie syncing pixel or other URL-based pixel, Vendor A includes a key-value pair with the parameter and macro `gdpr_consent=${GDPR_CONSENT_456}`. The resulting URL implementation before the macro is expanded by the party who calls it is:
+For example, Vendor A (GVL ID 456) who seeks to receive a TC String value via a URL-based pixel includes this key-value pair with the parameter and macro `gdpr_consent=${GDPR_CONSENT_456}`. The resulting URL before the macro is expanded by the party who calls it is:
 
-`http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=${GDPR_CONSENT_123}`
+`http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=${GDPR_CONSENT_456}`
 
-If the TC String for a given transaction is `COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw` the caller of the URL example above replaces (expands) the macro in the URL `gdpr_consent=${GDPR_CONSENT_123}` with the actual TC String value so that the originally placed macro is expand and the URL appears as follows when making the HTTP get request to Vendor A's server.
+If the TC String for a transaction is `COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw` the caller of the Vendor A's URL replaces the macro `${GDPR_CONSENT_456}` with the TC String value. Vendor A's URL will appear as follows when making the HTTP GET request to Vendor A's server.
 
 `http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw`
 
-TC Strings must always be propagated via macros as is, and not modified. In this example there may be additional URL-based implementations in the supply chain. Each is addressed the same way.
+_Note: TC Strings must always be propagated via macros as is, and not modified. In this example there may be additional URL-based implementations in the supply chain. Each is addressed the same way._
 
 The available parameters and macros to relay information through the non-OpenRTB/non-JavaScript excuting supply chain are listed in the following section.
 
-#### Full TC String passing
+#### Macro Format
 
-Services that are called using a URL from the user's browser, like cookie staplers, user id associators, and tracking pixels (the 'callee') are passed as macros within the URL and formatted as:
+The basic format of the URL parameters and macros is:
 
 ```
 &url_parameter=${macro_name}
 ```
 
 The supported URL parameters and the corresponding macros are defined below:
-
 
 <table>
   <thead>
@@ -269,7 +268,7 @@ The supported URL parameters and the corresponding macros are defined below:
       <td>
         <code>GDPR_CONSENT_XXXXX</code>
         <p>
-          (<code>XXXXX</code> is numeric Vendor ID - the ID of the vendor on
+          (<code>XXXXX</code> is numeric Vendor ID of the vendor on
           the <a href="#the-global-vendor-list">GVL</a> who is expecting
           this URL call)
         </p>
@@ -290,9 +289,7 @@ The supported URL parameters and the corresponding macros are defined below:
   </tbody>
 </table>
 
-
-The service making the call must replace the macros with appropriate values described in the table below. For macro `${GDPR_CONSENT_XXXXX}`, the service making the call must also check that the macro name contains a valid Vendor ID before replacing the macro. The creator of the URL should ensure these parameters are added only once, and are passed to services which are expecting them and can handle them properly.
-
+The vendor service making the call to a URL with the macro must replace the macros with appropriate values described in the table below. For macro `${GDPR_CONSENT_XXXXX}`, the vendor service making the call must also check that the macro contains a valid Vendor ID before replacing the macro. The vendor creating the URL should ensure these parameters are added only once, and are only used with other vendor services which are expecting a macro and can handle one properly.
 
 <table>
   <thead>
