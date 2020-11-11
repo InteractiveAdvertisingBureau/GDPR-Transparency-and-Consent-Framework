@@ -349,51 +349,61 @@ The following table sets expectations about which parties are expected to add an
 <table>
  <thead>
   <tr>
-   <td>Case</td>
-   <td>Who adds macro?</td>
-   <td>Who expands macro?</td>
+   <td><strong>Case</strong></td>
+   <td><strong>Who adds macro?</strong></td>
+   <td><strong>Who expands macro?</strong></td>
   </tr>
  </thead>
  <tbody>
   <tr>
-   <td>3rd party creative URL via DSP</td>
+   <td>3rd party creative URL <strong>via DSP</strong></td>
    <td>Creative vendor at time of tag export</td>
    <td>DSP before returning creative URL to page</td>
   </tr>
   <tr>
-   <td>3rd party creative via publisher ad server</td>
+   <td>3rd party creative <strong>via publisher ad server</strong></td>
    <td>Creative vendor at the time of tag export</td>
    <td>Publisher ad server before returning URL to the page</td>
   </tr>
   <tr>
-   <td>3rd party creative via header bidding</td>
+   <td>3rd party creative <strong>via header bidding</strong></td>
    <td>Creative vendor at the time of tag export</td>
    <td>DSP before returning URL to the SSP</td>
   </tr>
   <tr>
-   <td>Hosted creative URL via DSP</td>
+   <td>Hosted creative URL <strong>via DSP</strong></td>
    <td>DSP before returning creative URL to page</td>
    <td>DSP before returning creative URL to page</td>
   </tr>
   <tr>
-   <td>Hosted creative via publisher ad server</td>
+   <td>Hosted creative <strong>via publisher ad server</strong></td>
    <td>Publisher ad server before returning URL to the page</td>
    <td>Publisher ad server before returning URL to the page</td>
   </tr>
   <tr>
-   <td>Hosted creative via header bidding</td>
+   <td>Hosted creative <strong>via header bidding</strong></td>
    <td>DSP before returning URL to the SSP</td>
    <td>DSP before returning URL to the SSP</td>
   </tr>
   <tr>
-   <td>Cookie Sync Pixel via Creative</td>
-   <td></td>
-   <td></td>
+   <td>Cookie Sync Pixel <strong>via Creative</strong></td>
+   <td>?</td>
+   <td>?</td>
   </tr>
   <tr>
-   <td>Cookie Sync Pixel via Other Means</td>
-   <td></td>
-   <td></td>
+   <td>Cookie Sync Pixel <strong>via Other Means</strong></td>
+   <td>?</td>
+   <td>?</td>
+  </tr>
+  <tr>
+   <td>Pixels added to creatives</td>
+   <td>Pixel vendor</td>
+   <td>Vendor calling the initial creative URL?</td>
+  </tr>
+  <tr>
+   <td>URL pixels placed on digital properties</td>
+   <td>Pixel vendor</td>
+   <td>CMP?</td>
   </tr>
  </tbody>
 </table>
