@@ -25,6 +25,7 @@
    + [How does the CMP handle a globally-scoped TC string?](#how-does-the-cmp-handle-a-globally-scoped-tc-string)
    + [How does a vendor retrieve the TC string when it is not participating in a bid request and cannot execute JavaScript?](#how-does-a-vendor-retrieve-the-tc-string-when-it-is-not-participating-in-a-bid-request-and-cannot-execute-javascript)
      - [Macro Format, Parameters and Values](#macro-format-parameters-and-values)
+     - [Expectations for Macro Expansion](#expectations-for-macro-expansion)
      - [CMP Redirect for TC String](#cmp-redirect-for-tc-string)
    + [What if consent is governed differently in a country?](#what-if-consent-is-governed-differently-in-a-country)
  * [Creating a TC String](#creating-a-tc-string)
@@ -290,7 +291,9 @@ The supported URL parameters and the corresponding macros are defined below:
   </tbody>
 </table>
 
-The vendor service making the call to a URL with the macro must replace the macros with appropriate values described in the table below. For macro `${GDPR_CONSENT_XXXXX}`, the vendor service making the call must also check that the macro contains a valid Vendor ID before replacing the macro. The vendor creating the URL should ensure these parameters are added only once, and are only used with other vendor services which are expecting a macro and can handle one properly.
+The vendor service making the call to a URL with the macro must replace the macros with appropriate values described in the table below. For macro `${GDPR_CONSENT_XXXXX}`, the vendor service making the call to the URL must also check that the macro contains a valid Vendor ID and that the Vendor ID provided has a legal basis for processing personal data _before_ replacing the macro and calling the URL. 
+
+The vendor creating the URL should ensure these parameters are added only once, and are only used with other vendor services which are expecting a macro and can handle one properly. See <a href="#expectations-for-macro-expansion">"Expectations for Macro Expansion"</a> below.
 
 <table>
   <thead>
@@ -336,6 +339,34 @@ The vendor service making the call to a URL with the macro must replace the macr
 </table>
 
 **Note:** other personal data, like IP addresses or callee cookies, may be passed as part of the request, and the `${GDPR}` and `$GDPR_CONSENT_XXXXX` is used by the callee to determine whether an identifier cookie or other personal data can be set and/or used.
+
+#### Expectations for Macro Expansion
+
+Parties in the ad supply chain who cannot retrieve a TC String from an OpenRTB bid request or execute JavaScript to read a TC string from the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md) must not rely on other vendors to append URLs with any TCF macros. It is the responsibility of the party who cannot otherwise retreive the TC String value to add the correct macro to their URL-based implementation. Parties who cannot otherwise retreive the TC String value in a given implementation should not rely on ad ops or programmatic mechanisms to appropriately place a TCF macro in a URL-based implementation.
+
+The following table sets expectations about which party is expected to expand a TCF macro in a given use case.
+
+<table>
+ <thead>
+  <tr>
+   <td>Case</td>
+   <td>Who adds macro?</td>
+   <td>Who expands macro?</td>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td></td>
+   <td></td>
+   <td></td>
+  </tr>
+  <tr>
+   <td></td>
+   <td></td>
+   <td></td>
+  </tr>
+ </tbody>
+</table>
 
 #### CMP Redirect for TC String
 
