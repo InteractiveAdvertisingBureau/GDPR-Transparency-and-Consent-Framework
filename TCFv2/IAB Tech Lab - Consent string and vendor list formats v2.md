@@ -190,12 +190,19 @@ If the disclosures do not describe a global scope, or explicitly state service-s
 
 ### What are publisher restrictions?
 
-Version 2.0 of the Framework introduced the ability for publishers to signal restrictions on how vendors may process personal data:
+Version 2.0 of the Framework introduced the ability for publishers to signal restrictions on how vendors may process personal data. Restrictions can be of two types:
 
 *  **Purposes.** Restrict the purposes for which personal data is processed by a vendor.
 *  **Legal basis.** Specify the legal basis upon which a publisher requires a vendor to operate where a vendor has signaled flexibility on legal basis in the [GVL](#the-global-vendor-list).
 
-Publisher restrictions are custom requirements specified by a publisher and must only be saved to a service-specific TC String.
+Publisher restrictions are custom requirements specified by a publisher and must only be saved to a service-specific TC String as part of the _**[Core String](#the-core-string)**_. In order for vendors to determine if processing is permissible at all for a specific purpose or which legal basis is applicable (in case they signaled flexibility in the [GVL](#the-global-vendor-list)) restrictions must be respected.
+
+1. Vendors must always respect a restriction signal that disallows them the processing for a specific purpose regardless of whether or not they have declared that purpose to be “flexible”.
+2. Vendors that declared a purpose with a default legal basis (consent or legitimate interest respectively) but also declared this purpose as flexible must respect a legal basis restriction if present. That means for example in case they declared a purpose as legitimate interest but also declared that purpose as flexible and there is a legal basis restriction to require consent, they must then check for the consent signal and must not apply the legitimate interest signal.
+
+For the avoidance of doubt:
+
+In case a vendor has declared flexibility for a purpose and there is no legal basis restriction signal it must always apply the default legal basis under which the purpose was registered aside from being registered as flexible. That means if a vendor declared a purpose as legitimate interest and also declared that purpose as flexible it may not apply a "consent" signal without a legal basis restriction signal to require consent.   
 
 
 ### How does the CMP handle a globally-scoped TC string?
@@ -1516,7 +1523,7 @@ Signals which vendors the publisher permits to use OOB legal bases.
 
 Publishers may need to establish transparency and consent for a set of personal data processing purposes for their own use. For example, a publisher that wants to set a frequency-capping first-party cookie should request user consent for Purpose 1 "Store and/or access information on a device" in jurisdictions where it is required.
 
-The _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment in the TC string represents publisher purposes transparency & consent signals which is different than the other TC String segments; they are used to collect consumer purposes transparency & consent for vendors. This segment supports the standard list of purposes defined by the TCF as well as Custom Purposes defined by the publisher if they so choose.
+The _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment in the TC string represents the publisher's own transparency & consent signals and is separated from the general TC String segments. This segment supports the standard list of purposes defined by the TCF as well as Custom Purposes defined by the publisher if they so choose. Vendors should not rely on the _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment unless they're in agreement with the publisher to do so.
 
 
 <table>
