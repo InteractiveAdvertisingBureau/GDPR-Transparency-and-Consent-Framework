@@ -242,7 +242,7 @@ Register to be on the CMP list: https://register.consensu.org/
 This step is required to be a TCF recognised CMP trusted by vendors receiving the consents that you collect. Upon registration a CMP is assigned an ID, which is passed with each request, and granted access to the “consensu.org” domain for accessing and modifying the global consent cookie.
 
 ## 1. Collecting consent from users<a name="collectconsent"></a>
-The TCF defines a set of common purposes and features that vendors can act on. Vendors are responsible for providing up-to-date information on the purposes they support and the legal basis under which they wish to operate these purposes. This information is captured in the  Global Vendor List (). 
+The TCF defines a set of common purposes and features that vendors can act on. Vendors are responsible for providing up-to-date information on the purposes they support and the legal basis under which they wish to operate these purposes. This information is captured in the  Global Vendor List (GVL). 
 
 For a given publisher, a CMP must (at least) collect the user consent for all purposes and vendors declared by the publisher. With the publisher agreement, a CMP can also collect consent for all purposes and vendors in the GVL.
 
