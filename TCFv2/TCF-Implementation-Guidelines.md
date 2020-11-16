@@ -30,7 +30,8 @@ Policy FAQ, webinars, and other resources are available at
 ### [Vendor guidelines (DSPs, Agencies, DMPs)](#vendor)
 &nbsp;&nbsp;&nbsp;&nbsp;**[How do I find the TC String?](#findtcstring)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[How do I send the TC string?](#sendtcstring)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What do I do with the TC String?](#handletcstring)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How to determine legal bases from the TC String?](#detlegalbasis)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How to determine if data may be transmited?](#handletcstring)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[Agency guidelines](#agencyguide)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[DSP guidelines](#dspguide)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[DMP guidelines](#dmpguide)**<br>
@@ -160,9 +161,9 @@ Publishers should ask their partners (advertising vendors, DMPs, analytics vendo
 Vendors must support the withdrawal of consent. Since consent is transmitted from publisher or CMPs to partners and vendors on each request, the publisher or CMP should provide a mechanism for users to withdraw consent. This mechanism may be as simple as collecting consent at each user session, or providing an option that enables the user to withdraw consent later. The UI for withdrawing consent should be the same as the UI by which consent was given.
 
 # Vendor guidelines (DSPs, Agencies, DMPs)<a name="vendor"></a>
-For vendors or media buyers registered in the Global Vendor List, these guidelines help you understand how to check for consent, in accordance with the Framework.
+For vendors or media buyers registered in the Global Vendor List, these guidelines help you understand how to determine whether you have the necessary legal bases to process a user's personal data for their purposes based on the information captured in the TC String.
 
-1.	Vendors should be listed as vendor if they want to read or process user data in compliance with TCFor store and/or access information on a user’s device in compliance with the TCF. Any company is recommended tobe listed as a vendor in the Global Vendor List if they want to process personal data based on TCF signals.
+1.	Vendors must be registered in the Global Vendor List if they want to read or process user data in compliance with TCF or store and/or access information on a user’s device in compliance with the TCF. 
 2.	Vendors should check consent for users from the EEA (EU + Norway + Island + Liechtenstein).
 3.	Vendors should be able to identify traffic that falls under the GDPR.
 
@@ -182,8 +183,30 @@ For any client side call, once the consent payload has been obtained leveraging 
 
 The status of these two fields as indicated above show that the CMP has been loaded and the user has engaged. After validating the TC data payload is suitable for your case, you should pass it in the ad call using the URL-passing macro solution detailed in documentation for the TC String.
 
-## What do I do with the TC String?<a name="handletcstring"></a>
-According to policies of the Transparency and Consent Framework, a vendor may choose not to transmit data to another vendor for any reason, but a vendor must not transmit data to another vendor without a justified basis for relying on that vendor’s legal basis for processing the personal data.  If a vendor has or obtains personal data and has no legal basis for the access to and processing of that data, the vendor should quickly cease collection and storage of the data and refrain from passing the data on to other parties, even if those parties have a legal basis.
+## How to determine legal bases from the TC String?<a name="detlegalbasis"></a>
+In order to determine if they have the necessary legal basis to process a user’s personal data for a specific purpose registered in the GVL, vendors must apply all relevant signals from the TC String in accordance to their registration. 
+The relevant signals are: The applicable version of the GVL, the publisher restriction signal, the purpose legal basis signal and the vendor legal basis signal.
+
+Prior to processing a user’s personal data for a purpose registered in the GVL, vendors must:
+
+**Evaluate publisher restrictions** prior to any other signal:
+1.  Check if the publisher disallowed the processing for this purpose using a purpose restriction 
+2.  Check if the publisher specified the applicable legal basis for this purpose using a legal basis restriction:
+    -  In the absence of a legal basis restriction vendors must apply their default legal basis
+    -  If there is a legal basis restriction vendors must apply the publisher defined legal basis 
+    
+In case the publisher disallowed processing or the publisher defined legal basis is not registered by the vendor nor is the vendor flexible it may not process for that purpose. As an example, if a vendor registered legitimated interest as legal basis for a purpose and is not flexible it may not process if there is a legal basis restriction to "require consent".
+
+**Evaluate purpose and vendor legal basis** 
+
+After determining the applicable legal basis vendors must then check
+1. the presence of a purpose legal basis signal for the respective purpose 
+2. the presence of a vendor legal basis signal 
+
+Only if both signals are present for the applicable legal basis in the TC String, the vendor may then process for that purpose.
+
+## How to determine if data may be transmitted?<a name="handletcstring"></a>
+According to policies of the Transparency and Consent Framework, a vendor may choose not to transmit data to another vendor for any reason, but a vendor must not transmit data to another vendor without a justified basis for relying on that vendor’s legal basis for processing the personal data. If a vendor has or obtains personal data and has no legal basis for the access to and processing of that data, the vendor should quickly cease collection and storage of the data and refrain from passing the data on to other parties, even if those parties have a legal basis. To determine if a vendor has at least one legal basis to process a user’s personal data [see](#detlegalbasis).
 
 ## Agency guidelines<a name="agencyguide"></a>
 In addition to the vendor guidelines, agencies may want to consider the following details: 
@@ -219,7 +242,7 @@ Register to be on the CMP list: https://register.consensu.org/
 This step is required to be a TCF recognised CMP trusted by vendors receiving the consents that you collect. Upon registration a CMP is assigned an ID, which is passed with each request, and granted access to the “consensu.org” domain for accessing and modifying the global consent cookie.
 
 ## 1. Collecting consent from users<a name="collectconsent"></a>
-The TCF defines a set of common purposes and features that vendors can act on. Vendors are responsible for providing up-to-date information on the purposes they support and the legal basis under which they wish to operate these purposes. This information is captured in the  Global Vendor List (GVL). 
+The TCF defines a set of common purposes and features that vendors can act on. Vendors are responsible for providing up-to-date information on the purposes they support and the legal basis under which they wish to operate these purposes. This information is captured in the  Global Vendor List (). 
 
 For a given publisher, a CMP must (at least) collect the user consent for all purposes and vendors declared by the publisher. With the publisher agreement, a CMP can also collect consent for all purposes and vendors in the GVL.
 
