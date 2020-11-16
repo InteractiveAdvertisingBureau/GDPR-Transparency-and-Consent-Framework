@@ -195,7 +195,7 @@ Prior to processing a user’s personal data for a purpose registered in the GVL
     -  In the absence of a legal basis restriction vendors must apply their default legal basis
     -  If there is a legal basis restriction vendors must apply the publisher defined legal basis 
     
-In case the publisher disallowed processing or the publisher defined legal basis is not registered by the vendor nor is the vendor flexible it may not process for that purpose. As an example, if a vendor registered legitimated interest as legal basis for a purpose and is not flexible it may not process if there is a legal basis restriction to "require consent".
+In case the publisher disallows processing or the publisher defined legal basis is not registered by the vendor nor is the vendor flexible it may not process for that purpose. For example, if a vendor registered legitimate interest as legal basis for a purpose and is not flexible it may not process if there is a legal basis restriction to require consent.
 
 **Evaluate purpose and vendor legal basis** 
 
@@ -203,10 +203,10 @@ After determining the applicable legal basis vendors must then check
 1. the presence of a purpose legal basis signal for the respective purpose 
 2. the presence of a vendor legal basis signal 
 
-Only if both signals are present for the applicable legal basis in the TC String, the vendor may then process for that purpose.
+Only if both signals are present for the applicable legal basis in the TC String may the vendor process for that purpose.
 
 ## How to determine if data may be transmitted?<a name="handletcstring"></a>
-According to policies of the Transparency and Consent Framework, a vendor may choose not to transmit data to another vendor for any reason, but a vendor must not transmit data to another vendor without a justified basis for relying on that vendor’s legal basis for processing the personal data. If a vendor has or obtains personal data and has no legal basis for the access to and processing of that data, the vendor should quickly cease collection and storage of the data and refrain from passing the data on to other parties, even if those parties have a legal basis. To determine if a vendor has at least one legal basis to process a user’s personal data [see](#detlegalbasis).
+According to the policies of the Transparency and Consent Framework, a vendor may choose not to transmit data to another vendor for any reason, but a vendor must not transmit data to another vendor without a justified basis for relying on that vendor’s legal basis for processing the personal data. If a vendor has or obtains personal data and has no legal basis for the access to and processing of that data, the vendor should quickly cease collection and storage of the data and refrain from passing the data on to other parties, even if those parties have a legal basis. To determine if a vendor has at least one legal basis to process a user’s personal data [see](#detlegalbasis).
 
 ## Agency guidelines<a name="agencyguide"></a>
 In addition to the vendor guidelines, agencies may want to consider the following details: 
