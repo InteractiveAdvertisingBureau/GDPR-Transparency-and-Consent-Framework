@@ -373,6 +373,16 @@ The following table sets expectations about which parties are expected to add an
  </thead>
  <tbody>
   <tr>
+   <td>Ad request URL <strong>via publisher ad server</strong></td>
+   <td>Publisher ad server vendor at time of tag export</td>
+   <td>INSERT</td>
+  </tr>
+  <tr>
+   <td>Ad request URL <strong>via network</strong></td>
+   <td>Publisher ad server vendor at time of tag export</td>
+   <td>INSERT</td>
+  </tr>
+  <tr>
    <td>3rd party creative URL <strong>via DSP</strong></td>
    <td>Creative vendor at time of tag export</td>
    <td>DSP before returning creative URL to page</td>
@@ -409,13 +419,13 @@ The following table sets expectations about which parties are expected to add an
   </tr>
   <tr>
    <td>Cookie Sync URL <strong>via creative</strong></td>
-   <td>?</td>
-   <td>?</td>
+   <td>INSERT</td>
+   <td>INSERT</td>
   </tr>
   <tr>
    <td>Cookie Sync URL <strong>via other means</strong></td>
-   <td>?</td>
-   <td>?</td>
+   <td>INSERT</td>
+   <td>INSERT</td>
   </tr>
   <tr>
    <td>Pixels added to creatives</td>
@@ -425,7 +435,12 @@ The following table sets expectations about which parties are expected to add an
   <tr>
    <td>URL pixels placed on digital properties</td>
    <td>Pixel vendor</td>
-   <td>CMP?</td>
+   <td>INSERT</td>
+  </tr>
+  <tr>
+   <td>No script portion of tags and pixels that could otherwise use JavaScript</td>
+   <td>Tag or pixel vendor</td>
+   <td>INSERT</td>
   </tr>
  </tbody>
 </table>
