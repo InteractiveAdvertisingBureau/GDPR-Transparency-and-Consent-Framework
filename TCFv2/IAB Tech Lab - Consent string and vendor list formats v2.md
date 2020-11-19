@@ -218,36 +218,94 @@ In case a vendor has declared flexibility for a purpose and there is no legal ba
 
 ### How does a vendor retrieve the TC string when it is not participating in a bid request and cannot execute JavaScript?
 
-There are cases when vendors are unable to obtain a TC string via a bid request or using the [CMP API (JavaScript)](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md). A vendor may not be integrated with OpenRTB or may participate in an ad related transaction via a method which cannot execute JavaScript to call the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md). The cases are:
+There are cases when vendors are unable to obtain a TC string via a bid request or using the [CMP API (JavaScript)](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md). A vendor may not be integrated with OpenRTB or may participate in an ad-related transaction via a method which cannot execute JavaScript to call the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md). The cases are:
 
-*   URL-based creative tags 
+*   URL-based ad requests (typically VAST)
+*   URL-based creatives
 *   URL-based cookie syncing (typically an `<img>` tag)
 *   Other URL-based pixels
+*   "no script" portions of tags and pixels
 
 For example, `<img src="http://vendor-a.com/key1=val1&key2=val2">` fires an HTTP GET request from the browser to Vendor A’s domain. Since this implementation is an `<img>` tag without the ability to execute JavaScript, the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md) cannot be used by the vendor to obtain the TC String. It is clearly not receiving a bid request.
 
-When parties in the ad supply chain cannot retrieve a TC String from an OpenRTB bid request or execute JavaScript to read a TC string from the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md) they must add a macro to their URL-based creative tags, URL-based cookie syncing pixels and other URL-based pixels. The macro format is `${GDPR_CONSENT_XXXXX}` where `XXXXX` is the numeric Vendor ID of the vendor unable to retrieve the TC string via means other than the macro. The vendor _with_ access to the TC String via OpenRTB or the CMP API who calls the implementation with the macro will expand the macro with the value of the TC String. Now the parties in the ad supply chain who cannot retrieve a TC string from OpenRTB or the CMP API can read the value of the expanded macro when their implementation makes an HTTP GET Request.
+When parties in the ad supply chain cannot retrieve a TC String from an OpenRTB bid request or execute JavaScript to read a TC string from the [CMP API](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md) they must add a macro to their URL-based ad requests, URL-based creatives, URL-based cookie syncing pixels and other URL-based pixels, and "no script" portions of tags and pixels. The macro format is `${GDPR_CONSENT_XXXXX}` where `XXXXX` is the numeric Vendor ID of the vendor unable to retrieve the TC string via means other than the macro. The vendor _with_ access to the TC String via OpenRTB or the CMP API who calls the implementation with the macro will expand the macros, including the macro with the value of the TC String. Now the parties in the ad supply chain who cannot retrieve a TC string from OpenRTB or the CMP API can read the value of the expanded macro when their implementation makes an HTTP GET Request.
 
 For example, Vendor A (GVL ID 456) who seeks to receive a TC String value via a URL-based pixel includes this key-value pair with the parameter and macro `gdpr_consent=${GDPR_CONSENT_456}`. The resulting URL before the macro is expanded by the party who calls it is:
 
 `http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=${GDPR_CONSENT_456}`
 
-If the TC String for a transaction is `COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw` the caller of the Vendor A's URL replaces the macro `${GDPR_CONSENT_456}` with the TC String value. Vendor A's URL will appear as follows when making the HTTP GET request to Vendor A's server.
+If the TC String for a transaction is `COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw` the vendor calling Vendor A's URL replaces the macro `${GDPR_CONSENT_456}` with the TC String value. Vendor A's URL will appear as follows when making the HTTP GET request to Vendor A's server.
 
 `http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw`
 
-**Note:** TC Strings must always be propagated via macros as is, and not modified. In this example there may be additional URL-based implementations in the supply chain. Each is addressed the same way.
+**Note:** TC Strings must always be propagated as is via macros, never modified. 
 
-The available parameters and macros to relay information through the non-OpenRTB/non-JavaScript excuting supply chain are listed in the following section.
+**Note:** The above is only an example there are additional implementations requiring macros in the supply chain. Each is addressed the same way.
 
 #### Macro Format, Parameters and Values
 
-The basic format of the URL parameters and macros is:
+The available parameters and macros to relay information through the non-OpenRTB/non-JavaScript excuting supply chain are listed in this section. The basic format of macros is:
+
+```
+${MACRO_NAME}
+```
+
+**Note:** MACRO_NAME is UPPERCASE. The `${}` and UPPERCASE format can be expected by callers even if their platform's macro format convention is otherwise. The macro format is important to make certain a macro can be recognized and replaced given that vendors using macros are doing so because their implementation has no other way to retreive the TC String value for a given transaction.
+
+The following is a list of all TCF macros:
+
+<table>
+  <thead>
+    <tr>
+      <td><strong>Macro</strong></td>
+      <td><strong>possible values</strong></td>
+      <td><strong>purpose</strong></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>${GDPR}</code></td>
+      <td><code>0</code> / <code>1</code></td>
+      <td>
+        <code>0</code> GDPR does not apply; <code>1</code> GDPR applies. If
+        not present, callee should do geoIP lookup, and GDPR applies for EU
+        IP addresses
+      </td>
+    </tr>
+    <tr>
+      <td><code>${GDPR_CONSENT_XXXXX}</code></td>
+      <td>
+        URL-safe base64-encoded Transparency & Consent string. Only
+        meaningful if <code>gdpr=1</code>
+      </td>
+      <td>
+        Encodes the TC string, as obtained from the CMP JS API or OpenRTB.
+      </td>
+    </tr>
+    <tr>
+      <td><code>${GDPR_PD}</code></td>
+      <td>
+        <code>0</code> / <code>1</code> (optional, default: <code>1</code>)
+      </td>
+      <td>
+        for generic URL parameters, <code>gdpr_pd=0</code> indicates none of
+        them contain personal data (from the perspective of the callee). For
+        "defined" URL parameters, their definition should define whether
+        they include personal data.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+**Note:** other personal data, like IP addresses or callee cookies, may be passed as part of the request, and the `${GDPR}` and `$GDPR_CONSENT_XXXXX` is used by the callee to determine whether an identifier cookie or other personal data can be set and/or used.
+
+##### URL Implementations
+
+When the implementation is in a url, the expected format is:
 
 ```
 &url_parameter=${MACRO_NAME}
 ```
-**Note:** MACRO_NAME is UPPERCASE. The `${}` and UPPERCASE format can be expected by callers even if their platform's macro format convention is otherwise. The macro format is important to make certain a macro can be recognized and replaced given that vendors using macros are doing so because their implementation has no other way to retreive the TC String value for a given transaction.
 
 The supported URL parameters and the corresponding macros are defined below:
 
@@ -295,50 +353,9 @@ The vendor service making the call to a URL with the macro must replace the macr
 
 The vendor creating the URL should ensure these parameters are added only once, and are only used with other vendor services which are expecting a macro and can handle one properly. See <a href="#expectations-for-macro-expansion">"Expectations for Macro Expansion"</a> below.
 
-<table>
-  <thead>
-    <tr>
-      <td><strong>Macro</strong></td>
-      <td><strong>possible values</strong></td>
-      <td><strong>purpose</strong></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>${GDPR}</code></td>
-      <td><code>0</code> / <code>1</code></td>
-      <td>
-        <code>0</code> GDPR does not apply; <code>1</code> GDPR applies. If
-        not present, callee should do geoIP lookup, and GDPR applies for EU
-        IP addresses
-      </td>
-    </tr>
-    <tr>
-      <td><code>${GDPR_CONSENT_XXXXX}</code></td>
-      <td>
-        URL-safe base64-encoded Transparency & Consent string. Only
-        meaningful if <code>gdpr=1</code>
-      </td>
-      <td>
-        Encodes the TC string, as obtained from the CMP JS API or OpenRTB.
-      </td>
-    </tr>
-    <tr>
-      <td><code>${GDPR_PD}</code></td>
-      <td>
-        <code>0</code> / <code>1</code> (optional, default: <code>1</code>)
-      </td>
-      <td>
-        for generic URL parameters, <code>gdpr_pd=0</code> indicates none of
-        them contain personal data (from the perspective of the callee). For
-        "defined" URL parameters, their definition should define whether
-        they include personal data.
-      </td>
-    </tr>
-  </tbody>
-</table>
+##### Non-URL Implementations
 
-**Note:** other personal data, like IP addresses or callee cookies, may be passed as part of the request, and the `${GDPR}` and `$GDPR_CONSENT_XXXXX` is used by the callee to determine whether an identifier cookie or other personal data can be set and/or used.
+INSERT
 
 #### Expectations for Macro Expansion
 
