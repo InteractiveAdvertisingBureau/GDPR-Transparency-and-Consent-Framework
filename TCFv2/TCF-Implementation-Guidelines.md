@@ -161,9 +161,9 @@ Publishers should ask their partners (advertising vendors, DMPs, analytics vendo
 Vendors must support the withdrawal of consent. Since consent is transmitted from publisher or CMPs to partners and vendors on each request, the publisher or CMP should provide a mechanism for users to withdraw consent. This mechanism may be as simple as collecting consent at each user session, or providing an option that enables the user to withdraw consent later. The UI for withdrawing consent should be the same as the UI by which consent was given.
 
 # Vendor guidelines (DSPs, Agencies, DMPs)<a name="vendor"></a>
-For vendors or media buyers registered in the Global Vendor List, these guidelines help you understand how to determine whether you have the necessary legal bases to process a user's personal data for their purposes based on the information captured in the TC String.
+For vendors or media buyers registered in the Global Vendor List, these guidelines help you understand how to determine whether you have the necessary legal bases to process a user's personal data for the purposes you've disclosed in the GVL, based on the information contained in the TC String.
 
-1.	Vendors must be registered in the Global Vendor List if they want to read or process user data in compliance with TCF or store and/or access information on a user’s device in compliance with the TCF. 
+1.	In order to read or process user data in compliance with the TCF or store and/or access information on a user’s device in compliance with the TCF, vendors must be registered in the Global Vendor List. 
 2.	Vendors should check consent for users from the EEA (EU + Norway + Island + Liechtenstein).
 3.	Vendors should be able to identify traffic that falls under the GDPR.
 
@@ -184,26 +184,26 @@ For any client side call, once the consent payload has been obtained leveraging 
 The status of these two fields as indicated above show that the CMP has been loaded and the user has engaged. After validating the TC data payload is suitable for your case, you should pass it in the ad call using the URL-passing macro solution detailed in documentation for the TC String.
 
 ## How to determine legal bases from the TC String?<a name="detlegalbasis"></a>
-In order to determine if they have the necessary legal basis to process a user’s personal data for a specific purpose registered in the GVL, vendors must apply all relevant signals from the TC String in accordance to their registration. 
-The relevant signals are: The applicable version of the GVL, the publisher restriction signal, the purpose legal basis signal and the vendor legal basis signal.
+In order to determine if they have the necessary legal basis to process a user’s personal data for a specific purpose registered in the GVL, vendors must follow all relevant signals from the TC String in accordance with what they disclose in the GVL. 
+The relevant signals in the TC string are the GVL version, the publisher restrictions signal, the purpose legal basis signal and the vendor legal basis signal.
 
-Prior to processing a user’s personal data for a purpose registered in the GVL, vendors must:
+Prior to processing a user’s personal data for a purpose registered in the GVL, for each purpose vendors must:
 
 **Evaluate publisher restrictions** prior to any other signal:
-1.  Check if the publisher disallowed the processing for this purpose using a purpose restriction 
-2.  Check if the publisher specified the applicable legal basis for this purpose using a legal basis restriction:
-    -  In the absence of a legal basis restriction vendors must apply their default legal basis
-    -  If there is a legal basis restriction vendors must apply the publisher defined legal basis 
+1.  Check if the publisher completely disallowed processing based on this purpose using a purpose restriction 
+2.  Check if the publisher restricted the applicable legal basis for this purpose using a legal basis restriction (e.g. the publisher only allows "consent" as legal basis for this purpose, or only allows "legitimate interest" as legal basis for this purpose):
+    -  In the absence of a legal basis restriction, vendors must apply their default legal basis
+    -  If there is a legal basis restriction vendors must apply the publisher defined legal basis, which is only allowed if that purpose is either declared with the allowed legal basis as default legal basis, or if that purpose was declared as flexible
     
-In case the publisher disallows processing or the publisher defined legal basis is not registered by the vendor nor is the vendor flexible it may not process for that purpose. For example, if a vendor registered legitimate interest as legal basis for a purpose and is not flexible it may not process if there is a legal basis restriction to require consent.
+In case the publisher disallows processing or in case the acceptable legal basis defined by the publisher in the restrictions is not registered by the vendor as default purpose nor is the vendor declaring that purpose as flexible, the vendor may not process personal data based on that purpose. For example, if a vendor registered legitimate interest as legal basis for a purpose and is not declaring legal basis for that purpose as flexible, it may not process in the presence of a legal basis restriction that requires consent.
 
 **Evaluate purpose and vendor legal basis** 
 
-After determining the applicable legal basis vendors must then check
-1. the presence of a purpose legal basis signal for the respective purpose 
+After determining the applicable legal basis, vendors must then check:
+1. the presence of a purpose legal basis signal for each purpose 
 2. the presence of a vendor legal basis signal 
 
-Only if both signals are present for the applicable legal basis in the TC String may the vendor process for that purpose.
+Only if both signals are positive for the applicable legal basis in the TC String may the vendor process for that purpose.
 
 ## How to determine if data may be transmitted?<a name="handletcstring"></a>
 According to the policies of the Transparency and Consent Framework, a vendor may choose not to transmit data to another vendor for any reason, but a vendor must not transmit data to another vendor without a justified basis for relying on that vendor’s legal basis for processing the personal data. If a vendor has or obtains personal data and has no legal basis for the access to and processing of that data, the vendor should quickly cease collection and storage of the data and refrain from passing the data on to other parties, even if those parties have a legal basis. To determine if a vendor has at least one legal basis to process a user’s personal data [see "How to determine legal bases from the TC String?"](#detlegalbasis).
