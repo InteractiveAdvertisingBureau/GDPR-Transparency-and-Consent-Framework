@@ -1680,17 +1680,19 @@ The registration process is described here: [https://iabeurope.eu/tcf](https://i
 
 The GVL is in JSON format and the current version at any given time can be retrieved using the following URL structure:
 
-[https://vendorlist.consensu.org/v2/vendor-list.json](https://vendorlist.consensu.org/v2/vendor-list.json)
+[https://vendor-list.consensu.org/v2/vendor-list.json](https://vendor-list.consensu.org/v2/vendor-list.json)
 
 Previous versions of the Global Vendor List are available here:
 
-[https://vendorlist.consensu.org/v2/archives/vendor-list-v{vendor-list-version}.json](https://vendorlist.consensu.org/v2/archives/vendorlist-v{vendor-list-version}.json)
+[https://vendor-list.consensu.org/v2/archives/vendor-list-v{vendor-list-version}.json](https://vendor-list.consensu.org/v2/archives/vendorlist-v{vendor-list-version}.json)
 
 Where ‘vendor-list-version’ corresponds to the ‘vendorListVersion’ property in the GVL, for example, the following URL would retrieve the GVL update published with version 138
 
-https://vendorlist.consensu.org/v2/archives/vendor-list-v138.json
+https://vendor-list.consensu.org/v2/archives/vendor-list-v138.json
 
 Previous versions of the GVL may only be used in cases when the current version cannot be downloaded (such as when operating in-app while offline), or for change control management.
+
+**IMPORTANT NOTE**: the original vendorlist.consensu.org domain will be decommissioned on January 31st 2021. The new domain for GVL resources is vendor-list.consensu.org.
 
 ### TCF version 1 of the Global Vendor List (deprecated)
 
@@ -1704,7 +1706,7 @@ Version 1 of the Global Vendor List and all version 1 archives will continue to 
 
 Translations of the names and descriptions for Purposes, Special Purposes, Features, and Special Features to non-English languages are contained in a file where attributes containing English content (except vendor declaration information) are translated, and can be found here:
 
-https://vendorlist.consensu.org/v2/purposes-{language}.json
+https://vendor-list.consensu.org/v2/purposes-{language}.json
 
 Where ‘language’ is a two letter lowercase [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) language code. Supported languages are listed at the following URL:
 
@@ -1746,7 +1748,7 @@ Previous versions of the GVL must be cached for at least the period specified by
 
 ### CMPs accessing and caching the GVL
 
-Client-side CMP applications must not load GVL resources directly from vendorlist.consensu.org - instead they must be loaded and hosted by a CMP’s server-side application and then passed to the client-side CMP application.
+Client-side CMP applications must not load GVL resources directly from vendor-list.consensu.org - instead they must be loaded and hosted by a CMP’s server-side application and then passed to the client-side CMP application.
 
 As stated above, CMP server-side applications must cache these resources in the same way that a browser would. For example, if the ```max-age``` value in the header is one week, the server-side application must do the following:
 
