@@ -16,6 +16,37 @@ In its Planet49 judgment (available [here](http://curia.europa.eu/juris/document
 
 ## Global Vendor List Fields<sup id="a2">[2](#f2)</sup>
 
+### <code>usesCookies</code>
+
+This true or false field indicates whether the vendor uses cookie storage (session or otherwise).
+
+<table>
+  <tr>
+   <td>Field
+   </td>
+   <td>Scope
+   </td>
+   <td>Type
+   </td>
+   <td>Default
+   </td>
+   <td>Description
+   </td>
+  </tr>
+  <tr>
+   <td><code>usesCookies</code>
+   </td>
+   <td><strong>required</strong>
+   </td>
+   <td>Boolean
+   </td>
+   <td>-
+   </td>
+   <td>Indicates whether the vendor uses cookie storage (session or otherwise). True indicates cookie storage is used. False cookie storage is not used. 
+   </td>
+  </tr>
+</table>
+
 ### <code>cookieMaxAgeSeconds</code>
 
 The number of seconds representing the longest potential duration for cookie storage on a device. If a Vendor uses multiple cookies with differing durations, <code>cookieMaxAgeSeconds</code> represents the cookie with the longest duration. Note: cookies are the only method of storage or device access that permit a predictable duration to be set. 
@@ -36,7 +67,7 @@ The number of seconds representing the longest potential duration for cookie sto
   <tr>
    <td><code>cookieMaxAgeSeconds</code>
    </td>
-   <td><strong>required</strong>
+   <td><strong>optional</strong>
    </td>
    <td>integer
    </td>
@@ -73,7 +104,7 @@ This true or false field indicates whether the vendor uses other, non-cookie met
    </td>
    <td>-
    </td>
-   <td>Indicates the vendor’s use of non-cookie storage and access to information already stored on a user’s device. True indicates non-cookie access is used. False indicates only cookie storage and access are used. 
+   <td>Indicates the vendor’s use of non-cookie storage and access to information already stored on a user’s device. True indicates non-cookie access is used. False indicates non-cookie storage and access to information already stored on a user's device <em>is not</em> used. 
    </td>
   </tr>
 </table>
