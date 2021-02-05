@@ -69,7 +69,7 @@ This true or false field indicates whether the cookie in scope for <code>cookieM
    </td>
    <td><strong>required</strong>
    </td>
-   <td>integer
+   <td>boolean
    </td>
    <td>-
    </td>
