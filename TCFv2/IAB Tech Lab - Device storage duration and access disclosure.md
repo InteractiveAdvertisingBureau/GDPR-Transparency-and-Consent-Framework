@@ -47,6 +47,37 @@ The number of seconds representing the longest potential duration for cookie sto
   </tr>
 </table>
 
+### <code>cookieRefresh</code>
+
+This true or false field indicates whether the cookie in scope for <code>cookieMaxAgeSeconds</code> is refreshed when a browser reloads. The following is an example of a cookie "refresh" scenario. On Day 0 a user visits a webpage which loads Vendor A who seeks Purpose 1 consent. She consents to Purpose 1 which includes Vendor A's 90 day max age cookie disclosure. This cookie is set to expire 90 days from now on Day 90 using <code>Set-Cookie: Max-Age=7776000</code>. On Day 5 a user again visits the same webpage loading Vendor A. The webpage's CMP previously recorded her data processing choices and does not do so again. Vendor A is considered to "refresh" the cookie if it resets the countdown to 90 days from day 5, which would now be 96 days after the user made her choice when the webpage's CMP displayed a transparency and control experience to her.
+
+<table>
+  <tr>
+   <td>Field
+   </td>
+   <td>Scope
+   </td>
+   <td>Type
+   </td>
+   <td>Default
+   </td>
+   <td>Description
+   </td>
+  </tr>
+  <tr>
+   <td><code>cookieRefresh</code>
+   </td>
+   <td><strong>required</strong>
+   </td>
+   <td>integer
+   </td>
+   <td>-
+   </td>
+   <td>Indicates the vendor’s refreshing a cookie (see example above). True indicates the vendor refreshes this cookie. False indicates the vendor does not refresh the this cookie any time the browser reloads.</em>
+   </td>
+  </tr>
+</table>
+
 ### <code>usesNonCookieAccess</code>
 
 This true or false field indicates whether the vendor uses other, non-cookie methods of storage or accessing information already stored on a user’s device (see footnote 1). Examples of non-cookie storage and access may be localStorage, indexDB, mobile ad IDs, etc.
