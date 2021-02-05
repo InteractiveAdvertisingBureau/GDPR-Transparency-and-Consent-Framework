@@ -211,6 +211,16 @@ For types of mechanisms (non-cookie) where duration cannot be set, this field sh
    </td>
   </tr>
   <tr>
+   <td><code>cookieRefresh</code>
+   </td>
+   <td><strong>optional</strong>
+   </td>
+   <td>boolean
+   </td>
+   <td>Only required for the type = ‘cookie’; otherwise false. Indicates the vendor’s refreshing a cookie (see example above). True indicates the vendor refreshes this cookie. False indicates the vendor does not refresh the this cookie any time the browser reloads.
+   </td>
+  </tr>
+  <tr>
    <td><code>domain</code>
    </td>
    <td><strong>optional*</strong>
@@ -252,6 +262,7 @@ Below is an example JSON for a fictional company named AdTech123.  AdTech123 own
       "identifier": "retarget-adtech123",
       "type": "cookie",
       "maxAgeSeconds": 2592000000,
+      "cookieRefresh": false,
       "domain": "retarget.adtech123.com", 
       "purposes": [3,4,5,6]
     },
@@ -259,6 +270,7 @@ Below is an example JSON for a fictional company named AdTech123.  AdTech123 own
       "identifier": "id",
       "type": "web",
       "maxAgeSeconds": null,
+      "cookieRefresh": false,
       "purposes": [3,4,5,6,7,8,9,10]
     }
   ]
