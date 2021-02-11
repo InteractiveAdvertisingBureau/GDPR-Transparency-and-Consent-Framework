@@ -140,7 +140,7 @@ Link to a recommended, vendor-hosted, secure URL for disclosing additional stora
   </tr>
 </table>
 
-#### Example of GVL entry with `cookieMaxAgeSeconds, usesNonCookieAccess `and `deviceStorageDisclosureUrl`:
+#### Example of GVL entry with `cookieMaxAgeSeconds, cookieRefresh, usesNonCookieAccess `and `deviceStorageDisclosureUrl`:
 
 ```javascript
 ...
@@ -155,6 +155,7 @@ Link to a recommended, vendor-hosted, secure URL for disclosing additional stora
   "specialFeatures": [],
   "policyUrl": "https://adservervendor.eu/privacy-policy/",
   "cookieMaxAgeSeconds": 31536000,
+  "cookieRefresh": false,
   "usesNonCookieAccess": true,
   "deviceStorageDisclosureUrl": "https://vendor123.com/.well-known/deviceStorage.json"
 }
@@ -217,7 +218,7 @@ For types of mechanisms (non-cookie) where duration cannot be set, this field sh
    </td>
    <td>boolean
    </td>
-   <td>Only required for the type = ‘cookie’; otherwise false. Indicates the vendor’s refreshing a cookie (see example above). True indicates the vendor refreshes this cookie. False indicates the vendor does not refresh the cookie any time the browser reloads.
+   <td>Only required for the type = ‘cookie’; otherwise false. Indicates the vendor is refreshing a cookie (see example above). True indicates the vendor refreshes this cookie. False indicates the vendor does not refresh the cookie any time the browser reloads.
    </td>
   </tr>
   <tr>
