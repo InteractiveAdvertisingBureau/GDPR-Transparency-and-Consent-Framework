@@ -73,7 +73,7 @@ This true or false field indicates whether the cookie in scope for <code>cookieM
    </td>
    <td>-
    </td>
-   <td>Indicates the vendor’s refreshing a cookie (see example above). True indicates the vendor refreshes this cookie. False indicates the vendor does not refresh the this cookie any time the browser reloads.</em>
+   <td>Indicates the vendor’s refreshing a cookie (see example above). True indicates the vendor refreshes this cookie. False indicates the vendor does not refresh the cookie any time the browser reloads.</em>
    </td>
   </tr>
 </table>
