@@ -213,7 +213,7 @@ For types of mechanisms (non-cookie) where duration cannot be set, this field sh
   <tr>
    <td><code>domain</code>
    </td>
-   <td><strong>optional*</strong>
+   <td><strong>optional</strong>
    </td>
    <td>string
    </td>
