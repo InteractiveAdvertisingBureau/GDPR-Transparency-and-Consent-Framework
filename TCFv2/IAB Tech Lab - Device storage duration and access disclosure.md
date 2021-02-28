@@ -73,7 +73,7 @@ The number of seconds representing the longest potential duration for cookie sto
    </td>
    <td>-
    </td>
-   <td>The number, in seconds, of the longest potential duration for storage on a device, as set when using the cookie method of storage. A negative number or a 0 indicate session storage similar to the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie">Set-Cookie</a> spec. If a vendor only uses non-cookie storage the value should not be positive.  <em>Note: this only includes what is declared when the storage is set and does not consider duration extensions should storage be refreshed. </em>
+   <td>The number, in seconds, of the longest potential duration for storage on a device, as set when using the cookie method of storage. A negative number or a 0 indicate session storage similar to the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie">Set-Cookie</a> spec. A "-100" value no longer indicates no cookie usage. <em>Note: this only includes what is declared when the storage is set and does not consider duration extensions should storage be refreshed. </em>
    </td>
   </tr>
 </table>
@@ -201,7 +201,7 @@ The deviceStorage.json is hosted at the vendor-supplied URL (<code>deviceStorage
   <tr>
    <td><code>maxAgeSeconds</code>
    </td>
-   <td><strong>required</strong>
+   <td><strong>required if type = 'cookie' else null</strong>
    </td>
    <td>integer
    </td>
