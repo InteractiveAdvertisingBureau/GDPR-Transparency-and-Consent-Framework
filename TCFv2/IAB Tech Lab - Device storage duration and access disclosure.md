@@ -67,7 +67,7 @@ The number of seconds representing the longest potential duration for cookie sto
   <tr>
    <td><code>cookieMaxAgeSeconds</code>
    </td>
-   <td><strong>required if useCookies is set to true, else optional</strong>
+   <td><strong>required if usesCookies is set to true, else optional</strong>
    </td>
    <td>integer
    </td>
