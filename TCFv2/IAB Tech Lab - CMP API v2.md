@@ -615,7 +615,7 @@ PingReturn = {
 | Status Code | Applicable for | Description |
 | :-------- | :------------- | :------------- |
 | `'stub'` | cmpStatus | CMP not yet loaded – stub still in place |
-| `'loading'` | cmpStatus | CMP is loading |
+| `'loading'` | cmpStatus | DEPRECATED (this status is not distinct and will be removed in a future version) |
 | `'loaded'` | cmpStatus | CMP is finished loading |
 | `'error'` | cmpStatus | CMP is in an error state. A CMP shall not respond to any other API requests if this cmpStatus is present. A CMP may set this status if, for any reason, it is unable to perform the operations in compliance with the TCF. |
 | `'visible'` | displayStatus | User interface is currently displayed |
@@ -876,7 +876,7 @@ For performance reasons, the preferred way to make this happen in current ad ser
 | Macro | Values |
 | :-- | :-- |
 | `${GDPR}`| <p>**1** - GDPR Applies</p><p>**0** - GDPR does not apply</p><p>**unset** - unknown</p> |
-| `${GDPR_CONSENT}`| Encoded TC String |
+| `${GDPR_CONSENT_XXXX}`| Encoded TC String where XXXX is the numeric Vendor ID of the vendor receiving the TC string. |
 
 **Note**: Values align with IAB OpenRTB GDPR Advisory
 
@@ -1100,7 +1100,7 @@ Below is an example script that emulates the in-frame `__tcfapi()` call. It loca
 
 }());
 
-__tcfapi('ping', (pingReturn, success) => {
+__tcfapi('ping', 2, (pingReturn, success) => {
 
   // should get response from window.top's CMP
 

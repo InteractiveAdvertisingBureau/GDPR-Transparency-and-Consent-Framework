@@ -46,17 +46,16 @@
    + [How often is the Global Vendor List updated?](#how-often-is-the-global-vendor-list-updated)
    + [CMPs using the GVL](#cmps-using-the-gvl)
    + [Vendors using the GVL](#vendors-using-the-gvl)
-   + [Caching the Global Vendor List](#caching-the-global-vendor-list)
-     - [CMPs caching the GVL](#cmps-caching-the-gvl)
-     - [Vendors caching the GVL](#vendors-caching-the-gvl)
-     - [Caching previous versions of the GVL](#caching-previous-versions-of-the-gvl)
+   + [Accessing And Caching the Global Vendor List](#accessing-and-caching-the-global-vendor-list)
+     - [CMPs accessing and caching the GVL](#cmps-accessing-and-caching-the-gvl)
+     - [Vendors accessing and caching the GVL](#vendors-accessing-and-caching-the-gvl)
      - [Using a compressed version of the Global Vendor List](#using-a-compressed-version-of-the-global-vendor-list)
      - [Global Vendor List and TCF Policy Updates](#global-vendor-list-and-tcf-policy-updates)
    + [Example Global Vendor List JSON Object](#example-global-vendor-list-json-object)
  * [Global CMP List](#Global-CMP-List-Specification)
    + [What is contained in the Global CMP List?](#what-is-contained-in-the-Global-CMP-list)
    + [Where can I access the Global CMP List?](#where-can-i-access-the-Global-CMP-list)
-   + [How often is the Global CMP List updated?](#how-often-is-the-the-Global-CMP-list-updated)
+   + [How often is the Global CMP List updated?](#how-often-is-the-Global-CMP-list-updated)
    + [Caching the Global CMP List](#caching-the-Global-CMP-list)
    + [Server-side caching of the GCL](#server-side-caching-of-the-GCL)
    + [Using a compressed version of the Global CMP List](#using-a-compressed-version-of-the-Global-CMP-list)
@@ -66,7 +65,8 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
-|May 2020| 2.0 | Updated to clarify questions on `RestrictionType` cases |
+| December 2020 | 2.0 | Domain name change for GVL resources |
+| May 2020 | 2.0 | Updated to clarify questions on `RestrictionType` cases |
 | December 2019 | 2.0 | Updated with global cookie support notes, Updated macros to be upper case |
 | August 2019 | 2.0 | Version 2.0 released to the public |
 | April 2019 | 2.0 | Released for public comment |
@@ -191,12 +191,19 @@ If the disclosures do not describe a global scope, or explicitly state service-s
 
 ### What are publisher restrictions?
 
-Version 2.0 of the Framework introduced the ability for publishers to signal restrictions on how vendors may process personal data:
+Version 2.0 of the Framework introduced the ability for publishers to signal restrictions on how vendors may process personal data. Restrictions can be of two types:
 
 *  **Purposes.** Restrict the purposes for which personal data is processed by a vendor.
 *  **Legal basis.** Specify the legal basis upon which a publisher requires a vendor to operate where a vendor has signaled flexibility on legal basis in the [GVL](#the-global-vendor-list).
 
-Publisher restrictions are custom requirements specified by a publisher and must only be saved to a service-specific TC String.
+Publisher restrictions are custom requirements specified by a publisher and must only be saved to a service-specific TC String as part of the _**[Core String](#the-core-string)**_. In order for vendors to determine if processing is permissible at all for a specific purpose or which legal basis is applicable (in case they signaled flexibility in the [GVL](#the-global-vendor-list)) restrictions must be respected.
+
+1. Vendors must always respect a restriction signal that disallows them the processing for a specific purpose regardless of whether or not they have declared that purpose to be “flexible”.
+2. Vendors that declared a purpose with a default legal basis (consent or legitimate interest respectively) but also declared this purpose as flexible must respect a legal basis restriction if present. That means for example in case they declared a purpose as legitimate interest but also declared that purpose as flexible and there is a legal basis restriction to require consent, they must then check for the consent signal and must not apply the legitimate interest signal.
+
+For the avoidance of doubt:
+
+In case a vendor has declared flexibility for a purpose and there is no legal basis restriction signal it must always apply the default legal basis under which the purpose was registered aside from being registered as flexible. That means if a vendor declared a purpose as legitimate interest and also declared that purpose as flexible it may not apply a "consent" signal without a legal basis restriction signal to require consent.   
 
 
 ### How does the CMP handle a globally-scoped TC string?
@@ -387,6 +394,9 @@ The following table summarises where data is stored:
   </tbody>
 </table>
 
+#### Managing conflicting string versions
+Before 30 September 2020, [after which v1.x strings will be considered invalid](https://iabeurope.eu/all-news/the-iab-europe-transparency-consent-framework-tcf-steering-group-votes-to-extend-technical-support-for-tcf-v1-1/), if a CMP encounters a situation where both a v1.x string and a v2.0 string are erroneously present simultaneously, the CMP should remove the v1.x string to ensure that there is only one source of truth for consumers of the string.
+
 **Note:** TCF version 2 introduces [“Publisher Restrictions”](#what-are-publisher-restrictions), which, if exhausted by a publisher, could result in TC strings that are larger than the size limit for cookies.  While this possibility is remote, it should be guarded against – a CMP should work with a publisher to help them accomplish their goals. [Publisher Restrictions](#what-are-publisher-restrictions) are only allowed in TC Strings, therefore within a service-specific context so CMPs may need to take this into consideration when deciding on the storage mechanism for those TC Strings.
 
 ### What are the Purposes and Features being supported?
@@ -464,7 +474,7 @@ There are 4 distinct TC String segments that are joined together on a “dot” 
 *   Allowed vendors for restricting OOB signaling to select vendors, and
 *   Publisher purposes transparency and consent for their own data uses.
 
-The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent. The remaining optional and arbitrarily ordered segments represent support for [out-of-band (OOB)](#signaling-oob-in-the-tc-string) signaling and [publisher purposes transparency and consent (publisher TC)](##publisher-purposes-transparency-and-consent).  A TC String with all four segments is possible in certain conditions.
+The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent. The remaining optional and arbitrarily ordered segments represent support for [out-of-band (OOB)](#signaling-oob-in-the-tc-string) signaling and [publisher purposes transparency and consent (publisher TC)](#publisher-purposes-transparency-and-consent).  A TC String with all four segments is possible in certain conditions.
 
 For example, a globally-scoped TC String with all four segments present would be surfaced through CMP API – not stored – and look like:
 
@@ -1514,7 +1524,7 @@ Signals which vendors the publisher permits to use OOB legal bases.
 
 Publishers may need to establish transparency and consent for a set of personal data processing purposes for their own use. For example, a publisher that wants to set a frequency-capping first-party cookie should request user consent for Purpose 1 "Store and/or access information on a device" in jurisdictions where it is required.
 
-The _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment in the TC string represents publisher purposes transparency & consent signals which is different than the other TC String segments; they are used to collect consumer purposes transparency & consent for vendors. This segment supports the standard list of purposes defined by the TCF as well as Custom Purposes defined by the publisher if they so choose.
+The _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment in the TC string represents the publisher's own transparency & consent signals and is separated from the general TC String segments. This segment supports the standard list of purposes defined by the TCF as well as Custom Purposes defined by the publisher if they so choose. Vendors should not rely on the _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment unless they're in agreement with the publisher to do so.
 
 
 <table>
@@ -1671,17 +1681,19 @@ The registration process is described here: [https://iabeurope.eu/tcf](https://i
 
 The GVL is in JSON format and the current version at any given time can be retrieved using the following URL structure:
 
-[https://vendorlist.consensu.org/v2/vendor-list.json](https://vendorlist.consensu.org/v2/vendor-list.json)
+[https://vendor-list.consensu.org/v2/vendor-list.json](https://vendor-list.consensu.org/v2/vendor-list.json)
 
 Previous versions of the Global Vendor List are available here:
 
-[https://vendorlist.consensu.org/v2/archives/vendor-list-v{vendor-list-version}.json](https://vendorlist.consensu.org/v2/archives/vendorlist-v{vendor-list-version}.json)
+[https://vendor-list.consensu.org/v2/archives/vendor-list-v{vendor-list-version}.json](https://vendor-list.consensu.org/v2/archives/vendorlist-v{vendor-list-version}.json)
 
 Where ‘vendor-list-version’ corresponds to the ‘vendorListVersion’ property in the GVL, for example, the following URL would retrieve the GVL update published with version 138
 
-https://vendorlist.consensu.org/v2/archives/vendor-list-v138.json
+https://vendor-list.consensu.org/v2/archives/vendor-list-v138.json
 
 Previous versions of the GVL may only be used in cases when the current version cannot be downloaded (such as when operating in-app while offline), or for change control management.
+
+**IMPORTANT NOTE**: the original vendorlist.consensu.org domain will be decommissioned on January 31st 2021. The new domain for GVL resources is vendor-list.consensu.org.
 
 ### TCF version 1 of the Global Vendor List (deprecated)
 
@@ -1695,7 +1707,7 @@ Version 1 of the Global Vendor List and all version 1 archives will continue to 
 
 Translations of the names and descriptions for Purposes, Special Purposes, Features, and Special Features to non-English languages are contained in a file where attributes containing English content (except vendor declaration information) are translated, and can be found here:
 
-https://vendorlist.consensu.org/v2/purposes-{language}.json
+https://vendor-list.consensu.org/v2/purposes-{language}.json
 
 Where ‘language’ is a two letter lowercase [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) language code. Supported languages are listed at the following URL:
 
@@ -1737,7 +1749,7 @@ Previous versions of the GVL must be cached for at least the period specified by
 
 ### CMPs accessing and caching the GVL
 
-Client-side CMP applications must not load GVL resources directly from vendorlist.consensu.org - instead they must be loaded and hosted by a CMP’s server-side application and then passed to the client-side CMP application.
+Client-side CMP applications must not load GVL resources directly from vendor-list.consensu.org - instead they must be loaded and hosted by a CMP’s server-side application and then passed to the client-side CMP application.
 
 As stated above, CMP server-side applications must cache these resources in the same way that a browser would. For example, if the ```max-age``` value in the header is one week, the server-side application must do the following:
 
@@ -1881,16 +1893,15 @@ Here is an annotated example of the GVL’s JSON format:
    *
    * "name": string, REQUIRED
    *
-   * "purposes": array of positive integers, either purposes or
+   * "purposes": conditionally OPTIONAL (see "Constraints") array of positive 
+   * integers. List of Purpose ids declared as performed on the legal basis of
+   * consent
    *
-   * "legIntPurposes" REQUIRED. Array may be empty. List of purpose ids
-   * declared as performed on the legal basis of consent
+   * "legIntPurposes" conditionally OPTIONAL (see "Constraints") array of
+   * positive integers. List of Purpose ids declared as performed on the legal
+   * basis of legitimate interest
    *
-   * "specialPurposes": array of positive integers, OPTIONAL. Array may be
-   * empty. List of Special Purposes declared as performed on the legal basis
-   * of a legitimate interest
-   *
-   * "flexiblePurposes": array of positive integers, OPTIONAL. Array may be
+   * "flexiblePurposes": OPTIONAL array of positive integers. Array may be
    * empty. List of purpose ids where the vendor is flexible regarding the
    * legal basis; they will perform the processing based on consent or a
    * legitimate interest. The 'default' is determined by which of the other two
@@ -1898,8 +1909,7 @@ Here is an annotated example of the GVL’s JSON format:
    * vendor
    *
    * Constraints:
-   *   Either purposes OR legIntPurposes can be missing/empty, but not
-   *   both.
+   *   Either purposes OR legIntPurposes can be missing/empty, but not both.
    *
    *   A Purpose id must not be present in both purposes and legIntPurposes
    *
@@ -1910,6 +1920,10 @@ Here is an annotated example of the GVL’s JSON format:
    *   range from 1 to N, where N is the highest purpose id published in this
    *   GVL file.
    *
+   * "specialPurposes": array of positive integers, OPTIONAL. Array may be
+   * empty. List of Special Purposes declared as performed on the legal basis
+   * of a legitimate interest
+   *
    * "features": array of positive integers, OPTIONAL. Array may be empty. List
    * of Features the Vendor may utilize when performing some declared Purposes
    * processing.
@@ -1917,10 +1931,6 @@ Here is an annotated example of the GVL’s JSON format:
    * "specialFeatures": array of positive integers, OPTIONAL. Array may be
    * empty. List of Special Features the Vendor may utilize when performing
    * some declared Purposes processing.
-   *
-   * "SpecialPurposes": array of positive integers, OPTIONAL. Array may be
-   * empty. List of Special Purposes declared as performed on the legal basis
-   * of a legitimate interest
    *
    * "policyUrl": url string, REQUIRED URL to the Vendor's privacy policy
    * document.
