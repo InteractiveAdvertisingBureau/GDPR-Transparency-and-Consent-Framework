@@ -1076,7 +1076,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         <p>If this value is <code>2</code> and vendor is registered under 
         Legitimate Interest for that Purpose then the vendor <em>can ignore</em> the signal.</p>
         <p>If this value is <code>1</code> or <code>2</code> and the vendor is not
-        registered for the Purpose then the vendor <em>should not porcess</em> for that Purpose.</p>
+        registered for the Purpose then the vendor <em>should not process</em> for that Purpose.</p>
         <p>
           <strong>Note:</strong> Purpose 1 is always required to be
           registered as a consent purpose and can not be flexible per
