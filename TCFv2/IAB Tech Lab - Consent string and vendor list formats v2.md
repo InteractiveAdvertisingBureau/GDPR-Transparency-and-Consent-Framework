@@ -212,7 +212,7 @@ In case a vendor has declared flexibility for a purpose and there is no legal ba
 
 *   Decode the TC String from the global scope to load and preserve all existing signals
 *   Set the signals for the vendors specified in the CMP user interface. If a subset of vendors is shown in the CMP user interface, the CMP must only set signals for those vendors.
-*   If a CMP is unable to resolve an ambigious negative vendor signal – unable to differentiate between a “no” and a “never disclosed” – a CMP shall disambiguate the signal with the corresponding value in the _**[DisclosedVendors ](#disclosed-vendors-oob)**_ segment since that segment signals which vendors were disclosed to the user.
+*   If a CMP is unable to resolve an ambiguous negative vendor signal – unable to differentiate between a “no” and a “never disclosed” – a CMP shall disambiguate the signal with the corresponding value in the _**[DisclosedVendors ](#disclosed-vendors-oob)**_ segment since that segment signals which vendors were disclosed to the user.
 *   Once the user has made their selections the CMP shall save the resulting TC String back to the global context, overwriting the old one.
 
 
@@ -1058,7 +1058,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         <p>Vendors must always respect a <code>0</code> (Not Allowed)
         regardless of whether or not they have not declared that Purpose to
         be “flexible”. Values <code>1</code> and <code>2</code> are in
-        accordance with a vendors declared flexibility. Eg. if a vendor has
+        accordance with a vendor's declared flexibility. Eg. if a vendor has
         Purpose 2 declared as Legitimate Interest but also declares that
         Purpose as flexible and this field is set to <code>1</code>, they
         must then check for the “consent” signal in the VendorConsents
@@ -1184,7 +1184,7 @@ The CMP reads a TC String from global context storage and it contains a _**[Disc
 ```
 COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw
 ```
-Because the publisher does not support OOB legal bases, the dot-delimited _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment at the end of the TC String is removed when requested form the CMP API:
+Because the publisher does not support OOB legal bases, the dot-delimited _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment at the end of the TC String is removed when requested from the CMP API:
 
 [ _**[Core](#the-core-string)**_ ]
 ```
@@ -1319,7 +1319,7 @@ The _**DisclosedVendors**_ is a TC String segment that signals which vendors hav
     <tr>
       <td>NumEntries</td>
       <td>12 bits</td>
-      <td colspan="2">Number of ReangeEntry sections to follow</td>
+      <td colspan="2">Number of RangeEntry sections to follow</td>
     </tr>
     <tr style="border-top:5px solid black;">
       <td colspan="2">RangeEntry (repeated NumEntries times)</td>
@@ -1499,7 +1499,7 @@ Signals which vendors the publisher permits to use OOB legal bases.
         Vendor IDs even if the series is only a cardinality of 1.
       </td>
       <td>
-        This is the first or only Vendor ID that has is allowed in this
+        This is the first or only Vendor ID that is allowed in this
         RangeEntry.
       </td>
     </tr>
