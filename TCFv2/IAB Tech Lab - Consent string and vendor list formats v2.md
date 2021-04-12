@@ -923,7 +923,9 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         <p>
           If a user exercises their “Right To Object” to a vendor’s
           processing based on a legitimate interest, then that vendor’s bit
-          must be set to <code>0</code>.
+          must be set to <code>0</code>. Vendors who register only for Special
+          Purposes should not expect a <code>0</code> value as Special Purposes
+          are displayed for transparency only and do not include a user choice.
         </p>
       </td>
     </tr>
