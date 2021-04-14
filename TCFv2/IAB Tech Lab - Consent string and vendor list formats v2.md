@@ -1134,7 +1134,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       <td>
         The last ID of the inclusive contiguous ascending-order series of
         Vendor IDs started with StartOrOnlyVendorId but only if that series
-        has a cardinality greater than 1, otherwise this field is omitted. Note that _contiguous_ above permits encoding ranges that cover gaps in GVL vendor IDs unlike other range encodings in this specification. For example, to encode a restriction for vendors [12, 15, 18, 23] if vendor IDs 13-14, 16-17, and 19-22 are not in the GVL, a range entry of 12-23 is permitted. 
+        has a cardinality greater than 1, otherwise this field is omitted. Note that contiguous above permits encoding ranges that include deleted Vendors or cover gaps in GVL vendor IDs unlike other range encodings in this specification. For example, to encode a restriction for vendors [12, 15, 18, 24] if vendor IDs 13-14, 16-17, and 19-22 are not in the GVL and 23 is but has a non-empty deletedDate, a range entry of 12-24 is permitted.
       </td>
       <td>
         The end of the series of Vendor IDs – this is omitted if
