@@ -1134,7 +1134,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       <td>
         The last ID of the inclusive contiguous ascending-order series of
         Vendor IDs started with StartOrOnlyVendorId but only if that series
-        has a cardinality greater than 1, otherwise this field is omitted.
+        has a cardinality greater than 1, otherwise this field is omitted. Note that _contiguous_ above permits encoding ranges that cover gaps in the GVL registrations unlike other range encodings in this specification. For example, the publisher asks the CMP to signal a Publisher Restriction on Purpose 2 on Vendors [12, 15, 18, 23]. In the current GVL, Vendors 13-14, 16-17 and 19-22 are not registered. It is permitted to encode a single range sub-entry spanning 12-23 versus a separete entry for each restricted Vendor. 
       </td>
       <td>
         The end of the series of Vendor IDs – this is omitted if
