@@ -65,6 +65,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| May 2021 | 2.0 | Special Purpose only vendors transparency clarification |
 | December 2020 | 2.0 | Domain name change for GVL resources |
 | May 2020 | 2.0 | Updated to clarify questions on `RestrictionType` cases |
 | December 2019 | 2.0 | Updated with global cookie support notes, Updated macros to be upper case |
@@ -917,12 +918,16 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         <p>
           Set the bit corresponding to a given vendor to <code>1</code> if
           the CMP has established transparency for that vendor's legitimate
-          interest disclosures for one or more Purposes (not Special Purposes).
+          interest disclosures for one or more Purposes (including Special Purposes).
         </p>
         <p>
           If a user exercises their “Right To Object” to a vendor’s
           processing based on a legitimate interest, then that vendor’s bit
-          must be set to <code>0</code>.
+          must be set to <code>0</code>. For vendors that register for Special
+          Purposes only (no other Purposes) and have been displayed by
+          the CMP the value must be set to <code>1</code>. Note:
+          Special Purposes are displayed for transparency only and do not
+          enable user choice.
         </p>
       </td>
     </tr>
