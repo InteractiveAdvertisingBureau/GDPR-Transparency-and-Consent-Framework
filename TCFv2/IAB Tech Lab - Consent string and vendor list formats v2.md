@@ -923,9 +923,9 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         <p>
           If a user exercises their “Right To Object” to a vendor’s
           processing based on a legitimate interest, then that vendor’s bit
-          must be set to <code>0</code>. Vendors that register for Special
-          Purposes only, and no other Purposes, and have been displayed by
-          the CMP, then the value must be set to <code>1</code>. Note:
+          must be set to <code>0</code>. For vendors that register for Special
+          Purposes only (no other Purposes) and have been displayed by
+          the CMP the value must be set to <code>1</code>. Note:
           Special Purposes are displayed for transparency only and do not
           enable user choice.
         </p>
