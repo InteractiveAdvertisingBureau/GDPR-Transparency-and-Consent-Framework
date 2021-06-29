@@ -165,7 +165,7 @@ A TC String contains the following information:
 3. **Legitimate interest:** the record of a CMP having established legitimate interest transparency for a vendor and/or purpose and whether the user exercised their “Right to Object” to it.  This includes signals for Purposes in general and Purposes declared specifically for a given Vendor.
 4. **Publisher restrictions:** the restrictions of a vendor's data processing by a publisher within the context of the users trafficking their digital property.
 5. **Publisher transparency and consent:** a segment of a TC String that publishers may use to establish transparency with and receive consent from users for their own legal bases to process personal data or to share with vendors if they so choose.
-6. **Out-of-band (OOB) legal bases** (_**by July 1st 2021, CMPs must update their configuration so that they no longer make use of OOB. From Sept 1st 2021, OOB strings will be considered invalid**_) : two segments expressing that a Vendor is using  legal bases outside of the TCF to process personal data. The first segment is a list of Vendors disclosed to the user and the second is a list of Vendors that the publisher allows to use out-of-band legal bases.
+6. **Out-of-band (OOB) legal bases** (_**by July 31st 2021, CMPs must update their configuration so that they no longer make use of OOB. From Sept 1st 2021, OOB strings will be considered invalid**_) : two segments expressing that a Vendor is using  legal bases outside of the TCF to process personal data. The first segment is a list of Vendors disclosed to the user and the second is a list of Vendors that the publisher allows to use out-of-band legal bases.
 7. **Specific jurisdiction disclosures:** the country in which the publisher’s business entity is established or the legislative country of reference and a record of whether Purpose 1, “[to] store and/or access information on a device,” was disclosed to the user since some jurisdictions handle this Purpose differently.
 
 
@@ -183,7 +183,7 @@ A TC String that contains positive consent signals must not be created before cl
 
 There are two main contexts in which a TC String can be created:
 
-*   **Global** **(_by July 1st 2021, CMPs must update their configuration so that they no longer make use of global scope. Therefore CMPs must only read or write TC Strings in a service-specific context on the website that the user has visited and the CMP user interface must no longer make any reference to global scope consent. From Sept 1st 2021, Global Scope strings will be considered invalid_)** - A TC String in this context is saved globally and is shared by CMPs running on sites across the web; When stored globally, they must <span style="text-decoration:underline;">NOT</span> contain [Publisher restrictions](#what-are-publisher-restrictions) or a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment but they may contain a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment.
+*   **Global** **(_by July 31st 2021, CMPs must update their configuration so that they no longer make use of global scope. Therefore CMPs must only read or write TC Strings in a service-specific context on the website that the user has visited and the CMP user interface must no longer make any reference to global scope consent. From Sept 1st 2021, Global Scope strings will be considered invalid_)** - A TC String in this context is saved globally and is shared by CMPs running on sites across the web; When stored globally, they must <span style="text-decoration:underline;">NOT</span> contain [Publisher restrictions](#what-are-publisher-restrictions) or a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment but they may contain a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment.
 *   **Service-specific** - A  TC String in this context is only used by the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain [Publisher restrictions](#what-are-publisher-restrictions), a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment and an _**[AllowedVendors](#allowed-vendors-oob)**_ segment.
 
 CMPs must be set up to operate in either a service-specific or global configuration. If a Publisher-operated CMP declares that the personal data processing purpose is, for example, on this site and on other sites or apps where third-party companies also operate, then the scope is global and that TC String is used and stored in a global context.
@@ -210,7 +210,7 @@ In case a vendor has declared flexibility for a purpose and there is no legal ba
 
 ### How does the CMP handle a globally-scoped TC string? 
 
-_**__By July 1st 2021, CMPs must update their configuration so that they no longer make use of global scope. Therefore CMPs must only read or write TC Strings in a service-specific context on the website that the user has visited and the CMP user interface must no longer make any reference to global scope consent. From Sept 1st 2021, Global Scope strings will be considered invalid.__**_
+_**__By July 31st 2021, CMPs must update their configuration so that they no longer make use of global scope. Therefore CMPs must only read or write TC Strings in a service-specific context on the website that the user has visited and the CMP user interface must no longer make any reference to global scope consent. From Sept 1st 2021, Global Scope strings will be considered invalid.__**_
 
  When configured to use globally-scoped TC Strings CMPs must not overwrite any of the consent or legitimate interest signals found in an existing TC String. Therefore CMPs must do the following:
 
@@ -360,7 +360,7 @@ The following details provide information on creating, storing, and managing a T
 
 ### How should a Transparency & Consent String be stored?
 
-In version 1 of the TCF Specifications the consent string was specified to be stored as either a 1st party cookie for service-specific consent or a 3rd party cookie for global consent. In version 2 of the TCF Specifications, the storage mechanism used for service-specific TC Strings is up to a CMP, including any non-cookie storage mechanism. However, global TC Strings must still be stored as cookies under the `consensu.org` domain _**(by July 1st 2021, the Managing Organisation (MO) will no longer delegate a subdomain of the consensu.org domain to each newly registered CMP and CMPs must no longer write TC Strings in the 'euconsent-v2' cookie associated with the consensu.org domain. From Sept 1st 2021, CMPs must no longer read and process TC Strings in the ‘euconsent-v2’ cookie associated with the consensu.org domain)**_.
+In version 1 of the TCF Specifications the consent string was specified to be stored as either a 1st party cookie for service-specific consent or a 3rd party cookie for global consent. In version 2 of the TCF Specifications, the storage mechanism used for service-specific TC Strings is up to a CMP, including any non-cookie storage mechanism. However, global TC Strings must still be stored as cookies under the `consensu.org` domain _**(by July 31st 2021, the Managing Organisation (MO) will no longer delegate a subdomain of the consensu.org domain to each newly registered CMP and CMPs must no longer write TC Strings in the 'euconsent-v2' cookie associated with the consensu.org domain. From Sept 1st 2021, CMPs must no longer read and process TC Strings in the ‘euconsent-v2’ cookie associated with the consensu.org domain)**_.
 
 It is important to note that with the creation of the version 2 TCF Specifications globally-scoped and service-specific scoped TC Strings have different encoding and decoding requirements.  Some segments are not allowed in a global scope and some are not allowed in a service-specific scope. This document attempts to call out those differing requirements explicitly where applicable.
 
@@ -376,7 +376,7 @@ The following table summarises where data is stored:
   </thead>
   <tbody>
     <tr>
-      <td>Global <strong><em>(by July 1st 2021, CMPs must update their configuration so that they no longer make use of global scope. Therefore CMPs must only read or write TC Strings in a service-specific context on the website that the user has visited and the CMP user interface must no longer make any reference to global scope consent. From Sept 1st 2021, Global Scope strings will be considered invalid)</em></strong></td>
+      <td>Global <strong><em>(by July 31st 2021, CMPs must update their configuration so that they no longer make use of global scope. Therefore CMPs must only read or write TC Strings in a service-specific context on the website that the user has visited and the CMP user interface must no longer make any reference to global scope consent. From Sept 1st 2021, Global Scope strings will be considered invalid)</em></strong></td>
       <td>
         3rd-party .consensu.org cookie. CMPs may also “backup” a TC String
         encoded for the global scope via a different storage mechanism if
@@ -412,7 +412,7 @@ The IAB Europe Transparency & Consent Framework [Policies](https://iabeurope.eu/
 
 ### How should a global TC string be formatted for storage?
 
-_**By July 1st 2021, CMPs must update their configuration so that they no longer make use of global scope. Therefore CMPs must only read or write TC Strings in a service-specific context on the website that the user has visited and the CMP user interface must no longer make any reference to global scope consent. From Sept 1st 2021, Global Scope strings will be considered invalid.**_
+_**By July 31st 2021, CMPs must update their configuration so that they no longer make use of global scope. Therefore CMPs must only read or write TC Strings in a service-specific context on the website that the user has visited and the CMP user interface must no longer make any reference to global scope consent. From Sept 1st 2021, Global Scope strings will be considered invalid.**_
 
 The global TC string is stored in a shared space and is formatted as described in the following table:
 
@@ -443,7 +443,7 @@ The global TC string is stored in a shared space and is formatted as described i
         The DNS resolution for the name
         <code>[<em>cmp-name</em>].mgr.consensu.org</code> will be delegated
         by the Managing Organisation (IAB Europe) to each CMP. CMPs will
-        host their code, APIs, and CDN under this domain or subdomains. (<strong><em>by July 1st 2021, the Managing Organisation (MO) will no longer delegate a subdomain of the consensu.org domain to each newly registered CMP and CMPs must no longer write TC Strings in the 'euconsent-v2' cookie associated with the consensu.org domain. From Sept 1st 2021, CMPs must no longer read and process TC Strings in the ‘euconsent-v2’ cookie associated with the consensu.org domain</em></strong>)
+        host their code, APIs, and CDN under this domain or subdomains. (<strong><em>by July 31st 2021, the Managing Organisation (MO) will no longer delegate a subdomain of the consensu.org domain to each newly registered CMP and CMPs must no longer write TC Strings in the 'euconsent-v2' cookie associated with the consensu.org domain. From Sept 1st 2021, CMPs must no longer read and process TC Strings in the ‘euconsent-v2’ cookie associated with the consensu.org domain</em></strong>)
       </td>
     </tr>
     <tr>
@@ -466,7 +466,7 @@ The global TC string is stored in a shared space and is formatted as described i
 
 
 #### Global Cookie Storage Update (December 2019)
-- All requests that read from or write to the global cookie in the consensu.org domain must be secured by HTTPS _**(by July 1st 2021, the Managing Organisation (MO) will no longer delegate a subdomain of the consensu.org domain to each newly registered CMP and CMPs must no longer write TC Strings in the 'euconsent-v2' cookie associated with the consensu.org domain. From Sept 1st 2021, CMPs must no longer read and process TC Strings in the ‘euconsent-v2’ cookie associated with the consensu.org domain)**_
+- All requests that read from or write to the global cookie in the consensu.org domain must be secured by HTTPS _**(by July 31st 2021, the Managing Organisation (MO) will no longer delegate a subdomain of the consensu.org domain to each newly registered CMP and CMPs must no longer write TC Strings in the 'euconsent-v2' cookie associated with the consensu.org domain. From Sept 1st 2021, CMPs must no longer read and process TC Strings in the ‘euconsent-v2’ cookie associated with the consensu.org domain)**_
 - Additionally, browser cookie policies may require the support of certain attributes (e.g. sameSite, Secure)
 
 
@@ -480,7 +480,7 @@ There are 4 distinct TC String segments that are joined together on a “dot” 
 *   Allowed vendors for restricting OOB signaling to select vendors, and
 *   Publisher purposes transparency and consent for their own data uses.
 
-The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent. The remaining optional and arbitrarily ordered segments represent support for [out-of-band **(by July 1st 2021, CMPs must update their configuration so that they no longer make use of OOB. From Sept 1st 2021, OOB strings will be considered invalid)**](#signaling-oob-in-the-tc-string) signaling and [publisher purposes transparency and consent (publisher TC)](#publisher-purposes-transparency-and-consent).  A TC String with all four segments is possible in certain conditions.
+The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent. The remaining optional and arbitrarily ordered segments represent support for [out-of-band **(by July 31st 2021, CMPs must update their configuration so that they no longer make use of OOB. From Sept 1st 2021, OOB strings will be considered invalid)**](#signaling-oob-in-the-tc-string) signaling and [publisher purposes transparency and consent (publisher TC)](#publisher-purposes-transparency-and-consent).  A TC String with all four segments is possible in certain conditions.
 
 For example, a globally-scoped TC String with all four segments present would be surfaced through CMP API – not stored – and look like:
 
@@ -1168,7 +1168,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
 
 #### Signaling OOB in the TC String 
 
-_**By July 1st 2021, CMPs must update their configuration so that they no longer make use of OOB. From Sept 1st 2021, OOB strings will be considered invalid**_
+_**By July 31st 2021, CMPs must update their configuration so that they no longer make use of OOB. From Sept 1st 2021, OOB strings will be considered invalid**_
 
 On occasion, legal bases for processing a user's personal data are achieved outside of the TCF. This would be considered an out-of-band (OOB) legal basis. To signal whether using an OOB legal bases is allowed requires:
 
