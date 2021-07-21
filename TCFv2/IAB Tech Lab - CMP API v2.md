@@ -930,7 +930,7 @@ A CMP must provide stub script to its clients that at least supports the followi
 
 1. `__tcfapi` function that supports the ping command, with the minimum properties of `cmpLoaded` and `apiVersion`. **Note**: `gdprApplies` may also be set in the [`PingReturn`](#pingreturn) object if the "stub" is set by the publisher to apply GDPR to all traffic.  However, `gdprApplies` may not be available until the CMP is finished loading and the value will, therefore, be `undefined`. See the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more.
 2. Collect all calls to `__tcfapi` that cannot (yet) be handled by the “stub” in a queue
-3. Check if `window.frames['__tcfapiLocator']` exists, indicating that a CMP is already present, otherwise create an empty iframe named `'__tcfapiLocator`' in the current DOM.
+3. Check if `window.frames['__tcfapiLocator']` exists, indicating that a CMP is already present, otherwise create an empty iframe named `'__tcfapiLocator'` in the current DOM.
 4. Create an event listener for `postMessage` events on the `Window` object. When the event handler function receives a postMessage (`‘message’`) event it shall proxy the `__tcfapi` function requests to send the response back through the `postMessage` event channel
 5. The stub code must be loaded and executed synchronously before any other scripts that depend on the `__tcfapi` function to be there – this usually means between the `<head></head>` tags of the HTML document – in order to ensure that it can be executed before all calls from third parties.
 
