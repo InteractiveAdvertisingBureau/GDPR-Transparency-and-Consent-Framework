@@ -65,6 +65,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| August 2021 | 2.0 | Added optional use of DisclosedVendor segment in the context of storing service-level TC Strings  |
 | July 2021 | 2.0 | Highlight the deprecation of Global Scope, OOB and 'euconsent-v2' cookie associated with the consensu.org domain  |
 | May 2021 | 2.0 | Special Purpose only vendors transparency clarification |
 | December 2020 | 2.0 | Domain name change for GVL resources |
