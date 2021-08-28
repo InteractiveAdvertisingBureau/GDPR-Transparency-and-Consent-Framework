@@ -16,6 +16,37 @@ In its Planet49 judgment (available [here](http://curia.europa.eu/juris/document
 
 ## Global Vendor List Fields<sup id="a2">[2](#f2)</sup>
 
+### <code>usesCookies</code>
+
+This true or false field indicates whether the vendor uses cookie storage (session or otherwise).
+
+<table>
+  <tr>
+   <td>Field
+   </td>
+   <td>Scope
+   </td>
+   <td>Type
+   </td>
+   <td>Default
+   </td>
+   <td>Description
+   </td>
+  </tr>
+  <tr>
+   <td><code>usesCookies</code>
+   </td>
+   <td><strong>required</strong>
+   </td>
+   <td>Boolean
+   </td>
+   <td>-
+   </td>
+   <td>Indicates whether the vendor uses cookie storage (session or otherwise). True indicates cookie storage is used. False cookie storage is not used. 
+   </td>
+  </tr>
+</table>
+
 ### <code>cookieMaxAgeSeconds</code>
 
 The number of seconds representing the longest potential duration for cookie storage on a device. If a Vendor uses multiple cookies with differing durations, <code>cookieMaxAgeSeconds</code> represents the cookie with the longest duration. Note: cookies are the only method of storage or device access that permit a predictable duration to be set. 
@@ -36,13 +67,44 @@ The number of seconds representing the longest potential duration for cookie sto
   <tr>
    <td><code>cookieMaxAgeSeconds</code>
    </td>
-   <td><strong>required</strong>
+   <td><strong>required if usesCookies is set to true, else optional</strong>
    </td>
    <td>integer
    </td>
    <td>-
    </td>
-   <td>The number, in seconds, of the longest potential duration for storage on a device, as set when using the cookie method of storage. A negative number or a 0 indicate session storage similar to the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie">Set-Cookie</a> spec. If a vendor only uses non-cookie storage the value should not be positive.  <em>Note: this only includes what is declared when the storage is set and does not consider duration extensions should storage be refreshed. </em>
+   <td>The number, in seconds, of the longest potential duration for storage on a device, as set when using the cookie method of storage. A negative number or a 0 indicate session storage similar to the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie">Set-Cookie</a> spec. A "-100" value no longer indicates no cookie usage. <em>Note: this only includes what is declared when the storage is set and does not consider duration extensions should storage be refreshed. </em>
+   </td>
+  </tr>
+</table>
+
+### <code>cookieRefresh</code>
+
+This true or false field indicates whether any cookies in scope for <code>cookieMaxAgeSeconds</code> are refreshed after being initially set. The following is an example of a cookie "refresh" scenario. On Day 0 a user visits a webpage which loads Vendor A who seeks Purpose 1 consent. She consents to Purpose 1 which includes Vendor A's 90 day max age cookie disclosure. This cookie is set to expire 90 days from now on Day 90 using <code>Set-Cookie: Max-Age=7776000</code>. On Day 5 the same user again visits the same webpage loading Vendor A. The webpage's CMP previously recorded her data processing choices and does not surface a new consent request. Vendor A is considered to "refresh" the cookie if it resets the countdown to 90 days from day 5, which would now be 96 days after the user made her choice when the webpage's CMP displayed a transparency and control experience to her.
+
+<table>
+  <tr>
+   <td>Field
+   </td>
+   <td>Scope
+   </td>
+   <td>Type
+   </td>
+   <td>Default
+   </td>
+   <td>Description
+   </td>
+  </tr>
+  <tr>
+   <td><code>cookieRefresh</code>
+   </td>
+   <td><strong>required</strong>
+   </td>
+   <td>boolean
+   </td>
+   <td>-
+   </td>
+   <td>Indicates the vendor’s refreshing a cookie (see example above). True indicates the vendor refreshes this cookie. False indicates the vendor does not refresh the cookie any time the browser reloads.</em>
    </td>
   </tr>
 </table>
@@ -73,7 +135,7 @@ This true or false field indicates whether the vendor uses other, non-cookie met
    </td>
    <td>-
    </td>
-   <td>Indicates the vendor’s use of non-cookie storage and access to information already stored on a user’s device. True indicates non-cookie access is used. False indicates only cookie storage and access are used. 
+   <td>Indicates the vendor’s use of non-cookie storage and access to information already stored on a user’s device. True indicates non-cookie access is used. False indicates non-cookie storage and access to information already stored on a user's device <em>is not</em> used. 
    </td>
   </tr>
 </table>
@@ -109,7 +171,7 @@ Link to a recommended, vendor-hosted, secure URL for disclosing additional stora
   </tr>
 </table>
 
-#### Example of GVL entry with `cookieMaxAgeSeconds, usesNonCookieAccess `and `deviceStorageDisclosureUrl`:
+#### Example of GVL entry with `cookieMaxAgeSeconds, cookieRefresh, usesNonCookieAccess `and `deviceStorageDisclosureUrl`:
 
 ```javascript
 ...
@@ -124,6 +186,7 @@ Link to a recommended, vendor-hosted, secure URL for disclosing additional stora
   "specialFeatures": [],
   "policyUrl": "https://adservervendor.eu/privacy-policy/",
   "cookieMaxAgeSeconds": 31536000,
+  "cookieRefresh": false,
   "usesNonCookieAccess": true,
   "deviceStorageDisclosureUrl": "https://vendor123.com/.well-known/deviceStorage.json"
 }
@@ -170,7 +233,7 @@ The deviceStorage.json is hosted at the vendor-supplied URL (<code>deviceStorage
   <tr>
    <td><code>maxAgeSeconds</code>
    </td>
-   <td><strong>required</strong>
+   <td><strong>required if type = 'cookie' else null</strong>
    </td>
    <td>integer
    </td>
@@ -180,9 +243,19 @@ For types of mechanisms (non-cookie) where duration cannot be set, this field sh
    </td>
   </tr>
   <tr>
+   <td><code>cookieRefresh</code>
+   </td>
+   <td><strong>optional</strong>
+   </td>
+   <td>boolean
+   </td>
+   <td>Only required for the type = ‘cookie’; otherwise false. Indicates the vendor is refreshing a cookie (see example above). True indicates the vendor refreshes this cookie. False indicates the vendor does not refresh the cookie any time the browser reloads.
+   </td>
+  </tr>
+  <tr>
    <td><code>domain</code>
    </td>
-   <td><strong>optional*</strong>
+   <td><strong>optional</strong>
    </td>
    <td>string
    </td>
@@ -221,6 +294,7 @@ Below is an example JSON for a fictional company named AdTech123.  AdTech123 own
       "identifier": "retarget-adtech123",
       "type": "cookie",
       "maxAgeSeconds": 2592000000,
+      "cookieRefresh": false,
       "domain": "retarget.adtech123.com", 
       "purposes": [3,4,5,6]
     },
@@ -228,6 +302,7 @@ Below is an example JSON for a fictional company named AdTech123.  AdTech123 own
       "identifier": "id",
       "type": "web",
       "maxAgeSeconds": null,
+      "cookieRefresh": false,
       "purposes": [3,4,5,6,7,8,9,10]
     }
   ]
