@@ -216,7 +216,7 @@ _**__By July 31st 2021, CMPs must update their configuration so that they no lon
 
 *   Decode the TC String from the global scope to load and preserve all existing signals
 *   Set the signals for the vendors specified in the CMP user interface. If a subset of vendors is shown in the CMP user interface, the CMP must only set signals for those vendors.
-*   If a CMP is unable to resolve an ambigious negative vendor signal – unable to differentiate between a “no” and a “never disclosed” – a CMP shall disambiguate the signal with the corresponding value in the _**[DisclosedVendors ](#disclosed-vendors)**_ segment since that segment signals which vendors were disclosed to the user.
+*   If a CMP is unable to resolve an ambiguous negative vendor signal – unable to differentiate between a “no” and a “never disclosed” – a CMP shall disambiguate the signal with the corresponding value in the _**[DisclosedVendors ](#disclosed-vendors)**_ segment since that segment signals which vendors were disclosed to the user.
 *   Once the user has made their selections the CMP shall save the resulting TC String back to the global context, overwriting the old one.
 
 
@@ -1193,7 +1193,7 @@ The CMP reads a TC String from global context storage and it contains a _**[Disc
 ```
 COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw
 ```
-Because the publisher does not support OOB legal bases, the dot-delimited _**[DisclosedVendors](#disclosed-vendors)**_ segment at the end of the TC String is removed when requested form the CMP API:
+Because the publisher does not support OOB legal bases, the dot-delimited _**[DisclosedVendors](#disclosed-vendors)**_ segment at the end of the TC String is removed when requested from the CMP API:
 
 [ _**[Core](#the-core-string)**_ ]
 ```
@@ -1235,7 +1235,7 @@ CGL23UdMFJzvuA9ACCENAXCEAC0AAGrAAA5YA5ht7-_d_7_vd-f-nrf4_4A4hM4JCKoK4YhmAqABgAEg
 
 #### Disclosed Vendors
 
-The _**DisclosedVendors**_ is a TC String segment that signals which vendors have been disclosed to a given user by a CMP. This segment is required when saving a global-context TC String.  When a CMP updates a globally-scoped TC String, the CMP <span style="text-decoration:underline;">MUST</span> retain the existing values and only add new disclosed Vendor IDs that had not been added by other CMPs in prior interactions with this use 
+The _**DisclosedVendors**_ is a TC String segment that signals which vendors have been disclosed to a given user by a CMP. This segment is required when saving a global-context TC String.  When a CMP updates a globally-scoped TC String, the CMP <span style="text-decoration:underline;">MUST</span> retain the existing values and only add new disclosed Vendor IDs that had not been added by other CMPs in prior interactions with this user. 
 
 The _**DisclosedVendors**_ segment may also be used by a CMP while [storing](#how-should-a-transparency--consent-string-be-stored) service-specific TC Strings to retain the vendors that have been disclosed to a user by a given CMP on a given site/app or group of sites/apps. For the avoidance of doubt: The use of the _**DisclosedVendors**_ segment is only permissible in relation to service-specific TC Strings with respect to storing it as additional segment. CMPs <span style="text-decoration:underline;">MUST</span> ensure that the segment is not used when signaling to vendors. The official tool suite supports this through [encoding options](#https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/core#encoding-options).
 
