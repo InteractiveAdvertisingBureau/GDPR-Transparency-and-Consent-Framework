@@ -34,7 +34,7 @@
    + [TC String Format](#tc-string-format)
      - [The Core String](#the-core-string)
      - [Signaling OOB in the TC String](#signaling-oob-in-the-tc-string)
-     - [Disclosed Vendors (OOB)](#disclosed-vendors-oob)
+     - [Disclosed Vendors](#disclosed-vendors)
      - [Allowed Vendors (OOB)](#allowed-vendors-oob)
      - [Publisher Purposes Transparency and Consent](#publisher-purposes-transparency-and-consent)
  * [The Global Vendor List](#the-global-vendor-list)
@@ -180,8 +180,8 @@ A TC String that contains positive consent signals must not be created before cl
 
 There are two main contexts in which a TC String can be created:
 
-*   **Global** - A TC String in this context is saved globally and is shared by CMPs running on sites across the web; When stored globally, they must <span style="text-decoration:underline;">NOT</span> contain [Publisher restrictions](#what-are-publisher-restrictions) or a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment but they may contain a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment.
-*   **Service-specific** - A  TC String in this context is only used by the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain [Publisher restrictions](#what-are-publisher-restrictions), a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment and an _**[AllowedVendors](#allowed-vendors-oob)**_ segment.
+*   **Global** - A TC String in this context is saved globally and is shared by CMPs running on sites across the web; When stored globally, they must <span style="text-decoration:underline;">NOT</span> contain [Publisher restrictions](#what-are-publisher-restrictions) or a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment but they may contain a _**[DisclosedVendors](#disclosed-vendors)**_ segment.
+*   **Service-specific** - A  TC String in this context is only used by the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain [Publisher restrictions](#what-are-publisher-restrictions), a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment and an _**[AllowedVendors](#allowed-vendors-oob)**_ segment when signaling to vendors. The use of the _**[DisclosedVendors](#disclosed-vendors)**_ segment is restricted to storing it as additional metadata with the service-specific TC String. 
 
 CMPs must be set up to operate in either a service-specific or global configuration. If a Publisher-operated CMP declares that the personal data processing purpose is, for example, on this site and on other sites or apps where third-party companies also operate, then the scope is global and that TC String is used and stored in a global context.
 
@@ -211,7 +211,7 @@ In case a vendor has declared flexibility for a purpose and there is no legal ba
 
 *   Decode the TC String from the global scope to load and preserve all existing signals
 *   Set the signals for the vendors specified in the CMP user interface. If a subset of vendors is shown in the CMP user interface, the CMP must only set signals for those vendors.
-*   If a CMP is unable to resolve an ambigious negative vendor signal – unable to differentiate between a “no” and a “never disclosed” – a CMP shall disambiguate the signal with the corresponding value in the _**[DisclosedVendors ](#disclosed-vendors-oob)**_ segment since that segment signals which vendors were disclosed to the user.
+*   If a CMP is unable to resolve an ambigious negative vendor signal – unable to differentiate between a “no” and a “never disclosed” – a CMP shall disambiguate the signal with the corresponding value in the _**[DisclosedVendors ](#disclosed-vendors)**_ segment since that segment signals which vendors were disclosed to the user.
 *   Once the user has made their selections the CMP shall save the resulting TC String back to the global context, overwriting the old one.
 
 
@@ -469,7 +469,7 @@ The global TC string is stored in a shared space and is formatted as described i
 There are 4 distinct TC String segments that are joined together on a “dot” character.  They are:
 
 *   The core vendor transparency and consent details
-*   Disclosed vendors for validating OOB signaling
+*   Disclosed vendors
 *   Allowed vendors for restricting OOB signaling to select vendors, and
 *   Publisher purposes transparency and consent for their own data uses.
 
@@ -477,7 +477,7 @@ The _**[Core String](#the-core-string)**_ is always required and comes first and
 
 For example, a globally-scoped TC String with all four segments present would be surfaced through CMP API – not stored – and look like:
 
-[ _**[Core String](#the-core-string)**_ ].[ _**[Disclosed Vendors](#disclosed-vendors-oob)**_ ].[ _**[AllowedVendors](#allowed-vendors-oob)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
+[ _**[Core String](#the-core-string)**_ ].[ _**[Disclosed Vendors](#disclosed-vendors)**_ ].[ _**[AllowedVendors](#allowed-vendors-oob)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
 ```
 COw4XqLOw4XqLAAAAAENAXCAAAAAAAAAAAAAAAAAAAAA.IFukWSQgAIQwgI0QEByFAAAAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.QFukWSQgAIQwgI0QEByFAAAAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.YAAAAAAAAAAAAAAAAAA
@@ -1162,28 +1162,28 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
 
 On occasion, legal bases for processing a user's personal data are achieved outside of the TCF. This would be considered an out-of-band (OOB) legal basis. To signal whether using an OOB legal bases is allowed requires:
 
-*   An indication that some CMP has, at some time, disclosed the vendor in a global context to the user in the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment
+*   An indication that some CMP has, at some time, disclosed the vendor in a global context to the user in the _**[DisclosedVendors](#disclosed-vendors)**_ segment
 *   The use of a global-context TC String
 *   The publisher to allow vendors, in general, to use OOB legal bases
 *   Optionally, a list of specific vendors allowed to use OOB legal bases in the _**[AllowedVendors](#allowed-vendors-oob)**_ segment
 
-The _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment of a TC String provides a list of vendors that have been disclosed to a user; it is created and stored in a global context for all CMPs to share across the web. The existence of this segment as a member of a TC String, when signaling, implies that the publisher supports OOB legal bases. Conversely, If a publisher does not support OOB legal bases the segment shall be omitted when signaling.  Regardless of publisher support, a CMP shall still update the segment with any new Vendor IDs disclosed and save the updated TC String back to the global context when the CMP user interface completes its interaction with the user.
+The _**[DisclosedVendors](#disclosed-vendors)**_ segment of a TC String provides a list of vendors that have been disclosed to a user; it is created and stored in a global context for all CMPs to share across the web. The existence of this segment as a member of a TC String, when signaling, implies that the publisher supports OOB legal bases. Conversely, If a publisher does not support OOB legal bases the segment shall be omitted when signaling.  Regardless of publisher support, a CMP shall still update the segment with any new Vendor IDs disclosed and save the updated TC String back to the global context when the CMP user interface completes its interaction with the user.
 
-If a publisher supports OOB legal bases, but only for select vendors, a CMP shall create an _**[AllowedVendors](#allowed-vendors-oob)**_ segment that reflects the vendors the publisher allows to operate under OOB legal bases.  When a TC String is requested from the CMP API it shall include both the _**[AllowedVendors](#allowed-vendors-oob)**_ and _**[DisclosedVendors](#disclosed-vendors-oob)**_ segments.  However, when a TC String is stored, an _**[AllowedVendors](#allowed-vendors-oob)**_ segment must never be saved to the global context as this is a publisher-specific setting and does not apply web-wide. If a CMP encounters a TC String with an _**[AllowedVendors](#allowed-vendors-oob)**_ segment in the global context it must disregard it, not include it in responses from the CMP API, and of course omit it when re-saving.
+If a publisher supports OOB legal bases, but only for select vendors, a CMP shall create an _**[AllowedVendors](#allowed-vendors-oob)**_ segment that reflects the vendors the publisher allows to operate under OOB legal bases.  When a TC String is requested from the CMP API it shall include both the _**[AllowedVendors](#allowed-vendors-oob)**_ and _**[DisclosedVendors](#disclosed-vendors)**_ segments.  However, when a TC String is stored, an _**[AllowedVendors](#allowed-vendors-oob)**_ segment must never be saved to the global context as this is a publisher-specific setting and does not apply web-wide. If a CMP encounters a TC String with an _**[AllowedVendors](#allowed-vendors-oob)**_ segment in the global context it must disregard it, not include it in responses from the CMP API, and of course omit it when re-saving.
 
-**Note:** If a Vendor has been _disclosed_ within the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment that means that they have interacted with the Framework and therefore can not use OOB legal bases.
+**Note:** If a Vendor has been _disclosed_ within the _**[DisclosedVendors](#disclosed-vendors)**_ segment that means that they have interacted with the Framework and therefore can not use OOB legal bases.
 
 The following three examples demonstrate how to handle an OOB signal in the TC String.
 
 **Example 1: A Publisher Does <span style="text-decoration:underline;">Not</span> Support OOB Legal Bases**
 
-The CMP reads a TC String from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment:
+The CMP reads a TC String from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors)**_ segment:
 
-[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
+[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors)**_ ]
 ```
 COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw
 ```
-Because the publisher does not support OOB legal bases, the dot-delimited _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment at the end of the TC String is removed when requested form the CMP API:
+Because the publisher does not support OOB legal bases, the dot-delimited _**[DisclosedVendors](#disclosed-vendors)**_ segment at the end of the TC String is removed when requested form the CMP API:
 
 [ _**[Core](#the-core-string)**_ ]
 ```
@@ -1192,41 +1192,42 @@ COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA
 
 **Example 2: A Publisher Supports OOB Legal Bases**
 
-The CMP reads a TC String from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment (same as Example 1):
+The CMP reads a TC String from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors)**_ segment (same as Example 1):
 
-[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
+[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors)**_ ]
 ```
 COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw
 ```
-Since the publisher supports OOB legal bases for any vendor that uses it, the TC String, when surfaced through the CMP API, is unchanged from storage – it includes the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment:
+Since the publisher supports OOB legal bases for any vendor that uses it, the TC String, when surfaced through the CMP API, is unchanged from storage – it includes the _**[DisclosedVendors](#disclosed-vendors)**_ segment:
 
-[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
+[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors)**_ ]
 ```
 COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw
 ```
 
 **Example 3: A Publisher Supports OOB Legal Bases for Only Select Vendors**
 
-The CMP reads a TC String from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment (same as Example 1 & Example 2):
+The CMP reads a TC String from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors)**_ segment (same as Example 1 & Example 2):
 
 
-[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
+[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors)**_ ]
 ```
 COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw.PVAfDObdrA
 ```
 
 To indicate the select vendors a publisher approves to use OOB legal bases, the CMP includes the _**[AllowedVendors](#allowed-vendors-oob)**_ segment with the TC String from the CMP API:
 
-[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ].[ _**[AllowedVendors](#allowed-vendors-oob)**_ ]
+[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors)**_ ].[ _**[AllowedVendors](#allowed-vendors-oob)**_ ]
 
 ```
 CGL23UdMFJzvuA9ACCENAXCEAC0AAGrAAA5YA5ht7-_d_7_vd-f-nrf4_4A4hM4JCKoK4YhmAqABgAEgAA.IFut_a83_Ma_t-_SvB3v4-IAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.QFulWfTw4obx_Z2zUj6XkNIAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA
 ```
 
-#### Disclosed Vendors (OOB)
+#### Disclosed Vendors
 
-The _**DisclosedVendors**_ is a TC String segment that signals which vendors have been disclosed to a given user by a CMP. This segment is required when saving a global-context TC String.  When a CMP updates a globally-scoped TC String, the CMP <span style="text-decoration:underline;">MUST</span> retain the existing values and only add new disclosed Vendor IDs that had not been added by other CMPs in prior interactions with this user.
+The _**DisclosedVendors**_ is a TC String segment that signals which vendors have been disclosed to a given user by a CMP. This segment is required when saving a global-context TC String.  When a CMP updates a globally-scoped TC String, the CMP <span style="text-decoration:underline;">MUST</span> retain the existing values and only add new disclosed Vendor IDs that had not been added by other CMPs in prior interactions with this use 
 
+The _**DisclosedVendors**_ segment may also be used by a CMP while [storing](#how-should-a-transparency--consent-string-be-stored) service-specific TC Strings to retain the vendors that have been disclosed to a user by a given CMP on a given site/app or group of sites/apps. For the avoidance of doubt: The use of the _**DisclosedVendors**_ segment is only permissible in relation to service-specific TC Strings with respect to storing it as additional segment. CMPs <span style="text-decoration:underline;">MUST</span> ensure that the segment is not used when signaling to vendors. The official tool suite supports this through [encoding options](#https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/core#encoding-options).
 
 <table>
   <thead>
