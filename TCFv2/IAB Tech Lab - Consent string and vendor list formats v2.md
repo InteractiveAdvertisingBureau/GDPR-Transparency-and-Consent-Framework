@@ -22,7 +22,6 @@
    + [When should a TC string be created?](#when-should-a-tc-string-be-created)
    + [What are the different scopes for a TC String?](#what-are-the-different-scopes-for-a-tc-string)
    + [What are publisher restrictions?](#what-are-publisher-restrictions)
-   + [How does the CMP handle a globally-scoped TC string?](#how-does-the-cmp-handle-a-globally-scoped-tc-string)
    + [How does a URL-based service process the TC string when it can't execute JavaScript?](#how-does-a-url-based-service-process-the-tc-string-when-it-cant-execute-javascript)
      - [Full TC String passing](#full-tc-string-passing)
      - [CMP Redirect for TC String](#cmp-redirect-for-tc-string)
@@ -30,12 +29,8 @@
  * [Creating a TC String](#creating-a-tc-string)
    + [How should a Transparency & Consent String be stored?](#how-should-a-transparency--consent-string-be-stored)
    + [What are the Purposes and Features being supported?](#what-are-the-purposes-and-features-being-supported)
-   + [How should a global TC string be formatted for storage?](#how-should-a-global-tc-string-be-formatted-for-storage)
    + [TC String Format](#tc-string-format)
      - [The Core String](#the-core-string)
-     - [Signaling OOB in the TC String](#signaling-oob-in-the-tc-string)
-     - [Disclosed Vendors (OOB)](#disclosed-vendors-oob)
-     - [Allowed Vendors (OOB)](#allowed-vendors-oob)
      - [Publisher Purposes Transparency and Consent](#publisher-purposes-transparency-and-consent)
  * [The Global Vendor List](#the-global-vendor-list)
    + [I’m a vendor, how do I get added to the Global Vendor List?](#im-a-vendor-how-do-i-get-added-to-the-global-vendor-list)
@@ -65,6 +60,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| Sept 2021 | 2.0 | Deprecation of Global Scope, OOB and 'euconsent-v2' cookie associated with the consensu.org domain  |
 | July 2021 | 2.0 | Highlight the deprecation of Global Scope, OOB and 'euconsent-v2' cookie associated with the consensu.org domain  |
 | May 2021 | 2.0 | Special Purpose only vendors transparency clarification |
 | December 2020 | 2.0 | Domain name change for GVL resources |
@@ -165,8 +161,7 @@ A TC String contains the following information:
 3. **Legitimate interest:** the record of a CMP having established legitimate interest transparency for a vendor and/or purpose and whether the user exercised their “Right to Object” to it.  This includes signals for Purposes in general and Purposes declared specifically for a given Vendor.
 4. **Publisher restrictions:** the restrictions of a vendor's data processing by a publisher within the context of the users trafficking their digital property.
 5. **Publisher transparency and consent:** a segment of a TC String that publishers may use to establish transparency with and receive consent from users for their own legal bases to process personal data or to share with vendors if they so choose.
-6. **Out-of-band (OOB) legal bases** (_**by July 31st 2021, CMPs must update their configuration so that they no longer make use of OOB. From Sept 1st 2021, OOB strings will be considered invalid**_) : two segments expressing that a Vendor is using  legal bases outside of the TCF to process personal data. The first segment is a list of Vendors disclosed to the user and the second is a list of Vendors that the publisher allows to use out-of-band legal bases.
-7. **Specific jurisdiction disclosures:** the country in which the publisher’s business entity is established or the legislative country of reference and a record of whether Purpose 1, “[to] store and/or access information on a device,” was disclosed to the user since some jurisdictions handle this Purpose differently.
+6. **Specific jurisdiction disclosures:** the country in which the publisher’s business entity is established or the legislative country of reference and a record of whether Purpose 1, “[to] store and/or access information on a device,” was disclosed to the user since some jurisdictions handle this Purpose differently.
 
 
 ### Who should create a TC string?
@@ -183,7 +178,6 @@ A TC String that contains positive consent signals must not be created before cl
 
 There are two main contexts in which a TC String can be created:
 
-*   **Global** **(_by July 31st 2021, CMPs must update their configuration so that they no longer make use of global scope. Therefore CMPs must only read or write TC Strings in a service-specific context on the website that the user has visited and the CMP user interface must no longer make any reference to global scope consent. From Sept 1st 2021, Global Scope strings will be considered invalid_)** - A TC String in this context is saved globally and is shared by CMPs running on sites across the web; When stored globally, they must <span style="text-decoration:underline;">NOT</span> contain [Publisher restrictions](#what-are-publisher-restrictions) or a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment but they may contain a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment.
 *   **Service-specific** - A  TC String in this context is only used by the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain [Publisher restrictions](#what-are-publisher-restrictions), a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment and an _**[AllowedVendors](#allowed-vendors-oob)**_ segment.
 
 CMPs must be set up to operate in either a service-specific or global configuration. If a Publisher-operated CMP declares that the personal data processing purpose is, for example, on this site and on other sites or apps where third-party companies also operate, then the scope is global and that TC String is used and stored in a global context.
@@ -206,19 +200,6 @@ Publisher restrictions are custom requirements specified by a publisher and must
 For the avoidance of doubt:
 
 In case a vendor has declared flexibility for a purpose and there is no legal basis restriction signal it must always apply the default legal basis under which the purpose was registered aside from being registered as flexible. That means if a vendor declared a purpose as legitimate interest and also declared that purpose as flexible it may not apply a "consent" signal without a legal basis restriction signal to require consent.   
-
-
-### How does the CMP handle a globally-scoped TC string? 
-
-_**__By July 31st 2021, CMPs must update their configuration so that they no longer make use of global scope. Therefore CMPs must only read or write TC Strings in a service-specific context on the website that the user has visited and the CMP user interface must no longer make any reference to global scope consent. From Sept 1st 2021, Global Scope strings will be considered invalid.__**_
-
- When configured to use globally-scoped TC Strings CMPs must not overwrite any of the consent or legitimate interest signals found in an existing TC String. Therefore CMPs must do the following:
-
-*   Decode the TC String from the global scope to load and preserve all existing signals
-*   Set the signals for the vendors specified in the CMP user interface. If a subset of vendors is shown in the CMP user interface, the CMP must only set signals for those vendors.
-*   If a CMP is unable to resolve an ambiguous negative vendor signal – unable to differentiate between a “no” and a “never disclosed” – a CMP shall disambiguate the signal with the corresponding value in the _**[DisclosedVendors ](#disclosed-vendors-oob)**_ segment since that segment signals which vendors were disclosed to the user.
-*   Once the user has made their selections the CMP shall save the resulting TC String back to the global context, overwriting the old one.
-
 
 ### How does a URL-based service process the TC string when it can't execute JavaScript?
 
@@ -360,9 +341,7 @@ The following details provide information on creating, storing, and managing a T
 
 ### How should a Transparency & Consent String be stored?
 
-In version 1 of the TCF Specifications the consent string was specified to be stored as either a 1st party cookie for service-specific consent or a 3rd party cookie for global consent. In version 2 of the TCF Specifications, the storage mechanism used for service-specific TC Strings is up to a CMP, including any non-cookie storage mechanism. However, global TC Strings must still be stored as cookies under the `consensu.org` domain _**(by July 31st 2021, the Managing Organisation (MO) will no longer delegate a subdomain of the consensu.org domain to each newly registered CMP and CMPs must no longer write TC Strings in the 'euconsent-v2' cookie associated with the consensu.org domain. From Sept 1st 2021, CMPs must no longer read and process TC Strings in the ‘euconsent-v2’ cookie associated with the consensu.org domain)**_.
-
-It is important to note that with the creation of the version 2 TCF Specifications globally-scoped and service-specific scoped TC Strings have different encoding and decoding requirements.  Some segments are not allowed in a global scope and some are not allowed in a service-specific scope. This document attempts to call out those differing requirements explicitly where applicable.
+In version 1 of the TCF Specifications the consent string was specified to be stored as either a 1st party cookie for service-specific consent or a 3rd party cookie for global consent. In version 2 of the TCF Specifications, the storage mechanism used for service-specific TC Strings is up to a CMP, including any non-cookie storage mechanism. 
 
 The following table summarises where data is stored:
 
@@ -375,15 +354,6 @@ The following table summarises where data is stored:
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Global <strong><em>(by July 31st 2021, CMPs must update their configuration so that they no longer make use of global scope. Therefore CMPs must only read or write TC Strings in a service-specific context on the website that the user has visited and the CMP user interface must no longer make any reference to global scope consent. From Sept 1st 2021, Global Scope strings will be considered invalid)</em></strong></td>
-      <td>
-        3rd-party .consensu.org cookie. CMPs may also “backup” a TC String
-        encoded for the global scope via a different storage mechanism if
-        3rd-party cookies are being blocked or erased by a browser.
-      </td>
-      <td>Web-wide vendor transparency & consent</td>
-    </tr>
     <tr>
       <td>Service-specific</td>
       <td>
@@ -409,87 +379,19 @@ The IAB Europe Transparency & Consent Framework [Policies](https://iabeurope.eu/
 
 [https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/)
 
-
-### How should a global TC string be formatted for storage?
-
-_**By July 31st 2021, CMPs must update their configuration so that they no longer make use of global scope. Therefore CMPs must only read or write TC Strings in a service-specific context on the website that the user has visited and the CMP user interface must no longer make any reference to global scope consent. From Sept 1st 2021, Global Scope strings will be considered invalid.**_
-
-The global TC string is stored in a shared space and is formatted as described in the following table:
-
-
-<table>
-  <thead>
-    <tr>
-      <td><strong>Cookie Directive</strong></td>
-      <td><strong>Value(s)</strong></td>
-      <td><strong>Notes</strong></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Name</td>
-      <td><code>euconsent-v2</code></td>
-      <td>
-        To avoid conflicts with TC String cookie storage, beginning with
-        version 2.0 of the TCF the global and service-specific cookie name
-        shall include the TC string version as a hyphenated postfix, for
-        example <code>euconsent-v2</code>.
-      </td>
-    </tr>
-    <tr>
-      <td>Host</td>
-      <td><code>.consensu.org</code></td>
-      <td>
-        The DNS resolution for the name
-        <code>[<em>cmp-name</em>].mgr.consensu.org</code> will be delegated
-        by the Managing Organisation (IAB Europe) to each CMP. CMPs will
-        host their code, APIs, and CDN under this domain or subdomains. (<strong><em>by July 31st 2021, the Managing Organisation (MO) will no longer delegate a subdomain of the consensu.org domain to each newly registered CMP and CMPs must no longer write TC Strings in the 'euconsent-v2' cookie associated with the consensu.org domain. From Sept 1st 2021, CMPs must no longer read and process TC Strings in the ‘euconsent-v2’ cookie associated with the consensu.org domain</em></strong>)
-      </td>
-    </tr>
-    <tr>
-      <td>Path</td>
-      <td><code>/</code></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Max-Age</td>
-      <td><code>33696000</code></td>
-      <td>This represents thirteen 30-day months.</td>
-    </tr>
-    <tr>
-      <td>Value</td>
-      <td>Encoded TC String</td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-
-
-#### Global Cookie Storage Update (December 2019)
-- All requests that read from or write to the global cookie in the consensu.org domain must be secured by HTTPS _**(by July 31st 2021, the Managing Organisation (MO) will no longer delegate a subdomain of the consensu.org domain to each newly registered CMP and CMPs must no longer write TC Strings in the 'euconsent-v2' cookie associated with the consensu.org domain. From Sept 1st 2021, CMPs must no longer read and process TC Strings in the ‘euconsent-v2’ cookie associated with the consensu.org domain)**_
-- Additionally, browser cookie policies may require the support of certain attributes (e.g. sameSite, Secure)
-
-
-
 ### TC String Format
 
-There are 4 distinct TC String segments that are joined together on a “dot” character.  They are:
+There are 2 distincts TC String segments that are joined together on a “dot” character.  They are:
 
-*   The core vendor transparency and consent details
-*   Disclosed vendors for validating OOB signaling
-*   Allowed vendors for restricting OOB signaling to select vendors, and
+*   The core vendor transparency and consent details and
 *   Publisher purposes transparency and consent for their own data uses.
 
-The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent. The remaining optional and arbitrarily ordered segments represent support for [out-of-band **(by July 31st 2021, CMPs must update their configuration so that they no longer make use of OOB. From Sept 1st 2021, OOB strings will be considered invalid)**](#signaling-oob-in-the-tc-string) signaling and [publisher purposes transparency and consent (publisher TC)](#publisher-purposes-transparency-and-consent).  A TC String with all four segments is possible in certain conditions.
-
-For example, a globally-scoped TC String with all four segments present would be surfaced through CMP API – not stored – and look like:
-
-[ _**[Core String](#the-core-string)**_ ].[ _**[Disclosed Vendors](#disclosed-vendors-oob)**_ ].[ _**[AllowedVendors](#allowed-vendors-oob)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
+The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent. A TC String with all four segments is possible in certain conditions.
 
 ```
 COw4XqLOw4XqLAAAAAENAXCAAAAAAAAAAAAAAAAAAAAA.IFukWSQgAIQwgI0QEByFAAAAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.QFukWSQgAIQwgI0QEByFAAAAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.YAAAAAAAAAAAAAAAAAA
 ```
-A service-specific TC String must contain a Core TC String and may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment, but must not contain the OOB-related segments because those segments are not allowed in service-specific contexts:
+A service-specific TC String must contain a Core TC String and may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment :
 
 [ _**[Core String](#the-core-string)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
@@ -1163,371 +1065,6 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
     </tr>
   </tbody>
 </table>
-
-
-
-#### Signaling OOB in the TC String 
-
-_**By July 31st 2021, CMPs must update their configuration so that they no longer make use of OOB. From Sept 1st 2021, OOB strings will be considered invalid**_
-
-On occasion, legal bases for processing a user's personal data are achieved outside of the TCF. This would be considered an out-of-band (OOB) legal basis. To signal whether using an OOB legal bases is allowed requires:
-
-*   An indication that some CMP has, at some time, disclosed the vendor in a global context to the user in the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment
-*   The use of a global-context TC String
-*   The publisher to allow vendors, in general, to use OOB legal bases
-*   Optionally, a list of specific vendors allowed to use OOB legal bases in the _**[AllowedVendors](#allowed-vendors-oob)**_ segment
-
-The _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment of a TC String provides a list of vendors that have been disclosed to a user; it is created and stored in a global context for all CMPs to share across the web. The existence of this segment as a member of a TC String, when signaling, implies that the publisher supports OOB legal bases. Conversely, If a publisher does not support OOB legal bases the segment shall be omitted when signaling.  Regardless of publisher support, a CMP shall still update the segment with any new Vendor IDs disclosed and save the updated TC String back to the global context when the CMP user interface completes its interaction with the user.
-
-If a publisher supports OOB legal bases, but only for select vendors, a CMP shall create an _**[AllowedVendors](#allowed-vendors-oob)**_ segment that reflects the vendors the publisher allows to operate under OOB legal bases.  When a TC String is requested from the CMP API it shall include both the _**[AllowedVendors](#allowed-vendors-oob)**_ and _**[DisclosedVendors](#disclosed-vendors-oob)**_ segments.  However, when a TC String is stored, an _**[AllowedVendors](#allowed-vendors-oob)**_ segment must never be saved to the global context as this is a publisher-specific setting and does not apply web-wide. If a CMP encounters a TC String with an _**[AllowedVendors](#allowed-vendors-oob)**_ segment in the global context it must disregard it, not include it in responses from the CMP API, and of course omit it when re-saving.
-
-**Note:** If a Vendor has been _disclosed_ within the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment that means that they have interacted with the Framework and therefore can not use OOB legal bases.
-
-The following three examples demonstrate how to handle an OOB signal in the TC String.
-
-**Example 1: A Publisher Does <span style="text-decoration:underline;">Not</span> Support OOB Legal Bases**
-
-The CMP reads a TC String from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment:
-
-[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
-```
-COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw
-```
-Because the publisher does not support OOB legal bases, the dot-delimited _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment at the end of the TC String is removed when requested from the CMP API:
-
-[ _**[Core](#the-core-string)**_ ]
-```
-COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA
-```
-
-**Example 2: A Publisher Supports OOB Legal Bases**
-
-The CMP reads a TC String from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment (same as Example 1):
-
-[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
-```
-COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw
-```
-Since the publisher supports OOB legal bases for any vendor that uses it, the TC String, when surfaced through the CMP API, is unchanged from storage – it includes the _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment:
-
-[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
-```
-COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw
-```
-
-**Example 3: A Publisher Supports OOB Legal Bases for Only Select Vendors**
-
-The CMP reads a TC String from global context storage and it contains a _**[DisclosedVendors](#disclosed-vendors-oob)**_ segment (same as Example 1 & Example 2):
-
-
-[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ]
-```
-COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw.PVAfDObdrA
-```
-
-To indicate the select vendors a publisher approves to use OOB legal bases, the CMP includes the _**[AllowedVendors](#allowed-vendors-oob)**_ segment with the TC String from the CMP API:
-
-[ _**[Core](#the-core-string)**_ ].[ _**[DisclosedVendors](#disclosed-vendors-oob)**_ ].[ _**[AllowedVendors](#allowed-vendors-oob)**_ ]
-
-```
-CGL23UdMFJzvuA9ACCENAXCEAC0AAGrAAA5YA5ht7-_d_7_vd-f-nrf4_4A4hM4JCKoK4YhmAqABgAEgAA.IFut_a83_Ma_t-_SvB3v4-IAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.QFulWfTw4obx_Z2zUj6XkNIAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA
-```
-
-#### Disclosed Vendors (OOB)
-
-The _**DisclosedVendors**_ is a TC String segment that signals which vendors have been disclosed to a given user by a CMP. This segment is required when saving a global-context TC String.  When a CMP updates a globally-scoped TC String, the CMP <span style="text-decoration:underline;">MUST</span> retain the existing values and only add new disclosed Vendor IDs that had not been added by other CMPs in prior interactions with this user.
-
-
-<table>
-  <thead>
-    <tr style="background-color:#000;color:#FFF;">
-      <td><strong>Field Name</strong></td>
-      <td><strong>Bits</strong></td>
-      <td><strong>Values</strong></td>
-      <td><strong>Description</strong></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>SegmentType</td>
-      <td>3 bits</td>
-      <td>
-        <p>
-          Enum
-        </p>
-        <p><code>0</code> Default (<em>Core</em>)</p>
-        <p>
-          <strong><code>1</code> <em>DisclosedVendors</em></strong>
-        </p>
-        <p><code>2</code> <em>AllowedVendors</em></p>
-        <p><code>3</code> PublisherTC</p>
-      </td>
-      <td>
-        <strong><em>DisclosedVendors</em></strong> segment is
-        <code>1</code> which is <code>001</code> in binary.
-      </td>
-    </tr>
-    <tr>
-      <td>MaxVendorId</td>
-      <td>16 bits</td>
-      <td>The maximum Vendor ID included in this encoding.</td>
-      <td>
-        Because this section can be a variable length, this indicates the
-        last ID of the section so that a decoder will know when it has
-        reached the end.
-      </td>
-    </tr>
-    <tr>
-      <td>IsRangeEncoding</td>
-      <td>1 bit</td>
-      <td>
-        <code>1</code> Range<br />
-        <code>0</code> BitField
-      </td>
-      <td>
-        The encoding scheme used to encode the IDs in the section – Either a
-        BitField Section or Range Section follows. Encoding logic should
-        choose the encoding scheme that results in the smaller output size
-        for a given set.
-      </td>
-    </tr>
-    <tr></tr>
-    <tr style="background-color:#999;">
-      <td colspan="2"><strong>BitField Section</strong></td>
-      <td colspan="2">
-        <strong>Encodes one disclosed vendor bit per Vendor ID</strong>
-      </td>
-    </tr>
-    <tr>
-      <td>BitField</td>
-      <td>MaxVendorId bits</td>
-      <td>
-        <p>
-          One bit for each vendor
-        </p>
-        <p>
-          <code>1</code> Disclosed<br />
-          <code>0</code> Not Disclosed
-        </p>
-      </td>
-      <td>
-        The value for each Vendor ID from <code>1</code> to MaxVendorId.
-        <p>
-          Set the bit corresponding to a given vendor to <code>1</code> if
-          the CMP has disclosed the vendor in the UI.
-        </p>
-      </td>
-    </tr>
-    <tr style="background-color:#999;">
-      <td colspan="2"><strong>Range Section</strong></td>
-      <td colspan="2">
-        <strong>Encodes range groups of Vendor IDs who have been disclosed to a
-          user</strong>
-      </td>
-    </tr>
-    <tr>
-      <td>NumEntries</td>
-      <td>12 bits</td>
-      <td colspan="2">Number of RangeEntry sections to follow</td>
-    </tr>
-    <tr style="border-top:5px solid black;">
-      <td colspan="2">RangeEntry (repeated NumEntries times)</td>
-      <td colspan="2">
-        A single or range of Vendor ID(s) of Vendor(s) who were disclosed in
-        a CMP UI to the user. If a Vendor ID is not within the bounds of the
-        ranges then they were not disclosed to the user.
-      </td>
-    </tr>
-    <tr>
-      <td>IsARange</td>
-      <td>1 bit</td>
-      <td>
-        <code>1</code> Vendor ID range<br />
-        <code>0</code> Single Vendor ID
-      </td>
-      <td>
-        If more than one Vendor ID is included in this RangeEntry then this
-        describes a range of Vendor IDs and this value is 1. If only one
-        Vendor ID is included then the value is <code>0</code>.
-      </td>
-    </tr>
-    <tr>
-      <td>StartOrOnlyVendorId</td>
-      <td>16 bits</td>
-      <td>
-        The first ID of an inclusive contiguous ascending-order series of
-        Vendor IDs even if the series is only a cardinality of 1.
-      </td>
-      <td>
-        This is the first or only Vendor ID that has been disclosed in this
-        RangeEntry.
-      </td>
-    </tr>
-    <tr>
-      <td>EndVendorId</td>
-      <td>16 bits</td>
-      <td>
-        The last ID of the inclusive contiguous ascending-order series of
-        Vendor IDs started with StartOrOnlyVendorId but only if that series
-        has a cardinality greater than 1, otherwise this field is omitted.
-      </td>
-      <td>
-        The end of the series of Vendor IDs – this is omitted if
-        <code>IsARange=0</code>.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-#### Allowed Vendors (OOB)
-
-Signals which vendors the publisher permits to use OOB legal bases.
-
-<table>
-  <thead>
-    <tr style="background-color:#000;color:#FFF;">
-      <td><strong>Field Name</strong></td>
-      <td><strong>Bits</strong></td>
-      <td><strong>Values</strong></td>
-      <td><strong>Description</strong></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>SegmentType</td>
-      <td>3 bits</td>
-      <td>
-        <p>
-          Enum
-        </p>
-        <p><code>0</code> Default (<em>Core</em>)</p>
-        <p><code>1</code> <em>DisclosedVendors</em></p>
-        <p>
-          <strong><code>2</code> <em>AllowedVendors</em></strong>
-        </p>
-        <p><code>3</code> PublisherTC</p>
-      </td>
-      <td>
-        OOB AllowedVendors segment is <code>2</code> which is
-        <code>010</code> in binary.
-      </td>
-    </tr>
-    <tr>
-      <td>MaxVendorId</td>
-      <td>16 bits</td>
-      <td>The maximum Vendor ID that is included.</td>
-      <td>
-        Because this section can be a variable length, this indicates the
-        last ID of the section so that a decoder will know when it has
-        reached the end.
-      </td>
-    </tr>
-    <tr>
-      <td>IsRangeEncoding</td>
-      <td>1 bit</td>
-      <td>
-        <code>1</code> Range<br />
-        <code>0</code> BitField
-      </td>
-      <td>
-        The encoding scheme used to encode the IDs in the section – Either a
-        BitField Section or Range Section follows. Encoding logic should
-        choose the encoding scheme that results in the smaller output size
-        for a given set.
-      </td>
-    </tr>
-    <tr style="background-color:#999;">
-      <td colspan="2"><strong>BitField Section</strong></td>
-      <td colspan="2">
-        <strong>Encodes one allowed vendor bit per Vendor ID</strong>
-      </td>
-    </tr>
-    <tr>
-      <td>BitField</td>
-      <td>MaxVendorId bits</td>
-      <td>
-        <p>
-          One bit for each vendor
-        </p>
-        <p>
-          <code>1</code> Allowed<br />
-          <code>0</code> Not Allowed
-        </p>
-      </td>
-      <td>
-        The value for each Vendor ID from <code>1</code> to MaxVendorId.
-        <p>
-          Set the bit corresponding to a given Vendor ID to
-          <code>1</code> if the Publisher permits the vendor to use OOB
-          legal bases.
-        </p>
-      </td>
-    </tr>
-    <tr style="background-color:#999;">
-      <td colspan="2"><strong>Range Section</strong></td>
-      <td colspan="2">
-        <strong
-          >Encodes range groups of Vendor IDs who the publisher is allowing
-          to use OOB legal bases</strong
-        >
-      </td>
-    </tr>
-    <tr>
-      <td>NumEntries</td>
-      <td>12 bits</td>
-      <td colspan="2">Number of RangeEntry sections to follow</td>
-    </tr>
-    <tr style="border-top:5px solid black;">
-      <td colspan="2">RangeEntry (repeated NumEntries times)</td>
-      <td colspan="2">
-        A single or range of Vendor ID(s) of Vendor(s) who are allowed to
-        use OOB legal bases on the given publisher’s digital property. If
-        a Vendor ID is not within the bounds of the ranges then they are not
-        allowed to use OOB legal bases on the given publisher's digital
-        property..
-      </td>
-    </tr>
-    <tr>
-      <td>IsARange</td>
-      <td>1 bit</td>
-      <td>
-        <code>1</code> Vendor ID range<br />
-        <code>0</code> Single Vendor ID
-      </td>
-      <td>
-        If more than one Vendor ID is included in this RangeEntry then this
-        describes a range of Vendor IDs and this value is 1. If only one
-        Vendor ID is included then the value is <code>0</code>.
-      </td>
-    </tr>
-    <tr>
-      <td>StartOrOnlyVendorId</td>
-      <td>16 bits</td>
-      <td>
-        The first ID of an inclusive contiguous ascending-order series of
-        Vendor IDs even if the series is only a cardinality of 1.
-      </td>
-      <td>
-        This is the first or only Vendor ID that is allowed in this
-        RangeEntry.
-      </td>
-    </tr>
-    <tr>
-      <td>EndVendorId</td>
-      <td>16 bits</td>
-      <td>
-        The last ID of the inclusive contiguous ascending-order series of
-        Vendor IDs started with StartOrOnlyVendorId but only if that series
-        has a cardinality greater than 1, otherwise this field is omitted.
-      </td>
-      <td>
-        The end of the series of Vendor IDs – this is omitted if
-        <code>IsARange=0</code>.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
 
 #### Publisher Purposes Transparency and Consent
 
