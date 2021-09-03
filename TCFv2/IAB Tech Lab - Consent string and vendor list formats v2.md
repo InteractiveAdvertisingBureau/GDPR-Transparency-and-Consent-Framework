@@ -20,7 +20,7 @@
    + [What information is stored in a TC String?](#what-information-is-stored-in-a-tc-string)
    + [Who should create a TC string?](#who-should-create-a-tc-string)
    + [When should a TC string be created?](#when-should-a-tc-string-be-created)
-   + [What are the different scopes for a TC String?](#what-are-the-different-scopes-for-a-tc-string)
+   + [What is the scope for a TC String?](#what-is-the-scope-for-a-tc-string)
    + [What are publisher restrictions?](#what-are-publisher-restrictions)
    + [How does a URL-based service process the TC string when it can't execute JavaScript?](#how-does-a-url-based-service-process-the-tc-string-when-it-cant-execute-javascript)
      - [Full TC String passing](#full-tc-string-passing)
@@ -174,15 +174,9 @@ A Transparency & Consent String may only be created by an IAB Europe TCF registe
 A TC String that contains positive consent signals must not be created before clear affirmative action is taken by a user that unambiguously signifies that user’s consent. However, a TC String may be created with only legitimate interest establishment signals providing that legitimate interest transparency has been established in accordance with the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/).
 
 
-### What are the different scopes for a TC String?
+### What is the scope for a TC String?
 
-There are two main contexts in which a TC String can be created:
-
-*   **Service-specific** - A  TC String in this context is only used by the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain [Publisher restrictions](#what-are-publisher-restrictions), a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment and an _**[AllowedVendors](#allowed-vendors-oob)**_ segment.
-
-CMPs must be set up to operate in either a service-specific or global configuration. If a Publisher-operated CMP declares that the personal data processing purpose is, for example, on this site and on other sites or apps where third-party companies also operate, then the scope is global and that TC String is used and stored in a global context.
-
-If the disclosures do not describe a global scope, or explicitly state service-specific processing, then the TC String is used and stored explicitly as a service-specific string. Also, if the CMP discloses transparency and consent in a global context but the user’s browser does not permit third-party cookies, then the CMP’s only recourse is to retain the user’s preference using a local storage mechanism (eg. first-party cookie or [window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)). Since the transparency and consent obtained from the user is restricted to that site or service, the TC String must then have the service-specific bit [IsServiceSpecific](#tc-string-format) set.
+CMPs must be set up to operate in a **service-specific**. A  TC String in this context is only used by the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain [Publisher restrictions](#what-are-publisher-restrictions), a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment and an _**[AllowedVendors](#allowed-vendors-oob)**_ segment.
 
 
 ### What are publisher restrictions?
