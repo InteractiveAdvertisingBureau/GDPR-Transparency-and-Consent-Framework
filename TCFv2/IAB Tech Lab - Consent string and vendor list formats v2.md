@@ -24,13 +24,13 @@
    + [What are publisher restrictions?](#what-are-publisher-restrictions)
    + [How does a URL-based service process the TC string when it can't execute JavaScript?](#how-does-a-url-based-service-process-the-tc-string-when-it-cant-execute-javascript)
      - [Full TC String passing](#full-tc-string-passing)
-     - [CMP Redirect for TC String](#cmp-redirect-for-tc-string)
    + [What if consent is governed differently in a country?](#what-if-consent-is-governed-differently-in-a-country)
  * [Creating a TC String](#creating-a-tc-string)
    + [How should a Transparency & Consent String be stored?](#how-should-a-transparency--consent-string-be-stored)
    + [What are the Purposes and Features being supported?](#what-are-the-purposes-and-features-being-supported)
    + [TC String Format](#tc-string-format)
      - [The Core String](#the-core-string)
+     - [Disclosed Vendors](#disclosed-vendors)
      - [Publisher Purposes Transparency and Consent](#publisher-purposes-transparency-and-consent)
  * [The Global Vendor List](#the-global-vendor-list)
    + [I’m a vendor, how do I get added to the Global Vendor List?](#im-a-vendor-how-do-i-get-added-to-the-global-vendor-list)
@@ -61,6 +61,7 @@
 | Date | Version | Comments |
 | :-- | :-- | :-- |
 | Sept 2021 | 2.0 | Deprecation of Global Scope, OOB and 'euconsent-v2' cookie associated with the consensu.org domain  |
+| August 2021 | 2.0 | Added optional use of DisclosedVendor segment in the context of storing service-level TC Strings  |
 | July 2021 | 2.0 | Highlight the deprecation of Global Scope, OOB and 'euconsent-v2' cookie associated with the consensu.org domain  |
 | May 2021 | 2.0 | Special Purpose only vendors transparency clarification |
 | December 2020 | 2.0 | Domain name change for GVL resources |
@@ -176,7 +177,7 @@ A TC String that contains positive consent signals must not be created before cl
 
 ### What is the scope for a TC String?
 
-CMPs must be set up to operate in a **service-specific**. A  TC String in this context is only used by the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain [Publisher restrictions](#what-are-publisher-restrictions), a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment and an _**[AllowedVendors](#allowed-vendors-oob)**_ segment.
+CMPs must be set up to operate in a **service-specific** or group-specific configuration. A TC String in this context is applicable only on a service or group of services, for example the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain [Publisher restrictions](#what-are-publisher-restrictions) and a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment when returned by the CMP API.
 
 
 ### What are publisher restrictions?
@@ -186,7 +187,7 @@ Version 2.0 of the Framework introduced the ability for publishers to signal res
 *  **Purposes.** Restrict the purposes for which personal data is processed by a vendor.
 *  **Legal basis.** Specify the legal basis upon which a publisher requires a vendor to operate where a vendor has signaled flexibility on legal basis in the [GVL](#the-global-vendor-list).
 
-Publisher restrictions are custom requirements specified by a publisher and must only be saved to a service-specific TC String as part of the _**[Core String](#the-core-string)**_. In order for vendors to determine if processing is permissible at all for a specific purpose or which legal basis is applicable (in case they signaled flexibility in the [GVL](#the-global-vendor-list)) restrictions must be respected.
+Publisher restrictions are custom requirements specified by a publisher. In order for vendors to determine if processing is permissible at all for a specific purpose or which legal basis is applicable (in case they signaled flexibility in the [GVL](#the-global-vendor-list)) restrictions must be respected.
 
 1. Vendors must always respect a restriction signal that disallows them the processing for a specific purpose regardless of whether or not they have declared that purpose to be “flexible”.
 2. Vendors that declared a purpose with a default legal basis (consent or legitimate interest respectively) but also declared this purpose as flexible must respect a legal basis restriction if present. That means for example in case they declared a purpose as legitimate interest but also declared that purpose as flexible and there is a legal basis restriction to require consent, they must then check for the consent signal and must not apply the legitimate interest signal.
@@ -317,15 +318,11 @@ The service making the call must replace the macros with appropriate values desc
 
 **Note:** other personal data, like IP addresses or callee cookies, may be passed as part of the request, and the `gdpr` and `gdpr_consent_xxxxx` is used by the callee to determine whether an identifier cookie or other personal data can be set and/or used.
 
-#### CMP Redirect for TC String
-
-CMPs can implement a consent redirector and host it at `https://[cmpname].mgr.consensu.org/consent?redirect=url`. This redirector can read the (web-wide global) consent cookie which the browser sends with a 302 HTTP redirect URL using the parameters described in the previous section.
-
 ### What if consent is governed differently in a country?
 
 [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) require consent for Purpose 1 to store and/or access information on a device  “where such consent is necessary” leaving the responsibility to publishers and vendors to determine if consent in those jurisdictions is required or not.
 
- If a publisher is operating a CMP within a jurisdiction that does not require consent to store and/or access information on a device and, therefore, does not ask for consent on behalf of a vendor, the CMP will write the corresponding bit in the _**PurposesConsent**_ field to `0`. Even though it is valid within that jurisdiction to use Legitimate Interest for Purpose 1, a vendor would interpret that `0` as a “no consent” signal and have no way of knowing that consent was not required in the jurisdiction in which the publisher operates.  This lack of transparency would, ultimately, cause losses in ad revenue for that publisher.
+ If a publisher is operating a CMP within a jurisdiction that does not require consent to store and/or access information on a device and, therefore, does not ask for consent on behalf of a vendor for a purpose 1, the CMP will write the corresponding bit in the _**PurposesConsent**_ field to `0`. Even though it is valid within that jurisdiction to not request consent for Purpose 1, a vendor would interpret that `0` as a “no consent” signal and have no way of knowing that consent was not required in the jurisdiction in which the publisher operates.  This lack of transparency would, ultimately, cause losses in ad revenue for that publisher.
 
 To accommodate cases where Purpose 1 is governed differently for consent depending on the jurisdiction, a TC String is transparent about the publisher’s operating governance and whether or not Purpose 1 was disclosed to a user. The vendor can then use these details to make a determination about whether they have sufficient legal bases for personal data processing in that given context. To support this, there are two fields in a TC String: _**PublisherCC**_, which represents the publisher’s country code and a flag for whether any disclosure has been offered on Purpose 1 named _**PurposeOneTreatment**_. Details for each field are listed among [the fields used in the TC String](#tc-string-format).
 
@@ -335,32 +332,7 @@ The following details provide information on creating, storing, and managing a T
 
 ### How should a Transparency & Consent String be stored?
 
-In version 1 of the TCF Specifications the consent string was specified to be stored as either a 1st party cookie for service-specific consent or a 3rd party cookie for global consent. In version 2 of the TCF Specifications, the storage mechanism used for service-specific TC Strings is up to a CMP, including any non-cookie storage mechanism. 
-
-The following table summarises where data is stored:
-
-<table>
-  <thead>
-    <tr>
-      <td><strong>Scope</strong></td>
-      <td><strong>Storage</strong></td>
-      <td><strong>Purpose</strong></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Service-specific</td>
-      <td>
-        Storage mechanism chosen by CMP. Must not be stored as the version 1.1
-        local ‘euconsent’ cookie.
-      </td>
-      <td>
-        Service-specific vendor transparency & consent (if configured,
-        overrides global vendor transparency & consent)
-      </td>
-    </tr>
-  </tbody>
-</table>
+In version 1 of the TCF Specifications the consent string was specified to be stored as either a 1st party cookie for service-specific consent or a 3rd party cookie for global consent. In version 2 of the TCF Specifications, the storage mechanism used for service-specific and group-specific TC Strings is up to a CMP, including any non-cookie storage mechanism.
 
 #### Managing conflicting string versions
 Before 30 September 2020, [after which v1.x strings will be considered invalid](https://iabeurope.eu/all-news/the-iab-europe-transparency-consent-framework-tcf-steering-group-votes-to-extend-technical-support-for-tcf-v1-1/), if a CMP encounters a situation where both a v1.x string and a v2.0 string are erroneously present simultaneously, the CMP should remove the v1.x string to ensure that there is only one source of truth for consumers of the string.
@@ -375,17 +347,18 @@ The IAB Europe Transparency & Consent Framework [Policies](https://iabeurope.eu/
 
 ### TC String Format
 
-There are 2 distincts TC String segments that are joined together on a “dot” character.  They are:
+There are 3 distincts TC String segments that are joined together on a “dot” character.  They are:
 
-*   The core vendor transparency and consent details and
+*   The core vendor transparency and consent details
+*   Disclosed vendors for solving ambiguous negative vendor signal and
 *   Publisher purposes transparency and consent for their own data uses.
 
-The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent. A TC String with all four segments is possible in certain conditions.
+The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent.
 
 ```
 COw4XqLOw4XqLAAAAAENAXCAAAAAAAAAAAAAAAAAAAAA.IFukWSQgAIQwgI0QEByFAAAAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.QFukWSQgAIQwgI0QEByFAAAAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.YAAAAAAAAAAAAAAAAAA
 ```
-A service-specific TC String must contain a Core TC String and may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment :
+A TC String must contain a Core TC String and may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment :
 
 [ _**[Core String](#the-core-string)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
@@ -511,9 +484,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       <td>1 bit</td>
       <td><code>1</code> true<br /><code>0</code> false</td>
       <td>
-        Whether the signals encoded in this TC String were from
-        service-specific storage (<code>true</code>) versus ‘global’
-        consensu.org shared storage (<code>false</code>).
+       This field must always have the value of <code>1</code>. When a Vendor encounters a TC String with <code>IsServiceSpecific=0</code> then it is considered invalid.
       </td>
     </tr>
     <tr>
@@ -618,15 +589,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         >.
       </td>
       <td>
-        CMPs can use the PublisherCC field to indicate the legal
-        jurisdiction the publisher is under to help vendors determine
-        whether the vendor needs consent for Purpose 1.
-        <p>
-          In a globally-scoped TC string, this field must always have a
-          value of 0. When a CMP encounters a globally-scoped TC String with
-          PurposeOneTreatment=1 then it is considered invalid and the CMP
-          must discard it and re-establish transparency and consent.
-        </p>
+        CMPs can use the PublisherCC field to indicate the legal jurisdiction the publisher is under to help vendors determine whether the vendor needs consent for Purpose 1.
       </td>
     </tr>
     <tr>
@@ -1060,6 +1023,151 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
   </tbody>
 </table>
 
+#### Disclosed Vendors
+
+The _**DisclosedVendors**_ is an optional TC String segment that signals which vendors have been disclosed to a given user by a CMP. It may be used by a CMP while [storing](#how-should-a-transparency--consent-string-be-stored) TC Strings to record which vendors have been disclosed to the user, but must not be included in the TC String when returned by the CMP API.
+
+
+<table>
+  <thead>
+    <tr style="background-color:#000;color:#FFF;">
+      <td><strong>Field Name</strong></td>
+      <td><strong>Bits</strong></td>
+      <td><strong>Values</strong></td>
+      <td><strong>Description</strong></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SegmentType</td>
+      <td>3 bits</td>
+      <td>
+        <p>
+          Enum
+        </p>
+        <p><code>0</code> Default (<em>Core</em>)</p>
+        <p>
+          <strong><code>1</code> <em>DisclosedVendors</em></strong>
+        </p>
+        <p><code>3</code> PublisherTC</p>
+      </td>
+      <td>
+        <strong><em>DisclosedVendors</em></strong> segment is
+        <code>1</code> which is <code>001</code> in binary.
+      </td>
+    </tr>
+    <tr>
+      <td>MaxVendorId</td>
+      <td>16 bits</td>
+      <td>The maximum Vendor ID included in this encoding.</td>
+      <td>
+        Because this section can be a variable length, this indicates the
+        last ID of the section so that a decoder will know when it has
+        reached the end.
+      </td>
+    </tr>
+    <tr>
+      <td>IsRangeEncoding</td>
+      <td>1 bit</td>
+      <td>
+        <code>1</code> Range<br />
+        <code>0</code> BitField
+      </td>
+      <td>
+        The encoding scheme used to encode the IDs in the section – Either a
+        BitField Section or Range Section follows. Encoding logic should
+        choose the encoding scheme that results in the smaller output size
+        for a given set.
+      </td>
+    </tr>
+    <tr></tr>
+    <tr style="background-color:#999;">
+      <td colspan="2"><strong>BitField Section</strong></td>
+      <td colspan="2">
+        <strong>Encodes one disclosed vendor bit per Vendor ID</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>BitField</td>
+      <td>MaxVendorId bits</td>
+      <td>
+        <p>
+          One bit for each vendor
+        </p>
+        <p>
+          <code>1</code> Disclosed<br />
+          <code>0</code> Not Disclosed
+        </p>
+      </td>
+      <td>
+        The value for each Vendor ID from <code>1</code> to MaxVendorId.
+        <p>
+          Set the bit corresponding to a given vendor to <code>1</code> if
+          the CMP has disclosed the vendor in the UI.
+        </p>
+      </td>
+    </tr>
+    <tr style="background-color:#999;">
+      <td colspan="2"><strong>Range Section</strong></td>
+      <td colspan="2">
+        <strong>Encodes range groups of Vendor IDs who have been disclosed to a
+          user</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>NumEntries</td>
+      <td>12 bits</td>
+      <td colspan="2">Number of RangeEntry sections to follow</td>
+    </tr>
+    <tr style="border-top:5px solid black;">
+      <td colspan="2">RangeEntry (repeated NumEntries times)</td>
+      <td colspan="2">
+        A single or range of Vendor ID(s) of Vendor(s) who were disclosed in
+        a CMP UI to the user. If a Vendor ID is not within the bounds of the
+        ranges then they were not disclosed to the user.
+      </td>
+    </tr>
+    <tr>
+      <td>IsARange</td>
+      <td>1 bit</td>
+      <td>
+        <code>1</code> Vendor ID range<br />
+        <code>0</code> Single Vendor ID
+      </td>
+      <td>
+        If more than one Vendor ID is included in this RangeEntry then this
+        describes a range of Vendor IDs and this value is 1. If only one
+        Vendor ID is included then the value is <code>0</code>.
+      </td>
+    </tr>
+    <tr>
+      <td>StartOrOnlyVendorId</td>
+      <td>16 bits</td>
+      <td>
+        The first ID of an inclusive contiguous ascending-order series of
+        Vendor IDs even if the series is only a cardinality of 1.
+      </td>
+      <td>
+        This is the first or only Vendor ID that has been disclosed in this
+        RangeEntry.
+      </td>
+    </tr>
+    <tr>
+      <td>EndVendorId</td>
+      <td>16 bits</td>
+      <td>
+        The last ID of the inclusive contiguous ascending-order series of
+        Vendor IDs started with StartOrOnlyVendorId but only if that series
+        has a cardinality greater than 1, otherwise this field is omitted.
+      </td>
+      <td>
+        The end of the series of Vendor IDs – this is omitted if
+        <code>IsARange=0</code>.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 #### Publisher Purposes Transparency and Consent
 
 Publishers may need to establish transparency and consent for a set of personal data processing purposes for their own use. For example, a publisher that wants to set a frequency-capping first-party cookie should request user consent for Purpose 1 "Store and/or access information on a device" in jurisdictions where it is required.
@@ -1086,7 +1194,6 @@ The _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment i
         </p>
         <p><code>0</code> Default (<em>Core</em>)</p>
         <p><code>1</code> <em>DisclosedVendors</em></p>
-        <p><code>2</code> <em>AllowedVendors</em></p>
         <p>
           <strong><code>3</code> PublisherTC</strong>
         </p>
@@ -1233,7 +1340,7 @@ https://vendor-list.consensu.org/v2/archives/vendor-list-v138.json
 
 Previous versions of the GVL may only be used in cases when the current version cannot be downloaded (such as when operating in-app while offline), or for change control management.
 
-**IMPORTANT NOTE**: the original vendorlist.consensu.org domain will be decommissioned on January 31st 2021. The new domain for GVL resources is vendor-list.consensu.org.
+**IMPORTANT NOTE**: the original vendorlist.consensu.org domain has been decommissioned on January 31st 2021. The new domain for GVL resources is vendor-list.consensu.org.
 
 ### TCF version 1 of the Global Vendor List (deprecated)
 

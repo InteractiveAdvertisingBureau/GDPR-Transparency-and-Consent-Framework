@@ -179,7 +179,7 @@ The `vendorIds` array contains the integer-value Vendor IDs for Vendors in which
 
 If the `vendorIds` argument is not defined the callback will be called with a [`TCData`](#tcdata) that includes Transparency and Consent values for all Vendors in the [Global Vendor List](#what-is-the-global-vendor-list).  If GDPR does not apply to this user in this context (`gdprApplies=false`) then this user will have no Transparency and Consent values and a TCData object with no Transparency and Consent values for any Vendors will be passed to the callback function. For more on `gdprApplies` see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean).
 
-The callback shall be called immediately and without any asynchronous logic with whatever is available in the current state of the CMP.  To determine the current state the callback will need to evaluate the [`eventStatus`](#addeventlistener) property value.  It is recommended that calling scripts register a listener function via [`addEventListener`](#addeventlistener) instead of `getTCData`, which also exposes a [`TCData`](#tcdata) object, to ensure necessary TC string and decoded TC values under the right circumstances and context for their legal basis as specified in [TCF Policy](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/). The consent and legitimate interest values will be `false` in the [`TCData`](#tcdata) object for any unregistered Vendor ID passed in the vendorIds array.  Which, in accordance with [TCF Policy](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/), means “No Consent” for _consent_ and “No Legitimate Interest Transparency Established” for _legitimate interest_.
+Once the stub `__tcfapi` function has been replaced with the final implementation, the callback shall be called immediately and without any asynchronous logic with whatever is available in the current state of the CMP.  To determine the current state the callback will need to evaluate the [`eventStatus`](#addeventlistener) property value.  It is recommended that calling scripts register a listener function via [`addEventListener`](#addeventlistener) instead of `getTCData`, which also exposes a [`TCData`](#tcdata) object, to ensure necessary TC string and decoded TC values under the right circumstances and context for their legal basis as specified in [TCF Policy](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/). The consent and legitimate interest values will be `false` in the [`TCData`](#tcdata) object for any unregistered Vendor ID passed in the vendorIds array.  Which, in accordance with [TCF Policy](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/), means “No Consent” for _consent_ and “No Legitimate Interest Transparency Established” for _legitimate interest_.
 
 A value of `false` will be passed as the argument to the `success` callback parameter if an invalid `vendorIds` argument is passed with this command. An invalid `vendorIds` argument would constitute anything other than an array of positive integers.
 
@@ -442,7 +442,7 @@ TCData = {
 
       /**
        * true - Vendor has been disclosed to the user
-       * false | undefined - Vendor has been disclosed to the user
+       * false | undefined - Vendor has not been disclosed to the user
        */
       '[vendor id]': Boolean
     }
@@ -930,7 +930,7 @@ A CMP must provide stub script to its clients that at least supports the followi
 
 1. `__tcfapi` function that supports the ping command, with the minimum properties of `cmpLoaded` and `apiVersion`. **Note**: `gdprApplies` may also be set in the [`PingReturn`](#pingreturn) object if the "stub" is set by the publisher to apply GDPR to all traffic.  However, `gdprApplies` may not be available until the CMP is finished loading and the value will, therefore, be `undefined`. See the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more.
 2. Collect all calls to `__tcfapi` that cannot (yet) be handled by the “stub” in a queue
-3. Check if `window.frames['__tcfapiLocator']` exists, indicating that a CMP is already present, otherwise create an empty iframe named `'__tcfapiLocator`' in the current DOM.
+3. Check if `window.frames['__tcfapiLocator']` exists, indicating that a CMP is already present, otherwise create an empty iframe named `'__tcfapiLocator'` in the current DOM.
 4. Create an event listener for `postMessage` events on the `Window` object. When the event handler function receives a postMessage (`‘message’`) event it shall proxy the `__tcfapi` function requests to send the response back through the `postMessage` event channel
 5. The stub code must be loaded and executed synchronously before any other scripts that depend on the `__tcfapi` function to be there – this usually means between the `<head></head>` tags of the HTML document – in order to ensure that it can be executed before all calls from third parties.
 
