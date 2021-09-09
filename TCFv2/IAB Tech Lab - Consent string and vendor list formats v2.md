@@ -332,7 +332,7 @@ The following details provide information on creating, storing, and managing a T
 
 ### How should a Transparency & Consent String be stored?
 
-In version 1 of the TCF Specifications the consent string was specified to be stored as either a 1st party cookie for service-specific consent or a 3rd party cookie for global consent. In version 2 of the TCF Specifications, the storage mechanism used for service-specific and group-specific TC Strings is up to a CMP, including any non-cookie storage mechanism.
+In version 2 of the TCF Specifications, the storage mechanism used for service-specific and group-specific TC Strings is up to a CMP, including any non-cookie storage mechanism.
 
 #### Managing conflicting string versions
 Before 30 September 2020, [after which v1.x strings will be considered invalid](https://iabeurope.eu/all-news/the-iab-europe-transparency-consent-framework-tcf-steering-group-votes-to-extend-technical-support-for-tcf-v1-1/), if a CMP encounters a situation where both a v1.x string and a v2.0 string are erroneously present simultaneously, the CMP should remove the v1.x string to ensure that there is only one source of truth for consumers of the string.
@@ -344,6 +344,13 @@ Before 30 September 2020, [after which v1.x strings will be considered invalid](
 The IAB Europe Transparency & Consent Framework [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) defines Purposes, Special Purposes, Features, Special Features, and Stacks (groupings of Purposes and/or Special Features). You can reference the details of these purposes and features in the document found at the following URL:
 
 [https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/)
+
+#### Managing conflicting string versions
+
+Post 30 September 2020, [v1.x strings were considered invalid](https://iabeurope.eu/all-news/the-iab-europe-transparency-consent-framework-tcf-steering-group-votes-to-extend-technical-support-for-tcf-v1-1/). If a CMP encounters a situation where both a v1.x string and a v2.0 string are erroneously present simultaneously, the CMP should remove the v1.x string to ensure that there is only one source of truth for consumers of the string.
+
+Note: TCF version 2.0 introduces [“Publisher Restrictions”](#what-are-publisher-restrictions), which, if exhausted by a publisher, could result in TC strings that are larger than the size limit for cookies. While this possibility is remote, it should be guarded against – a CMP should work with a publisher to help them accomplish their goals. CMPs may need to take this into consideration when deciding on the storage mechanism for those TC Strings.
+
 
 ### TC String Format
 
