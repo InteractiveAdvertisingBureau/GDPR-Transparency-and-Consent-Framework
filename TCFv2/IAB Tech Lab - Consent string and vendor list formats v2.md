@@ -177,7 +177,7 @@ A TC String that contains positive consent signals must not be created before cl
 
 ### What is the scope for a TC String?
 
-CMPs must be set up to operate in a **service-specific** or group-specific configuration. A TC String in this context is applicable only on a service or group of services, for example the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain [Publisher restrictions](#what-are-publisher-restrictions) and a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment when returned by the CMP API.
+CMPs must be set up to operate in a **service-specific** or group-specific configuration. A TC String in this context is applicable only on a service or group of services, for example the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain _**[Publisher restrictions](#what-are-publisher-restrictions)**_ and a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment when returned by the CMP API.
 
 
 ### What are publisher restrictions?
