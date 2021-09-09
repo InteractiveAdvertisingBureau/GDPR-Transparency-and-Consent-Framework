@@ -396,8 +396,8 @@ TCData = {
   listenerId: Number | undefined,
 
   /*
-   * true - if using a service-specific or publisher-specific TC String
-   * false - if using a global TC String.
+   * true - Default value
+   * false - TC String is invalid.
    */
   isServiceSpecific: Boolean,
 
@@ -415,7 +415,6 @@ TCData = {
   publisherCC: 'Two-letter ISO 3166-1 alpha-2 code',
 
   /**
-   * Only exists on service-specific TC
    *
    * true - Purpose 1 not disclosed at all. CMPs use PublisherCC to
    * indicate the publisher's country of establishment to help Vendors
@@ -426,27 +425,6 @@ TCData = {
    */
   purposeOneTreatment: Boolean,
 
-  /**
-   * Only exists on global-scope TC
-   */
-  outOfBand: {
-    allowedVendors: {
-
-      /**
-       * true - Vendor is allowed to use an Out-of-Band Legal Basis
-       * false | undefined - Vendor is NOT allowed to use an Out-of-Band Legal Basis
-       */
-      '[vendor id]': Boolean
-    },
-    disclosedVendors: {
-
-      /**
-       * true - Vendor has been disclosed to the user
-       * false | undefined - Vendor has not been disclosed to the user
-       */
-      '[vendor id]': Boolean
-    }
-  },
   purpose: {
     consents: {
 
@@ -1109,11 +1087,6 @@ __tcfapi('ping', 2, (pingReturn, success) => {
 ### From where will the API retrieve the TC string?
 
 See the ‘How should the transparency & consent string be stored?’ section in the ‘Transparency & Consent String and Global Vendor List Format’ spec which describes where CMPs must store the transparency & consent string.
-
-#### How will the API prioritize the service-specific and the global configurations?
-
-The service-specific TC String will override the global TC String, if it is being used. The prioritization between these two scenarios is as specified in the policy FAQ.
-
 
 
 ## Major Changes from 1.1
