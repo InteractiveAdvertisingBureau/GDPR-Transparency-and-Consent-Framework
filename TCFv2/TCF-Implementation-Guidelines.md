@@ -21,10 +21,9 @@ Policy FAQ, webinars, and other resources are available at
 &nbsp;&nbsp;&nbsp;&nbsp;**[Is v2 backwards compatible?](#compatibility)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[How do I evaluate the details provided in the TC String?](#evaluatetcstring)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[How should I handle multiple signals with different information?](#mergesignals)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What is OOB?](#oob)**<br>
 ### [Publisher guidelines](#pub)
 &nbsp;&nbsp;&nbsp;&nbsp;**[What is a Consent Management Platform (CMP) and why do I, as a Publisher, need one?](#whatiscmp)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What publisher controls are available? What happened to Pubvendors?](#pubvendor)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What publisher controls are available? What happened to Pubvendors?](#pubvendors)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[The Global Vendor List](#gvl)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[Withdrawal of consent](#withdraw)**<br>
 ### [Vendor guidelines (DSPs, Agencies, DMPs)](#vendor)
@@ -103,11 +102,8 @@ Changes across the Framework are listed below and grouped according to supportin
 - Publisher restrictions added
 - Legitimate interest establishment signals added
 - “Right to object” to legitimate interests support added
-- Out-of-Band (OOB) legal basis support
-	- Created Allowed Vendors TC String segment
-	- Created Disclosed Vendors TC String segment 
 - Enhanced TC String Encoding
-	- TC String segmentation (core, publisher, oob segments) 
+	- TC String segmentation (core, publisher,) 
 	- Revised Macro support 
 - Text revisions based on requests for clarification/consistency
 
@@ -115,13 +111,13 @@ Changes across the Framework are listed below and grouped according to supportin
 - Includes recent policy updates
 - Better wording to distinguish between “policy version” and “GVL version”
 
-### Within the Consent Management Platform API
+### Within the Consent Management Platform API<a name="changecmp"></a>
 - Event Listeners, Support for CMP status change, such as when a user makes an active choice, and a new TC string is generated
 - New parameter order
 - New function signature name
 - Inclusion of passing “version” argument
 - Addition of in-app “command” for in-app specific values
-- Updates to support special jurisdiction, handling Out-of-Band (OOB) , and publisher restrictions
+- Updates to support special jurisdiction, and publisher restrictions
 
 ## What is legitimate interest, and what’s new for vendor registration?<a name="whatisli"></a>
 Under the GDPR, a legal basis is required for processing a user’s data. While consent is the most common legal basis for processing a user’s data, legitimate interest is another legal basis that a vendor may use. For more information legitimate interest and when it can be used as a legal basis, please visit gdpr-info.eu where the regulation is posted. Chapter 2, article 6, describes legal bases under the GDPR. 
@@ -130,13 +126,10 @@ Under the GDPR, a legal basis is required for processing a user’s data. While 
 No. The changes in v2 are substantial enough that a completely new implementation is required. With the list of features, purposes, stacks, new structure for the TC String, and a number of other changes, none of the updates map to anything in previous versions. After an initial transition phase in v2 adoption, older versions will be deprecated.
 
 ## How do I evaluate the details provided in the TC String?<a name="evaluatetcstring"></a>
-The TC String includes four (4) segments of information: the core string, publisher restrictions, publisher-approved vendors, and out-of-band (OOB) signaling. The technical specs describing the TC String provide details on specific information provided in each segment. These details may change from the start of the transaction to the end of the transaction. Vendors must evaluate the four segments of a string as it relates to a given transaction, determine the intent of the information provided, and proceed accordingly.
+The TC String includes four (4) segments of information: the core string, publisher restrictions and publisher-approved vendors. The technical specs describing the TC String provide details on specific information provided in each segment. These details may change from the start of the transaction to the end of the transaction. Vendors must evaluate the four segments of a string as it relates to a given transaction, determine the intent of the information provided, and proceed accordingly.
 
 ## How should I handle multiple signals with different information?<a name="mergesignals"></a>
 Sometimes two or more TC Strings might contain different preferences for different vendors. For example, one String includes consent signals for vendors 1, 2, and 3. Later, the user is asked for consent on vendors 3, 4, and 5, but rejects all three. In this example, the most recent signal received for vendor 3 is that of no consent and should be recorded as such despite previous signals. However, we cannot anticipate and provide guidance for all scenarios. Vendors should update the TC String, where applicable, with details that reflect the intent of the user and meets the requirements of the TCF. 
-
-## What is OOB? <a name="oob"></a>
-OOB is an abbreviation for Out-of-Band legal basis and represents a signal that transparency & consent was achieved for a vendor outside of the TCF, which is an in-band establishment. Publishers can choose whether to support OOB or not, and if they do, they may provide a list of approved vendors allowed to claim OOB. Look for details outlined in documentation for the TC String.
 
 # Publisher guidelines <a name="pub"></a>
 ## What is a Consent Management Platform (CMP) and why do I, as a Publisher, need one?<a name="whatiscmp"></a>
@@ -238,8 +231,10 @@ DMP in this document refers to enterprise software that can be used by publisher
 # Consent Management Platform (CMP) guidelines<a name="cmp"></a>
 This section outlines implementation guidelines for CMPs to be compliant with the TCF technical specification when collecting, storing and sharing user consent.
 
-Register to be on the CMP list: https://register.consensu.org/ 
-This step is required to be a TCF recognised CMP trusted by vendors receiving the consents that you collect. Upon registration a CMP is assigned an ID, which is passed with each request, and granted access to the “consensu.org” domain for accessing and modifying the global consent cookie.
+Register to be on the CMP list: https://register.consensu.org/. This step is required to be a TCF recognised CMP trusted by vendors receiving the consents that you collect. Upon registration a CMP is assigned an ID, which is passed with each request. Since September 1st 2021, new registering CMPs are no longer granted access to the “consensu.org” domain. CMPs who have been registered with the TCF before September 1st 2021 can continue to hots their tags at <code>https://[cmpname].mgr.consensu.org/</code>. 
+
+Note: it is the intention of the managing organisation at some point in the future to retire "consensus.org".
+
 
 ## 1. Collecting consent from users<a name="collectconsent"></a>
 The TCF defines a set of common purposes and features that vendors can act on. Vendors are responsible for providing up-to-date information on the purposes they support and the legal basis under which they wish to operate these purposes. This information is captured in the  Global Vendor List (GVL). 
@@ -258,9 +253,7 @@ As a CMP, you will need to:
 - Share the TC String with vendors through the available APIs.
 
 ## 3. Storing Consent<a name="storeconsent"></a>
-Depending on the publisher preference and on the policy requirements, consent can be stored either locally or globally. When storing the consent globally, the consent will be stored in a shared cookie with the “TC String” format on the “consensu.org” domain.
-
-CMPs are free to also store consent separately and with a different format if they need to (first-party cookies, long term proof of consent storage, etc.) provided that – if consent is being stored globally – they keep the shared cookie up-to-date with their local changes.
+In version 2 of the TCF Specifications, the storage mechanism used for service-specific and group-specific TC Strings is up to a CMP, including any non-cookie storage mechanism.
 
 For long-term storage, the following methods are common across CMPs:
 
@@ -318,7 +311,7 @@ At this time, the IAB Europe Transparency and Consent Framework is designed for 
 ## Related resources<a name="resources"></a>
 A v2 consent string encoder/decoder can be found here: https://iabtcf.com/#/ as well as links to further implementation libraries.
 
-### Will these FAQ be updated? <a name="updates"></a>
+### Will these FAQ be updated? <a name="faqupdates"></a>
 Yes, these guidelines will be updated as questions arise. A wiki with more dynamic content has been proposed, but timelines have not yet been determined.
 
 ### How can I learn more?<a name="learnmore"></a>
