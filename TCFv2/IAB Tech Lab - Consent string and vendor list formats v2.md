@@ -350,7 +350,7 @@ The IAB Europe Transparency & Consent Framework [Policies](https://iabeurope.eu/
 There are 3 distincts TC String segments that are joined together on a “dot” character.  They are:
 
 *   The core vendor transparency and consent details
-*   Disclosed vendors for solving ambiguous negative vendor signal and
+*   Disclosed vendors
 *   Publisher purposes transparency and consent for their own data uses.
 
 The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent.
