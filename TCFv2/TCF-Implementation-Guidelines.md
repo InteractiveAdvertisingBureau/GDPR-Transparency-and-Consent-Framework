@@ -45,7 +45,6 @@ Policy FAQ, webinars, and other resources are available at
 ### [How do vendors outside the RTB bidstream query a CMP?](#outsidertb)
 ### [Other Frequently Asked Questions](#otherfaq)
 &nbsp;&nbsp;&nbsp;&nbsp;**[Are cookies required for working with the CMP API?](#cookiesrequired)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What is the long-term plan for consent storage?](#futurestorage)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[Can I also use the API for CCPA or other laws?](#ccpa)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[Related resources](#resources)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Will these FAQ be updated?](#faqupdates)**<br>
@@ -103,7 +102,7 @@ Changes across the Framework are listed below and grouped according to supportin
 - Legitimate interest establishment signals added
 - “Right to object” to legitimate interests support added
 - Enhanced TC String Encoding
-	- TC String segmentation (core, publisher,) 
+	- TC String segmentation (core, publisher) 
 	- Revised Macro support 
 - Text revisions based on requests for clarification/consistency
 
@@ -126,7 +125,7 @@ Under the GDPR, a legal basis is required for processing a user’s data. While 
 No. The changes in v2 are substantial enough that a completely new implementation is required. With the list of features, purposes, stacks, new structure for the TC String, and a number of other changes, none of the updates map to anything in previous versions. After an initial transition phase in v2 adoption, older versions will be deprecated.
 
 ## How do I evaluate the details provided in the TC String?<a name="evaluatetcstring"></a>
-The TC String includes four (4) segments of information: the core string, publisher restrictions and publisher-approved vendors. The technical specs describing the TC String provide details on specific information provided in each segment. These details may change from the start of the transaction to the end of the transaction. Vendors must evaluate the four segments of a string as it relates to a given transaction, determine the intent of the information provided, and proceed accordingly.
+The TC String returned by the CMP API can include (2) segments of information : the core string and the publisher TC segment." and removing altogether this part : "Vendors must evaluate the two segments of a string as it relates to a given transaction, determine the intent of the information provided, and proceed accordingly.
 
 ## How should I handle multiple signals with different information?<a name="mergesignals"></a>
 Sometimes two or more TC Strings might contain different preferences for different vendors. For example, one String includes consent signals for vendors 1, 2, and 3. Later, the user is asked for consent on vendors 3, 4, and 5, but rejects all three. In this example, the most recent signal received for vendor 3 is that of no consent and should be recorded as such despite previous signals. However, we cannot anticipate and provide guidance for all scenarios. Vendors should update the TC String, where applicable, with details that reflect the intent of the user and meets the requirements of the TCF. 
@@ -231,9 +230,9 @@ DMP in this document refers to enterprise software that can be used by publisher
 # Consent Management Platform (CMP) guidelines<a name="cmp"></a>
 This section outlines implementation guidelines for CMPs to be compliant with the TCF technical specification when collecting, storing and sharing user consent.
 
-Register to be on the CMP list: https://register.consensu.org/. This step is required to be a TCF recognised CMP trusted by vendors receiving the consents that you collect. Upon registration a CMP is assigned an ID, which is passed with each request. Since September 1st 2021, new registering CMPs are no longer granted access to the “consensu.org” domain. CMPs who have been registered with the TCF before September 1st 2021 can continue to hots their tags at <code>https://[cmpname].mgr.consensu.org/</code>. 
+Register to be on the CMP list: https://register.consensu.org/. This step is required to be a TCF recognised CMP trusted by vendors receiving the consents that you collect. Upon registration a CMP is assigned an ID, which is passed with each request. Since September 1st 2021, new registering CMPs are no longer granted access to the “consensu.org” domain. CMPs who have been registered with the TCF before September 1st 2021 can continue to host their tags at <code>https://[cmpname].mgr.consensu.org/</code>. 
 
-Note: it is the intention of the managing organisation at some point in the future to retire "consensus.org".
+Note: it is the intention of the managing organisation at some point in the future to retire "consensu.org".
 
 
 ## 1. Collecting consent from users<a name="collectconsent"></a>
@@ -302,9 +301,6 @@ You may or may not depending on whether the scenario is covered by special featu
 Yes, v2 depends on the consent data being stored in cookies. 
 
 Discussion on future iterations have led to proposals about storage mechanisms like a central registry that stores user IDs and their associated information. At that time the implementation could be updated to retrieve data from a defined source without having to change the interface. Until such mechanism exist, cookies are required for working with the CMP API. 
-
-## What is the long-term plan for consent storage?<a name="futurestorage"></a>
-A third-party cookie isn’t a long-term solution to auditable, permanent, user-keyed consent storage, and doesn’t work with browsers that block 3rd-party cookies or mobile apps. CMP’s should work towards standardizing a more future-looking server-side consent retrieval mechanism so that cookies might be used as more of a “consent caching” in the future.
 
 ## Can I also use the API for CCPA or other laws?<a name="ccpa"></a>
 At this time, the IAB Europe Transparency and Consent Framework is designed for compliance with GDPR. The CMP API was designed to only support a special use case of the GDPR, which involves the use of user data in the context of digital advertising. Consult your local IAB or the IAB Tech Lab to learn more about other ongoing projects for privacy tool development.
