@@ -625,8 +625,8 @@ InAppTCData = {
   eventStatus: 'string',
 
   /*
-   * 1 - if using a service-specific or publisher-specific TC String
-   * 0 - if using a global TC String.
+   * 1 - Default value
+   * 0 - TC String is invalid.
    */
   isServiceSpecific: 1,
 
