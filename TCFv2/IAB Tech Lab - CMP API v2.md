@@ -2,7 +2,7 @@
 # Consent Management Platform API
 **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.0 | August 2019, Updated February 2020**
+**Final v.2.0 | August 2019, Updated September 2021**
 
 - [Version History](#version-history)
 - [Introduction](#introduction)
@@ -49,13 +49,13 @@
     - [Using postmessage](#using-postmessage)
     - [Is there a sample iframe script call to the CMP API?](#is-there-a-sample-iframe-script-call-to-the-cmp-api)
   - [From where will the API retrieve the TC string?](#from-where-will-the-api-retrieve-the-tc-string)
-    - [How will the API prioritize the service-specific and the global configurations?](#how-will-the-api-prioritize-the-service-specific-and-the-global-configurations)
   - [Major Changes from 1.1](#major-changes-from-11)
 
 ## Version History
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| September 2021 | 2.0 | Deprecation of Global Scope and OOB |
 | February 2020 | 2.0 | Removed CMP List; added included in the Consent String and Vendor List Specification |
 | February 2020 | 2.0 | Updated stub example to reference open-source library, change addEventListener/removeEventListener interface, clarify addEventListener callback invocation time, and remove SafeFrame proxy communications |
 | December 2019 | 2.0 | Updated with reference to CMP List, Updated macros to be upper case, Added cmpStatus to be surfaced in both the API calls and the TCData object, and fixed case in a reference to IABTCF_CmpSdkID |
@@ -398,6 +398,8 @@ TCData = {
   /*
    * true - Default value
    * false - TC String is invalid.
+   * since Sept 1st 2021, TC strings established with global-scope are considered invalid.
+   * see the section: "What happened to Global scope and Out-of-Band?" in "IAB Europe Transparency and Consent Framework Implementation Guidelines" page
    */
   isServiceSpecific: Boolean,
 
@@ -627,6 +629,8 @@ InAppTCData = {
   /*
    * 1 - Default value
    * 0 - TC String is invalid.
+   * since Sept 1st 2021, TC strings established with global-scope are considered invalid.
+   * see the section: "What happened to Global scope and Out-of-Band?" in "IAB Europe Transparency and Consent Framework Implementation Guidelines" page
    */
   isServiceSpecific: 1,
 
