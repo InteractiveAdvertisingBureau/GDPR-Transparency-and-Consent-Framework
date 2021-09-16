@@ -1,13 +1,20 @@
 # IAB Europe Transparency and Consent Framework Implementation Guidelines 
 
-**August 2019**
+<table>
+<tr>
+	<td><b>Created</b></td>
+    <td>August 2019</td>
+</tr>
+<tr>
+	<td><b>Last update</b></td>
+    <td>September 2021</td>
+</tr>
+</table>
 
 This document provides technical implementation guidelines related to the [IAB Europe Transparency and Consent Framework (TCF) v2 technical specs](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework). The IAB Tech Lab GDPR Technical Working Group has collaborated on the following implementation guidelines, and will continue to produce resources supporting industry adoption of the Framework. The intended audience of this document includes product and engineering teams who are building technology based on this framework, and who are looking for guidance on implementation strategies such as questions to ask your platform partners or avoiding common pitfalls.
 
 Policy FAQ, webinars, and other resources are available at 
-[https://www.iabeurope.eu/tcf](https://www.iabeurope.eu/tcf) 
-
-
+[https://www.iabeurope.eu/tcf](https://www.iabeurope.eu/tcf)
 
 
 ### [Introduction to the TCF](#Intro)<br>
@@ -21,6 +28,7 @@ Policy FAQ, webinars, and other resources are available at
 &nbsp;&nbsp;&nbsp;&nbsp;**[Is v2 backwards compatible?](#compatibility)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[How do I evaluate the details provided in the TC String?](#evaluatetcstring)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[How should I handle multiple signals with different information?](#mergesignals)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What happened to Global scope and Out-of-Band?](#gsoob)**<br>
 ### [Publisher guidelines](#pub)
 &nbsp;&nbsp;&nbsp;&nbsp;**[What is a Consent Management Platform (CMP) and why do I, as a Publisher, need one?](#whatiscmp)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[What publisher controls are available? What happened to Pubvendors?](#pubvendors)**<br>
@@ -125,10 +133,13 @@ Under the GDPR, a legal basis is required for processing a user’s data. While 
 No. The changes in v2 are substantial enough that a completely new implementation is required. With the list of features, purposes, stacks, new structure for the TC String, and a number of other changes, none of the updates map to anything in previous versions. After an initial transition phase in v2 adoption, older versions will be deprecated.
 
 ## How do I evaluate the details provided in the TC String?<a name="evaluatetcstring"></a>
-The TC String returned by the CMP API can include (2) segments of information : the core string and the publisher TC segment." and removing altogether this part : "Vendors must evaluate the two segments of a string as it relates to a given transaction, determine the intent of the information provided, and proceed accordingly.
+The TC String returned by the CMP API can include (2) segments of information : the core string and the publisher TC segment. The technical specs describing the TC String provide details on specific information provided in each segment. These details may change from the start of the transaction to the end of the transaction.
 
 ## How should I handle multiple signals with different information?<a name="mergesignals"></a>
-Sometimes two or more TC Strings might contain different preferences for different vendors. For example, one String includes consent signals for vendors 1, 2, and 3. Later, the user is asked for consent on vendors 3, 4, and 5, but rejects all three. In this example, the most recent signal received for vendor 3 is that of no consent and should be recorded as such despite previous signals. However, we cannot anticipate and provide guidance for all scenarios. Vendors should update the TC String, where applicable, with details that reflect the intent of the user and meets the requirements of the TCF. 
+Sometimes two or more TC Strings might contain different preferences for different vendors. For example, one String includes consent signals for vendors 1, 2, and 3. Later, the user is asked for consent on vendors 3, 4, and 5, but rejects all three. In this example, the most recent signal received for vendor 3 is that of no consent and should be recorded as such despite previous signals. However, we cannot anticipate and provide guidance for all scenarios. Vendors should update the TC String, where applicable, with details that reflect the intent of the user and meets the requirements of the TCF.
+
+## What happened to Global scope and Out-of-Band?<a name="gsoob"></a>
+The TCF Policy previously allowed legal bases in the Framework to be established with global scope, which means a legal basis is not only applicable on the service or group of services (service-specific and group-specific scopes) where it is obtained and managed, but all services implementing global scope preferences. In the context of global scope, TC Strings were stored in a 3rd party cookie associated with the “consensu.org” domain that enabled Consent Management Providers (CMPs) to read the “TC strings from their subdomains <code>[cmp-name].mgr.consensu.org</code> across different services. Deprecation of global-scope support was [announced](https://iabeurope.eu/wp-content/uploads/2021/06/TCF_V-CMP_comms_DeprecationOfGlobalScopeSupportInTCF_220621_IABEurope.pdf) on June 22nd 2021. Alongside the deprecation of global scope, support for Out-of-Band (OOB) - which refers to instances where a legal basis has not been established using the TCF in a global-scope context - was also deprecated. Since Sept 1st 2021, TC strings established with global-scope are considered invalid.
 
 # Publisher guidelines <a name="pub"></a>
 ## What is a Consent Management Platform (CMP) and why do I, as a Publisher, need one?<a name="whatiscmp"></a>
