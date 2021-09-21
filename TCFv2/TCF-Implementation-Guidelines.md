@@ -28,7 +28,7 @@ Policy FAQ, webinars, and other resources are available at
 &nbsp;&nbsp;&nbsp;&nbsp;**[Is v2 backwards compatible?](#compatibility)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[How do I evaluate the details provided in the TC String?](#evaluatetcstring)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[How should I handle multiple signals with different information?](#mergesignals)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What happened to Global scope and Out-of-Band?](#gsoob)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What happened to Global Scope and Out of Band?](#gsoob)**<br>
 ### [Publisher guidelines](#pub)
 &nbsp;&nbsp;&nbsp;&nbsp;**[What is a Consent Management Platform (CMP) and why do I, as a Publisher, need one?](#whatiscmp)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[What publisher controls are available? What happened to Pubvendors?](#pubvendors)**<br>
@@ -138,7 +138,7 @@ The TC String returned by the CMP API can include (2) segments of information : 
 ## How should I handle multiple signals with different information?<a name="mergesignals"></a>
 Sometimes two or more TC Strings might contain different preferences for different vendors. For example, one String includes consent signals for vendors 1, 2, and 3. Later, the user is asked for consent on vendors 3, 4, and 5, but rejects all three. In this example, the most recent signal received for vendor 3 is that of no consent and should be recorded as such despite previous signals. However, we cannot anticipate and provide guidance for all scenarios. Vendors should update the TC String, where applicable, with details that reflect the intent of the user and meets the requirements of the TCF.
 
-## What happened to Global scope and Out-of-Band?<a name="gsoob"></a>
+## What happened to Global Scope and Out of Band?<a name="gsoob"></a>
 The TCF Policy previously allowed legal bases in the Framework to be established with global scope, which means a legal basis is not only applicable on the service or group of services (service-specific and group-specific scopes) where it is obtained and managed, but all services implementing global scope preferences. In the context of global scope, TC Strings were stored in a 3rd party cookie associated with the “consensu.org” domain that enabled Consent Management Providers (CMPs) to read the “TC strings from their subdomains <code>[cmp-name].mgr.consensu.org</code> across different services. Deprecation of global-scope support was [announced](https://iabeurope.eu/wp-content/uploads/2021/06/TCF_V-CMP_comms_DeprecationOfGlobalScopeSupportInTCF_220621_IABEurope.pdf) on June 22nd 2021. Alongside the deprecation of global scope, support for Out-of-Band (OOB) - which refers to instances where a legal basis has not been established using the TCF in a global-scope context - was also deprecated. Since Sept 1st 2021, TC strings established with global-scope are considered invalid.
 
 # Publisher guidelines <a name="pub"></a>
