@@ -178,10 +178,10 @@ A TC String that contains positive consent signals must not be created before cl
 
 ### What is the scope for a TC String?
 
-CMPs must be set up to operate in a **service-specific** or group-specific configuration. A TC String in this context is applicable only on a service or group of services, for example the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain _**[Publisher restrictions](#what-are-publisher-restrictions)**_ and a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment when returned by the CMP API.
+CMPs must operate in a **service-specific** or group-specific configuration. A TC String in this context is applicable only on a service or group of services, for example the site(s) or app(s) on which it is running. One is created for every user on a given site/app or group of sites/apps. They may contain _**[Publisher restrictions](#what-are-publisher-restrictions)**_ and a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment when returned by the CMP API.
 
 
-### What happened to Global scope and Out of Band?
+### What happened to Global Scope and Out of Band?
 
 The TCF Policy previously allowed legal bases in the Framework to be established with global scope, which means a legal basis is not only applicable on the service or group of services (service-specific and group-specific scopes) where it is obtained and managed, but all services implementing global scope preferences. In the context of global scope, TC Strings were stored in a 3rd party cookie associated with the “consensu.org” domain that enabled Consent Management Providers (CMPs) to read the “TC strings from their subdomains [cmp-name].mgr.consensu.org across different services. Deprecation of global-scope support was announced on June 22nd 2021. Alongside the deprecation of global scope, support for Out-of-Band (OOB)&mdash;which refers to instances where a legal basis has not been established using the TCF in a global-scope context&mdash;was also deprecated. Since Sept 1st 2021, TC strings established with global-scope are considered invalid.
 
