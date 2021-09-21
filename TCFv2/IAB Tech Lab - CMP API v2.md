@@ -630,7 +630,7 @@ InAppTCData = {
    * 1 - Default value
    * 0 - TC String is invalid.
    * since Sept 1st 2021, TC strings established with global-scope are considered invalid.
-   * see the section: "What happened to Global scope and Out-of-Band?" in "IAB Europe Transparency and Consent Framework Implementation Guidelines" page
+   * see the section: ["What happened to Global Scope and Out of Band?"](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/TCF-Implementation-Guidelines.md#gsoob) in "IAB Europe Transparency and Consent Framework Implementation Guidelines"
    */
   isServiceSpecific: 1,
 
