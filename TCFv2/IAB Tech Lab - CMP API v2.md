@@ -2,7 +2,7 @@
 # Consent Management Platform API
 **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.0 | August 2019, Updated February 2020**
+**Final v.2.0 | August 2019, Updated September 2021**
 
 - [Version History](#version-history)
 - [Introduction](#introduction)
@@ -49,13 +49,13 @@
     - [Using postmessage](#using-postmessage)
     - [Is there a sample iframe script call to the CMP API?](#is-there-a-sample-iframe-script-call-to-the-cmp-api)
   - [From where will the API retrieve the TC string?](#from-where-will-the-api-retrieve-the-tc-string)
-    - [How will the API prioritize the service-specific and the global configurations?](#how-will-the-api-prioritize-the-service-specific-and-the-global-configurations)
   - [Major Changes from 1.1](#major-changes-from-11)
 
 ## Version History
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| September 2021 | 2.0 | Deprecation of Global Scope and OOB |
 | February 2020 | 2.0 | Removed CMP List; added included in the Consent String and Vendor List Specification |
 | February 2020 | 2.0 | Updated stub example to reference open-source library, change addEventListener/removeEventListener interface, clarify addEventListener callback invocation time, and remove SafeFrame proxy communications |
 | December 2019 | 2.0 | Updated with reference to CMP List, Updated macros to be upper case, Added cmpStatus to be surfaced in both the API calls and the TCData object, and fixed case in a reference to IABTCF_CmpSdkID |
@@ -396,8 +396,10 @@ TCData = {
   listenerId: Number | undefined,
 
   /*
-   * true - if using a service-specific or publisher-specific TC String
-   * false - if using a global TC String.
+   * true - Default value
+   * false - TC String is invalid.
+   * since Sept 1st 2021, TC strings established with global-scope are considered invalid.
+   * see the section: ["What happened to Global Scope and Out of Band?"](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/TCF-Implementation-Guidelines.md#gsoob) in "IAB Europe Transparency and Consent Framework Implementation Guidelines"
    */
   isServiceSpecific: Boolean,
 
@@ -415,7 +417,6 @@ TCData = {
   publisherCC: 'Two-letter ISO 3166-1 alpha-2 code',
 
   /**
-   * Only exists on service-specific TC
    *
    * true - Purpose 1 not disclosed at all. CMPs use PublisherCC to
    * indicate the publisher's country of establishment to help Vendors
@@ -426,27 +427,6 @@ TCData = {
    */
   purposeOneTreatment: Boolean,
 
-  /**
-   * Only exists on global-scope TC
-   */
-  outOfBand: {
-    allowedVendors: {
-
-      /**
-       * true - Vendor is allowed to use an Out-of-Band Legal Basis
-       * false | undefined - Vendor is NOT allowed to use an Out-of-Band Legal Basis
-       */
-      '[vendor id]': Boolean
-    },
-    disclosedVendors: {
-
-      /**
-       * true - Vendor has been disclosed to the user
-       * false | undefined - Vendor has not been disclosed to the user
-       */
-      '[vendor id]': Boolean
-    }
-  },
   purpose: {
     consents: {
 
@@ -647,8 +627,10 @@ InAppTCData = {
   eventStatus: 'string',
 
   /*
-   * 1 - if using a service-specific or publisher-specific TC String
-   * 0 - if using a global TC String.
+   * 1 - Default value
+   * 0 - TC String is invalid.
+   * since Sept 1st 2021, TC strings established with global-scope are considered invalid.
+   * see the section: ["What happened to Global Scope and Out of Band?"](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/TCF-Implementation-Guidelines.md#gsoob) in "IAB Europe Transparency and Consent Framework Implementation Guidelines"
    */
   isServiceSpecific: 1,
 
@@ -1109,11 +1091,6 @@ __tcfapi('ping', 2, (pingReturn, success) => {
 ### From where will the API retrieve the TC string?
 
 See the ‘How should the transparency & consent string be stored?’ section in the ‘Transparency & Consent String and Global Vendor List Format’ spec which describes where CMPs must store the transparency & consent string.
-
-#### How will the API prioritize the service-specific and the global configurations?
-
-The service-specific TC String will override the global TC String, if it is being used. The prioritization between these two scenarios is as specified in the policy FAQ.
-
 
 
 ## Major Changes from 1.1
