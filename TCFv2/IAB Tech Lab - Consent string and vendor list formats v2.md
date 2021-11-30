@@ -403,7 +403,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       </td>
       <td rowspan="2">
         A decisecond is 1/10th of a second. To create a decisecond timestamp
-        in JavaScript: <code>Math.round((new Date()).getTime()/100)</code>
+        in JavaScript: <code>Math.round((new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 0, 0, 0)).getTime()/100)</code>
       </td>
     </tr>
     <tr>
