@@ -26,6 +26,7 @@
    + [How does a URL-based service process the TC string when it can't execute JavaScript?](#how-does-a-url-based-service-process-the-tc-string-when-it-cant-execute-javascript)
      - [Full TC String passing](#full-tc-string-passing)
    + [What if consent is governed differently in a country?](#what-if-consent-is-governed-differently-in-a-country)
+   + [What happened to Created and LastUpdated?](#what-happened-to-created-and-lastupdated)
  * [Creating a TC String](#creating-a-tc-string)
    + [How should a Transparency & Consent String be stored?](#how-should-a-transparency--consent-string-be-stored)
    + [What are the Purposes and Features being supported?](#what-are-the-purposes-and-features-being-supported)
@@ -61,6 +62,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| Dec 2021 | 2.0 | Update of Created and LastUpdated to have the same value corresponding to the day-level timestamp of when the TC String was last updated |
 | Sept 2021 | 2.0 | Deprecation of Global Scope, OOB and 'euconsent-v2' cookie associated with the consensu.org domain  |
 | August 2021 | 2.0 | Added optional use of DisclosedVendor segment in the context of storing service-level TC Strings  |
 | July 2021 | 2.0 | Highlight the deprecation of Global Scope, OOB and 'euconsent-v2' cookie associated with the consensu.org domain  |
@@ -332,6 +334,10 @@ The service making the call must replace the macros with appropriate values desc
 
 To accommodate cases where Purpose 1 is governed differently for consent depending on the jurisdiction, a TC String is transparent about the publisher’s operating governance and whether or not Purpose 1 was disclosed to a user. The vendor can then use these details to make a determination about whether they have sufficient legal bases for personal data processing in that given context. To support this, there are two fields in a TC String: _**PublisherCC**_, which represents the publisher’s country code and a flag for whether any disclosure has been offered on Purpose 1 named _**PurposeOneTreatment**_. Details for each field are listed among [the fields used in the TC String](#tc-string-format).
 
+### What happened to Created and LastUpdated?
+
+The Created and LastUpdated fields previously corresponded to decisecond timestamps. Considering practical guidance from DPAs relating to the the various means that can be employed by data controllers to provide evidence of the consent obtained and its validity and the limited relevance of the Created field for publishers and their CMPs to fulfill the requirements of remaining users of their choices, as appropriate and at least every 13 months, the Created and LastUpdated fields have been updated to have the **same value** corresponding to the **day-level timestamp** of when the TC String was last updated.
+
 ## Creating a TC String
 
 The following details provide information on creating, storing, and managing a TC String.
@@ -398,20 +404,19 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       <td>Created</td>
       <td>36 bits</td>
       <td>
-        Epoch deciseconds when this TC String was first created (should not
-        be changed unless a new TCString is created from scratch)
+        Epoch time format when TC String was last updated (Must be updated any time a value is changed)
       </td>
       <td rowspan="2">
-        A decisecond is 1/10th of a second. To create a decisecond timestamp
-        in JavaScript: <code>Math.round((new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 0, 0, 0)).getTime()/100)</code>
+       To create a timestamp in JavaScript: <code>Math.round((new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 0, 0, 0)).getTime()/100)</code>.
+       <br><br>
+       Note : <a href="#what-happened-to-created-and-lastupdated">What happened to Created and LastUpdated?</a>
       </td>
     </tr>
     <tr>
       <td>LastUpdated</td>
       <td>36 bits</td>
       <td>
-        Epoch deciseconds when TC String was last updated (Must be updated
-        any time a value is changed)
+        Epoch time format when TC String was last updated (Must be updated any time a value is changed)
       </td>
     </tr>
     <tr>
