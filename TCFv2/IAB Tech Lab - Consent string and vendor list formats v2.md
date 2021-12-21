@@ -404,10 +404,10 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       <td>Created</td>
       <td>36 bits</td>
       <td>
-        Epoch time format when TC String was last updated (Must be updated any time a value is changed)
+        Epoch time format when TC String was last updated (must be updated any time a value is changed)
       </td>
       <td rowspan="2">
-       To create a timestamp in JavaScript: <code>Math.round((new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 0, 0, 0)).getTime()/100)</code>.
+       To create a timestamp in JavaScript: <code>Math.round((new Date(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 0, 0, 0)).getTime()/100)</code>. Also, the timestamp must be based in UTC time in order to get a consistent millisecond value across the time zones.
        <br><br>
        Note : <a href="#what-happened-to-created-and-lastupdated">What happened to Created and LastUpdated?</a>
       </td>
@@ -416,7 +416,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       <td>LastUpdated</td>
       <td>36 bits</td>
       <td>
-        Epoch time format when TC String was last updated (Must be updated any time a value is changed)
+        Epoch time format when TC String was last updated (must be updated any time a value is changed)
       </td>
     </tr>
     <tr>
