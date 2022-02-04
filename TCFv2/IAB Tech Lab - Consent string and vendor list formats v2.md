@@ -1671,7 +1671,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
 
 The fields below provide Vendors with a method to disclose the length of time any vendor-specific information may be stored on a device and other summary information about device storage. Vendors also provide granular storage and access disclosures via a JSON file. CMPs display this information to consumers. This form of transparency took on urgency after a ruling by the Court of Justice of the European Union in Case C-673/17 _Planet49_.
 
-In its Planet49 judgment (available here), the Court of Justice of the European Union (CJEU) ruled that the requirements for informed consent under Article 5(3) of the ePrivacy Directive include the disclosure of “the duration of the operation of cookies and whether or not third parties may have access to those cookies” (para. 81).1 The CJEU clarified that the information provided must enable the user to determine the consequences of any consent and be sufficiently detailed so as to enable the user to understand the functioning of the cookies employed. This includes the requirement to provide information about the duration of the cookies and whether or not third parties may have access to those cookies.
+In its Planet49 judgment (available [here](http://curia.europa.eu/juris/document/document.jsf;jsessionid=DA9630A1B5B38A1B6EFD5C9CC1DCD815?text=&docid=218462&pageIndex=0&doclang=EN&mode=lst&dir=&occ=first&part=1&cid=8222720)), the Court of Justice of the European Union (CJEU) ruled that the requirements for informed consent under Article 5(3) of the ePrivacy Directive include the disclosure of “the duration of the operation of cookies and whether or not third parties may have access to those cookies” (para. 81).[^1] The CJEU clarified that the information provided must enable the user to determine the consequences of any consent and be sufficiently detailed so as to enable the user to understand the functioning of the cookies employed. This includes the requirement to provide information about the duration of the cookies and whether or not third parties may have access to those cookies.
 
 ##### usesCookies
 
@@ -1715,7 +1715,7 @@ This true or false field indicates whether the vendor uses other, non-cookie met
  
  <table>
  <tr><td>Field</td><td>Type</td><td>Description</td></tr>
-  <tr><td><code>deviceStorageDisclosureURL</code></td><td>boolean</td><td>This required field is a secure URL to a vendor-hosted resource that adheres to the structure, content and serving described by the Vendor Device Storage & Operational Disclosures <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/Additional-Vendor-Information-List-Specification.md">specification</a>.</td></tr>
+  <tr><td><code>deviceStorageDisclosureURL</code></td><td>boolean</td><td>This required field is a secure URL to a vendor-hosted resource that adheres to the structure, content and serving described by the Vendor Device Storage & Operational Disclosures <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/tree/master/TCFv2/Vendor%20Device%20Storage%20%26%20Operational%20Disclosures.md">specification</a>.</td></tr>
  </table>
 
 ## Global CMP List Specification
@@ -1799,5 +1799,5 @@ Here is an example of the GCL’s JSON format:
   }
 }
 ```
----
-<sup>1</sup> Please note the difference of the legal and technical terms of art: The term “cookies” as used by the CJEU should be understood as a substitute for “storing information, or accessing information already stored, on the terminal equipment of an end user”, i.e. the activity covered by Article 5(3) of the ePrivacy Directive and Purpose 1 “Store and/or access information on a device” of the TCF. The ruling should therefore not be misunderstood as only applying to the more limited, technical concept of cookies as defined by the HTTP protocol specification.
+
+[^1]: Please note the difference of the legal and technical terms of art: The term “cookies” as used by the CJEU should be understood as a substitute for “storing information, or accessing information already stored, on the terminal equipment of an end user”, i.e. the activity covered by Article 5(3) of the ePrivacy Directive and Purpose 1 “Store and/or access information on a device” of the TCF. The ruling should therefore not be misunderstood as only applying to the more limited, technical concept of cookies as defined by the HTTP protocol specification.
