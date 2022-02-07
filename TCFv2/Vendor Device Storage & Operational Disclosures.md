@@ -2,7 +2,7 @@
 
  **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.0 | August 2019, Updated September 2021**
+**Final v.2.0 | August 2019, Updated February 2022**
 
  Table of Contents
  
@@ -46,20 +46,20 @@ Vendors MUST publish granular disclosures for web-based storage - ‘cookie’ a
 
 <table>
   <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
-  <tr><td>identifier</td><td>required</td><td>string</td><td>Key or object name, depending on type, for the storage item</td></tr>
-  <tr><td>type</td><td>required</td><td>enum</td><td>What type of storage or access mechanism is used: 'cookie', 'web', ‘app’. 
+  <tr><td><code>identifier</code></td><td>required</td><td>string</td><td>Key or object name, depending on type, for the storage item</td></tr>
+  <tr><td><code>type</code></td><td>required</td><td>enum</td><td>What type of storage or access mechanism is used: 'cookie', 'web', ‘app’. 
     Note 'web' <em>can represent local/session storage and IndexedDB</em>.</td></tr>
-  <tr><td>maxAgeSeconds</td><td>required if type = 'cookie' else null</td><td>integer</td><td>Only required if type = ‘cookie’; otherwise null. The number, in seconds, of the duration for storage on a device, as set when using cookie storage. <em>Note: this only includes what is declared when the storage is set and does not consider duration extensions should storage be refreshed.</em>
+  <tr><td><code>maxAgeSeconds</code></td><td>required if type = 'cookie' else null</td><td>integer</td><td>Only required if type = ‘cookie’; otherwise null. The number, in seconds, of the duration for storage on a device, as set when using cookie storage. <em>Note: this only includes what is declared when the storage is set and does not consider duration extensions should storage be refreshed.</em>
 <br>For types of mechanisms (non-cookie) where duration cannot be set, this field should be null.
 </td></tr>
-  <tr><td>cookieRefresh</td><td>required if type = ‘cookie’; otherwise false.</td><td>boolean</td><td>Indicates the vendor is refreshing a cookie. See <em>cookieRefresh</em> description in the <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md">core specification</a>. True indicates the vendor refreshes this cookie. False indicates the vendor does not refresh the cookie any time the browser reloads.</td></tr>
-  <tr><td>domain</td><td>optional</td><td>string</td><td><b>Required if type='cookie' or type='web'</b>
+  <tr><td><code>cookieRefresh</code></td><td>required if type = ‘cookie’; otherwise false.</td><td>boolean</td><td>Indicates the vendor is refreshing a cookie. See <em>cookieRefresh</em> description in the <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md">core specification</a>. True indicates the vendor refreshes this cookie. False indicates the vendor does not refresh the cookie any time the browser reloads.</td></tr>
+  <tr><td><code>domain</td><td>optional</td><td>string</td><td><b>Required if type='cookie' or type='web'</b>
 <br><br>
 “*” = any domain (ex. first party cookie)
     <br><br>
 “*.vendor.com” means multiple subdomains may exist
 </td></tr>
-  <tr><td>purposes</td><td>required</td><td>array<integer></td><td>The purpose ID or purpose IDs from the Global Vendor List (GVL) for which the storage is used.
+  <tr><td><code>purposes</code></td><td>required</td><td>array<integer></td><td>The purpose ID or purpose IDs from the Global Vendor List (GVL) for which the storage is used.
  <br><br>
 To indicate that use of the storage is subject to the consent requirement of the ePrivacy Directive, include Purpose ID 1 from the GVL.
     <br><br>
@@ -105,11 +105,11 @@ Vendors MUST publish the domains they use for collecting and processing personal
 
 <table>
   <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
-  <tr><td>domain</td><td>required</td><td>string</td><td>“*.vendor.com” means multiple subdomains may exist.
+  <tr><td><code>domain</code></td><td>required</td><td>string</td><td>“*.vendor.com” means multiple subdomains may exist.
 <br><br>
 Entry MUST NOT contain “http(s)://” or text other than the domain.
 </td></tr>
-  <tr><td>use</td><td>optional</td><td>string</td><td>Textual explanation of what the domain is used for.
+  <tr><td><code>use</code></td><td>optional</td><td>string</td><td>Textual explanation of what the domain is used for.
 <br><br>
 There is no mechanism for requesting alternate translations. For widest readability, it is suggested that Vendors use English for the optional explanatory text. </td></tr>
 </table>
