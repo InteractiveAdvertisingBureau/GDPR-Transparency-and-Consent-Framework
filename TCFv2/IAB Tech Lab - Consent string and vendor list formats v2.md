@@ -407,7 +407,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         Epoch time format when TC String was last updated (must be updated any time a value is changed)
       </td>
       <td rowspan="2">
-       To create a timestamp in JavaScript: <code>Math.round((new Date(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 0, 0, 0)).getTime()/100)</code>. Also, the timestamp must be based in UTC time in order to get a consistent millisecond value across the time zones.
+       To create a timestamp in JavaScript: <code>Math.round(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate())/100)</code>. Also, the timestamp must be based in UTC time in order to get a consistent millisecond value across the time zones.
        <br><br>
        Note : <a href="#what-happened-to-created-and-lastupdated">What happened to Created and LastUpdated?</a>
       </td>
