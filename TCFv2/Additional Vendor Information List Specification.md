@@ -6,7 +6,7 @@ The Additional Vendor Information List is a technical document that can be downl
 
  * Full Legal Entity Address
  * B2B Contact details
- * Territorial scope (EU/EEA/UK countries where the vendor operates)
+ * Territorial scope (EU/EEA/EFTA/UK countries where the vendor operates)
    + Jurisdictions list with [ISO 3166 country codes](https://www.iso.org/obp/ui/#search): Belgium (BE), Bulgaria (BG), Czechia (CZ), Denmark (DK), Germany (DE), Estonia (EE), Ireland (IE), Greece (GR), Spain (ES), France (FR), Croatia (HR), Iceland (IS), Italy (IT), Cyprus (CY), Latvia (LV), Liechtenstein (LI), Lithuania (LT), Luxembourg (LU), Hungary (HU), Malta (MT), Netherlands (NL), Norway (NO), Austria (AT), Poland (PL), Portugal (PT), Romania (RO), Slovenia (SI), Slovakia (SK), Finland (FI), Sweden (SE), Switzerland (CH), United Kingdom (GB)
  * Environment (environments where the vendor operates)
    + Web
