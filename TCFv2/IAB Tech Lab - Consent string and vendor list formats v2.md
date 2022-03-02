@@ -2,7 +2,7 @@
  # Transparency and Consent String with Global Vendor & CMP List Formats
  **IAB Europe Transparency & Consent Framework**
 
- **Final v.2.0 | August 2019, Updated December 2019**
+ **Final v.2.0 | August 2019, Updated February 2022**
 
  Table of Contents
 
@@ -37,6 +37,8 @@
  * [The Global Vendor List](#the-global-vendor-list)
    + [I’m a vendor, how do I get added to the Global Vendor List?](#im-a-vendor-how-do-i-get-added-to-the-global-vendor-list)
    + [What is contained in the Global Vendor List?](#what-is-contained-in-the-global-vendor-list)
+   + [Example Global Vendor List JSON Object](#example-global-vendor-list-json-object)
+     - [Vendor Fields relating to the Planet49 ruling](#vendor-fields-relating-to-the-planet49-ruling) 
    + [Where can I access the Global Vendor List?](#where-can-i-access-the-global-vendor-list)
    + [TCF version 1 of the Global Vendor List (deprecated)](#tcf-version-1-of-the-global-vendor-list-deprecated)
    + [Translations for Purposes, Special Purposes, Features, and Special Features](#translations-for-purposes-special-purposes-features-and-special-features)
@@ -62,6 +64,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| Feb 2022 | 2.0 | Move the current vendor fields relating to the Planet 49 ruling from the existing Device Storage Access & Disclosure tech spec to this core spec |
 | Dec 2021 | 2.0 | Update of Created and LastUpdated to have the same value corresponding to the day-level timestamp of when the TC String was last updated |
 | Sept 2021 | 2.0 | Deprecation of Global Scope, OOB and 'euconsent-v2' cookie associated with the consensu.org domain  |
 | August 2021 | 2.0 | Added optional use of DisclosedVendor segment in the context of storing service-level TC Strings  |
@@ -1335,6 +1338,14 @@ The registration process is described here: [https://iabeurope.eu/tcf](https://i
     *   List of Special Features they use across Purposes.
     *   GDPR/privacy policy page URL.
     *   HTTP “overflow” options which includes a <code>GET</code> request maximum size in kilobytes to help diagnose problems with TC String passing as well as limit oversized strings.
+    *   Whether they use cookie storage (session or otherwise).
+    *   The longest potential device storage duration, as set when using the cookie method of storage.
+    *   Whether they refresh cookies.
+    *   Whether they use non-cookie storage and access to information already stored on a user’s device.
+    *   Location of their vendor-hosted, secure URL for accessing additional storage and operational information.
+
+Additional information on Vendors can be downloaded from a domain managed and published by IAB Europe (see [Additional Vendor Information List Specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/Additional-Vendor-Information-List-Specification.md))
+
 
 
 ### Where can I access the Global Vendor List?
@@ -1456,72 +1467,70 @@ To determine if TCF [Policies](https://iabeurope.eu/iab-europe-transparency-cons
 
 ### Example Global Vendor List JSON Object
 
-Here is an annotated example of the GVL’s JSON format:
+Here is an annotated example of the GVL’s JSON format and content. Some attributes are described in the tables following the example:
 
 ```javascript
 {
   "gvlSpecificationVersion": 2,
   "vendorListVersion": 133, // incremented with each published file change
   "tcfPolicyVersion": 2, // The TCF MO will increment this value whenever a GVL change (such as adding a new Purpose or Feature or a change in Purpose wording) legally invalidates existing TC Strings and requires CMPs to re-establish transparency and consent from users. TCF Policy changes should be relatively infrequent and only occur when necessary to support changes in global mandate. If the policy version number in the latest GVL is different from the value in your TC String, then you need to re-establish transparency and consent for that user. A version 1 format TC String is considered to have a version value of 1.
-  "lastUpdated": "2018-05-28T00:00:00Z",
+  "lastUpdated": "2022-05-26T16:00:00Z",
   "purposes": {
-
-    /**
-     * Information published for each Purpose
-     *
-     * "id": number, REQUIRED
-     * "name": string, REQUIRED
-     * "description": string, REQUIRED
-     * "descriptionLegal": string, REQUIRED
-     * "consentable": boolean, OPTIONAL, default=true  false means CMPs should never afford users the means to provide an opt-in consent choice
-     * "rightToObject": boolean, OPTIONAL, default=true  false means CMPs should never afford users the means to exercise a right to object
-    */
-    "1": {
-      "id": 1,
-      "name": "Storage and access of information",
-      "description": "...",
-      "descriptionLegal": "..."
-    },
-    // ... more purposes from id=2 to id=9 (up to no higher than id=24)
-    "10": {
-      "id": 10,
-      "name": "Develop and improve product",
-      "description": "...",
-      "descriptionLegal": "...",
-      "consentable": false,
-      "rightToObject": false
-    }
+	/**
+ 	* Information published for each Purpose
+ 	*
+ 	* "id": number, REQUIRED
+ 	* "name": string, REQUIRED
+ 	* "description": string, REQUIRED
+ 	* "descriptionLegal": string, REQUIRED
+ 	* "consentable": boolean, OPTIONAL, default=true  false means CMPs should never afford users the means to provide an opt-in consent choice
+ 	* "rightToObject": boolean, OPTIONAL, default=true  false means CMPs should never afford users the means to exercise a right to object
+	*/
+	"1": {
+  	   "id": 1,
+  	   "name": "Storage and access of information",
+  	   "description": "...",
+  	   "descriptionLegal": "..."
+	},
+	// ... more purposes from id=2 to id=9 (up to no higher than id=24)
+	"10": {
+  	   "id": 10,
+  	   "name": "Develop and improve product",
+  	   "description": "...",
+  	   "descriptionLegal": "...",
+  	   "consentable": false,
+  	   "rightToObject": false
+	}
   },
   "specialPurposes" : {
-    "1": {
-      "id": 1,
-      "name": "Security, Fraud Prevention, Debugging",
-      "description": "...",
-      "descriptionLegal": "...",
-      "consentable": false,
-      "rightToObject": false
-    },
-    "2": {
-      "id": 2,
-      "name": "Technical ad and content delivery",
-      "description": "...",
-      "descriptionLegal": "...",
-      "consentable": false,
-      "rightToObject": false
-    }
+	"1": {
+  	   "id": 1,
+  	   "name": "Security, Fraud Prevention, Debugging",
+  	   "description": "...",
+  	   "descriptionLegal": "...",
+  	   "consentable": false,
+  	   "rightToObject": false
+	},
+	"2": {
+  	   "id": 2,
+  	   "name": "Technical ad and content delivery",
+  	   "description": "...",
+  	   "descriptionLegal": "...",
+  	   "consentable": false,
+  	   "rightToObject": false
+	}
   },
   "features" : {
-    "1": {
-      "id": 1,
-      "name": "Matching Data to Offline Sources",
-      "description": "Combining data from offline sources that were initially collected in other contexts",
-      "descriptionLegal": "..."
-    }
+	"1": {
+  	   "id": 1,
+  	   "name": "Matching Data to Offline Sources",
+  	   "description": "Combining data from offline sources that were initially collected in other contexts",
+  	   "descriptionLegal": "..."
+	}
 
   // ... more features from id=2 up to no higher than id=64.
 
   },
-
   /**
    * Special features differ from simple features in that CMPs MUST provide
    * users with a means to signal an opt-in choice as to whether vendors
@@ -1529,22 +1538,36 @@ Here is an annotated example of the GVL’s JSON format:
    * See Policies for specifics.
    */
   "specialFeatures" : {
-    "1": {
-      "id": 1,
-      "name": "Precise Geolocation",
-      "description": "...",
-      "descriptionLegal": "..."
-    },
-    "2": {
-      "id": 2,
-      "name": "Active Fingerprinting",
-      "description": "...",
-      "descriptionLegal": "..."
-    }
+	"1": {
+  	   "id": 1,
+  	   "name": "Precise Geolocation",
+  	   "description": "...",
+  	   "descriptionLegal": "..."
+	},
+	"2": {
+  	   "id": 2,
+  	   "name": "Active Fingerprinting",
+  	   "description": "...",
+  	   "descriptionLegal": "..."
+	}
 
   // ... more special features from id=3 up to no higher than id=8.
-    //
+  //
+
   },
+
+  "stacks": {
+	"1": {
+  	   "id": 1,
+  	   "purposes" : [],
+  	   "specialFeatures" : [1,2],
+  	   "name" : "Precise geolocation data, and identification through device scanning",
+  	   "description" : "Precise geolocation and information about device characteristics can be used."
+	}   
+  // ... more Stacks.
+  //
+  },
+
   "vendors": {
   /**
    * Information published for each vendor
@@ -1553,7 +1576,7 @@ Here is an annotated example of the GVL’s JSON format:
    *
    * "name": string, REQUIRED
    *
-   * "purposes": conditionally OPTIONAL (see "Constraints") array of positive 
+   * "purposes": conditionally OPTIONAL (see "Constraints") array of positive
    * integers. List of Purpose ids declared as performed on the legal basis of
    * consent
    *
@@ -1599,45 +1622,101 @@ Here is an annotated example of the GVL’s JSON format:
    * vendor is considered deleted after this date/time and MUST NOT be
    * established to users.
    *
-   * "overflow": object specifying the vendor's http GET request length  limit
+   * "overflow": object specifying the vendor's http GET request length limit
    * OPTIONAL. Has the following members & values
    *
    *   "overflow": {
-   *     "httpGetLimit": 32   /* 32 or 128 are supported options */
+   * 	   "httpGetLimit": 32   // 32 or 128 are supported options
    *   }
-   *    If a vendor entry does not include this attribute then the vendor has no
-   *    overflow options and none can be inferred.
+   *	If a vendor entry does not include this attribute then the vendor has no
+   *	overflow options and none can be inferred.
+   *
+   * Attributes for disclosures related to the Planet49 ruling.
+   * See the descriptions immediately after this example.
+   *
+   * "usesCookies": boolean, REQUIRED
+   * "cookieMaxAgeSeconds" : numeric, REQUIRED
+   * "cookieRefresh" : boolean, REQUIRED
+   * "usesNonCookieAccess" : boolean, REQUIRED
+   * "deviceStorageDisclosureUrl" : url string, REQUIRED
+   *
    */
-
   "1":{
-    "id": 1,
-    "name": "Vendor Name",
-    "purposes": [1],
-    "specialPurposes": [1],
-    "legIntPurposes": [2, 3],
-    "flexiblePurposes": [1, 2],
-    "features": [1, 2],
-    "specialFeatures": [1, 2],
-    "policyUrl": "https://vendorname.com/gdpr.html",
-    "deletedDate": "2019-02-28T00:00:00Z",
-    "overflow": {
-      "httpGetLimit": 32   /* 32 or 128 are supported options */
-      }
-    }
-  // ... more vendors
-  },
+       "id": 1,
+	   "name": "Vendor Name",
+	   "purposes": [1],
+	   "specialPurposes": [1],
+	   "legIntPurposes": [2, 3],
+	   "flexiblePurposes": [1, 2],
+	   "features": [1, 2],
+	   "specialFeatures": [1, 2],
+	   "policyUrl": "https://vendorname.com/gdpr.html",
+	   "deletedDate": "2019-02-28T00:00:00Z",
+	   "overflow": {
+      	      "httpGetLimit": 32
+  	   },
+  	   "usesCookies": true,
+	   "cookieMaxAgeSeconds": 31536000,
+	   "cookieRefresh": false,
+	   "usesNonCookieAccess": true,
+	   "deviceStorageDisclosureUrl": "https://vendorname.com/path/to/deviceAndOperationalDisclosures.json"
 
-  "stacks": {
-    "1": {
-      "id": 1,
-      "purposes" : [],
-      "specialFeatures" : [1,2],
-      "name" : "Precise geolocation data, and identification through device scanning",
-      "description" : "Precise geolocation and information about device characteristics can be used."
-    }
   }
+  // ... more vendors
+ }
 }
 ````
+
+#### Vendor Fields relating to the Planet49 ruling
+
+The fields below provide Vendors with a method to disclose the length of time any vendor-specific information may be stored on a device and other summary information about device storage. Vendors also provide granular storage and access disclosures via a JSON file. CMPs display this information to consumers. This form of transparency took on urgency after a ruling by the Court of Justice of the European Union in Case C-673/17 _Planet49_.
+
+In its Planet49 judgment (available [here](http://curia.europa.eu/juris/document/document.jsf;jsessionid=DA9630A1B5B38A1B6EFD5C9CC1DCD815?text=&docid=218462&pageIndex=0&doclang=EN&mode=lst&dir=&occ=first&part=1&cid=8222720)), the Court of Justice of the European Union (CJEU) ruled that the requirements for informed consent under Article 5(3) of the ePrivacy Directive include the disclosure of “the duration of the operation of cookies and whether or not third parties may have access to those cookies” (para. 81).[^1] The CJEU clarified that the information provided must enable the user to determine the consequences of any consent and be sufficiently detailed so as to enable the user to understand the functioning of the cookies employed. This includes the requirement to provide information about the duration of the cookies and whether or not third parties may have access to those cookies.
+
+##### usesCookies
+
+This true or false field indicates whether the vendor uses cookie storage (session or otherwise).
+<table>
+ <tr><td>Field</td><td>Type</td><td>Description</td></tr>
+  <tr><td><code>usesCookies</code></td><td>Boolean</td><td>Indicates whether the vendor uses cookie storage (session or otherwise). True indicates cookie storage is used. False cookie storage is not used.</td></tr>
+ </table>
+ 
+ ##### cookieMaxAgeSeconds
+ 
+The number of seconds representing the longest potential duration for cookie storage on a device. If a Vendor uses multiple cookies with differing durations, <code>cookieMaxAgeSeconds</code> represents the cookie with the longest duration. Note: cookies are the only method of storage or device access that permit a predictable duration to be set.
+
+<table>
+ <tr><td>Field</td><td>Type</td><td>Description</td></tr>
+  <tr><td><code>cookieMaxAgeSeconds</code></td><td>integer</td><td> The number, in seconds, of the longest potential duration for storage on a device, as set when using the cookie method of storage. A negative number or a 0 indicates session storage similar to the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie">Set-Cookie</a> spec. A <code>null</code> value is provided when <code>usesCookies=false</code>.
+   <br>
+   <em>Note: this only includes what is declared when the storage is initially set and does not consider duration extensions should storage be refreshed.</em>
+   </td></tr>
+ </table>
+
+##### cookieRefresh
+
+This true or false field indicates whether any cookies in scope for <code>cookieMaxAgeSeconds</code> are refreshed after being initially set. The following is an example of a cookie "refresh" scenario. On Day 0 a user visits a web page which loads Vendor A who seeks Purpose 1 consent. She consents to Purpose 1 which includes Vendor A's 90 day max age cookie disclosure. This cookie is set to expire 90 days from now on Day 90 using <code>Set-Cookie: Max-Age=7776000</code>. On Day 5 the same user again visits the same web page loading Vendor A. The web page's CMP previously recorded her data processing choices and does not surface a new consent request. Vendor A is considered to "refresh" the cookie if it resets the countdown to 90 days from day 5, which would now be 96 days after the user made her choice when the webpage's CMP displayed a transparency and control experience to her.
+
+<table>
+ <tr><td>Field</td><td>Type</td><td>Description</td></tr>
+  <tr><td><code>cookieRefresh</code></td><td>boolean</td><td>True indicates the vendor may refresh cookie(s). False indicates the vendor does not refresh any time the browser reloads.</td></tr>
+ </table>
+ 
+##### usesNonCookieAccess
+
+This true or false field indicates whether the vendor uses other, non-cookie methods of storage or accessing information already stored on a user’s device (see footnote 1). Examples of non-cookie storage and access may be localStorage, indexDB, mobile ad IDs, etc.
+
+<table>
+ <tr><td>Field</td><td>Type</td><td>Description</td></tr>
+  <tr><td><code>usesNonCookieAccess</code></td><td>boolean</td><td>Indicates the vendor’s use of non-cookie storage and access to information already stored on a user’s device. True indicates non-cookie access is used. False indicates non-cookie storage and access to information already stored on a user's device is not used.</td></tr>
+ </table>
+ 
+ ##### deviceStorageDisclosureUrl
+ 
+ <table>
+ <tr><td>Field</td><td>Type</td><td>Description</td></tr>
+  <tr><td><code>deviceStorageDisclosureURL</code></td><td>boolean</td><td>This required field is a secure URL to a vendor-hosted resource that adheres to the structure, content and serving described by the Vendor Device Storage & Operational Disclosures <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/tree/master/TCFv2/Vendor%20Device%20Storage%20%26%20Operational%20Disclosures.md">specification</a>.</td></tr>
+ </table>
 
 ## Global CMP List Specification
 The Global CMP List (GCL) is a JSON format document that lists all CMPs registered with the Transparency and Consent Framework (TCF). There are separate files for v1.1 and v2 of the framework. These files are used by vendors to determine which CMPs are compliant and active within the framework, in order to ascertain whether a given CMP ID found in a consent string or TC String is valid.
@@ -1720,3 +1799,5 @@ Here is an example of the GCL’s JSON format:
   }
 }
 ```
+
+[^1]: Please note the difference of the legal and technical terms of art: The term “cookies” as used by the CJEU should be understood as a substitute for “storing information, or accessing information already stored, on the terminal equipment of an end user”, i.e. the activity covered by Article 5(3) of the ePrivacy Directive and Purpose 1 “Store and/or access information on a device” of the TCF. The ruling should therefore not be misunderstood as only applying to the more limited, technical concept of cookies as defined by the HTTP protocol specification.
