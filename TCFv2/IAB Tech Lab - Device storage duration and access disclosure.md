@@ -3,7 +3,7 @@ A new feature introduced for Transparency and Consent Framework (TCF) v2.1
 
 ## Summary
 
-This specification provides vendors with a method to disclose the length of time any vendor-specific information may be stored on a device. The required disclosure is an added section in the Global Vendor List (GVL) and is used by CMPs to display the information to consumers. Additionally, vendors disclose additional storage and access via a JSON file which CMPs display to consumers. This form of transparency took on urgency after a ruling by the Court of Justice of the European Union in Case C-673/17 _Planet49_. 
+This document is one of the IAB Europe Transparency and Consent Framework Specifications. It defines operational information disclosures required of Vendors by the Framework and the structure for publishing them. This information includes the length of time any vendor-specific information may be stored on a device, as well as the complete list of domains the vendor uses. CMPs may disclose portions of this information to data subjects in Framework UIs. Transparency related to device storage took on urgency after a ruling by the Court of Justice of the European Union in Case C-673/17 _Planet49_.  
 
 ### Planet49 Ruling
 
@@ -142,7 +142,7 @@ This true or false field indicates whether the vendor uses other, non-cookie met
 
 ### <code>deviceStorageDisclosureUrl</code>
 
-Link to a recommended, vendor-hosted, secure URL for disclosing additional storage information (see “deviceStorage.json” heading below for additional details). 
+Link to a recommended, vendor-hosted, secure URL for disclosing additional information (see "Required Information and JSON Structure" heading below for additional details). 
 
 <table>
   <tr>
@@ -166,7 +166,7 @@ Link to a recommended, vendor-hosted, secure URL for disclosing additional stora
    </td>
    <td>-
    </td>
-   <td>Location of vendor-hosted deviceStorage.json file
+   <td>Location of vendor-hosted deviceStorage.json file.
    </td>
   </tr>
 </table>
@@ -193,9 +193,11 @@ Link to a recommended, vendor-hosted, secure URL for disclosing additional stora
 ...
 ```
 
-## deviceStorage.json
+## Required Information and JSON Structure
 
-The deviceStorage.json is hosted at the vendor-supplied URL (<code>deviceStorageDisclosureUrl</code>) to disclose additional storage and access information. It is recommended that deviceStorage.json be hosted in a Vendor's .well-known directory; although not required because the URL is provided by <code>deviceStorageDisclosureUrl</code>. Because CMPs will need to be able to load the JSON file in the browser, [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) must be enabled at the serving location specified by <code>deviceStorageDisclosureUrl</code>.
+The TCF registration process requires Vendors to provide a URL to a JSON resource that conforms to the content and structure specified below. The Managing Organisation publishes the URL on the GVL along with other Vendor registration information. The MO may publish some registration information separately from the GVL. Because CMPs must load the JSON file in the browser, Vendors must enable [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) at the location servicing the URL.
+
+The JSON contains two types of information, disclosures related to device storage access and duration (the _Disclosures_ object and attribute) and the web domains the Vendor uses (the _Domains_ object and attribute). Both are required, though not all information within each object is required. See the tables below. 
 
 ### Disclosures Object
 
@@ -284,7 +286,7 @@ To indicate that the use of storage is <span style="text-decoration:underline;">
 
 #### Example
 
-Below is an example JSON for a fictional company named AdTech123.  AdTech123 owns the domain `adtech123.com` and has a "third-party" re-targeting cookie that is set on the domain of `retarget.adtech123.com`.  They also maintain a `localStorage` object that contains a `user` object with key “id” that can be accessed via JavaScript at `window.localStorage.id`. AdTech123 hosts this `deviceStorage.json` at https://vendor123.com/path/to/deviceStorage.json
+Below is sample JSON for a fictional company named AdTech123. AdTech123 owns the domain `adtech123.com` and has a "third-party" retargeting cookie that is set on the domain of `retarget.adtech123.com`.  They also maintain a `localStorage` object that contains a `user` object with key “id” that can be accessed via JavaScript at `window.localStorage.id`. AdTech123 hosts this `deviceStorage.json` at https://vendor123.com/path/to/deviceStorage.json.
 
 
 ```javascript
@@ -305,6 +307,46 @@ Below is an example JSON for a fictional company named AdTech123.  AdTech123 own
       "cookieRefresh": false,
       "purposes": [3,4,5,6,7,8,9,10]
     }
+  ],
+  "domains": [
+    ...
+  ]
+}
+```
+### Domains Object
+
+<table>
+  <tr><td>Field</td><td>Scope</td><td>Field</td><td>Description</td></tr>
+  <tr><td>domain</td><td>required</td><td>string</td><td>“*.vendor.com” means multiple subdomains may exist.<br><br>Entry must not contain “http(s)://” or text other than the domain.</td></tr>
+  <tr><td>use</td><td>optional</td><td>string</td><td>Textual explanation of what the domain is used for.</td></tr>
+</table>
+
+#### Example
+
+The example below provides a list of the domains used by the fictional AdTech123 company, including details of what each domain is used for:
+
+```javascript
+{
+  "disclosures": [
+    ...
+  ],
+  "domains": [
+    {
+      "domain": "retarget.adtech123.com",
+      "use": "Retargeting and conversion tracking"
+    },
+    {
+      "domain": "static.adtech123.com",
+      "use": "Static CSS and JavaScript"
+    },
+    {
+      "domain": "tracking.adtech123.com",
+      "use": "Ad server and tracking"
+    },
+    {
+      "domain": "video.adtech123.com",
+      "use": "Video and banner distribution"
+    }
   ]
 }
 ```
@@ -312,4 +354,4 @@ Below is an example JSON for a fictional company named AdTech123.  AdTech123 own
 ## Footnotes
 <b id="f1">1</b> Please note the difference of the legal and technical terms of art: The term “cookies” as used by the CJEU should be understood as a substitute for “storing information, or accessing information already stored, on the terminal equipment of an end user”, i.e. the activity covered by Article 5(3) of the ePrivacy Directive and Purpose 1 “Store and/or access information on a device” of the TCF. The ruling should therefore not be misunderstood as only applying to the more limited, technical concept of cookies as defined by the HTTP protocol specification. [↩](#a1)
 
-<b id="f2">2</b> The use of the Global Vendor List to support device storage duration disclosures means publishers and their CMPs will need to coordinate between themselves how to handle any publisher disclosures. Those parties are welcome to use the structure defined for vendors in this spec, but are not required to. [↩](#a2)
+<b id="f2">2</b> The use of the Global Vendor List to support device storage duration disclosures means publishers and their CMPs will need to coordinate between themselves how to handle the Publisher’s storage disclosures. Those parties are welcome to use the structure defined by this Specification, but are not required to. [↩](#a2)
