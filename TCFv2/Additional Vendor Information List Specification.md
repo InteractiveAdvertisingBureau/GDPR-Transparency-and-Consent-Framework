@@ -1,8 +1,10 @@
-# Summary
+# Additional Vendor Information List Specification
+
+## Summary
 
 The Additional Vendor Information List is a technical document that can be downloaded from a domain managed and published by IAB Europe. It lists additional information registered by approved Vendors, such as B2B contact details, territorial scope or environments supported by their technology. The information stored in the list is not intended for user disclosures and can be used by publishers for determining which Vendors they wish to establish transparency and consent for on their digital properties.
 
-# What is contained in the Additional Vendor Information List?
+## What is contained in the Additional Vendor Information List?
 
  * Full Legal Entity Address
  * B2B Contact details
@@ -36,13 +38,13 @@ The Additional Vendor Information List is a technical document that can be downl
      - BCRs
      - Other
 
-# Where can I access the Additional Vendor Information List?
+## Where can I access the Additional Vendor Information List?
 
 The Additional Vendor Information List is in JSON format and the current version at any given time can be retrieved using the following URL structure:
 
 https://vendor-list.consensu.org/v2/additional-vendor-information-list.json
 
-# Example Additional Vendor Information List Object
+## Example Additional Vendor Information List Object
 
 ````javascript
 {
