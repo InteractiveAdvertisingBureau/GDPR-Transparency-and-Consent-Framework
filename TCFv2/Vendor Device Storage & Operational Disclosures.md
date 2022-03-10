@@ -52,7 +52,7 @@ Vendors MUST publish granular disclosures for web-based storage - ‘cookie’ a
   <tr><td><code>maxAgeSeconds</code></td><td>required if type = 'cookie' else null</td><td>integer</td><td>Only required if type = ‘cookie’; otherwise null. The number, in seconds, of the duration for storage on a device, as set when using cookie storage. <em>Note: this only includes what is declared when the storage is set and does not consider duration extensions should storage be refreshed.</em>
 <br>For types of mechanisms (non-cookie) where duration cannot be set, this field should be null.
 </td></tr>
-  <tr><td><code>cookieRefresh</code></td><td>required if type = ‘cookie’; otherwise false.</td><td>boolean</td><td>Indicates the vendor is refreshing a cookie. See <em>cookieRefresh</em> description in the <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md">core specification</a>. True indicates the vendor refreshes this cookie. False indicates the vendor does not refresh the cookie any time the browser reloads.</td></tr>
+  <tr><td><code>cookieRefresh</code></td><td>only required if type = ‘cookie’</td><td>boolean</td><td>Indicates the vendor is refreshing a cookie. See <em>cookieRefresh</em> description in the <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md">core specification</a>. True indicates the vendor refreshes this cookie. False indicates the vendor does not refresh the cookie any time the browser reloads.</td></tr>
   <tr><td><code>domain</td><td>optional</td><td>string</td><td><b>Required if type='cookie' or type='web'</b>
 <br><br>
 “*” = any domain (ex. first party cookie)
@@ -69,7 +69,7 @@ To indicate that the use of storage is exempted from (and therefore not subject 
 
 #### Example
 
-Below is sample JSON for a fictional TCF Vendor named AdTech123. AdTech123 owns the domain <code>adtech123.com</code> and has a "third-party" retargeting cookie that is set on the domain of <code>retarget.adtech123.com</code>.  They also maintain a <code>localStorage</code> object that contains a user object with key “id” that can be accessed via JavaScript at <code>window.localStorage.id</code>. 
+Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ owns the domain <code>adtech123.com</code> and has a "third-party" retargeting cookie that is set on the domain of <code>retarget.adtech123.com</code>.  They also maintain a <code>localStorage</code> object that contains a user object with key “id” that can be accessed via JavaScript at <code>window.localStorage.id</code>. 
 
 ````javascript
 {
@@ -97,7 +97,7 @@ Below is sample JSON for a fictional TCF Vendor named AdTech123. AdTech123 owns 
 }
 
 ````
-AdTech123 publishes this information at https://www.adtech123.com/path/to/deviceStorage.json, and provides this URL to the TCF during the registration process. 
+_AdTech123_ publishes this information at https://www.adtech123.com/path/to/deviceStorage.json, and provides this URL to the TCF during the registration process. 
 
 ### Domains Object
 
