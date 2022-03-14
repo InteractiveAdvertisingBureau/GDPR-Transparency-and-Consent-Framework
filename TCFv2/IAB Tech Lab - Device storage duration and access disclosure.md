@@ -1,5 +1,5 @@
-# Device Storage Duration & Access Disclosure
-A new feature introduced for Transparency and Consent Framework (TCF) v2.1
+# Device Storage Duration & Access Disclosure (deprecated and superseded by this new [doc](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/Vendor%20Device%20Storage%20%26%20Operational%20Disclosures.md))
+A new feature introduced for Transparency and Consent Framework (TCF) v2.1.
 
 ## Summary
 
