@@ -42,7 +42,7 @@ The JSON contains two types of information, disclosures related to device storag
 
 ### Disclosures Object
 
-Vendors MUST publish granular disclosures for web-based storage - ‘cookie’ and ‘web’ mechanism types. Vendors MAY provide ’app’ storage type disclosures, but are not required to do so. Vendors MAY leave the **Disclosures object** empty if they don’t use any `client-side storage`. 
+Vendors MUST publish granular disclosures for web-based storage - ‘cookie’ and ‘web’ mechanism types. Vendors MAY provide ’app’ storage type disclosures, but are not required to do so. Vendors MAY leave the **Disclosures object** empty if they do not use `client-side storage`. 
 
 <table>
   <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
