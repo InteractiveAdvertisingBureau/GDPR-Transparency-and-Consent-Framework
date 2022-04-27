@@ -11,7 +11,10 @@
 * [Audience](#audience)
   + [Relevant Documents](#relevant-documents)
 * [Required Information and JSON Structure](#required-information-and-json-structure)
-  + [Disclosures Object](#disclosures-object)
+  + [Disclosures array](#disclosures-array)
+    - [Example 1](#example-1)
+    - [Example 2](#example-2)
+  + [Domains array](#domains-array)
     - [Example](#example)
 * [Serving the JSON Resource](#serving-the-json-resource)
 
@@ -38,11 +41,11 @@ Vendors who need to publish these disclosures, or registered CMPs, Publishers an
 
 The TCF registration process requires Vendors to provide a secure URL to a JSON resource that conforms to the content and structure specified below. The Managing Organisation publishes the URL on the GVL along with other Vendor registration information.
 
-The JSON contains two types of information, disclosures related to device storage access and duration (the _Disclosures_ object and attributes) and the web domains the Vendor uses (the _Domains_ object and attributes). Both are required, though not all information within each object is required. See the tables below. 
+The JSON contains two types of information, disclosures related to device storage access and duration (the _Disclosures_ array and attributes) and the web domains the Vendor uses (the _Domains_ array and attributes). Both are required, though not all information within each array is required. See the tables below. 
 
-### Disclosures Object
+### Disclosures array
 
-Vendors that use web-based storage MUST publish granular disclosures for ‘cookie’ and ‘web’ mechanism types. Vendors MAY provide ’app’ storage type disclosures, but are not required to do so. Vendors should leave the **Disclosures object** empty if they do not make use of any `client-side storage`.
+Vendors that use web-based storage MUST publish granular disclosures for ‘cookie’ and ‘web’ mechanism types. Vendors MAY provide ’app’ storage type disclosures, but are not required to do so. Vendors should leave the **Disclosures array** empty if they do not make use of any `client-side storage`.
 
 <table>
   <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
@@ -67,7 +70,7 @@ To indicate that the use of storage is exempted from (and therefore not subject 
 </td></tr>
 </table>
 
-#### Example
+#### Example 1
 
 Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ owns the domain <code>adtech123.com</code> and has a "third-party" retargeting cookie that is set on the domain of <code>retarget.adtech123.com</code>.  They also maintain a <code>localStorage</code> object that contains a user object with key “id” that can be accessed via JavaScript at <code>window.localStorage.id</code>. 
 
@@ -97,9 +100,24 @@ Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ o
 }
 
 ````
+
+
+#### Example 2
+
+Below is sample JSON for a fictional TCF Vendor that does not make use of any `client-side storage`.
+
+````javascript
+{
+    "disclosures": [],
+    "domains": [
+        ...
+    ]
+}
+````
+
 _AdTech123_ publishes this information at https://www.adtech123.com/path/to/deviceStorage.json, and provides this URL to the TCF during the registration process. 
 
-### Domains Object
+### Domains array
 
 Vendors MUST publish the domains they use for collecting and processing personal data in the context of their TCF registration. Vendors MUST NOT include Publishers’ delegated domains or subdomains they may use.
 
