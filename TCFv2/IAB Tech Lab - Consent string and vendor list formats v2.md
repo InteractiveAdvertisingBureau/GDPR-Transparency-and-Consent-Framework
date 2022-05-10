@@ -1715,7 +1715,7 @@ This true or false field indicates whether the vendor uses other, non-cookie met
  
  <table>
  <tr><td>Field</td><td>Type</td><td>Description</td></tr>
-  <tr><td><code>deviceStorageDisclosureURL</code></td><td>boolean</td><td>This required field is a secure URL to a vendor-hosted resource that adheres to the structure, content and serving described by the Vendor Device Storage & Operational Disclosures <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/tree/master/TCFv2/Vendor%20Device%20Storage%20%26%20Operational%20Disclosures.md">specification</a>.</td></tr>
+  <tr><td><code>deviceStorageDisclosureUrl</code></td><td>string</td><td>This required field is a secure URL to a vendor-hosted resource that adheres to the structure, content and serving described by the Vendor Device Storage & Operational Disclosures <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/tree/master/TCFv2/Vendor%20Device%20Storage%20%26%20Operational%20Disclosures.md">specification</a>.</td></tr>
  </table>
 
 ## Global CMP List Specification
