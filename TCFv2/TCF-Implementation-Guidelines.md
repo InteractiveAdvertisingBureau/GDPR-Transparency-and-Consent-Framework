@@ -7,7 +7,7 @@
 </tr>
 <tr>
 	<td><b>Last update</b></td>
-    <td>September 2021</td>
+    <td>May 2022</td>
 </tr>
 </table>
 
@@ -38,7 +38,7 @@ Policy FAQ, webinars, and other resources are available at
 &nbsp;&nbsp;&nbsp;&nbsp;**[How do I find the TC String?](#findtcstring)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[How do I send the TC string?](#sendtcstring)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[How to determine legal bases from the TC String?](#detlegalbasis)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[How to determine if data may be transmited?](#handletcstring)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How to determine if data may be transmitted?](#handletcstring)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[Agency guidelines](#agencyguide)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[DSP guidelines](#dspguide)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[DMP guidelines](#dmpguide)**<br>
@@ -85,7 +85,7 @@ You can learn more about IAB Tech Lab support of the TCF and involvement with IA
 
 https://iabtechlab.com/standards/gdpr-transparency-and-consent-framework/
 
-You can also submit general feedback on IAB Tech Lab draft specifications to feedback@advertisingconsent.eu and any technical feedback to transparencyframework@iabtechlab.com. 
+You can also submit general feedback on IAB Tech Lab draft specifications to framework@iabeurope.eu and any technical feedback to transparencyframework@iabtechlab.com. 
 
 # Common Questions <a name="commonquestions"></a>
 ## Do I need to read the Policy? <a name="needpolicy"></a>
@@ -309,9 +309,9 @@ You may or may not depending on whether the scenario is covered by special featu
 
 # Other Frequently Asked Questions<a name="otherfaq"></a>
 ## Are cookies required for working with the CMP API?<a name="cookiesrequired"></a>
-Yes, v2 depends on the consent data being stored in cookies. 
+No, in version 2 of the TCF Specifications, the storage mechanism used for service-specific and group-specific TC Strings is up to a CMP, including any non-cookie storage mechanism.
 
-Discussion on future iterations have led to proposals about storage mechanisms like a central registry that stores user IDs and their associated information. At that time the implementation could be updated to retrieve data from a defined source without having to change the interface. Until such mechanism exist, cookies are required for working with the CMP API. 
+For further explanations, please go to the section [Storing Consent](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/TCF-Implementation-Guidelines.md#3-storing-consent) above.
 
 ## Can I also use the API for CCPA or other laws?<a name="ccpa"></a>
 At this time, the IAB Europe Transparency and Consent Framework is designed for compliance with GDPR. The CMP API was designed to only support a special use case of the GDPR, which involves the use of user data in the context of digital advertising. Consult your local IAB or the IAB Tech Lab to learn more about other ongoing projects for privacy tool development.
