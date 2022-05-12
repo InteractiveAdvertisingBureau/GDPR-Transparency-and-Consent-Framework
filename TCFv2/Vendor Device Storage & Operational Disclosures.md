@@ -2,7 +2,7 @@
 
  **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.0 | August 2019, Updated February 2022**
+**Final v.2.0 | August 2019, Updated April 2022**
 
  Table of Contents
  
@@ -11,7 +11,10 @@
 * [Audience](#audience)
   + [Relevant Documents](#relevant-documents)
 * [Required Information and JSON Structure](#required-information-and-json-structure)
-  + [Disclosures Object](#disclosures-object)
+  + [Disclosures array](#disclosures-array)
+    - [Example 1](#example-1)
+    - [Example 2](#example-2)
+  + [Domains array](#domains-array)
     - [Example](#example)
 * [Serving the JSON Resource](#serving-the-json-resource)
 
@@ -20,7 +23,8 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
-| Feb 2022 | 1.0 | Initial version. Augments and supersedes the [Device Storage Duration & Access Disclosure](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Device%20storage%20duration%20and%20access%20disclosure.md) specification.  |
+| April 2022 | 1.0| Wildcards are now permitted through the field named `identifier`, adding a new field named `domains` and **Disclosures object** can be empty if the vendor does not make use of any `client-side storage`. |
+| February 2022 | 1.0 | Initial version. Augments and supersedes the [Device Storage Duration & Access Disclosure](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Device%20storage%20duration%20and%20access%20disclosure.md) specification.  |
 
 ## Summary
 
@@ -38,36 +42,44 @@ Vendors who need to publish these disclosures, or registered CMPs, Publishers an
 
 The TCF registration process requires Vendors to provide a secure URL to a JSON resource that conforms to the content and structure specified below. The Managing Organisation publishes the URL on the GVL along with other Vendor registration information.
 
-The JSON contains two types of information, disclosures related to device storage access and duration (the _Disclosures_ object and attributes) and the web domains the Vendor uses (the _Domains_ object and attributes). Both are required, though not all information within each object is required. See the tables below. 
+The JSON contains two types of information, disclosures related to device storage access and duration (the _Disclosures_ array and attributes) and the web domains the Vendor uses (the _Domains_ array and attributes). Both are required, though not all information within each array is required. See the tables below. 
 
-### Disclosures Object
+### Disclosures array
 
-Vendors MUST publish granular disclosures for web-based storage - ‘cookie’ and ‘web’ mechanism types. Vendors MAY provide ’app’ storage type disclosures, but are not required to do so. 
+Vendors that use web-based storage MUST publish granular disclosures for ‘cookie’ and ‘web’ mechanism types. Vendors MAY provide ’app’ storage type disclosures, but are not required to do so. Vendors should leave the **Disclosures array** empty if they do not make use of any `client-side storage`.
 
 <table>
   <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
-  <tr><td><code>identifier</code></td><td>required</td><td>string</td><td>Key or object name, depending on type, for the storage item</td></tr>
+  <tr><td><code>identifier</code></td><td>required</td><td>string</td><td>Key or object name, depending on type, for the storage item.
+   Wildcards '*' are permitted. For example, "id*" or "*id" describes multiple prefixed or suffixed identifiers, all having the same purpose(s). 
+<br><br>
+   <b>Note</b> : A wildcard alone is invalid. A wildcard MUST NOT be used to group different identifiers with different purpose(s), therefore disclose a separate record for each specific identifier.
+   </td></tr>
   <tr><td><code>type</code></td><td>required</td><td>enum</td><td>What type of storage or access mechanism is used: 'cookie', 'web', ‘app’. 
     Note 'web' <em>can represent local/session storage and IndexedDB</em>.</td></tr>
-  <tr><td><code>maxAgeSeconds</code></td><td>required if type = 'cookie' else null</td><td>integer</td><td>Only required if type = ‘cookie’; otherwise null. The number, in seconds, of the duration for storage on a device, as set when using cookie storage. <em>Note: this only includes what is declared when the storage is set and does not consider duration extensions should storage be refreshed.</em>
+  <tr><td><code>maxAgeSeconds</code></td><td>required if type = 'cookie' else null</td><td>integer</td><td>Only required if type = ‘cookie’; otherwise null. The number, in seconds, of the duration for storage on a device, as set when using cookie storage. A 0 indicates session storage similar to the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie">Set-Cookie spec</a>. <em>Note: this only includes what is declared when the storage is set and does not consider duration extensions should storage be refreshed.</em>
 <br>For types of mechanisms (non-cookie) where duration cannot be set, this field should be null.
 </td></tr>
   <tr><td><code>cookieRefresh</code></td><td>only required if type = ‘cookie’</td><td>boolean</td><td>Indicates the vendor is refreshing a cookie. See <em>cookieRefresh</em> description in the <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md">core specification</a>. True indicates the vendor refreshes this cookie. False indicates the vendor does not refresh the cookie any time the browser reloads.</td></tr>
-  <tr><td><code>domain</td><td>optional</td><td>string</td><td><b>Required if type='cookie' or type='web'</b>
-<br><br>
-“*” = any domain (ex. first party cookie)
-    <br><br>
-“*.vendor.com” means multiple subdomains may exist
-</td></tr>
-  <tr><td><code>purposes</code></td><td>required</td><td>array<integer></td><td>The purpose ID or purpose IDs from the Global Vendor List (GVL) for which the storage is used.
- <br><br>
-To indicate that use of the storage is subject to the consent requirement of the ePrivacy Directive, include Purpose ID 1 from the GVL.
-    <br><br>
-To indicate that the use of storage is exempted from (and therefore not subject to) the consent requirement of the ePrivacy Directive, do not include Purpose ID 1 from the GVL.
-</td></tr>
+ <tr><td><code>domains</td><td>optional</td><td>array</td><td>
+  
+  <em>Use of this field is preferred. The less flexible `domain` field may be deprecated in a future release.</em> <br><br>
+<b>Required if type='cookie' or type='web'</b>.<br><br>
+Value is one or more strings describing a domain.<br><br> Wildcards '&ast;' are permitted. For example, "*.adtech123.com" indicates the identifier is used across multiple subdomains.<br><br>
+A wildcard alone is permitted only in cases where the number of domains is large and dynamic, such as when managing `first party` storage on many partners' properties.<br><br>
+  <b>Note</b> : A wildcard MUST NOT be used to group identifiers having different purpose(s) with a group of domains. </td></tr>
+  <tr><td><code>domain</td><td>optional</td><td>string</td><td>
+   
+  <em> This field cannot be used at the same time as the field named `domains` when declaring one or multiple identifier(s). This field can only be used to declare one or multiple identifier(s) with only one domain. <b>This field may be removed in a future release to only use the field `domains`</b>.</em>
+   <br><br>
+   <b>Required if type='cookie' or type='web'.</b>
+   <br><br>
+Wildcards '&ast;' are permitted. For example, "*.adtech123.com" indicates the identifier is used across multiple subdomains.   <br><br>
+A wildcard alone is permitted only in cases where the number of domains is large and dynamic, such as when managing `first party` storage on many partners' properties.   <br><br>
+   <b>Note</b> : A wildcard MUST NOT be used to group identifiers having different purpose(s) with a group of domains. If an identifier is used for the same purposes on a finite set of domains, then disclose a separate record for each specific domain, e.g. one each for 'retarget.adtech123.com', 'retarget.adtech123.net' 'register.adtech123svcs.com', and so on.</td></tr>
 </table>
 
-#### Example
+#### Example 1
 
 Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ owns the domain <code>adtech123.com</code> and has a "third-party" retargeting cookie that is set on the domain of <code>retarget.adtech123.com</code>.  They also maintain a <code>localStorage</code> object that contains a user object with key “id” that can be accessed via JavaScript at <code>window.localStorage.id</code>. 
 
@@ -97,9 +109,24 @@ Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ o
 }
 
 ````
+
+
+#### Example 2
+
+Below is sample JSON for a fictional TCF Vendor that does not make use of any `client-side storage`.
+
+````javascript
+{
+    "disclosures": [],
+    "domains": [
+        ...
+    ]
+}
+````
+
 _AdTech123_ publishes this information at https://www.adtech123.com/path/to/deviceStorage.json, and provides this URL to the TCF during the registration process. 
 
-### Domains Object
+### Domains array
 
 Vendors MUST publish the domains they use for collecting and processing personal data in the context of their TCF registration. Vendors MUST NOT include Publishers’ delegated domains or subdomains they may use.
 
