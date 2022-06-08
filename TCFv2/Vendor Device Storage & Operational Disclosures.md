@@ -2,7 +2,7 @@
 
  **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.0 | August 2019, Updated April 2022**
+**Final v.2.0 | August 2019, Updated June 2022**
 
  Table of Contents
  
@@ -17,13 +17,16 @@
   + [Domains array](#domains-array)
     - [Example](#example)
 * [Serving the JSON Resource](#serving-the-json-resource)
+  + [Around the JSON file](#around-the-json-file)
+  + [The role of the CMP](#the-role-of-the-cmp)
 
  
 ## Version History
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
-| April 2022 | 1.0| Wildcards are now permitted through the field named `identifier`, adding a new field named `domains` and **Disclosures object** can be empty if the vendor does not make use of any `client-side storage`. |
+| June 2022 | 1.0 | Update on the structure of the URL (path and filename) and use of this file by the CMPs |
+| April 2022 | 1.0 | Wildcards are now permitted through the field named `identifier`, adding a new field named `domains` and **Disclosures object** can be empty if the vendor does not make use of any `client-side storage`. |
 | February 2022 | 1.0 | Initial version. Augments and supersedes the [Device Storage Duration & Access Disclosure](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Device%20storage%20duration%20and%20access%20disclosure.md) specification.  |
 
 ## Summary
@@ -40,7 +43,7 @@ Vendors who need to publish these disclosures, or registered CMPs, Publishers an
 
 ## Required Information and JSON Structure
 
-The TCF registration process requires Vendors to provide a secure URL to a JSON resource that conforms to the content and structure specified below. The Managing Organisation publishes the URL on the GVL along with other Vendor registration information.
+The TCF registration process requires Vendors to provide a secure URL to a JSON resource that conforms to the content and structure specified below. The Managing Organisation publishes the URL in the deviceStorageDisclosureURL` field in the Global Vendor List (GVL) along with other Vendor registration information.
 
 The JSON contains two types of information, disclosures related to device storage access and duration (the _Disclosures_ array and attributes) and the web domains the Vendor uses (the _Domains_ array and attributes). Both are required, though not all information within each array is required. See the tables below. 
 
@@ -124,8 +127,6 @@ Below is sample JSON for a fictional TCF Vendor that does not make use of any `c
 }
 ````
 
-_AdTech123_ publishes this information at https://www.adtech123.com/path/to/deviceStorage.json, and provides this URL to the TCF during the registration process. 
-
 ### Domains array
 
 Vendors MUST publish the domains they use for collecting and processing personal data in the context of their TCF registration. Vendors MUST NOT include Publishers’ delegated domains or subdomains they may use.
@@ -171,6 +172,17 @@ There is no mechanism for requesting alternate translations. For widest readabil
 
 ## Serving the JSON Resource
 
-Because CMPs must load the JSON file in the browser, Vendors must enable [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) at the location servicing the URL. Vendors must respond with the appropriate <code>content-type</code> header (<code>application/json</code>) and [cache -control directives](https://www.keycdn.com/support/cache-control) so that CMPs are accessing the latest content when fetching from users’ browsers. The URL need not be served by the Vendor’s company domain. It could be served from a CDN. 
+### Around the JSON file
 
+The vendor publishes the information and provides the URL (the specification makes no assumptions or requirements about the URL) to the TCF during the registration process. This file :
+- is in JSON format,
+- is created, named and published by the vendor,
+- is publicly accessible, 
+- contains cookies and/or other storage mechanisms (Localstorage etc...) and domains used for collecting and processing personal data in the context of TCF.
+
+### The role of the CMP
+In order to allow CMPs to request and load the JSON on the client side, the vendor must enable [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) at the location servicing the URL.
+However, regardless of whether the CMP requests the JSON file from the vendor's server or CMP's server, [Access-Control-Allow-Credentials](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials) must be set to false in order to not include any cookie in the request. Vendors must respond with the appropriate `content-type` header (`application/json`) and [Cache-control directives](https://www.keycdn.com/support/cache-control) so that CMPs are accessing the latest content when fetching from users’ browsers. The URL need not be served by the Vendor’s company domain. It could be served from a CDN. 
+ 
+Usually, CMP requests the file only when/if a user clicks to review additional information (it's unusual for the information to be disclosed directly on the secondary layer).
 
