@@ -2,7 +2,7 @@
  # Transparency and Consent String with Global Vendor & CMP List Formats
  **IAB Europe Transparency & Consent Framework**
 
- **Final v.2.0 | August 2019, Updated February 2022**
+ **Final v.2.0 | August 2019, Updated June 2022**
 
  Table of Contents
 
@@ -64,6 +64,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| June 2022 | 2.0 | Update of the <b>Global Vendor List JSON Object</b> example regarding the filename in `deviceStorageDisclosureUrl` |
 | Feb 2022 | 2.0 | Move the current vendor fields relating to the Planet 49 ruling from the existing Device Storage Access & Disclosure tech spec to this core spec |
 | Dec 2021 | 2.0 | Update of Created and LastUpdated to have the same value corresponding to the day-level timestamp of when the TC String was last updated |
 | Sept 2021 | 2.0 | Deprecation of Global Scope, OOB and 'euconsent-v2' cookie associated with the consensu.org domain  |
@@ -1659,7 +1660,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
 	   "cookieMaxAgeSeconds": 31536000,
 	   "cookieRefresh": false,
 	   "usesNonCookieAccess": true,
-	   "deviceStorageDisclosureUrl": "https://vendorname.com/path/to/deviceAndOperationalDisclosures.json"
+	   "deviceStorageDisclosureUrl": "https://vendorname.com/path/to/file.json"
 
   }
   // ... more vendors
