@@ -7,6 +7,7 @@
 - [Version History](#version-history)
 - [Introduction](#introduction)
   - [About the Transparency & Consent Framework](#about-the-transparency--consent-framework)
+  - [About TCF Canada](#about-tcf-canada-loudspeaker)
   - [License](#license)
   - [Disclaimer](#disclaimer)
   - [About IAB Tech Lab](#about-iab-tech-lab)
@@ -39,6 +40,7 @@
   - [How do ad tags work?](#how-do-ad-tags-work)
   - [How does the "version" parameter work?](#how-does-the-version-parameter-work)
   - [What does the gdprApplies value mean?](#what-does-the-gdprapplies-value-mean)
+  - [What does the cplApplies value mean?](#what-does-the-cplapplies-value-mean)
   - [Details for vendors](#details-for-vendors)
     - [How can scripts on a page determine if there is a CMP present?](#how-can-scripts-on-a-page-determine-if-there-is-a-cmp-present)
     - [How can scripts determine if the CMP script is loaded yet?](#how-can-scripts-determine-if-the-cmp-script-is-loaded-yet)
@@ -83,6 +85,18 @@ To participate in the use of the TCF, become familiar with the Policies for usin
 IAB Europe Transparency & Consent Framework (TCF) has a simple objective to help all parties in the digital advertising chain ensure that they comply with the EU’s General Data Protection Regulation and ePrivacy Directive when processing personal data or accessing and/or storing information on a user’s device, such as cookies, advertising identifiers, device identifiers and other tracking technologies. IAB Tech Lab stewards the development of these technical specifications.
 
 Resources including policy FAQ, Global Vendor List, and CMP List can be found at [iabeurope.eu/tcf](http://iabeurope.eu/tcf).
+
+### About TCF Canada (:loudspeaker:)
+
+This specification is also used by TCF Canada. As described above, the original TCF was designed to support compliance of the GDPR in Europe. As such, when reading the specification from a TCF Canada perspective, please consider the following:
+
+*  References to the GDPR should be ignored
+*  References to "consent" should be read as "express consent"
+*  References to "legitimate interest" should be read as "implied consent"
+*  References to "special feature opt ins" should be read as "special feature express consent"
+*  References to a "Right to Object" should be read as a user exercising an "Objection"
+
+The adoption of this specification is virtually identical for TCF Canada - look out for differences in this document, which are highlighted using the 📢 icon.
 
 ### License
 
@@ -360,7 +374,11 @@ ______
 
 #### `TCData`
 
-This object contains both the encoded and unencoded values of the TC String as well as information about the CMP `eventStatus` and whether or not GDPR applies to this user in this context (see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more).  If GDPR does not apply to this user in this context then only `gdprApplies`, `tcfPolicyVersion`, `cmpId` and `cmpVersion` shall exist in the object. If it is unknown just yet whether GDPR Applies to this user in this context or if this is CMP Stub code then the `callback` shall not be invoked until that `gdprApplies` is known.
+This object contains both the encoded and unencoded values of the TC String as well as information about the CMP `eventStatus` and whether or not GDPR (or CPL) applies to this user in this context (see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) or ["What does the cplApplies value mean?"](#what-does-the-cplapplies-value-mean) for more) :
+- If GDPR does not apply to this user in this context then only `gdprApplies`, `tcfPolicyVersion`, `cmpId` and `cmpVersion` shall exist in the object. 
+- If it is unknown just yet whether GDPR Applies to this user in this context or if this is CMP Stub code then the `callback` shall not be invoked until that `gdprApplies` is known.
+- If CPL does not apply to this user in this context then only `cplApplies`, `tcfPolicyVersion`, `cmpId` and `cmpVersion` shall exist in the object. 
+- If it is unknown just yet whether CPL Applies to this user in this context or if this is CMP Stub code then the `callback` shall not be invoked until that `cplApplies` is known.
 
 ``` javascript
 TCData = {
@@ -376,6 +394,14 @@ TCData = {
    * see the section: "What does the gdprApplies value mean?"
    */
   gdprApplies: Boolean | undefined,
+  
+    /**
+   * true - CPL Applies
+   * false - CPL Does not apply
+   * undefined - unknown whether CPL Applies
+   * see the section: "What does the gdprApplies value mean?"
+   */
+  cplApplies: Boolean | undefined,
 
   /*
    * see addEventListener command
@@ -541,6 +567,14 @@ PingReturn = {
    * see the section: "What does the gdprApplies value mean?"
    */
   gdprApplies: Boolean | undefined,
+  
+    /**
+   * true - CPL Applies
+   * false - CPL Does not apply
+   * undefined - unknown whether CPL Applies
+   * see the section: "What does the cplApplies value mean?"
+   */
+  cplApplies: Boolean | undefined,
 
   /**
    * true - CMP main script is loaded
@@ -620,6 +654,14 @@ InAppTCData = {
    * see the section: "What does the gdprApplies value mean?"
    */
   gdprApplies: 1,
+  
+   /**
+   * 1 - CPL Applies
+   * 0 - CPL Does not apply
+   * undefined - unknown whether CPL applies
+   * see the section: "What does the cplApplies value mean?"
+   */
+  cplApplies: 1,
 
   /*
    * see addEventListener command
@@ -746,7 +788,7 @@ The steps for integrating a CMP SDK into an app are the following:
 
 1. An app publisher should embed a CMP SDK – The setup and configuration as well as the protocol for  how to initialize the CMP SDK  are all proprietary to each CMP SDK.
 2. Since more than one CMP SDK may be included in publishers' linked SDKs, the publisher must initialize only one of them. The initialized CMP shall set `IABTCF_CmpSdkID` with its ID as soon as it is initialized in the app to signal to vendors that a CMP is present.
-3. The CMP SDK will determine if GDPR applies (see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean)) to this user in this context. But, a publisher may choose to initialize a CMP dialogue UI manually.
+3. The CMP SDK will determine if GDPR applies (see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean)) or CPL pplies (see the section ["What does the cplApplies value mean?"](#what-does-the-cplapplies-value-mean)) to this user in this context. But, a publisher may choose to initialize a CMP dialogue UI manually.
 4. The CMP shall set the [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android) variables and vendors will then be able to read from them directly.
 5. Vendors should listen to `IABTCF_* `key updates to retrieve new TC data from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android).
 
@@ -769,6 +811,7 @@ The steps for integrating a CMP SDK into an app are the following:
 | `IABTCF_CmpSdkVersion`  | `Number`: The unsigned integer version number of CMP SDK |
 | `IABTCF_PolicyVersion`  | `Number`: The unsigned integer representing the version of the TCF that these consents adhere to. |
 | `IABTCF_gdprApplies`  | `Number`: <p>`1` GDPR applies in current context</p><p>`0` - GDPR does _**not**_ apply in current context</p><p>**Unset** - undetermined (default before initialization)</p><p>see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more</p> |
+| `IABTCF_cplApplies`  | `Number`: <p>`1` CPL applies in current context</p><p>`0` - CPL does _**not**_ apply in current context</p><p>**Unset** - undetermined (default before initialization)</p><p>see the section ["What does the cplApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more</p> |
 | `IABTCF_PublisherCC`  | `String`: [Two-letter ISO 3166-1 alpha-2 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) – Default: `AA` (unknown) |
 | `IABTCF_PurposeOneTreatment`  | `Number`: <p>`0` - no special treatment of purpose one</p><p>`1` - purpose one not disclosed</p><p>**Unset default** - `0`</p><p>Vendors can use this value to determine whether consent for purpose one is required.</p> |
 | `IABTCF_UseNonStandardStacks`  | `Number`: <p>`1` - CMP used a non-standard stack</p><p>`0` - CMP did not use a non-standard stack</p> |
@@ -805,6 +848,7 @@ Context mContext = getApplicationContext();
 SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 String consentString = mPreferences.getString("IABTCF_TCString", "");
 int gdprApplies = mPreferences.getInt("IABTCF_gdprApplies", "");
+int cplApplies = mPreferences.getInt("IABTCF_cplApplies", "");
 ```
 A callback can be registered to update settings when a preference is changed using the `registerOnSharedPreferenceChangeListener` method for the `android.content.SharedPreferences` class.
 
@@ -833,15 +877,27 @@ Mediation SDK allows app developers to monetize from multiple vendors.
 
 ##### Mediation SDK
 
+According to `IABTCF_gdprApplies` :
+
 *   Mediation SDK retrieves `IABTCF_gdprApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android).
 *   If `IABTCF_gdprApplies == 0`, Mediation SDK can run mediation across all ad network SDKs.
 *   If `IABTCF_gdprApplies == 1`, Mediation SDK will run mediation only among the ad network SDKs that are GDPR ready.
 
 'GDPR ready' means that the vendor retrieves `IABTCF_gdprApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android), and passes on these GDPR values downstream.
 
+According to `IABTCF_cplApplies` :
+
+*   Mediation SDK retrieves `IABTCF_cplApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android).
+*   If `IABTCF_cplApplies == 0`, Mediation SDK can run mediation across all ad network SDKs.
+*   If `IABTCF_cplApplies == 1`, Mediation SDK will run mediation only among the ad network SDKs that are GDPR ready.
+
+'CPL ready' means that the vendor retrieves `IABTCF_cplApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android), and passes on these GDPR values downstream.
+
 ##### Vendor
 
 *   Vendor retrieves `IABTCF_gdprApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android), and passes on these GDPR values downstream and passes on these GDPR values downstream.
+
+*   Vendor retrieves `IABTCF_cplApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android), and passes on these CPL values downstream and passes on these CPL values downstream.
 
 ______
 
@@ -859,10 +915,14 @@ For performance reasons, the preferred way to make this happen in current ad ser
 | :-- | :-- |
 | `${GDPR}`| <p>**1** - GDPR Applies</p><p>**0** - GDPR does not apply</p><p>**unset** - unknown</p> |
 | `${GDPR_CONSENT_XXXX}`| Encoded TC String where XXXX is the numeric Vendor ID of the vendor receiving the TC string. |
+| `${CPL}`| <p>**1** - CPL Applies</p><p>**0** - CPL does not apply</p><p>**unset** - unknown</p> |
+| `${CPL_CONSENT_XXXX}`| Encoded TC String where XXXX is the numeric Vendor ID of the vendor receiving the TC string. |
 
 **Note**: Values align with IAB OpenRTB GDPR Advisory
 
 **Note**: For more information on GDPR Applies see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean)
+
+**Note**: For more information on CPL Applies see the section ["What does the cplApplies value mean?"](#what-does-the-cplapplies-value-mean)
 
 ### How does the "version" parameter work?
 
@@ -879,6 +939,10 @@ If the argument is an integer higher than `1`, the CMP shall invoke the callback
 ### What does the gdprApplies value mean?
 
 `gdprApplies` is a `boolean` value that may be `undefined`.  A CMP shall determine whether or not GDPR applies in its current context and set the `gdprApplies` value.  A publisher may determine that GDPR applies to all traffic on their site and signal their CMP to always return `true` for `gdprApplies`, a CMP may invoke a geo-tagging service call to make a determination on a specific user or may have some other proprietary solution for determining whether or not GDPR applies in accordance with [TCF Policy](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/).  In any case, vendors shall respect the value of `gdprApplies` put forth by the CMP.  If `gdprApplies` value is `undefined` but exists in the schema outlined in the response object in this document, then calling scripts shall assume that the CMP is still pending a determination on whether or not GDPR applies in this context.
+
+### What does the cplApplies value mean?
+
+`cplApplies` is a `boolean` value that may be `undefined`.  A CMP shall determine whether or not CPL applies in its current context and set the `cplApplies` value.  A publisher may determine that CPL applies to all traffic on their site and signal their CMP to always return `true` for `cplApplies`, a CMP may invoke a geo-tagging service call to make a determination on a specific user or may have some other proprietary solution for determining whether or not CPL applies in accordance with ?.  In any case, vendors shall respect the value of `cplApplies` put forth by the CMP.  If `cplApplies` value is `undefined` but exists in the schema outlined in the response object in this document, then calling scripts shall assume that the CMP is still pending a determination on whether or not CPL applies in this context.
 
 ### Details for vendors
 
@@ -910,7 +974,7 @@ Typically, scripts will not need to check if the CMP script is loaded. Scripts c
 
 A CMP must provide stub script to its clients that at least supports the following features/logic:
 
-1. `__tcfapi` function that supports the ping command, with the minimum properties of `cmpLoaded` and `apiVersion`. **Note**: `gdprApplies` may also be set in the [`PingReturn`](#pingreturn) object if the "stub" is set by the publisher to apply GDPR to all traffic.  However, `gdprApplies` may not be available until the CMP is finished loading and the value will, therefore, be `undefined`. See the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more.
+1. `__tcfapi` function that supports the ping command, with the minimum properties of `cmpLoaded` and `apiVersion`. **Note**: `gdprApplies` may also be set in the [`PingReturn`](#pingreturn) object if the "stub" is set by the publisher to apply GDPR to all traffic.  However, `gdprApplies` may not be available until the CMP is finished loading and the value will, therefore, be `undefined`. See the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more. `cplApplies` may also be set in the [`PingReturn`](#pingreturn) object if the "stub" is set by the publisher to apply CPL to all traffic.  However, `cplApplies` may not be available until the CMP is finished loading and the value will, therefore, be `undefined`. See the section ["What does the cplApplies value mean?"](#what-does-the-cplapplies-value-mean) for more.
 2. Collect all calls to `__tcfapi` that cannot (yet) be handled by the “stub” in a queue
 3. Check if `window.frames['__tcfapiLocator']` exists, indicating that a CMP is already present, otherwise create an empty iframe named `'__tcfapiLocator'` in the current DOM.
 4. Create an event listener for `postMessage` events on the `Window` object. When the event handler function receives a postMessage (`‘message’`) event it shall proxy the `__tcfapi` function requests to send the response back through the `postMessage` event channel
