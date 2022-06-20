@@ -80,6 +80,20 @@ A wildcard alone is permitted only in cases where the number of domains is large
 Wildcards '&ast;' are permitted. For example, "*.adtech123.com" indicates the identifier is used across multiple subdomains.   <br><br>
 A wildcard alone is permitted only in cases where the number of domains is large and dynamic, such as when managing `first party` storage on many partners' properties.   <br><br>
    <b>Note</b> : A wildcard MUST NOT be used to group identifiers having different purpose(s) with a group of domains. If an identifier is used for the same purposes on a finite set of domains, then disclose a separate record for each specific domain, e.g. one each for 'retarget.adtech123.com', 'retarget.adtech123.net' 'register.adtech123svcs.com', and so on.</td></tr>
+  <tr>
+   <td><code>purposes</code>
+   </td>
+   <td>required
+   </td>
+   <td>array&lt;integer>
+   </td>
+   <td>The purpose ID or purpose IDs from the Global Vendor List (GVL) for which the storage is used. 
+<p>
+To indicate that use of the storage <span style="text-decoration:underline;">is</span> subject to the consent requirement of the ePrivacy Directive, include Purpose ID 1 from the GVL.
+<p>
+To indicate that the use of storage is <span style="text-decoration:underline;">exempted from</span> (and therefore <span style="text-decoration:underline;">not</span> subject to) the consent requirement of the ePrivacy Directive, do not include Purpose ID 1 from the GVL.
+   </td>
+  </tr>
 </table>
 
 #### Example 1
