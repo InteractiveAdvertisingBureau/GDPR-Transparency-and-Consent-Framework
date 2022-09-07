@@ -2,7 +2,7 @@
 
  **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.0 | August 2019, Updated June 2022**
+**Final v.2.0 | August 2019, Updated September 2022**
 
  Table of Contents
  
@@ -19,12 +19,14 @@
 * [Serving the JSON Resource](#serving-the-json-resource)
   + [Around the JSON file](#around-the-json-file)
   + [The role of the CMP](#the-role-of-the-cmp)
+* [FAQ](#faq)
 
  
 ## Version History
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| September 2022 | 1.0 | Update of the examples and adding a new FAQ |
 | June 2022 | 1.0 | Update on the structure of the URL (path and filename) and use of this file by the CMPs |
 | April 2022 | 1.0 | Wildcards are now permitted through the field named `identifier`, adding a new field named `domains` and **Disclosures object** can be empty if the vendor does not make use of any `client-side storage`. |
 | February 2022 | 1.0 | Initial version. Augments and supersedes the [Device Storage Duration & Access Disclosure](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Device%20storage%20duration%20and%20access%20disclosure.md) specification.  |
@@ -98,7 +100,7 @@ To indicate that the use of storage is <span style="text-decoration:underline;">
 
 #### Example 1
 
-Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ owns the domain <code>adtech123.com</code> and has a "third-party" retargeting cookie that is set on the domain of <code>retarget.adtech123.com</code>.  They also maintain a <code>localStorage</code> object that contains a user object with key “id” that can be accessed via JavaScript at <code>window.localStorage.id</code>. 
+Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ owns the domain <code>adtech123.com</code> and has a "third-party" retargeting cookie that is set on the domain of <code>retarget.adtech123.com</code>.  They also maintain a <code>localStorage</code> object that contains a user object with key “id” that can be accessed via JavaScript at <code>window.localStorage.id</code>. Note : The <code>domains</code> array is empty because there is no use of (*) via any <code>domains</code> in the in disclosure array above.
 
 ````javascript
 {
@@ -108,7 +110,7 @@ Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ o
       "type": "cookie",
       "maxAgeSeconds": 2592000000,
       "cookieRefresh": false,
-      "domain": "retarget.adtech123.com", 
+      "domains": ["retarget.adtech123.com"], 
       "purposes": [1,3,4,5,6]
     },
     {
@@ -116,13 +118,11 @@ Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ o
       "type": "web",
       "maxAgeSeconds": null,
       "cookieRefresh": false,
-      "domain": "tracking.adtech123.com", 
+      "domains": ["tracking.adtech123.com"], 
       "purposes": [1,3,4,5,6,7,8,9,10]
     }
   ],
-  "domains": [
-    ...
-  ]
+  "domains": []
 }
 
 ````
@@ -135,9 +135,7 @@ Below is sample JSON for a fictional TCF Vendor that does not make use of any `c
 ````javascript
 {
     "disclosures": [],
-    "domains": [
-        ...
-    ]
+    "domains": []
 }
 ````
 
@@ -161,7 +159,12 @@ There is no mechanism for requesting alternate translations. For widest readabil
 ````javascript
 {
   "disclosures": [
-    ...
+      "identifier": "retarget-adtech123",
+      "type": "cookie",
+      "maxAgeSeconds": 2592000000,
+      "cookieRefresh": false,
+      "domains": ["*.adtech123.com"], 
+      "purposes": [1,3,4,5,6]
   ],
   "domains": [
     {
@@ -200,3 +203,6 @@ However, regardless of whether the CMP requests the JSON file from the vendor's 
  
 Usually, CMP requests the file only when/if a user clicks to review additional information (it's unusual for the information to be disclosed directly on the secondary layer).
 
+## FAQ
+
+The [FAQ](https://iabeurope.eu/transparency-consent-framework/tcf-framework-faq-vendor-device-storage-and-operational-disclosures.pdf) addresses questions including the use of <code>domains</code> instead of <code>domain</code> field, the use of wildcards, when the storage mechanism is set by a first party etc… The document will be updated over the time.
