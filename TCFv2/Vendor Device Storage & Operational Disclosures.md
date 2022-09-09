@@ -100,7 +100,7 @@ To indicate that the use of storage is <span style="text-decoration:underline;">
 
 #### Example 1
 
-Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ owns the domain <code>adtech123.com</code> and has a "third-party" retargeting cookie that is set on the domain of <code>retarget.adtech123.com</code>.  They also maintain a <code>localStorage</code> object that contains a user object with key “id” that can be accessed via JavaScript at <code>window.localStorage.id</code>. Note : The <code>domains</code> array is empty because there is no use of (*) via any <code>domains</code> in the in disclosure array above.
+Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ owns the domain <code>adtech123.com</code> and has a "third-party" retargeting cookie that is set on the domain of <code>retarget.adtech123.com</code>.  They also maintain a <code>localStorage</code> object that contains a user object with key “id” that can be accessed via JavaScript at <code>window.localStorage.id</code>. 
 
 ````javascript
 {
@@ -122,7 +122,9 @@ Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ o
       "purposes": [1,3,4,5,6,7,8,9,10]
     }
   ],
-  "domains": []
+  "domains": [
+  ...
+  ]
 }
 
 ````
