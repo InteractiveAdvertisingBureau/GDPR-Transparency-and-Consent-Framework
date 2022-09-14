@@ -26,7 +26,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
-| September 2022 | 1.0 | Update of the examples and adding a new FAQ |
+| September 2022 | 1.0 | Adding a new FAQ |
 | June 2022 | 1.0 | Update on the structure of the URL (path and filename) and use of this file by the CMPs |
 | April 2022 | 1.0 | Wildcards are now permitted through the field named `identifier`, adding a new field named `domains` and **Disclosures object** can be empty if the vendor does not make use of any `client-side storage`. |
 | February 2022 | 1.0 | Initial version. Augments and supersedes the [Device Storage Duration & Access Disclosure](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Device%20storage%20duration%20and%20access%20disclosure.md) specification.  |
@@ -123,7 +123,7 @@ Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ o
     }
   ],
   "domains": [
-  ...
+    ...
   ]
 }
 
@@ -137,7 +137,9 @@ Below is sample JSON for a fictional TCF Vendor that does not make use of any `c
 ````javascript
 {
     "disclosures": [],
-    "domains": []
+    "domains": [
+        ...
+    ]
 }
 ````
 
@@ -161,12 +163,7 @@ There is no mechanism for requesting alternate translations. For widest readabil
 ````javascript
 {
   "disclosures": [
-      "identifier": "retarget-adtech123",
-      "type": "cookie",
-      "maxAgeSeconds": 2592000000,
-      "cookieRefresh": false,
-      "domains": ["*.adtech123.com"], 
-      "purposes": [1,3,4,5,6]
+    ...
   ],
   "domains": [
     {
