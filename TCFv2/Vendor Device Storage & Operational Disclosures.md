@@ -204,4 +204,4 @@ Usually, CMP requests the file only when/if a user clicks to review additional i
 
 ## FAQ
 
-The [FAQ](https://iabeurope.eu/transparency-consent-framework/tcf-framework-faq-vendor-device-storage-and-operational-disclosures.pdf) addresses questions including the use of <code>domains</code> instead of <code>domain</code> field, the use of wildcards, when the storage mechanism is set by a first party etc… The document will be updated over the time.
+The [FAQ](https://iabeurope.eu/transparency-consent-framework-file/tcf-framework-faq-vendor-device-storage-and-operational-disclosures.pdf) addresses questions including the use of <code>domains</code> instead of <code>domain</code> field, the use of wildcards, when the storage mechanism is set by a first party etc… The document will be updated over the time.
