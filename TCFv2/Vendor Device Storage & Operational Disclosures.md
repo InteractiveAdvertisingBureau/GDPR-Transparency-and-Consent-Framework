@@ -2,7 +2,7 @@
 
  **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.0 | August 2019, Updated September 2022**
+**Final v.2.0 | August 2019, Updated November 2022**
 
  Table of Contents
  
@@ -19,6 +19,7 @@
 * [Serving the JSON Resource](#serving-the-json-resource)
   + [Around the JSON file](#around-the-json-file)
   + [The role of the CMP](#the-role-of-the-cmp)
+  + [Access method](#access-method)
 * [FAQ](#faq)
 
  
@@ -201,6 +202,10 @@ In order to allow CMPs to request and load the JSON on the client side, the vend
 However, regardless of whether the CMP requests the JSON file from the vendor's server or CMP's server, [Access-Control-Allow-Credentials](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials) must be set to false in order to not include any cookie in the request. Vendors must respond with the appropriate `content-type` header (`application/json`) and [Cache-control directives](https://www.keycdn.com/support/cache-control) so that CMPs are accessing the latest content when fetching from users’ browsers. The URL need not be served by the Vendor’s company domain. It could be served from a CDN. 
  
 Usually, CMP requests the file only when/if a user clicks to review additional information (it's unusual for the information to be disclosed directly on the secondary layer).
+
+### Access method
+
+Even if the JSON file is already (or not) available via HTTP, the vendor must make publicly accessible the JSON file via HTTPS (uses [TLS](https://developer.mozilla.org/en-US/docs/Web/Security/Transport_Layer_Security) or [SSL](https://developer.mozilla.org/en-US/docs/Glossary/SSL) to encrypt HTTP requests and responses) on the standard ports (80 and 443, respectively) for secure communications.
 
 ## FAQ
 
