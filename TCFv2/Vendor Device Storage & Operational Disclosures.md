@@ -205,7 +205,7 @@ Usually, CMP requests the file only when/if a user clicks to review additional i
 
 ### Access method
 
-Even if the JSON file is already (or not) available via HTTP, the vendor must make publicly accessible the JSON file via HTTPS (uses [TLS](https://developer.mozilla.org/en-US/docs/Web/Security/Transport_Layer_Security) or [SSL](https://developer.mozilla.org/en-US/docs/Glossary/SSL) to encrypt HTTP requests and responses) on the standard ports (80 and 443, respectively) for secure communications.
+For secure communications, the vendor must make publicly accessible the JSON file via <b>HTTPS only</b> (uses [TLS](https://developer.mozilla.org/en-US/docs/Web/Security/Transport_Layer_Security) or [SSL](https://developer.mozilla.org/en-US/docs/Glossary/SSL) to encrypt HTTP requests and responses) on the standard ports (80 and 443, respectively).
 
 ## FAQ
 
