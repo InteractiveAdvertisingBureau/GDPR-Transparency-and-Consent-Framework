@@ -1345,8 +1345,7 @@ The registration process is described here: [https://iabeurope.eu/tcf](https://i
     *   Whether they use non-cookie storage and access to information already stored on a user’s device.
     *   Location of their vendor-hosted, secure URL for accessing additional storage and operational information.
 
-Additional information on Vendors can be downloaded from a domain managed and published by IAB Europe (see [Additional Vendor Information List Specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/Additional-Vendor-Information-List-Specification.md))
-
+Additional information on Vendors can be downloaded from a domain managed and published by IAB Europe (see [Additional Vendor Information List Specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/Additional%20Vendor%20Information%20List%20Specification.md))
 
 
 ### Where can I access the Global Vendor List?
