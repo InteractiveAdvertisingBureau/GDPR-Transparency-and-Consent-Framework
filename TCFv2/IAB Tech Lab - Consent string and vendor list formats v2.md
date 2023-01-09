@@ -2,7 +2,7 @@
  # Transparency and Consent String with Global Vendor & CMP List Formats
  **IAB Europe Transparency & Consent Framework**
 
- **Final v.2.0 | August 2019, Updated June 2022**
+ **Final v.2.0 | August 2019, Updated January 2023**
 
  Table of Contents
 
@@ -204,9 +204,22 @@ Publisher restrictions are custom requirements specified by a publisher. In orde
 1. Vendors must always respect a restriction signal that disallows them the processing for a specific purpose regardless of whether or not they have declared that purpose to be “flexible”.
 2. Vendors that declared a purpose with a default legal basis (consent or legitimate interest respectively) but also declared this purpose as flexible must respect a legal basis restriction if present. That means for example in case they declared a purpose as legitimate interest but also declared that purpose as flexible and there is a legal basis restriction to require consent, they must then check for the consent signal and must not apply the legitimate interest signal.
 
+While publisher restrictions must always be specified on a per purpose basis, the Framework also gives publishers the ability to use one single restriction applicable to all TCF purposes including Special Purposes to specify all-encompassing requirements to a vendor or a group of vendors, e.g. to disallow them the processing or to require them to rely on consent for all purposes they have declared.
+
 For the avoidance of doubt:
 
 In case a vendor has declared flexibility for a purpose and there is no legal basis restriction signal it must always apply the default legal basis under which the purpose was registered aside from being registered as flexible. That means if a vendor declared a purpose as legitimate interest and also declared that purpose as flexible it may not apply a "consent" signal without a legal basis restriction signal to require consent.   
+
+In case of conflicting publisher restrictions, vendors should respect the following hierarchy to determine if processing is permissible at all for a specific purpose or which legal basis is applicable (from lower priority to higher priority):
+- purpose ID 0 restriction type 1
+- purpose ID 0 restriction type 0
+- specific purpose ID restriction type 1
+- specific purpose ID restriction type 0
+
+For example if the TC String includes 1) a restriction signal that specifies consent is applicable to the vendor for the processing for a specific purpose and 2) a restriction signal that disallows the vendor the processing for a specific purpose, the vendor must consider it is not allowed to engage in processing for this specific purpose irrespective of the consent signal.
+
+If the TC String includes 1) a restriction signal that specifies consent is applicable to the vendor for the processing for a specific purpose and 2) a restriction signal that disallows the vendor the processing for the same purpose, the vendor must consider it is not allowed to engage in processing for this specific purpose irrespective of the consent signal. (pub restriction type 0 takes precedence over pub restriction type 1).
+
 
 ### How does a URL-based service process the TC string when it can't execute JavaScript?
 
@@ -561,8 +574,8 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         and published in the
         <a href="#the-global-vendor-list">Global Vendor List</a>. From left
         to right, Purpose 1 maps to the <code>0</code>th bit, purpose 24
-        maps to the bit at index 23. Special Purposes are a different ID
-        space and not included in this field.
+        maps to the bit at index 23. <br><br>
+	      Special Purposes are a different ID space and not included in this field - unless a PubRestrictionEntry applicable to Purpose ID 0 is present. In such a case, Special Purposes will be identified in this field with a single ID (24) mapped to the bit at index 23.
       </td>
     </tr>
     <tr>
@@ -917,6 +930,10 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       <td>
         The Vendor’s declared Purpose ID that the publisher has indicated
         that they are overriding.
+	      <br><br>
+	      When the value of PurposeID is set to 0 and the value of RestrictionType is <code>1</code>, the publisher has indicated they are overriding all TCF purposes to require Consent, including Special Purposes. In such a case, both Special Purposes are allocated the <b>ID 24</b> in the <code>PurposesConsent</code> field.
+<br><br>
+	      When the value of PurposeID is set to <code>0</code> and the value of RestrictionType is <code>0</code>, the publisher has indicated they are disallowing all TCF purposes including Special Purposes.
       </td>
     </tr>
     <tr>
@@ -947,9 +964,8 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         accordance with a vendor's declared flexibility. Eg. if a vendor has
         Purpose 2 declared as Legitimate Interest but also declares that
         Purpose as flexible and this field is set to <code>1</code>, they
-        must then check for the “consent” signal in the VendorConsents
-        section to make a determination on whether they have the legal basis
-        for processing user personal data under that Purpose.</p>
+        must then check for the “consent” signal in the VendorConsents section and the PurposesConsent field to make a determination on whether they have the legal basis for processing user personal data under that Purpose.</p>      
+	      <p>Eg. if a vendor has multiple Purposes and Special Purposes declared as Legitimate Interest and also declared as flexible, this field is set to <code>1</code> and the PurposeId field is is set to <code>0</code>, they must then check for the “consent” signals in the VendorConsents section and in the PurposesConsent field for all legitimate interest purposes they have declared as flexible, including Special Purposes identified with a single ID (24) mapped to the bit at index 23.</p>	      
         <p>When a vendor's Purpose registration <strong><em>is not flexible</em></strong> 
         they should interpret this value in the following ways:</strong></p>
         <p>If this value is <code>1</code> and vendor is registered under 
