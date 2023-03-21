@@ -2,7 +2,7 @@
 # Consent Management Platform API
 **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.0 | August 2019, Updated September 2021**
+**Final v.2.1 May 2023**
 
 - [Version History](#version-history)
 - [Introduction](#introduction)
@@ -49,12 +49,14 @@
     - [Using postmessage](#using-postmessage)
     - [Is there a sample iframe script call to the CMP API?](#is-there-a-sample-iframe-script-call-to-the-cmp-api)
   - [From where will the API retrieve the TC string?](#from-where-will-the-api-retrieve-the-tc-string)
+  - [Major Changes from 2.0](#major-changes-from-20)
   - [Major Changes from 1.1](#major-changes-from-11)
 
 ## Version History
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| May 2023 | 2.1 | Update to further strengthen the TCF as a standard in the industry: Deprecated API command "getTCData".
 | September 2021 | 2.0 | Deprecation of Global Scope and OOB |
 | February 2020 | 2.0 | Removed CMP List; added included in the Consent String and Vendor List Specification |
 | February 2020 | 2.0 | Updated stub example to reference open-source library, change addEventListener/removeEventListener interface, clarify addEventListener callback invocation time, and remove SafeFrame proxy communications |
@@ -118,19 +120,9 @@ This document specifies required functionality that the CMP must provide in acco
 
 ### What is the Global Vendor List?
 
-The Global Vendor List (GVL) is a technical document that CMPs download from a domain managed by IAB Europe. It lists all registered and approved Vendors, as well as standard Purposes, Features, Special Purposes, Special Features and Stacks. The information stored in the GVL is used for determining what legal disclosures must be made to the user. IAB Europe manages and publishes the GVL.
+The Global Vendor List (GVL) is a technical document that CMPs download from a domain managed by IAB Europe. It lists all registered and approved Vendors, as well as standard Purposes, Features, Special Purposes, Special Features, Stacks and Data Categories used in conjunction with purposes. The information stored in the GVL is used for determining what legal disclosures must be made to the user. IAB Europe manages and publishes the GVL.
 
-The Global Vendor List contains the following information:
-
-*   A Global Vendor List version.
-*   A list of standard Purposes, including any Special Purposes.
-*   A list of standard Features. Vendors can indicate that they use Features. Since they span purposes, users cannot exercise choice  about any of them, but Features Vendors use should be disclosed  in the CMP’s UI.
-*   A list of Special Features, which are Features for which users are given an opt-in choice.
-*   A list of Stack definitions.
-*   A list of Vendors with assigned Vendor IDs (denoted as **VendorIds** in the string), the standard Purposes for which they are requesting consent, the standard Purposes they will be using on the legitimate interest legal basis, the Features they may use across declared Purposes, and the URL of their GDPR/privacy policy page. _VendorIds_ are incrementally-assigned and not reused; deleted Vendors are just marked as deleted.
-*   Vendor GET limits to inform overflow option. This provides the information needed to support Vendor’s ability to use the http GET request.
-
-You can learn more about the Global Vendor list on the IAB EU website: [https://iabeurope.eu/tcf](https://iabeurope.eu/tcf)
+See the ‘The Global Vendor List’ section in the ‘Consent string and vendor list formats v2’ spec which describes the content and the use of the global vendor list in detail.
 
 ### How does the CMP provide the API?
 
@@ -150,40 +142,7 @@ ______
 
 #### `getTCData`
 
-| argument name | type | optional | value |
-|--:|:-:|:-:|:--|
-| command | string | | `'getTCData'` |
-| [version](#how-does-the-version-parameter-work) | number | | `2` |
-| callback | function | | `function(tcData: TCData, success: boolean)` |
-| parameter | int array | ✔️  | `vendorIds` |
-
-**Example:**
-
-```javascript
-__tcfapi('getTCData', 2, (tcData, success) => {
-
-  if(success) {
-
-    // do something with tcData
-
-  } else {
-
-    // do something else
-
-  }
-
-}, [1,2,3]);
-```
-
-The `vendorIds` array contains the integer-value Vendor IDs for Vendors in which transparency and consent is being requested.
-
-If the `vendorIds` argument is not defined the callback will be called with a [`TCData`](#tcdata) that includes Transparency and Consent values for all Vendors in the [Global Vendor List](#what-is-the-global-vendor-list).  If GDPR does not apply to this user in this context (`gdprApplies=false`) then this user will have no Transparency and Consent values and a TCData object with no Transparency and Consent values for any Vendors will be passed to the callback function. For more on `gdprApplies` see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean).
-
-Once the stub `__tcfapi` function has been replaced with the final implementation, the callback shall be called immediately and without any asynchronous logic with whatever is available in the current state of the CMP.  To determine the current state the callback will need to evaluate the [`eventStatus`](#addeventlistener) property value.  It is recommended that calling scripts register a listener function via [`addEventListener`](#addeventlistener) instead of `getTCData`, which also exposes a [`TCData`](#tcdata) object, to ensure necessary TC string and decoded TC values under the right circumstances and context for their legal basis as specified in [TCF Policy](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/). The consent and legitimate interest values will be `false` in the [`TCData`](#tcdata) object for any unregistered Vendor ID passed in the vendorIds array.  Which, in accordance with [TCF Policy](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/), means “No Consent” for _consent_ and “No Legitimate Interest Transparency Established” for _legitimate interest_.
-
-A value of `false` will be passed as the argument to the `success` callback parameter if an invalid `vendorIds` argument is passed with this command. An invalid `vendorIds` argument would constitute anything other than an array of positive integers.
-
-The `callback` shall be invoked only once per api call with this command.
+Deprecated in TCF v2.1. Add an `addEventListener` and use its callback function to access the tcData object.
 
 ______
 
@@ -365,7 +324,7 @@ This object contains both the encoded and unencoded values of the TC String as w
 ``` javascript
 TCData = {
   tcString: 'base64url-encoded TC string with segments',
-  tcfPolicyVersion: 2,
+  tcfPolicyVersion: 4,
   cmpId:1000,
   cmpVersion: 1000,
 
@@ -872,7 +831,7 @@ If the argument is `0` (Zero), `null` or `undefined`, the CMP shall return the i
 
 If the argument is invalid (i.e. not a positive integer greater than `1` or higher than the highest supported version for this CMP) the CMP shall invoke the callback with an argument of `false` for the success parameter and a `null` argument for any expected TC data parameter.
 
-If the argument is `1`, the CMP shall invoke the callback with an argument of `false` for the success parameter and a `null` argument for any expected TC data parameter, as this TCF version is no longer supported by this API. Vendors should instead use the version `1` API to get version `1` data (see [v1.1 documentation](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/CMP%20JS%20API%20v1.1%20Final.md#consent-management-provider-javascript-api-v11-transparency--consent-framework)).
+If the argument is `1`, the CMP shall invoke the callback with an argument of `false` for the success parameter and a `null` argument for any expected TC data parameter, as this TCF version is no longer supported by this API.
 
 If the argument is an integer higher than `1`, the CMP shall invoke the callback with defined data according to the specified version if it exists in that version.  For obvious reasons, if new properties of the version-specific outlined TC data objects are added in v3, a v2 TC data object shall not contain these new properties because they may either not exist or may have different meaning from version to version.
 
@@ -1092,6 +1051,8 @@ __tcfapi('ping', 2, (pingReturn, success) => {
 
 See the ‘How should the transparency & consent string be stored?’ section in the ‘Transparency & Consent String and Global Vendor List Format’ spec which describes where CMPs must store the transparency & consent string.
 
+## Major Changes from 2.0
+1. Deprecated command `getTCData`
 
 ## Major Changes from 1.1
 
