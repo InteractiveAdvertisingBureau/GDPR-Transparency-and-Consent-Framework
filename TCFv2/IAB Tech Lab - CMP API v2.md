@@ -136,13 +136,13 @@ Secondarily, CMPs must provide a proxy for postMessage events targeted to the `_
 
 ### What required API commands must a CMP support?
 
-All CMPs must support four required API commands: [`'getTCData'`](#gettcdata), [`'ping'`](#ping), [`'addEventListener'`](#addeventlistener) and [`'removeEventListener'`](#removeeventlistener).
+All CMPs must support three required API commands: [`'ping'`](#ping), [`'addEventListener'`](#addeventlistener) and [`'removeEventListener'`](#removeeventlistener).
 
 ______
 
 #### `getTCData`
 
-Deprecated in TCF v2.1. Add an `addEventListener` and use its callback function to access the tcData object.
+Deprecated in TCF v2.1. Add an [`'addEventListener'`](#addeventlistener) and use its callback function to access the tcData object.
 
 ______
 
