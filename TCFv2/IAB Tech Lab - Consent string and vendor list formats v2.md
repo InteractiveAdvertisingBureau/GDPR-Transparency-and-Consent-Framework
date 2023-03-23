@@ -1485,7 +1485,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
 ```javascript
 {
   "gvlSpecificationVersion": 3,
-  "vendorListVersion": 201, // incremented with each published file change
+  "vendorListVersion": 1, // incremented with each published file change
   "tcfPolicyVersion": 4, // The TCF MO will increment this value whenever a GVL change (such as adding a new Purpose or Feature or a change in Purpose wording) legally invalidates existing TC Strings and requires CMPs to re-establish transparency and consent from users. TCF Policy changes should be relatively infrequent and only occur when necessary to support changes in global mandate. If the policy version number in the latest GVL is different from the value in your TC String, then you need to re-establish transparency and consent for that user. A version 1 format TC String is considered to have a version value of 1.
   "lastUpdated": "2023-05-26T16:00:00Z",
   "purposes": {
