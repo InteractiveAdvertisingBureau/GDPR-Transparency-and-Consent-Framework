@@ -142,7 +142,7 @@ ______
 
 #### `getTCData`
 
-Deprecated in TCF v2.1. Add an [`'addEventListener'`](#addeventlistener) and use its callback function to access the tcData object.
+Deprecated in TCF v2.2. Add an [`'addEventListener'`](#addeventlistener) and use its callback function to access the tcData object.
 
 ______
 

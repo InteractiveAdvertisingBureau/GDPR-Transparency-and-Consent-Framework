@@ -2,7 +2,7 @@
  # Transparency and Consent String with Global Vendor & CMP List Formats
  **IAB Europe Transparency & Consent Framework**
 
- **Final v.2.1 May 2023**
+ **Final v.2.2 May 2023**
 
  Table of Contents
 
@@ -343,7 +343,7 @@ The Created and LastUpdated fields previously corresponded to decisecond timesta
 
 ### Why was support for legitimate interest for purposes 3 to 6 deprecated?
 
-In order to strengthen the TCF as a standard within the industry it was decided with version 2.1 to prohibit reliance on Legitimate Interest for purpose 3 (create a personalised ads profile), purpose 4 (select personalised ads), purpose 5 (create a personalised content profile) and purpose 6 (select personalised content).
+In order to strengthen the TCF as a standard within the industry it was decided with version 2.2 to prohibit reliance on Legitimate Interest for purpose 3 (create a personalised ads profile), purpose 4 (select personalised ads), purpose 5 (create a personalised content profile) and purpose 6 (select personalised content).
 
 ## Creating a TC String
 
@@ -361,7 +361,7 @@ The IAB Europe Transparency & Consent Framework [Policies](https://iabeurope.eu/
 
 #### Managing conflicting string versions
 
-With the release of TCF v2.1, the policy version has been incremented to version 4. Post 30 September 2023 a TC String with a policy version set to smaller than 4 will be deemed invalid.
+With the release of TCF v2.2, the policy version has been incremented to version 4. Post 30 September 2023 a TC String with a policy version set to smaller than 4 will be deemed invalid.
 
 Post 30 September 2020, [v1.x strings were considered invalid](https://iabeurope.eu/all-news/the-iab-europe-transparency-consent-framework-tcf-steering-group-votes-to-extend-technical-support-for-tcf-v1-1/). If a CMP encounters a situation where both a v1.x string and a v2.0 string are erroneously present simultaneously, the CMP should remove the v1.x string to ensure that there is only one source of truth for consumers of the string.
 
@@ -589,7 +589,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
           <code>0</code>. From left to right, Purpose 1 maps to the 0th bit,
           and purpose 24 maps to the bit at index 23. Special Purposes are a
           different ID space and not included in this field.<br>
-          Note: With TCF v2.1 support for legitimate interest for purpose 3
+          Note: With TCF v2.2 support for legitimate interest for purpose 3
           to 6 has been deprecated. Bits 2 to 5 are required to be set
           to <code>0</code>.
         </p>

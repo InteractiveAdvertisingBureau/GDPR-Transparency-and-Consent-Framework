@@ -11,7 +11,7 @@
 </tr>
 </table>
 
-This document provides technical implementation guidelines related to the [IAB Europe Transparency and Consent Framework (TCF) v2.1 technical specs](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework). The IAB Tech Lab GDPR Technical Working Group has collaborated on the following implementation guidelines, and will continue to produce resources supporting industry adoption of the Framework. The intended audience of this document includes product and engineering teams who are building technology based on this framework, and who are looking for guidance on implementation strategies such as questions to ask your platform partners or avoiding common pitfalls.
+This document provides technical implementation guidelines related to the [IAB Europe Transparency and Consent Framework (TCF) v2.2 technical specs](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework). The IAB Tech Lab GDPR Technical Working Group has collaborated on the following implementation guidelines, and will continue to produce resources supporting industry adoption of the Framework. The intended audience of this document includes product and engineering teams who are building technology based on this framework, and who are looking for guidance on implementation strategies such as questions to ask your platform partners or avoiding common pitfalls.
 
 Policy FAQ, webinars, and other resources are available at 
 [https://iabeurope.eu/tcf-2-0/](https://iabeurope.eu/tcf-2-0/)
@@ -20,6 +20,7 @@ Policy FAQ, webinars, and other resources are available at
 ### [Introduction to the TCF](#Intro)<br>
 ### [Common Questions](#commonquestions)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[Do I need to read the Policy?](#needpolicy)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What changed in v2.2?](#changesV2_2)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[What changed in v2.1?](#changesV2_1)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[What changed in v2?](#changesV2)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Within the Transparency and Consent String (TC String)](#changetcstring)<br>
@@ -59,7 +60,7 @@ The Transparency and Consent Framework (TCF) was created to help all parties who
 
 It allows publishers and website operators to communicate to vendors, in a standardized way, what preferences users have expressed when it comes to their personal data. A vendor is a company that participates in the delivery of digital advertising within a publisher’s website, app, or other digital content, that either accesses an end user’s device or browser or processes personal data about end users visiting the publishers content.
 
-The TCF was first introduced in April 2018. This document refers to version 2.1 of the TCF, announced in May 2023, which introduces significant changes and is not backward-compatible with the earlier versions.
+The TCF was first introduced in April 2018. This document refers to version 2.2 of the TCF, announced in May 2023, which introduces significant changes and is not backward-compatible with the earlier versions.
 
 The communication between publishers and vendors must pass through a Consent Management Platform (CMP). A CMP can be operated by anyone, as long as the entity that operates it has completed registration and is approved by IAB Europe. A list of all approved CMPs is available [here](https://iabeurope.eu/cmp-list/).
 
@@ -85,13 +86,16 @@ Yes, the technical specifications for the TC String and CMP API were developed t
 
 If you have not yet read tech specs or policy, you can access these documents here: 
 - [IAB Europe Transparency and Consent Framework Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/)
-- [Transparency and Consent String, Version 2.1](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md)
-- [Consent Management Platform API, Version 2.1](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md)
+- [Transparency and Consent String, Version 2.2](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md)
+- [Consent Management Platform API, Version 2.2](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md)
 
 All definitions in the implementation guidelines should reflect definitions provided in the Policy. 
 
+## What changed in v2.2?<a name="changesV2_2"></a>
+The TCF v2.2 update further strengthens the TCF as a standard in the industry: revised purpose names and descriptions, introduced retention periods for all purposes, removed legitimate interest for purposes 3 to 6, the introduction of data categories used in conjunction with the purposes, support for legitimate interest claim urls, adding support for localized policy urls, deprecation of the __tcfapi command "getTCData" and introducing a more robust vendor compliance program.
+
 ## What changed in v2.1?<a name="changesV2_1"></a>
-The TCF v2.1 update further strengthens the TCF as a standard in the industry: revised purpose names and descriptions, introduced retention periods for all purposes, removed legitimate interest for purposes 3 to 6, the introduction of data categories used in conjunction with the purposes, support for legitimate interest claim urls, adding support for localized policy urls, deprecation of the __tcfapi command "getTCData" and introducing a more robust vendor compliance program.
+Added the Device Storage Access & Disclosure to address the Planet 49 ruling.
 
 ## What changed in v2?<a name="changesV2"></a>
 Version 2 of the policy and technical specification marked significant updates to better support GDPR legislation and enhance the user experience, while remaining flexible to account for unique scenarios within the framework.
