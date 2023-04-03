@@ -64,9 +64,9 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
-| May 2023 | 2.1 | Update to further strengthen the TCF as a standard in the industry: revised purpose names and descriptions, introduced retention periods for all purposes, removed legitimate interest for purposes 3 to 6, the introduction of data categories used in conjunction with the purposes, support for legitimate interest claim urls, adding support for localized policy urls and introducing a more robust vendor compliance program. |
-| June 2022 | 2.0 | Update of the <b>Global Vendor List JSON Object</b> example regarding the filename in `deviceStorageDisclosureUrl` |
-| Feb 2022 | 2.0 | Move the current vendor fields relating to the Planet 49 ruling from the existing Device Storage Access & Disclosure tech spec to this core spec |
+| May 2023 | 2.2 | Update to further strengthen the TCF as a standard in the industry: revised purpose names and descriptions, introduced retention periods for all purposes, removed legitimate interest for purposes 3 to 6, the introduction of data categories used in conjunction with the purposes, support for legitimate interest claim urls, adding support for localized policy urls and introducing a more robust vendor compliance program. |
+| June 2022 | 2.1 | Update of the <b>Global Vendor List JSON Object</b> example regarding the filename in `deviceStorageDisclosureUrl` |
+| Feb 2022 | 2.1 | Move the current vendor fields relating to the Planet 49 ruling from the existing Device Storage Access & Disclosure tech spec to this core spec |
 | Dec 2021 | 2.0 | Update of Created and LastUpdated to have the same value corresponding to the day-level timestamp of when the TC String was last updated |
 | Sept 2021 | 2.0 | Deprecation of Global Scope, OOB and 'euconsent-v2' cookie associated with the consensu.org domain  |
 | August 2021 | 2.0 | Added optional use of DisclosedVendor segment in the context of storing service-level TC Strings  |
@@ -1581,13 +1581,13 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
   //
   },
 
-  "personalDataCategories": {
+  "dataCategories": {
 	"1": {
 	   "id": 1,
 	   "name" : "IP addresses",
 	   "description" : "..."
 	}
-  // ... more personalDataCategories.
+  // ... more dataCategories.
   //
   },
 
@@ -1638,8 +1638,8 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
    * empty. List of Special Features the Vendor may utilize when performing
    * some declared Purposes processing.
    *
-   * "personalDataDeclaration": An array of positive integers that represent
-   * the persona data categories declared by the vendor.
+   * "dataDeclaration": An array of positive integers that represent
+   * the data categories declared by the vendor.
    *
    * "dataRetention": an object that contains the data retention for each purpose
    * and specialPurpose. A stdRetention is computed and added if there is an
@@ -1687,7 +1687,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
           "purposes": { "3": -1, "4": -1, "5": -1, "6": -1, "7": -1, "8": -1, "9": 180 , "10:" -1},
           "specialPurposes": {}
       },
-     "personalDataDeclaration" : [ 1, 2, 4, 6 ],
+     "dataDeclaration" : [ 1, 2, 4, 6 ],
      "urls": [
         {
           "langId": "en",

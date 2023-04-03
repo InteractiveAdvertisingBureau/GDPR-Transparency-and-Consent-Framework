@@ -2,7 +2,7 @@
 # Consent Management Platform API
 **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.1 May 2023**
+**Final v.2.2 May 2023**
 
 - [Version History](#version-history)
 - [Introduction](#introduction)
@@ -56,7 +56,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
-| May 2023 | 2.1 | Update to further strengthen the TCF as a standard in the industry: Deprecated API command "getTCData".
+| May 2023 | 2.2 | Update to further strengthen the TCF as a standard in the industry: Deprecated API command "getTCData".
 | September 2021 | 2.0 | Deprecation of Global Scope and OOB |
 | February 2020 | 2.0 | Removed CMP List; added included in the Consent String and Vendor List Specification |
 | February 2020 | 2.0 | Updated stub example to reference open-source library, change addEventListener/removeEventListener interface, clarify addEventListener callback invocation time, and remove SafeFrame proxy communications |
