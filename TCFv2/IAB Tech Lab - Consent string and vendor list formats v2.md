@@ -1641,10 +1641,9 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
    * "dataDeclaration": An array of positive integers that represent
    * the data categories declared by the vendor.
    *
-   * "dataRetention": an object that contains the data retention for each purpose
-   * and specialPurpose. A stdRetention is computed and added if there is an
-   * absolute total of equal retention periods found. A dataRetention of -1 means 
-   * that no retention was given due to the purpose not being used.
+   * "dataRetention": an object that contains the data retention for the purpose
+   * and specialPurpose declared by the vendor. A stdRetention is computed and 
+   * added if there is an absolute total of equal retention periods found.
    *
    * "urls": an array of url objects representing language, policy url and
    * legitimate interest url. At least one entry is REQUIRED. Up to 40 languages
@@ -1676,7 +1675,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
   "1":{
      "id": 1,
 	   "name": "Vendor Name",
-	   "purposes": [1, 2, 9],
+	   "purposes": [1, 2, 3, 9],
 	   "specialPurposes": [1],
 	   "legIntPurposes": [2],
 	   "flexiblePurposes": [1, 2],
@@ -1684,7 +1683,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
 	   "specialFeatures": [1, 2],
      "dataRetention": {
           "stdRetention": 30
-          "purposes": { "3": -1, "4": -1, "5": -1, "6": -1, "7": -1, "8": -1, "9": 180 , "10:" -1},
+          "purposes": { "9": 180 },
           "specialPurposes": {}
       },
      "dataDeclaration" : [ 1, 2, 4, 6 ],
