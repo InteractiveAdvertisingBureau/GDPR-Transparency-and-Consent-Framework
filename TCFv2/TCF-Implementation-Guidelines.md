@@ -39,6 +39,7 @@ Policy FAQ, webinars, and other resources are available at
 &nbsp;&nbsp;&nbsp;&nbsp;**[How to determine legal bases from the TC String?](#detlegalbasis)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[How to determine if data may be transmitted?](#handletcstring)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[What if I don’t receive the TC string?](#nostring)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How do I determine which Global Vendor List to use?](#choosegvl)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[What else is there to consider when integrating with the TCF?](#whatelse)**<br>
 ### [Consent Management Platform (CMP) guidelines](#cmp)
 &nbsp;&nbsp;&nbsp;&nbsp;**[Collecting consent from users](#collectconsent)**<br>
@@ -199,6 +200,9 @@ According to the policies of the Transparency and Consent Framework, a vendor ma
 
 ## What if I don’t receive the TC string?<a name="nostring"></a>
 If transparency or consent information is unavailable in situations where TCF applies, you may not be able to process the user's data.
+
+## How do I determine which Global Vendor List to use?<a name="choosegvl"></a>
+With TCF v2.2 the global vendor list specification version will be set to 3. We will restart the vendor list version at 1 and increment for each update. TCF 2.2 supports the TCF policy version 4 or higher. The global vendor list (spec version 3) has the policy version encoded accordingly to 4 or higher. The TC string corresponding to TCF 2.2 will also have the policy version set to 4. Vendors need to read the policy version in the TCString to determine which global vendor list to use. (A policy version of 4 or higher requires the global vendor list with gvlSpecificationVersion set to 3.)
 
 ## What else is there to consider when integrating with the TCF?<a name="whatelse"></a>
 - Tag management containers should integrate CMP code. In addition to enriching ad calls, a CMP should also support calling a third-party tag management container that will handle robust tag logic already implemented on behalf of the publisher. 
