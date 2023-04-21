@@ -496,9 +496,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       <td>
         From the corresponding field in the
         <a href="#the-global-vendor-list">GVL</a> that was used for
-        obtaining consent. A new policy version invalidates existing strings
-        and requires CMPs to re-establish transparency and consent from
-        users.
+        obtaining consent.
       </td>
     </tr>
     <tr>
@@ -513,13 +511,14 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       <td>UseNonStandardStacks</td>
       <td>1 bit</td>
       <td>
-        <code>1</code> CMP used non-IAB standard stacks during consent
-        gathering<br /><code>0</code> IAB standard stacks were used
+        <code>1</code> CMP used non-IAB standard stacks or illustrations during consent
+        gathering<br /><code>0</code> IAB standard stacks and illustrations were used
       </td>
       <td>
         Setting this to 1 means that a publisher-run CMP – that is still IAB
-        Europe registered – is using customized Stack descriptions and not
-        the standard stack descriptions defined in the
+        Europe registered – is using customized Stack descriptions or customized
+        illustrations and not the standard stack descriptions or illustrations defined
+        in the
         <a
           href="https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/"
           >Policies</a
@@ -1367,7 +1366,7 @@ The GVL is in JSON format and the current version at any given time can be retri
 
 Previous versions of the Global Vendor List are available here:
 
-[https://vendor-list.consensu.org/v3/archives/vendor-list-v{vendor-list-version}.json](https://vendor-list.consensu.org/v3/archives/vendorlist-v{vendor-list-version}.json)
+[https://vendor-list.consensu.org/v3/archives/vendor-list-v{vendor-list-version}.json](https://vendor-list.consensu.org/v3/archives/vendor-list-v{vendor-list-version}.json)
 
 Where ‘vendor-list-version’ corresponds to the ‘vendorListVersion’ property in the GVL, for example, the following URL would retrieve the GVL update published with version 138
 
@@ -1495,7 +1494,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
  	* "id": number, REQUIRED
  	* "name": string, REQUIRED
  	* "description": string, REQUIRED
- 	* "descriptionLegal": string, REQUIRED
+ 	* "illustrations": string array, REQUIRED
  	* "consentable": boolean, OPTIONAL, default=true  false means CMPs should never afford users the means to provide an opt-in consent choice
  	* "rightToObject": boolean, OPTIONAL, default=true  false means CMPs should never afford users the means to exercise a right to object
 	*/
@@ -1503,14 +1502,14 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
   	   "id": 1,
   	   "name": "Storage and access of information",
   	   "description": "...",
-  	   "descriptionLegal": "..."
+  	   "illustrations": [ ]
 	},
 	// ... more purposes from id=2 to id=9 (up to no higher than id=24)
 	"10": {
   	   "id": 10,
   	   "name": "Develop and improve product",
   	   "description": "...",
-  	   "descriptionLegal": "...",
+  	   "illustrations": [ ],
   	   "consentable": false,
   	   "rightToObject": false
 	}
@@ -1520,7 +1519,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
   	   "id": 1,
   	   "name": "Security, Fraud Prevention, Debugging",
   	   "description": "...",
-  	   "descriptionLegal": "...",
+  	   "illustrations": [ ],
   	   "consentable": false,
   	   "rightToObject": false
 	},
@@ -1528,7 +1527,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
   	   "id": 2,
   	   "name": "Technical ad and content delivery",
   	   "description": "...",
-  	   "descriptionLegal": "...",
+  	   "illustrations": [ ],
   	   "consentable": false,
   	   "rightToObject": false
 	}
@@ -1538,7 +1537,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
   	   "id": 1,
   	   "name": "Matching Data to Offline Sources",
   	   "description": "Combining data from offline sources that were initially collected in other contexts",
-  	   "descriptionLegal": "..."
+  	   "illustrations": [ ]
 	}
 
   // ... more features from id=2 up to no higher than id=64.
@@ -1555,13 +1554,13 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
   	   "id": 1,
   	   "name": "Precise Geolocation",
   	   "description": "...",
-  	   "descriptionLegal": "..."
+  	   "illustrations": [ ]
 	},
 	"2": {
   	   "id": 2,
   	   "name": "Active Fingerprinting",
   	   "description": "...",
-  	   "descriptionLegal": "..."
+  	   "illustrations": [ ]
 	}
 
   // ... more special features from id=3 up to no higher than id=8.

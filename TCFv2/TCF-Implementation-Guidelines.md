@@ -143,7 +143,7 @@ The publisher may implement a CMP in one of two ways:
 2.	**Outsource:** Rely on  the service of a CMP registered with IAB Europe and listed here as an official CMP. 
 
 ## What publisher controls are available?<a name="pubcontrols"></a>
-Starting with v2 of the TC String, a segment of information enables publishers to define restrictions. When a vendor has declared their legal basis for a purpose as flexible, the publisher can change the vendor’s defaut choice. For instance if a vendor declares flexible with default choice legitimate interest, the publisher can restrict that choice to requires consent.
+Starting with v2 of the TC String, a segment of information enables publishers to define restrictions. When a vendor has declared their legal basis for a purpose as flexible, the publisher can change the vendor’s default choice. For instance if a vendor declares flexible with default choice legitimate interest, the publisher can restrict that choice to requires consent.
 
 ## The Global Vendor List<a name="gvl"></a>
 Publishers can ask their partners (advertising vendors, DMPs, analytics vendors, etc.) to register on the Global Vendor List (GVL), if not already registered. The Global Vendor List is maintained with current registered vendors [here](https://vendor-list.consensu.org/v2/vendor-list.json). 
