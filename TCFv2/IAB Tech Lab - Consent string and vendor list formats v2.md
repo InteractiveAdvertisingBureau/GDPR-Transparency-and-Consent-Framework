@@ -508,15 +508,15 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       </td>
     </tr>
     <tr>
-      <td>UseNonStandardStacks</td>
+      <td>UseNonStandardTexts</td>
       <td>1 bit</td>
       <td>
-        <code>1</code> CMP used non-IAB standard stacks or illustrations during consent
-        gathering<br /><code>0</code> IAB standard stacks and illustrations were used
+        <code>1</code> CMP used non-IAB standard texts during consent
+        gathering<br /><code>0</code> IAB standard texts were used
       </td>
       <td>
         Setting this to 1 means that a publisher-run CMP – that is still IAB
-        Europe registered – is using customized Stack descriptions or customized
+        Europe registered – is using customized text for stack descriptions or customized
         illustrations and not the standard stack descriptions or illustrations defined
         in the
         <a
