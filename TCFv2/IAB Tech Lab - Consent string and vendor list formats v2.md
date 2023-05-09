@@ -515,16 +515,12 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         gathering<br /><code>0</code> IAB standard texts were used
       </td>
       <td>
-        Setting this to 1 means that a publisher-run CMP – that is still IAB
-        Europe registered – is using customized text for stack descriptions or customized
-        illustrations and not the standard stack descriptions or illustrations defined
-        in the
+        Setting this to 1 means that a publisher is using customized texts (Stack descriptions or Illustrations) and not the standard texts defined in the
         <a
           href="https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/"
           >Policies</a
         >
-        (Appendix A section E). A CMP that services multiple publishers sets
-        this value to <code>0</code>.
+       (Appendix A) in accordance with the permissions described in Chapter III(21): (6)&(7). A CMP that services multiple publishers sets this value to <code>0</code>.
       </td>
     </tr>
     <tr>
