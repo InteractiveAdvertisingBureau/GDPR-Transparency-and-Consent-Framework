@@ -520,7 +520,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
           href="https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/"
           >Policies</a
         >
-       (Appendix A) in accordance with the permissions described in Chapter III(21): (6)&(7). A CMP that services multiple publishers sets this value to <code>0</code>.
+       (Appendix A) in accordance with the permissions described in Chapter IV(21): (6)&(7). A CMP that services multiple publishers sets this value to <code>0</code>.
       </td>
     </tr>
     <tr>
