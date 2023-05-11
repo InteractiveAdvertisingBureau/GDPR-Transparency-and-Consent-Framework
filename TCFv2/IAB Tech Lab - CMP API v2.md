@@ -187,18 +187,6 @@ const callback = (tcData, success) => {
 
     // do something with tcData.tcString
 
-    // remove the ourself to not get called more than once
-    __tcfapi('removeEventListener', 2, (success) => {
-
-      if(success) {
-
-        // oh good...
-
-      }
-
-    }, tcData.listenerId);
-
-
   } else {
 
     // do something else
