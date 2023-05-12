@@ -516,12 +516,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       </td>
       <td>
         Setting this to 1 signals to Vendors that a private CMP has modified standard Stack descriptions and/or their translations and/or that a CMP has modified or supplemented standard Illustrations and/or their translations 
-        as allowed by the 
-        <a
-          href="https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/"
-          >Policy</a
-        >
-       (Appendix A) in accordance with the permissions described in Chapter IV(21): (6)&(7).
+        as allowed by the policy.
       </td>
     </tr>
     <tr>
