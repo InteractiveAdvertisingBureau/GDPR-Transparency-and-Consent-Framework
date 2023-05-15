@@ -2,7 +2,7 @@
  # Transparency and Consent String with Global Vendor & CMP List Formats
  **IAB Europe Transparency & Consent Framework**
 
- **Final v.2.0 | August 2019, Updated June 2022**
+ **Final v.2.2 May 2023**
 
  Table of Contents
 
@@ -64,8 +64,9 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
-| June 2022 | 2.0 | Update of the <b>Global Vendor List JSON Object</b> example regarding the filename in `deviceStorageDisclosureUrl` |
-| Feb 2022 | 2.0 | Move the current vendor fields relating to the Planet 49 ruling from the existing Device Storage Access & Disclosure tech spec to this core spec |
+| May 2023 | 2.2 | Update to further strengthen the TCF as a standard in the industry: revised purpose names and descriptions, introduced retention periods for all purposes, removed legitimate interest for purposes 3 to 6, the introduction of data categories used in conjunction with the purposes, support for legitimate interest claim urls, adding support for localized policy urls and introducing a more robust vendor compliance program. |
+| June 2022 | 2.1 | Update of the <b>Global Vendor List JSON Object</b> example regarding the filename in `deviceStorageDisclosureUrl` |
+| Feb 2022 | 2.1 | Move the current vendor fields relating to the Planet 49 ruling from the existing Device Storage Access & Disclosure tech spec to this core spec |
 | Dec 2021 | 2.0 | Update of Created and LastUpdated to have the same value corresponding to the day-level timestamp of when the TC String was last updated |
 | Sept 2021 | 2.0 | Deprecation of Global Scope, OOB and 'euconsent-v2' cookie associated with the consensu.org domain  |
 | August 2021 | 2.0 | Added optional use of DisclosedVendor segment in the context of storing service-level TC Strings  |
@@ -90,7 +91,7 @@ IAB Europe established the TCF to support compliance with the GDPR in the contex
 
 Prescribed use of the TCF may support compliance with the GDPR, but the real benefit to the digital advertising ecosystem is a safer Internet for consumers, and more reliable data for brands and publishers. As adoption of the TCF increases, compliance becomes more scalable and data becomes more meaningful.
 
-To participate in the use of the TCF, vendors must make a public attestation of compliance with the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) for using it. To have transparency and consent established and signaled status for your online services stored in a global database, apply to be added to the [GVL](#the-global-vendor-list). To play a role in creating a TC String for signaling status on transparency and user consent, sign up with IAB Europe to become a CMP. CMPs must follow technical standards provided in this document for creating TC Strings in compliance with TCF [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/). They must also follow technical standards guidance for using the CMP API specified in this document to receive and process information provided in a TC String.
+To participate in the use of the TCF, vendors must make a public attestation of compliance with the [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) for using it. Register as a vendor and be listed in the [GVL](#the-global-vendor-list) to signal your status having transparency and consent established for your online services. To play a role in creating a TC String for signaling status on transparency and user consent, sign up with IAB Europe to become a CMP. CMPs must follow technical standards provided in this document for creating TC Strings in compliance with TCF [Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/). They must also follow technical standards guidance for using the CMP API specified in this document to receive and process information provided in a TC String.
 
 ### Audience
 
@@ -298,9 +299,7 @@ The service making the call must replace the macros with appropriate values desc
       <td><code>${GDPR}</code></td>
       <td><code>0</code> / <code>1</code></td>
       <td>
-        <code>0</code> GDPR does not apply; <code>1</code> GDPR applies. If
-        not present, callee should do geoIP lookup, and GDPR applies for EU
-        IP addresses
+        <code>0</code> GDPR does not apply; <code>1</code> GDPR applies.
       </td>
     </tr>
     <tr>
@@ -342,6 +341,10 @@ To accommodate cases where Purpose 1 is governed differently for consent dependi
 
 The Created and LastUpdated fields previously corresponded to decisecond timestamps. Considering practical guidance from DPAs relating to the the various means that can be employed by data controllers to provide evidence of the consent obtained and its validity and the limited relevance of the Created field for publishers and their CMPs to fulfill the requirements of remaining users of their choices, as appropriate and at least every 13 months, the Created and LastUpdated fields have been updated to have the **same value** corresponding to the **day-level timestamp** of when the TC String was last updated.
 
+### Why was support for legitimate interest for purposes 3 to 6 deprecated?
+
+In order to strengthen the TCF as a standard within the industry it was decided with version 2.2 to prohibit reliance on Legitimate Interest for purpose 3 (create a personalised ads profile), purpose 4 (select personalised ads), purpose 5 (create a personalised content profile) and purpose 6 (select personalised content).
+
 ## Creating a TC String
 
 The following details provide information on creating, storing, and managing a TC String.
@@ -357,6 +360,8 @@ The IAB Europe Transparency & Consent Framework [Policies](https://iabeurope.eu/
 [https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/)
 
 #### Managing conflicting string versions
+
+With the release of TCF v2.2, the policy version has been incremented to version 4. Post 30 September 2023 a TC String created with a policy version set to smaller than 4 will be deemed invalid. TC Strings with policy version 3 created until 30 September 2023 may still be returned by the CMP API post 30 September 2023"
 
 Post 30 September 2020, [v1.x strings were considered invalid](https://iabeurope.eu/all-news/the-iab-europe-transparency-consent-framework-tcf-steering-group-votes-to-extend-technical-support-for-tcf-v1-1/). If a CMP encounters a situation where both a v1.x string and a v2.0 string are erroneously present simultaneously, the CMP should remove the v1.x string to ensure that there is only one source of truth for consumers of the string.
 
@@ -491,9 +496,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       <td>
         From the corresponding field in the
         <a href="#the-global-vendor-list">GVL</a> that was used for
-        obtaining consent. A new policy version invalidates existing strings
-        and requires CMPs to re-establish transparency and consent from
-        users.
+        obtaining consent.
       </td>
     </tr>
     <tr>
@@ -505,22 +508,15 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       </td>
     </tr>
     <tr>
-      <td>UseNonStandardStacks</td>
+      <td>UseNonStandardTexts</td>
       <td>1 bit</td>
       <td>
-        <code>1</code> CMP used non-IAB standard stacks during consent
-        gathering<br /><code>0</code> IAB standard stacks were used
+        <code>1</code> CMP used non-IAB standard texts during consent
+        gathering<br /><code>0</code> IAB standard texts were used
       </td>
       <td>
-        Setting this to 1 means that a publisher-run CMP – that is still IAB
-        Europe registered – is using customized Stack descriptions and not
-        the standard stack descriptions defined in the
-        <a
-          href="https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/"
-          >Policies</a
-        >
-        (Appendix A section E). A CMP that services multiple publishers sets
-        this value to <code>0</code>.
+        Setting this to 1 signals to Vendors that a private CMP has modified standard Stack descriptions and/or their translations and/or that a CMP has modified or supplemented standard Illustrations and/or their translations 
+        as allowed by the policy.
       </td>
     </tr>
     <tr>
@@ -582,8 +578,11 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
           By default or if the user has exercised their “Right to Object” to
           a Purpose, the corresponding bit for that Purpose is set to
           <code>0</code>. From left to right, Purpose 1 maps to the 0th bit,
-          purpose 24 maps to the bit at index 23. Special Purposes are a
-          different ID space and not included in this field.
+          and purpose 24 maps to the bit at index 23. Special Purposes are a
+          different ID space and not included in this field.<br>
+          Note: With TCF v2.2 support for legitimate interest for purpose 3
+          to 6 has been deprecated. Bits 2 to 5 are required to be set
+          to <code>0</code>.
         </p>
       </td>
     </tr>
@@ -1311,7 +1310,7 @@ The _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment i
 
 ## The Global Vendor List
 
-The Global Vendor List (GVL) is a technical document that CMPs download from a domain managed and published by IAB Europe. It lists all registered and approved Vendors, as well as standard Purposes, Special Purposes, Features, Special Features and Stacks. The information stored in the GVL is used for determining what legal disclosures must be made to the user.
+The Global Vendor List (GVL) is a technical document that CMPs download from a domain managed and published by IAB Europe. It lists all registered and approved Vendors, as well as standard Purposes, Special Purposes, Features, Special Features, Stacks, and categories of data collected in conjunction with the purposes. The information stored in the GVL is used for determining what legal disclosures must be made to the user.
 
 ### I’m a vendor, how do I get added to the Global Vendor List?
 
@@ -1326,8 +1325,9 @@ The registration process is described here: [https://iabeurope.eu/tcf](https://i
 *   A list of standard Purposes
 *   A list of Special Purposes
 *   A list of standard Features
-*   A list of Special Features.
+*   A list of Special Features
 *   A list of Stacks
+*   A list of Categories of data collected
 *   A list of Vendors and their:
     *   Numeric ID which is incrementally assigned and never re-used – deleted Vendors are just marked as deleted.
     *   Name.
@@ -1337,7 +1337,9 @@ The registration process is described here: [https://iabeurope.eu/tcf](https://i
     *   List of Special Purposes to transparently disclose as their legitimate interest that a user has no right to object.
     *   List of Features they use across Purposes.
     *   List of Special Features they use across Purposes.
-    *   GDPR/privacy policy page URL.
+    *   List of Categories of data collected across Purposes.
+    *   Data retention duration for each purpose as applicable.
+    *   GDPR/privacy policy page and Legitimate Interest claim URL.
     *   HTTP “overflow” options which includes a <code>GET</code> request maximum size in kilobytes to help diagnose problems with TC String passing as well as limit oversized strings.
     *   Whether they use cookie storage (session or otherwise).
     *   The longest potential device storage duration, as set when using the cookie method of storage.
@@ -1352,15 +1354,15 @@ Additional information on Vendors can be downloaded from a domain managed and pu
 
 The GVL is in JSON format and the current version at any given time can be retrieved using the following URL structure:
 
-[https://vendor-list.consensu.org/v2/vendor-list.json](https://vendor-list.consensu.org/v2/vendor-list.json)
+[https://vendor-list.consensu.org/v3/vendor-list.json](https://vendor-list.consensu.org/v3/vendor-list.json)
 
 Previous versions of the Global Vendor List are available here:
 
-[https://vendor-list.consensu.org/v2/archives/vendor-list-v{vendor-list-version}.json](https://vendor-list.consensu.org/v2/archives/vendorlist-v{vendor-list-version}.json)
+[https://vendor-list.consensu.org/v3/archives/vendor-list-v{vendor-list-version}.json](https://vendor-list.consensu.org/v3/archives/vendor-list-v{vendor-list-version}.json)
 
 Where ‘vendor-list-version’ corresponds to the ‘vendorListVersion’ property in the GVL, for example, the following URL would retrieve the GVL update published with version 138
 
-https://vendor-list.consensu.org/v2/archives/vendor-list-v138.json
+https://vendor-list.consensu.org/v3/archives/vendor-list-v138.json
 
 Previous versions of the GVL may only be used in cases when the current version cannot be downloaded (such as when operating in-app while offline), or for change control management.
 
@@ -1374,11 +1376,13 @@ For reference, the URL for version 1 of the TCF was:
 
 Version 1 of the Global Vendor List and all version 1 archives will continue to be maintained until support officially ends in 2020. At that time, these files will be deprecated and only version 2 and newer of the Global Vendor List will be available.
 
-### Translations for Purposes, Special Purposes, Features, and Special Features
+### Translations for Purposes, Special Purposes, Features, Special Features, and Categories of data
 
-Translations of the names and descriptions for Purposes, Special Purposes, Features, and Special Features to non-English languages are contained in a file where attributes containing English content (except vendor declaration information) are translated, and can be found here:
+Translations of the names and descriptions for Purposes, Special Purposes, Features, Special Features, and the categories of data used in conjunction with purposes to non-English languages are contained in a 
+file where attributes containing English content (except vendor declaration information) are translated,
+and can be found here:
 
-https://vendor-list.consensu.org/v2/purposes-{language}.json
+https://vendor-list.consensu.org/v3/purposes-{language}.json
 
 Where ‘language’ is a two letter lowercase [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) language code. Supported languages are listed at the following URL:
 
@@ -1471,10 +1475,10 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
 
 ```javascript
 {
-  "gvlSpecificationVersion": 2,
-  "vendorListVersion": 133, // incremented with each published file change
-  "tcfPolicyVersion": 2, // The TCF MO will increment this value whenever a GVL change (such as adding a new Purpose or Feature or a change in Purpose wording) legally invalidates existing TC Strings and requires CMPs to re-establish transparency and consent from users. TCF Policy changes should be relatively infrequent and only occur when necessary to support changes in global mandate. If the policy version number in the latest GVL is different from the value in your TC String, then you need to re-establish transparency and consent for that user. A version 1 format TC String is considered to have a version value of 1.
-  "lastUpdated": "2022-05-26T16:00:00Z",
+  "gvlSpecificationVersion": 3,
+  "vendorListVersion": 1, // incremented with each published file change
+  "tcfPolicyVersion": 4, // The TCF MO will increment this value whenever a GVL change (such as adding a new Purpose or Feature or a change in Purpose wording) legally invalidates existing TC Strings and requires CMPs to re-establish transparency and consent from users. TCF Policy changes should be relatively infrequent and only occur when necessary to support changes in global mandate. If the policy version number in the latest GVL is different from the value in your TC String, then you need to re-establish transparency and consent for that user. A version 1 format TC String is considered to have a version value of 1.
+  "lastUpdated": "2023-05-26T16:00:00Z",
   "purposes": {
 	/**
  	* Information published for each Purpose
@@ -1482,7 +1486,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
  	* "id": number, REQUIRED
  	* "name": string, REQUIRED
  	* "description": string, REQUIRED
- 	* "descriptionLegal": string, REQUIRED
+ 	* "illustrations": string array, REQUIRED
  	* "consentable": boolean, OPTIONAL, default=true  false means CMPs should never afford users the means to provide an opt-in consent choice
  	* "rightToObject": boolean, OPTIONAL, default=true  false means CMPs should never afford users the means to exercise a right to object
 	*/
@@ -1490,14 +1494,14 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
   	   "id": 1,
   	   "name": "Storage and access of information",
   	   "description": "...",
-  	   "descriptionLegal": "..."
+  	   "illustrations": [ ]
 	},
 	// ... more purposes from id=2 to id=9 (up to no higher than id=24)
 	"10": {
   	   "id": 10,
   	   "name": "Develop and improve product",
   	   "description": "...",
-  	   "descriptionLegal": "...",
+  	   "illustrations": [ ],
   	   "consentable": false,
   	   "rightToObject": false
 	}
@@ -1507,7 +1511,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
   	   "id": 1,
   	   "name": "Security, Fraud Prevention, Debugging",
   	   "description": "...",
-  	   "descriptionLegal": "...",
+  	   "illustrations": [ ],
   	   "consentable": false,
   	   "rightToObject": false
 	},
@@ -1515,7 +1519,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
   	   "id": 2,
   	   "name": "Technical ad and content delivery",
   	   "description": "...",
-  	   "descriptionLegal": "...",
+  	   "illustrations": [ ],
   	   "consentable": false,
   	   "rightToObject": false
 	}
@@ -1525,7 +1529,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
   	   "id": 1,
   	   "name": "Matching Data to Offline Sources",
   	   "description": "Combining data from offline sources that were initially collected in other contexts",
-  	   "descriptionLegal": "..."
+  	   "illustrations": [ ]
 	}
 
   // ... more features from id=2 up to no higher than id=64.
@@ -1542,13 +1546,13 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
   	   "id": 1,
   	   "name": "Precise Geolocation",
   	   "description": "...",
-  	   "descriptionLegal": "..."
+  	   "illustrations": [ ]
 	},
 	"2": {
   	   "id": 2,
   	   "name": "Active Fingerprinting",
   	   "description": "...",
-  	   "descriptionLegal": "..."
+  	   "illustrations": [ ]
 	}
 
   // ... more special features from id=3 up to no higher than id=8.
@@ -1565,6 +1569,16 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
   	   "description" : "Precise geolocation and information about device characteristics can be used."
 	}   
   // ... more Stacks.
+  //
+  },
+
+  "dataCategories": {
+	"1": {
+	   "id": 1,
+	   "name" : "IP addresses",
+	   "description" : "..."
+	}
+  // ... more dataCategories.
   //
   },
 
@@ -1615,8 +1629,16 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
    * empty. List of Special Features the Vendor may utilize when performing
    * some declared Purposes processing.
    *
-   * "policyUrl": url string, REQUIRED URL to the Vendor's privacy policy
-   * document.
+   * "dataDeclaration": An array of positive integers that represent
+   * the data categories declared by the vendor.
+   *
+   * "dataRetention": an object that contains the data retention for the purpose
+   * and specialPurpose declared by the vendor. A stdRetention is computed and 
+   * added if there is an absolute total of equal retention periods found.
+   *
+   * "urls": an array of url objects representing language, policy url and
+   * legitimate interest url. At least one entry is REQUIRED. Up to 40 languages
+   * can be specified.
    *
    * "deletedDate": date string ("2019-05-28T00:00:00Z") OPTIONAL, If present,
    * vendor is considered deleted after this date/time and MUST NOT be
@@ -1642,15 +1664,33 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
    *
    */
   "1":{
-       "id": 1,
+     "id": 1,
 	   "name": "Vendor Name",
-	   "purposes": [1],
+	   "purposes": [1, 2, 3, 9],
 	   "specialPurposes": [1],
-	   "legIntPurposes": [2, 3],
+	   "legIntPurposes": [2],
 	   "flexiblePurposes": [1, 2],
 	   "features": [1, 2],
 	   "specialFeatures": [1, 2],
-	   "policyUrl": "https://vendorname.com/gdpr.html",
+     "dataRetention": {
+          "stdRetention": 30
+          "purposes": { "9": 180 },
+          "specialPurposes": {}
+      },
+     "dataDeclaration" : [ 1, 2, 4, 6 ],
+     "urls": [
+        {
+          "langId": "en",
+          "privacy": "https://vendorname.com/gdpr.html",
+          "legIntClaim": "https://vendorname.com/gdpr.html#li"
+
+        },
+        {
+          "langId": "fr",
+          "privacy": "https://vendorname.com/fr/gdpr.html",
+          "legIntClaim": "https://vendorname.com/fr/gdpr.html#li"
+        }
+     ],
 	   "deletedDate": "2019-02-28T00:00:00Z",
 	   "overflow": {
       	      "httpGetLimit": 32
@@ -1719,7 +1759,7 @@ This true or false field indicates whether the vendor uses other, non-cookie met
  </table>
 
 ## Global CMP List Specification
-The Global CMP List (GCL) is a JSON format document that lists all CMPs registered with the Transparency and Consent Framework (TCF). There are separate files for v1.1 and v2 of the framework. These files are used by vendors to determine which CMPs are compliant and active within the framework, in order to ascertain whether a given CMP ID found in a consent string or TC String is valid.
+The Global CMP List (GCL) is a JSON format document that lists all CMPs registered with the Transparency and Consent Framework (TCF). There are separate files for each version of the framework. Currently, we only support TCF v2. These files are used by vendors to determine which CMPs are compliant and active within the framework, in order to ascertain whether a given CMP ID found in a consent string or TC String is valid.
 
 IMPORTANT NOTE: all CMPs that have registered with the TCF are listed in these files. CMPs that are no longer active for whatever reason, have the `deletedDate` property set. Consent strings or TC Strings for CMPs with a `deletedDate` set must be considered invalid after that date/time and must be discarded immediately and not passed downstream.
 
