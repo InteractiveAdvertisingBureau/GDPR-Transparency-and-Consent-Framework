@@ -14,8 +14,7 @@
 This document provides technical implementation guidelines related to the [IAB Europe Transparency and Consent Framework (TCF) v2.2 technical specs](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework). The IAB Tech Lab GDPR Technical Working Group has collaborated on the following implementation guidelines, and will continue to produce resources supporting industry adoption of the Framework. The intended audience of this document includes product and engineering teams who are building technology based on this framework, and who are looking for guidance on implementation strategies such as questions to ask your platform partners or avoiding common pitfalls.
 
 Policy FAQ, webinars, and other resources are available at 
-[https://iabeurope.eu/tcf-2-0/](https://iabeurope.eu/tcf-2-0/)
-
+[https://www.iabeurope.eu/tcf](https://www.iabeurope.eu/tcf))
 
 ### [Introduction to the TCF](#Intro)<br>
 ### [Common Questions](#commonquestions)<br>
