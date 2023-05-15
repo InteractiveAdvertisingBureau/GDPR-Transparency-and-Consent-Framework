@@ -361,7 +361,7 @@ The IAB Europe Transparency & Consent Framework [Policies](https://iabeurope.eu/
 
 #### Managing conflicting string versions
 
-With the release of TCF v2.2, the policy version has been incremented to version 4. Post 30 September 2023 a TC String with a policy version set to smaller than 4 will be deemed invalid.
+With the release of TCF v2.2, the policy version has been incremented to version 4. Post 30 September 2023 a TC String created with a policy version set to smaller than 4 will be deemed invalid. TC Strings with policy version 3 created until 30 September 2023 may still be returned by the CMP API post 30 September 2023"
 
 Post 30 September 2020, [v1.x strings were considered invalid](https://iabeurope.eu/all-news/the-iab-europe-transparency-consent-framework-tcf-steering-group-votes-to-extend-technical-support-for-tcf-v1-1/). If a CMP encounters a situation where both a v1.x string and a v2.0 string are erroneously present simultaneously, the CMP should remove the v1.x string to ensure that there is only one source of truth for consumers of the string.
 

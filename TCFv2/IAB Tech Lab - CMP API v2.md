@@ -351,10 +351,10 @@ TCData = {
   isServiceSpecific: Boolean,
 
   /**
-   * true - CMP is using publisher-customized stack descriptions
-   * false - CMP is NOT using publisher-customized stack descriptions
+   * true - CMP is using publisher-customized stack descriptions and/or modified or supplemented standard Illustrations
+   * false - CMP is NOT using publisher-customized stack descriptions and or modified or supplemented standard Illustrations
    */
-  useNonStandardStacks: Boolean,
+  useNonStandardTexts: Boolean,
 
   /**
    * Country code of the country that determines the legislation of
@@ -582,10 +582,10 @@ InAppTCData = {
   isServiceSpecific: 1,
 
   /**
-   * 1 - CMP is using publisher-customized stack descriptions
-   * 0 - CMP is NOT using publisher-customized stack descriptions
+   * 1 - CMP is using publisher-customized stack descriptions and/or modified or supplemented standard Illustrations
+   * 0 - CMP is NOT using publisher-customized stack descriptions and/or modified or supplemented standard Illustrations
    */
-  useNonStandardStacks: 1,
+  useNonStandardTexts: 1,
 
   /**
    * Country code of the country that determines the legislation of
@@ -718,7 +718,7 @@ The steps for integrating a CMP SDK into an app are the following:
 | `IABTCF_gdprApplies`  | `Number`: <p>`1` GDPR applies in current context</p><p>`0` - GDPR does _**not**_ apply in current context</p><p>**Unset** - undetermined (default before initialization)</p><p>see the section ["What does the gdprApplies value mean?"](#what-does-the-gdprapplies-value-mean) for more</p> |
 | `IABTCF_PublisherCC`  | `String`: [Two-letter ISO 3166-1 alpha-2 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) – Default: `AA` (unknown) |
 | `IABTCF_PurposeOneTreatment`  | `Number`: <p>`0` - no special treatment of purpose one</p><p>`1` - purpose one not disclosed</p><p>**Unset default** - `0`</p><p>Vendors can use this value to determine whether consent for purpose one is required.</p> |
-| `IABTCF_UseNonStandardStacks`  | `Number`: <p>`1` - CMP used a non-standard stack</p><p>`0` - CMP did not use a non-standard stack</p> |
+| `IABTCF_UseNonStandardTexts`  | `Number`: <p>`1` - CMP uses customized stack descriptions and/or modified or supplemented standard Illustrations</p><p>`0` - CMP did not use a non-standard stack desc. and/or modified or supplemented Illustrations</p> |
 | `IABTCF_TCString` | `String`: Full encoded TC string |
 | `IABTCF_VendorConsents` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the consent status for Vendor ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is consent `true` for vendor ID `1` |
 | `IABTCF_VendorLegitimateInterests` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the legitimate interest status for Vendor ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is legitimate interest established `true` for vendor ID `1` |
