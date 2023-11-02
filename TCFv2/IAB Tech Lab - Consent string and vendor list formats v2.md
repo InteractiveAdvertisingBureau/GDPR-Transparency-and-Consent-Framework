@@ -1632,9 +1632,9 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
    * "dataDeclaration": An array of positive integers that represent
    * the data categories declared by the vendor.
    *
-   * "dataRetention": an object that contains the data retention for the purpose
-   * and specialPurpose declared by the vendor. A stdRetention is computed and 
-   * added if there is an absolute total of equal retention periods found.
+   * "dataRetention": an object that contains the data retention in days for the
+   * purpose and specialPurpose declared by the vendor. A stdRetention is computed 
+   * and added if there is an absolute total of equal retention periods found.
    *
    * "urls": an array of url objects representing language, policy url and
    * legitimate interest url. At least one entry is REQUIRED. Up to 40 languages
