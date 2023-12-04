@@ -413,7 +413,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       <td>Created</td>
       <td>36 bits</td>
       <td>
-        Epoch time format when TC String was last updated (must be updated any time a value is changed)
+        Epoch time format when TC String was created
       </td>
       <td rowspan="2">
        To create a timestamp in JavaScript: <code>Math.round(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate())/100)</code>. Also, the timestamp must be based in UTC time in order to get a consistent decisecond value across the time zones.
