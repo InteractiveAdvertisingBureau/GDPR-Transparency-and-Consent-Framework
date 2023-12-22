@@ -27,4 +27,4 @@ These implementations are not supported by the IAB.
 - [Rust](https://github.com/cirla/gdpr_consent) (cirla/gdpr_consent)
 - [Python](https://github.com/aabalaban/IAB-Consent-Framework/blob/master/IAB-Consent-Framework-v1.1.ipynb) (aabalaban/IAB-Consent-Framework)
 - [C](https://github.com/EulerianTechnologies/etcfv2) (EulerianTechnologies/etcfv2)
-- [Perl](https://github.com/peczenyj/GDPR-IAB-TCFv2)(GDPR::IAB::TCFv2)
+- [Perl](https://github.com/peczenyj/GDPR-IAB-TCFv2) (GDPR::IAB::TCFv2)
