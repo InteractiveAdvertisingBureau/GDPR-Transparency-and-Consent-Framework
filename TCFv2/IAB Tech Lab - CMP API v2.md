@@ -35,6 +35,10 @@
     - [How does ad mediation work in-app?](#how-does-ad-mediation-work-in-app)
       - [Mediation SDK](#mediation-sdk)
       - [Vendor](#vendor)
+  - [CTV Details](#ctv-details)
+      - [How is a CMP used in the CTV context?](#how-is-a-cmp-used-in-the-ctv-context)
+      - [Web Runtime](#web-runtime)
+      - [Native](#native)
 - [Using the CMP API](#using-the-cmp-api)
   - [How do ad tags work?](#how-do-ad-tags-work)
   - [How does the "version" parameter work?](#how-does-the-version-parameter-work)
@@ -56,6 +60,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+|January 2024 | 2.2 | Added details for CTV support
 | May 2023 | 2.2 | Update to further strengthen the TCF as a standard in the industry: Deprecated API command "getTCData".
 | September 2021 | 2.0 | Deprecation of Global Scope and OOB |
 | February 2020 | 2.0 | Removed CMP List; added included in the Consent String and Vendor List Specification |
@@ -789,6 +794,91 @@ Mediation SDK allows app developers to monetize from multiple vendors.
 ##### Vendor
 
 *   Vendor retrieves `IABTCF_gdprApplies` and `IABTCF_TCString` from [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults#1664798?language=objc)(iOS) or [`SharedPreferences`](https://developer.android.com/training/data-storage/shared-preferences.html)(Android), and passes on these GDPR values downstream.
+______
+
+### CTV Details
+#### How is a CMP used in the CTV context?
+The context of the CTV application will determine the storage locations and naming of the TCF data.
+
+#### Web Runtime
+Applications running in a web runtime environment that supports, at minimum, the Web Storage (Second Edition) specification shall follow all storage and naming conventions detailed in the [Javascript](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#what-required-api-commands-must-a-cmp-support) section of this spec. Data is to be retrieved using the commands, offering a consistent interface for Vendors to access TC string information.
+
+Should data not persist in Web Storage beyond the lifecycle of the application (application close, standby, or device shutdown), all data storage and naming conventions are to follow the specifications outlined in the CTV Native Private Storage section of this spec.
+
+#### Native
+Native CTV applications should support both Global Privacy Platform (GPP) section key names as well as TCF key names by following the naming conventions of Global Privacy Platform (GPP) data and string outlined in the [TCF EU Section spec](https://github.com/InteractiveAdvertisingBureau/Global-Privacy-Platform/blob/main/Sections/EEA/GPPExtension%3A%20IAB%20Europe%20TCF.md#key-names) and the TCF naming conventions outlined for in-app usage above [above](#what-is-the-cmp-in-app-internal-structure-for-the-defined-api). Data is to be limited to the context of the Application and inaccessible to external applications. 
+
+<i>Application Preferences (Registry)</i>
+
+Application Preferences, also referred to as a Registry in certain CTV environments, shall be used in a Native CTV Application environment under the condition that the TC data and TC String fit within the device constraints. Private Storage is to be used if the TC data and TC String do not fit within the device constraints
+
+<i>Private Storage</i>
+
+Private Storage shall be used under the condition that the CTV environment does not offer a Web Runtime that supports the Web Storage (Second Edition) specification, data does not persist beyond the lifecycle of the Application, or offer an Application Preferences (Registry) interface. The TC data and TC String are to be saved in a standardized and private storage space. Files are to follow the same naming convention as the key names detailed in the [TCF EU Section spec](https://github.com/InteractiveAdvertisingBureau/Global-Privacy-Platform/blob/main/Sections/EEA/GPPExtension%3A%20IAB%20Europe%20TCF.md#key-names) and the key names outlined for in-app usage [above](#what-is-the-cmp-in-app-internal-structure-for-the-defined-api) with the contents being the value of the corresponding key.
+Note: CTV Applications require proper permission scopes to be configured to read and write to the virtual Application file system. 
+
+#### CTV Examples
+
+**Android TV**
+```java
+// Option 1
+public void setTCString(String tcString) {
+  SharedPreferences.Editor editor = sharedPrefs.edit();
+  // TCF spec
+  editor.putString("IABTCF_TCString", tcString);
+  // GPP spec
+  editor.putString("IABGPP_2_TCString", tcString);
+  editor.commit();
+}
+
+// Option 2
+public void setTCString(String tcString) {
+  SharedPreferences.Editor editor = sharedPrefs.edit();
+  editor.putString("IABTCF_TCString", tcString);
+  editor.commit();
+}
+public void setTCStringForGpp(String tcString) {
+  SharedPreferences.Editor editor = sharedPrefs.edit();
+  editor.putString("IABGPP_2_TCString", tcString);
+  editor.commit();
+}
+``````
+
+**Apple TV**
+```java
+// Option 1
+- (void)setTcString:(NSString *)tcString {
+  NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+  // TCF spec
+  [userDefaults setObject:tcString forKey:@"IABTCF_TCString"];
+  // GPP spec
+  [userDefaults setObject:tcString forKey:@"IABGPP_2_TCString"];
+}
+
+// Option 2
+- (void)setTcString:(NSString *)tcString[INSERT] {
+  NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+  [userDefaults setObject:tcString forKey:@"IABTCF_TCString"];
+}
+- (void)setTcStringForGpp:(NSString *)tcString[INSERT] {
+  NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+  [userDefaults setObject:tcString forKey:@"IABGPP_2_TCString"];
+``````
+
+**Roku [Reference](https://developer.roku.com/docs/references/brightscript/components/roregistrysection.md)**
+```java
+Function SetTcfData(tcString As String) As Void
+    sec = CreateObject("roRegistrySection", "TCF")
+    sec.Write("IABTCF_TCString", tcString)
+    sec.Flush()
+End Function
+
+Function SetGppData(tcString As String) As Void
+    sec = CreateObject("roRegistrySection", "GPP")
+    sec.Write("IABGPP_2_TCString", tcString)
+    sec.Flush()
+End Function
+``````
 
 ______
 
