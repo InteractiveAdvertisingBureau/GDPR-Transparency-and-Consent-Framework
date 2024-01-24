@@ -1606,9 +1606,10 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
    * vendor
    *
    * Constraints:
-   *   Either purposes OR legIntPurposes can be missing/empty, but not both.
+   *   Either purposes OR legIntPurposes can be missing/empty, but not both
+   *   unless the vendor declared one of more specical purpose but no purposes.
    *
-   *   A Purpose id must not be present in both purposes and legIntPurposes
+   *   A Purpose id must not be present in both purposes and legIntPurposes.
    *
    *   A Purpose id listed in flexiblePurposes must have been declared in one
    *   of purposes or legIntPurposes.
@@ -1770,6 +1771,7 @@ IMPORTANT NOTE: all CMPs that have registered with the TCF are listed in these f
   * Their Name.
   * Whether or not the CMP is a commercial service.
   * If applicable, the date/time after which CMP is considered inactive.
+  * The declaration of the environment that the CMP operates in.
 
 ### Where can I access the Global CMP List?
 The GCL is in JSON format and the current version at any given time can be retrieved using the following URL:
@@ -1814,6 +1816,9 @@ Here is an example of the GCL’s JSON format:
      * "id": numeric, REQUIRED
      * "name": string, REQUIRED
      * "isCommercial": boolean, REQUIRED
+     * "environments": array of enum, REQUIRED. Indicates the environments where
+     * the vendor operates. ‘web’, ‘native app (mobile)’, ‘native app (CTV)’,
+     * ‘other’.
      * "deletedDate": date string ("2019-05-28T00:00:00Z") OPTIONAL
      *  If present, CMP is considered deleted after this date/time and
      *  consent string or TC String must be discarded immediately.
@@ -1822,7 +1827,8 @@ Here is an example of the GCL’s JSON format:
     "2":{
       "id": 2,
       "name": "Chandago",
-      "isCommercial": true
+      "isCommercial": true,
+      "environments": ["web","other"]
     },
 
     // ... more CMPs
@@ -1831,6 +1837,7 @@ Here is an example of the GCL’s JSON format:
       "id": 136,
       "name": "M6 Web",
       "isCommercial": false,
+      "environments: ["web","native app (mobile)"],
       "deletedDate": "2019-08-06T00:00:00Z"
     }
 
