@@ -1669,7 +1669,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
 	   "name": "Vendor Name",
 	   "purposes": [1, 2, 3, 9],
 	   "specialPurposes": [1],
-	   "legIntPurposes": [2],
+	   "legIntPurposes": [7],
 	   "flexiblePurposes": [1, 2],
 	   "features": [1, 2],
 	   "specialFeatures": [1, 2],
@@ -1817,7 +1817,7 @@ Here is an example of the GCL’s JSON format:
      * "name": string, REQUIRED
      * "isCommercial": boolean, REQUIRED
      * "environments": array of enum, REQUIRED. Indicates the environments where
-     * the vendor operates. ‘web’, ‘native app (mobile)’, ‘native app (CTV)’,
+     * the CMP operates. ‘web’, ‘native app (mobile)’, ‘native app (CTV)’,
      * ‘other’.
      * "deletedDate": date string ("2019-05-28T00:00:00Z") OPTIONAL
      *  If present, CMP is considered deleted after this date/time and
