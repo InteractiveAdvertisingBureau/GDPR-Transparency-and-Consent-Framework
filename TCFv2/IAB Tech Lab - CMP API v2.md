@@ -806,7 +806,7 @@ Applications running in a web runtime environment that supports, at minimum, the
 Should data not persist in Web Storage beyond the lifecycle of the application (application close, standby, or device shutdown), all data storage and naming conventions are to follow the specifications outlined in the CTV Native Private Storage section of this spec.
 
 #### Native
-Native CTV applications should support both Global Privacy Platform (GPP) section key names as well as TCF key names by following the naming conventions of Global Privacy Platform (GPP) data and string outlined in the [TCF EU Section spec](https://github.com/InteractiveAdvertisingBureau/Global-Privacy-Platform/blob/main/Sections/EEA/GPPExtension%3A%20IAB%20Europe%20TCF.md#key-names) and the TCF naming conventions outlined for in-app usage above [above](#what-is-the-cmp-in-app-internal-structure-for-the-defined-api). Data is to be limited to the context of the Application and inaccessible to external applications. 
+Native CTV applications should support both Global Privacy Platform (GPP) section key names as well as TCF key names by following the naming conventions of Global Privacy Platform (GPP) data and string outlined in the [TCF EU Section spec](https://github.com/InteractiveAdvertisingBureau/Global-Privacy-Platform/blob/main/Sections/EEA/GPPExtension%3A%20IAB%20Europe%20TCF.md#key-names) and the TCF naming conventions outlined for in-app usage [above](#what-is-the-cmp-in-app-internal-structure-for-the-defined-api). Data is to be limited to the context of the Application and inaccessible to external applications. 
 
 <i>Application Preferences (Registry)</i>
 
