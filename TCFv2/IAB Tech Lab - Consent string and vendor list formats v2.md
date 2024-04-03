@@ -64,6 +64,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| Feb 2024 | 2.2 | Deprecated the gdpr_pd macro, and added the field 'environments' to the CMP JSON. |
 | May 2023 | 2.2 | Update to further strengthen the TCF as a standard in the industry: revised purpose names and descriptions, introduced retention periods for all purposes, removed legitimate interest for purposes 3 to 6, the introduction of data categories used in conjunction with the purposes, support for legitimate interest claim urls, adding support for localized policy urls and introducing a more robust vendor compliance program. |
 | June 2022 | 2.1 | Update of the <b>Global Vendor List JSON Object</b> example regarding the filename in `deviceStorageDisclosureUrl` |
 | Feb 2022 | 2.1 | Move the current vendor fields relating to the Planet 49 ruling from the existing Device Storage Access & Disclosure tech spec to this core spec |
@@ -274,11 +275,6 @@ The supported URL parameters and the corresponding macros are defined below:
         </p>
       </td>
     </tr>
-    <tr>
-      <td><code>gdpr_pd</code></td>
-      <td><code>GDPR_PD</code></td>
-      <td><code>&gdpr_pd=${GDPR_PD}</code></td>
-    </tr>
   </tbody>
 </table>
 
@@ -310,18 +306,6 @@ The service making the call must replace the macros with appropriate values desc
       </td>
       <td>
         Encodes the TC string, as obtained from the CMP JS API or OpenRTB.
-      </td>
-    </tr>
-    <tr>
-      <td><code>${GDPR_PD}</code></td>
-      <td>
-        <code>0</code> / <code>1</code> (optional, default: <code>1</code>)
-      </td>
-      <td>
-        for generic URL parameters, <code>gdpr_pd=0</code> indicates none of
-        them contain personal data (from the perspective of the callee). For
-        "defined" URL parameters, their definition should define whether
-        they include personal data.
       </td>
     </tr>
   </tbody>
