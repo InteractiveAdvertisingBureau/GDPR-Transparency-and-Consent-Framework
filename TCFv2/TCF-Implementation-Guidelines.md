@@ -82,7 +82,7 @@ You can also submit your inquiries and questions regarding the TCF to framework@
 
 # Common Questions <a name="commonquestions"></a>
 ## Do I need to read the Policy? <a name="needpolicy"></a>
-Yes, the technical specifications for the TC String and CMP API were developed to support policies outlined in the Transparency and Consent Framework (TCF) Policies. Implementing the technology requires adherence to these policies.
+Yes, the technical specifications for the Transparency and Consent (TC) String and CMP API were developed to support policies outlined in the Transparency and Consent Framework (TCF) Policies. Implementing the technology requires adherence to these policies.
 
 If you have not yet read tech specs or policy, you can access these documents here: 
 - [IAB Europe Transparency and Consent Framework Policies](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/)
@@ -125,7 +125,7 @@ Changes across the Framework are listed below and grouped according to supportin
 - Updates to support special jurisdiction, and publisher restrictions
 
 ## How do I evaluate the details provided in the TC String?<a name="evaluatetcstring"></a>
-The TC String returned by the CMP API can include (2) segments of information : the core string and the publisher TC segment. The technical specs describing the TC string provide details on specific information provided in each segment. These details may change from the start of the transaction to the end of the transaction.
+The TC String returned by the CMP API can include two (2) segments of information : the core string and the publisher TC segment. The technical specs describing the TC string provide details on specific information provided in each segment. These details may change from the start of the transaction to the end of the transaction.
 
 ## How should I handle multiple signals with different information?<a name="mergesignals"></a>
 Sometimes two or more TC Strings might contain different preferences for different vendors. For example, one string includes consent signals for vendors 1, 2, and 3. Later, the user is asked for consent on vendors 3, 4, and 5, but rejects all three. In this example, the most recent signal received for vendor 3 is that of no consent and should be understood as such despite previous signals.
@@ -138,11 +138,11 @@ Please refer to TCF Policy for a complete definition of a CMP. A registered CMP 
 
 The publisher may implement a CMP in one of two ways:
 
-1.	**Build:** Develop an in-house CMP that meets the technical requirements specified by IAB Europe and register as an official CMP using this form.
-2.	**Outsource:** Rely on  the service of a CMP registered with IAB Europe and listed here as an official CMP. 
+1.	**Build:** Develop an in-house CMP that meets the technical requirements specified by IAB Europe and register as an official CMP using [this form](https://register.consensu.org/cmp).
+2.	**Outsource:** Rely on the service of a CMP registered with IAB Europe and listed [here](https://iabeurope.eu/cmp-list/) as an official CMP. 
 
 ## What publisher controls are available?<a name="pubcontrols"></a>
-Starting with v2 of the TC String, a segment of information enables publishers to define restrictions. When a vendor has declared their legal basis for a purpose as flexible, the publisher can change the vendor’s default choice. For instance if a vendor declares flexible with default choice legitimate interest, the publisher can restrict that choice to requires consent.
+Starting with v2 of the TC String, a segment of information enables publishers to define restrictions. When a vendor has declared their legal basis for a purpose as flexible, the publisher can change the vendor’s default choice. For instance if a vendor declares flexible with default choice legitimate interest, the publisher can restrict that choice to require consent.
 
 ## The Global Vendor List<a name="gvl"></a>
 Publishers can ask their partners (advertising vendors, DMPs, analytics vendors, etc.) to register on the Global Vendor List (GVL), if not already registered. The Global Vendor List is maintained with current registered vendors [here](https://vendor-list.consensu.org/v2/vendor-list.json). 
@@ -248,6 +248,7 @@ Certain GDPR rights, such as portability and the right to be forgotten, are not 
 In order to reduce the size of the TC string, CMPs are advised to store/provide publisher restrictions only when necessary to reflect the publisher's choice to restrict a vendor's processing of personal data. In terms of reflecting a publisher’s choice:
 
 * In case a vendor has not been disclosed to the user via the CMP UI, there is no need to store restrictions for that vendor in the TC String. Given the vendor was not disclosed both vendor consent and vendor legitimate interest signals in the TC String can be left undefined which suffices to signal that the vendor may not process personal data.
+* In case the user deselect a vendor (neither giving it consent nor allow it to operate under legitimate interest) the publisher restrictions for this vendor does not need to be written out into the TC string.
 * Purpose restrictions that disallow a vendor from processing personal data for a specific purpose only need to be stored in case the vendor was disclosed by the CMP (reflecting the restriction in the UI) and registered for that purpose in the GVL.
 * Legal Basis restrictions are only needed in situations where the vendor was disclosed by the CMP (reflecting the restriction in the UI) and is declaring flexibility in the GVL for the corresponding purpose, meaning that:
 
@@ -275,4 +276,4 @@ A v2 consent string encoder/decoder can be found here: https://iabtcf.com/#/ as 
 Yes, these guidelines will be updated as questions arise.
 
 ## How can I learn more?<a name="learnmore"></a>
-Visit our TCF web page at https://iabeurope.eu/tcf-2-0/ and join the working group.
+Visit our TCF web page at https://iabeurope.eu/transparency-consent-framework and join the working group.
