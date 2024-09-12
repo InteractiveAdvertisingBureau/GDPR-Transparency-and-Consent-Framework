@@ -248,7 +248,7 @@ Certain GDPR rights, such as portability and the right to be forgotten, are not 
 In order to reduce the size of the TC string, CMPs are advised to store/provide publisher restrictions only when necessary to reflect the publisher's choice to restrict a vendor's processing of personal data. In terms of reflecting a publisher’s choice:
 
 * In case a vendor has not been disclosed to the user via the CMP UI, there is no need to store restrictions for that vendor in the TC String. Given the vendor was not disclosed both vendor consent and vendor legitimate interest signals in the TC String can be left undefined which suffices to signal that the vendor may not process personal data.
-* In case the user deselects a vendor (neither giving it consent nor allowing it to operate under legitimate interest) the publisher restriction for this vendor does not need to be written out into the TC string.
+* In case the user deselects a vendor (neither giving it consent nor allowing it to operate under legitimate interest) the publisher restriction for this vendor does not need to be written out into the TC string. This is to avoid adding extra restrictions that do not impact the outcome. In case a vendor was not given consent nor legitimate interest, no restriction on that vendor would apply.
 * Purpose restrictions that disallow a vendor from processing personal data for a specific purpose only need to be stored in case the vendor was disclosed by the CMP (reflecting the restriction in the UI) and registered for that purpose in the GVL.
 * Legal Basis restrictions are only needed in situations where the vendor was disclosed by the CMP (reflecting the restriction in the UI) and is declaring flexibility in the GVL for the corresponding purpose, meaning that:
 
