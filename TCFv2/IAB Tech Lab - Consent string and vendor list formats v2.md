@@ -499,7 +499,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
         gathering<br /><code>0</code> IAB standard texts were used
       </td>
       <td>
-        Setting this to 1 signals to Vendors that a private CMP has modified standard Stack descriptions and/or their translations and/or that a CMP has modified or supplemented standard Illustrations and/or their translations 
+        Setting this to 1 signals to Vendors that a CMP has modified standard Stack descriptions and/or their translations and/or that a CMP has modified or supplemented standard Illustrations and/or their translations 
         as allowed by the policy.
       </td>
     </tr>
@@ -578,16 +578,9 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
     <tr>
       <td>PurposeOneTreatment</td>
       <td>1 bit</td>
-      <td>
-        <code>1</code> Purpose 1 was NOT disclosed at all.<br /><br /><code
-          >0</code
-        >
-        Purpose 1 was disclosed commonly as consent as expected by the
-        <a
+     <td><code>0</code> No special treatment. Purpose 1 was disclosed commonly as consent as expected by the <a
           href="https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/"
-          >Policies</a
-        >.
-      </td>
+          >Policies</a>.<br><code>1</code> Special treatment. Purpose 1 was not disclosed.</td>
       <td>
         CMPs can use the PublisherCC field to indicate the legal jurisdiction the publisher is under to help vendors determine whether the vendor needs consent for Purpose 1.
       </td>
