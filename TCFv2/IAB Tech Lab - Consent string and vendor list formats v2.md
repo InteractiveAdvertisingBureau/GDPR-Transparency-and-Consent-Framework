@@ -1363,7 +1363,7 @@ https://vendor-list.consensu.org/v3/purposes-{language}.json
 
 Where ‘language’ is a two letter lowercase [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) language code. Supported languages are listed at the following URL:
 
-[https://register.consensu.org/Translation](https://register.consensu.org/Translation)
+[https://register.consensu.org/translations/translationsEu](https://register.consensu.org/translations/translationsEu)
 
 ### How often is the Global Vendor List updated?
 
