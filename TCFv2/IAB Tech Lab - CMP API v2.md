@@ -211,7 +211,7 @@ Registers a callback function with a CMP (or a postmessage to respond to for cro
 | `'cmpuishown'` | This shall be the value for the `eventStatus` property of the [`TCData`](#tcdata) object any time the UI is surfaced or re-surfaced, a TC String is available and has rendered "Transparency" in accordance with the [TCF Policy](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/). The CMP shall create a TC string with all the surfaced vendors’ legitimate interest signals set to true and all the consent signals set to false.  If previous TC signals are present a CMP may also merge those into the now-available TC String in accordance with the policy. |
 | `'useractioncomplete'` | This shall be the value for the `eventStatus` property of the [`TCData`](#tcdata) object whenever a user has confirmed or re-confirmed their choices in accordance with [TCF Policy](https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/) and a CMP is prepared to respond to any calling scripts with the corresponding TC String. |
 
-The CMP will, in most cases, invoke the callback when  either the `'tcloaded'` OR `'cmpuishown'` + `'useractioncomplete'` `eventStatus`(s) occur, but never for all three `eventStatuses` within the same page view. However, if an existing and valid TC string is available and the CMP does not intend to to surface a UI automatically (`'tcloaded'`) but the user manually surfaces the UI and changes their selected choices (`'cmpuishown'` + `'useractioncomplete'`) all three `eventStatuses` would appear within the same page view.
+The CMP will, in most cases, invoke the callback when  either the `'tcloaded'` OR `'cmpuishown'` + `'useractioncomplete'` `eventStatus`(s) occur, but never for all three `eventStatuses` within the same page view. However, if an existing and valid TC string is available and the CMP does not intend to surface a UI automatically (`'tcloaded'`) but the user manually surfaces the UI and changes their selected choices (`'cmpuishown'` + `'useractioncomplete'`) all three `eventStatuses` would appear within the same page view.
 
 The callback shall be invoked with `false` as the argument for the `success` parameter if the callback could not be registered as a listener for any reason.
 
@@ -418,7 +418,7 @@ TCData = {
 
     }
   },
-  specialFeatureOptins: {
+  specialFeatureOptions: {
 
       /**
        * true - Special Feature Opted Into
