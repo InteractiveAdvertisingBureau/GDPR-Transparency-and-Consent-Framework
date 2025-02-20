@@ -1647,7 +1647,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
 	   "purposes": [1, 2, 3, 9],
 	   "specialPurposes": [1],
 	   "legIntPurposes": [7],
-	   "flexiblePurposes": [1, 2],
+	   "flexiblePurposes": [2],
 	   "features": [1, 2],
 	   "specialFeatures": [1, 2],
      "dataRetention": {
