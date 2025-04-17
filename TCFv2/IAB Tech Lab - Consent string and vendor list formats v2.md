@@ -366,9 +366,9 @@ The _**[Core String](#the-core-string)**_ is always required and comes first and
 ```
 COw4XqLOw4XqLAAAAAENAXCAAAAAAAAAAAAAAAAAAAAA.IFukWSQgAIQwgI0QEByFAAAAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.QFukWSQgAIQwgI0QEByFAAAAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.YAAAAAAAAAAAAAAAAAA
 ```
-A TC String must contain a Core TC String and may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment :
+A TC String must contain a Core TC String and the _**[Disclosed Vendors](#disclosed-vendors)**_ segment. It may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment:
 
-[ _**[Core String](#the-core-string)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
+[ _**[Core String](#the-core-string)**_ ].[_**[Disclosed Vendors](#disclosed-vendors)**_].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
 ```
 CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEgAA.argAC0gAAAAAAAAAAAA
