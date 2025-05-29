@@ -27,6 +27,8 @@
      - [Full TC String passing](#full-tc-string-passing)
    + [What if consent is governed differently in a country?](#what-if-consent-is-governed-differently-in-a-country)
    + [What happened to Created and LastUpdated?](#what-happened-to-created-and-lastupdated)
+   + [Why was support for legitimate interest for purposes 3 to 6 deprecated?](#why-was-support-for-legitimate-interest-for-purposes-3-to-6-deprecated)
+   + [Why was the disclosed vendors section made mandatory in TCF 2.3?](#mandatory_in_2_3)
  * [Creating a TC String](#creating-a-tc-string)
    + [How should a Transparency & Consent String be stored?](#how-should-a-transparency--consent-string-be-stored)
    + [What are the Purposes and Features being supported?](#what-are-the-purposes-and-features-being-supported)
@@ -329,6 +331,10 @@ The Created and LastUpdated fields previously corresponded to decisecond timesta
 ### Why was support for legitimate interest for purposes 3 to 6 deprecated?
 
 In order to strengthen the TCF as a standard within the industry it was decided with version 2.2 to prohibit reliance on Legitimate Interest for purpose 3 (create a personalised ads profile), purpose 4 (select personalised ads), purpose 5 (create a personalised content profile) and purpose 6 (select personalised content).
+
+### Why was the disclosed vendor section made mandatory in TCF 2.3?<a name="mandatory_in_2_3"></a>
+
+To solved the abiguity issue for vendors declaring only special purposes (no purposes under consent and purposes under legitimate interest or only purposes under consent, for which cases we used the LI signal as the identifier for special purpose) we have re-introduced the disclose vendor section to specificaly declare which vendors have been disclosed through the CMP. This way there is no abiguity regarding a vendor only declaring special purposes being disclosed or not. If a vendor declaring only special purposes is not listed in the disclosed vendor list that vendor cannot operate under the specisl purpose.
 
 ## Creating a TC String
 

@@ -18,42 +18,42 @@ Policy FAQ, webinars, and other resources are available at
 
 ### [Introduction to the TCF](#Intro)<br>
 ### [Common Questions](#commonquestions)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[Do I need to read the Policy?](#needpolicy)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What changed in v2.3?](#changesV2_3)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What changed in v2.2?](#changesV2_2)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What changed in v2.1?](#changesV2_1)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What changed in v2?](#changesV2)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Do I need to read the Policy?](#needpolicy)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What changed in v2.3?](#changesV2_3)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What changed in v2.2?](#changesV2_2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What changed in v2.1?](#changesV2_1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What changed in v2?](#changesV2)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Within the Transparency and Consent String (TC String)](#changetcstring)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Within the Global Vendor List (GVL) Format](#changegvl)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Within the Consent Management Platform API](#changecmp)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[How do I evaluate the details provided in the TC String?](#evaluatetcstring)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[How should I handle multiple signals with different information?](#mergesignals)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[How do I evaluate the details provided in the TC String?](#evaluatetcstring)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How should I handle multiple signals with different information?](#mergesignals)<br>
 ### [Publisher guidelines](#pub)
-&nbsp;&nbsp;&nbsp;&nbsp;**[What is a Consent Management Platform (CMP) and why do I, as a Publisher, need one?](#whatiscmp)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What publisher controls are available?](#pubcontrols)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[The Global Vendor List](#gvl)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[Withdrawal of consent](#withdraw)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What is a Consent Management Platform (CMP) and why do I, as a Publisher, need one?](#whatiscmp)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What publisher controls are available?](#pubcontrols)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[The Global Vendor List](#gvl)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Withdrawal of consent](#withdraw)<br>
 ### [Vendor guidelines](#vendor)
-&nbsp;&nbsp;&nbsp;&nbsp;**[How do I find the TC String?](#findtcstring)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[How do I send the TC string?](#sendtcstring)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[How to determine legal bases from the TC String?](#detlegalbasis)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[How to determine if data may be transmitted?](#handletcstring)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What if I don’t receive the TC string?](#nostring)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[How do I determine which Global Vendor List to use?](#choosegvl)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[What else is there to consider when integrating with the TCF?](#whatelse)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How do I find the TC String?](#findtcstring)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How do I send the TC string?](#sendtcstring)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How to determine legal bases from the TC String?](#detlegalbasis)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How to determine if data may be transmitted?](#handletcstring)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What if I don’t receive the TC string?](#nostring)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How do I determine which Global Vendor List to use?](#choosegvl)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[What else is there to consider when integrating with the TCF?](#whatelse)<br>
 ### [Consent Management Platform (CMP) guidelines](#cmp)
-&nbsp;&nbsp;&nbsp;&nbsp;**[Collecting consent from users](#collectconsent)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[Sharing consent with vendors](#shareconsent)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[Storing Consent](#storeconsent)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[Other GDPR rights](#otherrights)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[Encoding publisher restrictions](#pubrestrenc)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[CMP interface requirements](#cmpreq)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Collecting consent from users](#collectconsent)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Sharing consent with vendors](#shareconsent)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Storing Consent](#storeconsent)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Other GDPR rights](#otherrights)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Encoding publisher restrictions](#pubrestrenc)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[CMP interface requirements](#cmpreq)<br>
 ### [Other Frequently Asked Questions](#otherfaq)
-&nbsp;&nbsp;&nbsp;&nbsp;**[Are cookies required for working with the CMP API?](#cookiesrequired)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Are cookies required for working with the CMP API?](#cookiesrequired)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[Can I also use the API for CCPA or other laws?](#ccpa)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[Related resources](#resources)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[Will these FAQ be updated?](#faqupdates)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**[How can I learn more?](#learnmore)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Related resources](#resources)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Will these FAQ be updated?](#faqupdates)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[How can I learn more?](#learnmore)<br>
 
 
 # Introduction to the TCF <a name="intro"></a>
