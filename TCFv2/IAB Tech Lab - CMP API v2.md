@@ -416,6 +416,13 @@ TCData = {
        */
       '[vendor id]': Boolean
 
+    },
+    disclosedVendors: {
+      /**
+       * true - vendor was disclosed through the CMP
+       * false | undefined - vendor was not disclosed through the CMP
+       */
+      '[vendor id]': Boolean
     }
   },
   specialFeatureOptins: {
