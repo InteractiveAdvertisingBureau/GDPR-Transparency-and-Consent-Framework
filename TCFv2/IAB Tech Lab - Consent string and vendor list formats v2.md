@@ -334,7 +334,7 @@ In order to strengthen the TCF as a standard within the industry it was decided 
 
 ### Why was the disclosed vendor section made mandatory in TCF 2.3?<a name="mandatory_in_2_3"></a>
 
-To solved the abiguity issue for vendors declaring only special purposes (no purposes under consent and purposes under legitimate interest or only purposes under consent, for which cases we used the LI signal as the identifier for special purpose) we have re-introduced the disclose vendor section to specificaly declare which vendors have been disclosed through the CMP. This way there is no abiguity regarding a vendor only declaring special purposes being disclosed or not. If a vendor declaring only special purposes is not listed in the disclosed vendor list that vendor cannot operate under the specisl purpose.
+To solved the abiguity issue for vendors declaring only special purposes (no purposes under consent and purposes under legitimate interest or only purposes under consent, for which cases we used the LI signal as the identifier for special purpose) we have re-introduced the disclose vendors section to specificaly declare which vendors have been disclosed through the CMP. This way there is no abiguity regarding a vendor only declaring special purposes being disclosed or not. If a vendor is not found in either the purpose consent or legitimate interest section but is listed in the disclosed vendor list this means that the vendor has been disclosed to the user and can operate under the declared special purpose(s).
 
 ## Creating a TC String
 
