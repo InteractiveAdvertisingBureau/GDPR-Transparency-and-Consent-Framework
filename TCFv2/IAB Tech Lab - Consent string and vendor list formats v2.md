@@ -225,11 +225,11 @@ The resulting URL is:
 
 `http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=${GDPR_CONSENT_123}`
 
-If the TC String is: `COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw`
+If the TC String is: `CQSbk4AQSbk4ANwAAAENAwCgAAAAAAAAAAYgACPAAAAA.IDKQA4AAgAKAGQAygAAA`
 
  Then the caller replaces the macro in the URL with the actual TC String so that the originally placed pixel containing the macro is modified as follows when making the call to the specified server.
 
-`http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw`
+`http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=CQSbk4AQSbk4ANwAAAENAwCgAAAAAAAAAAYgACPAAAAA.IDKQA4AAgAKAGQAygAAA`
 
 TC Strings must always be propagated as is, and not modified. Additional URLs in the supply chain are addressed the same way with remaining vendors.
 
@@ -367,18 +367,14 @@ There are 3 distincts TC String segments that are joined together on a “dot”
 *   Disclosed vendors
 *   Publisher purposes transparency and consent for their own data uses.
 
-The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent.
-
-```
-COw4XqLOw4XqLAAAAAENAXCAAAAAAAAAAAAAAAAAAAAA.IFukWSQgAIQwgI0QEByFAAAAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.QFukWSQgAIQwgI0QEByFAAAAeIAACAIgSAAQAIAgEQACEABAAAgAQFAEAIAAAGBAAgAAAAQAIFAAMCQAAgAAQiRAEQAAAAANAAIAAggAIYQFAAARmggBC3ZCYzU2yIA.YAAAAAAAAAAAAAAAAAA
-```
 A TC String must contain a Core TC String and the _**[Disclosed Vendors](#disclosed-vendors)**_ segment. It may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment:
 
 [ _**[Core String](#the-core-string)**_ ].[_**[Disclosed Vendors](#disclosed-vendors)**_].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
 ```
-CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEgAA.argAC0gAAAAAAAAAAAA
+CQSbk4AQSbk4ANwAAAENAwCgAAAAAAAAAAYgACPAAAAA.IDKQA4AAgAKAGQAygAAA.YAAAAAAAAAAA
 ```
+The _**[Core String](#the-core-string)**_ comes first and includes all the details required for communicating basic vendor transparency and consent.
 
  #### The Core String
 
