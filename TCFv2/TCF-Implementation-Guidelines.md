@@ -93,7 +93,7 @@ If you have not yet read tech specs or policy, you can access these documents he
 All definitions in the implementation guidelines should reflect definitions provided in the Policy. 
 
 ## What changed in v2.3?<a name="changesV2_3"></a>
-The TCF v2.3 update introduces a change to resolve the ambiguity for disclosed vendors that neither declare consent nor legitimate interest. It makes the Disclosed Vendor segment mandatory for CMPs to declare the vendors they have disclosed to the user.
+The TCF v2.3 update introduces a change to resolve the ambiguity for vendors that declare special purposes. It makes the Disclosed Vendor segment mandatory for CMPs to declare the vendors they have disclosed to the user.
 
 ## What changed in v2.2?<a name="changesV2_2"></a>
 The TCF v2.2 update further strengthens the TCF as a standard in the industry: revised purpose names and descriptions, introduced retention periods for all purposes, removed legitimate interest for purposes 3 to 6, the introduction of data categories used in conjunction with the purposes, support for legitimate interest claim urls, adding support for localized policy urls, deprecation of the __tcfapi command "getTCData" and introducing a more robust vendor compliance program.
