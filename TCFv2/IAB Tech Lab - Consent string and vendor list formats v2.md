@@ -368,12 +368,14 @@ There are 3 distincts TC String segments that are joined together on a “dot”
 *   Publisher purposes transparency and consent for their own data uses.
 
 A TC String must contain a Core TC String and the _**[Disclosed Vendors](#disclosed-vendors)**_ segment. It may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment:
+=======
+The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent.
 
 [ _**[Core String](#the-core-string)**_ ].[_**[Disclosed Vendors](#disclosed-vendors)**_].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
 ```
 CQSbk4AQSbk4ANwAAAENAwCgAAAAAAAAAAYgACPAAAAA.IDKQA4AAgAKAGQAygAAA.YAAAAAAAAAAA
-```
+
 The _**[Core String](#the-core-string)**_ comes first and includes all the details required for communicating basic vendor transparency and consent.
 
  #### The Core String
@@ -1650,7 +1652,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
 	   "purposes": [1, 2, 3, 9],
 	   "specialPurposes": [1],
 	   "legIntPurposes": [7],
-	   "flexiblePurposes": [1, 2],
+	   "flexiblePurposes": [2],
 	   "features": [1, 2],
 	   "specialFeatures": [1, 2],
      "dataRetention": {
