@@ -334,7 +334,7 @@ In order to strengthen the TCF as a standard within the industry it was decided 
 
 ### Why was the disclosed vendor section made mandatory in TCF 2.3?<a name="mandatory_in_2_3"></a>
 
-To solved the abiguity issue for vendors declaring special purpose(s) we have re-introduced the disclose vendors section to declare which vendors have been disclosed through the CMP. This way there is no abiguity regarding a vendor only declaring special purposes being disclosed or not. If a vendor who declares special purpose(s) is listed in the disclosed vendor list this means that the vendor has been disclosed to the user and can operate under the declared special purpose(s).
+To resolve the ambiguity regarding vendors that declare special purpose(s), we have reintroduced the <b>Disclosed Vendors</b> section. This section allows CMPs to explicitly declare which vendors have been disclosed to the user. As a result, there is no longer any uncertainty about whether a vendor that only declares special purposes has been disclosed. If a vendor declaring special purpose(s) appears in the disclosed vendors list, it means that the vendor has been presented to the user and is permitted to operate under the declared special purpose(s).
 
 ## Creating a TC String
 
