@@ -27,6 +27,8 @@
      - [Full TC String passing](#full-tc-string-passing)
    + [What if consent is governed differently in a country?](#what-if-consent-is-governed-differently-in-a-country)
    + [What happened to Created and LastUpdated?](#what-happened-to-created-and-lastupdated)
+   + [Why was support for legitimate interest for purposes 3 to 6 deprecated?](#why-was-support-for-legitimate-interest-for-purposes-3-to-6-deprecated)
+   + [Why was the disclosed vendors section made mandatory in TCF 2.3?](#mandatory_in_2_3)
  * [Creating a TC String](#creating-a-tc-string)
    + [How should a Transparency & Consent String be stored?](#how-should-a-transparency--consent-string-be-stored)
    + [What are the Purposes and Features being supported?](#what-are-the-purposes-and-features-being-supported)
@@ -64,6 +66,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| Apr 2025 | 2.3 | Resolve the LI ambiguity by repurposing and making the ‘Disclosed Vendors’ section a mandatory section of the TC string.
 | Feb 2024 | 2.2 | Deprecated the gdpr_pd macro, and added the field 'environments' to the CMP JSON. |
 | May 2023 | 2.2 | Update to further strengthen the TCF as a standard in the industry: revised purpose names and descriptions, introduced retention periods for all purposes, removed legitimate interest for purposes 3 to 6, the introduction of data categories used in conjunction with the purposes, support for legitimate interest claim urls, adding support for localized policy urls and introducing a more robust vendor compliance program. |
 | June 2022 | 2.1 | Update of the <b>Global Vendor List JSON Object</b> example regarding the filename in `deviceStorageDisclosureUrl` |
@@ -222,11 +225,11 @@ The resulting URL is:
 
 `http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=${GDPR_CONSENT_123}`
 
-If the TC String is: `CQNIGUAQNIGUAE1ACADEBbFgAP_gAAAAAAYgKBpV9C7dbWFF8X53aPtkOY0X19BzIsQhBhSBAyAFyBOQ8JQA02E6NASgJiACEAAAoxTBAAFEHABEAQCAQAAEAADsIAwEgAAIIABEgBEQAAJYAAgKCIggEAAIgAIEEgAAmBiAKdLmXUiAgIACCgCQACABAICAAgMABAAIAAIAAAAAwgAAgAJgoAIAAAAAARAIAAAAAAAAAAAAIAAAAAAAAAAAgAAAKHQAYAAgoGMgAwABBQMVABgACCgYiADAAEFAw0AGAAIKBhIAMAAQUDLQAYAAgoGUgAwABBQMlABgACCgZCADAAEFAw`
+If the TC String is: `CQSbk4AQSbk4ANwAAAENAwCgAAAAAAAAAAYgACPAAAAA.IDKQA4AAgAKAGQAygAAA`
 
  Then the caller replaces the macro in the URL with the actual TC String so that the originally placed pixel containing the macro is modified as follows when making the call to the specified server.
 
-`http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=CQNIGUAQNIGUAE1ACADEBbFgAP_gAAAAAAYgKBpV9C7dbWFF8X53aPtkOY0X19BzIsQhBhSBAyAFyBOQ8JQA02E6NASgJiACEAAAoxTBAAFEHABEAQCAQAAEAADsIAwEgAAIIABEgBEQAAJYAAgKCIggEAAIgAIEEgAAmBiAKdLmXUiAgIACCgCQACABAICAAgMABAAIAAIAAAAAwgAAgAJgoAIAAAAAARAIAAAAAAAAAAAAIAAAAAAAAAAAgAAAKHQAYAAgoGMgAwABBQMVABgACCgYiADAAEFAw0AGAAIKBhIAMAAQUDLQAYAAgoGUgAwABBQMlABgACCgZCADAAEFAw`
+`http://vendor-a.com/key1=val1&key2=val2&gdpr_consent=CQSbk4AQSbk4ANwAAAENAwCgAAAAAAAAAAYgACPAAAAA.IDKQA4AAgAKAGQAygAAA`
 
 TC Strings must always be propagated as is, and not modified. Additional URLs in the supply chain are addressed the same way with remaining vendors.
 
@@ -329,6 +332,10 @@ The Created and LastUpdated fields previously corresponded to decisecond timesta
 
 In order to strengthen the TCF as a standard within the industry it was decided with version 2.2 to prohibit reliance on Legitimate Interest for purpose 3 (create a personalised ads profile), purpose 4 (select personalised ads), purpose 5 (create a personalised content profile) and purpose 6 (select personalised content).
 
+### Why was the disclosed vendor section made mandatory in TCF 2.3?<a name="mandatory_in_2_3"></a>
+
+To resolve the ambiguity regarding vendors that declare special purpose(s), we have reintroduced the <b>Disclosed Vendors</b> section. This section allows CMPs to explicitly declare which vendors have been disclosed to the user. As a result, there is no longer any uncertainty about whether a vendor that only declares special purposes has been disclosed. If a vendor declaring special purpose(s) appears in the disclosed vendors list, it means that the vendor has been presented to the user and is permitted to operate under the declared special purpose(s).
+
 ## Creating a TC String
 
 The following details provide information on creating, storing, and managing a TC String.
@@ -360,18 +367,16 @@ There are 3 distincts TC String segments that are joined together on a “dot”
 *   Disclosed vendors
 *   Publisher purposes transparency and consent for their own data uses.
 
+A TC String must contain a Core TC String and the _**[Disclosed Vendors](#disclosed-vendors)**_ segment. It may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment:
+=======
 The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent.
 
-```
-CQNIGUAQNIGUAA4ACAFRBdFgALAAAAEgAAIgKRwBYAFgAbABgAGQCmgOHgpECkYBEQA4AFAAWAEUARAAAAAA
-```
-A TC String must contain a Core TC String and may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment :
-
-[ _**[Core String](#the-core-string)**_ ].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
+[ _**[Core String](#the-core-string)**_ ].[_**[Disclosed Vendors](#disclosed-vendors)**_].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
 ```
-CQNIGUAQNIGUAE1ACADEBbFgAP_gAAAAAAYgKBpV9C7dbWFF8X53aPtkOY0X19BzIsQhBhSBAyAFyBOQ8JQA02E6NASgJiACEAAAoxTBAAFEHABEAQCAQAAEAADsIAwEgAAIIABEgBEQAAJYAAgKCIggEAAIgAIEEgAAmBiAKdLmXUiAgIACCgCQACABAICAAgMABAAIAAIAAAAAwgAAgAJgoAIAAAAAARAIAAAAAAAAAAAAIAAAAAAAAAAAgAAAKHQAYAAgoGMgAwABBQMVABgACCgYiADAAEFAw0AGAAIKBhIAMAAQUDLQAYAAgoGUgAwABBQMlABgACCgZCADAAEFAw.YAAAAAAAA60A
-```
+CQSbk4AQSbk4ANwAAAENAwCgAAAAAAAAAAYgACPAAAAA.IDKQA4AAgAKAGQAygAAA.YAAAAAAAAAAA
+
+The _**[Core String](#the-core-string)**_ comes first and includes all the details required for communicating basic vendor transparency and consent.
 
  #### The Core String
 
@@ -1018,7 +1023,7 @@ CQNIGUAQNIGUAE1ACADEBbFgAP_gAAAAAAYgKBpV9C7dbWFF8X53aPtkOY0X19BzIsQhBhSBAyAFyBOQ
 
 #### Disclosed Vendors
 
-The _**DisclosedVendors**_ is an optional TC String segment that records which vendors have been disclosed to a given user by a CMP. It may be used by a CMP while [storing](#how-should-a-transparency--consent-string-be-stored) TC Strings, but must not be included in the TC String when returned by the CMP API.
+The _**DisclosedVendors**_ is the TC String segment that records which vendors have been disclosed to a given user by a CMP. This is a mandatory segment.
 
 
 <table>
