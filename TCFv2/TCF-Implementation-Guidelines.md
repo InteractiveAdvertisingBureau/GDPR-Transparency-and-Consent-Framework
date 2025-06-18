@@ -274,7 +274,9 @@ For further explanations, please go to the section [Storing Consent](https://git
 At this time, the IAB Europe Transparency and Consent Framework is designed for compliance with GDPR. The CMP API was designed to only support a special use case of the GDPR, which involves the use of user data in the context of digital advertising or content. Consult your local IAB or the IAB Tech Lab to learn more about other ongoing projects for privacy tool development such as the Global Privacy Platform (GPP).
 
 ## Related resources<a name="resources"></a>
-A v2 consent string encoder/decoder can be found here: https://iabtcf.com/#/ as well as links to further implementation libraries.
+A v2 consent string encoder/decoder is available in the new combined GPP/TCF encoder/decoder here: https://iabgpp.com/#/.
+You can find our JavaScript library here: [iabtcf-es core module](https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/core).
+If you encounter any issues, please log them via our GitHub issue tracker: [Submit an issue](https://github.com/InteractiveAdvertisingBureau/iabtcf-es/issues/new/choose).
 
 ## Will these FAQ be updated?<a name="faqupdates"></a>
 Yes, these guidelines will be updated as questions arise.
