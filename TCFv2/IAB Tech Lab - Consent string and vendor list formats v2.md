@@ -375,6 +375,7 @@ The _**[Core String](#the-core-string)**_ is always required and comes first and
 
 ```
 CQSbk4AQSbk4ANwAAAENAwCgAAAAAAAAAAYgACPAAAAA.IDKQA4AAgAKAGQAygAAA.YAAAAAAAAAAA
+```
 
 The _**[Core String](#the-core-string)**_ comes first and includes all the details required for communicating basic vendor transparency and consent.
 
