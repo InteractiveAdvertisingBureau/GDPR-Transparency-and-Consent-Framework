@@ -361,7 +361,7 @@ Note: TCF version 2.0 introduces [“Publisher Restrictions”](#what-are-publis
 
 ### TC String Format
 
-There are 3 distincts TC String segments that are joined together on a “dot” character.  They are:
+There are 3 distinct TC String segments that are joined together on a “dot” character.  They are:
 
 *   The core vendor transparency and consent details
 *   Disclosed vendors
