@@ -62,7 +62,7 @@ Vendors that use web-based storage MUST publish granular disclosures for ‘cook
    <b>Note</b> : A wildcard alone is invalid. A wildcard MUST NOT be used to group different identifiers with different purpose(s), therefore disclose a separate record for each specific identifier.
    </td></tr>
   <tr><td><code>type</code></td><td>required</td><td>enum</td><td>What type of storage or access mechanism is used: 'cookie', 'web', ‘app’. 
-    Note 'web' <em>can represent local storage, shared storage, IndexedDB, and PAAPI.</em>.</td></tr>
+    Note 'web' <em>can represent local/session storage and IndexedDB</em>.</td></tr>
   <tr><td><code>maxAgeSeconds</code></td><td>required if type = 'cookie' else null</td><td>integer</td><td>Only required if type = ‘cookie’; otherwise null. The number, in seconds, of the duration for storage on a device, as set when using cookie storage. A 0 indicates session storage similar to the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie">Set-Cookie spec</a>. <em>Note: this only includes what is declared when the storage is set and does not consider duration extensions should storage be refreshed.</em>
 <br>For types of mechanisms (non-cookie) where duration cannot be set, this field should be null.
 </td></tr>
