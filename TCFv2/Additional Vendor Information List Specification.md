@@ -36,6 +36,7 @@ The Additional Vendor Information List is a technical document that can be downl
      - Adequacy decision
      - SCCs
      - BCRs
+     - Supplementary measures
      - Other
 
 ## Where can I access the Additional Vendor Information List?
@@ -68,23 +69,25 @@ https://vendor-list.consensu.org/v2/additional-vendor-information-list.json
    * different from the vendor’s place of establishment. ‘BE’, ‘BG’, ‘CZ’, 
    * ‘DK’, ‘DE’, ‘EE’, ‘IE’, ‘GR’, ‘ES’, ‘FR’, ‘HR’, ‘IS’, ‘IT’, ‘CY’, ‘LV’, 
    * ‘LI’, ‘LT’, ‘LU’, ‘HU’, ‘MT’, ‘NL’, ‘NO’, ‘AT’, ‘PL’, ‘PT’, ‘RO’, ‘SI’, 
-   * ‘SK’, ‘FI’, ‘SE’, ‘CH’, ‘GB’
+   * ‘SK’, ‘FI’, ‘SE’, ‘CH’, ‘GB’, ‘OTHER’.
    *
-   * "environments": array of enum, REQUIRED. Indicates the environments where 
-   * the vendor operates. ‘web’, ‘native app (mobile)’, ‘native app (CTV)’, 
-   * ‘other’.       
+   * "environments": array of enum, REQUIRED. Indicates the environments where
+   * the vendor operates. ‘Web’, ‘Native App (Mobile)’, ‘Native App (CTV)’,
+   * ‘Other’.
    *
-   * "serviceTypes": array of enum, REQUIRED. Indicates the type of services 
-   * offered by the vendor. ‘SSP’, ‘DSP’, ‘Verification’, ‘Ad serving’,    
-   * ‘Header bidding’, ‘DMP / Data provider’, ‘Identity resolution services’, 
-   * ‘Content delivery network’, ‘Recommendation service’, ‘Website   
-   * analytics’, ‘Buyer campaign analytics’, ‘Audience analytics’, ‘Other’.
+   * "serviceTypes": array of enum, REQUIRED. Indicates the type of services
+   * offered by the vendor. ‘SSP’, ‘DSP’, ‘Verification Tool’, ‘Ad Serving’,
+   * ‘Header Bidding Service’, ‘DMP / Data Provider’,
+   * ‘Identity Resolution Service’, ‘Content Delivery Network’,
+   * ‘Recommendation Service’, ‘Website Analytics’,
+   * ‘Buyer’, ‘Campaign Analytics’, ‘Audience Analytics’, ‘Other’.
    *
-   * "internationalTransfers": boolean, REQUIRED. Indicates whether the   
+   * "internationalTransfers": boolean, REQUIRED. Indicates whether the
    * vendors transfer personal data outside of the EU/EEA.
    *
    * "transferMechanisms": array of enum, REQUIRED IF internationalTransfers = 
-   * true else null. ‘Adequacy decision’, ‘SCCs’, ‘BCRs’, ‘Other’
+   * true else null. ‘Adequacy Decision’, ‘SCCs’, ‘BCRs’, ‘Supplementary
+   * measures’, ‘Other’.
    *
    */
 
@@ -94,8 +97,8 @@ https://vendor-list.consensu.org/v2/additional-vendor-information-list.json
     "legalAddress": "Vendor Name",
     "contact": "vendor@vendor.com",
     "territorialScope": ["BE", "FI"],
-    "environments": ["web","other"],
-    "serviceTypes": ["SSP", "Ad serving"],
+    "environments": ["Web","Other"],
+    "serviceTypes": ["SSP", "Ad Serving"],
     "internationalTransfers": true,
     "transfersMechanisms": ["BCRs"]
       }
