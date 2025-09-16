@@ -51,6 +51,7 @@ Policy FAQ, webinars, and other resources are available at
 ### [Other Frequently Asked Questions](#otherfaq)
 &nbsp;&nbsp;&nbsp;&nbsp;**[Are cookies required for working with the CMP API?](#cookiesrequired)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[Can I also use the API for CCPA or other laws?](#ccpa)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**[Additional clarification using the GDPR_CONSENT_XXXX macro](#gdpr_consent_macro)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[Related resources](#resources)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[Will these FAQ be updated?](#faqupdates)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**[How can I learn more?](#learnmore)<br>
@@ -272,6 +273,22 @@ For further explanations, please go to the section [Storing Consent](https://git
 
 ## Can I also use the API for CCPA or other laws?<a name="ccpa"></a>
 At this time, the IAB Europe Transparency and Consent Framework is designed for compliance with GDPR. The CMP API was designed to only support a special use case of the GDPR, which involves the use of user data in the context of digital advertising or content. Consult your local IAB or the IAB Tech Lab to learn more about other ongoing projects for privacy tool development such as the Global Privacy Platform (GPP).
+
+## Additional clarification on using the GDPR_CONSENT_XXXX macro<a name="gdpr_consent_macro"></a>
+### Role of the vendor ID in the consent macro
+The numeric Vendor ID of the vendor receiving the TC string must be included in consent macro because personal data (such as IP addresses or cookies) may be passed along with the request. The Vendor ID should be used by the service making the call to ensure they can verify their legal basis for processing.
+The vendor ID macro is used in the case where the consent string cannot be obtained on the web page (no JS script available). In this case the consent macro will be in the form of ${GDPR_CONSENT_XXXX}, where XXXX is the numeric Vendor ID of the vendor receiving the TC string. The vendor encoded in this macro is then required to obtain the TC string and replace the gdpr_consent with the actual TC string (see [Transparency and Consent String with Global Vendor & CMP List Format](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#how-does-a-url-based-service-process-the-tc-string-when-it-cant-execute-javascript)).
+
+### Proper handling of vendor IDs in piggybacking scenarios
+When a redirect is added to the pixel that means a new vendor will receive the request and that new vendor will need to resolve the consent string. There are two options here: 
+Consent string available: The original vendor's consent macro is replaced with the consent string at the time the piggybacking happens, no need to add a vendor consent macro to the redirect. 
+Consent string not available: The new vendor's consent macro will need to be added to the redirect, so the vendor receiving the call can request the consent string.
+
+### Vendor IDs be assigned when an intermediary forwards requests
+When forwarding the request, the intermediary should obtain the TC String and replace the consent macro with the consent string before redirecting. This is typically done on the server side, where a call to retrieve the consent string can be made.
+
+### Vendor IDs be assigned when an intermediary forwards and processes requests
+When forwarding and processing the request, the intermediary should obtain the TC string and replace the consent macro with the consent string before redirecting. This is typically done on the server side, where a call to retrieve the consent string can be made.
 
 ## Related resources<a name="resources"></a>
 A v2 consent string encoder/decoder is available in the new combined GPP/TCF encoder/decoder here: https://iabgpp.com/#/.
