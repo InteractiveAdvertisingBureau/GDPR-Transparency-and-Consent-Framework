@@ -277,7 +277,7 @@ At this time, the IAB Europe Transparency and Consent Framework is designed for 
 ## Additional clarification on using the GDPR_CONSENT_XXXX macro<a name="gdpr_consent_macro"></a>
 ### Role of the vendor ID in the consent macro
 The numeric Vendor ID of the vendor receiving the TC string must be included in consent macro because personal data (such as IP addresses or cookies) may be passed along with the request. The Vendor ID should be used by the service making the call to ensure they can verify their legal basis for processing.
-The vendor ID macro is used in the case where the consent string cannot be obtained on the web page (no JS script available). In this case the consent macro will be in the form of ${GDPR_CONSENT_XXXX}, where XXXX is the numeric Vendor ID of the vendor receiving the TC string. The vendor encoded in this macro is then required to obtain the TC string and replace the gdpr_consent with the actual TC string (see [Transparency and Consent String with Global Vendor & CMP List Format](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#how-does-a-url-based-service-process-the-tc-string-when-it-cant-execute-javascript)).
+The vendor ID macro is used in the case where the consent string cannot be obtained on the web page (no JS script available). In this case the consent macro will be in the form of ${GDPR_CONSENT_XXXX}, where XXXX is the numeric Vendor ID of the vendor to receive the TC string. The service making the call will verify the legal basis for the vendor and will pass the TC string to the vendor in its return call (see [Transparency and Consent String with Global Vendor & CMP List Format](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#how-does-a-url-based-service-process-the-tc-string-when-it-cant-execute-javascript)).
 
 ### Proper handling of vendor IDs in piggybacking scenarios
 When a redirect is added to the pixel that means a new vendor will receive the request and that new vendor will need to resolve the consent string. There are two options here: 
@@ -285,10 +285,10 @@ Consent string available: The original vendor's consent macro is replaced with t
 Consent string not available: The new vendor's consent macro will need to be added to the redirect, so the vendor receiving the call can request the consent string.
 
 ### Vendor IDs be assigned when an intermediary forwards requests
-When forwarding the request, the intermediary should obtain the TC String and replace the consent macro with the consent string before redirecting. This is typically done on the server side, where a call to retrieve the consent string can be made.
+When forwarding the request, the intermediary should obtain the TC String and replace the consent macro with the consent string before redirecting. Typically this is done by the intermediary by making a JS call on the client to optain the TS String.
 
 ### Vendor IDs be assigned when an intermediary forwards and processes requests
-When forwarding and processing the request, the intermediary should obtain the TC string and replace the consent macro with the consent string before redirecting. This is typically done on the server side, where a call to retrieve the consent string can be made.
+When forwarding and processing the request, the intermediary should obtain the TC string and replace the consent macro with the consent string before redirecting. Typically this is done by the intermediary by making a JS call on the client to optain the TS String.
 
 ## Related resources<a name="resources"></a>
 A v2 consent string encoder/decoder is available in the new combined GPP/TCF encoder/decoder here: https://iabgpp.com/#/.
