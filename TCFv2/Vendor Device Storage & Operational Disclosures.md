@@ -27,6 +27,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| October 2025 | 1.1 | Added support to: allow vendors to declare cookies and other storage mechanisms used in pursuit of non-TCF purposes (e.g. global opt-out), to declare cookies and other storage mechanisms used for Special Purposes and to declare their SDK package identifiers. |
 | September 2022 | 1.0 | Adding a new FAQ |
 | June 2022 | 1.0 | Update on the structure of the URL (path and filename) and use of this file by the CMPs |
 | April 2022 | 1.0 | Wildcards are now permitted through the field named `identifier`, adding a new field named `domains` and **Disclosures object** can be empty if the vendor does not make use of any `client-side storage`. |
@@ -95,7 +96,25 @@ A wildcard alone is permitted only in cases where the number of domains is large
 To indicate that use of the storage <span style="text-decoration:underline;">is</span> subject to the consent requirement of the ePrivacy Directive, include Purpose ID 1 from the GVL.
 <p>
 To indicate that the use of storage is <span style="text-decoration:underline;">exempted from</span> (and therefore <span style="text-decoration:underline;">not</span> subject to) the consent requirement of the ePrivacy Directive, do not include Purpose ID 1 from the GVL.
-   </td>
+</td>
+</tr>
+<tr>
+    <td><code>specialPurposes</code></td>
+    <td>optional</td>
+    <td>array&lt;integer></td>
+    <td>The specialPurpose ID or specialPurpose IDs from the Global Vendor List (GVL) for which the storage is used.</td>
+  </tr>
+  <tr>
+    <td><code>description</code></td>
+    <td>optional</td>
+    <td>string</td>
+    <td>The description of what this cookie is used for.</td>
+  </tr>
+  <tr>
+    <td><code>optOut</code></td>
+    <td>optional</td>
+    <td>boolean</td>
+    <td>If the cookie is an opt-out cookie this value is set to <code>true</code>. The default is <code>false,</code>.</td>
   </tr>
 </table>
 
@@ -113,6 +132,7 @@ Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ o
       "cookieRefresh": false,
       "domains": ["retarget.adtech123.com"], 
       "purposes": [1,3,4,5,6]
+      "specialPurpose": [1]
     },
     {
       "identifier": "id",
@@ -121,6 +141,14 @@ Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ o
       "cookieRefresh": false,
       "domains": ["tracking.adtech123.com"], 
       "purposes": [1,3,4,5,6,7,8,9,10]
+    },
+    {
+      "identifier": "optOut",
+      "type": "cookie",
+      ...
+      "purposes": [1,3,4,5,6,9,10],
+      "description": "Opt out of any tracking",
+      "optOut": true
     }
   ],
   "domains": [
@@ -182,6 +210,46 @@ There is no mechanism for requesting alternate translations. For widest readabil
     {
       "domain": "video.adtech123.com",
       "use": "Video and banner distribution"
+    }
+  ]
+}
+````
+
+### SDKS array
+
+Vendors must publish the mobile in-app sdks they use for collecting and processing personal data in the context of their TCF registration.
+
+<table>
+  <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
+  <tr><td><code>name</code></td><td>required</td><td>string</td><td>The API package name as registered with the corresponding mobile app store.</td>
+</td></tr>
+  <tr><td><code>use</code></td><td>optional</td><td>string</td><td>Textual explanation of what the SDK is used for.
+<br><br>
+There is no mechanism for requesting alternate translations. For widest readability, it is suggested that Vendors use English for the optional explanatory text. </td></tr>
+</table>
+
+#### Example
+
+````javascript
+{
+  "disclosures": [
+    ...
+  ],
+  "domains": [
+    ...
+  ],
+  "sdks": [
+    {
+      "name": "com.gms.ads",
+      "use": "Advertising"
+    },
+    {
+      "name": "com.analytics",
+      "use": "Analytics"
+    },
+    {
+      "name": "AppSDK.framework",
+      "use": "Advertising and tracking"
     }
   ]
 }
