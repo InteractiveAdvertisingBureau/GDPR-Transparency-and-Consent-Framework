@@ -131,8 +131,8 @@ Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ o
       "maxAgeSeconds": 2592000000,
       "cookieRefresh": false,
       "domains": ["retarget.adtech123.com"], 
-      "purposes": [1,3,4,5,6]
-      "specialPurpose": [1]
+      "purposes": [1,3,4,5,6],
+      "specialPurposes": [1]
     },
     {
       "identifier": "id",
