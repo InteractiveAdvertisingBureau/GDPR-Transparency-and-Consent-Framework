@@ -369,7 +369,7 @@ There are 3 distinct TC String segments that are joined together on a “dot” 
 
 A TC String must contain a Core TC String and the _**[Disclosed Vendors](#disclosed-vendors)**_ segment. It may optionally contain a _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ segment:
 =======
-The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent.
+The _**[Core String](#the-core-string)**_ is always required and comes first and includes all the details required for communicating basic vendor transparency and consent. All subsequent segments (disclosedVendors and PublisherTC) may appear in any order because each includes a segment ID used for identification.
 
 [ _**[Core String](#the-core-string)**_ ].[_**[Disclosed Vendors](#disclosed-vendors)**_].[ _**[Publisher TC](#publisher-purposes-transparency-and-consent)**_ ]
 
