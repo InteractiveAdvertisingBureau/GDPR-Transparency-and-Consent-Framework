@@ -70,7 +70,7 @@ Vendors that use web-based storage MUST publish granular disclosures for ‘cook
   <tr><td><code>cookieRefresh</code></td><td>only required if type = ‘cookie’</td><td>boolean</td><td>Indicates the vendor is refreshing a cookie. See <em>cookieRefresh</em> description in the <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md">core specification</a>. True indicates the vendor refreshes this cookie. False indicates the vendor does not refresh the cookie any time the browser reloads.</td></tr>
  <tr><td><code>domains</td><td>optional</td><td>array</td><td>
   
-  <em>Use of this field is preferred. The less flexible `domain` field may be deprecated in a future release.</em> <br><br>
+  <em>Use of this field is preferred. The less flexible `domain` field may be removed in a future release.</em> <br><br>
 <b>Required if type='cookie' or type='web'</b>.<br><br>
 Value is one or more strings describing a domain.<br><br> Wildcards '&ast;' are permitted. For example, "*.adtech123.com" indicates the identifier is used across multiple subdomains.<br><br>
 A wildcard alone is permitted only in cases where the number of domains is large and dynamic, such as when managing `first party` storage on many partners' properties.<br><br>
@@ -108,13 +108,13 @@ To indicate that the use of storage is <span style="text-decoration:underline;">
     <td><code>description</code></td>
     <td>optional</td>
     <td>string</td>
-    <td>The description of what this cookie is used for.</td>
+    <td>A brief description of this item's use.</td>
   </tr>
   <tr>
     <td><code>optOut</code></td>
     <td>optional</td>
     <td>boolean</td>
-    <td>If the cookie is an opt-out cookie this value is set to <code>true</code>. The default is <code>false,</code>.</td>
+    <td>If the storage/cookie facilitates a user opt-out, this value is set to <code>true</code>. The default is <code>false,</code>.</td>
   </tr>
 </table>
 
