@@ -2,7 +2,7 @@
 
  **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.0 | August 2019, Updated November 2022, October 2025**
+**Final v.2.0 | August 2019, Updated November 2022, December 2025**
 
  Table of Contents
  
