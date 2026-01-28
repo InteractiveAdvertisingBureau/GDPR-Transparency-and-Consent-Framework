@@ -16,8 +16,6 @@
     - [Example 2](#example-2)
   + [Domains array](#domains-array)
     - [Example](#example)
-  + [SDKS array](#sdks-array)
-    - [SDKs Example](#sdks-example)
 * [Serving the JSON Resource](#serving-the-json-resource)
   + [Around the JSON file](#around-the-json-file)
   + [The role of the CMP](#the-role-of-the-cmp)
@@ -29,7 +27,6 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
-| January 2026 | 1.1 | Revised text around setting and observing the `cache-conrtol`. |
 | October 2025 | 1.1 | Added support to: allow vendors to declare cookies and other storage mechanisms used in pursuit of non-TCF purposes (e.g. global opt-out), to declare cookies and other storage mechanisms used for Special Purposes and to declare their SDK package identifiers. |
 | September 2022 | 1.0 | Adding a new FAQ |
 | June 2022 | 1.0 | Update on the structure of the URL (path and filename) and use of this file by the CMPs |
@@ -271,9 +268,9 @@ The vendor publishes the information and provides the URL (the specification mak
 The URL need not be served by the Vendor’s company domain. It could be served from a CDN.
 
 ### The role of the CMP
-Usually, the CMP requests the file only when/if a user clicks to review additional information (it's unusual for the information to be disclosed directly on the secondary layer). In order to allow CMPs to request and load the JSON file on the client side, the vendor must enable [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) at the location servicing the URL. However, regardless of whether the CMP requests the JSON file from the vendor's server or CMP's server, [Access-Control-Allow-Credentials](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials) must be set to false in order to not include any cookie in the request. Vendors must respond with the appropriate `content-type` header (`application/json`) and [Cache-Control Directives](https://www.keycdn.com/support/cache-control).
+Usually, the CMP requests the file only when/if a user clicks to review additional information (it's unusual for the information to be disclosed directly on the secondary layer). In order to allow CMPs to request and load the JSON file on the client side, the vendor must enable [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) at the location servicing the URL. However, regardless of whether the CMP requests the JSON file from the vendor's server or CMP's server, [Access-Control-Allow-Credentials](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials) must be set to false in order to not include any cookie in the request. Vendors must respond with the appropriate `content-type` header (`application/json`) and [Cache-Control Directives](https://www.keycdn.com/support/cache-control) so that CMPs are accessing and using the latest content when fetching from users’ browsers or when caching the file on their servers. A vendor should not use a cache-control directive of less than 24 hours.
 
-CMPs must observe vendors’ cache-control directives when caching vendors’ JSON files. When the vendor has not configured any cache-control directives, CMPs must refresh the cached vendor’s JSON file at least daily.
+CMPs must observe vendors’ cache-control directives when caching vendors’ JSON files. When the vendor has not configured any cache-control directives or the cache-control directive is invalid (less than 24 hours),  CMPs must refresh the cached vendor’s JSON file at least daily.
 
 In cases of unavailability of the vendor’s JSON file or non-conformance with the content and structure specified in the specifications, CMPs may rely, if available, on a previous version of the vendor’s JSON file temporarily and until the issue is resolved. (To expedite resolution, unavailability and non-conformance of a vendor’s JSON file can be reported using the non-compliance form [here](https://iabeurope.eu/tcf-non-compliance-submission-form/).)
 
