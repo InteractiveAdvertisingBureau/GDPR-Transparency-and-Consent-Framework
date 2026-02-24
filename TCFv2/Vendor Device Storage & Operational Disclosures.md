@@ -29,7 +29,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
-| January 2026 | 1.1 | Revised text around setting and observing the `cache-conrtol`. |
+| January 2026 | 1.1 | Revised text around setting and observing the `cache-control`. |
 | October 2025 | 1.1 | Added support to: allow vendors to declare cookies and other storage mechanisms used in pursuit of non-TCF purposes (e.g. global opt-out), to declare cookies and other storage mechanisms used for Special Purposes and to declare their SDK package identifiers. |
 | September 2022 | 1.0 | Adding a new FAQ |
 | June 2022 | 1.0 | Update on the structure of the URL (path and filename) and use of this file by the CMPs |
