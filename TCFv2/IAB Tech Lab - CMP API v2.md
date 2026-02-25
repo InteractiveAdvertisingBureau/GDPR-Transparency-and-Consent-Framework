@@ -417,7 +417,7 @@ TCData = {
       '[vendor id]': Boolean
 
     },
-    vendorsDisclosed: {
+    disclosedVendors: {
       /**
        * true - vendor was disclosed through the CMP
        * false | undefined - vendor was not disclosed through the CMP
