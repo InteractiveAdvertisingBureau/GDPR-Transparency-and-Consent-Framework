@@ -177,7 +177,7 @@ Below is sample JSON for a fictional TCF Vendor that does not make use of any `c
 
 ### Domains array
 
-Vendors MUST publish the domains they use for collecting and processing personal data in the context of their TCF registration. Vendors MUST NOT include Publishers’ delegated domains or subdomains they may use.
+Vendors MUST publish the domains they use for collecting and processing personal data in the context of their TCF registration. Vendors MUST NOT include Publishers’ delegated domains or subdomains they may use. Vendors who do not use domains (no domains listed in the disclosure array) do not need to populate an empty domains array.
 
 <table>
   <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
@@ -220,7 +220,7 @@ There is no mechanism for requesting alternate translations. For widest readabil
 
 ### SDKS array
 
-Vendors must publish the mobile in-app sdks they use for collecting and processing personal data in the context of their TCF registration.
+Vendors must publish the mobile in-app sdks they use for collecting and processing personal data in the context of their TCF registration.  If vendors do not operate / support mobile in-app they do not need to add the SDKs array to the Device Storage & Operational Disclosures JSON file.
 
 <table>
   <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
@@ -283,4 +283,4 @@ For secure communications, the vendor must make publicly accessible the JSON fil
 
 ## FAQ
 
-The [FAQ](https://iabeurope.eu/transparency-consent-framework-file/tcf-framework-faq-vendor-device-storage-and-operational-disclosures.pdf) addresses questions including the use of <code>domains</code> instead of <code>domain</code> field, the use of wildcards, when the storage mechanism is set by a first party etc… The document will be updated over the time.
+The [FAQ](https://iabeurope.eu/transparency-consent-framework-file/tcf-framework-faq-vendor-device-storage-and-operational-disclosures.pdf) addresses questions including the use of the field name <code>domains</code> versus <code>domain</code>, when the domain(s) and SDKs section can be omitted, the use of wildcards, when the storage mechanism is set by a first party, etc. The FAQ document will be updated regularly.
