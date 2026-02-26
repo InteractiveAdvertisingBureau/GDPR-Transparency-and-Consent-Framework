@@ -60,6 +60,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+|Feburary 2026 | 2.2 | Updated TCData to use disclosedVendors for consistency with consent string spec |
 |January 2024 | 2.2 | Added details for CTV support
 | May 2023 | 2.2 | Update to further strengthen the TCF as a standard in the industry: Deprecated API command "getTCData".
 | September 2021 | 2.0 | Deprecation of Global Scope and OOB |
@@ -417,7 +418,7 @@ TCData = {
       '[vendor id]': Boolean
 
     },
-    vendorsDisclosed: {
+    disclosedVendors: {
       /**
        * true - vendor was disclosed through the CMP
        * false | undefined - vendor was not disclosed through the CMP
