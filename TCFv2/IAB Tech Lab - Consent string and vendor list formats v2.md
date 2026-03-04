@@ -66,7 +66,8 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
-| Apr 2025 | 2.3 | Resolve the LI ambiguity by repurposing and making the ‘Disclosed Vendors’ section a mandatory section of the TC string.
+| Mar 2026 | 2.3 | Removed text requiring Special Purpose–only vendors to be disclosed under the Legitimate Interest declaration. |
+| Apr 2025 | 2.3 | Resolve the LI ambiguity by repurposing and making the ‘Disclosed Vendors’ section a mandatory section of the TC string. |
 | Feb 2024 | 2.2 | Deprecated the gdpr_pd macro, and added the field 'environments' to the CMP JSON. |
 | May 2023 | 2.2 | Update to further strengthen the TCF as a standard in the industry: revised purpose names and descriptions, introduced retention periods for all purposes, removed legitimate interest for purposes 3 to 6, the introduction of data categories used in conjunction with the purposes, support for legitimate interest claim urls, adding support for localized policy urls and introducing a more robust vendor compliance program. |
 | June 2022 | 2.1 | Update of the <b>Global Vendor List JSON Object</b> example regarding the filename in `deviceStorageDisclosureUrl` |
@@ -781,16 +782,12 @@ The _**[Core String](#the-core-string)**_ comes first and includes all the detai
         <p>
           Set the bit corresponding to a given vendor to <code>1</code> if
           the CMP has established transparency for that vendor's legitimate
-          interest disclosures for one or more Purposes (including Special Purposes).
+          interest disclosures for one or more Purposes.
         </p>
         <p>
           If a user exercises their “Right To Object” to a vendor’s
           processing based on a legitimate interest, then that vendor’s bit
-          must be set to <code>0</code>. For vendors that register for Special
-          Purposes only (no other Purposes) and have been displayed by
-          the CMP the value must be set to <code>1</code>. Note:
-          Special Purposes are displayed for transparency only and do not
-          enable user choice.
+          must be set to <code>0</code>.
         </p>
       </td>
     </tr>
