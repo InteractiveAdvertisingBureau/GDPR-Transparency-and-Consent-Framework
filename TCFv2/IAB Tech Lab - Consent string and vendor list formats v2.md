@@ -66,7 +66,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
-| Mar 2026 | 2.3 | Removed text requiring Special Purpose–only vendors to be disclosed under the Legitimate Interest declaration. |
+| Apr 2026 | 2.3 | Removed text requiring Special Purpose–only vendors to be disclosed under the Legitimate Interest declaration. |
 | Apr 2025 | 2.3 | Resolve the LI ambiguity by repurposing and making the ‘Disclosed Vendors’ section a mandatory section of the TC string. |
 | Feb 2024 | 2.2 | Deprecated the gdpr_pd macro, and added the field 'environments' to the CMP JSON. |
 | May 2023 | 2.2 | Update to further strengthen the TCF as a standard in the industry: revised purpose names and descriptions, introduced retention periods for all purposes, removed legitimate interest for purposes 3 to 6, the introduction of data categories used in conjunction with the purposes, support for legitimate interest claim urls, adding support for localized policy urls and introducing a more robust vendor compliance program. |
@@ -336,6 +336,8 @@ In order to strengthen the TCF as a standard within the industry it was decided 
 ### Why was the disclosed vendor section made mandatory in TCF 2.3?<a name="mandatory_in_2_3"></a>
 
 To resolve the ambiguity regarding vendors that declare special purpose(s), we have made the <b>Disclosed Vendors</b> section mandatory. This section, previously optional, allows CMPs to explicitly declare which vendors have been disclosed to the user. By making it required, there is no longer any uncertainty about whether a vendor that only declares special purposes has been disclosed (previously a blank section left disclosure ambiguous). If a vendor declaring special purpose(s) appears in the disclosed vendors list, it means that the vendor has been presented to the user and is permitted to operate under the declared special purpose(s).
+
+For TC strings created prior to March 1, 2026, the Legitimate Interest bit was set to 1 for vendors declaring Special Purposes. This workaround was removed from the specification as of April 2026 (see _**[Core String](#the-core-string)**_ under <code>Vendor Legitimate Interest Section</code>).
 
 ## Creating a TC String
 
