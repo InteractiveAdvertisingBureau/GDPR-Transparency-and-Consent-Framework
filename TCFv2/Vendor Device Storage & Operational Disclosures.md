@@ -29,6 +29,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| March 2026 | 1.1 | Updated the Domains and SDKs sections to clarify when each section is required. |
 | January 2026 | 1.1 | Revised text around setting and observing the `cache-control`. |
 | October 2025 | 1.1 | Added support to: allow vendors to declare cookies and other storage mechanisms used in pursuit of non-TCF purposes (e.g. global opt-out), to declare cookies and other storage mechanisms used for Special Purposes and to declare their SDK package identifiers. |
 | September 2022 | 1.0 | Adding a new FAQ |
@@ -177,7 +178,7 @@ Below is sample JSON for a fictional TCF Vendor that does not make use of any `c
 
 ### Domains array
 
-Vendors MUST publish the domains they use for collecting and processing personal data in the context of their TCF registration. Vendors MUST NOT include Publishers’ delegated domains or subdomains they may use.
+Vendors MUST publish the domains they use to collect and process personal data in the context of their TCF registration. Vendors MUST NOT include Publishers’ delegated domains or subdomains that they may operate on behalf of a Publisher. Vendors that do not use domains (i.e., no domains are declared in the disclosures array) or that do not operate in a Web environment SHOULD NOT include the domains array.
 
 <table>
   <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
@@ -220,7 +221,9 @@ There is no mechanism for requesting alternate translations. For widest readabil
 
 ### SDKS array
 
-Vendors must publish the mobile in-app sdks they use for collecting and processing personal data in the context of their TCF registration.
+Vendors MUST publish the mobile in-app SDKs they use to collect and process personal data in the context of their TCF registration.
+Vendors that do not operate in or support mobile in-app environments SHOULD NOT include the sdks array in the Device Storage & Operational Disclosures JSON file.
+Vendors that support mobile in-app environments but do not use any SDKs MUST include an empty sdks array.
 
 <table>
   <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
@@ -283,4 +286,4 @@ For secure communications, the vendor must make publicly accessible the JSON fil
 
 ## FAQ
 
-The [FAQ](https://iabeurope.eu/transparency-consent-framework-file/tcf-framework-faq-vendor-device-storage-and-operational-disclosures.pdf) addresses questions including the use of <code>domains</code> instead of <code>domain</code> field, the use of wildcards, when the storage mechanism is set by a first party etc… The document will be updated over the time.
+The [FAQ](https://iabeurope.eu/transparency-consent-framework-file/tcf-framework-faq-vendor-device-storage-and-operational-disclosures.pdf) addresses questions including the use of the field name <code>domains</code> versus <code>domain</code>, when the domain(s) and SDKs section can be omitted, the use of wildcards, when the storage mechanism is set by a first party, etc. The FAQ document will be updated regularly.
