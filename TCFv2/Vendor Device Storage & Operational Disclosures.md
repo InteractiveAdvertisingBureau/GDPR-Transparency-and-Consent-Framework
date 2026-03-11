@@ -221,7 +221,9 @@ There is no mechanism for requesting alternate translations. For widest readabil
 
 ### SDKS array
 
-Vendors must publish the mobile in-app sdks they use for collecting and processing personal data in the context of their TCF registration.  If vendors do not operate / support mobile in-app they do not need to add the SDKs array to the Device Storage & Operational Disclosures JSON file.
+Vendors MUST publish the mobile in-app SDKs they use to collect and process personal data in the context of their TCF registration.
+Vendors that do not operate in or support mobile in-app environments SHOULD NOT include the sdks array in the Device Storage & Operational Disclosures JSON file.
+Vendors that support mobile in-app environments but do not use any SDKs MUST include an empty sdks array.
 
 <table>
   <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
