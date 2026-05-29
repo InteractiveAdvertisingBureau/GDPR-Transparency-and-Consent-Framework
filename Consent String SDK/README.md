@@ -29,3 +29,4 @@ These implementations are not supported by the IAB.
 - [C](https://github.com/EulerianTechnologies/etcfv2) (EulerianTechnologies/etcfv2)
 - [Perl](https://github.com/peczenyj/GDPR-IAB-TCFv2) (GDPR::IAB::TCFv2)
 - [Lua](https://github.com/peczenyj/lua-gdpr-iab-tcfv2) (lua-gdpr-iab-tcfv2)
+- [PHP](https://github.com/azerion/php-iab-tcf-v2) (azerion/php-iab-tcf-v2)
