@@ -231,7 +231,6 @@ There is no mechanism for requesting alternate translations. For widest readabil
     {
       "domain": "static.adtech123.com",
       "purposes": [],
-      "specialPurposes": []
       "use": "Static CSS and JavaScript"
     },
     {
