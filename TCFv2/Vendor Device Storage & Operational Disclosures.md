@@ -95,9 +95,9 @@ A wildcard alone is permitted only in cases where the number of domains is large
    <td>array&lt;integer>
    </td>
    <td>The purpose ID or purpose IDs from the Global Vendor List (GVL) for which the storage is used. 
-<p>
+<br><br>
 To indicate that use of the storage <span style="text-decoration:underline;">is</span> subject to the consent requirement of the ePrivacy Directive, include Purpose ID 1 from the GVL.
-<p>
+<br>
 To indicate that the use of storage is <span style="text-decoration:underline;">exempted from</span> (and therefore <span style="text-decoration:underline;">not</span> subject to) the consent requirement of the ePrivacy Directive, do not include Purpose ID 1 from the GVL.
 </td>
 </tr>
@@ -180,7 +180,8 @@ Below is sample JSON for a fictional TCF Vendor that does not make use of any `c
 
 ### Domains array
 
-Vendors MUST publish the domains they use for collecting and processing personal data in the context of their TCF registration. Vendors MUST NOT include Publishers’ delegated domains or subdomains they may use.
+Vendors MUST publish the domains they use for collecting and processing personal data in the context of their TCF registration. This may include domains used for the delivery of assets, such as image hosting URLs, or ad delivery servers where a client-side network call necessarily involves the automatic transmission of information that can be considered personal data under the GDPR.
+Vendors MUST NOT include Publishers’ delegated domains or subdomains they may use.
 
 <table>
   <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
@@ -188,6 +189,26 @@ Vendors MUST publish the domains they use for collecting and processing personal
 <br><br>
 Entry MUST NOT contain “http(s)://” or text other than the domain.
 </td></tr>
+<tr>
+   <td><code>purposes</code>
+   </td>
+   <td>required
+   </td>
+   <td>array&lt;integer>
+   </td>
+   <td>The purpose ID or purpose IDs from the Global Vendor List (GVL) for which the domain is used. 
+<br><br>
+To indicate that use of the domain <span style="text-decoration:underline;">is</span> subject to the consent requirement of the ePrivacy Directive, include Purpose ID 1 from the GVL.
+<br>
+To indicate that the use of domain is <span style="text-decoration:underline;">exempted from</span> (and therefore <span style="text-decoration:underline;">not</span> subject to) the consent requirement of the ePrivacy Directive, do not include Purpose ID 1 from the GVL.
+</td>
+</tr>
+<tr>
+    <td><code>specialPurposes</code></td>
+    <td>optional</td>
+    <td>array&lt;integer></td>
+    <td>The specialPurpose ID or specialPurpose IDs from the Global Vendor List (GVL) for which the domain is used.</td>
+  </tr>
   <tr><td><code>use</code></td><td>optional</td><td>string</td><td>Textual explanation of what the domain is used for.
 <br><br>
 There is no mechanism for requesting alternate translations. For widest readability, it is suggested that Vendors use English for the optional explanatory text. </td></tr>
@@ -203,18 +224,26 @@ There is no mechanism for requesting alternate translations. For widest readabil
   "domains": [
     {
       "domain": "retarget.adtech123.com",
+      "purposes": [1,3,4,5,6],
+      "specialPurposes": [1]
       "use": "Retargeting and conversion tracking"
     },
     {
       "domain": "static.adtech123.com",
+      "purposes": [],
+      "specialPurposes": []
       "use": "Static CSS and JavaScript"
     },
     {
       "domain": "tracking.adtech123.com",
+      "purposes": [1,7,8],
+      "specialPurposes": [3]
       "use": "Ad server and tracking"
     },
     {
       "domain": "video.adtech123.com",
+      "purposes": [1],
+      "specialPurposes": [1]
       "use": "Video and banner distribution"
     }
   ]
@@ -229,6 +258,26 @@ Vendors must publish the mobile in-app sdks they use for collecting and processi
   <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
   <tr><td><code>name</code></td><td>required</td><td>string</td><td>The API package name as registered with the corresponding mobile app store.</td>
 </td></tr>
+<tr>
+   <td><code>purposes</code>
+   </td>
+   <td>required
+   </td>
+   <td>array&lt;integer>
+   </td>
+   <td>The purpose ID or purpose IDs from the Global Vendor List (GVL) for which the sdk is used. 
+<br><br>
+To indicate that use of the sdk <span style="text-decoration:underline;">is</span> subject to the consent requirement of the ePrivacy Directive, include Purpose ID 1 from the GVL.
+<br>
+To indicate that the use of sdk is <span style="text-decoration:underline;">exempted from</span> (and therefore <span style="text-decoration:underline;">not</span> subject to) the consent requirement of the ePrivacy Directive, do not include Purpose ID 1 from the GVL.
+</td>
+</tr>
+<tr>
+    <td><code>specialPurposes</code></td>
+    <td>optional</td>
+    <td>array&lt;integer></td>
+    <td>The specialPurpose ID or specialPurpose IDs from the Global Vendor List (GVL) for which the sdk is used.</td>
+  </tr>
   <tr><td><code>use</code></td><td>optional</td><td>string</td><td>Textual explanation of what the SDK is used for.
 <br><br>
 There is no mechanism for requesting alternate translations. For widest readability, it is suggested that Vendors use English for the optional explanatory text. </td></tr>
@@ -247,14 +296,20 @@ There is no mechanism for requesting alternate translations. For widest readabil
   "sdks": [
     {
       "name": "com.gms.ads",
+      "purposes": [1,3,4,5,6],
+      "specialPurposes": [1,2]
       "use": "Advertising"
     },
     {
       "name": "com.analytics",
+      "purposes": [1,10],
+      "specialPurposes": [1]
       "use": "Analytics"
     },
     {
       "name": "AppSDK.framework",
+      "purposes": [1,3,4,5,6,7,9],
+      "specialPurposes": [1,2]
       "use": "Advertising and tracking"
     }
   ]
