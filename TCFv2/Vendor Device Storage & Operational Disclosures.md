@@ -180,7 +180,9 @@ Below is sample JSON for a fictional TCF Vendor that does not make use of any `c
 
 ### Domains array
 
-Vendors MUST publish the domains they use for collecting and processing personal data in the context of their TCF registration. This may include domains used for the delivery of assets, such as image hosting URLs, or ad delivery servers where a client-side network call necessarily involves the automatic transmission of information that can be considered personal data under the GDPR.
+Vendors MUST publish the domains they use for collecting and processing personal data in the context of their TCF registration. Vendors MUST publish the domains they use for collecting and processing personal data in the context of their TCF registration. This may include domains that are not used for storing and/or accessing information on users' devices (e.g. domains used for the delivery of assets, such as image hosting URLs, or ad delivery servers where a client-side network call necessarily involves the automatic transmission of information that can be considered personal data under the GDPR).
+Vendors MUST NOT include Publishers’ delegated domains or subdomains they may use.
+
 Vendors MUST NOT include Publishers’ delegated domains or subdomains they may use.
 
 <table>
