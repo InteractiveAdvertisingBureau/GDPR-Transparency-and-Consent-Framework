@@ -1594,7 +1594,7 @@ Here is an annotated example of the GVL’s JSON format and content. Some attrib
    *
    * Constraints:
    *   Either purposes OR legIntPurposes can be missing/empty, but not both
-   *   unless the vendor declared one of more specical purpose but no purposes.
+   *   unless the vendor declared one of more special purpose but no purposes.
    *
    *   A Purpose id must not be present in both purposes and legIntPurposes.
    *

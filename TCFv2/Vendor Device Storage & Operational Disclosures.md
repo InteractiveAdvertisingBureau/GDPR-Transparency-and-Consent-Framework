@@ -29,6 +29,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| March 2026 | 1.1 | Updated the Domains and SDKs sections to clarify when each section is required. |
 | January 2026 | 1.1 | Revised text around setting and observing the `cache-control`. |
 | October 2025 | 1.1 | Added support to: allow vendors to declare cookies and other storage mechanisms used in pursuit of non-TCF purposes (e.g. global opt-out), to declare cookies and other storage mechanisms used for Special Purposes and to declare their SDK package identifiers. |
 | September 2022 | 1.0 | Adding a new FAQ |
@@ -99,6 +100,8 @@ A wildcard alone is permitted only in cases where the number of domains is large
 To indicate that use of the storage <span style="text-decoration:underline;">is</span> subject to the consent requirement of the ePrivacy Directive, include Purpose ID 1 from the GVL.
 <br>
 To indicate that the use of storage is <span style="text-decoration:underline;">exempted from</span> (and therefore <span style="text-decoration:underline;">not</span> subject to) the consent requirement of the ePrivacy Directive, do not include Purpose ID 1 from the GVL.
+<p>
+To indicate that the storage is associated with a non-TCF cookie, leave the array empty.
 </td>
 </tr>
 <tr>
@@ -111,7 +114,7 @@ To indicate that the use of storage is <span style="text-decoration:underline;">
     <td><code>description</code></td>
     <td>optional</td>
     <td>string</td>
-    <td>A brief description of this item's use.</td>
+    <td>A brief description of this item's use. In case of Non-TCF cookie, a description is required.</td>
   </tr>
   <tr>
     <td><code>optOut</code></td>
@@ -148,7 +151,6 @@ Below is sample JSON for a fictional TCF Vendor named _AdTech123_. _AdTech123_ o
     {
       "identifier": "optOut",
       "type": "cookie",
-      ...
       "purposes": [],
       "description": "Opt out of any tracking",
       "optOut": true
@@ -183,10 +185,13 @@ Below is sample JSON for a fictional TCF Vendor that does not make use of any `c
 Vendors MUST publish the domains they use for collecting and processing personal data in the context of their TCF registration. This may include domains that are not used for storing and/or accessing information on users' devices (e.g. domains used for the delivery of assets, such as image hosting URLs, or ad delivery servers where a client-side network call necessarily involves the automatic transmission of information that can be considered personal data under the GDPR).
 Vendors MUST NOT include Publishers’ delegated domains or subdomains they may use.
 
-Vendors MUST NOT include Publishers’ delegated domains or subdomains they may use.
-
 <table>
   <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
+  <tr><td><code>domains</code></td><td>required</td><td>array</td>
+  <td>Vendors operating in web environment must declare the domains used.
+  <br>If no domains are used, an empty array must be included.
+  <br>If the vendor does not operate in web environment, the domains array may be omitted.
+  </td></tr>
   <tr><td><code>domain</code></td><td>required</td><td>string</td><td>“*.vendor.com” means multiple subdomains may exist.
 <br><br>
 Entry MUST NOT contain “http(s)://” or text other than the domain.
@@ -253,11 +258,15 @@ There is no mechanism for requesting alternate translations. For widest readabil
 
 ### SDKS array
 
-Vendors must publish the mobile in-app sdks they use for collecting and processing personal data in the context of their TCF registration.
+Vendors MUST publish the mobile in-app SDKs they use to collect and process personal data in the context of their TCF registration.
+Vendors that do not operate in or support mobile in-app environments SHOULD NOT include the sdks array in the Device Storage & Operational Disclosures JSON file.
+Vendors that support mobile in-app environments but do not use any SDKs MUST include an empty sdks array.
 
 <table>
   <tr><td>Field</td><td>Scope</td><td>Type</td><td>Description</td></tr>
-  <tr><td><code>name</code></td><td>required</td><td>string</td><td>The API package name as registered with the corresponding mobile app store.</td>
+  <tr><td><code>sdks</code></td><td>required</td><td>array</td><td>Vendors operating in mobile in-app environments must declare the SDKs used.
+<br>If no SDKs are used, an empty array must be included.
+<br>If the vendor does not operate in mobile in-app environments, the SDKs array may be omitted.
 </td></tr>
 <tr>
    <td><code>purposes</code>
@@ -342,4 +351,4 @@ For secure communications, the vendor must make publicly accessible the JSON fil
 
 ## FAQ
 
-The [FAQ](https://iabeurope.eu/transparency-consent-framework-file/tcf-framework-faq-vendor-device-storage-and-operational-disclosures.pdf) addresses questions including the use of <code>domains</code> instead of <code>domain</code> field, the use of wildcards, when the storage mechanism is set by a first party etc… The document will be updated over the time.
+The [FAQ](https://iabeurope.eu/transparency-consent-framework-file/tcf-framework-faq-vendor-device-storage-and-operational-disclosures.pdf) addresses questions including the use of the field name <code>domains</code> versus <code>domain</code>, when the domain(s) and SDKs section can be omitted, the use of wildcards, when the storage mechanism is set by a first party, etc. The FAQ document will be updated regularly.
