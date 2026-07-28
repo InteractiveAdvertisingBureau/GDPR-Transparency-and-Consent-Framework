@@ -29,6 +29,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| July 2026 | 1.1 | Clarified the declaration of domains, added purposes and special purposes to domain and sdk sections, updated examples
 | March 2026 | 1.1 | Updated the Domains and SDKs sections to clarify when each section is required. |
 | January 2026 | 1.1 | Revised text around setting and observing the `cache-control`. |
 | October 2025 | 1.1 | Added support to: allow vendors to declare cookies and other storage mechanisms used in pursuit of non-TCF purposes (e.g. global opt-out), to declare cookies and other storage mechanisms used for Special Purposes and to declare their SDK package identifiers. |
