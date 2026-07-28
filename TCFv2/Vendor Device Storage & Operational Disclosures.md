@@ -269,6 +269,7 @@ Vendors that support mobile in-app environments but do not use any SDKs MUST inc
 <br>If no SDKs are used, an empty array must be included.
 <br>If the vendor does not operate in mobile in-app environments, the SDKs array may be omitted.
 </td></tr>
+ <tr><td><code>name</code></td><td>required</td><td>string</td><td>The API package name as registered with the corresponding mobile app store.</td></tr>
 <tr>
    <td><code>purposes</code>
    </td>
