@@ -2,7 +2,7 @@
 
  **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.0 | August 2019, Updated November 2022, December 2025**
+**Final v.2.0 | August 2019, Updated November 2022, December 2025, July 2026**
 
  Table of Contents
  
@@ -29,7 +29,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
-| July 2026 | 1.1 | Clarified the declaration of domains, added purposes and special purposes to domain and sdk sections, updated examples
+| July 2026 | 1.2 | Clarified the declaration of domains, added purposes and special purposes to domain and sdk sections, updated examples
 | March 2026 | 1.1 | Updated the Domains and SDKs sections to clarify when each section is required. |
 | January 2026 | 1.1 | Revised text around setting and observing the `cache-control`. |
 | October 2025 | 1.1 | Added support to: allow vendors to declare cookies and other storage mechanisms used in pursuit of non-TCF purposes (e.g. global opt-out), to declare cookies and other storage mechanisms used for Special Purposes and to declare their SDK package identifiers. |
@@ -94,7 +94,7 @@ A wildcard alone is permitted only in cases where the number of domains is large
    </td>
    <td>required
    </td>
-   <td>array&lt;integer>
+   <td>array of integers
    </td>
    <td>The purpose ID or purpose IDs from the Global Vendor List (GVL) for which the storage is used. 
 <br><br>
@@ -108,7 +108,7 @@ To indicate that the storage is associated with a non-TCF cookie, leave the arra
 <tr>
     <td><code>specialPurposes</code></td>
     <td>optional</td>
-    <td>array&lt;integer></td>
+    <td>array of integers></td>
     <td>The specialPurpose ID or specialPurpose IDs from the Global Vendor List (GVL) for which the storage is used.</td>
   </tr>
   <tr>
@@ -202,7 +202,7 @@ Entry MUST NOT contain “http(s)://” or text other than the domain.
    </td>
    <td>required
    </td>
-   <td>array&lt;integer>
+   <td>array of integers
    </td>
    <td>The purpose ID or purpose IDs from the Global Vendor List (GVL) for which the domain is used. 
 <br><br>
@@ -214,7 +214,7 @@ To indicate that the use of domain is <span style="text-decoration:underline;">e
 <tr>
     <td><code>specialPurposes</code></td>
     <td>optional</td>
-    <td>array&lt;integer></td>
+    <td>array of integers</td>
     <td>The specialPurpose ID or specialPurpose IDs from the Global Vendor List (GVL) for which the domain is used.</td>
   </tr>
   <tr><td><code>use</code></td><td>optional</td><td>string</td><td>Textual explanation of what the domain is used for.
@@ -275,7 +275,7 @@ Vendors that support mobile in-app environments but do not use any SDKs MUST inc
    </td>
    <td>required
    </td>
-   <td>array&lt;integer>
+   <td>array of integers
    </td>
    <td>The purpose ID or purpose IDs from the Global Vendor List (GVL) for which the sdk is used. 
 <br><br>
@@ -287,7 +287,7 @@ To indicate that the use of sdk is <span style="text-decoration:underline;">exem
 <tr>
     <td><code>specialPurposes</code></td>
     <td>optional</td>
-    <td>array&lt;integer></td>
+    <td>array of integers</td>
     <td>The specialPurpose ID or specialPurpose IDs from the Global Vendor List (GVL) for which the sdk is used.</td>
   </tr>
   <tr><td><code>use</code></td><td>optional</td><td>string</td><td>Textual explanation of what the SDK is used for.
