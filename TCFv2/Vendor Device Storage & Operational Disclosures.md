@@ -298,4 +298,4 @@ For secure communications, the vendor must make publicly accessible the JSON fil
 
 ## FAQ
 
-The [FAQ](https://iabeurope.eu/transparency-consent-framework-file/tcf-framework-faq-vendor-device-storage-and-operational-disclosures.pdf) addresses questions including the use of the field name <code>domains</code> versus <code>domain</code>, when the domain(s) and SDKs section can be omitted, the use of wildcards, when the storage mechanism is set by a first party, etc. The FAQ document will be updated regularly.
+The [FAQ](https://iabeurope.eu/wp-content/uploads/260610-FAQs-on-Vendor-Device-Storage-Operational-Disclosures.pdf) addresses questions including the use of the field name <code>domains</code> versus <code>domain</code>, when the domain(s) and SDKs section can be omitted, the use of wildcards, when the storage mechanism is set by a first party, etc. The FAQ document will be updated regularly.
