@@ -2,7 +2,7 @@
 # Consent Management Platform API
 **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.5 March 2027**
+**Final v.2.5 Mar 2027**
 
 - [Version History](#version-history)
 - [Introduction](#introduction)
