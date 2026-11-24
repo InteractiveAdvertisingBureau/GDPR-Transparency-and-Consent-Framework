@@ -2,7 +2,7 @@
 # Consent Management Platform API
 **IAB Europe Transparency & Consent Framework**
 
-**Final v.2.2 May 2023**
+**Final v.2.5 March 2027**
 
 - [Version History](#version-history)
 - [Introduction](#introduction)
@@ -480,6 +480,20 @@ TCData = {
          */
         '[vendor id]': 1
       }
+      
+      'feature:[featureId]': {
+        /**
+         * 0 - Not Allowed
+        **/
+        '[vendor id]': 0
+      }
+
+      'specialFeature:[specialFeatureId]': {
+        /**
+         * 0 - Not Allowed
+        **/
+        'vendor id': 0
+      }
     }
   }
 }
@@ -683,15 +697,24 @@ InAppTCData = {
     restrictions: {
 
       /**
+       * restrictionType:
        * 0 - Not Allowed
        * 1 - Require Consent
        * 2 - Require Legitimate Interest
        * _ - No Restriction (maintains indexing)
        *
-       * each position represents vendor id and number represents restriction
-       * type 0-2
+       * each position represents vendorId and number represents restrictionType 0-2
+       * 
+       * for features the features id is prefixed with 'feature:'
+       * for specialfeartures the specialFeatureId is prefixed with 'specialFeature:'
+       * 
+       * the restrictionType for features and specialFeatures is always 0 (not allowed)
        */
-      '[purpose id]': '01201221'
+
+      '[purposeId]': {[vendorId]:[restrictionType], [vendorId]:[restrictionType], ...},
+      'feature:[featureId]': {[vendorId]:[restrictionType], [vendorId]:[restrictionType], ...},
+      'specialFeature:[specialFeatureId]': {[vendorId]:[restrictionType], [vendorId]:[restrictionType], ...}
+
     }
   }
 }
@@ -740,6 +763,8 @@ The steps for integrating a CMP SDK into an app are the following:
 | `IABTCF_PurposeLegitimateInterests` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the legitimate interest status for purpose ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is legitimate interest established `true` for purpose ID `1` |
 | `IABTCF_SpecialFeaturesOptIns` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the opt-in status for special feature ID **n+1**; `false` and `true` respectively. eg. `'1'` at index `0` is opt-in `true` for special feature ID `1` |
 | `IABTCF_PublisherRestrictions{ID}` | `String ['0','1', or '2']`: The value at position **n** – where **n**'s indexing begins at `0`  – indicates the publisher restriction type (0-2) for vendor **n+1**; (see Publisher Restrictions Types). eg. `'2'` at index `0` is restrictionType `2` for vendor ID `1`.  `{ID}` refers to the purpose ID. |
+| `IABTCF_PublisherFeastureRestrictions{ID}` | `String ['0']`: The value at position **n** – where **n**'s indexing begins at `0`  – indicates the publisher restriction type (0) for vendor **n+1**; (see Publisher Restrictions Types). eg. `'0'` at index `0` is restrictionType `0` for vendor ID `1`.  `{ID}` refers to the feature ID. |
+| `IABTCF_PublisherSpecialFeatureRestrictions{ID}` | `String ['0']`: The value at position **n** – where **n**'s indexing begins at `0`  – indicates the publisher restriction type (0-2) for vendor **n+1**; (see Publisher Restrictions Types). eg. `'0'` at index `0` is restrictionType `0` for vendor ID `1`.  `{ID}` refers to the purpose ID. |
 | `IABTCF_PublisherConsent` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the purpose consent status for purpose ID **n+1** for the publisher as they correspond to the [Global Vendor List](#what-is-the-global-vendor-list) Purposes; `false` and `true` respectively. eg. `'1'` at index `0` is consent `true` for purpose ID `1` |
 | `IABTCF_PublisherLegitimateInterests` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the purpose legitimate interest status for purpose ID **n+1** for the publisher as they correspond to the [Global Vendor List](#what-is-the-global-vendor-list) Purposes; `false` and `true` respectively. eg. `'1'` at index `0` is legitimate interest established `true` for purpose ID `1` |
 | `IABTCF_PublisherCustomPurposesConsents` | `Binary String`: The `'0'` or `'1'` at position **n** – where **n**'s indexing begins at `0`  – indicates the purpose consent status for the publisher's custom purpose ID **n+1** for the publisher; `false` and `true` respectively. eg. `'1'` at index `0` is consent `true` for custom purpose ID `1` |

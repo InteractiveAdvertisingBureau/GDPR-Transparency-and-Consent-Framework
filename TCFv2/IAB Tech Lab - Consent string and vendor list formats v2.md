@@ -2,7 +2,7 @@
  # Transparency and Consent String with Global Vendor & CMP List Formats
  **IAB Europe Transparency & Consent Framework**
 
- **Final v.2.2 May 2023**
+ **Final v.2.5 Mar 2027**
 
  Table of Contents
 
@@ -66,6 +66,7 @@
 
 | Date | Version | Comments |
 | :-- | :-- | :-- |
+| Feb 2027 | 2.5 | Added purpose/feature/special feature category to the publisher restrictions bitstream to support restricting Purposes, Features and Special Features.
 | May 2026 | 2.4 | Based on new policy updates: updated GVL JSON spec to include new StandardTexts field. Also removed text requiring Special Purpose–only vendors to be disclosed under the Legitimate Interest declaration.
 | Apr 2025 | 2.3 | Resolve the LI ambiguity by repurposing and making the ‘Disclosed Vendors’ section a mandatory section of the TC string.
 | Feb 2024 | 2.2 | Deprecated the gdpr_pd macro, and added the field 'environments' to the CMP JSON. |
@@ -200,12 +201,12 @@ The TCF Policy previously allowed legal bases in the Framework to be established
 
 ### What are publisher restrictions?
 
-Version 2.0 of the Framework introduced the ability for publishers to signal restrictions on how vendors may process personal data. Restrictions can be of two types:
+Version 2.0 of the Framework introduced the ability for publishers to signal restrictions on how vendors may process personal data. Version 2.5 of the Framework expanded this functionality by adding support to restrict features and special features. Restrictions can be of two types:
 
-*  **Purposes.** Restrict the purposes for which personal data is processed by a vendor.
-*  **Legal basis.** Specify the legal basis upon which a publisher requires a vendor to operate where a vendor has signaled flexibility on legal basis in the [GVL](#the-global-vendor-list).
+*  **Purposes/Features/Special Features.** Restrict the purposes, features and/or special features for which personal data is processed by a vendor.
+*  **Legal basis.** Specify the legal basis upon which a publisher requires a vendor to operate. For purposes it specifies the legal basis upon which a publisher requires a vendor to operate where a vendor has signaled flexibility on legal basis in the [GVL](#the-global-vendor-list).
 
-Publisher restrictions are custom requirements specified by a publisher. In order for vendors to determine if processing is permissible at all for a specific purpose or which legal basis is applicable (in case they signaled flexibility in the [GVL](#the-global-vendor-list)) restrictions must be respected.
+Publisher restrictions are custom requirements specified by a publisher. In order for vendors to determine if processing is permissible at all for a specific purpose, feature or special feature or which legal basis (for purposes) is applicable (in case they signaled flexibility in the [GVL](#the-global-vendor-list)) restrictions must be respected.
 
 1. Vendors must always respect a restriction signal that disallows them the processing for a specific purpose regardless of whether or not they have declared that purpose to be “flexible”.
 2. Vendors that declared a purpose with a default legal basis (consent or legitimate interest respectively) but also declared this purpose as flexible must respect a legal basis restriction if present. That means for example in case they declared a purpose as legitimate interest but also declared that purpose as flexible and there is a legal basis restriction to require consent, they must then check for the consent signal and must not apply the legitimate interest signal.
@@ -876,8 +877,7 @@ The _**[Core String](#the-core-string)**_ comes first and includes all the detai
       <td colspan="2">
         Number of restriction records to follow.<br /><br /><strong
           style="color:red;"
-          >Value is required</strong
-        >
+          >Value is required</strong>
         even if it is <code>0</code>
       </td>
     </tr>
@@ -886,18 +886,28 @@ The _**[Core String](#the-core-string)**_ comes first and includes all the detai
         PubRestrictionEntry (Repeated NumPubRestrictions times)
       </td>
       <td>
-        Each Publisher Restriction Entry is made up of three parts: Purpose
-        ID, Restriction Type and, List of Vendor IDs under that Purpose
-        restriction.
+        Each Publisher Restriction Entry is made up of four parts: Purpose/Feature/Special Feature Category, Purpose/Feature/Special Feature ID,
+        Restriction Type, and List of Vendor IDs under that Purpose restriction.
       </td>
     </tr>
     <tr>
-      <td>PurposeId</td>
-      <td>6 bits</td>
-      <td>Purpose ID</td>
+      <td>Purpose/Feature/Special Feature Category</td>
+      <td>2 bits</td>
+      <td>Type</td>
       <td>
-        The Vendor’s declared Purpose ID that the publisher has indicated
-        that they are overriding.
+        <p>The type of purpose or feature that the ID belongs to:</p>
+        <p>00 - Publisher Restriction applies to Purposes</p>
+        <p>01 - Reserved</p>
+        <p>10 - Publisher Restriction applies to Features</p>
+        <p>11 - Publisher Restriction applies to Special Features</p>
+      </td>
+    </tr>
+    <tr>
+      <td>PurposeOrFeatureId</td>
+      <td>4 bits</td>
+      <td>Purpose / Feature / Special Feature ID</td>
+      <td>
+        The Vendor’s declared Purpose, Feature or Special Feature ID that the publisher has indicated that they are overriding.
       </td>
     </tr>
     <tr>
@@ -908,8 +918,7 @@ The _**[Core String](#the-core-string)**_ comes first and includes all the detai
           Enum
         </p>
         <p>
-          <code>0</code> Purpose Flatly Not Allowed by Publisher (regardless
-          of Vendor declarations)
+          <code>0</code> Purpose/Feature/Special Feature Flatly Not Allowed by Publisher (regardless of Vendor declarations)
         </p>
         <p>
           <code>1</code> Require Consent (if Vendor has declared the Purpose
