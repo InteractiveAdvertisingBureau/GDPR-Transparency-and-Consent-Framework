@@ -3,7 +3,7 @@
 <table>
 <tr>
 	<td><b>Last update</b></td>
-    <td>May 2023</td>
+    <td>Mar 2027</td>
 </tr>
 <tr>
 	<td><b>Created</b></td>
@@ -147,7 +147,7 @@ The publisher may implement a CMP in one of two ways:
 2.	**Outsource:** Rely on the service of a CMP registered with IAB Europe and listed [here](https://iabeurope.eu/cmp-list/) as an official CMP. 
 
 ## What publisher controls are available?<a name="pubcontrols"></a>
-Starting with v2 of the TC String, a segment of information enables publishers to define restrictions. When a vendor has declared their legal basis for a purpose as flexible, the publisher can change the vendor’s default choice. For instance if a vendor declares flexible with default choice legitimate interest, the publisher can restrict that choice to require consent.
+Starting with v2 of the TC String, a segment of information enables publishers to define restrictions. Version v2.5 added support for Features and Special Features. When a vendor has declared their legal basis for a purpose as flexible, the publisher can change the vendor’s default choice. For instance if a vendor declares flexible with default choice legitimate interest, the publisher can restrict that choice to require consent.
 
 ## The Global Vendor List<a name="gvl"></a>
 Publishers can ask their partners (advertising vendors, DMPs, analytics vendors, etc.) to register on the Global Vendor List (GVL), if not already registered. The Global Vendor List is maintained with current registered vendors [here](https://vendor-list.consensu.org/v2/vendor-list.json). 
@@ -184,7 +184,7 @@ The relevant signals in the TC string are the GVL version, the publisher restric
 Prior to processing a user’s personal data for a purpose registered in the GVL, for each purpose vendors must:
 
 **Evaluate publisher restrictions** prior to any other signal:
-1.  Check if the publisher completely disallowed processing based on this purpose using a purpose restriction 
+1.  Check if the publisher completely disallowed processing based on this purpose, feature or special feature using a purpose/featur/special feature restriction 
 2.  Check if the publisher restricted the applicable legal basis for this purpose using a legal basis restriction (e.g. the publisher only allows "consent" as legal basis for this purpose, or only allows "legitimate interest" as legal basis for this purpose):
     -  In the absence of a legal basis restriction, vendors must apply their default legal basis
     -  If there is a legal basis restriction vendors must apply the publisher defined legal basis, which is only allowed if that purpose is either declared with the allowed legal basis as default legal basis, or if that purpose was declared as flexible
@@ -254,7 +254,7 @@ In order to reduce the size of the TC string, CMPs are advised to store/provide 
 
 * In case a vendor has not been disclosed to the user via the CMP UI, there is no need to store restrictions for that vendor in the TC String. Given the vendor was not disclosed both vendor consent and vendor legitimate interest signals in the TC String can be left undefined which suffices to signal that the vendor may not process personal data.
 * In case the user deselects a vendor (neither giving it consent nor allowing it to operate under legitimate interest) the publisher restriction for this vendor does not need to be written out into the TC string. This is to avoid adding extra restrictions that do not impact the outcome. In case a vendor was not given consent nor legitimate interest, no restriction on that vendor would apply.
-* Purpose restrictions that disallow a vendor from processing personal data for a specific purpose only need to be stored in case the vendor was disclosed by the CMP (reflecting the restriction in the UI) and registered for that purpose in the GVL.
+* Purpose restrictions that disallow a vendor from processing personal data for a specific purpose, feature or special feature only need to be stored in case the vendor was disclosed by the CMP (reflecting the restriction in the UI) and registered for that purpose in the GVL.
 * Legal Basis restrictions are only needed in situations where the vendor was disclosed by the CMP (reflecting the restriction in the UI) and is declaring flexibility in the GVL for the corresponding purpose, meaning that:
 
     1. The vendor registered a purpose as legitimate interest (default legal basis), but also registered this purpose as flexible (i.e. also accepts consent as a legal basis). In this case a "require consent" restriction is needed to signal that the vendor may only process using consent as legal basis.
